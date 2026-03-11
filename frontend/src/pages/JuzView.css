@@ -1,0 +1,38 @@
+/* JuzView.css — Juz reader page */
+
+.juz-view { padding: 2rem 0; }
+
+.jv-header { margin-bottom: 1rem; }
+.jv-header h1 { margin-bottom: 0.2rem; }
+
+.jv-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.jv-search { max-width: 360px; }
+
+/* Juz specific structural additions */
+.juz-surah-group { margin-bottom: 3rem; }
+
+.juz-surah-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.juz-surah-link {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+}
+
+.jv-verse { padding: 0; } /* Reset local padding if any */
+

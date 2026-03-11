@@ -1,0 +1,90 @@
+/**
+ * context/BookmarkContext.jsx — Bookmark state management
+ * Interacts with /api/bookmarks backend. Uses a persistent clientId
+ * stored in localStorage to identify anonymous sessions.
+ */
+
+import { createContext, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+
+const BookmarkContext = createContext();
+
+// Generate or retrieve a UUID-style client ID for anonymous bookmarks
+function getClientId() {
+  let id = localStorage.getItem('quran-client-id');
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem('quran-client-id', id);
+  }
+  return id;
+}
+
+export function BookmarkProvider({ children }) {
+  const [bookmarks, setBookmarks] = useState([]);
+  const [loading,   setLoading]   = useState(true);
+  const clientId = getClientId();
+
+  // Load bookmarks on mount
+  useEffect(() => {
+    fetchBookmarks();
+  }, []);
+
+  /**
+   * Fetch all bookmarks for this client session
+   */
+  async function fetchBookmarks() {
+    try {
+      const { data } = await axios.get(`/api/bookmarks?clientId=${clientId}`);
+      setBookmarks(data);
+    } catch (err) {
+      console.error('Failed to load bookmarks:', err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  /**
+   * Add a bookmark for a specific verse
+   */
+  async function addBookmark(verse) {
+    try {
+      const { data } = await axios.post('/api/bookmarks', { ...verse, clientId });
+      setBookmarks((prev) => [data, ...prev]);
+      return { success: true };
+    } catch (err) {
+      if (err.response?.status === 409) return { success: false, message: 'Already bookmarked' };
+      return { success: false, message: 'Failed to bookmark' };
+    }
+  }
+
+  /**
+   * Remove a bookmark by its MongoDB _id
+   */
+  async function removeBookmark(id) {
+    try {
+      await axios.delete(`/api/bookmarks/${id}`);
+      setBookmarks((prev) => prev.filter((b) => b._id !== id));
+    } catch (err) {
+      console.error('Failed to remove bookmark:', err.message);
+    }
+  }
+
+  /**
+   * Check if a specific verse is already bookmarked
+   */
+  function isBookmarked(surahNumber, verseNumber) {
+    return bookmarks.some(
+      (b) => b.surahNumber === surahNumber && b.verseNumber === verseNumber
+    );
+  }
+
+  return (
+    <BookmarkContext.Provider value={{ bookmarks, loading, addBookmark, removeBookmark, isBookmarked, fetchBookmarks }}>
+      {children}
+    </BookmarkContext.Provider>
+  );
+}
+
+export function useBookmarks() {
+  return useContext(BookmarkContext);
+}

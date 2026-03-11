@@ -1,0 +1,66 @@
+/* SearchPage.css — Search results page */
+
+.search-page { padding: 2rem 0; }
+.sp-title { margin-bottom: 1.5rem; }
+
+/* Search form */
+.sp-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 620px;
+  position: relative;
+  margin-bottom: 1.75rem;
+}
+.sp-input {
+  padding-left: 1rem;
+  flex: 1;
+  height: 48px;
+  font-size: 1rem;
+}
+.sp-form .btn {
+  height: 48px;
+  flex-shrink: 0;
+  padding: 0 1.25rem;
+}
+
+/* Result count / status */
+.sp-count { margin-bottom: 1rem; font-size: 0.9rem; }
+
+/* Error */
+.sp-error {
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Results grid */
+.sp-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Individual result card */
+.sp-card {
+  text-decoration: none;
+  color: var(--text-primary);
+  display: block;
+}
+.sp-card:hover { color: var(--text-primary); }
+
+.sp-text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-top: 0.4rem;
+}
+
+/* Highlighted keyword */
+.sp-highlight {
+  background: rgba(201,168,76,0.25);
+  color: var(--accent-gold-light);
+  border-radius: 3px;
+  padding: 0 2px;
+  font-style: normal;
+}

@@ -1,0 +1,76 @@
+/* SurahList.css — Surah grid list page */
+
+.surah-list { padding: 2rem 0; }
+
+.sl-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+.sl-header h1 { margin-bottom: 0.25rem; }
+.sl-search { max-width: 280px; }
+
+/* Responsive grid */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Individual surah card */
+.surah-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.surah-card:hover { color: var(--text-primary); }
+
+/* Circular number */
+.surah-number {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+
+.surah-info {
+  flex: 1;
+  min-width: 0;
+}
+.surah-english {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.surah-translation {
+  display: block;
+  font-size: 0.78rem;
+  margin-top: 0.1rem;
+}
+
+.surah-meta {
+  text-align: right;
+}
+.surah-arabic-name {
+  font-size: 1.1rem !important;
+  line-height: 1.5 !important;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .sl-header { flex-direction: column; align-items: flex-start; }
+  .sl-search { max-width: 100%; }
+}

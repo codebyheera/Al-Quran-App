@@ -1,0 +1,57 @@
+/* BookmarksPage.css — Bookmarks listing page */
+
+.bookmarks-page { padding: 2rem 0; }
+
+.bp-header {
+  margin-bottom: 1.75rem;
+}
+.bp-header h1 { margin-bottom: 0.25rem; }
+
+/* Empty state */
+.bp-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--text-secondary);
+}
+.bp-empty-icon { font-size: 3.5rem; display: block; margin-bottom: 1rem; opacity: 0.5; }
+.bp-empty h3 { margin-bottom: 0.5rem; }
+.bp-empty p  { max-width: 340px; margin: 0 auto; }
+
+/* Grid of bookmark cards */
+.bookmark-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.bookmark-card { position: relative; }
+
+/* Reference badge */
+.bm-ref { text-decoration: none; }
+.bm-ref:hover .badge { opacity: 0.85; }
+
+/* Arabic snippet */
+.bm-arabic {
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+  margin: 0.6rem 0 0.4rem !important;
+  padding-right: 0.5rem;
+}
+
+/* Translation */
+.bm-translation { font-size: 0.85rem; line-height: 1.6; }
+
+/* Date */
+.bm-date { font-size: 0.72rem; margin-top: 0.5rem; }
+
+/* Delete */
+.bm-delete {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-sm);
+}
+.bm-delete:hover { color: #e74c3c; background: rgba(231,76,60,0.08); }
+
+/* Go-to button */
+.bm-goto { width: 100%; justify-content: center; font-size: 0.85rem; }

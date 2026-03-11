@@ -1,0 +1,86 @@
+/* SurahView.css — Full Surah reader page */
+
+.surah-view { padding: 2rem 0; }
+
+/* Header */
+.sv-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.sv-header h1 { margin-bottom: 0.2rem; }
+.sv-arabic-name {
+  font-size: clamp(1.8rem, 5vw, 2.8rem) !important;
+  line-height: 1.4 !important;
+  color: var(--accent-gold);
+}
+
+/* Bismillah */
+.bismillah {
+  text-align: center;
+  font-size: clamp(1.4rem, 3vw, 2rem) !important;
+  color: var(--accent-gold);
+  opacity: 0.85;
+  margin: 1.25rem 0;
+  letter-spacing: 0.04em;
+}
+
+/* In-surah search */
+.sv-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.sv-search { max-width: 360px; }
+
+/* Verse card list */
+.verse-list { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 1.5rem; 
+  margin-top: 2rem;
+}
+
+/* Page specific overrides or additions if any */
+.jv-verse { padding: 0; } /* Reset local padding for Juz specifically if needed */
+
+/* Prev/Next nav */
+.sv-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+}
+.sv-nav .btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  color: var(--text-primary);
+  padding: 0.65rem 1.25rem;
+  border-radius: 100px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+  animation: toastIn 0.3s ease both;
+  z-index: 999;
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
