@@ -1,43 +1,33 @@
 /**
- * routes/surah.js — Surah data route
- * Proxies AlQuran Cloud API to serve Arabic + English verse data
+ * routes/surah.js — Surah data route (ESM)
  */
 
-const express = require('express');
-const axios   = require('axios');
-const router  = express.Router();
+import express from 'express';
+import axios from 'axios';
+const router = express.Router();
 
 const ALQURAN_BASE = 'https://api.alquran.cloud/v1';
 
-/**
- * GET /api/surah/:surahNumber
- * Fetches a full Surah with Arabic (Uthmani) text and English translation
- */
 router.get('/:surahNumber', async (req, res) => {
   const { surahNumber } = req.params;
   const num = parseInt(surahNumber);
 
-  // Validate range
   if (isNaN(num) || num < 1 || num > 114) {
     return res.status(400).json({ error: 'Invalid surah number. Must be 1–114.' });
   }
 
   try {
-    // Fetch both editions in a single API call
     const url = `${ALQURAN_BASE}/surah/${num}/editions/quran-uthmani,en.asad`;
     const { data } = await axios.get(url);
 
-    // data.data is an array of two edition objects
     const arabicEdition  = data.data[0];
     const englishEdition = data.data[1];
 
-    // Merge ayahs from both editions into a unified array
     const verses = arabicEdition.ayahs.map((ayah, i) => ({
       number:       ayah.numberInSurah,
       globalNumber: ayah.number,
       arabic:       ayah.text,
       translation:  englishEdition.ayahs[i]?.text || '',
-      // Audio URL from EveryAyah CDN (Abdul Samad recitation)
       audioUrl: `https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/${String(num).padStart(3, '0')}${String(ayah.numberInSurah).padStart(3, '0')}.mp3`,
     }));
 
@@ -56,9 +46,6 @@ router.get('/:surahNumber', async (req, res) => {
   }
 });
 
-/**
- * GET /api/surah — list all 114 Surahs (metadata only)
- */
 router.get('/', async (req, res) => {
   try {
     const { data } = await axios.get(`${ALQURAN_BASE}/surah`);
@@ -77,4 +64,4 @@ router.get('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

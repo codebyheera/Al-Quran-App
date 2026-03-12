@@ -1,35 +1,27 @@
 /**
- * routes/search.js — Local full-text verse search
- *
- * Strategy:
- *  1. Load data/quran-en.json (if it exists) for fast local search.
- *  2. If file doesn't exist yet, fall back to fetching surahs live from
- *     AlQuran Cloud and cache them in memory.
- *
- * Run `node scripts/download-quran.js` once to build the local cache and
- * make searches instant.
+ * routes/search.js — Local full-text verse search (ESM)
  */
 
-const express = require('express');
-const axios   = require('axios');
-const fs      = require('fs');
-const path    = require('path');
-const router  = express.Router();
+import express from 'express';
+import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const router = express.Router();
+
+// __dirname equivalent for ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const DATA_FILE     = path.join(__dirname, '..', 'data', 'quran-en.json');
 const ALQURAN_BASE  = 'https://api.alquran.cloud/v1';
 
-/** In-memory cache: array of { surahNumber, surahName, arabicName, verses[] } */
 let quranCache = null;
 
-/**
- * Load the Quran data into memory.
- * Priority: local JSON file → live API fetch (slower).
- */
 async function loadQuranData() {
-  if (quranCache) return quranCache;               // already loaded
+  if (quranCache) return quranCache;
 
-  // ── 1. Try local file ──────────────────────────────────────────────────────
   if (fs.existsSync(DATA_FILE)) {
     console.log('[search] Loading local quran-en.json…');
     quranCache = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
@@ -37,8 +29,7 @@ async function loadQuranData() {
     return quranCache;
   }
 
-  // ── 2. Fetch live and cache in memory ──────────────────────────────────────
-  console.warn('[search] data/quran-en.json not found — fetching live (slow). Run scripts/download-quran.js to cache locally.');
+  console.warn('[search] data/quran-en.json not found — fetching live (slow).');
 
   const { data: listData } = await axios.get(`${ALQURAN_BASE}/surah`, { timeout: 20000 });
   const surahMeta = listData.data;
@@ -63,22 +54,15 @@ async function loadQuranData() {
           translation:  english.ayahs[i]?.text || '',
         })),
       });
-    } catch { /* skip failed surah */ }
+    } catch { /* skip */ }
   }
 
   quranCache = all;
   return all;
 }
 
-// Pre-warm cache when server starts (non-blocking)
 loadQuranData().catch(() => {});
 
-/**
- * GET /api/search?q=keyword[&surah=1]
- * Returns matching verses with highlighted context.
- *
- * Also matches surah names so "baqarah" or "al-fatihah" return results.
- */
 router.get('/', async (req, res) => {
   const { q, surah: surahParam } = req.query;
 
@@ -87,15 +71,13 @@ router.get('/', async (req, res) => {
   }
 
   const keyword   = q.trim().toLowerCase();
-  const surahOnly = surahParam ? parseInt(surahParam) : null; // optional per-surah filter
+  const surahOnly = surahParam ? parseInt(surahParam) : null;
 
   try {
     const data = await loadQuranData();
-
     const matches = [];
 
     for (const surah of data) {
-      // Skip if caller wants a specific surah and this isn't it
       if (surahOnly && surah.surahNumber !== surahOnly) continue;
 
       const surahNameMatch = surah.surahName.toLowerCase().includes(keyword);
@@ -115,7 +97,7 @@ router.get('/', async (req, res) => {
             matchType: surahNameMatch ? 'Surah Name' : surahNumberMatch ? 'Surah Number' : 'Verse Text'
           });
         }
-        if (matches.length >= 100) break; // cap at 100 results
+        if (matches.length >= 100) break;
       }
       if (matches.length >= 100) break;
     }
@@ -123,8 +105,8 @@ router.get('/', async (req, res) => {
     res.json({ count: matches.length, matches });
   } catch (err) {
     console.error('[search] Error:', err.message);
-    res.status(500).json({ error: 'Search temporarily unavailable. Please try again.' });
+    res.status(500).json({ error: 'Search temporarily unavailable.' });
   }
 });
 
-module.exports = router;
+export default router;

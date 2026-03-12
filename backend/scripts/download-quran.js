@@ -1,13 +1,14 @@
 /**
- * scripts/download-quran.js
- * Run once: node scripts/download-quran.js
- * Downloads the full Saheeh International translation and caches it as data/quran-en.json
- * Saves incrementally so it can be resumed if interrupted.
+ * scripts/download-quran.js (ESM)
  */
 
-const axios = require('axios');
-const fs    = require('fs');
-const path  = require('path');
+import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const DATA_DIR  = path.join(__dirname, '..', 'data');
 const OUT_FILE  = path.join(DATA_DIR, 'quran-en.json');
@@ -31,7 +32,6 @@ async function fetchWithRetry(url, retries = 3, delayMs = 2000) {
 async function main() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 
-  // Load partial progress if resuming
   let all = [];
   const doneSet = new Set();
   if (fs.existsSync(TEMP_FILE)) {
@@ -42,7 +42,6 @@ async function main() {
 
   console.log('⏳ Downloading Saheeh International translation from alquran.cloud…');
 
-  // Get surah metadata list
   const listData = await fetchWithRetry(`${ALQURAN}/surah`);
   const surahMeta = listData.data;
 
@@ -73,22 +72,17 @@ async function main() {
         })),
       });
 
-      // Save progress after each surah
       fs.writeFileSync(TEMP_FILE, JSON.stringify(all, null, 0), 'utf8');
     } catch (e) {
       console.error(`\n  ⚠️  Skipping Surah ${meta.number}: ${e.message}`);
     }
 
-    // Polite delay
     await new Promise((r) => setTimeout(r, 300));
   }
 
-  // Sort by surah number (in case any were out of order)
   all.sort((a, b) => a.surahNumber - b.surahNumber);
-
   fs.writeFileSync(OUT_FILE, JSON.stringify(all, null, 0), 'utf8');
 
-  // Clean up temp file
   if (fs.existsSync(TEMP_FILE)) fs.unlinkSync(TEMP_FILE);
 
   const mb = (fs.statSync(OUT_FILE).size / 1024 / 1024).toFixed(1);

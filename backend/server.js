@@ -1,12 +1,18 @@
 /**
- * server.js — Main Express server entry point
+ * server.js — Main Express server entry point (ESM)
  * Sets up middleware, routes, and MongoDB connection
  */
 
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Define __dirname for ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables from .env file
 dotenv.config();
@@ -15,22 +21,34 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ── Middleware ────────────────────────────────────────────────────────────────
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  credentials: true,
-}));
+app.use(cors()); // Simplified as requested
 app.use(express.json());
 
-// ── Routes ────────────────────────────────────────────────────────────────────
-app.use('/api/surah',     require('./routes/surah'));
-app.use('/api/juz',       require('./routes/juz'));
-app.use('/api/bookmarks', require('./routes/bookmarks'));
-app.use('/api/search',    require('./routes/search'));
+// ── Routes (Importing ESM routes with .js extensions) ─────────────────────────
+import surahRoutes from './routes/surah.js';
+import juzRoutes from './routes/juz.js';
+import bookmarkRoutes from './routes/bookmarks.js';
+import searchRoutes from './routes/search.js';
 
-// Root health-check
-app.get('/', (req, res) => {
-  res.json({ message: 'Quran API is running 🌙' });
-});
+app.use('/api/surah',     surahRoutes);
+app.use('/api/juz',       juzRoutes);
+app.use('/api/bookmarks', bookmarkRoutes);
+app.use('/api/search',    searchRoutes);
+
+// ── Production Setup ──────────────────────────────────────────────────────────
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
+  });
+} else {
+  // Root health-check for development
+  app.get('/', (req, res) => {
+    res.json({ message: 'Quran API is running 🌙' });
+  });
+}
 
 // ── MongoDB Connection ────────────────────────────────────────────────────────
 mongoose.connection.on('connected', () => console.log('✅ Connected to MongoDB Atlas'));

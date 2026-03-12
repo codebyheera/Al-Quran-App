@@ -1,29 +1,22 @@
 /**
- * routes/juz.js — Juz data route
- * Proxies AlQuran Cloud API to serve Juz data with Arabic + English
+ * routes/juz.js — Juz data route (ESM)
  */
 
-const express = require('express');
-const axios   = require('axios');
-const router  = express.Router();
+import express from 'express';
+import axios from 'axios';
+const router = express.Router();
 
 const ALQURAN_BASE = 'https://api.alquran.cloud/v1';
 
-/**
- * GET /api/juz/:juzNumber
- * Fetches all ayahs of a Juz with Arabic text and English translation
- */
 router.get('/:juzNumber', async (req, res) => {
   const { juzNumber } = req.params;
   const num = parseInt(juzNumber);
 
-  // Validate range (Quran has 30 Juz)
   if (isNaN(num) || num < 1 || num > 30) {
     return res.status(400).json({ error: 'Invalid juz number. Must be 1–30.' });
   }
 
   try {
-    // Fetch both editions simultaneously
     const [arabicRes, englishRes] = await Promise.all([
       axios.get(`${ALQURAN_BASE}/juz/${num}/quran-uthmani`),
       axios.get(`${ALQURAN_BASE}/juz/${num}/en.asad`),
@@ -32,7 +25,6 @@ router.get('/:juzNumber', async (req, res) => {
     const arabicAyahs  = arabicRes.data.data.ayahs;
     const englishAyahs = englishRes.data.data.ayahs;
 
-    // Merge into unified verse list with audio URLs
     const verses = arabicAyahs.map((ayah, i) => ({
       number:         ayah.numberInSurah,
       globalNumber:   ayah.number,
@@ -55,15 +47,9 @@ router.get('/:juzNumber', async (req, res) => {
   }
 });
 
-/**
- * GET /api/juz — list all 30 Juz with starting surah info
- */
 router.get('/', async (req, res) => {
   try {
-    // AlQuran Cloud doesn't have a /juz list endpoint,
-    // so we return a static metadata list
     const juzMeta = Array.from({ length: 30 }, (_, i) => ({ juzNumber: i + 1 }));
-    // Starting surah/verse mapping for the 30 juz
     const JUZ_START = [
       { surah: 1,  verse: 1  }, { surah: 2,  verse: 142 }, { surah: 2,  verse: 253 },
       { surah: 3,  verse: 93 }, { surah: 4,  verse: 24  }, { surah: 4,  verse: 148 },
@@ -89,4 +75,4 @@ router.get('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
