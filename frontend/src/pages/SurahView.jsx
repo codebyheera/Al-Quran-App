@@ -210,35 +210,37 @@ export default function SurahView() {
                 id={`verse-${verse.number}`}
               >
                 {/* Header section with Ayah number */}
-                <div className="verse-card-header">
+                <div className="verse-card-side">
                   <div className="verse-badge">{verse.number}</div>
                 </div>
 
-                {/* Arabic text */}
-                <p className="arabic verse-arabic">{verse.arabic}</p>
+                <div className="verse-card-main">
+                  {/* Arabic text */}
+                  <p className="arabic verse-arabic">{verse.arabic}</p>
 
-                {/* English translation */}
-                {showTranslation && (
-                  <p className="translation verse-translation">{verse.translation}</p>
-                )}
+                  {/* English translation */}
+                  {showTranslation && (
+                    <p className="translation verse-translation">{verse.translation}</p>
+                  )}
 
-                {/* Footer section with controls */}
-                <div className="verse-card-footer">
-                  <AudioPlayer
-                    verse={{
-                      ...verse,
-                      surahNumber: surahNum,
-                      surahName: surah.surahName,
-                      audio: verse.audioUrl
-                    }}
-                  />
-                  <button
-                    className={`btn btn-ghost bookmark-btn ${bookmarked ? 'bookmarked' : ''}`}
-                    onClick={() => handleBookmark(verse)}
-                    title={bookmarked ? 'Remove bookmark' : 'Bookmark this verse'}
-                  >
-                    {bookmarked ? '🔖 Bookmarked' : '🔖 Bookmark'}
-                  </button>
+                  {/* Footer section with controls */}
+                  <div className="verse-card-footer">
+                    <AudioPlayer
+                      verse={{
+                        ...verse,
+                        surahNumber: surahNum,
+                        surahName: surah.surahName,
+                        audio: verse.audioUrl
+                      }}
+                    />
+                    <button
+                      className={`btn btn-ghost bookmark-btn ${bookmarked ? 'bookmarked' : ''}`}
+                      onClick={() => handleBookmark(verse)}
+                      title={bookmarked ? 'Remove bookmark' : 'Bookmark this verse'}
+                    >
+                      {bookmarked ? '🔖 Bookmarked' : '🔖 Bookmark'}
+                    </button>
+                  </div>
                 </div>
               </div>
             );
