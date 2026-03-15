@@ -1,19 +1,77 @@
 /**
  * components/Navbar.jsx — Sticky top navigation bar
- * Contains logo, nav links, search input, bookmark link, and theme toggle
+ * Contains logo, nav links, search input, qari selector, bookmark link, and theme toggle
  */
 
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { useQari } from '../context/QariContext';
 import '../styles/Navbar.css';
+
+function QariDropdown({ reciter, changeReciter, reciters }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const current = reciters.find((r) => r.id === reciter);
+
+  // Close when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="qari-dropdown" ref={ref}>
+      <button
+        className={`qari-trigger ${open ? 'open' : ''}`}
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        title="Select Reciter"
+      >
+        <span className="qari-trigger-icon">🎙️</span>
+        <span className="qari-trigger-label">{current?.name}</span>
+        <svg className={`qari-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+          <path d="M7 10l5 5 5-5z"/>
+        </svg>
+      </button>
+
+      {open && (
+        <div className="qari-panel" role="listbox">
+          <div className="qari-panel-header">Reciter</div>
+          {reciters.map((r) => (
+            <button
+              key={r.id}
+              className={`qari-option ${r.id === reciter ? 'selected' : ''}`}
+              role="option"
+              aria-selected={r.id === reciter}
+              onClick={() => { changeReciter(r.id); setOpen(false); }}
+            >
+              <span className="qari-option-info">
+                <span className="qari-option-name">{r.name}</span>
+              </span>
+              {r.id === reciter && (
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const { reciter, changeReciter, reciters } = useQari();
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
 
-  // Navigate to search page on Enter
   function handleSearch(e) {
     if (e.key === 'Enter' && query.trim()) {
       navigate(`/search?q=${encodeURIComponent(query.trim())}`);
@@ -52,6 +110,9 @@ export default function Navbar() {
 
         {/* Action buttons */}
         <div className="navbar-actions">
+          {/* Custom Qari Dropdown */}
+          <QariDropdown reciter={reciter} changeReciter={changeReciter} reciters={reciters} />
+
           {/* Bookmarks shortcut */}
           <NavLink to="/bookmarks">
             <button className="nav-icon-btn" title="Bookmarks">🔖</button>

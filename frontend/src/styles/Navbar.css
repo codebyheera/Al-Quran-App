@@ -102,6 +102,160 @@
   background: rgba(201, 168, 76, 0.08);
 }
 
+/* ── Custom Qari Dropdown ───────────────────────────────────────── */
+.qari-dropdown {
+  position: relative;
+  z-index: 200;
+}
+
+/* Trigger button */
+.qari-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 36px;
+  padding: 0 0.65rem 0 0.55rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  user-select: none;
+  letter-spacing: 0.01em;
+}
+.qari-trigger:hover,
+.qari-trigger.open {
+  border-color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.06);
+  color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+}
+
+.qari-trigger-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+  filter: grayscale(0.3);
+}
+.qari-trigger.open .qari-trigger-icon { filter: none; }
+
+.qari-trigger-label {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Animated chevron */
+.qari-chevron {
+  opacity: 0.6;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+  flex-shrink: 0;
+}
+.qari-chevron.rotated { transform: rotate(180deg); opacity: 1; }
+
+/* Dropdown panel */
+.qari-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow), 0 0 0 1px rgba(201, 168, 76, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  animation: qariPanelIn 0.18s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+@keyframes qariPanelIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Panel header label */
+.qari-panel-header {
+  padding: 0.55rem 0.85rem 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+}
+
+/* Each reciter option row */
+.qari-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+  gap: 0.5rem;
+  position: relative;
+}
+.qari-option::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent-gold);
+  border-radius: 0 2px 2px 0;
+  transform: scaleY(0);
+  transition: transform 0.18s ease;
+}
+.qari-option:hover {
+  background: rgba(201, 168, 76, 0.06);
+}
+.qari-option.selected {
+  background: rgba(201, 168, 76, 0.05);
+}
+.qari-option.selected::after {
+  transform: scaleY(1);
+}
+
+.qari-option-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.qari-option-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: color 0.15s ease;
+}
+.qari-option.selected .qari-option-name,
+.qari-option:hover .qari-option-name { color: var(--accent-gold); }
+
+.qari-option-ar {
+  font-family: var(--font-arabic);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  direction: rtl;
+  line-height: 1.4;
+}
+
+/* Checkmark on selected */
+.qari-option svg {
+  color: var(--accent-gold);
+  flex-shrink: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .navbar-search { display: none; }
+  .qari-trigger-label { max-width: 75px; font-size: 0.75rem; }
+  .qari-panel { min-width: 180px; }
 }
+

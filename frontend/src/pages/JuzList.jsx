@@ -30,17 +30,16 @@ export default function JuzList() {
         <div className="juz-grid">
           {juzList.map((j) => (
             <Link key={j.juzNumber} to={`/juz/${j.juzNumber}`} className="juz-card card">
-              {/* Decorative Arabic Juz number */}
-              <div className="juz-arabic-num">
-                {toArabicNum(j.juzNumber)}
-              </div>
-              <div className="juz-info">
-                <span className="juz-label">Juz</span>
-                <span className="juz-number">{j.juzNumber}</span>
-              </div>
-              <div className="juz-start text-muted">
-                <span>Starts at</span>
-                <span>Surah {j.startSurah} : {j.startVerse}</span>
+              <div className="juz-card-content">
+                <div className="juz-info">
+                  <span className="juz-label">JUZ</span>
+                  <span className="juz-number">{j.juzNumber}</span>
+                </div>
+                <div className="juz-divider"></div>
+                <div className="juz-start">
+                  <span className="juz-start-label text-muted">Starts at</span>
+                  <span className="juz-start-value">Surah {j.startSurah} : {j.startVerse}</span>
+                </div>
               </div>
             </Link>
           ))}
@@ -48,9 +47,4 @@ export default function JuzList() {
       </div>
     </div>
   );
-}
-
-// Convert a western numeral to Arabic-Indic numeral for decoration
-function toArabicNum(n) {
-  return String(n).split('').map((d) => '٠١٢٣٤٥٦٧٨٩'[parseInt(d)]).join('');
 }

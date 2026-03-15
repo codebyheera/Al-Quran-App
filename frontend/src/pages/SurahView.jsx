@@ -11,6 +11,7 @@ import axios from 'axios';
 import AudioPlayer from '../components/AudioPlayer';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
+import { useQari } from '../context/QariContext';
 import './SurahView.css';
 
 export default function SurahView() {
@@ -27,7 +28,12 @@ export default function SurahView() {
     return parseFloat(localStorage.getItem('arabicFontSize')) || 2.2;
   });
 
-  const { currentVerse, isPlaying, playPlaylist, togglePlay } = useAudio();
+  const [showTranslation, setShowTranslation] = useState(() => {
+    return localStorage.getItem('showTranslation') !== 'false';
+  });
+
+  const { currentVerse, isPlaying, playPlaylist, togglePlay, stop } = useAudio();
+  const { reciter } = useQari();
 
   const { addBookmark, removeBookmark, isBookmarked, bookmarks } = useBookmarks();
   const topRef = useRef(null);
@@ -36,11 +42,12 @@ export default function SurahView() {
     setLoading(true);
     setError(null);
     setFilter('');
+    stop(); // Stop any playing audio when switching reciter or surah
     topRef.current?.scrollIntoView({ behavior: 'smooth' });
-    axios.get(`/api/surah/${surahNum}`)
+    axios.get(`/api/surah/${surahNum}?reciter=${reciter}`)
       .then(({ data }) => { setSurah(data); setLoading(false); })
       .catch(() => { setError('Failed to load Surah.'); setLoading(false); });
-  }, [surahNum]);
+  }, [surahNum, reciter]);
 
   // Auto-scroll when currentVerse changes
   useEffect(() => {
@@ -109,6 +116,14 @@ export default function SurahView() {
     }
   }
 
+  const toggleTranslation = () => {
+    setShowTranslation(prev => {
+      const newVal = !prev;
+      localStorage.setItem('showTranslation', newVal);
+      return newVal;
+    });
+  };
+
   if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Surah…</p></div>;
   if (error)   return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
 
@@ -170,6 +185,15 @@ export default function SurahView() {
             <button className="btn btn-ghost" style={{ padding: '0.2rem 0.6rem' }} onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>A-</button>
             <span className="text-primary" style={{ minWidth: '2ch', textAlign: 'center', fontSize: '0.9rem' }}>{fontSize.toFixed(1)}</span>
             <button className="btn btn-ghost" style={{ padding: '0.2rem 0.6rem' }} onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>A+</button>
+            <div style={{ width: '1px', height: '20px', background: 'var(--border)', margin: '0 0.5rem' }}></div>
+            <button
+              className="btn btn-ghost"
+              style={{ padding: '0.2rem 0.6rem', fontSize: '0.85rem' }}
+              onClick={toggleTranslation}
+              title={showTranslation ? "Hide English Translation" : "Show English Translation"}
+            >
+              EN: <span className={showTranslation ? "text-primary" : "text-muted"}>{showTranslation ? 'On' : 'Off'}</span>
+            </button>
           </div>
         </div>
 
@@ -194,7 +218,9 @@ export default function SurahView() {
                 <p className="arabic verse-arabic">{verse.arabic}</p>
 
                 {/* English translation */}
-                <p className="translation verse-translation">{verse.translation}</p>
+                {showTranslation && (
+                  <p className="translation verse-translation">{verse.translation}</p>
+                )}
 
                 {/* Footer section with controls */}
                 <div className="verse-card-footer">

@@ -1,6 +1,6 @@
 /**
  * main.jsx — React app entry point
- * Wraps the app with ThemeProvider and BookmarkProvider
+ * Wraps the app with ThemeProvider, BookmarkProvider, QariProvider, and AudioProvider
  */
 
 import React from 'react';
@@ -10,6 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider }   from './context/ThemeContext';
 import { BookmarkProvider } from './context/BookmarkContext';
 import { AudioProvider }    from './context/AudioContext';
+import { QariProvider }     from './context/QariContext';
 import App from './App';
 
 import './styles/global.css';
@@ -19,11 +20,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <BookmarkProvider>
-          <AudioProvider>
-            <App />
-          </AudioProvider>
-        </BookmarkProvider>
+        <QariProvider>
+          <BookmarkProvider>
+            <AudioProvider>
+              <App />
+            </AudioProvider>
+          </BookmarkProvider>
+        </QariProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
