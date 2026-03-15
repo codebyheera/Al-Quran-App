@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../lib/api';
 import './JuzList.css';
 
 export default function JuzList() {
@@ -12,7 +12,7 @@ export default function JuzList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/juz')
+    api.get('/api/juz')
       .then(({ data }) => { setJuzList(data); setLoading(false); })
       .catch(() => setLoading(false));
   }, []);

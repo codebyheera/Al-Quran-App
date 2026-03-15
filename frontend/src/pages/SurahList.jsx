@@ -5,7 +5,7 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../lib/api';
 import './SurahList.css';
 
 export default function SurahList() {
@@ -15,7 +15,7 @@ export default function SurahList() {
   const [query,   setQuery]   = useState('');
 
   useEffect(() => {
-    axios.get('/api/surah')
+    api.get('/api/surah')
       .then(({ data }) => { setSurahs(data); setLoading(false); })
       .catch(() => { setError('Failed to load Surahs'); setLoading(false); });
   }, []);

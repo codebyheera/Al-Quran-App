@@ -35,20 +35,10 @@ app.use('/api/juz',       juzRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 app.use('/api/search',    searchRoutes);
 
-// ── Production Setup ──────────────────────────────────────────────────────────
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
-  });
-} else {
-  // Root health-check for development
-  app.get('/', (req, res) => {
-    res.json({ message: 'Quran API is running 🌙' });
-  });
-}
+// Health-check
+app.get('/', (_req, res) => {
+  res.json({ message: 'Quran API is running 🌙' });
+});
 
 // ── MongoDB Connection ────────────────────────────────────────────────────────
 mongoose.connection.on('connected', () => console.log('✅ Connected to MongoDB Atlas'));

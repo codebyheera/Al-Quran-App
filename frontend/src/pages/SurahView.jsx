@@ -7,7 +7,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../lib/api';
 import AudioPlayer from '../components/AudioPlayer';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
@@ -44,7 +44,7 @@ export default function SurahView() {
     setFilter('');
     stop(); // Stop any playing audio when switching reciter or surah
     topRef.current?.scrollIntoView({ behavior: 'smooth' });
-    axios.get(`/api/surah/${surahNum}?reciter=${reciter}`)
+    api.get(`/api/surah/${surahNum}?reciter=${reciter}`)
       .then(({ data }) => { setSurah(data); setLoading(false); })
       .catch(() => { setError('Failed to load Surah.'); setLoading(false); });
   }, [surahNum, reciter]);

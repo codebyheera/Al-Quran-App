@@ -5,7 +5,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../lib/api';
 import AudioPlayer from '../components/AudioPlayer';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
@@ -41,7 +41,7 @@ export default function JuzView() {
     setFilter('');
     stop(); // Stop any playing audio when switching reciter or juz
     topRef.current?.scrollIntoView({ behavior: 'smooth' });
-    axios.get(`/api/juz/${juzNum}?reciter=${reciter}`)
+    api.get(`/api/juz/${juzNum}?reciter=${reciter}`)
       .then(({ data }) => { setJuz(data); setLoading(false); })
       .catch(() => { setError('Failed to load Juz.'); setLoading(false); });
   }, [juzNum, reciter]);

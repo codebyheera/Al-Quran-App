@@ -5,7 +5,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../lib/api';
 import './SearchPage.css';
 
 export default function SearchPage() {
@@ -28,7 +28,7 @@ export default function SearchPage() {
     setError(null);
     setSearched(true);
     setResults([]);
-    axios.get(`/api/search?q=${encodeURIComponent(urlQuery.trim())}`)
+    api.get(`/api/search?q=${encodeURIComponent(urlQuery.trim())}`)
       .then(({ data }) => { setResults(data.matches || []); setLoading(false); })
       .catch((err) => {
         const msg = err.response?.data?.error || 'Search failed. Please try again.';

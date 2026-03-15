@@ -5,7 +5,7 @@
  */
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../lib/api';
 
 const BookmarkContext = createContext();
 
@@ -34,7 +34,7 @@ export function BookmarkProvider({ children }) {
    */
   async function fetchBookmarks() {
     try {
-      const { data } = await axios.get(`/api/bookmarks?clientId=${clientId}`);
+      const { data } = await api.get(`/api/bookmarks?clientId=${clientId}`);
       setBookmarks(data);
     } catch (err) {
       console.error('Failed to load bookmarks:', err.message);
@@ -48,7 +48,7 @@ export function BookmarkProvider({ children }) {
    */
   async function addBookmark(verse) {
     try {
-      const { data } = await axios.post('/api/bookmarks', { ...verse, clientId });
+      const { data } = await api.post('/api/bookmarks', { ...verse, clientId });
       setBookmarks((prev) => [data, ...prev]);
       return { success: true };
     } catch (err) {
@@ -62,7 +62,7 @@ export function BookmarkProvider({ children }) {
    */
   async function removeBookmark(id) {
     try {
-      await axios.delete(`/api/bookmarks/${id}`);
+      await api.delete(`/api/bookmarks/${id}`);
       setBookmarks((prev) => prev.filter((b) => b._id !== id));
     } catch (err) {
       console.error('Failed to remove bookmark:', err.message);
