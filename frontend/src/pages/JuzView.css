@@ -8,10 +8,11 @@
 .jv-controls {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
-.jv-search { max-width: 360px; }
+.jv-search { max-width: 360px; flex: 1; min-width: 160px; }
 
 /* Juz specific structural additions */
 .juz-surah-group { margin-bottom: 3rem; }
@@ -26,6 +27,8 @@
   margin-bottom: 1.5rem;
   border: 1px solid var(--border);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .juz-surah-link {
@@ -35,4 +38,28 @@
 }
 
 .jv-verse { padding: 0; } /* Reset local padding if any */
+
+/* ── Mobile ─────────────────────────────── */
+@media (max-width: 640px) {
+  .juz-view { padding: 1rem 0; }
+
+  .jv-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+  .jv-search { max-width: 100%; }
+
+  .jv-controls .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .juz-surah-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
+  }
+}
+
 

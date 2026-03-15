@@ -459,3 +459,53 @@ a:hover { color: var(--accent-gold-light); }
   padding-bottom: 90px;
 }
 
+/* ════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS  (max-width: 640px / 480px)
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  /* Verse card: reduce horizontal padding */
+  .verse-card {
+    padding: 1rem;
+    gap: 0.85rem;
+  }
+
+  /* Shrink the Arabic font a bit so it fits on phone */
+  .verse-arabic {
+    font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
+    line-height: 1.9 !important;
+  }
+
+  /* Card footer stacks buttons on tiny screens */
+  .verse-card-footer {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Smaller verse badge */
+  .verse-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 0.8rem;
+  }
+
+  /* Slightly reduce verse translation text */
+  .verse-translation {
+    font-size: 0.92rem;
+  }
+  
+  /* Shrink card padding */
+  .card { padding: 1rem; }
+
+  /* Make has-player leave space for bottom nav */
+  .has-player main { padding-bottom: 80px; }
+}
+
+@media (max-width: 480px) {
+  /* Very small phones: reduce Arabic font more */
+  .verse-arabic {
+    font-size: clamp(1.3rem, 6.5vw, 1.8rem) !important;
+  }
+}
+
+
