@@ -27,24 +27,42 @@ router.get('/:juzNumber', async (req, res) => {
   }
 
   try {
-    const [arabicRes, englishRes] = await Promise.all([
+    const quranComUrl = `https://api.quran.com/api/v4/verses/by_juz/${num}?words=true&word_fields=text_uthmani&per_page=600`;
+    
+    const [arabicRes, englishRes, quranComRes] = await Promise.all([
       axios.get(`${ALQURAN_BASE}/juz/${num}/quran-uthmani`),
       axios.get(`${ALQURAN_BASE}/juz/${num}/en.asad`),
+      axios.get(quranComUrl)
     ]);
 
     const arabicAyahs  = arabicRes.data.data.ayahs;
     const englishAyahs = englishRes.data.data.ayahs;
 
-    const verses = arabicAyahs.map((ayah, i) => ({
-      number:         ayah.numberInSurah,
-      globalNumber:   ayah.number,
-      surahNumber:    ayah.surah.number,
-      surahName:      ayah.surah.englishName,
-      arabicSurahName: ayah.surah.name,
-      arabic:         ayah.text,
-      translation:    englishAyahs[i]?.text || '',
-      audioUrl: getAudioUrl(reciter, ayah.surah.number, ayah.numberInSurah, ayah.number),
-    }));
+    // Create a map of verses from Quran.com API for fast lookup by verseKey
+    const wordsMap = {};
+    if (quranComRes.data && quranComRes.data.verses) {
+      quranComRes.data.verses.forEach(v => {
+        wordsMap[v.verse_key] = v.words.map(w => ({
+          ...w,
+          audioUrl: w.audio_url ? `https://verses.quran.com/${w.audio_url}` : null
+        }));
+      });
+    }
+
+    const verses = arabicAyahs.map((ayah, i) => {
+      const verseKey = `${ayah.surah.number}:${ayah.numberInSurah}`;
+      return {
+        number:         ayah.numberInSurah,
+        globalNumber:   ayah.number,
+        surahNumber:    ayah.surah.number,
+        surahName:      ayah.surah.englishName,
+        arabicSurahName: ayah.surah.name,
+        arabic:         ayah.text,
+        translation:    englishAyahs[i]?.text || '',
+        audioUrl: getAudioUrl(reciter, ayah.surah.number, ayah.numberInSurah, ayah.number),
+        words: wordsMap[verseKey] || []
+      };
+    });
 
     res.json({
       juzNumber: num,

@@ -28,10 +28,29 @@ router.get('/:surahNumber', async (req, res) => {
 
   try {
     const url = `${ALQURAN_BASE}/surah/${num}/editions/quran-uthmani,en.asad`;
-    const { data } = await axios.get(url);
+    const quranComUrl = `https://api.quran.com/api/v4/verses/by_chapter/${num}?words=true&word_fields=text_uthmani&per_page=300`;
 
+    const [alquranRes, quranComRes] = await Promise.all([
+      axios.get(url),
+      axios.get(quranComUrl)
+    ]);
+
+    const data = alquranRes.data;
     const arabicEdition  = data.data[0];
     const englishEdition = data.data[1];
+
+    // Create a map of verses from Quran.com API for fast lookup by verseKey
+    const wordsMap = {};
+    if (quranComRes.data && quranComRes.data.verses) {
+      quranComRes.data.verses.forEach(v => {
+        const verseNum = v.verse_key.split(':')[1];
+        wordsMap[verseNum] = v.words.map(w => ({
+          ...w,
+          // Convert relative audio path from API to full CDN path
+          audioUrl: w.audio_url ? `https://verses.quran.com/${w.audio_url}` : null
+        }));
+      });
+    }
 
     const verses = arabicEdition.ayahs.map((ayah, i) => ({
       number:       ayah.numberInSurah,
@@ -39,6 +58,7 @@ router.get('/:surahNumber', async (req, res) => {
       arabic:       ayah.text,
       translation:  englishEdition.ayahs[i]?.text || '',
       audioUrl: getAudioUrl(reciter, num, ayah.numberInSurah, ayah.number),
+      words: wordsMap[ayah.numberInSurah] || []
     }));
 
     res.json({

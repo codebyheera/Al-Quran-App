@@ -24,34 +24,34 @@ function QariDropdown({ reciter, changeReciter, reciters }) {
   }, []);
 
   return (
-    <div className="qari-dropdown" ref={ref}>
+    <div className="navbar-dropdown" ref={ref}>
       <button
-        className={`qari-trigger ${open ? 'open' : ''}`}
+        className={`dropdown-trigger ${open ? 'open' : ''}`}
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
         title="Select Reciter"
       >
-        <span className="qari-trigger-icon">🎙️</span>
-        <span className="qari-trigger-label">{current?.name}</span>
-        <svg className={`qari-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+        <span className="dropdown-trigger-icon">🎙️</span>
+        <span className="dropdown-trigger-label">{current?.name}</span>
+        <svg className={`dropdown-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
           <path d="M7 10l5 5 5-5z"/>
         </svg>
       </button>
 
       {open && (
-        <div className="qari-panel" role="listbox">
-          <div className="qari-panel-header">Reciter</div>
+        <div className="dropdown-panel" role="listbox">
+          <div className="dropdown-panel-header">Reciter</div>
           {reciters.map((r) => (
             <button
               key={r.id}
-              className={`qari-option ${r.id === reciter ? 'selected' : ''}`}
+              className={`dropdown-option ${r.id === reciter ? 'selected' : ''}`}
               role="option"
               aria-selected={r.id === reciter}
               onClick={() => { changeReciter(r.id); setOpen(false); }}
             >
-              <span className="qari-option-info">
-                <span className="qari-option-name">{r.name}</span>
+              <span className="dropdown-option-info">
+                <span className="dropdown-option-name">{r.name}</span>
               </span>
               {r.id === reciter && (
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
@@ -66,8 +66,66 @@ function QariDropdown({ reciter, changeReciter, reciters }) {
   );
 }
 
+function ThemeDropdown({ theme, changeTheme, themes }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const current = themes.find((t) => t.id === theme);
+
+  // Close when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="navbar-dropdown" ref={ref}>
+      <button
+        className={`dropdown-trigger ${open ? 'open' : ''}`}
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        title="Select Theme"
+      >
+        <span className="dropdown-trigger-icon">🎨</span>
+        <span className="dropdown-trigger-label" style={{display: 'none'}}>{current?.name}</span>
+        <svg className={`dropdown-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+          <path d="M7 10l5 5 5-5z"/>
+        </svg>
+      </button>
+
+      {open && (
+        <div className="dropdown-panel theme-panel" role="listbox">
+          <div className="dropdown-panel-header">Theme</div>
+          {themes.map((t) => (
+            <button
+              key={t.id}
+              className={`dropdown-option ${t.id === theme ? 'selected' : ''}`}
+              role="option"
+              aria-selected={t.id === theme}
+              onClick={() => { changeTheme(t.id); setOpen(false); }}
+            >
+              <span className="dropdown-option-info">
+                <span className="dropdown-trigger-icon" style={{marginRight: '8px'}}>{t.icon}</span>
+                <span className="dropdown-option-name">{t.name}</span>
+              </span>
+              {t.id === theme && (
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, changeTheme, themes } = useTheme();
   const { reciter, changeReciter, reciters } = useQari();
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
@@ -117,14 +175,9 @@ export default function Navbar() {
           <NavLink to="/bookmarks">
             <button className="nav-icon-btn" title="Bookmarks">🔖</button>
           </NavLink>
-          {/* Theme toggle */}
-          <button
-            className="nav-icon-btn"
-            onClick={toggleTheme}
-            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          >
-            {theme === 'dark' ? '☀️' : '🌙'}
-          </button>
+          
+          {/* Custom Theme Dropdown */}
+          <ThemeDropdown theme={theme} changeTheme={changeTheme} themes={themes} />
         </div>
       </div>
     </nav>

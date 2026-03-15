@@ -215,8 +215,37 @@ export default function SurahView() {
                 </div>
 
                 <div className="verse-card-main">
-                  {/* Arabic text */}
-                  <p className="arabic verse-arabic">{verse.arabic}</p>
+                  {/* Arabic text with Word-by-Word Audio */}
+                  <div className="arabic verse-arabic" dir="rtl">
+                    {verse.words && verse.words.length > 0 ? (
+                      verse.words
+                        .filter(word => word.char_type_name !== 'end')
+                        .map((word, wIdx) => {
+                          // Play individual audio for this word
+                          const playWordAudio = (e) => {
+                            e.stopPropagation();
+                            if (word.audioUrl) {
+                              const audio = new Audio(word.audioUrl);
+                              audio.play().catch(err => console.error("Word audio playback failed:", err));
+                            }
+                          };
+                          
+                          return (
+                            <span 
+                              key={wIdx} 
+                              className="quran-word"
+                              onClick={playWordAudio}
+                              title={word.translation?.text || ''}
+                            >
+                              {word.text_uthmani || word.text}
+                            </span>
+                          );
+                        })
+                    ) : (
+                      // Fallback if words aren't loaded or available
+                      verse.arabic
+                    )}
+                  </div>
 
                   {/* English translation */}
                   {showTranslation && (

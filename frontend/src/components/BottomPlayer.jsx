@@ -12,7 +12,9 @@ export default function BottomPlayer() {
     stop, 
     skipNext, 
     skipPrev, 
-    seek 
+    seek,
+    isMinimized,
+    setIsMinimized
   } = useAudio();
 
   if (!currentVerse) return null;
@@ -29,60 +31,76 @@ export default function BottomPlayer() {
   };
 
   return (
-    <div className="bottom-player glass">
-      <div className="container bottom-player-inner">
-        
-        {/* Info Section */}
-        <div className="player-info">
-          <div className="player-verse-info">
-            <span className="player-surah">{currentVerse.surahName || 'Surah'}</span>
-            <span className="player-divider">•</span>
-            <span className="player-verse-num">Ayah {currentVerse.number}</span>
-          </div>
-          <div className="player-arabic-preview arabic">{currentVerse.arabic}</div>
+    <>
+      {/* Minimized Floating Button */}
+      {isMinimized ? (
+        <div className="minimized-player glass" onClick={() => setIsMinimized(false)} title="Open Audio Player">
+          {isPlaying ? (
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+          )}
         </div>
+      ) : (
+        /* Full Sleek Bottom Player */
+        <div className="bottom-player glass">
+          <div className="container bottom-player-inner">
+            
+            {/* Info Section */}
+            <div className="player-info">
+              <div className="player-verse-info">
+                <span className="player-surah">{currentVerse.surahName || 'Surah'}</span>
+                <span className="player-divider">•</span>
+                <span className="player-verse-num" style={{whiteSpace: 'nowrap'}}>Ayah {currentVerse.number}</span>
+              </div>
+            </div>
 
-        {/* Controls Section */}
-        <div className="player-main-controls">
-          <div className="player-buttons">
-            <button className="player-btn prev" onClick={skipPrev} title="Previous Ayah">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6L19 18V6z"/></svg>
-            </button>
-            <button className="player-btn play-pause" onClick={togglePlay} title={isPlaying ? "Pause" : "Play"}>
-              {isPlaying ? (
-                <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-              ) : (
-                <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              )}
-            </button>
-            <button className="player-btn next" onClick={skipNext} title="Next Ayah">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-            </button>
-          </div>
-          
-          <div className="player-slider-container">
-            <span className="time-display">{formatTime(progress)}</span>
-            <input 
-              type="range" 
-              className="player-slider" 
-              min="0" 
-              max={duration || 0} 
-              step="0.1"
-              value={progress}
-              onChange={handleProgressBarChange}
-            />
-            <span className="time-display">{formatTime(duration)}</span>
+            {/* Controls Section */}
+            <div className="player-main-controls">
+              <div className="player-buttons">
+                <button className="player-btn prev" onClick={skipPrev} title="Previous Ayah">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6L19 18V6z"/></svg>
+                </button>
+                <button className="player-btn play-pause" onClick={togglePlay} title={isPlaying ? "Pause" : "Play"}>
+                  {isPlaying ? (
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  )}
+                </button>
+                <button className="player-btn next" onClick={skipNext} title="Next Ayah">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                </button>
+              </div>
+              
+              <div className="player-slider-container">
+                <span className="time-display">{formatTime(progress)}</span>
+                <input 
+                  type="range" 
+                  className="player-slider" 
+                  min="0" 
+                  max={duration || 0} 
+                  step="0.1"
+                  value={progress}
+                  onChange={handleProgressBarChange}
+                />
+                <span className="time-display">{formatTime(duration)}</span>
+              </div>
+            </div>
+
+            {/* Actions Section */}
+            <div className="player-actions">
+               <button className="player-btn minimize" onClick={() => setIsMinimized(true)} title="Minimize Player">
+                 <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+               </button>
+               <button className="player-btn stop" onClick={stop} title="Stop & Close">
+                 <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+               </button>
+            </div>
+
           </div>
         </div>
-
-        {/* Close button */}
-        <div className="player-actions">
-           <button className="player-btn stop" onClick={stop} title="Stop & Close">
-             <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-           </button>
-        </div>
-
-      </div>
-    </div>
+      )}
+    </>
   );
 }

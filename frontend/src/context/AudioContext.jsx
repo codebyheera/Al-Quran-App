@@ -11,6 +11,7 @@ export const AudioProvider = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isMinimized, setIsMinimized] = useState(false);
 
   const audioRef = useRef(new Audio());
 
@@ -48,6 +49,7 @@ export const AudioProvider = ({ children }) => {
     setPlaylist([]);
     setCurrentIndex(-1);
     setCurrentVerse(verse);
+    setIsMinimized(false); // Show full player for a single verse
     audioRef.current.src = verse.audio;
     audioRef.current.play().catch(console.error);
   };
@@ -56,6 +58,7 @@ export const AudioProvider = ({ children }) => {
     setPlaylist(verses);
     setCurrentIndex(startIdx);
     setCurrentVerse(verses[startIdx]);
+    setIsMinimized(true); // Auto-hide the player for full surah playback
     audioRef.current.src = verses[startIdx].audio;
     audioRef.current.play().catch(console.error);
   };
@@ -111,6 +114,8 @@ export const AudioProvider = ({ children }) => {
       currentIndex,
       progress,
       duration,
+      isMinimized,
+      setIsMinimized,
       playVerse,
       playPlaylist,
       togglePlay,

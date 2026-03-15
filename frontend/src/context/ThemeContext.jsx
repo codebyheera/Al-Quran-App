@@ -7,6 +7,14 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext();
 
+export const THEMES = [
+  { id: 'dark', name: 'Dark', icon: '🌙' },
+  { id: 'light', name: 'Light', icon: '☀️' },
+  { id: 'emerald', name: 'Emerald', icon: '🌿' },
+  { id: 'sapphire', name: 'Sapphire', icon: '🌊' },
+  { id: 'obsidian', name: 'Obsidian', icon: '🌑' }
+];
+
 export function ThemeProvider({ children }) {
   // Read saved theme from localStorage (default: dark)
   const [theme, setTheme] = useState(() => localStorage.getItem('quran-theme') || 'dark');
@@ -17,10 +25,10 @@ export function ThemeProvider({ children }) {
     localStorage.setItem('quran-theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+  const changeTheme = (newTheme) => setTheme(newTheme);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, changeTheme, themes: THEMES }}>
       {children}
     </ThemeContext.Provider>
   );

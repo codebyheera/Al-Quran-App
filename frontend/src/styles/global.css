@@ -72,6 +72,78 @@ img, video { display: block; max-width: 100%; }
   --shadow-gold:   0 0 20px rgba(201, 168, 76, 0.1);
 }
 
+/* ── Emerald (Islamic Green) Mode ────────────────────────────── */
+[data-theme="emerald"] {
+  --bg-primary:    #0a1811;
+  --bg-secondary:  #11261a;
+  --bg-card:       #152e20;
+  --bg-card-hover: #1c3d2a;
+  --bg-glass:      rgba(21, 46, 32, 0.75);
+
+  --accent-gold:   #d4af37;
+  --accent-gold-light: #e6ce7a;
+  --accent-green:  #34d399;
+  --accent-blue:   #3b82f6;
+
+  --text-primary:  #f0fdf4;
+  --text-secondary:#bbf7d0;
+  --text-muted:    #86efac;
+  --text-arabic:   #ffffff;
+
+  --border:        rgba(212, 175, 55, 0.2);
+  --border-hover:  rgba(212, 175, 55, 0.5);
+  --shadow:        0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-gold:   0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+/* ── Sapphire (Ocean Blue) Mode ─────────────────────────────── */
+[data-theme="sapphire"] {
+  --bg-primary:    #061121;
+  --bg-secondary:  #0a1930;
+  --bg-card:       #112240;
+  --bg-card-hover: #1e3357;
+  --bg-glass:      rgba(17, 34, 64, 0.75);
+
+  --accent-gold:   #64ffda; /* Minty teal for high contrast */
+  --accent-gold-light: #8affe5;
+  --accent-green:  #10b981;
+  --accent-blue:   #3b82f6;
+
+  --text-primary:  #e2e8f0;
+  --text-secondary:#94a3b8;
+  --text-muted:    #64748b;
+  --text-arabic:   #f8fafc;
+
+  --border:        rgba(100, 255, 218, 0.2);
+  --border-hover:  rgba(100, 255, 218, 0.5);
+  --shadow:        0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-gold:   0 0 20px rgba(100, 255, 218, 0.15);
+}
+
+/* ── Obsidian (Pure Black) Mode ─────────────────────────────── */
+[data-theme="obsidian"] {
+  --bg-primary:    #000000;
+  --bg-secondary:  #09090b;
+  --bg-card:       #121214;
+  --bg-card-hover: #1c1c1f;
+  --bg-glass:      rgba(18, 18, 20, 0.85);
+
+  --accent-gold:   #fbbf24;
+  --accent-gold-light: #fcd34d;
+  --accent-green:  #22c55e;
+  --accent-blue:   #3b82f6;
+
+  --text-primary:  #fafafa;
+  --text-secondary:#a1a1aa;
+  --text-muted:    #71717a;
+  --text-arabic:   #ffffff;
+
+  --border:        rgba(251, 191, 36, 0.25);
+  --border-hover:  rgba(251, 191, 36, 0.6);
+  --shadow:        0 4px 24px rgba(0, 0, 0, 0.6);
+  --shadow-gold:   0 0 20px rgba(251, 191, 36, 0.15);
+}
+
 /* ── Base Styles ─────────────────────────────────────────────── */
 body {
   font-family: var(--font-ui);
@@ -188,6 +260,22 @@ a:hover { color: var(--accent-gold-light); }
   line-height: 1.8 !important;
   margin-bottom: 1rem; /* tighter spacing */
   transition: var(--transition);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end; /* Right-to-left layout */
+  gap: 0.35rem 0.5rem;
+}
+
+.quran-word {
+  cursor: pointer;
+  padding: 0 0.1rem;
+  border-radius: 4px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.quran-word:hover {
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--accent-gold);
 }
 
 .verse-translation {
