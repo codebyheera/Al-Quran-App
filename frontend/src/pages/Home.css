@@ -192,8 +192,8 @@
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
-    margin-bottom: 1.75rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
   }
 
   .hero-search {
@@ -209,6 +209,14 @@
   .home-mode-cards {
     grid-template-columns: 1fr 1fr;
   }
+
+  .mode-card {
+    gap: 0.6rem;
+    padding: 1rem;
+  }
+  .mode-card-icon { font-size: 1.6rem; }
+  .mode-card h3 { font-size: 0.88rem; }
+  .mode-card p  { font-size: 0.72rem; }
 
   .popular-grid {
     grid-template-columns: 1fr;

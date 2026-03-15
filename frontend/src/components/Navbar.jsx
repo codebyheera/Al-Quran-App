@@ -1,6 +1,6 @@
 /**
  * components/Navbar.jsx — Sticky top navigation bar
- * Contains logo, nav links, search input, qari selector, bookmark link, and theme toggle
+ * Includes hamburger menu for mobile, Qari and Theme dropdowns.
  */
 
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -14,7 +14,6 @@ function QariDropdown({ reciter, changeReciter, reciters }) {
   const ref = useRef(null);
   const current = reciters.find((r) => r.id === reciter);
 
-  // Close when clicking outside
   useEffect(() => {
     function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
@@ -69,9 +68,7 @@ function QariDropdown({ reciter, changeReciter, reciters }) {
 function ThemeDropdown({ theme, changeTheme, themes }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
-  const current = themes.find((t) => t.id === theme);
 
-  // Close when clicking outside
   useEffect(() => {
     function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
@@ -90,7 +87,6 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
         title="Select Theme"
       >
         <span className="dropdown-trigger-icon">🎨</span>
-        <span className="dropdown-trigger-label" style={{display: 'none'}}>{current?.name}</span>
         <svg className={`dropdown-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
           <path d="M7 10l5 5 5-5z"/>
         </svg>
@@ -108,7 +104,7 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
               onClick={() => { changeTheme(t.id); setOpen(false); }}
             >
               <span className="dropdown-option-info">
-                <span className="dropdown-trigger-icon" style={{marginRight: '8px'}}>{t.icon}</span>
+                <span className="dropdown-trigger-icon">{t.icon}</span>
                 <span className="dropdown-option-name">{t.name}</span>
               </span>
               {t.id === theme && (
@@ -128,20 +124,25 @@ export default function Navbar() {
   const { theme, changeTheme, themes } = useTheme();
   const { reciter, changeReciter, reciters } = useQari();
   const [query, setQuery] = useState('');
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
 
   function handleSearch(e) {
     if (e.key === 'Enter' && query.trim()) {
       navigate(`/search?q=${encodeURIComponent(query.trim())}`);
       setQuery('');
+      setMobileOpen(false);
     }
   }
+
+  // Close mobile menu on route change
+  function handleNavClick() { setMobileOpen(false); }
 
   return (
     <nav className="navbar">
       <div className="navbar-inner">
         {/* Logo */}
-        <NavLink to="/" className="navbar-logo">
+        <NavLink to="/" className="navbar-logo" onClick={handleNavClick}>
           <span className="navbar-logo-icon">☪</span>
           <span className="navbar-logo-text">Al-<span>Quran</span></span>
         </NavLink>
@@ -153,7 +154,7 @@ export default function Navbar() {
           <NavLink to="/bookmarks" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Bookmarks</NavLink>
         </div>
 
-        {/* Search bar */}
+        {/* Search bar (desktop) */}
         <div className="navbar-search">
           <input
             className="input"
@@ -166,20 +167,47 @@ export default function Navbar() {
           />
         </div>
 
-        {/* Action buttons */}
+        {/* Right actions */}
         <div className="navbar-actions">
-          {/* Custom Qari Dropdown */}
           <QariDropdown reciter={reciter} changeReciter={changeReciter} reciters={reciters} />
-
-          {/* Bookmarks shortcut */}
           <NavLink to="/bookmarks">
             <button className="nav-icon-btn" title="Bookmarks">🔖</button>
           </NavLink>
-          
-          {/* Custom Theme Dropdown */}
           <ThemeDropdown theme={theme} changeTheme={changeTheme} themes={themes} />
+
+          {/* Hamburger (mobile only) */}
+          <button
+            className={`hamburger ${mobileOpen ? 'open' : ''}`}
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label="Toggle menu"
+          >
+            <span /><span /><span />
+          </button>
         </div>
       </div>
+
+      {/* Mobile slide-down menu */}
+      {mobileOpen && (
+        <div className="mobile-menu">
+          {/* Mobile search */}
+          <div className="mobile-search">
+            <input
+              className="input"
+              type="text"
+              placeholder="Search Surahs or verses..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleSearch}
+              aria-label="Search"
+            />
+          </div>
+
+          {/* Mobile nav links */}
+          <NavLink to="/surah"     className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>📖 Surahs</NavLink>
+          <NavLink to="/juz"       className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>📚 Juz</NavLink>
+          <NavLink to="/bookmarks" className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>🔖 Bookmarks</NavLink>
+        </div>
+      )}
     </nav>
   );
 }
