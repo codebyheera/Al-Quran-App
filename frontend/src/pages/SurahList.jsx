@@ -5,6 +5,7 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import './SurahList.css';
 
@@ -33,6 +34,12 @@ export default function SurahList() {
 
   return (
     <div className="surah-list page-enter">
+      <Helmet>
+        <title>Surahs of Quran – Read & Listen Online</title>
+        <meta name="description" content="Access all Surahs of the Holy Quran online. Read in Arabic, listen to authentic recitations, and explore each Ayah easily." />
+        <link rel="canonical" href="https://al-quran-by-subhan.vercel.app/surah" />
+      </Helmet>
+      
       <div className="container">
         {/* Header */}
         <div className="sl-header">
