@@ -10,10 +10,10 @@ import api from '../lib/api';
 import './SurahList.css';
 
 export default function SurahList() {
-  const [surahs,  setSurahs]  = useState([]);
+  const [surahs, setSurahs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error,   setError]   = useState(null);
-  const [query,   setQuery]   = useState('');
+  const [error, setError] = useState(null);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     api.get('/api/surah')
@@ -30,16 +30,16 @@ export default function SurahList() {
   );
 
   if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Surahs…</p></div>;
-  if (error)   return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
+  if (error) return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
 
   return (
     <div className="surah-list page-enter">
       <Helmet>
-        <title>Surahs of Quran – Read & Listen Online</title>
+        <title>Surahs of the Quran – Read & Listen Online Free</title>
         <meta name="description" content="Access all Surahs of the Holy Quran online. Read in Arabic, listen to authentic recitations, and explore each Ayah easily." />
         <link rel="canonical" href="https://al-quran-by-subhan.vercel.app/surah" />
       </Helmet>
-      
+
       <div className="container">
         {/* Header */}
         <div className="sl-header">
