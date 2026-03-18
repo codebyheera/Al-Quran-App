@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const QUICK_LINKS = [
@@ -43,7 +44,7 @@ export default function Footer() {
           <ul className="footer-list">
             {QUICK_LINKS.map(link => (
               <li key={link.to}>
-                <a href={link.to} className="footer-link">{link.label}</a>
+                <Link to={link.to} className="footer-link">{link.label}</Link>
               </li>
             ))}
           </ul>
