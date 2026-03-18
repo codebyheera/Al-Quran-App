@@ -45,18 +45,21 @@ mongoose.connection.on('connected', () => console.log('✅ Connected to MongoDB 
 mongoose.connection.on('error', (err) => console.error('❌ MongoDB connection error:', err));
 mongoose.connection.on('disconnected', () => console.log('⚠️ MongoDB disconnected'));
 
-// Start Express server first so API works even if DB is slow
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  
-  if (!process.env.MONGO_URI) {
-    console.error('❌ MONGO_URI is missing in .env');
-    return;
-  }
-  
+if (!process.env.MONGO_URI) {
+  console.error('❌ MONGO_URI is missing in .env');
+} else {
+  // Connect globally so serverless functions can use the connection pool
   mongoose
     .connect(process.env.MONGO_URI)
-    .catch(err => {
-      console.error('❌ Initial MongoDB connection failed:', err.message);
-    });
-});
+    .catch(err => console.error('❌ Initial MongoDB connection failed:', err.message));
+}
+
+// Only listen locally, Vercel Serverless will use the exported app
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  });
+}
+
+// Export the app for Vercel
+export default app;
