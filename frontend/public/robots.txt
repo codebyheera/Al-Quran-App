@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://al-quran-by-subhan.vercel.app/sitemap.xml
