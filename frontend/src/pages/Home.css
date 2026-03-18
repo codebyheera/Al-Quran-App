@@ -207,16 +207,16 @@
   }
 
   .home-mode-cards {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .mode-card {
-    gap: 0.6rem;
-    padding: 1rem;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
   }
-  .mode-card-icon { font-size: 1.6rem; }
-  .mode-card h3 { font-size: 0.88rem; }
-  .mode-card p  { font-size: 0.72rem; }
+  .mode-card-icon { font-size: 1.8rem; }
+  .mode-card h3 { font-size: 1.05rem; margin-bottom: 0.2rem; }
+  .mode-card p  { font-size: 0.85rem; }
 
   .popular-grid {
     grid-template-columns: 1fr;
