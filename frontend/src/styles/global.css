@@ -470,9 +470,8 @@ a:hover { color: var(--accent-gold-light); }
     gap: 0.85rem;
   }
 
-  /* Shrink the Arabic font a bit so it fits on phone */
+  /* Let the font-size variable from JS scaling take effect */
   .verse-arabic {
-    font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
     line-height: 1.9 !important;
   }
 
@@ -502,10 +501,7 @@ a:hover { color: var(--accent-gold-light); }
 }
 
 @media (max-width: 480px) {
-  /* Very small phones: reduce Arabic font more */
-  .verse-arabic {
-    font-size: clamp(1.3rem, 6.5vw, 1.8rem) !important;
-  }
+  /* Very small phones: let JS scale control size */
 }
 
 
