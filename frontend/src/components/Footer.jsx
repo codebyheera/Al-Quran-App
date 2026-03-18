@@ -25,10 +25,10 @@ export default function Footer() {
 
         {/* ── Brand ── */}
         <div className="footer-brand">
-          <div className="footer-logo">
+          <Link to="/" className="footer-logo">
             <span className="footer-logo-icon">☪</span>
             <span className="footer-logo-text">Al-<span>Quran</span></span>
-          </div>
+          </Link>
           <p className="footer-tagline">
             Read, Listen, and Reflect on the Holy Quran — anytime, anywhere.
           </p>
