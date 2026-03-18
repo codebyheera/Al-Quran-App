@@ -144,20 +144,21 @@ export default function SurahView() {
 
         {/* ── Surah Header ────────────────────────────────── */}
         <div className="sv-header">
-          <div>
-            <h1>{surah.surahName}</h1>
-            <p className="text-muted">{surah.nameTranslation} · {surah.revelation} · {surah.versesCount} verses</p>
+          <div className="sv-header-info">
+            <div className="sv-title-row">
+              <h1>{surah.surahName}</h1>
+              <div className="sv-arabic-name arabic">{surah.arabicName}</div>
+            </div>
+            <p className="sv-subtitle text-muted">
+              {surah.nameTranslation} · {surah.revelation} · {surah.versesCount} verses
+            </p>
           </div>
-          <div className="sv-header-end">
-            <div className="sv-arabic-name arabic">{surah.arabicName}</div>
-            <button 
-              className={`btn ${isPlaying && currentVerse?.surahNumber === surahNum ? 'btn-secondary' : 'btn-primary'} mt-2`}
-              onClick={handlePlayAllToggle}
-              style={{ width: '100%', justifyContent: 'center' }}
-            >
-              {isPlaying && currentVerse?.surahNumber === surahNum ? '⏸ Pause Surah' : '▶ Play Surah'}
-            </button>
-          </div>
+          <button 
+            className={`btn sv-play-btn ${isPlaying && currentVerse?.surahNumber === surahNum ? 'btn-secondary' : 'btn-primary'}`}
+            onClick={handlePlayAllToggle}
+          >
+            {isPlaying && currentVerse?.surahNumber === surahNum ? '⏸ Pause' : '▶ Play'}
+          </button>
         </div>
 
         {/* ── Bismillah (except surah 1 & 9) ────────────── */}
@@ -168,29 +169,30 @@ export default function SurahView() {
         )}
 
         {/* ── Controls (Search & Font Sizing) ─────────────────── */}
-        <div className="sv-controls" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <div style={{ flex: '1', position: 'relative' }}>
+        <div className="sv-controls">
+          <div className="sv-search-wrapper">
             <input
               className="input sv-search"
               type="text"
-              placeholder="Search within this Surah…"
+              placeholder="Search..."
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             />
-            {filter && <span className="text-muted" style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '0.85rem' }}>{verses.length} match(es)</span>}
+            {filter && <span className="sv-search-count text-muted">{verses.length} match(es)</span>}
           </div>
           
-          <div className="font-controls flex-center gap-1" style={{ background: 'var(--bg-secondary)', padding: '0.2rem 0.5rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
-            <span className="text-muted" style={{ fontSize: '0.85rem', marginRight: '0.5rem' }}>Arabic Size:</span>
-            <button className="btn btn-ghost" style={{ padding: '0.2rem 0.6rem' }} onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>A-</button>
-            <span className="text-primary" style={{ minWidth: '2ch', textAlign: 'center', fontSize: '0.9rem' }}>{fontSize.toFixed(1)}</span>
-            <button className="btn btn-ghost" style={{ padding: '0.2rem 0.6rem' }} onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>A+</button>
-            <div style={{ width: '1px', height: '20px', background: 'var(--border)', margin: '0 0.5rem' }}></div>
+          <div className="sv-font-controls">
+            <span className="sv-font-label text-muted">Arabic:</span>
+            <div className="sv-font-btns">
+              <button className="btn btn-ghost" onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>A-</button>
+              <span className="sv-font-val text-primary">{fontSize.toFixed(1)}</span>
+              <button className="btn btn-ghost" onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>A+</button>
+            </div>
+            <div className="sv-font-divider"></div>
             <button
-              className="btn btn-ghost"
-              style={{ padding: '0.2rem 0.6rem', fontSize: '0.85rem' }}
+              className="btn btn-ghost sv-en-btn"
               onClick={toggleTranslation}
-              title={showTranslation ? "Hide English Translation" : "Show English Translation"}
+              title={showTranslation ? "Hide English" : "Show English"}
             >
               EN: <span className={showTranslation ? "text-primary" : "text-muted"}>{showTranslation ? 'On' : 'Off'}</span>
             </button>

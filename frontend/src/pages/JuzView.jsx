@@ -145,44 +145,46 @@ export default function JuzView() {
     >
       <div className="container">
         {/* Header */}
-        <div className="jv-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <h1>Juz {juzNum}</h1>
-            <p className="text-muted">{juz.totalVerses} verses</p>
+        <div className="jv-header">
+          <div className="jv-header-info">
+            <div className="jv-title-row">
+              <h1>Juz {juzNum}</h1>
+            </div>
+            <p className="jv-subtitle text-muted">{juz.totalVerses} verses</p>
           </div>
           <button 
-            className={`btn ${isPlaying && juz?.verses.some(v => v.surahNumber === currentVerse?.surahNumber && v.number === currentVerse?.number) ? 'btn-secondary' : 'btn-primary'}`}
+            className={`btn jv-play-btn ${isPlaying && juz?.verses.some(v => v.surahNumber === currentVerse?.surahNumber && v.number === currentVerse?.number) ? 'btn-secondary' : 'btn-primary'}`}
             onClick={handlePlayAllToggle}
-            style={{ padding: '0.6rem 1.5rem' }}
           >
-            {isPlaying && juz?.verses.some(v => v.surahNumber === currentVerse?.surahNumber && v.number === currentVerse?.number) ? '⏸ Pause Juz' : '▶ Play Juz'}
+            {isPlaying && juz?.verses.some(v => v.surahNumber === currentVerse?.surahNumber && v.number === currentVerse?.number) ? '⏸ Pause' : '▶ Play'}
           </button>
         </div>
 
         {/* Controls (Search & Font Sizing) */}
-        <div className="jv-controls" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <div style={{ flex: '1', position: 'relative' }}>
+        <div className="jv-controls">
+          <div className="jv-search-wrapper">
             <input
               className="input jv-search"
               type="text"
-              placeholder="Search within this Juz…"
+              placeholder="Search..."
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             />
-            {filter && <span className="text-muted" style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '0.85rem' }}>{verses.length} match(es)</span>}
+            {filter && <span className="jv-search-count text-muted">{verses.length} match(es)</span>}
           </div>
           
-          <div className="font-controls flex-center gap-1" style={{ background: 'var(--bg-secondary)', padding: '0.2rem 0.5rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
-            <span className="text-muted" style={{ fontSize: '0.85rem', marginRight: '0.5rem' }}>Arabic Size:</span>
-            <button className="btn btn-ghost" style={{ padding: '0.2rem 0.6rem' }} onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>A-</button>
-            <span className="text-primary" style={{ minWidth: '2ch', textAlign: 'center', fontSize: '0.9rem' }}>{fontSize.toFixed(1)}</span>
-            <button className="btn btn-ghost" style={{ padding: '0.2rem 0.6rem' }} onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>A+</button>
-            <div style={{ width: '1px', height: '20px', background: 'var(--border)', margin: '0 0.5rem' }}></div>
+          <div className="jv-font-controls">
+            <span className="jv-font-label text-muted">Arabic:</span>
+            <div className="jv-font-btns">
+              <button className="btn btn-ghost" onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>A-</button>
+              <span className="jv-font-val text-primary">{fontSize.toFixed(1)}</span>
+              <button className="btn btn-ghost" onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>A+</button>
+            </div>
+            <div className="jv-font-divider"></div>
             <button
-              className="btn btn-ghost"
-              style={{ padding: '0.2rem 0.6rem', fontSize: '0.85rem' }}
+              className="btn btn-ghost jv-en-btn"
               onClick={toggleTranslation}
-              title={showTranslation ? "Hide English Translation" : "Show English Translation"}
+              title={showTranslation ? "Hide English" : "Show English"}
             >
               EN: <span className={showTranslation ? "text-primary" : "text-muted"}>{showTranslation ? 'On' : 'Off'}</span>
             </button>

@@ -2,17 +2,103 @@
 
 .juz-view { padding: 2rem 0; }
 
-.jv-header { margin-bottom: 1rem; }
-.jv-header h1 { margin-bottom: 0.2rem; }
+/* Header */
+.jv-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.jv-header-info {
+  flex: 1;
+  min-width: 0;
+}
+.jv-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+.jv-title-row h1 {
+  margin: 0;
+  line-height: 1.2;
+}
+.jv-subtitle {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-top: 0.25rem;
+}
+.jv-play-btn {
+  flex-shrink: 0;
+}
 
+/* Controls */
 .jv-controls {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
-.jv-search { max-width: 360px; flex: 1; min-width: 160px; }
+.jv-search-wrapper {
+  flex: 1;
+  position: relative;
+  min-width: 240px;
+}
+.jv-search {
+  width: 100%;
+}
+.jv-search-count {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+.jv-font-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--bg-secondary);
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.jv-font-label {
+  font-size: 0.75rem;
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+}
+.jv-font-btns {
+  display: flex;
+  align-items: center;
+}
+.jv-font-btns .btn {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.85rem;
+}
+.jv-font-val {
+  min-width: 2.5ch;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.jv-font-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  margin: 0 0.2rem;
+}
+.jv-en-btn {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.8rem;
+}
 
 /* Juz specific structural additions */
 .juz-surah-group { margin-bottom: 3rem; }
@@ -43,16 +129,33 @@
 @media (max-width: 640px) {
   .juz-view { padding: 1rem 0; }
 
+  .jv-header {
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .jv-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+  }
+  .jv-play-btn {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+  }
+
   .jv-controls {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.6rem;
+    gap: 0.5rem;
   }
-  .jv-search { max-width: 100%; }
-
-  .jv-controls .btn {
-    width: 100%;
-    justify-content: center;
+  .jv-search-wrapper {
+    min-width: 100%;
+  }
+  
+  .jv-font-controls {
+    justify-content: space-between;
+    padding: 0.35rem 0.5rem;
   }
 
   .juz-surah-header {
