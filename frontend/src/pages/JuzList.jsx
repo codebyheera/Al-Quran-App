@@ -4,6 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import './JuzList.css';
 
@@ -21,6 +22,12 @@ export default function JuzList() {
 
   return (
     <div className="juz-list page-enter">
+      <Helmet>
+        <title>Holy Quran Juz – Arabic Recitation Online</title>
+        <meta name="description" content="Read and listen to the complete Quran Juz online. Perfect for recitation, learning, and spiritual growth." />
+        <link rel="canonical" href="https://al-quran-by-subhan.vercel.app/juz" />
+      </Helmet>
+      
       <div className="container">
         <div className="jl-header">
           <h1>Juz</h1>

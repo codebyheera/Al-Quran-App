@@ -5,6 +5,7 @@
 
 import { Link } from 'react-router-dom';
 import { useBookmarks } from '../context/BookmarkContext';
+import { Helmet } from 'react-helmet-async';
 import './BookmarksPage.css';
 
 export default function BookmarksPage() {
@@ -14,6 +15,12 @@ export default function BookmarksPage() {
 
   return (
     <div className="bookmarks-page page-enter">
+      <Helmet>
+        <title>Quran Bookmarks – Save & Read Quran Online</title>
+        <meta name="description" content="Keep track of your Quran bookmarks online. Read Surahs, listen to recitations, and explore saved Ayahs easily." />
+        <link rel="canonical" href="https://al-quran-by-subhan.vercel.app/bookmarks" />
+      </Helmet>
+
       <div className="container">
         {/* Header */}
         <div className="bp-header">
