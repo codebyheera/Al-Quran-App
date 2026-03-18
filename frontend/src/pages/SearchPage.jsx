@@ -83,7 +83,7 @@ export default function SearchPage() {
           {results.map((r) => (
             <Link
               key={`${r.surahNumber}-${r.verseNumber}`}
-              to={`/surah/${r.surahNumber}#verse-${r.verseNumber}`}
+              to={`/surah/${r.surahName}#verse-${r.verseNumber}`}
               className="sp-card card"
             >
               <div className="flex-between mb-1">

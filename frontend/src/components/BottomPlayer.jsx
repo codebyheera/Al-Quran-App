@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAudio } from '../context/AudioContext';
 import './BottomPlayer.css';
 
@@ -16,6 +16,87 @@ export default function BottomPlayer() {
     isMinimized,
     setIsMinimized
   } = useAudio();
+  
+  // Draggable State - initialize to null, we'll set it in useEffect to bottom-right
+  const [position, setPosition] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartPos = useRef({ x: 0, y: 0 });
+  const hasMovedWhileDragging = useRef(false);
+
+  // Initialize position to bottom-right
+  useEffect(() => {
+    if (!position) {
+      const initialBottom = window.innerHeight - 80; // 60px icon + ~20px offset
+      const initialRight = window.innerWidth - 80;
+      setPosition({ x: initialRight, y: initialBottom });
+    }
+  }, []);
+
+  const handleDragStart = (e) => {
+    if (!position) return;
+    setIsDragging(true);
+    hasMovedWhileDragging.current = false;
+    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+    
+    // Store where we clicked relative to the icon's top-left
+    dragStartPos.current = { x: clientX - position.x, y: clientY - position.y };
+  };
+
+  const handleDrag = (e) => {
+    if (!isDragging || !position) return;
+    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+    
+    let newX = clientX - dragStartPos.current.x;
+    let newY = clientY - dragStartPos.current.y;
+    
+    // Clamping to viewport
+    const iconSize = 60;
+    const padding = 10;
+    newX = Math.max(padding, Math.min(newX, window.innerWidth - iconSize - padding));
+    newY = Math.max(padding, Math.min(newY, window.innerHeight - iconSize - padding));
+    
+    if (Math.abs(newX - position.x) > 5 || Math.abs(newY - position.y) > 5) {
+      hasMovedWhileDragging.current = true;
+    }
+    
+    setPosition({ x: newX, y: newY });
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+  };
+
+  // Add/remove event listeners for global drag move/end
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleDrag);
+      window.addEventListener('mouseup', handleDragEnd);
+      window.addEventListener('touchmove', handleDrag, { passive: false });
+      window.addEventListener('touchend', handleDragEnd);
+    } else {
+      window.removeEventListener('mousemove', handleDrag);
+      window.removeEventListener('mouseup', handleDragEnd);
+      window.removeEventListener('touchmove', handleDrag);
+      window.removeEventListener('touchend', handleDragEnd);
+    }
+    return () => {
+      window.removeEventListener('mousemove', handleDrag);
+      window.removeEventListener('mouseup', handleDragEnd);
+      window.removeEventListener('touchmove', handleDrag);
+      window.removeEventListener('touchend', handleDragEnd);
+    };
+  }, [isDragging]);
+
+  const handleMinimizedClick = (e) => {
+    if (hasMovedWhileDragging.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    setIsMinimized(false);
+  };
 
   if (!currentVerse) return null;
 
@@ -34,7 +115,20 @@ export default function BottomPlayer() {
     <>
       {/* Minimized Floating Button */}
       {isMinimized ? (
-        <div className="minimized-player glass" onClick={() => setIsMinimized(false)} title="Open Audio Player">
+        <div 
+          className={`minimized-player glass ${isDragging ? 'is-dragging' : ''}`} 
+          onMouseDown={handleDragStart}
+          onTouchStart={handleDragStart}
+          onClick={handleMinimizedClick}
+          style={{ 
+            left: position ? `${position.x}px` : 'auto',
+            top: position ? `${position.y}px` : 'auto',
+            bottom: position ? 'auto' : '2rem',
+            right: position ? 'auto' : '2rem',
+            transform: 'none'
+          }}
+          title="Drag to move, Click to expand"
+        >
           {isPlaying ? (
             <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
           ) : (

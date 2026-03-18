@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useState, useRef } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import api from '../lib/api';
 import AudioPlayer from '../components/AudioPlayer';
 import { useBookmarks } from '../context/BookmarkContext';
@@ -16,6 +16,7 @@ export default function JuzView() {
   const { id } = useParams();
   const juzNum = parseInt(id);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [juz,     setJuz]     = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,6 +31,26 @@ export default function JuzView() {
     return localStorage.getItem('showTranslation') !== 'false';
   });
   const [activeMenu, setActiveMenu] = useState(null);
+  const menuTimeoutRef = useRef(null);
+
+  const toggleMenu = (e, menuId) => {
+    e.stopPropagation();
+    if (activeMenu === menuId) {
+      setActiveMenu(null);
+      if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+    } else {
+      setActiveMenu(menuId);
+      if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+      menuTimeoutRef.current = setTimeout(() => {
+        setActiveMenu(null);
+      }, 2000);
+    }
+  };
+
+  const handleFeatureClick = () => {
+    setActiveMenu(null);
+    if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+  };
 
   const { currentVerse, isPlaying, playPlaylist, togglePlay, stop } = useAudio();
   const { reciter } = useQari();
@@ -46,6 +67,21 @@ export default function JuzView() {
       .then(({ data }) => { setJuz(data); setLoading(false); })
       .catch(() => { setError('Failed to load Juz.'); setLoading(false); });
   }, [juzNum, reciter]);
+
+  // Auto-scroll on initial load if hash is present
+  useEffect(() => {
+    if (!loading && juz && location.hash) {
+      const id = location.hash.replace('#', '');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('menu-open'); 
+          setTimeout(() => el.classList.remove('menu-open'), 1500);
+        }
+      }, 150);
+    }
+  }, [loading, juz, location.hash]);
 
   // Auto-scroll when currentVerse changes
   useEffect(() => {
@@ -127,6 +163,12 @@ export default function JuzView() {
       )
     : juz.verses;
 
+  // Pre-calculate mapped playlist for AudioPlayer
+  const mappedPlaylist = verses.map(v => ({
+    ...v,
+    audio: v.audioUrl
+  }));
+
   // Group verses by surah for nicer rendering
   const groups = [];
   let current = null;
@@ -196,7 +238,7 @@ export default function JuzView() {
         {groups.map((group) => (
           <div key={group.surahNumber} className="juz-surah-group">
             <div className="juz-surah-header">
-              <Link to={`/surah/${group.surahNumber}`} className="juz-surah-link">
+              <Link to={`/surah/${group.surahName}`} className="juz-surah-link">
                 {group.surahNumber}. {group.surahName}
               </Link>
               <span className="arabic" style={{ fontSize: '1.2rem', color: 'var(--accent-gold)', opacity: 0.8 }}>
@@ -207,8 +249,8 @@ export default function JuzView() {
             {group.verses.map((verse) => {
               const bookmarked = isBookmarked(verse.surahNumber, verse.number);
               
-              // We need the global index of this verse in the full 'juz.verses' array to check if it's playing
-              // Since 'verses' is filtered, and 'group' is derived from 'verses', we can just find its index in the unfiltered juz.verses
+              // Find the index of this verse in the current filtered verses array
+              const index = verses.indexOf(verse);
               const isPlaying = currentVerse?.audio === verse.audioUrl;
               const verseUid = `${verse.surahNumber}-${verse.number}`;
               const isMenuOpen = activeMenu === verseUid;
@@ -219,7 +261,7 @@ export default function JuzView() {
                   className={`verse-card jv-verse ${isPlaying ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`}
                   id={`verse-${verseUid}`}
                 >
-                  <button className="verse-menu-btn" onClick={(e) => { e.stopPropagation(); setActiveMenu(isMenuOpen ? null : verseUid); }}>
+                  <button className="verse-menu-btn" onClick={(e) => toggleMenu(e, verseUid)}>
                       <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
                         <circle cx="12" cy="12" r="1.5"></circle>
                         <circle cx="12" cy="5" r="1.5"></circle>
@@ -270,15 +312,14 @@ export default function JuzView() {
                     )}
 
                     {/* Footer section with controls */}
-                    <div className="verse-card-footer">
+                    <div className="verse-card-footer" onClickCapture={handleFeatureClick}>
                       <div className="verse-card-logo" style={{ display: 'none', color: 'var(--accent-gold)', fontWeight: 'bold', fontSize: '0.9rem', alignItems: 'center', gap: '4px' }}>
                         <span style={{ fontSize: '1.1rem' }}>☪</span> QApp
                       </div>
                       <AudioPlayer 
-                        verse={{
-                          ...verse,
-                          audio: verse.audioUrl
-                        }}
+                        verse={mappedPlaylist[index]}
+                        fullPlaylist={mappedPlaylist}
+                        index={index}
                       />
                       <button
                         className={`btn btn-ghost bookmark-btn ${bookmarked ? 'bookmarked' : ''}`}

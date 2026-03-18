@@ -3,6 +3,7 @@
  */
 
 import { Routes, Route } from 'react-router-dom';
+import ScrollToTop   from './components/ScrollToTop';
 import Navbar        from './components/Navbar';
 import Footer        from './components/Footer';
 import Home          from './pages/Home';
@@ -20,6 +21,7 @@ export default function App() {
 
   return (
     <div className={`app-root ${currentVerse ? 'has-player' : ''}`}>
+      <ScrollToTop />
       {/* Persistent top navigation */}
       <Navbar />
 

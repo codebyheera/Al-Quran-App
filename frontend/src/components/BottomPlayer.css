@@ -165,10 +165,20 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  cursor: pointer;
+  cursor: grab;
   box-shadow: 0 8px 24px rgba(220, 165, 80, 0.4);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
   animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  touch-action: none;
+  user-select: none;
+}
+
+.minimized-player:active {
+  cursor: grabbing;
+}
+
+.minimized-player.is-dragging {
+  transition: none;
 }
 
 @keyframes popIn {

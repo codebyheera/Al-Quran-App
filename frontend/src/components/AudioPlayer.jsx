@@ -6,8 +6,8 @@
 import { useAudio } from '../context/AudioContext';
 import './AudioPlayer.css';
 
-export default function AudioPlayer({ verse }) {
-  const { currentVerse, isPlaying, togglePlay, playVerse } = useAudio();
+export default function AudioPlayer({ verse, fullPlaylist, index }) {
+  const { currentVerse, isPlaying, togglePlay, playPlaylist } = useAudio();
 
   if (!verse?.audio) return null;
 
@@ -16,8 +16,8 @@ export default function AudioPlayer({ verse }) {
   function handleToggle() {
     if (isCurrent) {
       togglePlay();
-    } else {
-      playVerse(verse);
+    } else if (fullPlaylist && index !== undefined) {
+      playPlaylist(fullPlaylist, index);
     }
   }
 

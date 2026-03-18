@@ -11,16 +11,16 @@ import './Home.css';
 
 // Popular Surahs — static quick-access shown on the home page
 const POPULAR = [
-  { number: 1,   name: 'Al-Fatihah',  arabic: 'الفاتحة',   verses: 7   },
+  { number: 1,   name: 'Al-Faatiha',  arabic: 'الفاتحة',   verses: 7   },
   { number: 2,   name: 'Al-Baqarah',  arabic: 'البقرة',    verses: 286 },
   { number: 18,  name: 'Al-Kahf',     arabic: 'الكهف',     verses: 110 },
-  { number: 36,  name: 'Ya-Sin',      arabic: 'يس',        verses: 83  },
-  { number: 55,  name: 'Ar-Rahman',   arabic: 'الرحمن',    verses: 78  },
-  { number: 56,  name: 'Al-Waqiah',   arabic: 'الواقعة',   verses: 96  },
+  { number: 36,  name: 'Ya-Seen',     arabic: 'يس',        verses: 83  },
+  { number: 55,  name: 'Ar-Rahmaan',  arabic: 'الرحمن',    verses: 78  },
+  { number: 56,  name: 'Al-Waaqia',   arabic: 'الواقعة',   verses: 96  },
   { number: 67,  name: 'Al-Mulk',     arabic: 'الملك',     verses: 30  },
-  { number: 93,  name: 'Ad-Duha',     arabic: 'الضحى',     verses: 11  },
-  { number: 94,  name: 'Al-Inshirah', arabic: 'الشرح',     verses: 8   },
-  { number: 112, name: 'Al-Ikhlas',   arabic: 'الإخلاص',   verses: 4   },
+  { number: 93,  name: 'Ad-Duhaa',    arabic: 'الضحى',     verses: 11  },
+  { number: 94,  name: 'ash-sharh',   arabic: 'الشرح',     verses: 8   },
+  { number: 112, name: 'Al-Ikhlaas',  arabic: 'الإخلاص',   verses: 4   },
 ];
 
 export default function Home() {
@@ -105,7 +105,7 @@ export default function Home() {
           </div>
           <div className="popular-grid">
             {POPULAR.map((s) => (
-              <Link key={s.number} to={`/surah/${s.number}`} className="card popular-card">
+              <Link key={s.number} to={`/surah/${s.name}`} className="card popular-card">
                 <span className="popular-num badge badge-gold">{s.number}</span>
                 <div className="popular-info">
                   <span className="popular-english">{s.name}</span>
@@ -126,7 +126,7 @@ export default function Home() {
             </div>
             <div className="recent-bookmarks">
               {bookmarks.slice(0, 3).map((b) => (
-                <Link key={b._id} to={`/surah/${b.surahNumber}`} className="card bookmark-preview">
+                <Link key={b._id} to={`/surah/${b.surahName}#verse-${b.verseNumber}`} className="card bookmark-preview">
                   <div className="flex-between">
                     <span className="badge badge-gold">{b.surahName} {b.verseNumber}:{b.surahNumber}</span>
                     <span className="text-muted" style={{ fontSize: '0.75rem' }}>🔖</span>

@@ -51,7 +51,7 @@ export default function BookmarksPage() {
             <div key={b._id} className="bookmark-card card">
               {/* Surah / verse reference */}
               <div className="flex-between mb-1">
-                <Link to={`/surah/${b.surahNumber}#verse-${b.verseNumber}`} className="bm-ref">
+                <Link to={`/surah/${b.surahName}#verse-${b.verseNumber}`} className="bm-ref">
                   <span className="badge badge-gold">{b.surahName || `Surah ${b.surahNumber}`} — Verse {b.verseNumber}</span>
                 </Link>
                 <button
@@ -81,7 +81,7 @@ export default function BookmarksPage() {
               </p>
 
               {/* Go-to link */}
-              <Link to={`/surah/${b.surahNumber}`} className="btn btn-secondary bm-goto mt-2">
+              <Link to={`/surah/${b.surahName}#verse-${b.verseNumber}`} className="btn btn-secondary bm-goto mt-2">
                 Read Surah →
               </Link>
             </div>

@@ -59,7 +59,7 @@ export default function SurahList() {
         {/* Grid */}
         <div className="surah-grid">
           {filtered.map((s) => (
-            <Link key={s.number} to={`/surah/${s.number}`} className="surah-card card">
+            <Link key={s.number} to={`/surah/${s.englishName}`} className="surah-card card">
               <div className="surah-number">
                 <span>{s.number}</span>
               </div>

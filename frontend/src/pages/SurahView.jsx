@@ -6,22 +6,26 @@
  */
 
 import { useEffect, useState, useRef } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import api from '../lib/api';
 import AudioPlayer from '../components/AudioPlayer';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
 import { useQari } from '../context/QariContext';
+import { Helmet } from 'react-helmet-async';
 import './SurahView.css';
 
 export default function SurahView() {
   const { id } = useParams();
-  const surahNum = parseInt(id);
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [surah,   setSurah]   = useState(null);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState(null);
+
+  // We'll use the ID from the URL for the API call, 
+  // and use surah.surahNumber for numeric logic once loaded.
+  const surahNum = surah?.surahNumber || (parseInt(id) || null);
   const [filter,  setFilter]  = useState('');
   const [toastMsg, setToastMsg] = useState('');
   const [fontSize, setFontSize] = useState(() => {
@@ -32,6 +36,26 @@ export default function SurahView() {
     return localStorage.getItem('showTranslation') !== 'false';
   });
   const [activeMenu, setActiveMenu] = useState(null);
+  const menuTimeoutRef = useRef(null);
+
+  const toggleMenu = (e, menuId) => {
+    e.stopPropagation();
+    if (activeMenu === menuId) {
+      setActiveMenu(null);
+      if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+    } else {
+      setActiveMenu(menuId);
+      if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+      menuTimeoutRef.current = setTimeout(() => {
+        setActiveMenu(null);
+      }, 2000);
+    }
+  };
+
+  const handleFeatureClick = () => {
+    setActiveMenu(null);
+    if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+  };
 
   const { currentVerse, isPlaying, playPlaylist, togglePlay, stop } = useAudio();
   const { reciter } = useQari();
@@ -45,10 +69,26 @@ export default function SurahView() {
     setFilter('');
     stop(); // Stop any playing audio when switching reciter or surah
     topRef.current?.scrollIntoView({ behavior: 'smooth' });
-    api.get(`/api/surah/${surahNum}?reciter=${reciter}`)
+    api.get(`/api/surah/${id}?reciter=${reciter}`)
       .then(({ data }) => { setSurah(data); setLoading(false); })
       .catch(() => { setError('Failed to load Surah.'); setLoading(false); });
-  }, [surahNum, reciter]);
+  }, [id, reciter]);
+
+  // Auto-scroll on initial load if hash is present
+  useEffect(() => {
+    if (!loading && surah && location.hash) {
+      const id = location.hash.replace('#', '');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Add a temporary highlight effect
+          el.classList.add('menu-open'); 
+          setTimeout(() => el.classList.remove('menu-open'), 1500);
+        }
+      }, 150);
+    }
+  }, [loading, surah, location.hash]);
 
   // Auto-scroll when currentVerse changes
   useEffect(() => {
@@ -128,12 +168,19 @@ export default function SurahView() {
   if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Surah…</p></div>;
   if (error)   return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
 
-  // Client-side verse filter (search within surah)
   const verses = filter
     ? surah.verses.filter((v) =>
         v.arabic.includes(filter) || v.translation.toLowerCase().includes(filter.toLowerCase())
       )
     : surah.verses;
+
+  // Pre-calculate mapped playlist for AudioPlayer
+  const mappedPlaylist = verses.map(v => ({
+    ...v,
+    surahNumber: surahNum,
+    surahName: surah.surahName,
+    audio: v.audioUrl
+  }));
 
   return (
     <div 
@@ -141,6 +188,13 @@ export default function SurahView() {
       ref={topRef}
       style={{ '--arabic-font-size': `${fontSize}rem` }}
     >
+      {surah && (
+        <Helmet>
+          <title>{`Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}</title>
+          <meta name="description" content={`Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`} />
+          <link rel="canonical" href={`https://al-quran-by-subhan.vercel.app/surah/${id}`} />
+        </Helmet>
+      )}
       <div className="container">
 
         {/* ── Surah Header ────────────────────────────────── */}
@@ -213,7 +267,7 @@ export default function SurahView() {
                 className={`verse-card ${isPlaying ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`} 
                 id={`verse-${verse.number}`}
               >
-                <button className="verse-menu-btn" onClick={(e) => { e.stopPropagation(); setActiveMenu(isMenuOpen ? null : verse.number); }}>
+                <button className="verse-menu-btn" onClick={(e) => toggleMenu(e, verse.number)}>
                     <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
                       <circle cx="12" cy="12" r="1.5"></circle>
                       <circle cx="12" cy="5" r="1.5"></circle>
@@ -264,17 +318,14 @@ export default function SurahView() {
                   )}
 
                   {/* Footer section with controls */}
-                  <div className="verse-card-footer">
+                  <div className="verse-card-footer" onClickCapture={handleFeatureClick}>
                     <div className="verse-card-logo" style={{ display: 'none', color: 'var(--accent-gold)', fontWeight: 'bold', fontSize: '0.9rem', alignItems: 'center', gap: '4px' }}>
                       <span style={{ fontSize: '1.1rem' }}>☪</span> QApp
                     </div>
                     <AudioPlayer
-                      verse={{
-                        ...verse,
-                        surahNumber: surahNum,
-                        surahName: surah.surahName,
-                        audio: verse.audioUrl
-                      }}
+                      verse={mappedPlaylist[index]}
+                      fullPlaylist={mappedPlaylist}
+                      index={index}
                     />
                     <button
                       className={`btn btn-ghost bookmark-btn ${bookmarked ? 'bookmarked' : ''}`}
@@ -298,16 +349,16 @@ export default function SurahView() {
         <div className="sv-nav">
           <button
             className="btn btn-secondary"
-            onClick={() => navigate(`/surah/${surahNum - 1}`)}
-            disabled={surahNum <= 1}
+            onClick={() => navigate(`/surah/${surah.surahNumber - 1}`)}
+            disabled={surah.surahNumber <= 1}
           >
             ← Previous Surah
           </button>
           <Link to="/surah" className="btn btn-ghost">All Surahs</Link>
           <button
             className="btn btn-secondary"
-            onClick={() => navigate(`/surah/${surahNum + 1}`)}
-            disabled={surahNum >= 114}
+            onClick={() => navigate(`/surah/${surah.surahNumber + 1}`)}
+            disabled={surah.surahNumber >= 114}
           >
             Next Surah →
           </button>

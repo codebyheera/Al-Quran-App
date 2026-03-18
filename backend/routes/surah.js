@@ -4,6 +4,7 @@
 
 import express from 'express';
 import axios from 'axios';
+import { getSurahId } from '../data/surahMapping.js';
 const router = express.Router();
 
 const ALQURAN_BASE = 'https://api.alquran.cloud/v1';
@@ -17,13 +18,13 @@ function getAudioUrl(reciter, surahNum, ayahNumInSurah, globalAyahNum) {
   return `https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/${String(surahNum).padStart(3, '0')}${String(ayahNumInSurah).padStart(3, '0')}.mp3`;
 }
 
-router.get('/:surahNumber', async (req, res) => {
-  const { surahNumber } = req.params;
-  const num = parseInt(surahNumber);
+router.get('/:surahIdentifier', async (req, res) => {
+  const { surahIdentifier } = req.params;
+  const num = getSurahId(surahIdentifier);
   const reciter = req.query.reciter || 'abdulsamad';
 
-  if (isNaN(num) || num < 1 || num > 114) {
-    return res.status(400).json({ error: 'Invalid surah number. Must be 1–114.' });
+  if (!num || num < 1 || num > 114) {
+    return res.status(400).json({ error: 'Invalid surah identifier. Use number (1-114) or English name.' });
   }
 
   try {
