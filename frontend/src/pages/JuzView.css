@@ -123,11 +123,15 @@
   color: var(--accent-gold);
 }
 
-.jv-verse { padding: 0; } /* Reset local padding if any */
+.jv-verse {
+  padding: 0;
+} 
+/* The verse cards inside JuzView use the same HTML structure as SurahView.
+   Mobile responsive adjustments for .verse-card are handled in global.css */
 
 /* ── Mobile ─────────────────────────────── */
 @media (max-width: 640px) {
-  .juz-view { padding: 1rem 0; }
+  /* Removed .juz-view padding override as global.css handles it */
 
   .jv-header {
     gap: 0.75rem;

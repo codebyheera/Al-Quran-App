@@ -29,6 +29,7 @@ export default function JuzView() {
   const [showTranslation, setShowTranslation] = useState(() => {
     return localStorage.getItem('showTranslation') !== 'false';
   });
+  const [activeMenu, setActiveMenu] = useState(null);
 
   const { currentVerse, isPlaying, playPlaylist, togglePlay, stop } = useAudio();
   const { reciter } = useQari();
@@ -209,13 +210,22 @@ export default function JuzView() {
               // We need the global index of this verse in the full 'juz.verses' array to check if it's playing
               // Since 'verses' is filtered, and 'group' is derived from 'verses', we can just find its index in the unfiltered juz.verses
               const isPlaying = currentVerse?.audio === verse.audioUrl;
+              const verseUid = `${verse.surahNumber}-${verse.number}`;
+              const isMenuOpen = activeMenu === verseUid;
 
               return (
                 <div 
-                  key={`${verse.surahNumber}-${verse.number}`} 
-                  className={`verse-card jv-verse ${isPlaying ? 'active-playing' : ''}`}
-                  id={`verse-${verse.surahNumber}-${verse.number}`}
+                  key={verseUid} 
+                  className={`verse-card jv-verse ${isPlaying ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`}
+                  id={`verse-${verseUid}`}
                 >
+                  <button className="verse-menu-btn" onClick={(e) => { e.stopPropagation(); setActiveMenu(isMenuOpen ? null : verseUid); }}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
+                        <circle cx="12" cy="12" r="1.5"></circle>
+                        <circle cx="12" cy="5" r="1.5"></circle>
+                        <circle cx="12" cy="19" r="1.5"></circle>
+                      </svg>
+                  </button>
                   {/* Header section with Ayah number */}
                   <div className="verse-card-side">
                     <div className="verse-badge">{verse.number}</div>
@@ -261,6 +271,9 @@ export default function JuzView() {
 
                     {/* Footer section with controls */}
                     <div className="verse-card-footer">
+                      <div className="verse-card-logo" style={{ display: 'none', color: 'var(--accent-gold)', fontWeight: 'bold', fontSize: '0.9rem', alignItems: 'center', gap: '4px' }}>
+                        <span style={{ fontSize: '1.1rem' }}>☪</span> QApp
+                      </div>
                       <AudioPlayer 
                         verse={{
                           ...verse,

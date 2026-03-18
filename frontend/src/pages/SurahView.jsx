@@ -31,6 +31,7 @@ export default function SurahView() {
   const [showTranslation, setShowTranslation] = useState(() => {
     return localStorage.getItem('showTranslation') !== 'false';
   });
+  const [activeMenu, setActiveMenu] = useState(null);
 
   const { currentVerse, isPlaying, playPlaylist, togglePlay, stop } = useAudio();
   const { reciter } = useQari();
@@ -204,13 +205,21 @@ export default function SurahView() {
           {verses.map((verse, index) => {
             const bookmarked = isBookmarked(surahNum, verse.number);
             const isPlaying = currentVerse?.audio === verse.audioUrl;
+            const isMenuOpen = activeMenu === verse.number;
             
             return (
               <div 
                 key={verse.number} 
-                className={`verse-card ${isPlaying ? 'active-playing' : ''}`} 
+                className={`verse-card ${isPlaying ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`} 
                 id={`verse-${verse.number}`}
               >
+                <button className="verse-menu-btn" onClick={(e) => { e.stopPropagation(); setActiveMenu(isMenuOpen ? null : verse.number); }}>
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
+                      <circle cx="12" cy="12" r="1.5"></circle>
+                      <circle cx="12" cy="5" r="1.5"></circle>
+                      <circle cx="12" cy="19" r="1.5"></circle>
+                    </svg>
+                </button>
                 {/* Header section with Ayah number */}
                 <div className="verse-card-side">
                   <div className="verse-badge">{verse.number}</div>
@@ -256,6 +265,9 @@ export default function SurahView() {
 
                   {/* Footer section with controls */}
                   <div className="verse-card-footer">
+                    <div className="verse-card-logo" style={{ display: 'none', color: 'var(--accent-gold)', fontWeight: 'bold', fontSize: '0.9rem', alignItems: 'center', gap: '4px' }}>
+                      <span style={{ fontSize: '1.1rem' }}>☪</span> QApp
+                    </div>
                     <AudioPlayer
                       verse={{
                         ...verse,

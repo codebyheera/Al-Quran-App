@@ -167,7 +167,7 @@
 
 /* ── Mobile ─────────────────────────────── */
 @media (max-width: 640px) {
-  .surah-view { padding: 1rem 0; }
+  /* Removed .surah-view padding override as global.css handles it */
 
   .sv-header {
     gap: 0.75rem;
