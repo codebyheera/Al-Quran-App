@@ -11,6 +11,7 @@ import { ThemeProvider }   from './context/ThemeContext';
 import { BookmarkProvider } from './context/BookmarkContext';
 import { AudioProvider }    from './context/AudioContext';
 import { QariProvider }     from './context/QariContext';
+import { HelmetProvider }   from 'react-helmet-async';
 import App from './App';
 
 import './styles/global.css';
@@ -19,15 +20,17 @@ import '@fontsource/noto-nastaliq-urdu';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider>
-        <QariProvider>
-          <BookmarkProvider>
-            <AudioProvider>
-              <App />
-            </AudioProvider>
-          </BookmarkProvider>
-        </QariProvider>
-      </ThemeProvider>
+      <HelmetProvider>
+        <ThemeProvider>
+          <QariProvider>
+            <BookmarkProvider>
+              <AudioProvider>
+                <App />
+              </AudioProvider>
+            </BookmarkProvider>
+          </QariProvider>
+        </ThemeProvider>
+      </HelmetProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

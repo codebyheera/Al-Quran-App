@@ -6,6 +6,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useBookmarks } from '../context/BookmarkContext';
+import { Helmet } from 'react-helmet-async';
 import './Home.css';
 
 // Popular Surahs — static quick-access shown on the home page
@@ -34,6 +35,11 @@ export default function Home() {
 
   return (
     <div className="home page-enter">
+      <Helmet>
+        <title>Quran App Online – Read & Listen Quran in Arabic</title>
+        <meta name="description" content="Free online Quran app. Read the Quran in Arabic, listen to Surah recitations, and explore each Ayah with ease." />
+      </Helmet>
+
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="hero pattern-bg">
         <div className="hero-content">
