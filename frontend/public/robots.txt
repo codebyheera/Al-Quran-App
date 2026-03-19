@@ -1,4 +1,237 @@
-User-agent: *
+# Allow all major Googlebots
+User-agent: Googlebot
+Allow: /posts/
+Allow: /pages/
+Allow: /
+Allow: /sitemap.xml
+Allow: /wp-content/uploads/
+Allow: /llms.txt
+Disallow: /?utm_
+
+
+User-agent: Googlebot-Image
+Allow: /wp-content/uploads/
+
+
+User-agent: Googlebot-News
+Allow: /posts/
+
+User-agent: Google-Extended
 Allow: /
 
+
+User-agent: Google-CloudVertexBot
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /posts/
+Allow: /wp-content/uploads/
+
+
+User-agent: Googlebot-Mobile
+Allow: /posts/
+Allow: /pages/
+
+
+User-agent: Googlebot-Local
+Allow: /posts/
+Allow: /pages/
+
+
+User-agent: Googlebot-Smartphone
+Allow: /posts/
+Allow: /pages/
+Allow: /wp-content/uploads/
+Allow: /sitemap.xml
+
+
+# Allow other major search engines
+User-agent: Bingbot
+Allow: /
+
+
+User-agent: DuckDuckBot
+Allow: /
+
+
+User-agent: Slurp
+Allow: /
+
+
+User-agent: Screaming Frog SEO Spider
+Allow: /
+
+
+# Allow known AI, scraping, spam & unused bots
+User-agent: GPTBot
+Allow: /
+
+
+User-agent: ChatGPT-User
+Allow: /
+
+
+User-agent: ChatGPTBot
+Allow: /
+
+
+User-agent: Claude
+Allow: /
+
+
+User-agent: PerplexityBot
+Allow: /
+
+
+User-agent: Amazonbot
+Allow: /
+
+
+User-agent: ByteSpider
+Allow: /
+
+
+User-agent: Sogou
+Allow: /
+
+
+User-agent: AhrefsBot
+Allow: /
+
+
+User-agent: MJ12bot
+Allow: /
+
+
+User-agent: SemrushBot
+Allow: /
+
+
+User-agent: PetalBot
+Allow: /
+
+
+User-agent: DotBot
+Allow: /
+
+
+User-agent: MauiBot
+Allow: /
+
+
+User-agent: DataForSeoBot
+Allow: /
+
+
+User-agent: SEOkicks
+Allow: /
+
+
+User-agent: BLEXBot
+Allow: /
+
+
+User-agent: Twitterbot
+Allow: /
+
+
+User-agent: Discordbot
+Allow: /
+
+
+User-agent: Slackbot
+Allow: /
+
+
+User-agent: Screaming Frog SEO Spider
+Allow: /
+
+
+# Block spammy paths, admin, and injection vectors
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-config.php
+Disallow: /wp-cron.php
+Disallow: /wp-comments-post.php
+Disallow: /wp-trackback.php
+Disallow: /xmlrpc.php
+Disallow: /cgi-bin/
+Disallow: /shopdetail/
+Disallow: /get-message-notify
+Disallow: /readme.html
+Disallow: /license.txt
+Disallow: /error_logs/
+Disallow: /logs/
+Disallow: /scripts/
+Disallow: /private/
+Disallow: /backup/
+Disallow: /wp-content/debug.log
+Disallow: /wp-json/wp/v2/
+Disallow: /wp-json/oembed/
+Disallow: /wp-content/ai-generated/
+Disallow: /wp-content/mu-plugins/
+Disallow: /wp-content/languages/
+Disallow: /wp-content/cache/
+Disallow: /wp-content/upgrade/
+Disallow: /wp-content/uploads/wpcf7_captcha/
+Disallow: /wp-content/uploads/wpcf7_uploads/
+Disallow: /trackback/
+Disallow: /?s=
+Disallow: /?p=
+Disallow: /?attachment_id=
+Disallow: /search/
+Disallow: /404/
+Disallow: /author/
+Disallow: /category/
+Disallow: /tag/
+Disallow: /archive/
+Disallow: /archives/
+Disallow: /feed/
+Disallow: /comments/
+Disallow: /admin/
+Disallow: /error/
+Disallow: /trash/
+Disallow: /__trashed/
+Disallow: /__trashed-*
+Disallow: /__trashed-/
+Disallow: /dev/
+Disallow: /staging/
+Disallow: /beta/
+Disallow: /debug/
+Disallow: /sandbox/
+Disallow: /maintenance/
+Disallow: /*?replytocom
+Disallow: /*?utm_source
+Disallow: /*?gclid=
+Disallow: /*?fbclid=
+Disallow: /*?utm_campaign=
+Disallow: /*?utm_medium=
+Disallow: /*?pk_campaign=
+Disallow: /*?ref=
+Disallow: /*?source=
+Disallow: /*?tracking=
+Disallow: /*?q=
+Disallow: /*?preview=
+Disallow: /*?attachment_id=
+Disallow: /amp/
+Disallow: /*/amp/
+Disallow: /*/feed/
+Disallow: /*.php$
+Disallow: /nike/
+Disallow: /adidas/
+Disallow: /gucci/
+
+
+# Allow safe & indexable areas
+Allow: /
+Allow: /posts/
+Allow: /pages/
+Allow: /wp-content/uploads/
+Allow: /robots.txt
+Allow: /sitemap.xml
+
+
+# Sitemaps
 Sitemap: https://al-quran-by-subhan.vercel.app/sitemap.xml
