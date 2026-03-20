@@ -8,7 +8,7 @@
   <url><loc>https://al-quran-by-subhan.vercel.app/bookmarks</loc></url>
   <url><loc>https://al-quran-by-subhan.vercel.app/search</loc></url>
 
-  <!-- Surah Pages (1–114) — names from AlQuran Cloud API -->
+  <!-- Surah Pages -->
   <url><loc>https://al-quran-by-subhan.vercel.app/surah/Al-Faatiha</loc></url>
   <url><loc>https://al-quran-by-subhan.vercel.app/surah/Al-Baqara</loc></url>
   <url><loc>https://al-quran-by-subhan.vercel.app/surah/Aal-i-Imraan</loc></url>
