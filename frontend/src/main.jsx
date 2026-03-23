@@ -17,7 +17,10 @@ import App from './App';
 import './styles/global.css';
 import '@fontsource/noto-nastaliq-urdu';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+import { createRoot, hydrateRoot } from 'react-dom/client';
+
+const rootElement = document.getElementById('root');
+const app = (
   <React.StrictMode>
     <BrowserRouter>
       <HelmetProvider>
@@ -34,3 +37,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+if (rootElement.hasChildNodes()) {
+  hydrateRoot(rootElement, app);
+} else {
+  createRoot(rootElement).render(app);
+}

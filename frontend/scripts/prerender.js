@@ -1,0 +1,108 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import express from 'express';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import puppeteer from 'puppeteer';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = path.resolve(__dirname, '../dist');
+
+// Extract surah URLs from the structured JSON-LD in index.html
+const indexHtmlContent = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8');
+const surahUrls = [];
+const regex = /"url":\s*"(https:\/\/[^/]+)(\/surah\/[^"]+)"/g;
+let match;
+while ((match = regex.exec(indexHtmlContent)) !== null) {
+  if (match[2]) surahUrls.push(match[2]);
+}
+
+const juzUrls = Array.from({ length: 30 }, (_, i) => `/juz/${i + 1}`);
+
+const routesToPrerender = [
+  '/',
+  '/surah',
+  '/juz',
+  '/bookmarks',
+  '/search',
+  ...surahUrls,
+  ...juzUrls
+];
+
+async function run() {
+  if (!fs.existsSync(distPath)) {
+    console.error('dist folder not found. Run npm run build first.');
+    process.exit(1);
+  }
+
+  // Preserve the original index.html as template
+  const templatePath = path.resolve(distPath, 'template.html');
+  if (!fs.existsSync(templatePath)) {
+    fs.copyFileSync(path.resolve(distPath, 'index.html'), templatePath);
+  }
+
+  console.log(`Starting to prerender ${routesToPrerender.length} routes...`);
+
+  const app = express();
+  
+  app.use('/api', createProxyMiddleware({ 
+    target: process.env.VITE_API_URL || 'http://localhost:5000', 
+    changeOrigin: true 
+  }));
+
+  app.use(express.static(distPath, { index: false })); // don't serve index.html automatically by static
+  
+  app.get(/.*/, (req, res) => {
+    try {
+      const html = fs.readFileSync(templatePath, 'utf-8');
+      res.send(html);
+    } catch (err) {
+      console.error("Error sending template:", err.message);
+      res.status(500).send("Error reading template");
+    }
+  });
+
+  const server = app.listen(0, async () => {
+    const port = server.address().port;
+    const baseUrl = `http://localhost:${port}`;
+    console.log(`Local server running at ${baseUrl}`);
+    
+    // Launch headless Chromium
+    // Using new headless mode for better stability
+    const browser = await puppeteer.launch({ 
+      headless: 'new', 
+      args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+    });
+    
+    for (const route of routesToPrerender) {
+      console.log(`Prerendering ${route}...`);
+      const page = await browser.newPage();
+      
+      try {
+        await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
+      } catch (err) {
+        console.warn(`Timeout or error while waiting for network idle on ${route}. Saving HTML anyway.`, err.message);
+      }
+      
+      const html = await page.content();
+      await page.close();
+
+      const routeDir = path.join(distPath, route);
+      if (!fs.existsSync(routeDir)) {
+        fs.mkdirSync(routeDir, { recursive: true });
+      }
+      
+      fs.writeFileSync(path.join(routeDir, 'index.html'), html);
+    }
+
+    await browser.close();
+    server.close();
+    console.log('Prerendering complete!');
+  });
+}
+
+run().catch(err => {
+  console.error('Prerendering failed:', err);
+  process.exit(1);
+});
