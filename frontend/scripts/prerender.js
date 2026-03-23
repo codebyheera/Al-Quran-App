@@ -68,12 +68,23 @@ async function run() {
     const baseUrl = `http://localhost:${port}`;
     console.log(`Local server running at ${baseUrl}`);
     
-    // Launch headless Chromium
-    // Using new headless mode for better stability
-    const browser = await puppeteer.launch({ 
-      headless: 'new', 
-      args: ['--no-sandbox', '--disable-setuid-sandbox'] 
-    });
+    let browser;
+    // Vercel build environment needs the specialized chromium binary
+    if (process.env.VERCEL) {
+      const chromium = (await import('@sparticuz/chromium')).default;
+      const puppeteerCore = (await import('puppeteer-core')).default;
+      browser = await puppeteerCore.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless,
+      });
+    } else {
+      browser = await puppeteer.launch({ 
+        headless: 'new', 
+        args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+      });
+    }
     
     for (const route of routesToPrerender) {
       console.log(`Prerendering ${route}...`);
