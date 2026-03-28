@@ -57,11 +57,18 @@ export default function JuzView() {
   const { addBookmark, removeBookmark, isBookmarked, bookmarks } = useBookmarks();
   const topRef = useRef(null);
 
+  // Track currently playing word audio to prevent overlaps
+  const wordAudioRef = useRef(null);
+
   useEffect(() => {
     setLoading(true);
     setError(null);
     setFilter('');
     stop(); // Stop any playing audio when switching reciter or juz
+    if (wordAudioRef.current) {
+      wordAudioRef.current.pause();
+      wordAudioRef.current = null;
+    }
     topRef.current?.scrollIntoView({ behavior: 'smooth' });
     api.get(`/api/juz/${juzNum}?reciter=${reciter}`)
       .then(({ data }) => { setJuz(data); setLoading(false); })
@@ -278,23 +285,30 @@ export default function JuzView() {
                     <div className="arabic verse-arabic" dir="rtl">
                       {verse.words && verse.words.length > 0 ? (
                         verse.words
-                          .filter(word => word.char_type_name !== 'end')
-                          .map((word, wIdx) => {
+                          .filter(w => w.char_type_name !== 'end')
+                          .map((word) => {
                             // Play individual audio for this word
                             const playWordAudio = (e) => {
+                              e.preventDefault();
                               e.stopPropagation();
                               if (word.audioUrl) {
+                                if (wordAudioRef.current) {
+                                  wordAudioRef.current.pause();
+                                  wordAudioRef.current.currentTime = 0;
+                                }
                                 const audio = new Audio(word.audioUrl);
+                                wordAudioRef.current = audio;
                                 audio.play().catch(err => console.error("Word audio playback failed:", err));
                               }
                             };
                             
                             return (
                               <span 
-                                key={wIdx} 
+                                key={word.id || word.position} 
                                 className="quran-word"
                                 onClick={playWordAudio}
                                 title={word.translation?.text || ''}
+                                style={{ display: 'inline-block', cursor: word.audioUrl ? 'pointer' : 'text' }}
                               >
                                 {word.text_uthmani || word.text}
                               </span>
