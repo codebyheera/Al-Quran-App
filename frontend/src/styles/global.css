@@ -144,6 +144,54 @@ img, video { display: block; max-width: 100%; }
   --shadow-gold:   0 0 20px rgba(251, 191, 36, 0.15);
 }
 
+/* ── Sunset (Warm/Desert) Mode ──────────────────────────────── */
+[data-theme="sunset"] {
+  --bg-primary:    #2d1b19;
+  --bg-secondary:  #3d2522;
+  --bg-card:       #4a2e2a;
+  --bg-card-hover: #5d3a35;
+  --bg-glass:      rgba(74, 46, 42, 0.75);
+
+  --accent-gold:   #ffb347;
+  --accent-gold-light: #ffd180;
+  --accent-green:  #4caf50;
+  --accent-blue:   #64b5f6;
+
+  --text-primary:  #fff0e6;
+  --text-secondary:#ffd7bf;
+  --text-muted:    #cc9e82;
+  --text-arabic:   #ffffff;
+
+  --border:        rgba(255, 179, 71, 0.2);
+  --border-hover:  rgba(255, 179, 71, 0.5);
+  --shadow:        0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-gold:   0 0 20px rgba(255, 179, 71, 0.15);
+}
+
+/* ── Amethyst (Deep Purple) Mode ────────────────────────────── */
+[data-theme="amethyst"] {
+  --bg-primary:    #1a1025;
+  --bg-secondary:  #241634;
+  --bg-card:       #2d1d42;
+  --bg-card-hover: #3b2756;
+  --bg-glass:      rgba(45, 29, 66, 0.75);
+
+  --accent-gold:   #e0a96d;
+  --accent-gold-light: #f3c68f;
+  --accent-green:  #2dd4bf;
+  --accent-blue:   #34d399;
+
+  --text-primary:  #f3e8ff;
+  --text-secondary:#d8b4fe;
+  --text-muted:    #a855f7;
+  --text-arabic:   #ffffff;
+
+  --border:        rgba(224, 169, 109, 0.2);
+  --border-hover:  rgba(224, 169, 109, 0.5);
+  --shadow:        0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-gold:   0 0 20px rgba(224, 169, 109, 0.15);
+}
+
 /* ── Base Styles ─────────────────────────────────────────────── */
 body {
   font-family: var(--font-ui);
@@ -282,6 +330,16 @@ a:hover { color: var(--accent-gold-light); }
   color: var(--accent-gold);
 }
 
+/* Active word highlight — shown while word audio is playing */
+.quran-word--active {
+  background: rgba(201, 168, 76, 0.25);
+  color: var(--accent-gold);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(201, 168, 76, 0.4);
+  transform: scale(1.05);
+  transition: all 0.15s ease;
+}
+
 .verse-translation {
   font-size: 1rem;
   color: var(--text-secondary);
@@ -322,6 +380,11 @@ a:hover { color: var(--accent-gold-light); }
 }
 
 .verse-menu-btn {
+  display: none;
+}
+
+/* Container for the translate + three-dots group (mobile) */
+.verse-top-actions {
   display: none;
 }
 
@@ -481,8 +544,7 @@ a:hover { color: var(--accent-gold-light); }
   /* Verse card: Convert to column layout so side content leaves the side */
   .verse-card {
     flex-direction: column;
-    padding: 1.25rem;
-    padding-bottom: 3.25rem; /* Space for the absolute badge at the bottom */
+    padding: 2.25rem 1.25rem 3.5rem 1.25rem; /* Much larger top padding for the absolute top buttons */
     gap: 0;
     transition: padding 0.3s ease;
   }
@@ -493,9 +555,7 @@ a:hover { color: var(--accent-gold-light); }
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
+    position: static;
     width: 32px;
     height: 32px;
     border: none;
@@ -505,9 +565,43 @@ a:hover { color: var(--accent-gold-light); }
     cursor: pointer;
     z-index: 5;
     transition: background 0.2s;
+    flex-shrink: 0;
   }
   .verse-menu-btn:active {
     background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Wrapper for translate + three-dots buttons (top-left on mobile) */
+  .verse-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Gap for pill spacing */
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    z-index: 5;
+  }
+
+  /* Per-verse translation toggle button */
+  .verse-translate-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-radius: 100px; /* Pill shape */
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .verse-translate-btn:active,
+  .verse-translate-btn.active {
+    color: var(--accent-gold);
+    background: rgba(201, 168, 76, 0.1);
   }
 
   /* Hide the desktop side container, we will move the badge via CSS ordering or flex */

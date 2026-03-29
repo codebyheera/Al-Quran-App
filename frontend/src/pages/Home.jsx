@@ -4,9 +4,10 @@
  */
 
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useBookmarks } from '../context/BookmarkContext';
 import { Helmet } from 'react-helmet-async';
+import api from '../lib/api';
 import './Home.css';
 
 // Popular Surahs — static quick-access shown on the home page
@@ -25,13 +26,61 @@ const POPULAR = [
 
 export default function Home() {
   const [query, setQuery] = useState('');
+  const [allSurahs, setAllSurahs] = useState([]);
+  const [verseOfTheDay, setVerseOfTheDay] = useState(null);
+  const [isLoadingVotd, setIsLoadingVotd] = useState(true);
   const navigate = useNavigate();
   const { bookmarks } = useBookmarks();
+
+  useEffect(() => {
+    api.get('/api/surah')
+      .then(({ data }) => setAllSurahs(data))
+      .catch((err) => console.error("Could not fetch surahs for suggestions", err));
+      
+    async function fetchVOTD() {
+      setIsLoadingVotd(true);
+      try {
+        const randomNum = Math.floor(Math.random() * 6236) + 1;
+        const res = await fetch(`https://api.alquran.cloud/v1/ayah/${randomNum}/editions/quran-uthmani,en.asad`);
+        const data = await res.json();
+        
+        if (data && data.data) {
+          const arabicData = data.data[0];
+          const englishData = data.data[1];
+          setVerseOfTheDay({
+            arabic: arabicData.text,
+            translation: englishData.text,
+            surahName: arabicData.surah.englishName,
+            surahNumber: arabicData.surah.number,
+            verseNumber: arabicData.numberInSurah
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch verse of the day", err);
+      } finally {
+        setIsLoadingVotd(false);
+      }
+    }
+    fetchVOTD();
+  }, []);
 
   function handleSearch(e) {
     e.preventDefault();
     if (query.trim()) navigate(`/search?q=${encodeURIComponent(query.trim())}`);
   }
+
+  const suggestions = query.trim() ? allSurahs.filter(s =>
+    s.englishName.toLowerCase().startsWith(query.toLowerCase()) ||
+    s.englishName.toLowerCase().includes(query.toLowerCase()) ||
+    String(s.number).includes(query) ||
+    s.name.includes(query)
+  ).sort((a, b) => {
+    const aStarts = a.englishName.toLowerCase().startsWith(query.toLowerCase());
+    const bStarts = b.englishName.toLowerCase().startsWith(query.toLowerCase());
+    if (aStarts && !bStarts) return -1;
+    if (!aStarts && bStarts) return 1;
+    return 0;
+  }).slice(0, 6) : [];
 
   return (
     <div className="home page-enter">
@@ -43,6 +92,7 @@ export default function Home() {
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="hero pattern-bg">
+        <div className="hero-bg-orbs"></div>
         <div className="hero-content">
           <div className="hero-bismillah arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
           <h1 className="hero-title">
@@ -53,16 +103,33 @@ export default function Home() {
           </p>
 
           {/* Search */}
-          <form className="hero-search" onSubmit={handleSearch}>
-            <input
-              className="input"
-              type="text"
-              placeholder="Search by Surah name, number, or keyword…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <button type="submit" className="btn btn-primary">Search</button>
-          </form>
+          <div className="hero-search-wrapper">
+            <form className="hero-search" onSubmit={handleSearch}>
+              <input
+                className="input"
+                type="text"
+                placeholder="Search by Surah name, number, or keyword…"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <button type="submit" className="btn btn-primary">Search</button>
+            </form>
+
+            {suggestions.length > 0 && (
+              <div className="search-dropdown">
+                {suggestions.map((s) => (
+                  <Link key={s.number} to={`/surah/${s.englishName}`} className="search-dropdown-item">
+                    <span className="search-dropdown-num badge badge-gold">{s.number}</span>
+                    <div style={{ flex: 1, textAlign: 'left' }}>
+                      <div style={{ fontWeight: 600 }}>{s.englishName}</div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{s.nameTranslation}</div>
+                    </div>
+                    <span className="arabic" style={{ fontSize: '1.2rem', lineHeight: '1.2' }}>{s.name}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
@@ -115,6 +182,30 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </section>
+
+        {/* ── Random Verse Of The Day ──────────────────────── */}
+        <section className="home-section votd-section">
+          <div className="flex-between mb-2">
+            <h2>Verse of the Day</h2>
+          </div>
+          {isLoadingVotd ? (
+            <div className="card loading-votd">
+              <div className="spinner"></div>
+            </div>
+          ) : verseOfTheDay ? (
+            <Link to={`/surah/${verseOfTheDay.surahNumber}#verse-${verseOfTheDay.verseNumber}`} className="card votd-card">
+              <div className="flex-between mb-2">
+                <span className="badge badge-gold">{verseOfTheDay.surahName} {verseOfTheDay.surahNumber}:{verseOfTheDay.verseNumber}</span>
+              </div>
+              <div className="arabic votd-arabic">
+                {verseOfTheDay.arabic}
+              </div>
+              <div className="votd-translation mt-2">
+                {verseOfTheDay.translation}
+              </div>
+            </Link>
+          ) : null}
         </section>
 
         {/* ── Recent Bookmarks ──────────────────────────────── */}

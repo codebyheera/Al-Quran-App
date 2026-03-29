@@ -2,20 +2,29 @@
 
 /* Hero section */
 .hero {
-  min-height: 50vh;
+  min-height: 32vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5rem 1.5rem;
+  padding: 2.5rem 1.5rem 2.75rem;
   text-align: center;
   position: relative;
-  overflow: hidden;
   background-color: var(--bg-primary);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+}
+
+/* Background clipping layer */
+.hero-bg-orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Rich animated glowing orbs / mesh gradient effect */
-.hero::before,
-.hero::after {
+.hero-bg-orbs::before,
+.hero-bg-orbs::after {
   content: '';
   position: absolute;
   inset: -50%;
@@ -23,7 +32,7 @@
   pointer-events: none;
 }
 
-.hero::before {
+.hero-bg-orbs::before {
   /* Rich gold and blue glowing orbs */
   background: 
     radial-gradient(circle at 35% 65%, rgba(201, 168, 76, 0.18) 0%, transparent 45%),
@@ -32,7 +41,7 @@
   animation: heroGlowFlow 20s infinite alternate ease-in-out;
 }
 
-.hero::after {
+.hero-bg-orbs::after {
   /* Subtle structural glass grid overlay */
   inset: 0;
   background-image: 
@@ -50,13 +59,13 @@
 }
 
 /* Light mode overrides for the hero */
-[data-theme="light"] .hero::before {
+[data-theme="light"] .hero-bg-orbs::before {
   background: 
     radial-gradient(circle at 35% 65%, rgba(201, 168, 76, 0.12) 0%, transparent 45%),
     radial-gradient(circle at 75% 25%, rgba(74, 158, 255, 0.06) 0%, transparent 50%),
     radial-gradient(circle at 15% 15%, rgba(201, 168, 76, 0.04) 0%, transparent 40%);
 }
-[data-theme="light"] .hero::after {
+[data-theme="light"] .hero-bg-orbs::after {
   background-image: 
     linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
@@ -69,42 +78,50 @@
 }
 
 .hero-bismillah {
-  font-size: clamp(1.6rem, 5vw, 2.5rem) !important;
+  font-size: clamp(1.3rem, 3.5vw, 1.9rem) !important;
   color: var(--accent-gold) !important;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   text-align: center !important;
   display: block;
   width: 100%;
-  text-shadow: 0 0 24px rgba(201, 168, 76, 0.25);
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.28);
+  letter-spacing: 0.02em;
 }
 [data-theme="light"] .hero-bismillah { text-shadow: none; }
 
 .hero-title {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   line-height: 1.15;
-  font-size: clamp(2.2rem, 6vw, 3.8rem);
-  letter-spacing: -0.02em;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  letter-spacing: -0.025em;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
 }
 [data-theme="light"] .hero-title { text-shadow: none; }
 
 .hero-subtitle {
-  font-size: 1.15rem;
+  font-size: 0.98rem;
   color: var(--text-secondary);
-  margin-bottom: 2.5rem;
-  max-width: 600px;
+  margin-bottom: 1.5rem;
+  max-width: 520px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.6;
+  line-height: 1.55;
+  opacity: 0.85;
+}
+
+.hero-search-wrapper {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  z-index: 20;
+  width: 100%;
 }
 
 .hero-search {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  max-width: 600px;
-  margin: 0 auto;
-  position: relative;
+  width: 100%;
 }
 /* Ensure search bar shines slightly in dark mode */
 .hero-search .input {
@@ -121,6 +138,60 @@
   height: 48px;
   padding: 0 1.5rem;
   flex-shrink: 0;
+}
+
+/* Autocomplete Dropdown */
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  animation: fadeUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+[data-theme="light"] .search-dropdown {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.search-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background 0.2s;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+.search-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.search-dropdown-item:hover {
+  background: var(--bg-card-hover);
+  border-left: 3px solid var(--accent-gold);
+  padding-left: calc(1rem - 3px); /* Compensate for border to avoid shifting */
+}
+
+.search-dropdown-num {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
 }
 
 /* Mode cards */
@@ -187,13 +258,17 @@
 /* ── Mobile ─────────────────────────────── */
 @media (max-width: 640px) {
   .hero {
-    padding: 3rem 1rem;
-    min-height: 40vh;
+    padding: 1.75rem 1rem 2rem;
+    min-height: unset;
   }
 
   .hero-subtitle {
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .hero-search-wrapper {
+    width: 100%;
   }
 
   .hero-search {
@@ -222,8 +297,54 @@
     grid-template-columns: 1fr;
   }
 
-  .recent-bookmarks {
-    grid-template-columns: 1fr;
+    .recent-bookmarks {
+      grid-template-columns: 1fr;
+    }
   }
-}
+
+  /* Verse of the Day */
+  .votd-section {
+    padding-bottom: 1rem;
+  }
+  
+  .loading-votd {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .loading-votd .spinner {
+    width: 30px;
+    height: 30px;
+    border-width: 2px;
+  }
+  
+  .votd-card {
+    text-decoration: none;
+    display: block;
+    border-left: 3px solid transparent;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  
+  .votd-card:hover {
+    border-left-color: var(--accent-gold);
+    transform: translateY(-2px);
+  }
+  
+  .votd-arabic {
+    font-size: clamp(1.6rem, 4vw, 2.2rem) !important;
+    line-height: 2 !important;
+    color: var(--text-arabic);
+  }
+  
+  .votd-translation {
+    border-left: 2px solid rgba(201, 168, 76, 0.3);
+    padding-left: 1rem;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
 

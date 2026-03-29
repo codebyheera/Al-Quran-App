@@ -12,7 +12,9 @@ export const THEMES = [
   { id: 'light', name: 'Light', icon: '☀️' },
   { id: 'emerald', name: 'Emerald', icon: '🌿' },
   { id: 'sapphire', name: 'Sapphire', icon: '🌊' },
-  { id: 'obsidian', name: 'Obsidian', icon: '🌑' }
+  { id: 'obsidian', name: 'Obsidian', icon: '🌑' },
+  { id: 'sunset', name: 'Sunset', icon: '🌅' },
+  { id: 'amethyst', name: 'Amethyst', icon: '🔮' }
 ];
 
 export function ThemeProvider({ children }) {

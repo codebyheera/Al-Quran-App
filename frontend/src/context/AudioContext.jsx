@@ -12,6 +12,8 @@ export const AudioProvider = ({ children }) => {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [repeatMode, setRepeatMode] = useState(0); // 0=off, 1=once, 2=twice, 3=infinite
+  const [repeatCount, setRepeatCount] = useState(0);
 
   const audioRef = useRef(new Audio());
 
@@ -21,10 +23,24 @@ export const AudioProvider = ({ children }) => {
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
     const handleEnded = () => {
-      if (playlist.length > 0 && currentIndex < playlist.length - 1) {
-        skipNext();
+      if (repeatMode === 3) {
+        audio.currentTime = 0;
+        audio.play().catch(console.error);
+      } else if (repeatMode === 1 && repeatCount < 1) {
+        setRepeatCount((prev) => prev + 1);
+        audio.currentTime = 0;
+        audio.play().catch(console.error);
+      } else if (repeatMode === 2 && repeatCount < 2) {
+        setRepeatCount((prev) => prev + 1);
+        audio.currentTime = 0;
+        audio.play().catch(console.error);
       } else {
-        setIsPlaying(false);
+        setRepeatCount(0); // reset count
+        if (playlist.length > 0 && currentIndex < playlist.length - 1) {
+          skipNext();
+        } else {
+          setIsPlaying(false);
+        }
       }
     };
     const handleTimeUpdate = () => {
@@ -43,13 +59,14 @@ export const AudioProvider = ({ children }) => {
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
     };
-  }, [playlist, currentIndex]);
+  }, [playlist, currentIndex, repeatMode, repeatCount]);
 
   const playVerse = (verse) => {
     setPlaylist([]);
     setCurrentIndex(-1);
     setCurrentVerse(verse);
-    setIsMinimized(false); // Show full player for a single verse
+    setIsMinimized(false);
+    setRepeatCount(0);
     audioRef.current.src = verse.audio;
     audioRef.current.play().catch(console.error);
   };
@@ -58,7 +75,8 @@ export const AudioProvider = ({ children }) => {
     setPlaylist(verses);
     setCurrentIndex(startIdx);
     setCurrentVerse(verses[startIdx]);
-    setIsMinimized(true); // Auto-hide the player for full surah playback
+    setIsMinimized(true);
+    setRepeatCount(0);
     audioRef.current.src = verses[startIdx].audio;
     audioRef.current.play().catch(console.error);
   };
@@ -77,6 +95,7 @@ export const AudioProvider = ({ children }) => {
     setCurrentVerse(null);
     setPlaylist([]);
     setCurrentIndex(-1);
+    setRepeatCount(0);
   };
 
   const skipNext = () => {
@@ -85,6 +104,7 @@ export const AudioProvider = ({ children }) => {
       const nextVerse = playlist[nextIdx];
       setCurrentIndex(nextIdx);
       setCurrentVerse(nextVerse);
+      setRepeatCount(0);
       audioRef.current.src = nextVerse.audio;
       audioRef.current.play().catch(console.error);
     }
@@ -96,6 +116,7 @@ export const AudioProvider = ({ children }) => {
       const prevVerse = playlist[prevIdx];
       setCurrentIndex(prevIdx);
       setCurrentVerse(prevVerse);
+      setRepeatCount(0);
       audioRef.current.src = prevVerse.audio;
       audioRef.current.play().catch(console.error);
     }
@@ -104,6 +125,11 @@ export const AudioProvider = ({ children }) => {
   const seek = (time) => {
     audioRef.current.currentTime = time;
     setProgress(time);
+  };
+
+  const toggleRepeat = () => {
+    setRepeatMode((prev) => (prev + 1) % 4);
+    setRepeatCount(0);
   };
 
   return (
@@ -115,7 +141,9 @@ export const AudioProvider = ({ children }) => {
       progress,
       duration,
       isMinimized,
+      repeatMode,
       setIsMinimized,
+      toggleRepeat,
       playVerse,
       playPlaylist,
       togglePlay,

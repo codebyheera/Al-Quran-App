@@ -3,7 +3,7 @@
  * Includes hamburger menu for mobile, Qari and Theme dropdowns.
  */
 
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useQari } from '../context/QariContext';
@@ -86,7 +86,8 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
         aria-expanded={open}
         title="Select Theme"
       >
-        <span className="dropdown-trigger-icon">🎨</span>
+        <span className="dropdown-trigger-icon">🌗</span>
+        <span className="dropdown-trigger-label">Theme</span>
         <svg className={`dropdown-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
           <path d="M7 10l5 5 5-5z"/>
         </svg>
@@ -123,17 +124,7 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
 export default function Navbar() {
   const { theme, changeTheme, themes } = useTheme();
   const { reciter, changeReciter, reciters } = useQari();
-  const [query, setQuery] = useState('');
   const [mobileOpen, setMobileOpen] = useState(false);
-  const navigate = useNavigate();
-
-  function handleSearch(e) {
-    if (e.key === 'Enter' && query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
-      setQuery('');
-      setMobileOpen(false);
-    }
-  }
 
   // Close mobile menu on route change
   function handleNavClick() { setMobileOpen(false); }
@@ -154,18 +145,6 @@ export default function Navbar() {
           <NavLink to="/bookmarks" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Bookmarks</NavLink>
         </div>
 
-        {/* Search bar (desktop) */}
-        <div className="navbar-search">
-          <input
-            className="input"
-            type="text"
-            placeholder="Search Surahs or verses..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={handleSearch}
-            aria-label="Search"
-          />
-        </div>
 
         {/* Right actions */}
         <div className="navbar-actions">
@@ -189,18 +168,6 @@ export default function Navbar() {
       {/* Mobile slide-down menu */}
       {mobileOpen && (
         <div className="mobile-menu">
-          {/* Mobile search */}
-          <div className="mobile-search">
-            <input
-              className="input"
-              type="text"
-              placeholder="Search Surahs or verses..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={handleSearch}
-              aria-label="Search"
-            />
-          </div>
 
           {/* Mobile nav links */}
           <NavLink to="/surah"     className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>📖 Surahs</NavLink>

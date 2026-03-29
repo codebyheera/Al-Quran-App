@@ -1,0 +1,38 @@
+[
+  {
+    "id": 79368,
+    "position": 1,
+    "audio_url": "wbw/002_142_002.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "۞ سَيَقُولُ",
+    "page_number": 22,
+    "line_number": 1,
+    "text": "۞ سَيَقُولُ",
+    "translation": {
+      "text": "Will say",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "sayaqūlu",
+      "language_name": "english"
+    }
+  },
+  {
+    "id": 79369,
+    "position": 2,
+    "audio_url": "wbw/002_142_003.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "ٱلسُّفَهَآءُ",
+    "page_number": 22,
+    "line_number": 1,
+    "text": "ٱلسُّفَهَآءُ",
+    "translation": {
+      "text": "the foolish ones",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "l-sufahāu",
+      "language_name": "english"
+    }
+  }
+]

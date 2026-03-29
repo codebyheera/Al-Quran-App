@@ -26,16 +26,29 @@ export default function SurahView() {
   // We'll use the ID from the URL for the API call, 
   // and use surah.surahNumber for numeric logic once loaded.
   const surahNum = surah?.surahNumber || (parseInt(id) || null);
-  const [filter,  setFilter]  = useState('');
   const [toastMsg, setToastMsg] = useState('');
   const [fontSize, setFontSize] = useState(() => {
     return parseFloat(localStorage.getItem('arabicFontSize')) || 2.2;
   });
 
   const [showTranslation, setShowTranslation] = useState(() => {
-    return localStorage.getItem('showTranslation') !== 'false';
+    return localStorage.getItem('showTranslation') === 'true';
   });
   const [activeMenu, setActiveMenu] = useState(null);
+  // Per-verse translation reveal (used when global showTranslation is off)
+  const [revealedVerses, setRevealedVerses] = useState(new Set());
+  // Track which word is currently being played for visual highlight
+  const [activeWordId, setActiveWordId] = useState(null);
+
+  const toggleVerseTranslation = (e, verseNumber) => {
+    e.stopPropagation();
+    setRevealedVerses(prev => {
+      const next = new Set(prev);
+      if (next.has(verseNumber)) next.delete(verseNumber);
+      else next.add(verseNumber);
+      return next;
+    });
+  };
   const menuTimeoutRef = useRef(null);
 
   const toggleMenu = (e, menuId) => {
@@ -69,7 +82,6 @@ export default function SurahView() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    setFilter('');
     stop(); // Stop any playing audio when switching reciter or surah
     if (wordAudioRef.current) {
       wordAudioRef.current.pause();
@@ -175,11 +187,7 @@ export default function SurahView() {
   if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Surah…</p></div>;
   if (error)   return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
 
-  const verses = filter
-    ? surah.verses.filter((v) =>
-        v.arabic.includes(filter) || v.translation.toLowerCase().includes(filter.toLowerCase())
-      )
-    : surah.verses;
+  const verses = surah.verses;
 
   // Pre-calculate mapped playlist for AudioPlayer
   const mappedPlaylist = verses.map(v => ({
@@ -230,25 +238,14 @@ export default function SurahView() {
           </div>
         )}
 
-        {/* ── Controls (Search & Font Sizing) ─────────────────── */}
+        {/* ── Controls (Font Sizing) ─────────────────── */}
         <div className="sv-controls">
-          <div className="sv-search-wrapper">
-            <input
-              className="input sv-search"
-              type="text"
-              placeholder="Search..."
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            />
-            {filter && <span className="sv-search-count text-muted">{verses.length} match(es)</span>}
-          </div>
-          
           <div className="sv-font-controls">
             <span className="sv-font-label text-muted">Arabic:</span>
             <div className="sv-font-btns">
-              <button className="btn btn-ghost" onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>A-</button>
+              <button className="btn btn-ghost" onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>-</button>
               <span className="sv-font-val text-primary">{fontSize.toFixed(1)}</span>
-              <button className="btn btn-ghost" onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>A+</button>
+              <button className="btn btn-ghost" onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>+</button>
             </div>
             <div className="sv-font-divider"></div>
             <button
@@ -274,13 +271,25 @@ export default function SurahView() {
                 className={`verse-card ${isPlaying ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`} 
                 id={`verse-${verse.number}`}
               >
-                <button className="verse-menu-btn" onClick={(e) => toggleMenu(e, verse.number)}>
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
-                      <circle cx="12" cy="12" r="1.5"></circle>
-                      <circle cx="12" cy="5" r="1.5"></circle>
-                      <circle cx="12" cy="19" r="1.5"></circle>
-                    </svg>
-                </button>
+                <div className="verse-top-actions">
+                  <button className="verse-menu-btn" onClick={(e) => toggleMenu(e, verse.number)}>
+                      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
+                        <circle cx="12" cy="12" r="1.5"></circle>
+                        <circle cx="12" cy="5" r="1.5"></circle>
+                        <circle cx="12" cy="19" r="1.5"></circle>
+                      </svg>
+                  </button>
+                  {/* Translate toggle — mobile only, visible when EN is off */}
+                  {!showTranslation && (
+                    <button
+                      className={`verse-translate-btn ${revealedVerses.has(verse.number) ? 'active' : ''}`}
+                      onClick={(e) => toggleVerseTranslation(e, verse.number)}
+                      title="Show translation"
+                    >
+                      Translation
+                    </button>
+                  )}
+                </div>
                 {/* Header section with Ayah number */}
                 <div className="verse-card-side">
                   <div className="verse-badge">{verse.number}</div>
@@ -290,31 +299,32 @@ export default function SurahView() {
                   {/* Arabic text with Word-by-Word Audio */}
                   <div className="arabic verse-arabic" dir="rtl">
                     {verse.words && verse.words.length > 0 ? (
-                      verse.words
-                        .filter(w => w.char_type_name !== 'end')
-                        .map((word) => {
+                      verse.words.map((word) => {
                           // Play individual audio for this word
                           const playWordAudio = (e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             if (word.audioUrl) {
+                              // Stop any currently playing word audio
                               if (wordAudioRef.current) {
                                 wordAudioRef.current.pause();
                                 wordAudioRef.current.currentTime = 0;
                               }
+                              setActiveWordId(word.id);
                               const audio = new Audio(word.audioUrl);
                               wordAudioRef.current = audio;
-                              audio.play().catch(err => console.error("Word audio playback failed:", err));
+                              audio.play().catch(err => console.error('Word audio failed:', err));
+                              audio.onended = () => setActiveWordId(null);
                             }
                           };
-                          
+
                           return (
-                            <span 
-                              key={word.id || word.position} 
-                              className="quran-word"
+                            <span
+                              key={word.id || word.position}
+                              className={`quran-word${activeWordId === word.id ? ' quran-word--active' : ''}`}
                               onClick={playWordAudio}
                               title={word.translation?.text || ''}
-                              style={{ display: 'inline-block', cursor: word.audioUrl ? 'pointer' : 'text' }}
+                              style={{ cursor: word.audioUrl ? 'pointer' : 'text' }}
                             >
                               {word.text_uthmani || word.text}
                             </span>
@@ -326,8 +336,8 @@ export default function SurahView() {
                     )}
                   </div>
 
-                  {/* English translation */}
-                  {showTranslation && (
+                  {/* English translation — shown if global toggle is on, OR this verse is individually revealed */}
+                  {(showTranslation || revealedVerses.has(verse.number)) && (
                     <p className="translation verse-translation">{verse.translation}</p>
                   )}
 
@@ -354,10 +364,6 @@ export default function SurahView() {
             );
           })}
         </div>
-
-        {verses.length === 0 && filter && (
-          <p className="text-center text-muted mt-3">No verses matched "{filter}".</p>
-        )}
 
         {/* ── Prev / Next navigation ──────────────────────── */}
         <div className="sv-nav">

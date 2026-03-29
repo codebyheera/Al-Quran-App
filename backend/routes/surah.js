@@ -40,16 +40,38 @@ router.get('/:surahIdentifier', async (req, res) => {
     const arabicEdition  = data.data[0];
     const englishEdition = data.data[1];
 
+    // Build word audio URL from surah/verse/position — avoids the off-by-one
+    // bug in the Quran.com API where audio_url starts at _002 due to the ۞ symbol.
+    function buildWordAudioUrl(surahNum, verseNum, wordPosition) {
+      const s = String(surahNum).padStart(3, '0');
+      const v = String(verseNum).padStart(3, '0');
+      const w = String(wordPosition).padStart(3, '0');
+      return `https://audio.qurancdn.com/wbw/${s}_${v}_${w}.mp3`;
+    }
+
     // Create a map of verses from Quran.com API for fast lookup by verseKey
     const wordsMap = {};
     if (quranComRes.data && quranComRes.data.verses) {
       quranComRes.data.verses.forEach(v => {
-        const verseNum = v.verse_key.split(':')[1];
-        wordsMap[verseNum] = v.words.map(w => ({
-          ...w,
-          // Convert relative audio path from API to full CDN path
-          audioUrl: w.audio_url ? `https://verses.quran.com/${w.audio_url}` : null
-        }));
+        const verseNum = parseInt(v.verse_key.split(':')[1]);
+        // Filter out non-words (end markers, sajdah signs etc.) then assign
+        // a sequential 1-based position for reliable audio URL construction.
+        let wordIndex = 0;
+        wordsMap[verseNum] = v.words
+          .filter(w => w.char_type_name === 'word')
+          .map(w => {
+            wordIndex++;
+            return {
+              id: w.id,
+              position: wordIndex,
+              char_type_name: w.char_type_name,
+              text_uthmani: w.text_uthmani || w.text,
+              text: w.text_uthmani || w.text,
+              translation: w.translation,
+              transliteration: w.transliteration,
+              audioUrl: buildWordAudioUrl(num, verseNum, wordIndex)
+            };
+          });
       });
     }
 

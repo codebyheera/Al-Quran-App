@@ -34,70 +34,93 @@
   flex-shrink: 0;
 }
 
-/* Controls */
-.jv-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-.jv-search-wrapper {
-  flex: 1;
-  position: relative;
-  min-width: 240px;
-}
-.jv-search {
-  width: 100%;
-}
-.jv-search-count {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.8rem;
-  pointer-events: none;
-}
+/* Font Sizing & English Toggle Controls */
 .jv-font-controls {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  background: var(--bg-secondary);
-  padding: 0.2rem 0.4rem;
-  border-radius: var(--radius-sm);
+  justify-content: center;
+  gap: 1.25rem;
+  background: var(--bg-card);
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-md); /* Standardized card radius */
   border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
+  transition: var(--transition);
+  margin: 0 auto 2rem auto;
 }
+.jv-font-controls:hover {
+  box-shadow: var(--shadow-gold);
+  border-color: var(--border-hover);
+}
+
 .jv-font-label {
-  font-size: 0.75rem;
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
+
 .jv-font-btns {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
 }
 .jv-font-btns .btn {
-  padding: 0.2rem 0.4rem;
-  font-size: 0.85rem;
-}
-.jv-font-val {
-  min-width: 2.5ch;
-  text-align: center;
-  font-size: 0.85rem;
-  font-weight: 500;
+  padding: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   color: var(--text-primary);
+  line-height: 1;
 }
+.jv-font-btns .btn:hover:not(:disabled) {
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.jv-font-val {
+  min-width: 3ch;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
 .jv-font-divider {
   width: 1px;
-  height: 16px;
+  height: 24px;
   background: var(--border);
-  margin: 0 0.2rem;
+  opacity: 0.5;
 }
+
 .jv-en-btn {
-  padding: 0.2rem 0.4rem;
-  font-size: 0.8rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 100px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+.jv-en-btn:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: var(--border-hover);
+}
+.jv-en-btn .text-primary {
+  color: var(--accent-gold) !important;
+  font-weight: 700;
 }
 
 /* Juz specific structural additions */
@@ -154,12 +177,17 @@
     gap: 0.5rem;
   }
   .jv-search-wrapper {
-    min-width: 100%;
+    display: none;
   }
   
   .jv-font-controls {
-    justify-content: space-between;
-    padding: 0.35rem 0.5rem;
+    width: 100%;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    gap: 0.75rem;
+  }
+  .jv-font-divider {
+    display: block;
   }
 
   .juz-surah-header {

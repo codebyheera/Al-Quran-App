@@ -14,7 +14,9 @@ export default function BottomPlayer() {
     skipPrev, 
     seek,
     isMinimized,
-    setIsMinimized
+    setIsMinimized,
+    repeatMode,
+    toggleRepeat
   } = useAudio();
   
   // Draggable State - initialize to null, we'll set it in useEffect to bottom-right
@@ -152,6 +154,16 @@ export default function BottomPlayer() {
             {/* Controls Section */}
             <div className="player-main-controls">
               <div className="player-buttons">
+                <button 
+                  className={`player-btn repeat ${repeatMode > 0 ? 'active' : ''}`} 
+                  onClick={toggleRepeat} 
+                  title={repeatMode === 0 ? "Repeat: Off" : repeatMode === 1 ? "Repeat: 1x" : repeatMode === 2 ? "Repeat: 2x" : "Repeat: Infinite"}
+                >
+                  {repeatMode === 1 && <span className="repeat-badge">1</span>}
+                  {repeatMode === 2 && <span className="repeat-badge">2</span>}
+                  {repeatMode === 3 && <span className="repeat-badge" style={{fontSize: '0.9rem', marginTop: '-1px'}}>∞</span>}
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+                </button>
                 <button className="player-btn prev" onClick={skipPrev} title="Previous Ayah">
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6L19 18V6z"/></svg>
                 </button>
