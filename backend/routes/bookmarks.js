@@ -3,19 +3,36 @@
  */
 
 import express from 'express';
-import Bookmark from '../models/Bookmark.js';
+import { supabase } from '../lib/supabase.js';
 const router = express.Router();
+
+function mapToMongoFormat(row) {
+  if (!row) return null;
+  return {
+    _id: row.id,
+    clientId: row.client_id,
+    surahNumber: row.surah_number,
+    surahName: row.surah_name,
+    verseNumber: row.verse_number,
+    arabicText: row.arabic_text,
+    translation: row.translation,
+    note: row.note,
+    createdAt: row.created_at
+  };
+}
 
 router.get('/', async (req, res) => {
   const { clientId } = req.query;
   if (!clientId) return res.status(400).json({ error: 'clientId is required.' });
 
-  try {
-    const bookmarks = await Bookmark.find({ clientId }).sort({ createdAt: -1 });
-    res.json(bookmarks);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch bookmarks.' });
-  }
+  const { data, error } = await supabase
+    .from('bookmarks')
+    .select('*')
+    .eq('client_id', clientId)
+    .order('created_at', { ascending: false });
+
+  if (error) return res.status(500).json({ error: 'Failed to fetch bookmarks.' });
+  res.json(data.map(mapToMongoFormat));
 });
 
 router.post('/', async (req, res) => {
@@ -25,41 +42,57 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'clientId, surahNumber, and verseNumber are required.' });
   }
 
-  try {
-    const bookmark = await Bookmark.create({
-      clientId, surahNumber, surahName, verseNumber, arabicText, translation, note: note || '',
-    });
-    res.status(201).json(bookmark);
-  } catch (err) {
-    if (err.code === 11000) {
-      return res.status(409).json({ error: 'Verse already bookmarked.' });
-    }
-    res.status(500).json({ error: 'Failed to create bookmark.' });
+  // Check for duplicate pseudo-unique index (clientId + surahNumber + verseNumber)
+  const { data: existing } = await supabase
+    .from('bookmarks')
+    .select('id')
+    .eq('client_id', clientId)
+    .eq('surah_number', surahNumber)
+    .eq('verse_number', verseNumber)
+    .single();
+
+  if (existing) {
+    return res.status(409).json({ error: 'Verse already bookmarked.' });
   }
+
+  const { data, error } = await supabase
+    .from('bookmarks')
+    .insert([{
+      client_id: clientId,
+      surah_number: surahNumber,
+      surah_name: surahName,
+      verse_number: verseNumber,
+      arabic_text: arabicText,
+      translation: translation,
+      note: note || ''
+    }])
+    .select()
+    .single();
+
+  if (error) return res.status(500).json({ error: 'Failed to create bookmark.' });
+  res.status(201).json(mapToMongoFormat(data));
 });
 
 router.put('/:id', async (req, res) => {
-  try {
-    const bookmark = await Bookmark.findByIdAndUpdate(
-      req.params.id,
-      { note: req.body.note },
-      { new: true }
-    );
-    if (!bookmark) return res.status(404).json({ error: 'Bookmark not found.' });
-    res.json(bookmark);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to update bookmark.' });
-  }
+  const { data, error } = await supabase
+    .from('bookmarks')
+    .update({ note: req.body.note })
+    .eq('id', req.params.id)
+    .select()
+    .single();
+
+  if (error || !data) return res.status(404).json({ error: 'Bookmark not found.' });
+  res.json(mapToMongoFormat(data));
 });
 
 router.delete('/:id', async (req, res) => {
-  try {
-    const bookmark = await Bookmark.findByIdAndDelete(req.params.id);
-    if (!bookmark) return res.status(404).json({ error: 'Bookmark not found.' });
-    res.json({ message: 'Bookmark deleted.', id: req.params.id });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to delete bookmark.' });
-  }
+  const { error, count } = await supabase
+    .from('bookmarks')
+    .delete({ count: 'exact' })
+    .eq('id', req.params.id);
+
+  if (error || count === 0) return res.status(404).json({ error: 'Bookmark not found.' });
+  res.json({ message: 'Bookmark deleted.', id: req.params.id });
 });
 
 export default router;

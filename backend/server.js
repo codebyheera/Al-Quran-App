@@ -4,7 +4,6 @@
  */
 
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -40,44 +39,8 @@ app.get('/', (_req, res) => {
   res.json({ message: 'Quran API is running 🌙' });
 });
 
-// ── MongoDB Connection for Vercel Serverless ─────────────────────────────────
-let isConnected = false;
-
-const connectToDatabase = async () => {
-  if (isConnected || mongoose.connection.readyState === 1) {
-    return;
-  }
-  if (!process.env.MONGO_URI) {
-    throw new Error('MONGO_URI is literally missing in the Vercel Environment Variables.');
-  }
-  
-  try {
-    const db = await mongoose.connect(process.env.MONGO_URI, {
-      maxPoolSize: 10,
-      serverSelectionTimeoutMS: 5000,
-    });
-    isConnected = db.connections[0].readyState === 1;
-    console.log('✅ Connected to MongoDB Atlas (Serverless)');
-  } catch (err) {
-    if (err.message.includes('IP')) {
-      throw new Error(`MongoDB IP Blocked: Tell user to allow 0.0.0.0/0 in MongoDB Atlas. Details: ${err.message}`);
-    }
-    throw new Error(`MongoDB Connection Failed: ${err.message}`);
-  }
-};
-
-// Add middleware to ensure DB connection before handling Bookmark routes
-app.use(async (req, res, next) => {
-  if (req.path.startsWith('/api/bookmarks')) {
-    try {
-      await connectToDatabase();
-    } catch (err) {
-      console.error('Fatal DB Error:', err.message);
-      return res.status(500).json({ error: err.message, v: '1.1' });
-    }
-  }
-  next();
-});
+// DB connections are no longer managed at the server footprint level!
+// Supabase handles its own networking gracefully over Edge HTTP.
 
 // Only listen locally, Vercel Serverless will use the exported app
 if (process.env.NODE_ENV !== 'production') {
