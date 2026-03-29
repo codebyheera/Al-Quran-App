@@ -48,8 +48,7 @@ const connectToDatabase = async () => {
     return;
   }
   if (!process.env.MONGO_URI) {
-    console.error('❌ MONGO_URI is missing in .env');
-    return;
+    throw new Error('MONGO_URI is literally missing in the Vercel Environment Variables.');
   }
   
   try {
@@ -60,14 +59,22 @@ const connectToDatabase = async () => {
     isConnected = db.connections[0].readyState === 1;
     console.log('✅ Connected to MongoDB Atlas (Serverless)');
   } catch (err) {
-    console.error('❌ MongoDB connection failed:', err.message);
+    if (err.message.includes('IP')) {
+      throw new Error(`MongoDB IP Blocked: Tell user to allow 0.0.0.0/0 in MongoDB Atlas. Details: ${err.message}`);
+    }
+    throw new Error(`MongoDB Connection Failed: ${err.message}`);
   }
 };
 
 // Add middleware to ensure DB connection before handling Bookmark routes
 app.use(async (req, res, next) => {
   if (req.path.startsWith('/api/bookmarks')) {
-    await connectToDatabase();
+    try {
+      await connectToDatabase();
+    } catch (err) {
+      console.error('Fatal DB Error:', err.message);
+      return res.status(500).json({ error: err.message, v: '1.1' });
+    }
   }
   next();
 });

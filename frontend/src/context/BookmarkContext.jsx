@@ -53,6 +53,12 @@ export function BookmarkProvider({ children }) {
       return { success: true };
     } catch (err) {
       if (err.response?.status === 409) return { success: false, message: 'Already bookmarked' };
+      
+      // Pass the specific backend error message back if available
+      const backendError = err.response?.data?.error;
+      if (backendError) {
+        return { success: false, message: backendError };
+      }
       return { success: false, message: 'Failed to bookmark' };
     }
   }
