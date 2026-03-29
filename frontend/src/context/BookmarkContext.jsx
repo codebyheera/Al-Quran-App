@@ -38,6 +38,11 @@ export function BookmarkProvider({ children }) {
       setBookmarks(data);
     } catch (err) {
       console.error('Failed to load bookmarks:', err.message);
+      if (err.response?.data?.error) {
+        alert("LIVE SITE DB ERROR: " + err.response.data.error);
+      } else if (err.response?.status === 500) {
+        alert("LIVE SITE 500 ERROR: Backend unreachable or crashed without returning JSON. Is VITE_API_URL set to your backend Vercel URL in your Frontend Vercel Environment Variables?");
+      }
     } finally {
       setLoading(false);
     }
