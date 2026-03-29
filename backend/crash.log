@@ -1,0 +1,68 @@
+﻿Γ£à Supabase client initialized: https://hjuaeuelhwnjomagnmtx.supabase.co
+[search] Loading local quran-en.jsonΓÇª
+[search] Loaded 114 surahs from file.
+node : node:events:496
+At line:1 char:1
++ node server.js 2>&1 | 
+Out-File -FilePath 
+crash.log -Encoding utf8; 
+Ge ...
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: (nod  
+  e:events:496:String) [   
+ ], RemoteException
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+      throw er; // 
+Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: 
+address already in use 
+:::5000
+    at 
+Server.setupListenHandle 
+[as _listen2] 
+(node:net:1939:16)
+    at listenInCluster 
+(node:net:1996:12)
+    at Server.listen 
+(node:net:2101:7)
+    at Function.listen (C:\
+Users\T470\.gemini\antigrav
+ity\scratch\Quran App\backe
+nd\node_modules\express\lib
+\application.js:635:24)
+    at file:///C:/Users/T47
+0/.gemini/antigravity/scrat
+ch/Quran%20App/backend/serv
+er.js:42:7
+    at ModuleJob.run (node:
+internal/modules/esm/module
+_job:274:25)
+    at async onImport.trace
+Promise.__proto__ (node:int
+ernal/modules/esm/loader:64
+4:26)
+    at async asyncRunEntryP
+ointWithESMLoader (node:int
+ernal/modules/run_main:117:
+5)
+Emitted 'error' event on 
+Server instance at:
+    at emitErrorNT 
+(node:net:1975:8)
+    at process.processTicks
+AndRejections (node:interna
+l/process/task_queues:90:21
+) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v22.16.0
