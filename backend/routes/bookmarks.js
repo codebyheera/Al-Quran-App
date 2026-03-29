@@ -22,6 +22,14 @@ function mapRow(row) {
   };
 }
 
+function getErrorMessage(error) {
+  if (!error) return 'Unknown error';
+  if (error.code === '42P01') return 'The "bookmarks" table does not exist in your Supabase DB. Please run the setup SQL.';
+  if (error.code === '42501') return 'Row Level Security (RLS) is blocking the request. Disable RLS or add a policy in Supabase.';
+  if (error.message?.includes('fetch failed') || error.message?.includes('missing-url')) return 'Your Vercel environment is missing the SUPABASE_URL and SUPABASE_KEY variables.';
+  return `Database Error: ${error.message}`;
+}
+
 // GET /api/bookmarks?clientId=xxx
 router.get('/', async (req, res) => {
   const { clientId } = req.query;
@@ -35,7 +43,7 @@ router.get('/', async (req, res) => {
 
   if (error) {
     console.error('GET /bookmarks error:', error.message);
-    return res.status(500).json({ error: 'Failed to fetch bookmarks.' });
+    return res.status(500).json({ error: getErrorMessage(error) });
   }
   res.json(data.map(mapRow));
 });
@@ -49,13 +57,17 @@ router.post('/', async (req, res) => {
   }
 
   // Check for duplicate
-  const { data: existing } = await supabase
+  const { data: existing, error: checkError } = await supabase
     .from('bookmarks')
     .select('id')
     .eq('client_id', clientId)
     .eq('surah_number', surahNumber)
     .eq('verse_number', verseNumber)
     .maybeSingle();
+
+  if (checkError) {
+    return res.status(500).json({ error: getErrorMessage(checkError) });
+  }
 
   if (existing) {
     return res.status(409).json({ error: 'Verse already bookmarked.' });
@@ -77,7 +89,7 @@ router.post('/', async (req, res) => {
 
   if (error) {
     console.error('POST /bookmarks error:', error.message);
-    return res.status(500).json({ error: 'Failed to create bookmark.' });
+    return res.status(500).json({ error: getErrorMessage(error) });
   }
   res.status(201).json(mapRow(data));
 });
@@ -93,6 +105,7 @@ router.put('/:id', async (req, res) => {
 
   if (error || !data) {
     console.error('PUT /bookmarks error:', error?.message);
+    if (error) return res.status(500).json({ error: getErrorMessage(error) });
     return res.status(404).json({ error: 'Bookmark not found.' });
   }
   res.json(mapRow(data));
@@ -105,8 +118,11 @@ router.delete('/:id', async (req, res) => {
     .delete({ count: 'exact' })
     .eq('id', req.params.id);
 
-  if (error || count === 0) {
-    console.error('DELETE /bookmarks error:', error?.message);
+  if (error) {
+    console.error('DELETE /bookmarks error:', error.message);
+    return res.status(500).json({ error: getErrorMessage(error) });
+  }
+  if (count === 0) {
     return res.status(404).json({ error: 'Bookmark not found.' });
   }
   res.json({ message: 'Bookmark deleted.', id: req.params.id });
