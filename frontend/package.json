@@ -6,7 +6,8 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.js",
+    "build": "vite build",
+    "build:prerender": "vite build && node scripts/prerender.js",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -68,36 +68,49 @@ async function run() {
     const baseUrl = `http://localhost:${port}`;
     console.log(`Local server running at ${baseUrl}`);
     
-    let browser;
-    // Vercel build environment needs the specialized chromium binary
-    if (process.env.VERCEL) {
-      const chromium = (await import('@sparticuz/chromium')).default;
-      const puppeteerCore = (await import('puppeteer-core')).default;
-      browser = await puppeteerCore.launch({
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
-        headless: chromium.headless,
-      });
-    } else {
-      browser = await puppeteer.launch({ 
-        headless: 'new', 
-        args: ['--no-sandbox', '--disable-setuid-sandbox'] 
-      });
+    let browser = null;
+    try {
+      // Vercel build environment needs the specialized chromium binary
+      if (process.env.VERCEL) {
+        const chromium = (await import('@sparticuz/chromium')).default;
+        const puppeteerCore = (await import('puppeteer-core')).default;
+        browser = await puppeteerCore.launch({
+          args: chromium.args,
+          defaultViewport: chromium.defaultViewport,
+          executablePath: await chromium.executablePath(),
+          headless: chromium.headless,
+        });
+      } else {
+        browser = await puppeteer.launch({ 
+          headless: 'new', 
+          args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+        });
+      }
+    } catch (launchError) {
+      console.warn('⚠️ Could not launch Puppeteer. Prerendering will fallback to SPA shell.', launchError.message);
     }
     
+    const templateHtml = fs.readFileSync(templatePath, 'utf-8');
+
     for (const route of routesToPrerender) {
       console.log(`Prerendering ${route}...`);
-      const page = await browser.newPage();
+      let html = templateHtml; // Fallback to SPA shell
       
-      try {
-        await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
-      } catch (err) {
-        console.warn(`Timeout or error while waiting for network idle on ${route}. Saving HTML anyway.`, err.message);
+      if (browser) {
+        let page;
+        try {
+          page = await browser.newPage();
+          await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
+          html = await page.content();
+        } catch (err) {
+          console.warn(`Timeout or error while waiting for network idle on ${route}. Saving HTML anyway.`, err.message);
+          if (page) {
+            html = await page.content().catch(() => templateHtml); // Try to salvage what loaded
+          }
+        } finally {
+          if (page) await page.close().catch(() => {});
+        }
       }
-      
-      const html = await page.content();
-      await page.close();
 
       const routeDir = path.join(distPath, route);
       if (!fs.existsSync(routeDir)) {
@@ -107,7 +120,9 @@ async function run() {
       fs.writeFileSync(path.join(routeDir, 'index.html'), html);
     }
 
-    await browser.close();
+    if (browser) {
+      await browser.close().catch(() => {});
+    }
     server.close();
     console.log('Prerendering complete!');
   });
