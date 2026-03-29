@@ -217,7 +217,7 @@ export default function Home() {
             </div>
             <div className="recent-bookmarks">
               {bookmarks.slice(0, 3).map((b) => (
-                <Link key={b._id} to={`/surah/${b.surahName}#verse-${b.verseNumber}`} className="card bookmark-preview">
+                <Link key={b._id} to={`/surah/${encodeURIComponent(b.surahName)}#verse-${b.verseNumber}`} className="card bookmark-preview">
                   <div className="flex-between">
                     <span className="badge badge-gold">{b.surahName} {b.verseNumber}:{b.surahNumber}</span>
                     <span className="text-muted" style={{ fontSize: '0.75rem' }}>🔖</span>

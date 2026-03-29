@@ -40,19 +40,37 @@ app.get('/', (_req, res) => {
   res.json({ message: 'Quran API is running 🌙' });
 });
 
-// ── MongoDB Connection ────────────────────────────────────────────────────────
-mongoose.connection.on('connected', () => console.log('✅ Connected to MongoDB Atlas'));
-mongoose.connection.on('error', (err) => console.error('❌ MongoDB connection error:', err));
-mongoose.connection.on('disconnected', () => console.log('⚠️ MongoDB disconnected'));
+// ── MongoDB Connection for Vercel Serverless ─────────────────────────────────
+let isConnected = false;
 
-if (!process.env.MONGO_URI) {
-  console.error('❌ MONGO_URI is missing in .env');
-} else {
-  // Connect globally so serverless functions can use the connection pool
-  mongoose
-    .connect(process.env.MONGO_URI)
-    .catch(err => console.error('❌ Initial MongoDB connection failed:', err.message));
-}
+const connectToDatabase = async () => {
+  if (isConnected || mongoose.connection.readyState === 1) {
+    return;
+  }
+  if (!process.env.MONGO_URI) {
+    console.error('❌ MONGO_URI is missing in .env');
+    return;
+  }
+  
+  try {
+    const db = await mongoose.connect(process.env.MONGO_URI, {
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+    });
+    isConnected = db.connections[0].readyState === 1;
+    console.log('✅ Connected to MongoDB Atlas (Serverless)');
+  } catch (err) {
+    console.error('❌ MongoDB connection failed:', err.message);
+  }
+};
+
+// Add middleware to ensure DB connection before handling Bookmark routes
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/api/bookmarks')) {
+    await connectToDatabase();
+  }
+  next();
+});
 
 // Only listen locally, Vercel Serverless will use the exported app
 if (process.env.NODE_ENV !== 'production') {
