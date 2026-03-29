@@ -34,7 +34,7 @@ function QariDropdown({ reciter, changeReciter, reciters }) {
         <span className="dropdown-trigger-icon">🎙️</span>
         <span className="dropdown-trigger-label">{current?.name}</span>
         <svg className={`dropdown-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-          <path d="M7 10l5 5 5-5z"/>
+          <path d="M7 10l5 5 5-5z" />
         </svg>
       </button>
 
@@ -54,7 +54,7 @@ function QariDropdown({ reciter, changeReciter, reciters }) {
               </span>
               {r.id === reciter && (
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
                 </svg>
               )}
             </button>
@@ -89,7 +89,7 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
         <span className="dropdown-trigger-icon">🌗</span>
         <span className="dropdown-trigger-label">Theme</span>
         <svg className={`dropdown-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-          <path d="M7 10l5 5 5-5z"/>
+          <path d="M7 10l5 5 5-5z" />
         </svg>
       </button>
 
@@ -110,7 +110,7 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
               </span>
               {t.id === theme && (
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
                 </svg>
               )}
             </button>
@@ -140,8 +140,8 @@ export default function Navbar() {
 
         {/* Nav links (desktop) */}
         <div className="navbar-links">
-          <NavLink to="/surah"     className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Surahs</NavLink>
-          <NavLink to="/juz"       className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Juz</NavLink>
+          <NavLink to="/surah" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Surahs</NavLink>
+          <NavLink to="/juz" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Juz</NavLink>
           <NavLink to="/bookmarks" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Bookmarks</NavLink>
         </div>
 
@@ -170,8 +170,8 @@ export default function Navbar() {
         <div className="mobile-menu">
 
           {/* Mobile nav links */}
-          <NavLink to="/surah"     className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>📖 Surahs</NavLink>
-          <NavLink to="/juz"       className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>📚 Juz</NavLink>
+          <NavLink to="/surah" className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>📖 Surahs</NavLink>
+          <NavLink to="/juz" className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>📚 Juz</NavLink>
           <NavLink to="/bookmarks" className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>🔖 Bookmarks</NavLink>
         </div>
       )}
