@@ -35,7 +35,38 @@ export function BookmarkProvider({ children }) {
   async function fetchBookmarks() {
     try {
       const { data } = await api.get(`/api/bookmarks?clientId=${clientId}`);
-      setBookmarks(data);
+      
+      // Seed 4 random bookmarks for brand new users
+      if (data.length === 0 && !localStorage.getItem('quran-bookmarks-seeded')) {
+        localStorage.setItem('quran-bookmarks-seeded', 'true');
+        
+        // Fetch 4 random verses in parallel
+        const seedPromises = Array.from({ length: 4 }).map(async () => {
+          const randomNum = Math.floor(Math.random() * 6236) + 1;
+          const res = await fetch(`https://api.alquran.cloud/v1/ayah/${randomNum}/editions/quran-uthmani,en.asad`);
+          const verseData = await res.json();
+          if (verseData && verseData.data) {
+            const arabicData = verseData.data[0];
+            const englishData = verseData.data[1];
+            return api.post('/api/bookmarks', {
+              clientId,
+              surahNumber: arabicData.surah.number,
+              surahName: arabicData.surah.englishName,
+              verseNumber: arabicData.numberInSurah,
+              arabicText: arabicData.text,
+              translation: englishData.text,
+            });
+          }
+        });
+        
+        await Promise.allSettled(seedPromises);
+        
+        // Re-fetch bookmarks after seeding completes
+        const { data: seededData } = await api.get(`/api/bookmarks?clientId=${clientId}`);
+        setBookmarks(seededData);
+      } else {
+        setBookmarks(data);
+      }
     } catch (err) {
       console.error('Failed to load bookmarks:', err.message);
     } finally {
