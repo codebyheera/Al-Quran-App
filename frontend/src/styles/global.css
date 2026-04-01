@@ -544,7 +544,7 @@ a:hover { color: var(--accent-gold-light); }
   /* Verse card: Convert to column layout so side content leaves the side */
   .verse-card {
     flex-direction: column;
-    padding: 2.25rem 1.25rem 3.5rem 1.25rem; /* Much larger top padding for the absolute top buttons */
+    padding: 3.25rem 1.25rem 4rem 1.25rem; /* Increased top padding to provide space below translation button, and bottom padding */
     gap: 0;
     transition: padding 0.3s ease;
   }
