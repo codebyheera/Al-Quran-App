@@ -14,6 +14,7 @@ export const AudioProvider = ({ children }) => {
   const [isMinimized, setIsMinimized] = useState(false);
   const [repeatMode, setRepeatMode] = useState(0); // 0=off, 1=once, 2=twice, 3=infinite
   const [repeatCount, setRepeatCount] = useState(0);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);
 
   const audioRef = useRef(new Audio());
 
@@ -60,6 +61,12 @@ export const AudioProvider = ({ children }) => {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
     };
   }, [playlist, currentIndex, repeatMode, repeatCount]);
+
+  // Handle Playback Speed Ref Changes
+  useEffect(() => {
+    audioRef.current.playbackRate = playbackSpeed;
+  }, [playbackSpeed, currentVerse]);
+
 
   const playVerse = (verse) => {
     setPlaylist([]);
@@ -132,6 +139,25 @@ export const AudioProvider = ({ children }) => {
     setRepeatCount(0);
   };
 
+  const skipForward = () => {
+    const newTime = Math.min(audioRef.current.duration, audioRef.current.currentTime + 10);
+    audioRef.current.currentTime = newTime;
+    setProgress(newTime);
+  };
+
+  const skipBackward = () => {
+    const newTime = Math.max(0, audioRef.current.currentTime - 10);
+    audioRef.current.currentTime = newTime;
+    setProgress(newTime);
+  };
+
+  const toggleSpeed = () => {
+    const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+    const currentIdx = speeds.indexOf(playbackSpeed);
+    const nextIdx = (currentIdx + 1) % speeds.length;
+    setPlaybackSpeed(speeds[nextIdx]);
+  };
+
   return (
     <AudioContext.Provider value={{
       currentVerse,
@@ -144,13 +170,17 @@ export const AudioProvider = ({ children }) => {
       repeatMode,
       setIsMinimized,
       toggleRepeat,
+      toggleSpeed,
+      skipForward,
+      skipBackward,
       playVerse,
       playPlaylist,
       togglePlay,
       stop,
       skipNext,
       skipPrev,
-      seek
+      seek,
+      playbackSpeed
     }}>
       {children}
     </AudioContext.Provider>
