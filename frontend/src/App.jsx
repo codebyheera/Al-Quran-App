@@ -15,9 +15,11 @@ import BookmarksPage from './pages/BookmarksPage';
 import SearchPage    from './pages/SearchPage';
 import BottomPlayer  from './components/BottomPlayer';
 import { useAudio }   from './context/AudioContext';
+import { useBookmarks } from './context/BookmarkContext';
 
 export default function App() {
   const { currentVerse } = useAudio();
+  const { toast } = useBookmarks();
 
   return (
     <div className={`app-root ${currentVerse ? 'has-player' : ''}`}>
@@ -36,6 +38,9 @@ export default function App() {
           <Route path="/search"      element={<SearchPage />} />
         </Routes>
       </main>
+
+      {/* Global toast notification */}
+      {toast && <div className="toast">{toast}</div>}
 
       {/* Persistent bottom audio player */}
       <Footer />

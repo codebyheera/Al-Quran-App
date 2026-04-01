@@ -21,7 +21,7 @@ export default function JuzView() {
   const [juz,     setJuz]     = useState(null);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState(null);
-  const [toastMsg, setToastMsg] = useState('');
+
   const [fontSize, setFontSize] = useState(() => {
     return parseFloat(localStorage.getItem('arabicFontSize')) || 2.2;
   });
@@ -117,10 +117,7 @@ export default function JuzView() {
     }
   }, [currentVerse, juz]);
 
-  function showToast(msg) {
-    setToastMsg(msg);
-    setTimeout(() => setToastMsg(''), 2500);
-  }
+
 
   function handleFontChange(delta) {
     setFontSize((prev) => {
@@ -151,16 +148,15 @@ export default function JuzView() {
     const alreadyBookmarked = isBookmarked(verse.surahNumber, verse.number);
     if (alreadyBookmarked) {
       const bm = bookmarks.find((b) => b.surahNumber === verse.surahNumber && b.verseNumber === verse.number);
-      if (bm) { await removeBookmark(bm._id); showToast('Bookmark removed'); }
+      if (bm) { await removeBookmark(bm._id); }
     } else {
-      const result = await addBookmark({
+      await addBookmark({
         surahNumber: verse.surahNumber,
         surahName:   verse.surahName,
         verseNumber: verse.number,
         arabicText:  verse.arabic,
         translation: verse.translation,
       });
-      showToast(result.success ? '🔖 Verse bookmarked!' : result.message || 'Error');
     }
   }
 
@@ -363,7 +359,7 @@ export default function JuzView() {
         </div>
       </div>
 
-      {toastMsg && <div className="toast">{toastMsg}</div>}
+
     </div>
   );
 }

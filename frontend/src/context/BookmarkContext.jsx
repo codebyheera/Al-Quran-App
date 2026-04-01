@@ -26,12 +26,21 @@ function getUserId() {
 export function BookmarkProvider({ children }) {
   const [bookmarks, setBookmarks] = useState([]);
   const [loading,   setLoading]   = useState(true);
+  const [toast,     setToast]     = useState(null);
   const userId = getUserId();
 
   // Load bookmarks on mount
   useEffect(() => {
     fetchBookmarks();
   }, []);
+
+  /**
+   * Simple toast trigger
+   */
+  function showToast(message) {
+    setToast(message);
+    setTimeout(() => setToast(null), 3000);
+  }
 
   /**
    * Fetch all bookmarks for this user session
@@ -67,12 +76,16 @@ export function BookmarkProvider({ children }) {
         translation: verse.translation,
       });
       setBookmarks((prev) => [normalise(data, verse), ...prev]);
+      showToast('Bookmark added successfully');
       return { success: true };
     } catch (err) {
-      if (err.response?.status === 409) return { success: false, message: 'Already bookmarked' };
+      if (err.response?.status === 409) {
+        showToast('Already bookmarked');
+        return { success: false, message: 'Already bookmarked' };
+      }
       const backendError = err.response?.data?.error;
-      if (backendError) return { success: false, message: backendError };
-      return { success: false, message: 'Failed to bookmark' };
+      showToast(backendError || 'Failed to bookmark');
+      return { success: false, message: backendError || 'Failed to bookmark' };
     }
   }
 
@@ -83,8 +96,10 @@ export function BookmarkProvider({ children }) {
     try {
       await api.delete(`/api/bookmarks/${id}`);
       setBookmarks((prev) => prev.filter((b) => b._id !== id));
+      showToast('Bookmark removed');
     } catch (err) {
       console.error('Failed to remove bookmark:', err.message);
+      showToast('Failed to remove bookmark');
     }
   }
 
@@ -97,7 +112,16 @@ export function BookmarkProvider({ children }) {
   }
 
   return (
-    <BookmarkContext.Provider value={{ bookmarks, loading, addBookmark, removeBookmark, isBookmarked, fetchBookmarks }}>
+    <BookmarkContext.Provider value={{
+      bookmarks,
+      loading,
+      addBookmark,
+      removeBookmark,
+      isBookmarked,
+      fetchBookmarks,
+      toast,
+      showToast
+    }}>
       {children}
     </BookmarkContext.Provider>
   );

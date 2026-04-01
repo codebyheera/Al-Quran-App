@@ -26,7 +26,7 @@ export default function SurahView() {
   // We'll use the ID from the URL for the API call, 
   // and use surah.surahNumber for numeric logic once loaded.
   const surahNum = surah?.surahNumber || (parseInt(id) || null);
-  const [toastMsg, setToastMsg] = useState('');
+
   const [fontSize, setFontSize] = useState(() => {
     return parseFloat(localStorage.getItem('arabicFontSize')) || 2.2;
   });
@@ -124,11 +124,7 @@ export default function SurahView() {
     }
   }, [currentVerse, surah, surahNum]);
 
-  // Show a toast notification for bookmark actions
-  function showToast(msg) {
-    setToastMsg(msg);
-    setTimeout(() => setToastMsg(''), 2500);
-  }
+
 
   function handleFontChange(delta) {
     setFontSize((prev) => {
@@ -163,16 +159,15 @@ export default function SurahView() {
     if (alreadyBookmarked) {
       // Find the bookmark id and remove it
       const bm = bookmarks.find((b) => b.surahNumber === surahNum && b.verseNumber === verse.number);
-      if (bm) { await removeBookmark(bm._id); showToast('Bookmark removed'); }
+      if (bm) { await removeBookmark(bm._id); }
     } else {
-      const result = await addBookmark({
+      await addBookmark({
         surahNumber: surahNum,
         surahName:   surah.surahName,
         verseNumber: verse.number,
         arabicText:  verse.arabic,
         translation: verse.translation,
       });
-      showToast(result.success ? '🔖 Verse bookmarked!' : result.message || 'Error');
     }
   }
 
@@ -385,8 +380,7 @@ export default function SurahView() {
         </div>
       </div>
 
-      {/* Toast notification */}
-      {toastMsg && <div className="toast">{toastMsg}</div>}
+
     </div>
   );
 }
