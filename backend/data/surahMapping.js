@@ -146,6 +146,7 @@ const englishNamesToIds = {
   "Al-Qaari'a": 101, "At-Takaathur": 102, "Al-Asr": 103, "Al-Humaza": 104, "Al-Fil": 105,
   "Quraish": 106, "Al-Maa'un": 107, "Al-Kawthar": 108, "Al-Kaafiroon": 109, "An-Nasr": 110,
   "Al-Masad": 111, "Al-Ikhlaas": 112, "Al-Falaq": 113, "An-Naas": 114,
+  "Al-Baqarah": 2,
   // Add common variations/aliases found in audit
   "Al-Aala": 87,
   "Al-Aalaa": 87,

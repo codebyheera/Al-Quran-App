@@ -82,7 +82,7 @@ export const AudioProvider = ({ children }) => {
     setPlaylist(verses);
     setCurrentIndex(startIdx);
     setCurrentVerse(verses[startIdx]);
-    setIsMinimized(true);
+    setIsMinimized(false);
     setRepeatCount(0);
     audioRef.current.src = verses[startIdx].audio;
     audioRef.current.play().catch(console.error);

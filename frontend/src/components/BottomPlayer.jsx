@@ -23,20 +23,56 @@ export default function BottomPlayer() {
     playbackSpeed
   } = useAudio();
   
-  // Draggable State
+  // Draggable State (for minimized icon)
   const [position, setPosition] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const dragStartPos = useRef({ x: 0, y: 0 });
   const hasMovedWhileDragging = useRef(false);
 
-  // Initialize position to bottom-right
+  // Scroll State (for auto-minimize/expand on mobile)
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Hover State (for 5 second auto-hide)
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Automatic position defaults handled by CSS bottom/right.
+
+  // -- AUTO MINIMIZE ON SCROLL DOWN (MOBILE ONLY) --
   useEffect(() => {
-    if (!position) {
-      const initialBottom = window.innerHeight - 80;
-      const initialRight = window.innerWidth - 80;
-      setPosition({ x: initialRight, y: initialBottom });
+    const handleScroll = () => {
+      // Only apply auto-minimize on mobile view
+      if (window.innerWidth > 768 || !currentVerse) return;
+      
+      const currentScrollY = window.scrollY;
+      const threshold = 50; // Don't trigger too early
+      
+      if (currentScrollY > lastScrollY && currentScrollY > threshold && !isMinimized) {
+        // Scrolling down -> minimize
+        setIsMinimized(true);
+      } else if (currentScrollY < lastScrollY && isMinimized) {
+        // Scrolling up -> expand
+        setIsMinimized(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY, isMinimized, currentVerse, setIsMinimized]);
+
+  // -- AUTO MINIMIZE AFTER 5 SECONDS (IDLE TIMER) --
+  useEffect(() => {
+    let timeoutId;
+    if (!isMinimized && currentVerse && !isHovering) {
+      timeoutId = setTimeout(() => {
+        setIsMinimized(true);
+      }, 5000);
     }
-  }, []);
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [isMinimized, currentVerse, isHovering, setIsMinimized]);
 
   const handleDragStart = (e) => {
     if (!position) return;
@@ -118,7 +154,7 @@ export default function BottomPlayer() {
       {/* Minimized Floating Button */}
       {isMinimized ? (
         <div 
-          className={`minimized-player glass ${isDragging ? 'is-dragging' : ''}`} 
+          className={`minimized-player glass ${isDragging ? 'is-dragging' : ''} ${isPlaying ? 'is-playing' : ''}`} 
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
           onClick={handleMinimizedClick}
@@ -141,7 +177,11 @@ export default function BottomPlayer() {
       ) : (
         <>
           {/* --- CLASSIC HORIZONTAL DESKTOP PLAYER --- */}
-          <div className="bottom-player-desktop-classic desktop-only-flex">
+          <div 
+            className="bottom-player-desktop-classic desktop-only-flex"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
             <div className="container bottom-player-inner">
               <div className="player-info">
                 <div className="player-verse-info">
@@ -197,15 +237,19 @@ export default function BottomPlayer() {
           </div>
 
           {/* --- MODERN PREMIUM MOBILE PLAYER --- */}
-          <div className="modern-player-wrapper mobile-only-flex">
+          <div 
+            className={`modern-player-wrapper mobile-only-flex ${isPlaying ? 'is-playing' : ''}`}
+            onTouchStart={() => setIsHovering(true)}
+            onTouchEnd={() => setIsHovering(false)}
+          >
             <div className="modern-player-header">
-              <button className="modern-minimize-btn" onClick={() => setIsMinimized(true)}>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
-                  <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+              <button className="modern-minimize-chevron-btn" onClick={() => setIsMinimized(true)} title="Minimize">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 9l6 6 6-6" />
                 </svg>
               </button>
-              <button className="modern-close-btn" onClick={stop}>
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="white"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+              <button className="modern-close-btn" onClick={stop} title="Stop playback">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
               </button>
             </div>
             <div className="modern-player-arc">
@@ -224,7 +268,14 @@ export default function BottomPlayer() {
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
                     {repeatMode > 0 && <span className="modern-badge">{repeatMode === 3 ? '∞' : repeatMode}</span>}
                   </button>
-                  <button className="modern-btn skip-10" onClick={skipBackward}><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12.5 8c-2.65 0-5.05 1-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/><path d="M10 12h2v4h-2z"/><path d="M8 12h1v4H8z"/></svg></button>
+                  <button className="modern-btn skip-10" onClick={skipBackward} title="Skip Back 10s">
+                    <div className="skip-btn-content">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M2.5 2v6h6M2.66 15.57a10 10 0 1 0 .57-8.38"/>
+                      </svg>
+                      <span className="skip-val">10</span>
+                    </div>
+                  </button>
                 </div>
                 <div className="modern-playback-group">
                   <button className="modern-btn prev" onClick={skipPrev}><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6L19 18V6z"/></svg></button>
@@ -232,8 +283,18 @@ export default function BottomPlayer() {
                   <button className="modern-btn next" onClick={skipNext}><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
                 </div>
                 <div className="modern-ctrl-group">
-                  <button className="modern-btn skip-10" onClick={skipForward}><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M18.41 10.6C16.55 9 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.92 16c1.05-3.19 4.05-5.5 7.58-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.59 3.6z"/><path d="M14 12h2v4h-2z"/><path d="M16 12h1v4h-1z"/></svg></button>
-                  <button className="modern-speed-pill" onClick={toggleSpeed}><span>{playbackSpeed}x</span></button>
+                  <button className="modern-btn skip-10" onClick={skipForward} title="Skip Forward 10s">
+                    <div className="skip-btn-content">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/>
+                      </svg>
+                      <span className="skip-val">10</span>
+                    </div>
+                  </button>
+                  <button className="modern-speed-pill-v2" onClick={toggleSpeed} title="Toggle speed">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="black"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                    <span>{playbackSpeed}x</span>
+                  </button>
                 </div>
               </div>
               <div className="modern-progress-row">

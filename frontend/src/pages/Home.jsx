@@ -172,7 +172,7 @@ export default function Home() {
           </div>
           <div className="popular-grid">
             {POPULAR.map((s) => (
-              <Link key={s.number} to={`/surah/${s.name}`} className="card popular-card">
+              <Link key={s.number} to={`/surah/${encodeURIComponent(s.name)}`} className="card popular-card">
                 <span className="popular-num badge badge-gold">{s.number}</span>
                 <div className="popular-info">
                   <span className="popular-english">{s.name}</span>
@@ -194,7 +194,7 @@ export default function Home() {
               <div className="spinner"></div>
             </div>
           ) : verseOfTheDay ? (
-            <Link to={`/surah/${verseOfTheDay.surahNumber}#verse-${verseOfTheDay.verseNumber}`} className="card votd-card">
+            <Link to={`/surah/${encodeURIComponent(verseOfTheDay.surahName)}#verse-${verseOfTheDay.verseNumber}`} className="card votd-card">
               <div className="flex-between mb-2">
                 <span className="badge badge-gold">{verseOfTheDay.surahName} {verseOfTheDay.surahNumber}:{verseOfTheDay.verseNumber}</span>
               </div>
