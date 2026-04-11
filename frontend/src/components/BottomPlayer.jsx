@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAudio } from '../context/AudioContext';
+import { useQari } from '../context/QariContext';
 import './BottomPlayer.css';
 
 export default function BottomPlayer() {
@@ -22,6 +23,8 @@ export default function BottomPlayer() {
     skipBackward,
     playbackSpeed,
   } = useAudio();
+
+  const { selectedReciter } = useQari();
 
   const [position, setPosition] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -141,10 +144,17 @@ export default function BottomPlayer() {
           }}
         >
           <div className="bp-mini-art">
-            {/* Quran icon */}
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-            </svg>
+            <img
+              src={selectedReciter?.image}
+              alt={selectedReciter?.name}
+              className="bp-mini-img"
+              onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+            />
+            <div className="bp-mini-img-fallback" style={{ display: 'none' }}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+              </svg>
+            </div>
           </div>
           <div className="bp-mini-text">
             <span className="bp-mini-surah">{currentVerse.surahName || 'Surah'}</span>
@@ -288,10 +298,18 @@ export default function BottomPlayer() {
             <div className="bp-artwork-wrap">
               <div className={`bp-artwork-ring ${isPlaying ? 'spinning' : ''}`}>
                 <div className="bp-artwork-inner">
-                  <svg viewBox="0 0 24 24" width="48" height="48" fill="none">
-                    <circle cx="12" cy="12" r="10" stroke="#7F77DD" strokeWidth="1" />
-                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" fill="#7F77DD" opacity=".6" />
-                  </svg>
+                  <img
+                    src={selectedReciter?.image}
+                    alt={selectedReciter?.name}
+                    className="bp-artwork-img"
+                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                  />
+                  <div className="bp-artwork-fallback" style={{ display: 'none' }}>
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none">
+                      <circle cx="12" cy="12" r="10" stroke="#7F77DD" strokeWidth="1" />
+                      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" fill="#7F77DD" opacity=".6" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>

@@ -505,6 +505,28 @@
   flex-shrink: 0;
 }
 
+/* Reciter image in minimized pill */
+.bp-mini-art img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Reciter image in mobile artwork */
+.bp-artwork-inner {
+  position: relative;
+}
+
+.bp-artwork-inner img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+}
+
 .bp-mini-text {
   display: flex;
   flex-direction: column;
