@@ -18,12 +18,31 @@ export const AudioProvider = ({ children }) => {
 
   const audioRef = useRef(new Audio());
 
+
+
   useEffect(() => {
     const audio = audioRef.current;
+    let animationFrameId;
 
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
+    const tick = () => {
+      if (!audio.paused) {
+        setProgress(audio.currentTime);
+        setDuration(audio.duration || 0);
+        animationFrameId = requestAnimationFrame(tick);
+      }
+    };
+
+    const handlePlay = () => {
+      setIsPlaying(true);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(tick);
+    };
+    const handlePause = () => {
+      setIsPlaying(false);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
     const handleEnded = () => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
       if (repeatMode === 3) {
         audio.currentTime = 0;
         audio.play().catch(console.error);
@@ -45,8 +64,11 @@ export const AudioProvider = ({ children }) => {
       }
     };
     const handleTimeUpdate = () => {
-      setProgress(audio.currentTime);
-      setDuration(audio.duration || 0);
+      // Still listen to timeupdate for manual seeking while paused
+      if (audio.paused) {
+        setProgress(audio.currentTime);
+        setDuration(audio.duration || 0);
+      }
     };
 
     audio.addEventListener('play', handlePlay);
@@ -55,12 +77,13 @@ export const AudioProvider = ({ children }) => {
     audio.addEventListener('timeupdate', handleTimeUpdate);
 
     return () => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
     };
-  }, [playlist, currentIndex, repeatMode, repeatCount]);
+  }, [playlist, currentIndex, repeatMode, repeatCount, currentVerse]);
 
   // Handle Playback Speed Ref Changes
   useEffect(() => {

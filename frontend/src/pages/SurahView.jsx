@@ -19,9 +19,9 @@ export default function SurahView() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [surah,   setSurah]   = useState(null);
+  const [surah, setSurah] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error,   setError]   = useState(null);
+  const [error, setError] = useState(null);
 
   // We'll use the ID from the URL for the API call, 
   // and use surah.surahNumber for numeric logic once loaded.
@@ -75,7 +75,7 @@ export default function SurahView() {
 
   const { addBookmark, removeBookmark, isBookmarked, bookmarks } = useBookmarks();
   const topRef = useRef(null);
-  
+
   // Track currently playing word audio to prevent overlaps
   const wordAudioRef = useRef(null);
 
@@ -102,7 +102,7 @@ export default function SurahView() {
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'center' });
           // Add a temporary highlight effect
-          el.classList.add('menu-open'); 
+          el.classList.add('menu-open');
           setTimeout(() => el.classList.remove('menu-open'), 1500);
         }
       }, 150);
@@ -136,7 +136,7 @@ export default function SurahView() {
 
   function handlePlayAllToggle() {
     if (!surah || !surah.verses.length) return;
-    
+
     // Check if we are already playing this surah's playlist
     const isCurrentSurahPlaying = currentVerse?.surahNumber === surahNum;
 
@@ -163,9 +163,9 @@ export default function SurahView() {
     } else {
       await addBookmark({
         surahNumber: surahNum,
-        surahName:   surah.surahName,
+        surahName: surah.surahName,
         verseNumber: verse.number,
-        arabicText:  verse.arabic,
+        arabicText: verse.arabic,
         translation: verse.translation,
       });
     }
@@ -180,7 +180,7 @@ export default function SurahView() {
   };
 
   if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Surah…</p></div>;
-  if (error)   return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
+  if (error) return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
 
   const verses = surah.verses;
 
@@ -193,8 +193,8 @@ export default function SurahView() {
   }));
 
   return (
-    <div 
-      className="surah-view page-enter" 
+    <div
+      className="surah-view page-enter"
       ref={topRef}
       style={{ '--arabic-font-size': `${fontSize}rem` }}
     >
@@ -218,7 +218,7 @@ export default function SurahView() {
               {surah.nameTranslation} · {surah.revelation} · {surah.versesCount} verses
             </p>
           </div>
-          <button 
+          <button
             className={`btn sv-play-btn ${isPlaying && currentVerse?.surahNumber === surahNum ? 'btn-secondary' : 'btn-primary'}`}
             onClick={handlePlayAllToggle}
           >
@@ -259,20 +259,20 @@ export default function SurahView() {
             const bookmarked = isBookmarked(surahNum, verse.number);
             const isPlaying = currentVerse?.audio === verse.audioUrl;
             const isMenuOpen = activeMenu === verse.number;
-            
+
             return (
-              <div 
-                key={verse.number} 
-                className={`verse-card ${isPlaying ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`} 
+              <div
+                key={verse.number}
+                className={`verse-card ${isPlaying ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`}
                 id={`verse-${verse.number}`}
               >
                 <div className="verse-top-actions">
                   <button className="verse-menu-btn" onClick={(e) => toggleMenu(e, verse.number)}>
-                      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
-                        <circle cx="12" cy="12" r="1.5"></circle>
-                        <circle cx="12" cy="5" r="1.5"></circle>
-                        <circle cx="12" cy="19" r="1.5"></circle>
-                      </svg>
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
+                      <circle cx="12" cy="12" r="1.5"></circle>
+                      <circle cx="12" cy="5" r="1.5"></circle>
+                      <circle cx="12" cy="19" r="1.5"></circle>
+                    </svg>
                   </button>
                   {/* Translate toggle — mobile only, visible when EN is off */}
                   {!showTranslation && (
@@ -295,36 +295,36 @@ export default function SurahView() {
                   <div className="arabic verse-arabic" dir="rtl">
                     {verse.words && verse.words.length > 0 ? (
                       verse.words.map((word) => {
-                          // Play individual audio for this word
-                          const playWordAudio = (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            if (word.audioUrl) {
-                              // Stop any currently playing word audio
-                              if (wordAudioRef.current) {
-                                wordAudioRef.current.pause();
-                                wordAudioRef.current.currentTime = 0;
-                              }
-                              setActiveWordId(word.id);
-                              const audio = new Audio(word.audioUrl);
-                              wordAudioRef.current = audio;
-                              audio.play().catch(err => console.error('Word audio failed:', err));
-                              audio.onended = () => setActiveWordId(null);
+                        // Play individual audio for this word
+                        const playWordAudio = (e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          if (word.audioUrl) {
+                            // Stop any currently playing word audio
+                            if (wordAudioRef.current) {
+                              wordAudioRef.current.pause();
+                              wordAudioRef.current.currentTime = 0;
                             }
-                          };
+                            setActiveWordId(word.id);
+                            const audio = new Audio(word.audioUrl);
+                            wordAudioRef.current = audio;
+                            audio.play().catch(err => console.error('Word audio failed:', err));
+                            audio.onended = () => setActiveWordId(null);
+                          }
+                        };
 
-                          return (
-                            <span
-                              key={word.id || word.position}
-                              className={`quran-word${activeWordId === word.id ? ' quran-word--active' : ''}`}
-                              onClick={playWordAudio}
-                              title={word.translation?.text || ''}
-                              style={{ cursor: word.audioUrl ? 'pointer' : 'text' }}
-                            >
-                              {word.text_uthmani || word.text}
-                            </span>
-                          );
-                        })
+                        return (
+                          <span
+                            key={word.id || word.position}
+                            className={`quran-word${activeWordId === word.id ? ' quran-word--active' : ''}`}
+                            onClick={playWordAudio}
+                            title={word.translation?.text || ''}
+                            style={{ cursor: word.audioUrl ? 'pointer' : 'text' }}
+                          >
+                            {word.text_uthmani || word.text}
+                          </span>
+                        );
+                      })
                     ) : (
                       // Fallback if words aren't loaded or available
                       verse.arabic

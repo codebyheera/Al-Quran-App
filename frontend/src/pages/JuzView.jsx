@@ -18,9 +18,9 @@ export default function JuzView() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [juz,     setJuz]     = useState(null);
+  const [juz, setJuz] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error,   setError]   = useState(null);
+  const [error, setError] = useState(null);
 
   const [fontSize, setFontSize] = useState(() => {
     return parseFloat(localStorage.getItem('arabicFontSize')) || 2.2;
@@ -95,7 +95,7 @@ export default function JuzView() {
         const el = document.getElementById(id);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          el.classList.add('menu-open'); 
+          el.classList.add('menu-open');
           setTimeout(() => el.classList.remove('menu-open'), 1500);
         }
       }, 150);
@@ -129,7 +129,7 @@ export default function JuzView() {
 
   function handlePlayAllToggle() {
     if (!juz || !juz.verses.length) return;
-    
+
     // Simplification: Check if playing this juz already
     const isThisJuzPlaying = juz.verses.some(v => v.surahNumber === currentVerse?.surahNumber && v.number === currentVerse?.number);
 
@@ -152,9 +152,9 @@ export default function JuzView() {
     } else {
       await addBookmark({
         surahNumber: verse.surahNumber,
-        surahName:   verse.surahName,
+        surahName: verse.surahName,
         verseNumber: verse.number,
-        arabicText:  verse.arabic,
+        arabicText: verse.arabic,
         translation: verse.translation,
       });
     }
@@ -169,7 +169,7 @@ export default function JuzView() {
   };
 
   if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Juz…</p></div>;
-  if (error)   return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
+  if (error) return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
 
   const verses = juz.verses;
 
@@ -191,8 +191,8 @@ export default function JuzView() {
   }
 
   return (
-    <div 
-      className="juz-view page-enter" 
+    <div
+      className="juz-view page-enter"
       ref={topRef}
       style={{ '--arabic-font-size': `${fontSize}rem` }}
     >
@@ -205,7 +205,7 @@ export default function JuzView() {
             </div>
             <p className="jv-subtitle text-muted">{juz.totalVerses} verses</p>
           </div>
-          <button 
+          <button
             className={`btn jv-play-btn ${isPlaying && juz?.verses.some(v => v.surahNumber === currentVerse?.surahNumber && v.number === currentVerse?.number) ? 'btn-secondary' : 'btn-primary'}`}
             onClick={handlePlayAllToggle}
           >
@@ -247,7 +247,7 @@ export default function JuzView() {
 
             {group.verses.map((verse) => {
               const bookmarked = isBookmarked(verse.surahNumber, verse.number);
-              
+
               // Find the index of this verse in the current filtered verses array
               const index = verses.indexOf(verse);
               const isPlaying = currentVerse?.audio === verse.audioUrl;
@@ -255,18 +255,18 @@ export default function JuzView() {
               const isMenuOpen = activeMenu === verseUid;
 
               return (
-                <div 
-                  key={verseUid} 
+                <div
+                  key={verseUid}
                   className={`verse-card jv-verse ${isPlaying ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`}
                   id={`verse-${verseUid}`}
                 >
                   <div className="verse-top-actions">
                     <button className="verse-menu-btn" onClick={(e) => toggleMenu(e, verseUid)}>
-                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
-                          <circle cx="12" cy="12" r="1.5"></circle>
-                          <circle cx="12" cy="5" r="1.5"></circle>
-                          <circle cx="12" cy="19" r="1.5"></circle>
-                        </svg>
+                      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
+                        <circle cx="12" cy="12" r="1.5"></circle>
+                        <circle cx="12" cy="5" r="1.5"></circle>
+                        <circle cx="12" cy="19" r="1.5"></circle>
+                      </svg>
                     </button>
                     {/* Translate toggle — mobile only, visible when EN is off */}
                     {!showTranslation && (
@@ -289,34 +289,34 @@ export default function JuzView() {
                     <div className="arabic verse-arabic" dir="rtl">
                       {verse.words && verse.words.length > 0 ? (
                         verse.words.map((word) => {
-                            const playWordAudio = (e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              if (word.audioUrl) {
-                                if (wordAudioRef.current) {
-                                  wordAudioRef.current.pause();
-                                  wordAudioRef.current.currentTime = 0;
-                                }
-                                setActiveWordId(word.id);
-                                const audio = new Audio(word.audioUrl);
-                                wordAudioRef.current = audio;
-                                audio.play().catch(err => console.error('Word audio failed:', err));
-                                audio.onended = () => setActiveWordId(null);
+                          const playWordAudio = (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            if (word.audioUrl) {
+                              if (wordAudioRef.current) {
+                                wordAudioRef.current.pause();
+                                wordAudioRef.current.currentTime = 0;
                               }
-                            };
+                              setActiveWordId(word.id);
+                              const audio = new Audio(word.audioUrl);
+                              wordAudioRef.current = audio;
+                              audio.play().catch(err => console.error('Word audio failed:', err));
+                              audio.onended = () => setActiveWordId(null);
+                            }
+                          };
 
-                            return (
-                              <span
-                                key={word.id || word.position}
-                                className={`quran-word${activeWordId === word.id ? ' quran-word--active' : ''}`}
-                                onClick={playWordAudio}
-                                title={word.translation?.text || ''}
-                                style={{ cursor: word.audioUrl ? 'pointer' : 'text' }}
-                              >
-                                {word.text_uthmani || word.text}
-                              </span>
-                            );
-                          })
+                          return (
+                            <span
+                              key={word.id || word.position}
+                              className={`quran-word${activeWordId === word.id ? ' quran-word--active' : ''}`}
+                              onClick={playWordAudio}
+                              title={word.translation?.text || ''}
+                              style={{ cursor: word.audioUrl ? 'pointer' : 'text' }}
+                            >
+                              {word.text_uthmani || word.text}
+                            </span>
+                          );
+                        })
                       ) : (
                         verse.arabic
                       )}
@@ -332,7 +332,7 @@ export default function JuzView() {
                       <div className="verse-card-logo" style={{ display: 'none', color: 'var(--accent-gold)', fontWeight: 'bold', fontSize: '0.9rem', alignItems: 'center', gap: '4px' }}>
                         <span style={{ fontSize: '1.1rem' }}>☪</span> QApp
                       </div>
-                      <AudioPlayer 
+                      <AudioPlayer
                         verse={mappedPlaylist[index]}
                         fullPlaylist={mappedPlaylist}
                         index={index}

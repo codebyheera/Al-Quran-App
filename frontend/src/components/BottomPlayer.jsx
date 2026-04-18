@@ -30,34 +30,6 @@ export default function BottomPlayer() {
   const [isDragging, setIsDragging] = useState(false);
   const dragStartPos = useRef({ x: 0, y: 0 });
   const hasMovedWhileDragging = useRef(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
-
-  // Auto minimize on scroll down (mobile only)
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerWidth > 768 || !currentVerse) return;
-      const currentScrollY = window.scrollY;
-      const threshold = 50;
-      if (currentScrollY > lastScrollY && currentScrollY > threshold && !isMinimized) {
-        setIsMinimized(true);
-      } else if (currentScrollY < lastScrollY && isMinimized) {
-        setIsMinimized(false);
-      }
-      setLastScrollY(currentScrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, isMinimized, currentVerse, setIsMinimized]);
-
-  // Auto minimize after 5 seconds idle
-  useEffect(() => {
-    let timeoutId;
-    if (!isMinimized && currentVerse && !isHovering) {
-      timeoutId = setTimeout(() => setIsMinimized(true), 5000);
-    }
-    return () => { if (timeoutId) clearTimeout(timeoutId); };
-  }, [isMinimized, currentVerse, isHovering, setIsMinimized]);
 
   const handleDragStart = (e) => {
     if (!position) return;
@@ -180,8 +152,6 @@ export default function BottomPlayer() {
           {/* ── DESKTOP PLAYER ── */}
           <div
             className="bp-desktop"
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
           >
             <div className="bp-desktop-inner">
               {/* Track info */}
@@ -276,8 +246,6 @@ export default function BottomPlayer() {
           {/* ── MOBILE PLAYER ── */}
           <div
             className={`bp-mobile ${isPlaying ? 'is-playing' : ''}`}
-            onTouchStart={() => setIsHovering(true)}
-            onTouchEnd={() => setIsHovering(false)}
           >
             {/* Header row */}
             <div className="bp-mobile-header">
