@@ -143,6 +143,7 @@ export default function Navbar() {
           <NavLink to="/surah" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Surahs</NavLink>
           <NavLink to="/juz" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Juz</NavLink>
           <NavLink to="/bookmarks" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Bookmarks</NavLink>
+          <NavLink to="/support" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Support ✨</NavLink>
         </div>
 
 
@@ -173,6 +174,7 @@ export default function Navbar() {
           <NavLink to="/surah" className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>📖 Surahs</NavLink>
           <NavLink to="/juz" className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>📚 Juz</NavLink>
           <NavLink to="/bookmarks" className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>🔖 Bookmarks</NavLink>
+          <NavLink to="/support" className={({ isActive }) => 'mobile-link' + (isActive ? ' active' : '')} onClick={handleNavClick}>✨ Support</NavLink>
         </div>
       )}
     </nav>
