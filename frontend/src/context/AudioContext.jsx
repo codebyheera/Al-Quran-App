@@ -11,7 +11,7 @@ export const AudioProvider = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(window.innerWidth <= 768);
   const [repeatMode, setRepeatMode] = useState(0); // 0=off, 1=once, 2=twice, 3=infinite
   const [repeatCount, setRepeatCount] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
@@ -76,6 +76,11 @@ export const AudioProvider = ({ children }) => {
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('timeupdate', handleTimeUpdate);
 
+    // If audio is already playing when this effect re-runs, kickstart the tick
+    if (!audio.paused) {
+      animationFrameId = requestAnimationFrame(tick);
+    }
+
     return () => {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
       audio.removeEventListener('play', handlePlay);
@@ -95,7 +100,7 @@ export const AudioProvider = ({ children }) => {
     setPlaylist([]);
     setCurrentIndex(-1);
     setCurrentVerse(verse);
-    setIsMinimized(false);
+    setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
     audioRef.current.src = verse.audio;
     audioRef.current.play().catch(console.error);
@@ -105,7 +110,7 @@ export const AudioProvider = ({ children }) => {
     setPlaylist(verses);
     setCurrentIndex(startIdx);
     setCurrentVerse(verses[startIdx]);
-    setIsMinimized(false);
+    setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
     audioRef.current.src = verses[startIdx].audio;
     audioRef.current.play().catch(console.error);

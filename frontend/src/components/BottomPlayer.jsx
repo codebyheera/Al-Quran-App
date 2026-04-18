@@ -28,6 +28,8 @@ export default function BottomPlayer() {
 
   const [position, setPosition] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isScrubbing, setIsScrubbing] = useState(false);
+  const [localProgress, setLocalProgress] = useState(0);
   const dragStartPos = useRef({ x: 0, y: 0 });
   const hasMovedWhileDragging = useRef(false);
 
@@ -88,7 +90,20 @@ export default function BottomPlayer() {
 
   if (!currentVerse) return null;
 
-  const handleProgressChange = (e) => seek(parseFloat(e.target.value));
+  const handleScrubStart = () => {
+    setIsScrubbing(true);
+    setLocalProgress(progress);
+  };
+
+  const handleScrubEnd = () => {
+    setIsScrubbing(false);
+  };
+
+  const handleProgressChange = (e) => {
+    const val = parseFloat(e.target.value);
+    setLocalProgress(val);
+    seek(val);
+  };
 
   const formatTime = (time) => {
     if (!time) return '0:00';
@@ -97,7 +112,8 @@ export default function BottomPlayer() {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const progressPct = duration ? (progress / duration) * 100 : 0;
+  const displayProgress = isScrubbing ? localProgress : progress;
+  const progressPct = duration ? (displayProgress / duration) * 100 : 0;
 
   return (
     <>
@@ -209,7 +225,7 @@ export default function BottomPlayer() {
                 </div>
 
                 <div className="bp-progress">
-                  <span className="bp-time">{formatTime(progress)}</span>
+                  <span className="bp-time">{formatTime(displayProgress)}</span>
                   <div className="bp-slider-track">
                     <div className="bp-slider-fill" style={{ width: `${progressPct}%` }} />
                     <input
@@ -218,8 +234,12 @@ export default function BottomPlayer() {
                       min="0"
                       max={duration || 0}
                       step="0.1"
-                      value={progress}
+                      value={displayProgress}
                       onChange={handleProgressChange}
+                      onMouseDown={handleScrubStart}
+                      onMouseUp={handleScrubEnd}
+                      onTouchStart={handleScrubStart}
+                      onTouchEnd={handleScrubEnd}
                     />
                   </div>
                   <span className="bp-time">{formatTime(duration)}</span>
@@ -290,7 +310,7 @@ export default function BottomPlayer() {
 
             {/* Progress */}
             <div className="bp-mobile-progress">
-              <span className="bp-mobile-time">{formatTime(progress)}</span>
+              <span className="bp-mobile-time">{formatTime(displayProgress)}</span>
               <div className="bp-slider-track">
                 <div className="bp-slider-fill" style={{ width: `${progressPct}%` }} />
                 <input
@@ -299,8 +319,12 @@ export default function BottomPlayer() {
                   min="0"
                   max={duration || 0}
                   step="0.1"
-                  value={progress}
+                  value={displayProgress}
                   onChange={handleProgressChange}
+                  onMouseDown={handleScrubStart}
+                  onMouseUp={handleScrubEnd}
+                  onTouchStart={handleScrubStart}
+                  onTouchEnd={handleScrubEnd}
                 />
               </div>
               <span className="bp-mobile-time bp-mobile-time-end">{formatTime(duration)}</span>
