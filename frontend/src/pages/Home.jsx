@@ -85,8 +85,9 @@ export default function Home() {
   return (
     <div className="home page-enter">
       <Helmet>
-        <title>Quran App Online – Read & Listen Quran in Arabic</title>
-        <meta name="description" content="Free online Quran app. Read the Quran in Arabic, listen to Surah recitations, and explore each Ayah with ease." />
+        <title>Al-Quran Hub | Read Quran Pak Online Free</title>
+        <meta name="description" content="Read Quran Pak online for free. Access all Surahs and Juz with beautiful recitation on Al-Quran Hub." />
+        <meta name="keywords" content="quran pak, read quran online, quran online, al quran" />
         <link rel="canonical" href="https://alquranhub.org/" />
       </Helmet>
 
