@@ -202,7 +202,7 @@ export default function SurahView() {
         <Helmet>
           <title>{`Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}</title>
           <meta name="description" content={`Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`} />
-          <link rel="canonical" href={`https://al-quran-by-subhan.vercel.app/surah/${id}`} />
+          <link rel="canonical" href={`https://alquranhub.org/surah/${id}`} />
         </Helmet>
       )}
       <div className="container">

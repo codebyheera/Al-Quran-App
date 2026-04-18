@@ -5,7 +5,7 @@
  *                  Vite's dev proxy rewrites /api/* → http://localhost:5000/api/*
  *
  * In production:   VITE_API_URL is set to the deployed backend URL, e.g.
- *                  https://al-quran-api.vercel.app
+ *                  https://api.alquranhub.org
  *                  All /api/* calls are prefixed with that URL.
  */
 

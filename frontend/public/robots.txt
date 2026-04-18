@@ -234,4 +234,4 @@ Allow: /sitemap.xml
 
 
 # Sitemaps
-Sitemap: https://al-quran-by-subhan.vercel.app/sitemap.xml
+Sitemap: https://alquranhub.org/sitemap.xml

@@ -37,7 +37,7 @@ export default function SurahList() {
       <Helmet>
         <title>Surahs of the Quran – Read & Listen Online Free</title>
         <meta name="description" content="Access all Surahs of the Holy Quran online. Read in Arabic, listen to authentic recitations, and explore each Ayah easily." />
-        <link rel="canonical" href="https://al-quran-by-subhan.vercel.app/surah" />
+        <link rel="canonical" href="https://alquranhub.org/surah" />
       </Helmet>
 
       <div className="container">

@@ -87,7 +87,7 @@ export default function Home() {
       <Helmet>
         <title>Quran App Online – Read & Listen Quran in Arabic</title>
         <meta name="description" content="Free online Quran app. Read the Quran in Arabic, listen to Surah recitations, and explore each Ayah with ease." />
-        <link rel="canonical" href="https://al-quran-by-subhan.vercel.app/" />
+        <link rel="canonical" href="https://alquranhub.org/" />
       </Helmet>
 
       {/* ── Hero ─────────────────────────────────────────────── */}

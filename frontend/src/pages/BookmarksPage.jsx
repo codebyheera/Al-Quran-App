@@ -18,7 +18,7 @@ export default function BookmarksPage() {
       <Helmet>
         <title>Quran Bookmarks – Save & Read Quran Online</title>
         <meta name="description" content="Keep track of your Quran bookmarks online. Read Surahs, listen to recitations, and explore saved Ayahs easily." />
-        <link rel="canonical" href="https://al-quran-by-subhan.vercel.app/bookmarks" />
+        <link rel="canonical" href="https://alquranhub.org/bookmarks" />
       </Helmet>
 
       <div className="container">

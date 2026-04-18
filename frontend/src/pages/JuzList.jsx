@@ -25,7 +25,7 @@ export default function JuzList() {
       <Helmet>
         <title>Holy Quran Juz – Arabic Recitation Online</title>
         <meta name="description" content="Read and listen to the complete Quran Juz online. Perfect for recitation, learning, and spiritual growth." />
-        <link rel="canonical" href="https://al-quran-by-subhan.vercel.app/juz" />
+        <link rel="canonical" href="https://alquranhub.org/juz" />
       </Helmet>
       
       <div className="container">
