@@ -1,0 +1,278 @@
+/* ============================================================
+   NotFound.css — 404 Page Styles
+   Matches the Al-Quran Hub design system (dark/light/emerald…)
+   ============================================================ */
+
+/* ── Page wrapper ────────────────────────────────────────────── */
+.not-found-page {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Decorative radial blobs ─────────────────────────────────── */
+.not-found-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 30%,  rgba(201, 168, 76, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 85% 70%,  rgba(74, 158, 255, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 50% 100%, rgba(201, 168, 76, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Center card ─────────────────────────────────────────────── */
+.not-found-card {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 3.5rem 2.5rem;
+  box-shadow: var(--shadow), var(--shadow-gold);
+  animation: cardReveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Arabic ornament ─────────────────────────────────────────── */
+.not-found-ornament {
+  font-family: var(--font-arabic);
+  font-size: 2.2rem;
+  color: var(--accent-gold);
+  opacity: 0.55;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.25rem;
+  animation: fadeIn 0.6s 0.2s ease both;
+}
+
+/* ── 404 number ──────────────────────────────────────────────── */
+.not-found-code {
+  font-size: clamp(5rem, 20vw, 9rem);
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 50%, var(--accent-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite, fadeIn 0.6s 0.1s ease both;
+  margin-bottom: 0.35rem;
+  user-select: none;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Divider crescent ────────────────────────────────────────── */
+.not-found-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.2rem auto;
+  max-width: 300px;
+  animation: fadeIn 0.6s 0.25s ease both;
+}
+
+.not-found-divider::before,
+.not-found-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+}
+
+.not-found-divider-icon {
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  opacity: 0.8;
+}
+
+/* ── Headline ────────────────────────────────────────────────── */
+.not-found-title {
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  animation: fadeIn 0.6s 0.3s ease both;
+}
+
+/* ── Sub-text ────────────────────────────────────────────────── */
+.not-found-desc {
+  font-size: 0.97rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 440px;
+  margin: 0 auto 2rem;
+  animation: fadeIn 0.6s 0.35s ease both;
+}
+
+/* ── Attempted URL pill ──────────────────────────────────────── */
+.not-found-url-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.35rem 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-family: monospace;
+  margin-bottom: 2rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  animation: fadeIn 0.6s 0.4s ease both;
+}
+
+.not-found-url-pill svg {
+  flex-shrink: 0;
+  color: var(--accent-gold);
+}
+
+/* ── Action buttons ──────────────────────────────────────────── */
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: center;
+  margin-bottom: 2.25rem;
+  animation: fadeIn 0.6s 0.45s ease both;
+}
+
+.not-found-btn-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.6rem;
+  background: linear-gradient(135deg, var(--accent-gold), #a8882a);
+  color: #0f0f1a;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+  font-family: var(--font-ui);
+}
+
+.not-found-btn-home:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+  color: #0f0f1a;
+}
+
+.not-found-btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  font-family: var(--font-ui);
+}
+
+.not-found-btn-back:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* ── Quick links section ─────────────────────────────────────── */
+.not-found-links-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  animation: fadeIn 0.6s 0.5s ease both;
+}
+
+.not-found-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: center;
+  animation: fadeIn 0.6s 0.55s ease both;
+}
+
+.not-found-quick-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(201, 168, 76, 0.07);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: var(--transition);
+  font-family: var(--font-ui);
+}
+
+.not-found-quick-link:hover {
+  background: rgba(201, 168, 76, 0.14);
+  border-color: var(--border-hover);
+  color: var(--accent-gold);
+  transform: translateY(-1px);
+}
+
+/* ── Shared fade-in ──────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .not-found-card {
+    padding: 2.5rem 1.5rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .not-found-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .not-found-btn-home,
+  .not-found-btn-back {
+    justify-content: center;
+    width: 100%;
+  }
+}

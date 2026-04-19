@@ -14,6 +14,7 @@ import JuzView       from './pages/JuzView';
 import BookmarksPage from './pages/BookmarksPage';
 import SearchPage    from './pages/SearchPage';
 import SupportPage   from './pages/SupportPage';
+import NotFound      from './pages/NotFound';
 import BottomPlayer  from './components/BottomPlayer';
 import { useAudio }   from './context/AudioContext';
 import { useBookmarks } from './context/BookmarkContext';
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/bookmarks"   element={<BookmarksPage />} />
           <Route path="/search"      element={<SearchPage />} />
           <Route path="/support"     element={<SupportPage />} />
+          <Route path="*"            element={<NotFound />} />
         </Routes>
       </main>
 
