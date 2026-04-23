@@ -32,6 +32,26 @@ export default function BottomPlayer() {
   const [localProgress, setLocalProgress] = useState(0);
   const dragStartPos = useRef({ x: 0, y: 0 });
   const hasMovedWhileDragging = useRef(false);
+  const autoMinimizeTimeoutRef = useRef(null);
+
+  const resetAutoMinimizeTimer = () => {
+    if (autoMinimizeTimeoutRef.current) {
+      clearTimeout(autoMinimizeTimeoutRef.current);
+    }
+    // Only set timer if not minimized and on desktop (using a safe threshold)
+    if (!isMinimized && window.innerWidth > 768) {
+      autoMinimizeTimeoutRef.current = setTimeout(() => {
+        setIsMinimized(true);
+      }, 5000);
+    }
+  };
+
+  useEffect(() => {
+    resetAutoMinimizeTimer();
+    return () => {
+      if (autoMinimizeTimeoutRef.current) clearTimeout(autoMinimizeTimeoutRef.current);
+    };
+  }, [isMinimized, currentVerse, isPlaying]); // Reset when status changes
 
   const handleDragStart = (e) => {
     if (!position) return;
@@ -168,6 +188,8 @@ export default function BottomPlayer() {
           {/* ── DESKTOP PLAYER ── */}
           <div
             className="bp-desktop"
+            onMouseMove={resetAutoMinimizeTimer}
+            onMouseEnter={resetAutoMinimizeTimer}
           >
             <div className="bp-desktop-inner">
               {/* Track info */}
