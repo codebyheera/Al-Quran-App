@@ -13,11 +13,11 @@ const RECITER_PATH = {
   'abdulsamad': 'AbdulSamad_64kbps_QuranExplorer.Com',
   'sudais': 'Abdurrahmaan_As-Sudais_64kbps',
   'ghamidi': 'Ghamadi_40kbps',
-  'alafasy': 'Mishary_Rashid_Alafasy_128kbps'
+  'alafasy': 'Mishary_Rashid_Alafasy_128kbps',
+  'yasser': 'Yasser_Ad-Dussary_128kbps'
 };
 
 const RECITER_IDENTIFIER = {
-  'yasser': 'ar.yasseraldossari'
 };
 
 function getAudioUrl(reciter, surahNum, ayahNumInSurah, globalAyahNum) {
