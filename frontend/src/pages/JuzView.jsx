@@ -5,6 +5,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import AudioPlayer from '../components/AudioPlayer';
 import { useBookmarks } from '../context/BookmarkContext';
@@ -196,6 +197,11 @@ export default function JuzView() {
       ref={topRef}
       style={{ '--arabic-font-size': `${fontSize}rem` }}
     >
+      <Helmet>
+        <title>{`Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`}</title>
+        <meta name="description" content={`Read and listen to Juz ${juzNum} of the Holy Quran online. Arabic text, English translation, and beautiful recitation available.`} />
+        <link rel="canonical" href={`https://alquranhub.org/juz/${juzNum}`} />
+      </Helmet>
       <div className="container">
         {/* Header */}
         <div className="jv-header">
