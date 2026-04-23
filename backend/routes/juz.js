@@ -9,12 +9,27 @@ const router = express.Router();
 const ALQURAN_BASE = 'https://api.alquran.cloud/v1';
 
 // Helper to build audio URL based on reciter
+const RECITER_PATH = {
+  'abdulsamad': 'AbdulSamad_64kbps_QuranExplorer.Com',
+  'sudais': 'Abdurrahmaan_As-Sudais_64kbps',
+  'ghamidi': 'Ghamadi_40kbps',
+  'alafasy': 'Mishary_Rashid_Alafasy_128kbps'
+};
+
+const RECITER_IDENTIFIER = {
+  'yasser': 'ar.yasseraldossari'
+};
+
 function getAudioUrl(reciter, surahNum, ayahNumInSurah, globalAyahNum) {
-  if (reciter === 'alafasy') {
-    return `https://cdn.islamic.network/quran/audio/128/ar.alafasy/${globalAyahNum}.mp3`;
+  if (RECITER_PATH[reciter]) {
+    const path = RECITER_PATH[reciter];
+    const s = String(surahNum).padStart(3, '0');
+    const a = String(ayahNumInSurah).padStart(3, '0');
+    return `https://www.everyayah.com/data/${path}/${s}${a}.mp3`;
   }
-  // Default: Abdul Samad
-  return `https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/${String(surahNum).padStart(3, '0')}${String(ayahNumInSurah).padStart(3, '0')}.mp3`;
+  
+  const id = RECITER_IDENTIFIER[reciter] || 'ar.abdulsamad';
+  return `https://cdn.islamic.network/quran/audio/128/${id}/${globalAyahNum}.mp3`;
 }
 
 router.get('/:juzNumber', async (req, res) => {

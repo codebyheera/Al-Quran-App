@@ -38,6 +38,37 @@
 .sv-play-btn {
   flex-shrink: 0;
 }
+.sv-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.sv-hq-btn {
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+.sv-hq-btn:hover {
+  background: var(--accent-gold);
+  color: #000;
+  box-shadow: var(--shadow-gold);
+}
+.sv-hq-btn.active {
+  background: var(--accent-gold);
+  color: #000;
+  animation: glowPulse 2s infinite;
+}
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(201, 168, 76, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+}
 
 /* Bismillah */
 .bismillah {
@@ -206,9 +237,16 @@
     gap: 0.1rem;
   }
   .sv-play-btn {
-    padding: 0.5rem 0.85rem;
-    font-size: 0.85rem;
-    margin-top: 0.2rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    margin-top: 0;
+  }
+  .sv-hq-btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  .sv-header-actions {
+    gap: 0.5rem;
   }
 
   .sv-controls {

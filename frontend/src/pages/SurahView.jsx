@@ -138,7 +138,7 @@ export default function SurahView() {
     if (!surah || !surah.verses.length) return;
 
     // Check if we are already playing this surah's playlist
-    const isCurrentSurahPlaying = currentVerse?.surahNumber === surahNum;
+    const isCurrentSurahPlaying = currentVerse?.surahNumber === surahNum && (!currentVerse.isHQ);
 
     if (isCurrentSurahPlaying) {
       togglePlay();
@@ -153,6 +153,7 @@ export default function SurahView() {
       playPlaylist(playlistVerses, 0);
     }
   }
+
 
   async function handleBookmark(verse) {
     const alreadyBookmarked = isBookmarked(surahNum, verse.number);
@@ -218,12 +219,15 @@ export default function SurahView() {
               {surah.nameTranslation} · {surah.revelation} · {surah.versesCount} verses
             </p>
           </div>
-          <button
-            className={`btn sv-play-btn ${isPlaying && currentVerse?.surahNumber === surahNum ? 'btn-secondary' : 'btn-primary'}`}
-            onClick={handlePlayAllToggle}
-          >
-            {isPlaying && currentVerse?.surahNumber === surahNum ? '⏸ Pause' : '▶ Play'}
-          </button>
+          <div className="sv-header-actions">
+
+            <button
+              className={`btn sv-play-btn ${(isPlaying && currentVerse?.surahNumber === surahNum && !currentVerse.isHQ) ? 'btn-secondary' : 'btn-primary'}`}
+              onClick={handlePlayAllToggle}
+            >
+              {(isPlaying && currentVerse?.surahNumber === surahNum && !currentVerse.isHQ) ? '⏸ Pause' : '▶ Play'}
+            </button>
+          </div>
         </div>
 
         {/* ── Bismillah (except surah 1 & 9) ────────────── */}

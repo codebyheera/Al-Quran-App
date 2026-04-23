@@ -18,8 +18,6 @@ export const AudioProvider = ({ children }) => {
 
   const audioRef = useRef(new Audio());
 
-
-
   useEffect(() => {
     const audio = audioRef.current;
     let animationFrameId;
