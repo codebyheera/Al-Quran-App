@@ -33,10 +33,6 @@ const SadaPayLogo = () => (
   <img 
     src="https://crystalpng.com/wp-content/uploads/2025/09/Sadapay-Logo.png" 
     alt="SadaPay Logo"
-    width="120"
-    height="120"
-    loading="lazy"
-    decoding="async"
     style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }}
   />
 );

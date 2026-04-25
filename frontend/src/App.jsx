@@ -33,7 +33,7 @@ export default function App() {
       <Navbar />
 
       <main>
-        <Suspense fallback={<div className="loading-center"><div className="spinner"></div><p>Loading...</p></div>}>
+        <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
           <Routes>
             <Route path="/"            element={<Home />} />
             <Route path="/surah"       element={<SurahList />} />
