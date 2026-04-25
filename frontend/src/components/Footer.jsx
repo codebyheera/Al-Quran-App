@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const QUICK_LINKS = [
-  { label: 'Home',      to: '/' },
-  { label: 'Surahs',    to: '/surah' },
-  { label: 'Juz',       to: '/juz' },
+  { label: 'Home', to: '/' },
+  { label: 'Surahs', to: '/surah' },
+  { label: 'Juz', to: '/juz' },
   { label: 'Bookmarks', to: '/bookmarks' },
   { label: 'Support ✨', to: '/support' },
 ];
@@ -70,7 +70,14 @@ export default function Footer() {
       <div className="footer-bottom">
         <p className="footer-credit">
           Built with <span className="footer-heart">♥</span> by{' '}
-          <strong className="footer-author">Muhammad Subhan Naeem</strong>
+          <a
+            href="https://www.linkedin.com/in/codebysubhan/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-author"
+          >
+            Muhammad Subhan Naeem
+          </a>
         </p>
         <p className="footer-copy">© {year} Al-Quran App. All rights reserved.</p>
       </div>
