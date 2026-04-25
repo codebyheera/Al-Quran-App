@@ -155,7 +155,11 @@ export default function BottomPlayer() {
             <img
               src={selectedReciter?.image}
               alt={selectedReciter?.name}
+              width="44"
+              height="44"
               className="bp-mini-img"
+              loading="lazy"
+              decoding="async"
               onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
             />
             <div className="bp-mini-img-fallback" style={{ display: 'none' }}>
@@ -311,7 +315,11 @@ export default function BottomPlayer() {
                   <img
                     src={selectedReciter?.image}
                     alt={selectedReciter?.name}
+                    width="200"
+                    height="200"
                     className="bp-artwork-img"
+                    loading="lazy"
+                    decoding="async"
                     onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                   />
                   <div className="bp-artwork-fallback" style={{ display: 'none' }}>
