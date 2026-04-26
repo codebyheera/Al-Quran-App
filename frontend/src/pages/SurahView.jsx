@@ -201,7 +201,7 @@ export default function SurahView() {
     >
       {surah && (
         <Helmet>
-          <title>{surahNum === 36 ? 'Complete Surah Yaseen – Yaseen Surah Quran Text & Translation Online | AlQuranHub' : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}</title>
+          <title>{surahNum === 36 ? 'Complete Surah Yaseen – Yaseen Quran Text & Translation | AlQuranHub' : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}</title>
           <meta name="description" content={surahNum === 36 ? 'Access the full Surah Yaseen online with Arabic text and English translation. Study, read, and recite Yaseen Surah easily at AlQuranHub.' : `Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`} />
           <link rel="canonical" href={`https://alquranhub.org/surah/${id}`} />
         </Helmet>
