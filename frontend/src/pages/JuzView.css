@@ -147,7 +147,7 @@
 }
 
 .jv-verse {
-  padding: 0;
+  /* Ensure it inherits global .verse-card padding instead of overriding it to 0 */
 } 
 /* The verse cards inside JuzView use the same HTML structure as SurahView.
    Mobile responsive adjustments for .verse-card are handled in global.css */
