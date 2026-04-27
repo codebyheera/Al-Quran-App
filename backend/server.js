@@ -8,6 +8,7 @@ import 'dotenv/config'; // ← loads .env BEFORE all other module bodies execute
 
 import express from 'express';
 import cors from 'cors';
+import rateLimit from 'express-rate-limit';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,7 +19,22 @@ const app  = express();
 const PORT = process.env.PORT || 5000;
 
 // ── Middleware ───────────────────────────────────────────────────────────────
-app.use(cors());
+// Rate Limiter configuration
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  message: { message: "Too many requests from this IP, please try again after 15 minutes" }
+});
+
+app.use(limiter);
+
+// CORS configuration
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://alquranhub.org']
+    : ['http://localhost:3000', 'http://localhost:5173', 'https://alquranhub.org']
+}));
+
 app.use(express.json());
 
 // ── Routes ───────────────────────────────────────────────────────────────────

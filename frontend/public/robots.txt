@@ -1,77 +1,16 @@
-# ===========================================
-# robots.txt — alquranhub.org
-# Al-Quran Hub | Non-Profit Quran Website
-# ===========================================
-
-# -----------------------------------------------
-# Default — All Crawlers
-# -----------------------------------------------
 User-agent: *
 Allow: /
+
 Disallow: /api/
-Disallow: /admin/
-Disallow: /dashboard/
 Disallow: /private/
-Disallow: /dev/
-Disallow: /staging/
-Disallow: /*.env$
-Disallow: /*?utm_source
-Disallow: /*?utm_medium
-Disallow: /*?utm_campaign
+
+Disallow: /*?utm_source=
+Disallow: /*?utm_medium=
+Disallow: /*?utm_campaign=
 Disallow: /*?fbclid=
 Disallow: /*?gclid=
+Disallow: /*.env$
 
-# -----------------------------------------------
-# Major Search Engines — Full Access
-# -----------------------------------------------
-User-agent: Googlebot
-Allow: /
-
-User-agent: Googlebot-Image
-Allow: /
-
-User-agent: Googlebot-Mobile
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-# -----------------------------------------------
-# SEO Tools — Allow
-# -----------------------------------------------
-User-agent: AhrefsBot
-Allow: /
-
-User-agent: SemrushBot
-Allow: /
-
-User-agent: MJ12bot
-Allow: /
-
-# -----------------------------------------------
-# Social Media Bots — Allow (previews ke liye)
-# -----------------------------------------------
-User-agent: Twitterbot
-Allow: /
-
-User-agent: Discordbot
-Allow: /
-
-User-agent: Slackbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-# -----------------------------------------------
-# AI Bots — Block (Quran content protection)
-# -----------------------------------------------
 User-agent: GPTBot
 Disallow: /
 
@@ -97,6 +36,15 @@ User-agent: meta-externalagent
 Disallow: /
 
 User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: Diffbot
 Disallow: /
 
 # -----------------------------------------------
