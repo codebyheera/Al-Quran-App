@@ -10,14 +10,14 @@ const ALQURAN_BASE = 'https://api.alquran.cloud/v1';
 
 // Helper to build audio URL based on reciter
 const RECITER_PATH = {
-  'abdulsamad': 'AbdulSamad_64kbps_QuranExplorer.Com',
   'sudais': 'Abdurrahmaan_As-Sudais_64kbps',
   'ghamidi': 'Ghamadi_40kbps',
-  'alafasy': 'Mishary_Rashid_Alafasy_128kbps',
   'yasser': 'Yasser_Ad-Dussary_128kbps'
 };
 
 const RECITER_IDENTIFIER = {
+  'abdulsamad': 'ar.abdulsamad',
+  'alafasy': 'ar.alafasy'
 };
 
 function getAudioUrl(reciter, surahNum, ayahNumInSurah, globalAyahNum) {

@@ -114,6 +114,10 @@ export const AudioProvider = ({ children }) => {
     audioRef.current.play().catch(console.error);
   };
 
+  const updatePlaylist = (newPlaylist) => {
+    setPlaylist(newPlaylist);
+  };
+
   const togglePlay = () => {
     if (audioRef.current.paused) {
       audioRef.current.play().catch(console.error);
@@ -201,6 +205,7 @@ export const AudioProvider = ({ children }) => {
       skipBackward,
       playVerse,
       playPlaylist,
+      updatePlaylist,
       togglePlay,
       stop,
       skipNext,

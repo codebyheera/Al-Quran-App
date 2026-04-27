@@ -66,25 +66,46 @@ export default function JuzView() {
     if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
   };
 
-  const { currentVerse, isPlaying, playPlaylist, togglePlay, stop } = useAudio();
+  const { currentVerse, isPlaying, playPlaylist, updatePlaylist, togglePlay, stop } = useAudio();
   const { reciter } = useQari();
   const { addBookmark, removeBookmark, isBookmarked, bookmarks } = useBookmarks();
   const topRef = useRef(null);
+
+  const prevJuzRef = useRef(juzNum);
 
   // Track currently playing word audio to prevent overlaps
   const wordAudioRef = useRef(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-    stop(); // Stop any playing audio when switching reciter or juz
-    if (wordAudioRef.current) {
+    const isJuzChange = prevJuzRef.current !== juzNum;
+    prevJuzRef.current = juzNum;
+
+    if (isJuzChange || !juz) {
+      setLoading(true);
+      setError(null);
+      stop(); // Stop audio only on juz change
+      topRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    if (wordAudioRef.current && isJuzChange) {
       wordAudioRef.current.pause();
       wordAudioRef.current = null;
     }
-    topRef.current?.scrollIntoView({ behavior: 'smooth' });
+    
     api.get(`/api/juz/${juzNum}?reciter=${reciter}`)
-      .then(({ data }) => { setJuz(data); setLoading(false); })
+      .then(({ data }) => { 
+        setJuz(data); 
+        setLoading(false); 
+
+        // Update background playlist if currently playing this juz
+        if (!isJuzChange && updatePlaylist) {
+          const mappedVerses = data.verses.map(v => ({
+            ...v,
+            audio: v.audioUrl
+          }));
+          updatePlaylist(mappedVerses);
+        }
+      })
       .catch(() => { setError('Failed to load Juz.'); setLoading(false); });
   }, [juzNum, reciter]);
 

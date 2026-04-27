@@ -70,26 +70,50 @@ export default function SurahView() {
     if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
   };
 
-  const { currentVerse, isPlaying, playPlaylist, togglePlay, stop } = useAudio();
+  const { currentVerse, isPlaying, playPlaylist, updatePlaylist, togglePlay, stop } = useAudio();
   const { reciter } = useQari();
 
   const { addBookmark, removeBookmark, isBookmarked, bookmarks } = useBookmarks();
   const topRef = useRef(null);
 
+  // Ref to track the previous ID to differentiate between ID change vs Reciter change
+  const prevIdRef = useRef(id);
+
   // Track currently playing word audio to prevent overlaps
   const wordAudioRef = useRef(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-    stop(); // Stop any playing audio when switching reciter or surah
-    if (wordAudioRef.current) {
+    const isIdChange = prevIdRef.current !== id;
+    prevIdRef.current = id;
+
+    if (isIdChange || !surah) {
+      setLoading(true);
+      setError(null);
+      stop(); // Stop any playing audio when switching surah
+      topRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    if (wordAudioRef.current && isIdChange) {
       wordAudioRef.current.pause();
       wordAudioRef.current = null;
     }
-    topRef.current?.scrollIntoView({ behavior: 'smooth' });
+
     api.get(`/api/surah/${id}?reciter=${reciter}`)
-      .then(({ data }) => { setSurah(data); setLoading(false); })
+      .then(({ data }) => { 
+        setSurah(data); 
+        setLoading(false); 
+        
+        // Update background playlist if currently playing
+        if (!isIdChange && updatePlaylist) {
+          const mappedVerses = data.verses.map(v => ({
+            ...v,
+            surahNumber: data.surahNumber,
+            surahName: data.surahName,
+            audio: v.audioUrl
+          }));
+          updatePlaylist(mappedVerses);
+        }
+      })
       .catch(() => { setError('Failed to load Surah.'); setLoading(false); });
   }, [id, reciter]);
 
