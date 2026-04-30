@@ -225,8 +225,8 @@ export default function SurahView() {
     >
       {surah && (
         <Helmet>
-          <title>{surahNum === 36 ? 'Complete Surah Yaseen – Yaseen Quran Text & Translation | AlQuranHub' : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}</title>
-          <meta name="description" content={surahNum === 36 ? 'Access the full Surah Yaseen online with Arabic text and English translation. Study, read, and recite Yaseen Surah easily at AlQuranHub.' : `Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`} />
+          <title>{surahNum === 36 ? 'Complete Surah Yaseen – Yaseen Quran Text & Translation | AlQuranHub' : surahNum === 18 ? 'Surah Al-Kahf - Read & Listen with English Translation' : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}</title>
+          <meta name="description" content={surahNum === 36 ? 'Access the full Surah Yaseen online with Arabic text and English translation. Study, read, and recite Yaseen Surah easily at AlQuranHub.' : surahNum === 18 ? 'Read complete Surah Al-Kahf in Arabic with English translation. Listen with 7 Qari recitations including Mishary. First & last 10 verses. Free on Al-Quran Hub.' : `Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`} />
           <link rel="canonical" href={`https://alquranhub.org/surah/${id}`} />
         </Helmet>
       )}
