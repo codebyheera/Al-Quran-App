@@ -1,132 +1,66 @@
-# 📖 Al-Quran — MERN Stack Quran Web App
+# 📖 Al-Quran Hub
 
-A full-featured, beautiful Quran reading app built with **React**, **Node/Express**, and **MongoDB**.
+**A free, ad-free Quran web application for the Muslim Ummah.**  
+Read every Surah, listen to every Ayah — beautifully, simply, and without distractions.
+
+🌐 **[alquranhub.org](https://alquranhub.org)**
+
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&style=flat-square)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?logo=node.js&logoColor=white&style=flat-square)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?logo=supabase&logoColor=white&style=flat-square)
+![Cloudflare](https://img.shields.io/badge/CDN-Cloudflare-F38020?logo=cloudflare&logoColor=white&style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+
+---
+
+## Overview
+
+Al-Quran Hub is a non-profit, open-source Quran platform built on the **SERN stack** (Supabase, Express, React, Node.js). The goal is simple — provide every Muslim with clean, fast, and free access to the Holy Quran online, with no ads, no paywalls, and no distractions.
+
+---
 
 ## Features
 
-- 📖 **Browse all 114 Surahs** — with Arabic text, English translation
-- 📚 **Browse all 30 Juz** — grouped by Surah within each part  
-- 🔊 **Audio recitation** — per-verse playback (Abdul Samad, EveryAyah CDN)
-- 🔖 **Bookmarks** — save verses, stored in MongoDB, no login required
-- 🔍 **Search** — global text search across English translation
-- 🌙 **Dark / Light mode** — persisted to localStorage
-- ⬅➡ **Prev / Next navigation** between Surahs and Juz
-- 📱 **Mobile-first responsive design**
-
----
-
-## Project Structure
-
-```
-Quran App/
-├── backend/       ← Node.js + Express + MongoDB
-│   ├── models/    ← Mongoose schemas (User, Bookmark)
-│   ├── routes/    ← API routes (surah, juz, bookmarks, search)
-│   ├── server.js
-│   └── package.json
-└── frontend/      ← React (Vite)
-    ├── src/
-    │   ├── components/   ← Navbar, AudioPlayer
-    │   ├── context/      ← ThemeContext, BookmarkContext
-    │   ├── pages/        ← Home, SurahList, JuzList, SurahView, JuzView, BookmarksPage, SearchPage
-    │   └── styles/       ← global.css, per-component CSS
-    └── package.json
-```
-
----
-
-## Running Locally
-
-### Prerequisites
-- [Node.js](https://nodejs.org) v18+
-- [MongoDB Atlas](https://www.mongodb.com/atlas) account (free tier works)
-
-### 1. Clone / navigate to the project
-
-```bash
-cd "Quran App"
-```
-
-### 2. Set up the Backend
-
-```bash
-cd backend
-copy .env.example .env
-```
-
-Open `.env` and replace the `MONGO_URI` with your **MongoDB Atlas** connection string:
-
-```
-MONGO_URI=mongodb+srv://<user>:<pass>@<cluster>.mongodb.net/quranapp?retryWrites=true&w=majority
-```
-
-Then install dependencies and start:
-
-```bash
-npm install
-npm run dev     # uses nodemon for auto-reload
-# Server runs on http://localhost:5000
-```
-
-### 3. Set up the Frontend
-
-```bash
-cd ../frontend
-npm install
-npm run dev
-# App opens on http://localhost:5173
-```
-
-> The Vite dev server automatically proxies `/api/*` to `http://localhost:5000`.
-
----
-
-## API Routes (Backend)
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/surah` | List all 114 Surahs (metadata) |
-| GET | `/api/surah/:n` | Surah Arabic + English text |
-| GET | `/api/juz` | List all 30 Juz |
-| GET | `/api/juz/:n` | Juz Arabic + English text |
-| GET | `/api/bookmarks?clientId=x` | Get user bookmarks |
-| POST | `/api/bookmarks` | Create bookmark |
-| DELETE | `/api/bookmarks/:id` | Delete bookmark |
-| GET | `/api/search?q=keyword` | Search English translation |
-
----
-
-## Deployment
-
-### Frontend → Vercel / Netlify
-1. Build: `npm run build` inside `frontend/`
-2. Set environment variable: `VITE_API_URL=https://your-backend.com`
-3. Deploy `frontend/dist/`
-
-### Backend → Render / Railway
-1. Set `MONGO_URI` and `PORT` env vars
-2. Set start command: `node server.js`
-3. Set `FRONTEND_URL` to your deployed frontend URL (for CORS)
-
-### Database → MongoDB Atlas
-- Free M0 cluster is sufficient to start
-- Whitelist all IPs (`0.0.0.0/0`) for cloud deployment
+| Feature | Description |
+|---------|-------------|
+| 📖 **114 Surahs** | Full Arabic text with English translation |
+| 📚 **30 Juz** | Complete Juz browsing grouped by Surah |
+| 🔊 **Audio Recitation** | Per-verse playback — Sheikh Abdul Samad via EveryAyah CDN |
+| 🔖 **Bookmarks** | Save and revisit verses — no account required |
+| 🔍 **Search** | Full-text search across English translation |
+| 🌙 **Dark / Light Mode** | Theme persisted across sessions |
+| 📱 **Responsive Design** | Mobile-first, works on all screen sizes |
 
 ---
 
 ## Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
+|-------|------------|
 | Frontend | React 18, Vite, React Router v6 |
-| Styling | Vanilla CSS, Google Fonts (Amiri, Noto Naskh Arabic, Inter) |
 | Backend | Node.js, Express 4 |
-| Database | MongoDB (Mongoose) |
+| Database | Supabase (PostgreSQL) |
+| Styling | Vanilla CSS, Google Fonts (Amiri, Noto Naskh Arabic) |
 | Quran Data | [AlQuran Cloud API](https://alquran.cloud/api) |
 | Audio | [EveryAyah CDN](https://everyayah.com) |
+| Hosting | Vercel + Render |
+| CDN | Cloudflare |
+
+---
+
+## Contributing
+
+Contributions are welcome — whether it's a bug fix, a new feature, or an improvement to the UI.  
+Open an issue or submit a pull request.
 
 ---
 
 ## License
 
 MIT — free to use, modify, and distribute.
+
+---
+
+<div align="center">
+  Built with ❤️ for the Muslim Ummah &nbsp;|&nbsp; <a href="https://alquranhub.org">alquranhub.org</a>
+</div>
