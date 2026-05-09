@@ -145,7 +145,7 @@ export default function Navbar() {
           {/* Logo */}
           <NavLink to="/" className="navbar-logo" onClick={closeSidebar}>
             <span className="navbar-logo-icon">☪</span>
-            <span className="navbar-logo-text">Al-<span>Quran</span></span>
+            <span className="navbar-logo-text">Al-<span>Quran</span> Hub</span>
           </NavLink>
 
           {/* Nav links (desktop) */}
@@ -191,7 +191,7 @@ export default function Navbar() {
         <div className="sidebar-header">
           <div className="sidebar-logo">
             <span className="navbar-logo-icon">☪</span>
-            <span className="navbar-logo-text">Al-<span>Quran</span></span>
+            <span className="navbar-logo-text">Al-<span>Quran</span> Hub</span>
           </div>
           <button className="sidebar-close" onClick={closeSidebar} aria-label="Close menu">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">

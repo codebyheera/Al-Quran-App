@@ -28,7 +28,7 @@ export default function Footer() {
         <div className="footer-brand">
           <Link to="/" className="footer-logo">
             <span className="footer-logo-icon">☪</span>
-            <span className="footer-logo-text">Al-<span>Quran</span></span>
+            <span className="footer-logo-text">Al-<span>Quran</span> Hub</span>
           </Link>
           <p className="footer-tagline">
             Read, Listen, and Reflect on the Holy Quran — anytime, anywhere.
@@ -79,7 +79,7 @@ export default function Footer() {
             Muhammad Subhan Naeem
           </a>
         </p>
-        <p className="footer-copy">© {year} Al-Quran App. All rights reserved.</p>
+        <p className="footer-copy">© {year} Al-Quran Hub. All rights reserved.</p>
       </div>
     </footer>
   );
