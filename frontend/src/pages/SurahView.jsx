@@ -283,25 +283,25 @@ export default function SurahView() {
             name="description"
             content={
               surahNum === 1
-                ? "Surah Al-Fatiha (The Opening) — Chapter 1 of the Holy Quran. Read in Arabic, listen to beautiful recitation, and explore English translation. Free on Al-Quran Hub."
+                ? "Surah Al-Fatiha (Chapter 1). Read in Arabic, listen to beautiful recitations, and explore English translations. Free on Al-Quran Hub."
                 : surahNum === 2
-                  ? "Read and listen to Surah Al-Baqarah (The Cow) — Chapter 2 of the Holy Quran. Includes Ayatul Kursi, Arabic text, English translation. Free recitation on Al-Quran Hub."
+                  ? "Read and listen to Surah Al-Baqarah (The Cow) — Chapter 2 of the Quran. Includes Ayatul Kursi, Arabic text, and English translations. Free on Al-Quran Hub."
                   : surahNum === 3
-                    ? "Read and listen to Surah Al-Imran (Family of Imran) — Chapter 3 of the Holy Quran. 200 verses with Arabic text, English translation. Free recitation on Al-Quran Hub."
+                    ? "Read and listen to Surah Al-Imran (Family of Imran) — Chapter 3 of the Quran. 200 verses with Arabic text and English translation. Free at Al-Quran Hub."
                     : surahNum === 4
-                      ? "Read and listen to Surah An-Nisa (The Women) — Chapter 4 of the Holy Quran. 176 verses covering women's rights, inheritance & family laws. Arabic, English — Free on Al-Quran Hub."
+                      ? "Read and listen to Surah An-Nisa (Women) - Chapter 4. 176 verses on women's rights, inheritance, family laws. Arabic and English. Free on Al-Quran Hub."
                       : surahNum === 5
-                        ? "Read and listen to Surah Al-Maidah (The Table Spread) — Chapter 5 of the Holy Quran. 120 verses on halal food, justice & Islamic law. Arabic & English — Free on Al-Quran Hub."
+                        ? "Read and listen to Surah Al-Maidah (Table Spread) - Chapter 5. 120 verses on halal food, justice & Islamic law. Arabic & English. Free on Al-Quran Hub."
                         : surahNum === 6
                           ? "Read and listen to Surah Al-Anam (The Cattle) — Chapter 6 of the Holy Quran. 165 verses on Tawheed & faith. Arabic & English — Free on Al-Quran Hub."
                           : surahNum === 7
                             ? "Read and listen to Surah Al-Araf (The Heights) — Chapter 7 of the Holy Quran. 206 verses on Adam, Day of Judgment. Arabic & English — Free on Al-Quran Hub."
                             : surahNum === 8
-                              ? "Read and listen to Surah Al-Anfal (The Spoils of War) — Chapter 8 of the Holy Quran. 75 verses on Battle of Badr, faith & unity. Arabic & English — Free on Al-Quran Hub."
+                              ? "Read and listen to Surah Al-Anfal (Spoils of War) - Chapter 8. 75 verses on Battle of Badr, faith & unity. Arabic & English — Free on Al-Quran Hub."
                               : surahNum === 9
                                 ? "Read and listen to Surah Tawbah (The Repentance) — Chapter 9 of the Holy Quran. 129 verses. Arabic & English — Free on Al-Quran Hub."
                                 : surahNum === 10
-                                  ? "Read and listen to Surah Younus (Jonah) — Chapter 10 of the Holy Quran. 109 verses on faith, patience & repentance. Arabic & English — Free on Al-Quran Hub."
+                                  ? "Read and listen to Surah Younus (Jonah) — Ch. 10. 109 verses on faith, patience & repentance. Arabic & English — Free on Al-Quran Hub."
                                   : surahNum === 36
                                   ? "Read complete Surah Yaseen (Ya-Sin) in Arabic with English translation. Listen to full Yaseen Surah with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
                                   : surahNum === 18
