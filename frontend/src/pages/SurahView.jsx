@@ -271,13 +271,23 @@ export default function SurahView() {
                               ? "Surah Tawbah | Read & Listen Online Free — Al-Quran Hub"
                               : surahNum === 10
                                 ? "Surah Younus | Read & Listen Online Free — Al-Quran Hub"
-                                : surahNum === 36
-                                ? "Surah Yaseen - Read Complete Yaseen with Translation"
-                                : surahNum === 18
-                                  ? "Surah Al-Kahf - Read & Listen with English Translation"
-                                  : surahNum === 22
-                                    ? "Surah Al-Hajj - Read Online with English Translation"
-                                    : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}
+                                : surahNum === 11
+                                  ? "Surah Hud | Read & Listen Online Free — Al-Quran Hub"
+                                  : surahNum === 12
+                                    ? "Surah Yousaf | Read & Listen Online Free — Al-Quran Hub"
+                                    : surahNum === 13
+                                      ? "Surah Ar-Rad | Read & Listen Online Free — Al-Quran Hub"
+                                      : surahNum === 14
+                                        ? "Surah ibrahim | Read & Listen Online Free — Al-Quran Hub"
+                                        : surahNum === 15
+                                          ? "Surah Al-Hijr | Read & Listen Free Online — Al-Quran Hub"
+                                          : surahNum === 36
+                                            ? "Surah Yaseen - Read Complete Yaseen with Translation"
+                                            : surahNum === 18
+                                              ? "Surah Al-Kahf - Read & Listen with English Translation"
+                                              : surahNum === 22
+                                                ? "Surah Al-Hajj - Read Online with English Translation"
+                                                : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}
           </title>
           <meta
             name="description"
@@ -302,13 +312,23 @@ export default function SurahView() {
                                 ? "Read and listen to Surah Tawbah (The Repentance) — Chapter 9 of the Holy Quran. 129 verses. Arabic & English — Free on Al-Quran Hub."
                                 : surahNum === 10
                                   ? "Read and listen to Surah Younus (Jonah) — Ch. 10. 109 verses on faith, patience & repentance. Arabic & English — Free on Al-Quran Hub."
-                                  : surahNum === 36
-                                  ? "Read complete Surah Yaseen (Ya-Sin) in Arabic with English translation. Listen to full Yaseen Surah with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
-                                  : surahNum === 18
-                                    ? "Read complete Surah Al-Kahf in Arabic with English translation. Listen with 7 Qari recitations including Mishary. First & last 10 verses. Free on Al-Quran Hub."
-                                    : surahNum === 22
-                                      ? "Read complete Surah Al-Hajj in Arabic with English translation. Listen with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
-                                      : `Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`
+                                  : surahNum === 11
+                                    ? "Read and listen to Surah Hud — Chapter 11 of the Quran. 123 verses with stories of 7 Prophets — Noah, Hud, Saleh, Ibrahim, Lot, Shuayb & Moses. Arabic & English. Free on Al-Quran Hub."
+                                    : surahNum === 12
+                                      ? "Read and listen to Surah Yousaf (Joseph) — Ch 12. 111 verses - the Quran story. Patience, faith & forgiveness. Arabic & English. Free on Al-Quran Hub."
+                                      : surahNum === 13
+                                        ? "Read and listen to Surah Ar-Rad (Thunder) - Ch 13. 43 verses on Allah's power & nature signs. Verses 11 & 28. Arabic & English. Free on Al-Quran Hub."
+                                        : surahNum === 14
+                                          ? "Read and listen to Surah ibrahim (Abraham) — Chapter 14. 52 verses on gratitude, faith & ibrahim's dua. Arabic & English. Free on Al-Quran Hub."
+                                          : surahNum === 15
+                                            ? "Read and listen to Surah Al-Hijr — Chapter 15 of the Quran. 99 verses on Allah's protection & Prophet stories. Arabic & English. Free on Al-Quran Hub."
+                                            : surahNum === 36
+                                              ? "Read complete Surah Yaseen (Ya-Sin) in Arabic with English translation. Listen to full Yaseen Surah with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
+                                              : surahNum === 18
+                                                ? "Read complete Surah Al-Kahf in Arabic with English translation. Listen with 7 Qari recitations including Mishary. First & last 10 verses. Free on Al-Quran Hub."
+                                                : surahNum === 22
+                                                  ? "Read complete Surah Al-Hajj in Arabic with English translation. Listen with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
+                                                  : `Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`
             }
           />
           <link rel="canonical" href={`https://alquranhub.org/surah/${id}`} />
