@@ -313,7 +313,7 @@ export default function SurahView() {
                                 : surahNum === 10
                                   ? "Read and listen to Surah Younus (Jonah) — Ch. 10. 109 verses on faith, patience & repentance. Arabic & English — Free on Al-Quran Hub."
                                   : surahNum === 11
-                                    ? "Read and listen to Surah Hud — Chapter 11 of the Quran. 123 verses with stories of 7 Prophets — Noah, Hud, Saleh, Ibrahim, Lot, Shuayb & Moses. Arabic & English. Free on Al-Quran Hub."
+                                    ? "Read and listen to Surah Hud — Chapter 11 of the Quran. 123 verses with stories of 7 Prophets. Arabic & English. Free on Al-Quran Hub."
                                     : surahNum === 12
                                       ? "Read and listen to Surah Yousaf (Joseph) — Ch 12. 111 verses - the Quran story. Patience, faith & forgiveness. Arabic & English. Free on Al-Quran Hub."
                                       : surahNum === 13
