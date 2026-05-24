@@ -9,6 +9,7 @@ import { useBookmarks } from '../context/BookmarkContext';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import './Home.css';
+import './SurahList.css';
 
 // Popular Surahs — static quick-access shown on the home page
 const POPULAR = [
@@ -29,6 +30,7 @@ export default function Home() {
   const [allSurahs, setAllSurahs] = useState([]);
   const [verseOfTheDay, setVerseOfTheDay] = useState(null);
   const [isLoadingVotd, setIsLoadingVotd] = useState(true);
+  const [showAllSurahs, setShowAllSurahs] = useState(false);
   const navigate = useNavigate();
   const { bookmarks } = useBookmarks();
 
@@ -229,6 +231,43 @@ export default function Home() {
                 </Link>
               ))}
             </div>
+          </section>
+        )}
+
+        {/* ── All Surahs (Grid) ──────────────────────────────── */}
+        {allSurahs.length > 0 && (
+          <section className="home-section">
+            <div className="flex-between mb-2">
+              <h2>All Surahs</h2>
+              <Link to="/surah" className="btn btn-ghost" style={{ fontSize: '0.85rem' }}>Filter Surahs →</Link>
+            </div>
+            <div className="surah-grid">
+              {allSurahs.slice(0, showAllSurahs ? allSurahs.length : 42).map((s) => (
+                <Link key={s.number} to={`/surah/${s.englishName}`} className="surah-card card">
+                  <div className="surah-number">
+                    <span>{s.number}</span>
+                  </div>
+                  <div className="surah-info">
+                    <span className="surah-english">{s.englishName}</span>
+                    <span className="surah-translation text-muted">{s.nameTranslation}</span>
+                  </div>
+                  <div className="surah-meta">
+                    <span className="arabic surah-arabic-name">{s.name}</span>
+                    <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end', marginTop: '0.35rem' }}>
+                      <span className="badge badge-muted">{s.versesCount} verses</span>
+                      <span className={`badge ${s.revelation === 'Meccan' ? 'badge-gold' : 'badge-green'}`}>{s.revelation}</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            {!showAllSurahs && allSurahs.length > 42 && (
+              <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+                <button className="btn btn-primary" onClick={() => setShowAllSurahs(true)}>
+                  Load All Surahs
+                </button>
+              </div>
+            )}
           </section>
         )}
       </div>

@@ -5,6 +5,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BottomPlayer from './components/BottomPlayer';
+import SupportPopup from './components/SupportPopup';
 import { useAudio } from './context/AudioContext';
 import { useBookmarks } from './context/BookmarkContext';
 
@@ -67,6 +68,9 @@ export default function App() {
       {/* Persistent bottom audio player */}
       <Footer />
       <BottomPlayer />
+
+      {/* Global Support Popup */}
+      <SupportPopup />
     </div>
   );
 }
