@@ -303,24 +303,36 @@ export default function SurahView() {
                                                               ? "Surah Furqan | Read & Listen Online on — Al-Quran Hub"
                                                               : surahNum === 26
                                                                 ? "Surah Ash-Shuara | Read & Listen Online on — Al-Quran Hub"
-                                                                : surahNum === 27
-                                                                ? "Surah An-Naml | Read & Listen Online on  Al-Quran Hub."
-                                                                : surahNum === 28
-                                                                ? "Surah Al-Qasas | Read & Listen Online on  Al-Quran Hub"
-                                                                : surahNum === 29
-                                                                ? "Surah Al-Ankabut | Read & Listen Online on Al-Quran Hub."
-                                                               : surahNum === 30 
-                                                               ? "Surah Ar-Rum | Read & Listen Online on Al-Quran Hub."
                                                                 : surahNum ===
-                                                                    36
-                                                                  ? "Surah Yaseen - Read Complete Yaseen with Translation"
+                                                                    27
+                                                                  ? "Surah An-Naml | Read & Listen Online on  Al-Quran Hub."
                                                                   : surahNum ===
-                                                                      18
-                                                                    ? "Surah Al-Kahf - Read & Listen with English Translation"
+                                                                      28
+                                                                    ? "Surah Al-Qasas | Read & Listen Online on  Al-Quran Hub"
                                                                     : surahNum ===
-                                                                        22
-                                                                      ? "Surah Al-Hajj - Read Online with English Translation"
-                                                                      : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}
+                                                                        29
+                                                                      ? "Surah Al-Ankabut | Read & Listen Online on Al-Quran Hub."
+                                                                      : surahNum ===
+                                                                          30
+                                                                        ? "Surah Ar-Rum | Read & Listen Online on Al-Quran Hub."
+                                                                        : surahNum ===
+                                                                            31
+                                                                          ? "Surah Luqman | Read & Listen with Translation."
+                                                                          : surahNum ===
+                                                                              32
+                                                                            ? "Surah As-Sajdah | Read & Listen with Translation."
+                                                                           : surahNum === 33
+                                                                           ? "Read Surah Al-Ahzab Online with Translation Free."
+                                                                            : surahNum ===
+                                                                                36
+                                                                              ? "Surah Yaseen - Read Complete Yaseen with Translation"
+                                                                              : surahNum ===
+                                                                                  18
+                                                                                ? "Surah Al-Kahf - Read & Listen with English Translation"
+                                                                                : surahNum ===
+                                                                                    22
+                                                                                  ? "Surah Al-Hajj - Read Online with English Translation"
+                                                                                  : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}
           </title>
           <meta
             name="description"
@@ -378,24 +390,36 @@ export default function SurahView() {
                                                                 : surahNum ===
                                                                     26
                                                                   ? "Read and listen to Surah Ash-Shuara (Chapter 26) online for free with English translation, and audio recitation. Explore the full surah on Al-Quran Hub."
-                                                                  : surahNum === 27
-                                                                  ? "Read and listen to Surah An-Naml (Chapter 27) online for free with English translation, and audio recitation. Explore the full surah on Al-Quran Hub."
-                                                                  : surahNum === 28
-                                                                  ? "Read and listen to Surah Al-Qasas (Chapter 28) online for free with English translation, and audio recitation. Explore the full surah on Al-Quran Hub."
-                                                                  :surahNum === 29
-                                                                  ? "Read and listen to Surah Al-Ankabut (Chapter 29) online for free with English translation, and audio recitation. Explore the full surah on Al-Quran Hub."
-                                                                  : surahNum === 30
-                                                                  ? "Read and listen to Surah Ar-Rum (Chapter 30) online for free with English translation, and audio recitation. Explore the full surah on Al-Quran Hub."
                                                                   : surahNum ===
-                                                                      36
-                                                                    ? "Read complete Surah Yaseen (Ya-Sin) in Arabic with English translation. Listen to full Yaseen Surah with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
+                                                                      27
+                                                                    ? "Read and listen to Surah An-Naml (Chapter 27) online for free with English translation, and audio recitation. Explore the full surah on Al-Quran Hub."
                                                                     : surahNum ===
-                                                                        18
-                                                                      ? "Read complete Surah Al-Kahf in Arabic with English translation. Listen with 7 Qari recitations including Mishary. First & last 10 verses. Free on Al-Quran Hub."
+                                                                        28
+                                                                      ? "Read and listen to Surah Al-Qasas (Chapter 28) online for free with English translation, and audio recitation. Explore the full surah on Al-Quran Hub."
                                                                       : surahNum ===
-                                                                          22
-                                                                        ? "Read complete Surah Al-Hajj in Arabic with English translation. Listen with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
-                                                                        : `Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`
+                                                                          29
+                                                                        ? "Read and listen to Surah Al-Ankabut (Chapter 29) online for free with English translation, and audio recitation. Explore the full surah on Al-Quran Hub."
+                                                                        : surahNum ===
+                                                                            30
+                                                                          ? "Read and listen to Surah Ar-Rum (Chapter 30) online for free with English translation, and audio recitation. Explore the full surah on Al-Quran Hub."
+                                                                          : surahNum ===
+                                                                              31
+                                                                            ? "Read & listen to Surah Luqman (Chapter 31) online with English translation & audio recitation. Explore it free on Al-Quran Hub."
+                                                                            : surahNum ===
+                                                                                32
+                                                                              ? "Read & listen to Surah As-Sajdah (Chapter 32) full online with English translation & audio recitation. Explore it free on Al-Quran Hub."
+                                                                            : surahNum === 33
+                                                                            ? "Read & listen to Surah Al-Ahzab (Chapter 33) full online with English translation & audio recitation. Start exploring now on Al-Quran Hub."
+                                                                              : surahNum ===
+                                                                                  36
+                                                                                ? "Read complete Surah Yaseen (Ya-Sin) in Arabic with English translation. Listen to full Yaseen Surah with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
+                                                                                : surahNum ===
+                                                                                    18
+                                                                                  ? "Read complete Surah Al-Kahf in Arabic with English translation. Listen with 7 Qari recitations including Mishary. First & last 10 verses. Free on Al-Quran Hub."
+                                                                                  : surahNum ===
+                                                                                      22
+                                                                                    ? "Read complete Surah Al-Hajj in Arabic with English translation. Listen with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
+                                                                                    : `Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`
             }
           />
           <link rel="canonical" href={`https://alquranhub.org/surah/${id}`} />
