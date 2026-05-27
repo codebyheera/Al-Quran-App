@@ -323,9 +323,15 @@ export default function SurahView() {
                                                                             ? "Surah As-Sajdah | Read & Listen with Translation."
                                                                            : surahNum === 33
                                                                            ? "Read Surah Al-Ahzab Online with Translation Free."
+                                                                           : surahNum === 34
+                                                                           ? "Surah Saba | Read & Listen Online — Al-Quran Hub."
+                                                                           : surahNum === 35
+                                                                           ? "Surah Fatir | Read & Listen Online — Al-Quran Hub."
                                                                             : surahNum ===
                                                                                 36
-                                                                              ? "Surah Yaseen - Read Complete Yaseen with Translation"
+                                                                              ? "Surah Yaseen Full | Read Online — Al-Quran Hub."
+                                                                              : surahNum === 37
+                                                                              ? "As-Saffat | Surah 37 Read Online — Al-Quran Hub."
                                                                               : surahNum ===
                                                                                   18
                                                                                 ? "Surah Al-Kahf - Read & Listen with English Translation"
@@ -410,9 +416,15 @@ export default function SurahView() {
                                                                               ? "Read & listen to Surah As-Sajdah (Chapter 32) full online with English translation & audio recitation. Explore it free on Al-Quran Hub."
                                                                             : surahNum === 33
                                                                             ? "Read & listen to Surah Al-Ahzab (Chapter 33) full online with English translation & audio recitation. Start exploring now on Al-Quran Hub."
-                                                                              : surahNum ===
+                                                                             : surahNum === 34
+                                                                             ? "Read Surah Saba (Chapter 34) online with English translation & audio recitation. Explore the full Quran Saba for free on Al-Quran Hub."
+                                                                            : surahNum === 35
+                                                                             ? "Read Surah Fatir (Chapter 35) online with English translation & audio recitation. Explore Fatir Surah for free on Al-Quran Hub."
+                                                                             : surahNum ===
                                                                                   36
-                                                                                ? "Read complete Surah Yaseen (Ya-Sin) in Arabic with English translation. Listen to full Yaseen Surah with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
+                                                                                ? "Read Surah Yaseen full online with English translation & audio recitation. Explore Yaseen Shareef & Surah Yasin for free on Al-Quran Hub."
+                                                                               : surahNum === 37
+                                                                               ? "Explore As-Saffat, the 37th chapter of the Quran, with English translation & audio recitation. Read Surah As-Saffat verse by verse free on Al-Quran Hub."
                                                                                 : surahNum ===
                                                                                     18
                                                                                   ? "Read complete Surah Al-Kahf in Arabic with English translation. Listen with 7 Qari recitations including Mishary. First & last 10 verses. Free on Al-Quran Hub."
