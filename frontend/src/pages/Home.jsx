@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { useBookmarks } from '../context/BookmarkContext';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
+import VerseOfDay from '../components/VerseOfDay';
 import './Home.css';
 import './SurahList.css';
 
@@ -28,8 +29,6 @@ const POPULAR = [
 export default function Home() {
   const [query, setQuery] = useState('');
   const [allSurahs, setAllSurahs] = useState([]);
-  const [verseOfTheDay, setVerseOfTheDay] = useState(null);
-  const [isLoadingVotd, setIsLoadingVotd] = useState(true);
   const [showAllSurahs, setShowAllSurahs] = useState(false);
   const navigate = useNavigate();
   const { bookmarks } = useBookmarks();
@@ -38,32 +37,6 @@ export default function Home() {
     api.get('/api/surah')
       .then(({ data }) => setAllSurahs(data))
       .catch((err) => console.error("Could not fetch surahs for suggestions", err));
-      
-    async function fetchVOTD() {
-      setIsLoadingVotd(true);
-      try {
-        const randomNum = Math.floor(Math.random() * 6236) + 1;
-        const res = await fetch(`https://api.alquran.cloud/v1/ayah/${randomNum}/editions/quran-uthmani,en.asad`);
-        const data = await res.json();
-        
-        if (data && data.data) {
-          const arabicData = data.data[0];
-          const englishData = data.data[1];
-          setVerseOfTheDay({
-            arabic: arabicData.text,
-            translation: englishData.text,
-            surahName: arabicData.surah.englishName,
-            surahNumber: arabicData.surah.number,
-            verseNumber: arabicData.numberInSurah
-          });
-        }
-      } catch (err) {
-        console.error("Failed to fetch verse of the day", err);
-      } finally {
-        setIsLoadingVotd(false);
-      }
-    }
-    fetchVOTD();
   }, []);
 
   function handleSearch(e) {
@@ -189,26 +162,7 @@ export default function Home() {
 
         {/* ── Random Verse Of The Day ──────────────────────── */}
         <section className="home-section votd-section">
-          <div className="flex-between mb-2">
-            <h2>Verse of the Day</h2>
-          </div>
-          {isLoadingVotd ? (
-            <div className="card loading-votd">
-              <div className="spinner"></div>
-            </div>
-          ) : verseOfTheDay ? (
-            <Link to={`/surah/${encodeURIComponent(verseOfTheDay.surahName)}#verse-${verseOfTheDay.verseNumber}`} className="card votd-card">
-              <div className="flex-between mb-2">
-                <span className="badge badge-gold">{verseOfTheDay.surahName} {verseOfTheDay.surahNumber}:{verseOfTheDay.verseNumber}</span>
-              </div>
-              <div className="arabic votd-arabic">
-                {verseOfTheDay.arabic}
-              </div>
-              <div className="votd-translation mt-2">
-                {verseOfTheDay.translation}
-              </div>
-            </Link>
-          ) : null}
+          <VerseOfDay />
         </section>
 
         {/* ── Recent Bookmarks ──────────────────────────────── */}
