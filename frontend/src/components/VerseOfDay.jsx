@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './VerseOfDay.module.css';
 
@@ -61,6 +61,8 @@ const VerseOfDay = ({ hijriDate }) => {
   const [error, setError] = useState(null);
   const [randomOffset, setRandomOffset] = useState(0);
   const [toastMessage, setToastMessage] = useState('');
+  const [toastKey, setToastKey] = useState(0);
+  const toastTimeoutRef = useRef(null);
   const [gregorianDate, setGregorianDate] = useState('');
   const [computedHijri, setComputedHijri] = useState('');
 
@@ -120,7 +122,9 @@ const VerseOfDay = ({ hijriDate }) => {
 
   const showToast = (msg) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(''), 2000);
+    setToastKey(prev => prev + 1);
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    toastTimeoutRef.current = setTimeout(() => setToastMessage(''), 3000);
   };
 
   const handleCopyLink = () => {
@@ -257,7 +261,7 @@ const VerseOfDay = ({ hijriDate }) => {
       )}
 
       {toastMessage && (
-        <div className={styles.toast}>
+        <div key={toastKey} className={styles.toast}>
           {toastMessage}
         </div>
       )}

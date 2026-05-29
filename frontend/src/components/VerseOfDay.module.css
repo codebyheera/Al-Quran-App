@@ -6,6 +6,7 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
 .headerRow {
@@ -177,25 +178,26 @@
 }
 
 .toast {
-  position: fixed;
-  bottom: 32px;
+  position: absolute;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--accent-gold);
-  color: var(--bg-primary);
+  color: #111;
   padding: 12px 24px;
   border-radius: 8px;
-  font-weight: 600;
-  z-index: 1000;
+  font-weight: 700;
+  z-index: 100;
   border: 1px solid var(--border);
-  animation: fadeInOut 2s ease-in-out forwards;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: fadeInOut 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeInOut {
   0% { opacity: 0; transform: translate(-50%, 20px); }
-  15% { opacity: 1; transform: translate(-50%, 0); }
-  85% { opacity: 1; transform: translate(-50%, 0); }
-  100% { opacity: 0; transform: translate(-50%, -20px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 20px); }
 }
 
 /* Mobile Responsiveness */
