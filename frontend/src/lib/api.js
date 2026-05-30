@@ -11,13 +11,7 @@
 
 import axios from 'axios';
 
-let BASE = import.meta.env.VITE_API_URL ?? '';
-
-// During react-snap prerendering, point requests directly to the backend
-// to avoid hitting the static file server which returns HTML for /api/*
-if (typeof window !== 'undefined' && window.navigator.userAgent.includes('ReactSnap')) {
-  BASE = 'http://localhost:5000';
-}
+const BASE = import.meta.env.VITE_API_URL ?? '';
 
 const api = axios.create({ baseURL: BASE });
 
