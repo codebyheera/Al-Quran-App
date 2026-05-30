@@ -17,6 +17,7 @@ export default defineConfig({
 
   // ── Bundle Optimization ──────────────────────────────────────────────────
   build: {
+    target: 'es2015',
     rollupOptions: {
       output: {
         manualChunks: {

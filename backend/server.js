@@ -32,7 +32,7 @@ app.use(limiter);
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
     ? ['https://alquranhub.org']
-    : ['http://localhost:3000', 'http://localhost:5173', 'https://alquranhub.org']
+    : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:45678', 'https://alquranhub.org']
 }));
 
 app.use(express.json());

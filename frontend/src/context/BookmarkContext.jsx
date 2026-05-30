@@ -12,12 +12,18 @@ import api from '../lib/api';
 
 const BookmarkContext = createContext();
 
-// Generate or retrieve a UUID-style user ID for anonymous bookmarks
 function getUserId() {
   // Keep reading the old key so existing users' sessions are preserved
   let id = localStorage.getItem('quran-client-id');
   if (!id) {
-    id = crypto.randomUUID();
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+      id = crypto.randomUUID();
+    } else {
+      id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
     localStorage.setItem('quran-client-id', id);
   }
   return id;

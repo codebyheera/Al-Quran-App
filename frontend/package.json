@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "build:prerender": "vite build && node scripts/prerender.js",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postbuild": "react-snap"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -40,12 +41,16 @@
       "/bookmarks",
       "/search"
     ],
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
     "crawl": true,
-    "skipThirdPartyRequests": true,
+    "skipThirdPartyRequests": false,
     "minifyHtml": {
       "collapseWhitespace": false,
       "removeComments": false
-    }
+    },
+    "inlineCss": false
   }
 }
