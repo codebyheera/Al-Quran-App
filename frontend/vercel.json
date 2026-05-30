@@ -18,6 +18,14 @@
       "destination": "/api/$1"
     },
     {
+      "source": "/surah/:name",
+      "destination": "/surah/:name/index.html"
+    },
+    {
+      "source": "/juz/:num",
+      "destination": "/juz/:num/index.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

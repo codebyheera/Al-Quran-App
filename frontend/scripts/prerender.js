@@ -9,14 +9,27 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const distPath = path.resolve(__dirname, '../dist');
 
-// Extract surah URLs from the structured JSON-LD in index.html
-const indexHtmlContent = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8');
-const surahUrls = [];
-const regex = /"url":\s*"(https:\/\/[^/]+)(\/surah\/[^"]+)"/g;
-let match;
-while ((match = regex.exec(indexHtmlContent)) !== null) {
-  if (match[2]) surahUrls.push(match[2]);
-}
+// All 114 surah slugs (matching your API route params)
+const surahUrls = [
+  "Al-Faatiha","Al-Baqara","Aal-i-Imraan","An-Nisaa","Al-Maaida","Al-An'aam",
+  "Al-A'raaf","Al-Anfaal","At-Tawba","Yunus","Hud","Yusuf","Ar-Ra'd","Ibrahim",
+  "Al-Hijr","An-Nahl","Al-Israa","Al-Kahf","Maryam","Taa-Haa","Al-Anbiyaa",
+  "Al-Hajj","Al-Muminoon","An-Noor","Al-Furqaan","Ash-Shu'araa","An-Naml",
+  "Al-Qasas","Al-Ankaboot","Ar-Room","Luqman","As-Sajda","Al-Ahzaab","Saba",
+  "Faatir","Yaseen","As-Saaffaat","Saad","Az-Zumar","Ghafir","Fussilat",
+  "Ash-Shura","Az-Zukhruf","Ad-Dukhaan","Al-Jaathiya","Al-Ahqaf","Muhammad",
+  "Al-Fath","Al-Hujuraat","Qaaf","Adh-Dhaariyat","At-Tur","An-Najm","Al-Qamar",
+  "Ar-Rahmaan","Al-Waaqia","Al-Hadid","Al-Mujaadila","Al-Hashr","Al-Mumtahana",
+  "As-Saff","Al-Jumu'a","Al-Munaafiqoon","At-Taghaabun","At-Talaaq","At-Tahrim",
+  "Al-Mulk","Al-Qalam","Al-Haaqqa","Al-Ma'aarij","Nooh","Al-Jinn","Al-Muzzammil",
+  "Al-Muddaththir","Al-Qiyaama","Al-Insaan","Al-Mursalaat","An-Naba",
+  "An-Naazi'aat","Abasa","At-Takwir","Al-Infitaar","Al-Mutaffifin","Al-Inshiqaaq",
+  "Al-Burooj","At-Taariq","Al-A'laa","Al-Ghaashiya","Al-Fajr","Al-Balad",
+  "Ash-Shams","Al-Lail","Ad-Dhuhaa","Ash-Sharh","At-Tin","Al-Alaq","Al-Qadr",
+  "Al-Bayyina","Az-Zalzala","Al-Aadiyaat","Al-Qaari'a","At-Takaathur","Al-Asr",
+  "Al-Humaza","Al-Fil","Quraish","Al-Maa'un","Al-Kawthar","Al-Kaafiroon",
+  "An-Nasr","Al-Masad","Al-Ikhlaas","Al-Falaq","An-Naas"
+].map(slug => `/surah/${slug}`);
 
 const juzUrls = Array.from({ length: 30 }, (_, i) => `/juz/${i + 1}`);
 

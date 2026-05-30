@@ -242,16 +242,8 @@ export default function SurahView() {
     audio: v.audioUrl,
   }));
 
-  return (
-    <div
-      className="surah-view page-enter"
-      ref={topRef}
-      style={{ "--arabic-font-size": `${fontSize}rem` }}
-    >
-      {surah && (
-        <Helmet>
-          <title>
-            {surahNum === 1
+  const pageTitle = surah ? (
+    surahNum === 1
               ? "Surah Fatiha (Al-Fatiha) | Read & Listen Free — Al-Quran Hub"
               : surahNum === 2
                 ? "Surah Baqra (Al-Baqarah) | Read & Listen Full Online Free — Al-Quran Hub"
@@ -339,11 +331,10 @@ export default function SurahView() {
                                                                                     22
                                                                                   ? "Surah Al-Hajj - Read Online with English Translation"
                                                                                   : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}
-          </title>
-          <meta
-            name="description"
-            content={
-              surahNum === 1
+  ) : "Al-Quran Hub";
+
+  const pageDescription = surah ? (
+    surahNum === 1
                 ? "Surah Al-Fatiha (Chapter 1). Read in Arabic, listen to beautiful recitations, and explore English translations. Free on Al-Quran Hub."
                 : surahNum === 2
                   ? "Read and listen to Surah Al-Baqarah (The Cow) — Chapter 2 of the Quran. Includes Ayatul Kursi, Arabic text, and English translations. Free on Al-Quran Hub."
@@ -432,9 +423,35 @@ export default function SurahView() {
                                                                                       22
                                                                                     ? "Read complete Surah Al-Hajj in Arabic with English translation. Listen with 7 Qari recitations including Mishary. Free on Al-Quran Hub."
                                                                                     : `Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`
-            }
-          />
+  ) : "Read and listen to the Holy Quran online.";
+
+  return (
+    <div
+      className="surah-view page-enter"
+      ref={topRef}
+      style={{ "--arabic-font-size": `${fontSize}rem` }}
+    >
+      {surah && (
+        <Helmet>
+          <title>{pageTitle}</title>
+          <meta name="description" content={pageDescription} />
           <link rel="canonical" href={`https://alquranhub.org/surah/${id}`} />
+          <meta property="og:title" content={pageTitle} />
+          <meta property="og:description" content={pageDescription} />
+          <meta property="og:url" content={`https://alquranhub.org/surah/${id}`} />
+          <meta property="og:type" content="article" />
+          <script type="application/ld+json">
+            {`
+              {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "${pageTitle.replace(/"/g, '\\"')}",
+                "url": "https://alquranhub.org/surah/${id}",
+                "description": "${pageDescription.replace(/"/g, '\\"')}",
+                "inLanguage": "ar"
+              }
+            `}
+          </script>
         </Helmet>
       )}
       <div className="container">
