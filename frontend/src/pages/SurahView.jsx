@@ -330,7 +330,7 @@ export default function SurahView() {
                                                                                 : surahNum ===
                                                                                     22
                                                                                   ? "Surah Al-Hajj - Read Online with English Translation"
-                                                                                  : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`}
+                                                                                  : `Surah ${surah.surahName} (${surah.nameTranslation}) - ${surah.arabicName} - Read Online`
   ) : "Al-Quran Hub";
 
   const pageDescription = surah ? (
