@@ -8,8 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:prerender": "vite build && node scripts/prerender.js",
-    "preview": "vite preview",
-    "postbuild": "react-snap"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -28,29 +27,7 @@
     "http-proxy-middleware": "^3.0.5",
     "puppeteer": "^24.40.0",
     "puppeteer-core": "^24.40.0",
-    "react-snap": "^1.23.0",
     "vite": "^5.1.6"
   },
-  "reactSnap": {
-    "source": "dist",
-    "destination": "dist",
-    "include": [
-      "/",
-      "/surah",
-      "/juz",
-      "/bookmarks",
-      "/search"
-    ],
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
-    ],
-    "crawl": true,
-    "skipThirdPartyRequests": false,
-    "minifyHtml": {
-      "collapseWhitespace": false,
-      "removeComments": false
-    },
-    "inlineCss": false
-  }
+
 }
