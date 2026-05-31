@@ -131,18 +131,27 @@
 }
 
 .translationText {
-  color: var(--text-secondary);
-  font-style: italic;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  color: var(--accent-gold);
+  font-size: 1.15rem;
+  line-height: 1.8;
   margin: 0;
 }
 
-.shareRow {
+.translationTextUr {
+  color: var(--accent-gold);
+  font-family: 'Noto Nastaliq Urdu', serif;
+  font-style: normal;
+  font-size: 1.6rem;
+  line-height: 2.8;
+  margin: 0;
+  text-align: right;
+}
+
+.actionRow {
   display: flex;
   gap: 12px;
-  margin-bottom: 32px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .actionBtn {
@@ -160,14 +169,14 @@
   transition: background 0.2s;
 }
 
-.actionBtn:hover {
-  background-color: var(--bg-card-hover);
+.iconBtn {
+  padding: 10px;
+  min-width: 42px;
+  justify-content: center;
 }
 
-.bottomRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.actionBtn:hover {
+  background-color: var(--bg-card-hover);
 }
 
 .loading, .error {
@@ -220,8 +229,9 @@
     align-self: flex-start;
   }
 
-  .shareRow {
+  .actionRow {
     gap: 8px;
+    justify-content: center;
   }
 
   .actionBtn {
@@ -231,13 +241,7 @@
     font-size: 0.85rem;
   }
 
-  .bottomRow {
-    flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
-  }
-
-  .bottomRow .actionBtn {
-    flex: unset;
+  .iconBtn {
+    flex: 0 0 auto;
   }
 }

@@ -29,7 +29,7 @@ router.get('/:surahIdentifier', async (req, res) => {
   }
 
   try {
-    const editions = isGhamidi ? 'quran-uthmani,en.asad' : `quran-uthmani,en.asad,${reciterIdentifier}`;
+    const editions = isGhamidi ? 'quran-uthmani,en.asad,ur.jalandhry' : `quran-uthmani,en.asad,ur.jalandhry,${reciterIdentifier}`;
     const url = `${ALQURAN_BASE}/surah/${num}/editions/${editions}`;
     const quranComUrl = `https://api.quran.com/api/v4/verses/by_chapter/${num}?words=true&word_fields=text_uthmani&per_page=300`;
 
@@ -41,7 +41,8 @@ router.get('/:surahIdentifier', async (req, res) => {
     const data = alquranRes.data;
     const arabicEdition  = data.data[0];
     const englishEdition = data.data[1];
-    const audioEdition   = isGhamidi ? null : data.data[2];
+    const urduEdition    = data.data[2];
+    const audioEdition   = isGhamidi ? null : data.data[3];
 
     function buildEveryAyahUrl(reciter, surahNum, ayahNum) {
       const RECITER_PATH = {
@@ -97,6 +98,7 @@ router.get('/:surahIdentifier', async (req, res) => {
       globalNumber: ayah.number,
       arabic:       ayah.text,
       translation:  englishEdition.ayahs[i]?.text || '',
+      urduTranslation: urduEdition.ayahs[i]?.text || '',
       audioUrl: (isGhamidi || internalReciter === 'sudais' || internalReciter === 'yasser') ? buildEveryAyahUrl(internalReciter, num, ayah.numberInSurah) : (audioEdition?.ayahs[i]?.audio || ''),
       words: wordsMap[ayah.numberInSurah] || []
     }));

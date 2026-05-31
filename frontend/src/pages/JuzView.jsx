@@ -28,8 +28,18 @@ export default function JuzView() {
     return parseFloat(localStorage.getItem('arabicFontSize')) || 2.2;
   });
 
-  const [showTranslation, setShowTranslation] = useState(() => {
-    return localStorage.getItem('showTranslation') === 'true';
+  const [translationFontSize, setTranslationFontSize] = useState(() => {
+    return parseFloat(localStorage.getItem('translationFontSize')) || 1.0;
+  });
+
+  const [showEn, setShowEn] = useState(() => {
+    const val = localStorage.getItem("showEn");
+    if (val !== null) return val === "true";
+    return localStorage.getItem("showTranslation") === "true"; // fallback
+  });
+
+  const [showUr, setShowUr] = useState(() => {
+    return localStorage.getItem("showUr") === "true";
   });
   const [activeMenu, setActiveMenu] = useState(null);
   // Per-verse translation reveal (used when global showTranslation is off)
@@ -150,6 +160,14 @@ export default function JuzView() {
     });
   }
 
+  function handleTranslationFontChange(delta) {
+    setTranslationFontSize((prev) => {
+      const newSize = Math.min(Math.max(parseFloat((prev + delta).toFixed(1)), 0.8), 2.0);
+      localStorage.setItem('translationFontSize', newSize);
+      return newSize;
+    });
+  }
+
   function handlePlayAllToggle() {
     if (!juz || !juz.verses.length) return;
 
@@ -183,10 +201,26 @@ export default function JuzView() {
     }
   }
 
-  const toggleTranslation = () => {
-    setShowTranslation(prev => {
+  const toggleEn = () => {
+    setShowEn((prev) => {
       const newVal = !prev;
-      localStorage.setItem('showTranslation', newVal);
+      localStorage.setItem("showEn", newVal);
+      if (newVal) {
+        setShowUr(false);
+        localStorage.setItem("showUr", false);
+      }
+      return newVal;
+    });
+  };
+
+  const toggleUr = () => {
+    setShowUr((prev) => {
+      const newVal = !prev;
+      localStorage.setItem("showUr", newVal);
+      if (newVal) {
+        setShowEn(false);
+        localStorage.setItem("showEn", false);
+      }
       return newVal;
     });
   };
@@ -217,7 +251,7 @@ export default function JuzView() {
     <div
       className="juz-view page-enter"
       ref={topRef}
-      style={{ '--arabic-font-size': `${fontSize}rem` }}
+      style={{ '--arabic-font-size': `${fontSize}rem`, '--translation-font-size': `${translationFontSize}rem` }}
     >
       <Helmet encodeSpecialCharacters={false}>
         <title>{`Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`}</title>
@@ -251,20 +285,37 @@ export default function JuzView() {
         {/* Controls (Font Sizing) */}
         <div className="jv-controls">
           <div className="jv-font-controls">
-            <span className="jv-font-label text-muted">Arabic:</span>
-            <div className="jv-font-btns">
-              <button className="btn btn-ghost" onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>-</button>
-              <span className="jv-font-val text-primary">{fontSize.toFixed(1)}</span>
-              <button className="btn btn-ghost" onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>+</button>
+            <div className="jv-font-size-row">
+              <span className="jv-font-label text-muted">Arabic:</span>
+              <div className="jv-font-btns">
+                <button className="btn btn-ghost" onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>-</button>
+                <span className="jv-font-val text-primary">{fontSize.toFixed(1)}</span>
+                <button className="btn btn-ghost" onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>+</button>
+              </div>
+              <div className="jv-font-divider"></div>
+              <span className="jv-font-label text-muted">Trans:</span>
+              <div className="jv-font-btns">
+                <button className="btn btn-ghost" onClick={() => handleTranslationFontChange(-0.1)} disabled={translationFontSize <= 0.8}>-</button>
+                <span className="jv-font-val text-primary">{translationFontSize.toFixed(1)}</span>
+                <button className="btn btn-ghost" onClick={() => handleTranslationFontChange(0.1)} disabled={translationFontSize >= 2.0}>+</button>
+              </div>
             </div>
-            <div className="jv-font-divider"></div>
-            <button
-              className="btn btn-ghost jv-en-btn"
-              onClick={toggleTranslation}
-              title={showTranslation ? "Hide English" : "Show English"}
-            >
-              EN: <span className={showTranslation ? "text-primary" : "text-muted"}>{showTranslation ? 'On' : 'Off'}</span>
-            </button>
+            <div className="jv-lang-row">
+              <button
+                className="btn btn-ghost jv-en-btn"
+                onClick={toggleEn}
+                title={showEn ? "Hide English" : "Show English"}
+              >
+                EN: <span className={showEn ? "text-primary" : "text-muted"}>{showEn ? 'On' : 'Off'}</span>
+              </button>
+              <button
+                className="btn btn-ghost jv-ur-btn"
+                onClick={toggleUr}
+                title={showUr ? "Hide Urdu" : "Show Urdu"}
+              >
+                UR: <span className={showUr ? "text-primary" : "text-muted"}>{showUr ? 'On' : 'Off'}</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -303,8 +354,8 @@ export default function JuzView() {
                         <circle cx="12" cy="19" r="1.5"></circle>
                       </svg>
                     </button>
-                    {/* Translate toggle — mobile only, visible when EN is off */}
-                    {!showTranslation && (
+                    {/* Translate toggle — mobile only, visible when both translations are off */}
+                    {(!showEn && !showUr) && (
                       <button
                         className={`verse-translate-btn ${revealedVerses.has(verseUid) ? 'active' : ''}`}
                         onClick={(e) => toggleVerseTranslation(e, verseUid)}
@@ -357,9 +408,20 @@ export default function JuzView() {
                       )}
                     </div>
 
-                    {/* English translation — shown if global toggle is on, OR this verse is individually revealed */}
-                    {(showTranslation || revealedVerses.has(verseUid)) && (
-                      <p className="translation verse-translation">{verse.translation}</p>
+                    {/* Translations — shown if global toggle is on, OR this verse is individually revealed */}
+                    {(showEn || showUr || revealedVerses.has(verseUid)) && (
+                      <div className="translations-container" style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px' }}>
+                        {(showEn || revealedVerses.has(verseUid)) && verse.translation && (
+                          <p className="translation verse-translation" style={{ margin: 0, color: 'var(--accent-gold)', fontSize: 'var(--translation-font-size, 1rem)', lineHeight: '1.8' }}>
+                            {verse.translation}
+                          </p>
+                        )}
+                        {(showUr || revealedVerses.has(verseUid)) && verse.urduTranslation && (
+                          <p className="translation verse-translation-ur" dir="rtl" style={{ margin: 0, fontFamily: '"Noto Nastaliq Urdu", serif', fontStyle: 'normal', textAlign: 'right', fontSize: `calc(var(--translation-font-size, 1rem) * 1.6)`, lineHeight: '2.8', color: 'var(--accent-gold)' }}>
+                            {verse.urduTranslation}
+                          </p>
+                        )}
+                      </div>
                     )}
 
                     {/* Footer section with controls */}

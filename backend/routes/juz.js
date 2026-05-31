@@ -44,14 +44,16 @@ router.get('/:juzNumber', async (req, res) => {
   try {
     const quranComUrl = `https://api.quran.com/api/v4/verses/by_juz/${num}?words=true&word_fields=text_uthmani&per_page=600`;
     
-    const [arabicRes, englishRes, quranComRes] = await Promise.all([
+    const [arabicRes, englishRes, urduRes, quranComRes] = await Promise.all([
       axios.get(`${ALQURAN_BASE}/juz/${num}/quran-uthmani`),
       axios.get(`${ALQURAN_BASE}/juz/${num}/en.asad`),
+      axios.get(`${ALQURAN_BASE}/juz/${num}/ur.jalandhry`),
       axios.get(quranComUrl)
     ]);
 
     const arabicAyahs  = arabicRes.data.data.ayahs;
     const englishAyahs = englishRes.data.data.ayahs;
+    const urduAyahs    = urduRes.data.data.ayahs;
 
     // Build word audio URL from surah/verse/position — avoids the off-by-one
     // bug in the Quran.com API where audio_url starts at _002 due to the ۞ symbol.
@@ -98,6 +100,7 @@ router.get('/:juzNumber', async (req, res) => {
         arabicSurahName: ayah.surah.name,
         arabic:         ayah.text,
         translation:    englishAyahs[i]?.text || '',
+        urduTranslation: urduAyahs[i]?.text || '',
         audioUrl: getAudioUrl(reciter, ayah.surah.number, ayah.numberInSurah, ayah.number),
         words: wordsMap[verseKey] || []
       };
