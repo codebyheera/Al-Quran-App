@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import AudioPlayer from '../components/AudioPlayer';
 import { useBookmarks } from '../context/BookmarkContext';
+import AudioDropdown from '../components/AudioDropdown';
 import { useAudio } from '../context/AudioContext';
 import { useQari } from '../context/QariContext';
 import Breadcrumb from '../components/Breadcrumb';
@@ -32,15 +33,6 @@ export default function JuzView() {
     return parseFloat(localStorage.getItem('translationFontSize')) || 1.0;
   });
 
-  const [showEn, setShowEn] = useState(() => {
-    const val = localStorage.getItem("showEn");
-    if (val !== null) return val === "true";
-    return localStorage.getItem("showTranslation") === "true"; // fallback
-  });
-
-  const [showUr, setShowUr] = useState(() => {
-    return localStorage.getItem("showUr") === "true";
-  });
   const [activeMenu, setActiveMenu] = useState(null);
   // Per-verse translation reveal (used when global showTranslation is off)
   const [revealedVerses, setRevealedVerses] = useState(new Set());
@@ -77,7 +69,20 @@ export default function JuzView() {
     if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
   };
 
-  const { currentVerse, isPlaying, playPlaylist, updatePlaylist, togglePlay, stop } = useAudio();
+  const {
+    currentVerse,
+    isPlaying,
+    playPlaylist,
+    updatePlaylist,
+    togglePlay,
+    stop,
+    audioLanguage,
+    setAudioLanguage,
+    showEn,
+    setShowEn,
+    showUr,
+    setShowUr
+  } = useAudio();
   const { reciter } = useQari();
   const { addBookmark, removeBookmark, isBookmarked, bookmarks } = useBookmarks();
   const topRef = useRef(null);
@@ -112,13 +117,13 @@ export default function JuzView() {
         if (!isJuzChange && updatePlaylist) {
           const mappedVerses = data.verses.map(v => ({
             ...v,
-            audio: v.audioUrl
+            audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl
           }));
           updatePlaylist(mappedVerses);
         }
       })
       .catch(() => { setError('Failed to load Juz.'); setLoading(false); });
-  }, [juzNum, reciter]);
+  }, [juzNum, reciter, audioLanguage]);
 
   // Auto-scroll on initial load if hash is present
   useEffect(() => {
@@ -141,7 +146,7 @@ export default function JuzView() {
       // Check if the playing verse belongs to this juz
       const belongsToThisJuz = juz.verses.some(v => v.surahNumber === currentVerse.surahNumber && v.number === currentVerse.number);
       if (belongsToThisJuz) {
-        const verseId = `verse-${currentVerse.surahNumber}-${currentVerse.number}`;
+        const verseId = `verse-${currentVerse.surahNumber}:${currentVerse.number}`;
         const el = document.getElementById(verseId);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -179,7 +184,7 @@ export default function JuzView() {
     } else {
       const playlistVerses = juz.verses.map(v => ({
         ...v,
-        audio: v.audioUrl
+        audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl
       }));
       playPlaylist(playlistVerses, 0);
     }
@@ -201,29 +206,9 @@ export default function JuzView() {
     }
   }
 
-  const toggleEn = () => {
-    setShowEn((prev) => {
-      const newVal = !prev;
-      localStorage.setItem("showEn", newVal);
-      if (newVal) {
-        setShowUr(false);
-        localStorage.setItem("showUr", false);
-      }
-      return newVal;
-    });
-  };
+  const toggleEn = () => setShowEn((prev) => !prev);
+  const toggleUr = () => setShowUr((prev) => !prev);
 
-  const toggleUr = () => {
-    setShowUr((prev) => {
-      const newVal = !prev;
-      localStorage.setItem("showUr", newVal);
-      if (newVal) {
-        setShowEn(false);
-        localStorage.setItem("showEn", false);
-      }
-      return newVal;
-    });
-  };
 
   if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Juz…</p></div>;
   if (error) return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
@@ -233,7 +218,7 @@ export default function JuzView() {
   // Pre-calculate mapped playlist for AudioPlayer
   const mappedPlaylist = verses.map(v => ({
     ...v,
-    audio: v.audioUrl
+    audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl
   }));
 
   // Group verses by surah for nicer rendering
@@ -301,6 +286,8 @@ export default function JuzView() {
               </div>
             </div>
             <div className="jv-lang-row">
+              <AudioDropdown />
+              <div className="jv-font-divider" style={{ display: 'block', height: '18px', opacity: 0.3, margin: '0 0.2rem' }}></div>
               <button
                 className="btn btn-ghost jv-en-btn"
                 onClick={toggleEn}
@@ -331,19 +318,20 @@ export default function JuzView() {
               </span>
             </div>
 
-            {group.verses.map((verse) => {
+            {group.verses.map((verse, idx) => {
+              const verseUid = `${verse.surahNumber}:${verse.number}`;
               const bookmarked = isBookmarked(verse.surahNumber, verse.number);
+              const verseAudio = audioLanguage === 'en' ? verse.englishAudioUrl : audioLanguage === 'ur' ? verse.urduAudioUrl : verse.audioUrl;
+              const isPlayingVerse = currentVerse?.audio === verseAudio;
+              const isMenuOpen = activeMenu === verseUid;
 
               // Find the index of this verse in the current filtered verses array
               const index = verses.indexOf(verse);
-              const isPlaying = currentVerse?.audio === verse.audioUrl;
-              const verseUid = `${verse.surahNumber}-${verse.number}`;
-              const isMenuOpen = activeMenu === verseUid;
 
               return (
                 <div
                   key={verseUid}
-                  className={`verse-card jv-verse ${isPlaying ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`}
+                  className={`verse-card jv-verse ${isPlayingVerse ? 'active-playing' : ''} ${isMenuOpen ? 'menu-open' : ''}`}
                   id={`verse-${verseUid}`}
                 >
                   <div className="verse-top-actions">

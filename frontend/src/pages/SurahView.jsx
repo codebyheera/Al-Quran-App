@@ -10,6 +10,7 @@ import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import api from "../lib/api";
 import AudioPlayer from "../components/AudioPlayer";
 import { useBookmarks } from "../context/BookmarkContext";
+import AudioDropdown from "../components/AudioDropdown";
 import { useAudio } from "../context/AudioContext";
 import { useQari } from "../context/QariContext";
 import { Helmet } from "react-helmet-async";
@@ -36,15 +37,6 @@ export default function SurahView() {
     return parseFloat(localStorage.getItem("translationFontSize")) || 1.0;
   });
 
-  const [showEn, setShowEn] = useState(() => {
-    const val = localStorage.getItem("showEn");
-    if (val !== null) return val === "true";
-    return localStorage.getItem("showTranslation") === "true"; // fallback
-  });
-
-  const [showUr, setShowUr] = useState(() => {
-    return localStorage.getItem("showUr") === "true";
-  });
   const [activeMenu, setActiveMenu] = useState(null);
   // Per-verse translation reveal (used when global showTranslation is off)
   const [revealedVerses, setRevealedVerses] = useState(new Set());
@@ -88,6 +80,12 @@ export default function SurahView() {
     updatePlaylist,
     togglePlay,
     stop,
+    audioLanguage,
+    setAudioLanguage,
+    showEn,
+    setShowEn,
+    showUr,
+    setShowUr
   } = useAudio();
   const { reciter } = useQari();
 
@@ -129,7 +127,7 @@ export default function SurahView() {
             ...v,
             surahNumber: data.surahNumber,
             surahName: data.surahName,
-            audio: v.audioUrl,
+            audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl,
           }));
           updatePlaylist(mappedVerses);
         }
@@ -138,7 +136,7 @@ export default function SurahView() {
         setError("Failed to load Surah.");
         setLoading(false);
       });
-  }, [id, reciter]);
+  }, [id, reciter, audioLanguage]);
 
   // Auto-scroll on initial load if hash is present
   useEffect(() => {
@@ -202,7 +200,7 @@ export default function SurahView() {
         ...v,
         surahNumber: surahNum,
         surahName: surah.surahName,
-        audio: v.audioUrl, // Map audioUrl to audio for the context
+        audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl,
       }));
       playPlaylist(playlistVerses, 0);
     }
@@ -270,11 +268,11 @@ export default function SurahView() {
   const verses = surah.verses;
 
   // Pre-calculate mapped playlist for AudioPlayer
-  const mappedPlaylist = verses.map((v) => ({
+  const mappedPlaylist = verses.map(v => ({
     ...v,
     surahNumber: surahNum,
     surahName: surah.surahName,
-    audio: v.audioUrl,
+    audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl
   }));
 
   const pageTitle = surah ? (
@@ -587,6 +585,8 @@ export default function SurahView() {
               </div>
             </div>
             <div className="sv-lang-row">
+              <AudioDropdown />
+              <div className="sv-font-divider" style={{ display: 'block', height: '18px', opacity: 0.3, margin: '0 0.2rem' }}></div>
               <button
                 className="btn btn-ghost sv-en-btn"
                 onClick={toggleEn}
@@ -615,14 +615,19 @@ export default function SurahView() {
         <div className="verse-list">
           {verses.map((verse, index) => {
             const bookmarked = isBookmarked(surahNum, verse.number);
-            const isPlaying = currentVerse?.audio === verse.audioUrl;
+            const verseAudio = audioLanguage === 'en' ? verse.englishAudioUrl : audioLanguage === 'ur' ? verse.urduAudioUrl : verse.audioUrl;
+            const isPlayingVerse = currentVerse?.audio === verseAudio;
             const isMenuOpen = activeMenu === verse.number;
 
             return (
               <div
                 key={verse.number}
-                className={`verse-card ${isPlaying ? "active-playing" : ""} ${isMenuOpen ? "menu-open" : ""}`}
+                className={`verse-card ${isPlayingVerse ? "active-playing" : ""} ${isMenuOpen ? "menu-open" : ""}`}
                 id={`verse-${verse.number}`}
+                onClick={() => {
+                  // Close menu if clicking outside
+                  if (isMenuOpen) setActiveMenu(null);
+                }}
               >
                 <div className="verse-top-actions">
                   <button

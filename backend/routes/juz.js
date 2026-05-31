@@ -44,16 +44,20 @@ router.get('/:juzNumber', async (req, res) => {
   try {
     const quranComUrl = `https://api.quran.com/api/v4/verses/by_juz/${num}?words=true&word_fields=text_uthmani&per_page=600`;
     
-    const [arabicRes, englishRes, urduRes, quranComRes] = await Promise.all([
+    const [arabicRes, englishRes, urduRes, quranComRes, enAudioRes, urAudioRes] = await Promise.all([
       axios.get(`${ALQURAN_BASE}/juz/${num}/quran-uthmani`),
-      axios.get(`${ALQURAN_BASE}/juz/${num}/en.asad`),
+      axios.get(`${ALQURAN_BASE}/juz/${num}/en.sahih`),
       axios.get(`${ALQURAN_BASE}/juz/${num}/ur.jalandhry`),
-      axios.get(quranComUrl)
+      axios.get(quranComUrl),
+      axios.get(`${ALQURAN_BASE}/juz/${num}/en.walk`),
+      axios.get(`${ALQURAN_BASE}/juz/${num}/ur.khan`)
     ]);
 
     const arabicAyahs  = arabicRes.data.data.ayahs;
     const englishAyahs = englishRes.data.data.ayahs;
     const urduAyahs    = urduRes.data.data.ayahs;
+    const enAudioAyahs = enAudioRes.data.data.ayahs;
+    const urAudioAyahs = urAudioRes.data.data.ayahs;
 
     // Build word audio URL from surah/verse/position — avoids the off-by-one
     // bug in the Quran.com API where audio_url starts at _002 due to the ۞ symbol.
@@ -90,19 +94,24 @@ router.get('/:juzNumber', async (req, res) => {
       });
     }
 
-    const verses = arabicAyahs.map((ayah, i) => {
-      const verseKey = `${ayah.surah.number}:${ayah.numberInSurah}`;
+    const verses = arabicAyahs.map((a, i) => {
+      const verseKey = `${a.surah.number}:${a.numberInSurah}`;
       return {
-        number:         ayah.numberInSurah,
-        globalNumber:   ayah.number,
-        surahNumber:    ayah.surah.number,
-        surahName:      ayah.surah.englishName,
-        arabicSurahName: ayah.surah.name,
-        arabic:         ayah.text,
-        translation:    englishAyahs[i]?.text || '',
+        number:          a.numberInSurah,
+        globalNumber:    a.number,
+        surahNumber:     a.surah.number,
+        surahName:       a.surah.englishName,
+        arabicSurahName: a.surah.name,
+        arabic:          a.text,
+        translation:     englishAyahs[i]?.text || '',
         urduTranslation: urduAyahs[i]?.text || '',
-        audioUrl: getAudioUrl(reciter, ayah.surah.number, ayah.numberInSurah, ayah.number),
-        words: wordsMap[verseKey] || []
+        audioUrl:        getAudioUrl(reciter, a.surah.number, a.numberInSurah, a.number),
+        englishAudioUrl: enAudioAyahs[i]?.audio || '',
+        urduAudioUrl:    urAudioAyahs[i]?.audio || '',
+        words:           wordsMap[verseKey] || [],
+        juz:             a.juz,
+        page:            a.page,
+        sajda:           a.sajda || false
       };
     });
 

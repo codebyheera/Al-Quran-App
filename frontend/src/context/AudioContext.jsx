@@ -15,6 +15,27 @@ export const AudioProvider = ({ children }) => {
   const [repeatMode, setRepeatMode] = useState(0); // 0=off, 1=once, 2=twice, 3=infinite
   const [repeatCount, setRepeatCount] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [audioLanguage, setAudioLanguage] = useState('ar'); // 'ar', 'en', 'ur', 'combine'
+  const [combineStep, setCombineStep] = useState(0); // 0=ar, 1=en, 2=ur
+
+  const [showEn, setShowEn] = useState(() => {
+    const val = localStorage.getItem("showEn");
+    if (val !== null) return val === "true";
+    return localStorage.getItem("showTranslation") === "true"; // fallback
+  });
+
+  const [showUr, setShowUr] = useState(() => {
+    return localStorage.getItem("showUr") === "true";
+  });
+
+  // Persist toggles to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("showEn", showEn);
+  }, [showEn]);
+
+  useEffect(() => {
+    localStorage.setItem("showUr", showUr);
+  }, [showUr]);
 
   const audioRef = useRef(new Audio());
 
@@ -41,6 +62,38 @@ export const AudioProvider = ({ children }) => {
     };
     const handleEnded = () => {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+      // Handle Combine mode logic
+      if (audioLanguage === 'combine' && currentVerse) {
+        if (combineStep === 0) {
+          // Finished Arabic, check if English should play
+          if (showEn && currentVerse.englishAudioUrl) {
+            setCombineStep(1);
+            audio.src = currentVerse.englishAudioUrl;
+            audio.play().catch(console.error);
+            return;
+          }
+          // If no English, fall through to check Urdu
+          if (showUr && currentVerse.urduAudioUrl) {
+            setCombineStep(2);
+            audio.src = currentVerse.urduAudioUrl;
+            audio.play().catch(console.error);
+            return;
+          }
+        } else if (combineStep === 1) {
+          // Finished English, check if Urdu should play
+          if (showUr && currentVerse.urduAudioUrl) {
+            setCombineStep(2);
+            audio.src = currentVerse.urduAudioUrl;
+            audio.play().catch(console.error);
+            return;
+          }
+        }
+      }
+
+      // If we reach here, the full verse sequence (ar/en/ur) is complete.
+      setCombineStep(0); // reset for next verse
+
       if (repeatMode === 3) {
         audio.currentTime = 0;
         audio.play().catch(console.error);
@@ -86,7 +139,7 @@ export const AudioProvider = ({ children }) => {
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
     };
-  }, [playlist, currentIndex, repeatMode, repeatCount, currentVerse]);
+  }, [playlist, currentIndex, repeatMode, repeatCount, currentVerse, combineStep, audioLanguage, showEn, showUr]);
 
   // Handle Playback Speed Ref Changes
   useEffect(() => {
@@ -94,13 +147,39 @@ export const AudioProvider = ({ children }) => {
   }, [playbackSpeed, currentVerse]);
 
 
+  const getAudioForLanguage = (verse, lang) => {
+    if (!verse) return '';
+    if (lang === 'combine') return verse.audioUrl || verse.audio; // combine always starts with Arabic
+    if (lang === 'en') return verse.englishAudioUrl || verse.audio;
+    if (lang === 'ur') return verse.urduAudioUrl || verse.audio;
+    return verse.audioUrl || verse.audio;
+  };
+
+  // Handle Playback Language Changes
+  useEffect(() => {
+    if (currentVerse) {
+      setCombineStep(0); // Reset combine step if user changes language mid-playback
+      const newSrc = getAudioForLanguage(currentVerse, audioLanguage);
+      if (audioRef.current.src !== newSrc) {
+        const wasPlaying = !audioRef.current.paused;
+        audioRef.current.src = newSrc;
+        // Optionally reset currentTime to 0 on language change
+        audioRef.current.currentTime = 0;
+        if (wasPlaying) {
+          audioRef.current.play().catch(console.error);
+        }
+      }
+    }
+  }, [audioLanguage, currentVerse]);
+
   const playVerse = (verse) => {
     setPlaylist([]);
     setCurrentIndex(-1);
     setCurrentVerse(verse);
     setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
-    audioRef.current.src = verse.audio;
+    setCombineStep(0);
+    audioRef.current.src = getAudioForLanguage(verse, audioLanguage);
     audioRef.current.play().catch(console.error);
   };
 
@@ -110,7 +189,8 @@ export const AudioProvider = ({ children }) => {
     setCurrentVerse(verses[startIdx]);
     setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
-    audioRef.current.src = verses[startIdx].audio;
+    setCombineStep(0);
+    audioRef.current.src = getAudioForLanguage(verses[startIdx], audioLanguage);
     audioRef.current.play().catch(console.error);
   };
 
@@ -142,7 +222,8 @@ export const AudioProvider = ({ children }) => {
       setCurrentIndex(nextIdx);
       setCurrentVerse(nextVerse);
       setRepeatCount(0);
-      audioRef.current.src = nextVerse.audio;
+      setCombineStep(0);
+      audioRef.current.src = getAudioForLanguage(nextVerse, audioLanguage);
       audioRef.current.play().catch(console.error);
     }
   };
@@ -154,7 +235,8 @@ export const AudioProvider = ({ children }) => {
       setCurrentIndex(prevIdx);
       setCurrentVerse(prevVerse);
       setRepeatCount(0);
-      audioRef.current.src = prevVerse.audio;
+      setCombineStep(0);
+      audioRef.current.src = getAudioForLanguage(prevVerse, audioLanguage);
       audioRef.current.play().catch(console.error);
     }
   };
@@ -211,7 +293,13 @@ export const AudioProvider = ({ children }) => {
       skipNext,
       skipPrev,
       seek,
-      playbackSpeed
+      playbackSpeed,
+      audioLanguage,
+      setAudioLanguage,
+      showEn,
+      setShowEn,
+      showUr,
+      setShowUr
     }}>
       {children}
     </AudioContext.Provider>

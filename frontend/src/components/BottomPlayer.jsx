@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAudio } from '../context/AudioContext';
 import { useQari } from '../context/QariContext';
+import AudioDropdown from './AudioDropdown';
 import './BottomPlayer.css';
 
 export default function BottomPlayer() {
@@ -22,6 +23,8 @@ export default function BottomPlayer() {
     skipForward,
     skipBackward,
     playbackSpeed,
+    audioLanguage,
+    setAudioLanguage
   } = useAudio();
 
   const { selectedReciter } = useQari();
@@ -270,6 +273,7 @@ export default function BottomPlayer() {
 
               {/* Right: speed + actions */}
               <div className="bp-actions">
+                <AudioDropdown upwards={true} isCompact={true} />
                 <button className="bp-speed" onClick={toggleSpeed}>{playbackSpeed}×</button>
                 <button className="bp-btn" onClick={() => setIsMinimized(true)} title="Minimize">
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
@@ -394,6 +398,7 @@ export default function BottomPlayer() {
                 <span className="bp-skip-label">10</span>
               </button>
 
+              <AudioDropdown upwards={true} isCompact={true} />
               <button className="bp-mobile-speed" onClick={toggleSpeed}>{playbackSpeed}×</button>
             </div>
           </div>

@@ -29,7 +29,9 @@ router.get('/:surahIdentifier', async (req, res) => {
   }
 
   try {
-    const editions = isGhamidi ? 'quran-uthmani,en.asad,ur.jalandhry' : `quran-uthmani,en.asad,ur.jalandhry,${reciterIdentifier}`;
+    const editions = isGhamidi 
+      ? 'quran-uthmani,en.sahih,ur.jalandhry,en.walk,ur.khan' 
+      : `quran-uthmani,en.sahih,ur.jalandhry,${reciterIdentifier},en.walk,ur.khan`;
     const url = `${ALQURAN_BASE}/surah/${num}/editions/${editions}`;
     const quranComUrl = `https://api.quran.com/api/v4/verses/by_chapter/${num}?words=true&word_fields=text_uthmani&per_page=300`;
 
@@ -43,6 +45,8 @@ router.get('/:surahIdentifier', async (req, res) => {
     const englishEdition = data.data[1];
     const urduEdition    = data.data[2];
     const audioEdition   = isGhamidi ? null : data.data[3];
+    const enAudioEdition = isGhamidi ? data.data[3] : data.data[4];
+    const urAudioEdition = isGhamidi ? data.data[4] : data.data[5];
 
     function buildEveryAyahUrl(reciter, surahNum, ayahNum) {
       const RECITER_PATH = {
@@ -93,14 +97,21 @@ router.get('/:surahIdentifier', async (req, res) => {
       });
     }
 
-    const verses = arabicEdition.ayahs.map((ayah, i) => ({
-      number:       ayah.numberInSurah,
-      globalNumber: ayah.number,
-      arabic:       ayah.text,
-      translation:  englishEdition.ayahs[i]?.text || '',
-      urduTranslation: urduEdition.ayahs[i]?.text || '',
-      audioUrl: (isGhamidi || internalReciter === 'sudais' || internalReciter === 'yasser') ? buildEveryAyahUrl(internalReciter, num, ayah.numberInSurah) : (audioEdition?.ayahs[i]?.audio || ''),
-      words: wordsMap[ayah.numberInSurah] || []
+    const verses = arabicEdition.ayahs.map((arabicAyah, i) => ({
+      number: arabicAyah.numberInSurah,
+      globalNumber: arabicAyah.number,
+      arabic: arabicAyah.text,
+      translation: englishEdition?.ayahs[i]?.text || '',
+      urduTranslation: urduEdition?.ayahs[i]?.text || '',
+      audioUrl: (isGhamidi || internalReciter === 'sudais' || internalReciter === 'yasser')
+        ? buildEveryAyahUrl(internalReciter, num, arabicAyah.numberInSurah) 
+        : (audioEdition?.ayahs[i]?.audio || ''),
+      englishAudioUrl: enAudioEdition?.ayahs[i]?.audio || '',
+      urduAudioUrl: urAudioEdition?.ayahs[i]?.audio || '',
+      words: wordsMap[arabicAyah.numberInSurah] || [],
+      juz: arabicAyah.juz,
+      page: arabicAyah.page,
+      sajda: arabicAyah.sajda || false
     }));
 
     res.json({

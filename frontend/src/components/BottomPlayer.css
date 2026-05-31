@@ -88,20 +88,27 @@
 
 /* ── SPEED PILL ── */
 .bp-speed {
-  background: var(--border);
-  border: 1px solid var(--border-hover);
-  border-radius: 6px;
-  padding: 3px 10px;
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--bp-accent);
   cursor: pointer;
-  transition: background var(--bp-transition);
+  transition: var(--bp-transition);
   white-space: nowrap;
 }
 
 .bp-speed:hover {
-  background: var(--bg-card-hover);
+  border-color: var(--bp-accent-hover);
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--bp-accent-hover);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
 }
 
 /* ════════════════════════════════════════
@@ -447,20 +454,28 @@
 }
 
 .bp-mobile-speed {
-  background: var(--border);
-  border: 1px solid var(--border-hover);
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--bp-accent);
   cursor: pointer;
-  min-width: 42px;
+  min-width: 48px;
   text-align: center;
+  transition: var(--bp-transition);
 }
 
 .bp-mobile-speed:hover {
-  background: var(--bg-card-hover);
+  border-color: var(--bp-accent-hover);
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--bp-accent-hover);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
 }
 
 /* ════════════════════════════════════════
