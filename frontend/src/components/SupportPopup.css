@@ -237,21 +237,35 @@
   }
   
   .sp-left-panel {
-    padding: 1.5rem;
+    padding: 1.2rem;
+    text-align: center;
   }
   
   .sp-left-panel h2 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+  }
+
+  .sp-left-panel p {
+    display: none;
+  }
+
+  .sp-quote-box {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
+  .support-popup-content {
+    padding: 1rem;
+    max-height: 85vh;
+  }
   .sp-stats-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
   }
-  .support-popup-content {
-    padding: 1.2rem;
+  .sp-stat-card {
+    padding: 0.6rem;
   }
   .sp-stat-num {
     font-size: 1.1rem;
