@@ -584,9 +584,9 @@ export default function SurahView() {
                 </button>
               </div>
             </div>
-            <div className="sv-lang-row">
+            <div className="sv-lang-row" style={{ flexWrap: 'wrap' }}>
               <AudioDropdown />
-              <div className="sv-font-divider" style={{ display: 'block', height: '18px', opacity: 0.3, margin: '0 0.2rem' }}></div>
+              <div className="sv-font-divider" style={{ height: '18px', opacity: 0.3, margin: '0 0.2rem' }}></div>
               <button
                 className="btn btn-ghost sv-en-btn"
                 onClick={toggleEn}

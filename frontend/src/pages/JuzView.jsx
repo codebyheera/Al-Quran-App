@@ -285,9 +285,9 @@ export default function JuzView() {
                 <button className="btn btn-ghost" onClick={() => handleTranslationFontChange(0.1)} disabled={translationFontSize >= 2.0}>+</button>
               </div>
             </div>
-            <div className="jv-lang-row">
+            <div className="jv-lang-row" style={{ flexWrap: 'wrap' }}>
               <AudioDropdown />
-              <div className="jv-font-divider" style={{ display: 'block', height: '18px', opacity: 0.3, margin: '0 0.2rem' }}></div>
+              <div className="jv-font-divider" style={{ height: '18px', opacity: 0.3, margin: '0 0.2rem' }}></div>
               <button
                 className="btn btn-ghost jv-en-btn"
                 onClick={toggleEn}
