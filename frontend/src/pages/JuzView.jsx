@@ -270,19 +270,23 @@ export default function JuzView() {
         {/* Controls (Font Sizing) */}
         <div className="jv-controls">
           <div className="jv-font-controls">
-            <div className="jv-font-size-row">
-              <span className="jv-font-label text-muted">Arabic:</span>
-              <div className="jv-font-btns">
-                <button className="btn btn-ghost" onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>-</button>
-                <span className="jv-font-val text-primary">{fontSize.toFixed(1)}</span>
-                <button className="btn btn-ghost" onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>+</button>
+            <div className="jv-font-size-row" style={{ flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span className="jv-font-label text-muted">Arabic:</span>
+                <div className="jv-font-btns">
+                  <button className="btn btn-ghost" onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>-</button>
+                  <span className="jv-font-val text-primary">{fontSize.toFixed(1)}</span>
+                  <button className="btn btn-ghost" onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>+</button>
+                </div>
               </div>
               <div className="jv-font-divider"></div>
-              <span className="jv-font-label text-muted">Trans:</span>
-              <div className="jv-font-btns">
-                <button className="btn btn-ghost" onClick={() => handleTranslationFontChange(-0.1)} disabled={translationFontSize <= 0.8}>-</button>
-                <span className="jv-font-val text-primary">{translationFontSize.toFixed(1)}</span>
-                <button className="btn btn-ghost" onClick={() => handleTranslationFontChange(0.1)} disabled={translationFontSize >= 2.0}>+</button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span className="jv-font-label text-muted">Trans:</span>
+                <div className="jv-font-btns">
+                  <button className="btn btn-ghost" onClick={() => handleTranslationFontChange(-0.1)} disabled={translationFontSize <= 0.8}>-</button>
+                  <span className="jv-font-val text-primary">{translationFontSize.toFixed(1)}</span>
+                  <button className="btn btn-ghost" onClick={() => handleTranslationFontChange(0.1)} disabled={translationFontSize >= 2.0}>+</button>
+                </div>
               </div>
             </div>
             <div className="jv-lang-row" style={{ flexWrap: 'wrap' }}>

@@ -541,47 +541,51 @@ export default function SurahView() {
         {/* ── Controls (Font Sizing) ─────────────────── */}
         <div className="sv-controls">
           <div className="sv-font-controls">
-            <div className="sv-font-size-row">
-              <span className="sv-font-label text-muted">Arabic:</span>
-              <div className="sv-font-btns">
-                <button
-                  className="btn btn-ghost"
-                  onClick={() => handleFontChange(-0.2)}
-                  disabled={fontSize <= 1.4}
-                >
-                  -
-                </button>
-                <span className="sv-font-val text-primary">
-                  {fontSize.toFixed(1)}
-                </span>
-                <button
-                  className="btn btn-ghost"
-                  onClick={() => handleFontChange(0.2)}
-                  disabled={fontSize >= 4.0}
-                >
-                  +
-                </button>
+            <div className="sv-font-size-row" style={{ flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span className="sv-font-label text-muted">Arabic:</span>
+                <div className="sv-font-btns">
+                  <button
+                    className="btn btn-ghost"
+                    onClick={() => handleFontChange(-0.2)}
+                    disabled={fontSize <= 1.4}
+                  >
+                    -
+                  </button>
+                  <span className="sv-font-val text-primary">
+                    {fontSize.toFixed(1)}
+                  </span>
+                  <button
+                    className="btn btn-ghost"
+                    onClick={() => handleFontChange(0.2)}
+                    disabled={fontSize >= 4.0}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-              <div className="sv-font-divider"></div>
-              <span className="sv-font-label text-muted">Trans:</span>
-              <div className="sv-font-btns">
-                <button
-                  className="btn btn-ghost"
-                  onClick={() => handleTranslationFontChange(-0.1)}
-                  disabled={translationFontSize <= 0.8}
-                >
-                  -
-                </button>
-                <span className="sv-font-val text-primary">
-                  {translationFontSize.toFixed(1)}
-                </span>
-                <button
-                  className="btn btn-ghost"
-                  onClick={() => handleTranslationFontChange(0.1)}
-                  disabled={translationFontSize >= 2.0}
-                >
-                  +
-                </button>
+              <div className="sv-font-divider" style={{ height: '18px', opacity: 0.3, margin: '0' }}></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span className="sv-font-label text-muted">Trans:</span>
+                <div className="sv-font-btns">
+                  <button
+                    className="btn btn-ghost"
+                    onClick={() => handleTranslationFontChange(-0.1)}
+                    disabled={translationFontSize <= 0.8}
+                  >
+                    -
+                  </button>
+                  <span className="sv-font-val text-primary">
+                    {translationFontSize.toFixed(1)}
+                  </span>
+                  <button
+                    className="btn btn-ghost"
+                    onClick={() => handleTranslationFontChange(0.1)}
+                    disabled={translationFontSize >= 2.0}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
             <div className="sv-lang-row" style={{ flexWrap: 'wrap' }}>
