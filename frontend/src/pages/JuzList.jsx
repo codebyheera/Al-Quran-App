@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
+import Breadcrumb from '../components/Breadcrumb';
 import './JuzList.css';
 
 export default function JuzList() {
@@ -22,13 +23,20 @@ export default function JuzList() {
 
   return (
     <div className="juz-list page-enter">
-      <Helmet>
+      <Helmet encodeSpecialCharacters={false}>
         <title>Holy Quran Juz – Arabic Recitation Online</title>
         <meta name="description" content="Read and listen to the complete Quran Juz online. Perfect for recitation, learning, and spiritual growth." />
         <link rel="canonical" href="https://alquranhub.org/juz" />
       </Helmet>
-      
+
+
       <div className="container">
+        {/* ── Breadcrumb Navigation ───────────────────────── */}
+        <Breadcrumb crumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Juz', href: '/juz' },
+        ]} />
+
         <div className="jl-header">
           <h1>Juz</h1>
           <p className="text-muted">All 30 parts of the Holy Quran</p>

@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
+import Breadcrumb from '../components/Breadcrumb';
 import './SurahList.css';
 
 export default function SurahList() {
@@ -34,13 +35,20 @@ export default function SurahList() {
 
   return (
     <div className="surah-list page-enter">
-      <Helmet>
+      <Helmet encodeSpecialCharacters={false}>
         <title>Surahs of the Quran – Read & Listen Online Free</title>
         <meta name="description" content="Access all Surahs of the Holy Quran online. Read in Arabic, listen to authentic recitations, and explore each Ayah easily." />
         <link rel="canonical" href="https://alquranhub.org/surah" />
       </Helmet>
 
+
       <div className="container">
+        {/* ── Breadcrumb Navigation ───────────────────────── */}
+        <Breadcrumb crumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Surahs', href: '/surah' },
+        ]} />
+
         {/* Header */}
         <div className="sl-header">
           <div>

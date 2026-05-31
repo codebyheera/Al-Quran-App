@@ -11,6 +11,7 @@ import AudioPlayer from '../components/AudioPlayer';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
 import { useQari } from '../context/QariContext';
+import Breadcrumb from '../components/Breadcrumb';
 import './JuzView.css';
 
 export default function JuzView() {
@@ -218,12 +219,19 @@ export default function JuzView() {
       ref={topRef}
       style={{ '--arabic-font-size': `${fontSize}rem` }}
     >
-      <Helmet>
+      <Helmet encodeSpecialCharacters={false}>
         <title>{`Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`}</title>
         <meta name="description" content={`Read and listen to Juz ${juzNum} of the Holy Quran online. Arabic text, English translation, and beautiful recitation available.`} />
         <link rel="canonical" href={`https://alquranhub.org/juz/${juzNum}`} />
       </Helmet>
       <div className="container">
+        {/* ── Breadcrumb Navigation ───────────────────────── */}
+        <Breadcrumb crumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Juz', href: '/juz' },
+          { label: `Juz ${juzNum}`, href: `/juz/${juzNum}` },
+        ]} />
+
         {/* Header */}
         <div className="jv-header">
           <div className="jv-header-info">

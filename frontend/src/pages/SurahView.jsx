@@ -13,6 +13,7 @@ import { useBookmarks } from "../context/BookmarkContext";
 import { useAudio } from "../context/AudioContext";
 import { useQari } from "../context/QariContext";
 import { Helmet } from "react-helmet-async";
+import Breadcrumb from "../components/Breadcrumb";
 import "./SurahView.css";
 
 export default function SurahView() {
@@ -431,30 +432,47 @@ export default function SurahView() {
       ref={topRef}
       style={{ "--arabic-font-size": `${fontSize}rem` }}
     >
-      {surah && (
-        <Helmet>
-          <title>{pageTitle}</title>
-          <meta name="description" content={pageDescription} />
+      {surah && (() => {
+        const cleanTitle = pageTitle.replace(/&amp;/g, '&');
+        const cleanDescription = pageDescription.replace(/&amp;/g, '&');
+        const cleanSurahName = surah.surahName.replace(/&amp;/g, '&');
+
+        return (
+        <Helmet encodeSpecialCharacters={false}>
+          <title>{cleanTitle}</title>
+          <meta name="description" content={cleanDescription} />
           <link rel="canonical" href={`https://alquranhub.org/surah/${id}`} />
-          <meta property="og:title" content={pageTitle} />
-          <meta property="og:description" content={pageDescription} />
+          <meta property="og:title" content={cleanTitle} />
+          <meta property="og:description" content={cleanDescription} />
           <meta property="og:url" content={`https://alquranhub.org/surah/${id}`} />
           <meta property="og:type" content="article" />
-          <script type="application/ld+json">
-            {`
-              {
-                "@context": "https://schema.org",
-                "@type": "WebPage",
-                "name": "${pageTitle.replace(/"/g, '\\"')}",
-                "url": "https://alquranhub.org/surah/${id}",
-                "description": "${pageDescription.replace(/"/g, '\\"')}",
-                "inLanguage": "ar"
-              }
-            `}
-          </script>
         </Helmet>
+        );
+      })()}
+
+      {surah && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": pageTitle.replace(/&amp;/g, '&'),
+              "url": `https://alquranhub.org/surah/${id}`,
+              "description": pageDescription.replace(/&amp;/g, '&'),
+              "inLanguage": "ar"
+            })
+          }}
+        />
       )}
       <div className="container">
+        {/* ── Breadcrumb Navigation ───────────────────────── */}
+        <Breadcrumb crumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Surahs', href: '/surah' },
+          { label: surah?.surahName || `Surah ${id}`, href: `/surah/${id}` },
+        ]} />
+
         {/* ── Surah Header ────────────────────────────────── */}
         <div className="sv-header">
           <div className="sv-header-info">

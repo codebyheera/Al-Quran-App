@@ -1,0 +1,84 @@
+/* ── Breadcrumb Component ─────────────────────────────────────── */
+
+.breadcrumb {
+  margin-bottom: 1.25rem;
+}
+
+/* Outer pill — dark glass container holding all crumbs */
+.breadcrumb-list {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+    gap: 0.35rem;  /* 0 se change karo */
+  list-style: none;
+  padding: 0.35rem 0;    /* ← padding bhi adjust karo, left/right 0 */
+  margin: 0;
+  max-width: 100%;
+}
+
+/* Each crumb + its separator sit in a flex row */
+.breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Clickable ancestor links — muted, plain text */
+.breadcrumb-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.2rem 0.35rem;
+  border-radius: var(--radius-sm);
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumb-link:hover {
+  color: var(--accent-gold-light);
+}
+
+/* Active / current page — gold filled pill chip */
+.breadcrumb-current {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.65rem;
+  background: var(--accent-gold);
+  color: #0f0f1a;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.25);
+}
+
+/* Chevron › separator */
+.breadcrumb-sep {
+  width: 5px;
+  height: 9px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin: 0 0.05rem;
+  opacity: 0.5;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .breadcrumb-list {
+    padding: 0.3rem 0.5rem;
+  }
+
+  .breadcrumb-item {
+    font-size: 0.76rem;
+  }
+
+  .breadcrumb-current {
+    font-size: 0.74rem;
+    padding: 0.18rem 0.5rem;
+  }
+}
