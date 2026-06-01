@@ -532,7 +532,7 @@ export default function SurahView() {
         </div>
 
         {/* ── Bismillah (except surah 1 & 9) ────────────── */}
-        {surahNum !== 9 && (
+        {surahNum !== 1 && surahNum !== 9 && (
           <div className="bismillah arabic">
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
           </div>

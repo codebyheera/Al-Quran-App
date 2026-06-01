@@ -97,10 +97,22 @@ router.get('/:surahIdentifier', async (req, res) => {
       });
     }
 
-    const verses = arabicEdition.ayahs.map((arabicAyah, i) => ({
-      number: arabicAyah.numberInSurah,
-      globalNumber: arabicAyah.number,
-      arabic: arabicAyah.text,
+    const verses = arabicEdition.ayahs.map((arabicAyah, i) => {
+      let arabicText = arabicAyah.text;
+      
+      // Remove Bismillah prefix from Ayah 1 of all surahs except Surah 1 (Al-Fatiha)
+      if (num !== 1 && arabicAyah.numberInSurah === 1) {
+        arabicText = arabicText.replace('بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ', '');
+        // Also catch variations just in case
+        arabicText = arabicText.replace('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ', '');
+        // Sometimes there's a variation with different unicode:
+        arabicText = arabicText.replace('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ', '');
+      }
+
+      return {
+        number: arabicAyah.numberInSurah,
+        globalNumber: arabicAyah.number,
+        arabic: arabicText,
       translation: englishEdition?.ayahs[i]?.text || '',
       urduTranslation: urduEdition?.ayahs[i]?.text || '',
       audioUrl: (isGhamidi || internalReciter === 'sudais' || internalReciter === 'yasser')
@@ -112,7 +124,8 @@ router.get('/:surahIdentifier', async (req, res) => {
       juz: arabicAyah.juz,
       page: arabicAyah.page,
       sajda: arabicAyah.sajda || false
-    }));
+    };
+  });
 
     res.json({
       surahNumber:  arabicEdition.number,

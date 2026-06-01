@@ -95,6 +95,14 @@ router.get('/:juzNumber', async (req, res) => {
     }
 
     const verses = arabicAyahs.map((a, i) => {
+      let arabicText = a.text;
+      
+      if (a.surah.number !== 1 && a.numberInSurah === 1) {
+        arabicText = arabicText.replace('بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ', '');
+        arabicText = arabicText.replace('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ', '');
+        arabicText = arabicText.replace('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ', '');
+      }
+
       const verseKey = `${a.surah.number}:${a.numberInSurah}`;
       return {
         number:          a.numberInSurah,
@@ -102,7 +110,7 @@ router.get('/:juzNumber', async (req, res) => {
         surahNumber:     a.surah.number,
         surahName:       a.surah.englishName,
         arabicSurahName: a.surah.name,
-        arabic:          a.text,
+        arabic:          arabicText,
         translation:     englishAyahs[i]?.text || '',
         urduTranslation: urduAyahs[i]?.text || '',
         audioUrl:        getAudioUrl(reciter, a.surah.number, a.numberInSurah, a.number),

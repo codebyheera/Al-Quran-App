@@ -74,10 +74,28 @@ const VerseOfDay = ({ hijriDate }) => {
     setGregorianDate(date);
     
     try {
-      const hijriFormatter = new Intl.DateTimeFormat('en-US-u-ca-islamic-umalqura', {
-        day: 'numeric', month: 'long', year: 'numeric'
+      const islamicMonths = [
+        "Muharram", "Safar", "Rabiʻ I", "Rabiʻ II",
+        "Jumada I", "Jumada II", "Rajab", "Shaʻban",
+        "Ramadan", "Shawwal", "Dhuʻl-Qiʻdah", "Dhuʻl-Hijjah"
+      ];
+      const formatter = new Intl.DateTimeFormat('en-US-u-ca-islamic-umalqura', {
+        day: 'numeric', month: 'numeric', year: 'numeric'
       });
-      setComputedHijri(hijriFormatter.format(today).replace(' AH', ''));
+      const parts = formatter.formatToParts(today);
+      const day = parts.find(p => p.type === 'day')?.value;
+      const monthNum = parseInt(parts.find(p => p.type === 'month')?.value, 10);
+      const year = parts.find(p => p.type === 'year')?.value;
+      
+      if (day && !isNaN(monthNum) && year) {
+        const monthName = islamicMonths[monthNum - 1] || monthNum;
+        setComputedHijri(`${day} ${monthName} ${year}`);
+      } else {
+        const fallbackFormatter = new Intl.DateTimeFormat('en-US-u-ca-islamic-umalqura', {
+          day: 'numeric', month: 'long', year: 'numeric'
+        });
+        setComputedHijri(fallbackFormatter.format(today).replace(' AH', ''));
+      }
     } catch (e) {
       setComputedHijri('');
     }

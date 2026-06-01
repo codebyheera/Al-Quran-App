@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useQari } from '../context/QariContext';
+import { useBookmarks } from '../context/BookmarkContext';
 import '../styles/Navbar.css';
 
 function QariDropdown({ reciter, changeReciter, reciters }) {
@@ -124,6 +125,7 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
 export default function Navbar() {
   const { theme, changeTheme, themes } = useTheme();
   const { reciter, changeReciter, reciters } = useQari();
+  const { bookmarks } = useBookmarks();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Lock body scroll when sidebar is open
@@ -153,7 +155,7 @@ export default function Navbar() {
             <NavLink to="/surah" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Surahs</NavLink>
             <NavLink to="/juz" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Juz</NavLink>
             <NavLink to="/bookmarks" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Bookmarks</NavLink>
-            <NavLink to="/support" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Support ✨</NavLink>
+            <NavLink to="/support" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Support</NavLink>
           </div>
 
           {/* Right actions */}
@@ -190,100 +192,79 @@ export default function Navbar() {
         {/* Sidebar Header */}
         <div className="sidebar-header">
           <div className="sidebar-logo">
-            <span className="navbar-logo-icon">☪</span>
-            <span className="navbar-logo-text">Al-<span>Quran</span> Hub</span>
+            <span className="sidebar-logo-icon">☪</span>
+            <span className="sidebar-logo-text">Al-<span>Quran</span> Hub</span>
           </div>
-          <button className="sidebar-close" onClick={closeSidebar} aria-label="Close menu">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
+          <button className="sidebar-close-btn" onClick={closeSidebar} aria-label="Close menu">
+            <i className="ti ti-x"></i>
           </button>
         </div>
 
         {/* Search Bar */}
-        <div className="sidebar-search">
-          <svg className="sidebar-search-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
-          </svg>
-          <input
-            className="sidebar-search-input"
-            type="text"
-            placeholder="Search Surah..."
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && e.target.value.trim()) {
-                closeSidebar();
-                window.location.href = `/search?q=${encodeURIComponent(e.target.value.trim())}`;
-              }
-            }}
-          />
+        <div className="sidebar-search-container">
+          <div className="sidebar-search-box">
+            <i className="ti ti-search search-icon"></i>
+            <input
+              className="sidebar-search-input"
+              type="text"
+              placeholder="Search Surah or Ayah..."
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && e.target.value.trim()) {
+                  closeSidebar();
+                  window.location.href = `/search?q=${encodeURIComponent(e.target.value.trim())}`;
+                }
+              }}
+            />
+          </div>
         </div>
 
         {/* Stats Row */}
-        <div className="sidebar-stats">
-          <div className="sidebar-stat">
-            <span className="sidebar-stat-num">114</span>
-            <span className="sidebar-stat-label">Surahs</span>
+        <div className="sidebar-stats-boxes">
+          <div className="stat-box">
+            <span className="stat-num">114</span>
+            <span className="stat-label">SURAHS</span>
           </div>
-          <div className="sidebar-stat-divider" />
-          <div className="sidebar-stat">
-            <span className="sidebar-stat-num">30</span>
-            <span className="sidebar-stat-label">Juz</span>
+          <div className="stat-box">
+            <span className="stat-num">30</span>
+            <span className="stat-label">JUZ</span>
           </div>
-          <div className="sidebar-stat-divider" />
-          <div className="sidebar-stat">
-            <span className="sidebar-stat-num">6,236</span>
-            <span className="sidebar-stat-label">Ayahs</span>
+          <div className="stat-box">
+            <span className="stat-num">6,236</span>
+            <span className="stat-label">AYAHS</span>
           </div>
         </div>
 
-        {/* Decorative divider */}
-        <div className="sidebar-divider" />
+        {/* Navigation Section */}
+        <div className="sidebar-nav-label">NAVIGATION</div>
 
-        {/* Nav label */}
-        <div className="sidebar-section-label">Navigation</div>
-
-        {/* Nav Links */}
-        <nav className="sidebar-nav">
-          <NavLink to="/surah" className={({ isActive }) => `sidebar-link surah-link ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <span className="sidebar-link-icon icon-green">📖</span>
-            <span className="sidebar-link-text">Surahs</span>
-            <svg className="sidebar-link-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
+        <nav className="sidebar-nav-links">
+          <NavLink to="/surah" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
+            <i className="ti ti-book nav-icon"></i>
+            <span className="nav-text">Surahs</span>
+            <i className="ti ti-chevron-right nav-arrow"></i>
           </NavLink>
 
-          <NavLink to="/juz" className={({ isActive }) => `sidebar-link juz-link ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <span className="sidebar-link-icon icon-blue">📚</span>
-            <span className="sidebar-link-text">Juz</span>
-            <svg className="sidebar-link-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
+          <NavLink to="/juz" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
+            <i className="ti ti-book-2 nav-icon"></i>
+            <span className="nav-text">Juz</span>
           </NavLink>
 
-          <NavLink to="/bookmarks" className={({ isActive }) => `sidebar-link bookmarks-link ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <span className="sidebar-link-icon icon-amber">🔖</span>
-            <span className="sidebar-link-text">Bookmarks</span>
-            <svg className="sidebar-link-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
+          <NavLink to="/bookmarks" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
+            <i className="ti ti-bookmark nav-icon"></i>
+            <span className="nav-text">Bookmarks</span>
+            {bookmarks.length > 0 && <span className="nav-badge">{bookmarks.length}</span>}
           </NavLink>
 
-          <NavLink to="/support" className={({ isActive }) => `sidebar-link support-link ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <span className="sidebar-link-icon icon-purple">✨</span>
-            <span className="sidebar-link-text">Support</span>
-            <svg className="sidebar-link-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
+          <NavLink to="/support" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
+            <i className="ti ti-heart nav-icon"></i>
+            <span className="nav-text">Support</span>
           </NavLink>
         </nav>
 
         {/* Footer */}
-        <div className="sidebar-footer">
-          <div className="sidebar-footer-text">Free · Non-Profit · No Ads</div>
-          <div className="sidebar-footer-bottom">
-            <span className="sidebar-footer-domain">alquranhub.org</span>
-            <span className="sidebar-footer-version">v1.0.0</span>
-          </div>
+        <div className="sidebar-bottom-footer">
+          <div className="footer-line1">Free · Non-Profit · No Ads</div>
+          <div className="footer-line2">alquranhub.org</div>
         </div>
 
       </aside>

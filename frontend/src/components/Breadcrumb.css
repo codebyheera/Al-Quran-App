@@ -9,11 +9,17 @@
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
-    gap: 0.35rem;  /* 0 se change karo */
+  gap: 0.35rem;
   list-style: none;
-  padding: 0.35rem 0;    /* ← padding bhi adjust karo, left/right 0 */
+  padding: 0.35rem 0;
   margin: 0;
   max-width: 100%;
+}
+
+/* Remove left padding from the first item to align flush left */
+.breadcrumb-item:first-child .breadcrumb-link,
+.breadcrumb-item:first-child .breadcrumb-current {
+  padding-left: 0;
 }
 
 /* Each crumb + its separator sit in a flex row */
@@ -70,7 +76,7 @@
 /* ── Mobile ─────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .breadcrumb-list {
-    padding: 0.3rem 0.5rem;
+    padding: 0.3rem 0;
   }
 
   .breadcrumb-item {
