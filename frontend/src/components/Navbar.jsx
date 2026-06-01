@@ -8,6 +8,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useQari } from '../context/QariContext';
 import { useBookmarks } from '../context/BookmarkContext';
+import { useAudio } from '../context/AudioContext';
 import '../styles/Navbar.css';
 
 function QariDropdown({ reciter, changeReciter, reciters }) {
@@ -126,7 +127,10 @@ export default function Navbar() {
   const { theme, changeTheme, themes } = useTheme();
   const { reciter, changeReciter, reciters } = useQari();
   const { bookmarks } = useBookmarks();
+  const { isPlaying } = useAudio();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollY = useRef(0);
 
   // Lock body scroll when sidebar is open
   useEffect(() => {
@@ -138,11 +142,43 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [sidebarOpen]);
 
+  // Handle header hiding when playing
+  useEffect(() => {
+    if (!isPlaying) {
+      setIsHidden(false);
+      return;
+    }
+    
+    // Hide immediately if already scrolled past 10px when play starts
+    if (window.scrollY >= 10) {
+      setIsHidden(true);
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < 10) {
+        setIsHidden(false);
+      } else if (currentScrollY < lastScrollY.current) {
+        setIsHidden(false);
+      } else if (currentScrollY > lastScrollY.current && isPlaying) {
+        setIsHidden(true);
+      }
+      
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isPlaying]);
+
   function closeSidebar() { setSidebarOpen(false); }
 
   return (
     <>
-      <nav className="navbar">
+      <nav className={`navbar ${isHidden ? 'navbar-hidden' : ''}`}>
         <div className="navbar-inner">
           {/* Logo */}
           <NavLink to="/" className="navbar-logo" onClick={closeSidebar}>
