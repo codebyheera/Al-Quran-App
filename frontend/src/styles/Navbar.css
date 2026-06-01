@@ -186,6 +186,7 @@
 
   .dropdown-panel {
     min-width: 170px;
+    max-width: calc(100vw - 24px);
   }
 }
 
@@ -554,6 +555,23 @@
 
 .theme-panel {
   min-width: 160px;
+}
+
+/* ── AudioDropdown Panel Responsive Positioning ── */
+.dropdown-panel.audio-dropdown-panel {
+  left: 50%;
+  right: auto;
+  margin-left: -80px;
+}
+
+@media (max-width: 768px) {
+  /* Right-align inside BottomPlayer on mobile to prevent overflowing right screen edge */
+  .bp-mobile-controls .dropdown-panel.audio-dropdown-panel,
+  .bp-actions .dropdown-panel.audio-dropdown-panel {
+    left: auto;
+    right: 0;
+    margin-left: 0;
+  }
 }
 
 @keyframes dropdownPanelIn {

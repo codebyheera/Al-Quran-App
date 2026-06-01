@@ -51,12 +51,9 @@ export default function AudioDropdown({ isCompact = false, upwards = false }) {
 
       {open && (
         <div 
-          className="dropdown-panel theme-panel" 
+          className="dropdown-panel theme-panel audio-dropdown-panel" 
           role="listbox"
           style={{
-            left: '50%',
-            right: 'auto',
-            marginLeft: '-80px',
             ...(upwards ? { top: 'auto', bottom: 'calc(100% + 8px)', transformOrigin: 'bottom' } : {})
           }}
         >
