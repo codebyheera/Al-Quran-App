@@ -63,7 +63,7 @@ video {
 
   --transition: all 0.25s ease;
   --font-ui: 'Inter', sans-serif;
-  --font-arabic: 'MeQuran', 'Noto Nastaliq Urdu', serif;
+  --font-arabic: 'MeQuran', 'Gulzar', 'Noto Nastaliq Urdu', serif;
   --arabic-font-size: 2.2rem;
 }
 
