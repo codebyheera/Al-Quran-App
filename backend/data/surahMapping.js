@@ -194,3 +194,12 @@ export function getSurahId(slugOrId) {
   const normalized = decoded.toLowerCase().replace(/[^a-z0-9]/g, '');
   return normalizedSurahMapping[normalized] || null;
 }
+
+export function getSurahSlug(id) {
+  const numId = parseInt(id, 10);
+  if (isNaN(numId) || numId < 1 || numId > 114) return null;
+  for (const [name, val] of Object.entries(englishNamesToIds)) {
+    if (val === numId) return name;
+  }
+  return String(numId);
+}

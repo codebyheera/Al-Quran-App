@@ -120,6 +120,9 @@ export default function SurahView() {
       .then(({ data }) => {
         setSurah(data);
         setLoading(false);
+        if (isIdChange && !location.hash) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // Update background playlist if currently playing
         if (!isIdChange && updatePlaylist) {
@@ -772,7 +775,7 @@ export default function SurahView() {
         <div className="sv-nav">
           <button
             className="btn btn-secondary"
-            onClick={() => navigate(`/surah/${surah.surahNumber - 1}`)}
+            onClick={() => navigate(`/surah/${surah.prevSurahSlug}`)}
             disabled={surah.surahNumber <= 1}
           >
             ← Previous Surah
@@ -782,7 +785,7 @@ export default function SurahView() {
           </Link>
           <button
             className="btn btn-secondary"
-            onClick={() => navigate(`/surah/${surah.surahNumber + 1}`)}
+            onClick={() => navigate(`/surah/${surah.nextSurahSlug}`)}
             disabled={surah.surahNumber >= 114}
           >
             Next Surah →

@@ -4,7 +4,7 @@
 
 import express from 'express';
 import axios from 'axios';
-import { getSurahId } from '../data/surahMapping.js';
+import { getSurahId, getSurahSlug } from '../data/surahMapping.js';
 const router = express.Router();
 
 const ALQURAN_BASE = 'https://api.alquran.cloud/v1';
@@ -134,6 +134,8 @@ router.get('/:surahIdentifier', async (req, res) => {
       nameTranslation: arabicEdition.englishNameTranslation,
       revelation:   arabicEdition.revelationType,
       versesCount:  arabicEdition.numberOfAyahs,
+      prevSurahSlug: num > 1 ? getSurahSlug(num - 1) : null,
+      nextSurahSlug: num < 114 ? getSurahSlug(num + 1) : null,
       surahAudioUrl: (() => {
         const hqMapping = {
           'ghamidi': `https://server7.mp3quran.net/s_gmd/${String(num).padStart(3, '0')}.mp3`,
