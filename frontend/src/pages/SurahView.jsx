@@ -480,6 +480,15 @@ export default function SurahView() {
         const cleanTitle = pageTitle.replace(/&amp;/g, '&');
         const cleanDescription = pageDescription.replace(/&amp;/g, '&');
 
+        const webPageSchema = {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": cleanTitle,
+          "url": `https://alquranhub.org/surah/${id}`,
+          "description": cleanDescription,
+          "inLanguage": "ar"
+        };
+
         return (
         <Helmet encodeSpecialCharacters={false}>
           <title>{cleanTitle}</title>
@@ -489,33 +498,17 @@ export default function SurahView() {
           <meta property="og:description" content={cleanDescription} />
           <meta property="og:url" content={`https://alquranhub.org/surah/${id}`} />
           <meta property="og:type" content="article" />
+          <script type="application/ld+json">
+            {JSON.stringify(webPageSchema)}
+          </script>
+          {faqSchema && (
+            <script type="application/ld+json">
+              {JSON.stringify(faqSchema)}
+            </script>
+          )}
         </Helmet>
         );
       })()}
-
-      {surah && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebPage",
-              "name": pageTitle.replace(/&amp;/g, '&'),
-              "url": `https://alquranhub.org/surah/${id}`,
-              "description": pageDescription.replace(/&amp;/g, '&'),
-              "inLanguage": "ar"
-            })
-          }}
-        />
-      )}
-      {surah && faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqSchema),
-          }}
-        />
-      )}
       <div className="container">
         {/* ── Breadcrumb Navigation ───────────────────────── */}
         <Breadcrumb crumbs={[
