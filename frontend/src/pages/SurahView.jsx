@@ -15,6 +15,8 @@ import { useAudio } from "../context/AudioContext";
 import { useQari } from "../context/QariContext";
 import { Helmet } from "react-helmet-async";
 import Breadcrumb from "../components/Breadcrumb";
+import SurahFaqSection from "../components/SurahFaqSection";
+import { getSurahFaqs, getSurahFaqSchema } from "../data/surahFaqs";
 import "./SurahView.css";
 
 export default function SurahView() {
@@ -277,6 +279,7 @@ export default function SurahView() {
     surahName: surah.surahName,
     audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl
   }));
+  const faqItems = getSurahFaqs(surahNum);
 
   const pageTitle = surah ? (
     surahNum === 1
@@ -461,6 +464,12 @@ export default function SurahView() {
                                                                                     : `Read and listen to Surah ${surah.surahName} (${surah.nameTranslation}). Contains ${surah.versesCount} verses. Revealed in ${surah.revelation}. Arabic text, translation and audio available.`
   ) : "Read and listen to the Holy Quran online.";
 
+  const faqSchema = getSurahFaqSchema({
+    surahNumber: surahNum,
+    pageUrl: `https://alquranhub.org/surah/${id}`,
+    pageTitle,
+  });
+
   return (
     <div
       className="surah-view page-enter"
@@ -470,7 +479,6 @@ export default function SurahView() {
       {surah && (() => {
         const cleanTitle = pageTitle.replace(/&amp;/g, '&');
         const cleanDescription = pageDescription.replace(/&amp;/g, '&');
-        const cleanSurahName = surah.surahName.replace(/&amp;/g, '&');
 
         return (
         <Helmet encodeSpecialCharacters={false}>
@@ -497,6 +505,14 @@ export default function SurahView() {
               "description": pageDescription.replace(/&amp;/g, '&'),
               "inLanguage": "ar"
             })
+          }}
+        />
+      )}
+      {surah && faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema),
           }}
         />
       )}
@@ -772,6 +788,13 @@ export default function SurahView() {
         </div>
 
         {/* ── Prev / Next navigation ──────────────────────── */}
+        {faqItems.length > 0 && (
+          <SurahFaqSection
+            title="Frequently Asked Questions"
+            surahName={surah.surahName}
+            items={faqItems}
+          />
+        )}
         <div className="sv-nav">
           <button
             className="btn btn-secondary"
