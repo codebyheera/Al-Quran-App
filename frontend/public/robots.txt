@@ -166,7 +166,6 @@ Disallow: /trash/
 Disallow: /__trashed/
 Disallow: /__trashed-*
 Disallow: /*__trashed-*/
-Disallow: /search/
 Disallow: /feed/
 Disallow: /*/feed/
 Disallow: /comments/
