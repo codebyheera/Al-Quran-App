@@ -3,8 +3,8 @@
  * Wraps the app with ThemeProvider, BookmarkProvider, QariProvider, and AudioProvider
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { StrictMode } from 'react';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider }   from './context/ThemeContext';
@@ -15,13 +15,12 @@ import { HelmetProvider }   from 'react-helmet-async';
 import App from './App';
 
 import './styles/global.css';
-import '@fontsource/noto-nastaliq-urdu';
-
-import { createRoot, hydrateRoot } from 'react-dom/client';
+// NOTE: @fontsource/noto-nastaliq-urdu removed — already loaded via Google Fonts CDN in index.html
+// Bundling it added 159+ kB to the JS bundle unnecessarily
 
 const rootElement = document.getElementById('root');
 const app = (
-  <React.StrictMode>
+  <StrictMode>
     <BrowserRouter>
       <HelmetProvider>
         <ThemeProvider>
@@ -35,7 +34,7 @@ const app = (
         </ThemeProvider>
       </HelmetProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </StrictMode>
 );
 
 if (rootElement.hasChildNodes()) {

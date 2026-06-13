@@ -4,10 +4,12 @@ import { Routes, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import BottomPlayer from './components/BottomPlayer';
-import SupportPopup from './components/SupportPopup';
 import { useAudio } from './context/AudioContext';
 import { useBookmarks } from './context/BookmarkContext';
+
+// ── Lazy load heavy global components ────────────────────────────────────────
+const BottomPlayer = lazy(() => import('./components/BottomPlayer'));
+const SupportPopup = lazy(() => import('./components/SupportPopup'));
 
 // ── Home is eagerly loaded (critical first paint) ────────────────────────────
 import Home from './pages/Home';
@@ -69,10 +71,14 @@ export default function App() {
 
       {/* Persistent bottom audio player */}
       <Footer />
-      <BottomPlayer />
+      <Suspense fallback={null}>
+        <BottomPlayer />
+      </Suspense>
 
       {/* Global Support Popup */}
-      <SupportPopup />
+      <Suspense fallback={null}>
+        <SupportPopup />
+      </Suspense>
     </div>
   );
 }

@@ -7,10 +7,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useBookmarks } from '../context/BookmarkContext';
 import { Helmet } from 'react-helmet-async';
+import { lazy, Suspense } from 'react';
 import api from '../lib/api';
-import VerseOfDay from '../components/VerseOfDay';
 import './Home.css';
 import './SurahList.css';
+
+const VerseOfDay = lazy(() => import('../components/VerseOfDay'));
 
 // Popular Surahs — static quick-access shown on the home page
 const POPULAR = [
@@ -162,7 +164,9 @@ export default function Home() {
 
         {/* ── Random Verse Of The Day ──────────────────────── */}
         <section className="home-section votd-section">
-          <VerseOfDay />
+          <Suspense fallback={<div style={{ minHeight: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div className="spinner" /></div>}>
+            <VerseOfDay />
+          </Suspense>
         </section>
 
         {/* ── Recent Bookmarks ──────────────────────────────── */}
