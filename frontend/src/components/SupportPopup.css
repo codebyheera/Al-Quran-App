@@ -11,6 +11,7 @@
   z-index: 9999;
   padding: 1rem;
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   animation: fadeInOverlay 0.3s ease-out forwards;
 }
 
@@ -30,6 +31,9 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
+  z-index: 10000;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   animation: slideUpPopup 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
