@@ -188,6 +188,7 @@ export default function Navbar() {
 
           {/* Nav links (desktop) */}
           <div className="navbar-links">
+            <NavLink to="/" end className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Home</NavLink>
             <NavLink to="/surah" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Surahs</NavLink>
             <NavLink to="/juz" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Juz</NavLink>
             <NavLink to="/bookmarks" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Bookmarks</NavLink>
@@ -274,6 +275,11 @@ export default function Navbar() {
         <div className="sidebar-nav-label">NAVIGATION</div>
 
         <nav className="sidebar-nav-links">
+          <NavLink to="/" end className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
+            <i className="ti ti-home nav-icon"></i>
+            <span className="nav-text">Home</span>
+          </NavLink>
+
           <NavLink to="/surah" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
             <i className="ti ti-book nav-icon"></i>
             <span className="nav-text">Surahs</span>
