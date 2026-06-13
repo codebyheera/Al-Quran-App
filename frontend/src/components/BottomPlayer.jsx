@@ -36,13 +36,21 @@ export default function BottomPlayer() {
   const dragStartPos = useRef({ x: 0, y: 0 });
   const hasMovedWhileDragging = useRef(false);
   const autoMinimizeTimeoutRef = useRef(null);
+  // Cache viewport width to avoid forced reflow on every timer call
+  const isDesktop = useRef(typeof window !== 'undefined' && window.innerWidth > 768);
+
+  useEffect(() => {
+    const updateIsDesktop = () => { isDesktop.current = window.innerWidth > 768; };
+    window.addEventListener('resize', updateIsDesktop, { passive: true });
+    return () => window.removeEventListener('resize', updateIsDesktop);
+  }, []);
 
   const resetAutoMinimizeTimer = () => {
     if (autoMinimizeTimeoutRef.current) {
       clearTimeout(autoMinimizeTimeoutRef.current);
     }
     // Only set timer if not minimized and on desktop (using a safe threshold)
-    if (!isMinimized && window.innerWidth > 768) {
+    if (!isMinimized && isDesktop.current) {
       autoMinimizeTimeoutRef.current = setTimeout(() => {
         setIsMinimized(true);
       }, 5000);

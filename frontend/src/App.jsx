@@ -9,8 +9,10 @@ import SupportPopup from './components/SupportPopup';
 import { useAudio } from './context/AudioContext';
 import { useBookmarks } from './context/BookmarkContext';
 
-// ── Lazy load all pages ──────────────────────────────────────────────────────
-const Home = lazy(() => import('./pages/Home'));
+// ── Home is eagerly loaded (critical first paint) ────────────────────────────
+import Home from './pages/Home';
+
+// ── Lazy load all other pages ─────────────────────────────────────────────────
 const SurahList = lazy(() => import('./pages/SurahList'));
 const JuzList = lazy(() => import('./pages/JuzList'));
 const SurahView = lazy(() => import('./pages/SurahView'));

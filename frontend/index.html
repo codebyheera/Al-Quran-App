@@ -26,7 +26,6 @@
   <meta name="google-site-verification" content="D4M0EW6nC5EQF7RT7PeX_jGuYznnkLNc1k_9GL9GwU8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
   <!-- Keywords -->
   <meta name="keywords" content="quran pak, read quran online, quran online, al quran" />
 
@@ -35,22 +34,36 @@
   <!-- Title -->
   <title>Al-Quran Hub | Read Quran Pak Online Free</title>
 
+  <!-- Preconnect for faster font loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Gulzar&family=Inter:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 
-  
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GR7C4XE17J"></script>
-  <script>
+  <!-- DNS prefetch for external APIs used at runtime -->
+  <link rel="dns-prefetch" href="https://api.alquran.cloud" />
+  <link rel="preconnect" href="https://cdn.alquran.cloud" crossorigin />
+
+  <!-- Inter (critical UI font) — loaded immediately -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Arabic fonts (large, non-critical) — loaded after page paint -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Gulzar&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Gulzar&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" rel="stylesheet" /></noscript>
+
+  <!-- Preload Tabler Icons (non-blocking) -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" /></noscript>
+
+  <!-- Google Analytics (defer) -->
+  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-GR7C4XE17J"></script>
+  <script defer>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-GR7C4XE17J');
   </script>
-  <script type="text/javascript">
+
+  <!-- Microsoft Clarity (defer) -->
+  <script defer>
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;

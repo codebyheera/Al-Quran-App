@@ -149,25 +149,30 @@ export default function Navbar() {
       return;
     }
     
-    // Hide immediately if already scrolled past 10px when play starts
-    if (window.scrollY >= 10) {
-      setIsHidden(true);
-    }
+    // Wrap layout read in rAF to avoid forced reflow
+    requestAnimationFrame(() => {
+      if (window.scrollY >= 10) {
+        setIsHidden(true);
+      }
+    });
   }, [isPlaying]);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY < 10) {
-        setIsHidden(false);
-      } else if (currentScrollY < lastScrollY.current) {
-        setIsHidden(false);
-      } else if (currentScrollY > lastScrollY.current && isPlaying) {
-        setIsHidden(true);
-      }
-      
-      lastScrollY.current = currentScrollY;
+      // Batch layout read + write inside rAF to prevent forced reflow
+      requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY < 10) {
+          setIsHidden(false);
+        } else if (currentScrollY < lastScrollY.current) {
+          setIsHidden(false);
+        } else if (currentScrollY > lastScrollY.current && isPlaying) {
+          setIsHidden(true);
+        }
+
+        lastScrollY.current = currentScrollY;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

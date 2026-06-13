@@ -18,6 +18,8 @@ export default defineConfig({
   // ── Bundle Optimization ──────────────────────────────────────────────────
   build: {
     target: 'es2015',
+    cssCodeSplit: true,   // Split CSS per chunk for faster per-page loading
+    minify: 'esbuild',   // Faster + smaller than default terser
     rollupOptions: {
       output: {
         manualChunks: {

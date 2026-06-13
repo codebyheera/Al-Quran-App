@@ -235,7 +235,9 @@ const VerseOfDay = ({ hijriDate }) => {
       </div>
 
       {loading ? (
-        <div className={styles.loading}>Loading verse...</div>
+        <div className={styles.loading} style={{ minHeight: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="spinner" />
+        </div>
       ) : error ? (
         <div className={styles.error}>{error}</div>
       ) : (
