@@ -19,7 +19,7 @@ export const THEMES = [
 
 export function ThemeProvider({ children }) {
   // Read saved theme from localStorage (default: dark)
-  const [theme, setTheme] = useState(() => localStorage.getItem('quran-theme') || 'dark');
+  const [theme, setTheme] = useState(() => localStorage.getItem('quran-theme') || 'emerald');
 
   // Apply theme class to <html> whenever it changes
   useEffect(() => {

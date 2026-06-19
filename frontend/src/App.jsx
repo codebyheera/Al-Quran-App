@@ -22,6 +22,8 @@ const JuzView = lazy(() => import('./pages/JuzView'));
 const BookmarksPage = lazy(() => import('./pages/BookmarksPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
+const BlogArchive = lazy(() => import('./pages/BlogArchive'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // ── Lightweight loader ───────────────────────────────────────────────────────
@@ -61,6 +63,8 @@ export default function App() {
             <Route path="/bookmarks" element={<BookmarksPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/support" element={<SupportPage />} />
+            <Route path="/blog" element={<BlogArchive />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

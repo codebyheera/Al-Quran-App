@@ -42,7 +42,7 @@ export const RECITERS = [
 
 export const QariProvider = ({ children }) => {
   const [reciter, setReciter] = useState(() => {
-    return localStorage.getItem('selectedReciter') || 'abdulsamad';
+    return localStorage.getItem('selectedReciter') || 'alafasy';
   });
 
   const changeReciter = (id) => {

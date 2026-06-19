@@ -9,6 +9,7 @@ import { useBookmarks } from '../context/BookmarkContext';
 import { Helmet } from 'react-helmet-async';
 import { lazy, Suspense } from 'react';
 import api from '../lib/api';
+import { BlogCard } from '../components/BlogCard';
 import './Home.css';
 import './SurahList.css';
 
@@ -32,6 +33,7 @@ export default function Home() {
   const [query, setQuery] = useState('');
   const [allSurahs, setAllSurahs] = useState([]);
   const [showAllSurahs, setShowAllSurahs] = useState(false);
+  const [recentBlogs, setRecentBlogs] = useState([]);
   const navigate = useNavigate();
   const { bookmarks } = useBookmarks();
 
@@ -39,6 +41,10 @@ export default function Home() {
     api.get('/api/surah')
       .then(({ data }) => setAllSurahs(data))
       .catch((err) => console.error("Could not fetch surahs for suggestions", err));
+      
+    api.get('/api/blogs', { params: { page: 1, limit: 3 } })
+      .then(({ data }) => setRecentBlogs(data.blogs || []))
+      .catch((err) => console.error("Could not fetch recent blogs", err));
   }, []);
 
   function handleSearch(e) {
@@ -168,6 +174,21 @@ export default function Home() {
             <VerseOfDay />
           </Suspense>
         </section>
+
+        {/* ── Recent Blogs ──────────────────────────────── */}
+        {recentBlogs.length > 0 && (
+          <section className="home-section">
+            <div className="flex-between mb-2">
+              <h2>Newest Articles</h2>
+              <Link to="/blog" className="btn btn-ghost" style={{ fontSize: '0.85rem' }}>View All →</Link>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.75rem' }}>
+              {recentBlogs.map((blog) => (
+                <BlogCard key={blog.id} blog={blog} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ── Recent Bookmarks ──────────────────────────────── */}
         {bookmarks.length > 0 && (

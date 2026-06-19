@@ -6,6 +6,7 @@ const QUICK_LINKS = [
   { label: 'Surahs', to: '/surah' },
   { label: 'Juz', to: '/juz' },
   { label: 'Bookmarks', to: '/bookmarks' },
+  { label: 'Blog', to: '/blog' },
   { label: 'Support', to: '/support' },
 ];
 

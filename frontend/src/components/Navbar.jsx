@@ -197,6 +197,7 @@ export default function Navbar() {
             <NavLink to="/surah" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Surahs</NavLink>
             <NavLink to="/juz" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Juz</NavLink>
             <NavLink to="/bookmarks" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Bookmarks</NavLink>
+            <NavLink to="/blog" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Blog</NavLink>
             <NavLink to="/support" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Support</NavLink>
           </div>
 
@@ -299,6 +300,11 @@ export default function Navbar() {
             <i className="ti ti-bookmark nav-icon"></i>
             <span className="nav-text">Bookmarks</span>
             {bookmarks.length > 0 && <span className="nav-badge">{bookmarks.length}</span>}
+          </NavLink>
+
+          <NavLink to="/blog" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
+            <i className="ti ti-writing nav-icon"></i>
+            <span className="nav-text">Blog</span>
           </NavLink>
 
           <NavLink to="/support" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>

@@ -42,11 +42,13 @@ import surahRoutes    from './routes/surah.js';
 import juzRoutes      from './routes/juz.js';
 import bookmarkRoutes from './routes/bookmarks.js';
 import searchRoutes   from './routes/search.js';
+import blogRoutes     from './routes/blogRoutes.js';
 
 app.use('/api/surah',     surahRoutes);
 app.use('/api/juz',       juzRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 app.use('/api/search',    searchRoutes);
+app.use('/api/blogs',     blogRoutes);
 
 // Health-check
 app.get('/', (_req, res) => {
