@@ -548,6 +548,12 @@
   }
 
   .author-card {
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .author-socials {
+    justify-content: center;
   }
 }
