@@ -31,7 +31,6 @@
   font-family: var(--font-ui);
   font-weight: 500;
   white-space: nowrap;
-  max-width: 100%;
 }
 
 /* Clickable ancestor links — muted, plain text */
@@ -62,9 +61,6 @@
   letter-spacing: 0.01em;
   line-height: 1.4;
   box-shadow: 0 0 10px rgba(201, 168, 76, 0.25);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
 }
 
 /* Chevron › separator */
@@ -80,7 +76,16 @@
 /* ── Mobile ─────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .breadcrumb-list {
-    padding: 0.3rem 0;
+    padding: 0.3rem 0 0.5rem 0;
+    margin-bottom: -0.5rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .breadcrumb-list::-webkit-scrollbar {
+    display: none;
   }
 
   .breadcrumb-item {

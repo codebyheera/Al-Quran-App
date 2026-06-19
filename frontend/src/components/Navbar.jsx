@@ -243,23 +243,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Search Bar */}
-        <div className="sidebar-search-container">
-          <div className="sidebar-search-box">
-            <i className="ti ti-search search-icon"></i>
-            <input
-              className="sidebar-search-input"
-              type="text"
-              placeholder="Search Surah or Ayah..."
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && e.target.value.trim()) {
-                  closeSidebar();
-                  window.location.href = `/search?q=${encodeURIComponent(e.target.value.trim())}`;
-                }
-              }}
-            />
-          </div>
-        </div>
+
 
         {/* Stats Row */}
         <div className="sidebar-stats-boxes">
