@@ -799,14 +799,13 @@
 
 /* ── Responsive ──────────────────────────────────────────── */
 
-/* Tablet / small desktop: stack countdown above cards */
+/* Tablet (860–601px): stack + horizontal-scroll cards */
 @media (max-width: 860px) {
   .prayer-body {
     grid-template-columns: 1fr;
     gap: 1.1rem;
   }
 
-  /* Cards row: reset grid → horizontal scroll */
   .prayer-cards-row {
     display: flex;
     flex-wrap: nowrap;
@@ -823,53 +822,63 @@
   .prayer-cards-row::-webkit-scrollbar { display: none; }
 
   .prayer-card {
-    flex: 0 0 min(120px, 28vw);
-    padding: 1rem 0.4rem;
+    flex: 0 0 min(130px, 28vw);
+    padding: 1rem 0.5rem;
   }
 
-  .prayer-card-active {
-    transform: none;
-  }
+  .prayer-card-active { transform: none; }
 }
 
-/* Mobile: compact clock + smaller cards */
-@media (max-width: 540px) {
+/* Mobile (≤600px): drop scroll → all 5 cards visible in a grid */
+@media (max-width: 600px) {
+  .prayer-body { gap: 0.9rem; }
+
   .prayer-countdown-box {
     padding: 1rem 1.1rem 0.9rem;
   }
 
-  .prayer-cd-name {
-    font-size: 1.3rem;
-  }
+  .prayer-cd-name { font-size: 1.3rem; }
 
   .prayer-clock-digit {
-    font-size: 1.2rem;
-    min-width: 2rem;
-    padding: 0.18rem 0.35rem;
+    font-size: 1.15rem;
+    min-width: 1.9rem;
+    padding: 0.15rem 0.35rem;
   }
 
   .prayer-clock-sep {
     font-size: 1rem;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.8rem;
   }
 
-  .prayer-clock-cap {
-    font-size: 0.5rem;
-  }
+  .prayer-clock-cap { font-size: 0.5rem; }
 
-  .prayer-card {
-    flex: 0 0 min(105px, 26vw);
-    padding: 0.85rem 0.3rem;
+  /* Override the scroll layout: back to a grid where all 5 fit */
+  .prayer-cards-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    overflow: visible;
+    overflow-x: unset;
+    flex-wrap: unset;
+    padding-bottom: 0;
     gap: 0.35rem;
   }
 
-  .prayer-time {
-    font-size: 1.1rem;
+  .prayer-card {
+    flex: unset;
+    min-width: 0;
+    padding: 0.85rem 0.25rem;
+    gap: 0.3rem;
   }
 
-  .prayer-name {
-    font-size: 12px;
+  .prayer-time {
+    font-size: 1.05rem;
+    white-space: nowrap;
   }
+
+  .prayer-name { font-size: 11px; }
+
+  .prayer-ampm { font-size: 0.58rem; }
 
   .prayer-method-pill {
     font-size: 0.68rem;
@@ -877,15 +886,20 @@
   }
 }
 
-/* Small phones: cards fill screen with snap scroll */
-@media (max-width: 380px) {
-  .prayer-card {
-    flex: 0 0 calc(50vw - 2rem);
-  }
+/* Small phones (≤400px): tighten further */
+@media (max-width: 400px) {
+  .prayer-cards-row { gap: 0.25rem; }
+
+  .prayer-card { padding: 0.75rem 0.15rem; }
+
+  .prayer-time { font-size: 0.92rem; }
+
+  .prayer-name { font-size: 10px; }
 
   .prayer-clock-digit {
-    font-size: 1.05rem;
-    min-width: 1.8rem;
+    font-size: 1rem;
+    min-width: 1.65rem;
+    padding: 0.12rem 0.28rem;
   }
 }
 

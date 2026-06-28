@@ -15,8 +15,8 @@
   padding: 0.85rem 1.1rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 
-  width: calc(100vw - 2.5rem);
-  max-width: 480px;
+  /* never wider than viewport, centered */
+  width: min(460px, calc(100vw - 2rem));
 
   animation: notifSlideUp 0.35s ease;
 }
@@ -59,22 +59,22 @@
   white-space: nowrap;
 }
 
-/* Mobile: stack text above buttons, anchor to bottom edge */
-@media (max-width: 480px) {
+/* ── Mobile: full-width bottom sheet ──────────────────────── */
+@media (max-width: 520px) {
   .notif-banner {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    bottom: 0;
+    /* reset centered-pill approach */
     left: 0;
     right: 0;
+    bottom: 0;
     transform: none;
     width: 100%;
-    max-width: 100%;
+
     border-radius: 16px 16px 0 0;
-    padding: 0.9rem 1rem 1rem;
-    gap: 0.6rem;
-    animation: notifSlideUpMobile 0.35s ease;
+    border-bottom: none;
+    padding: 0.9rem 1rem calc(0.9rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.7rem;
+
+    animation: notifSlideUpMobile 0.32s ease;
   }
 
   @keyframes notifSlideUpMobile {
@@ -83,11 +83,27 @@
   }
 
   .notif-banner-text {
-    font-size: 0.84rem;
-    flex-basis: calc(100% - 2.5rem);
+    font-size: 0.85rem;
+    flex: 1;
   }
 
   .notif-banner-actions {
-    margin-left: auto;
+    flex-shrink: 0;
+  }
+}
+
+/* Very small phones: stack text + buttons vertically */
+@media (max-width: 360px) {
+  .notif-banner {
+    flex-wrap: wrap;
+  }
+
+  .notif-banner-text {
+    flex-basis: 100%;
+  }
+
+  .notif-banner-actions {
+    width: 100%;
+    justify-content: flex-end;
   }
 }
