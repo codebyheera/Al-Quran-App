@@ -20,14 +20,18 @@ const MESSAGES = [
 // POST /api/notifications/subscribe
 router.post('/subscribe', async (req, res) => {
   const { subscription } = req.body;
-  if (!subscription?.endpoint) {
+  if (!subscription?.endpoint || !subscription?.keys?.p256dh || !subscription?.keys?.auth) {
     return res.status(400).json({ error: 'Invalid subscription object' });
   }
 
   const { error } = await supabase
     .from('push_subscriptions')
     .upsert(
-      { endpoint: subscription.endpoint, subscription: JSON.stringify(subscription) },
+      {
+        endpoint: subscription.endpoint,
+        p256dh:   subscription.keys.p256dh,
+        auth:     subscription.keys.auth,
+      },
       { onConflict: 'endpoint' }
     );
 
@@ -46,9 +50,9 @@ router.get('/cron', async (req, res) => {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const { data: subs, error } = await supabase
+  const { data: subscriptions, error } = await supabase
     .from('push_subscriptions')
-    .select('endpoint, subscription');
+    .select('endpoint, p256dh, auth');
 
   if (error) {
     console.error('Cron fetch error:', error.message);
@@ -66,12 +70,16 @@ router.get('/cron', async (req, res) => {
   let sent = 0, failed = 0, deleted = 0;
 
   await Promise.all(
-    (subs || []).map(async (row) => {
+    (subscriptions || []).map(async (sub) => {
       try {
-        const sub = typeof row.subscription === 'string'
-          ? JSON.parse(row.subscription)
-          : row.subscription;
-        await webpush.sendNotification(sub, payload);
+        const pushSubscription = {
+          endpoint: sub.endpoint,
+          keys: {
+            p256dh: sub.p256dh,
+            auth:   sub.auth,
+          },
+        };
+        await webpush.sendNotification(pushSubscription, payload);
         sent++;
       } catch (err) {
         failed++;
@@ -80,7 +88,7 @@ router.get('/cron', async (req, res) => {
           await supabase
             .from('push_subscriptions')
             .delete()
-            .eq('endpoint', row.endpoint);
+            .eq('endpoint', sub.endpoint);
           deleted++;
         }
       }
