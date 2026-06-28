@@ -25,20 +25,16 @@ export default function usePushNotification() {
     });
   }, []);
 
-  async function subscribe() {
+  // Called AFTER permission is already granted — does SW subscribe + Supabase save
+  async function subscribeUser() {
     if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
     setLoading(true);
     try {
-      const reg    = await navigator.serviceWorker.ready;
-      const result = await Notification.requestPermission();
-      setPermission(result);
-      if (result !== 'granted') return;
-
+      const reg = await navigator.serviceWorker.ready;
       const sub = await reg.pushManager.subscribe({
         userVisibleOnly:      true,
         applicationServerKey: urlBase64ToUint8Array(VAPID_KEY),
       });
-
       await api.post('/api/notifications/subscribe', { subscription: sub.toJSON() });
       setSubscribed(true);
     } catch (err) {
@@ -48,5 +44,5 @@ export default function usePushNotification() {
     }
   }
 
-  return { permission, subscribed, loading, subscribe };
+  return { permission, setPermission, subscribed, loading, subscribeUser };
 }
