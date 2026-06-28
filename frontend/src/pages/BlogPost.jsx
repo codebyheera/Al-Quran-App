@@ -231,6 +231,7 @@ export default function BlogPost() {
       <Helmet>
         <title>{blog.meta_title || blog.title} | Al-Quran Hub Blog</title>
         <meta name="description" content={blog.meta_description || blog.excerpt} />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://alquranhub.org/blog/${blog.slug}`} />
 
         {/* Open Graph */}
