@@ -6,7 +6,7 @@ const DISMISS_KEY  = 'notif_dismissed_until';
 const DISMISS_DAYS = 7;
 
 export default function NotificationBanner() {
-  const { permission, subscribed, loading, subscribe } = usePushNotification();
+  const { permission, setPermission, subscribed, loading, subscribeUser } = usePushNotification();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -30,8 +30,12 @@ export default function NotificationBanner() {
     setVisible(false);
   }
 
-  async function handleSubscribe() {
-    await subscribe();
+  async function handleAllow() {
+    const result = await Notification.requestPermission();
+    setPermission(result);
+    if (result === 'granted') {
+      await subscribeUser();
+    }
     setVisible(false);
   }
 
@@ -46,7 +50,7 @@ export default function NotificationBanner() {
       <div className="notif-banner-actions">
         <button
           className="btn btn-primary notif-banner-allow"
-          onClick={handleSubscribe}
+          onClick={handleAllow}
           disabled={loading}
         >
           {loading ? 'Enabling…' : 'Allow'}
