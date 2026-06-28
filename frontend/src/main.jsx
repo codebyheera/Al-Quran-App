@@ -18,6 +18,14 @@ import './styles/global.css';
 // NOTE: @fontsource/noto-nastaliq-urdu removed — already loaded via Google Fonts CDN in index.html
 // Bundling it added 159+ kB to the JS bundle unnecessarily
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch((err) => {
+      console.warn('SW registration failed:', err);
+    });
+  });
+}
+
 const rootElement = document.getElementById('root');
 const app = (
   <StrictMode>

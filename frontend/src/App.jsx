@@ -8,8 +8,9 @@ import { useAudio } from './context/AudioContext';
 import { useBookmarks } from './context/BookmarkContext';
 
 // ── Lazy load heavy global components ────────────────────────────────────────
-const BottomPlayer = lazy(() => import('./components/BottomPlayer'));
-const SupportPopup = lazy(() => import('./components/SupportPopup'));
+const BottomPlayer        = lazy(() => import('./components/BottomPlayer'));
+const SupportPopup        = lazy(() => import('./components/SupportPopup'));
+const NotificationBanner  = lazy(() => import('./components/NotificationBanner'));
 
 // ── Home is eagerly loaded (critical first paint) ────────────────────────────
 import Home from './pages/Home';
@@ -82,6 +83,11 @@ export default function App() {
       {/* Global Support Popup */}
       <Suspense fallback={null}>
         <SupportPopup />
+      </Suspense>
+
+      {/* Push notification permission banner */}
+      <Suspense fallback={null}>
+        <NotificationBanner />
       </Suspense>
     </div>
   );
