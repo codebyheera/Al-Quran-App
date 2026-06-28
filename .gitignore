@@ -35,4 +35,5 @@ Desktop.ini
 
 # Backend specific
 backend/out.log
+backend/crash.log
 backend/test-mongo.js
