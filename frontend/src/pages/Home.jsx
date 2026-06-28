@@ -13,7 +13,41 @@ import { BlogCard } from '../components/BlogCard';
 import './Home.css';
 import './SurahList.css';
 
-const VerseOfDay = lazy(() => import('../components/VerseOfDay'));
+const VerseOfDay   = lazy(() => import('../components/VerseOfDay'));
+const PrayerTimes  = lazy(() => import('../components/PrayerTimes'));
+
+const FEATURES = [
+  {
+    icon: '🎧',
+    title: 'Top Reciters',
+    desc: 'Listen to beautiful recitations by Mishary Al-Afasy, Abdul Rahman Al-Sudais, and more.',
+  },
+  {
+    icon: '📖',
+    title: 'Arabic with Translation',
+    desc: 'Read every Surah with clear Arabic text, English translation, and word-by-word meaning.',
+  },
+  {
+    icon: '🔖',
+    title: 'Bookmark Any Verse',
+    desc: 'Save your favorite verses and pick up exactly where you left off — anytime.',
+  },
+  {
+    icon: '🌙',
+    title: '100% Ad-Free',
+    desc: 'No ads, no banners, no tracking. Just you and the words of Allah.',
+  },
+  {
+    icon: '📱',
+    title: 'Mobile Friendly',
+    desc: 'Optimized for every device — read and listen comfortably on your phone or tablet.',
+  },
+  {
+    icon: '🆓',
+    title: 'Completely Free',
+    desc: 'Al-Quran Hub is and will always be free — built as sadaqah jariyah for the Ummah.',
+  },
+];
 
 // Popular Surahs — static quick-access shown on the home page
 const POPULAR = [
@@ -69,7 +103,7 @@ export default function Home() {
     <div className="home page-enter">
       <Helmet>
         <title>Al-Quran Hub | Read Quran Pak Online Free</title>
-        <meta name="description" content="Read Quran Pak online for free. Access all Surahs and Juz with beautiful recitation on Al-Quran Hub." />
+        <meta name="description" content="Read Quran Pak online for free with daily prayer times, Verse of the Day, and Islamic blog. Access all Surahs and Juz with beautiful recitation on Al-Quran Hub." />
         <meta name="keywords" content="quran pak, read quran online, quran online, al quran" />
         <link rel="canonical" href="https://alquranhub.org/" />
       </Helmet>
@@ -168,6 +202,33 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── Prayer Times ──────────────────────────────────── */}
+        <section className="home-section">
+          <Suspense fallback={<div className="prayer-loading"><div className="spinner" /></div>}>
+            <PrayerTimes />
+          </Suspense>
+        </section>
+
+        {/* ── Why Al-Quran Hub ──────────────────────────────── */}
+        <section className="home-section features-section">
+          <span className="features-badge">✦ WHY AL-QURAN HUB</span>
+          <h2 className="mt-1">
+            Everything You Need to <span className="text-gold">Read the Quran</span>
+          </h2>
+          <p className="features-subheading">
+            Built for Muslims who want a clean, distraction-free experience — no ads, no subscriptions, just the Quran.
+          </p>
+          <div className="features-grid">
+            {FEATURES.map((f) => (
+              <div key={f.title} className="feature-card card">
+                <div className="feature-icon">{f.icon}</div>
+                <h3 className="feature-title">{f.title}</h3>
+                <p className="feature-desc">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* ── Random Verse Of The Day ──────────────────────── */}
         <section className="home-section votd-section">
           <Suspense fallback={<div style={{ minHeight: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div className="spinner" /></div>}>
@@ -250,6 +311,23 @@ export default function Home() {
           </section>
         )}
       </div>
+
+      {/* ── Support CTA ──────────────────────────────────────── */}
+      <section className="home-cta-section">
+        <div className="home-cta-inner">
+          <span className="features-badge">🤲 SUPPORT THE PROJECT</span>
+          <h2 className="home-cta-heading">
+            Help Keep the Quran <span className="text-gold">Free &amp; Accessible</span>
+          </h2>
+          <p className="home-cta-sub">
+            Al-Quran Hub is built and funded personally no ads, no investors, just sincere effort
+            for the Ummah. Your support helps keep the servers running and new features coming.
+          </p>
+<Link to="/support" className="btn btn-primary home-cta-btn">
+            Support Al-Quran Hub →
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
