@@ -38,17 +38,19 @@ app.use(cors({
 app.use(express.json());
 
 // ── Routes ───────────────────────────────────────────────────────────────────
-import surahRoutes    from './routes/surah.js';
-import juzRoutes      from './routes/juz.js';
-import bookmarkRoutes from './routes/bookmarks.js';
-import searchRoutes   from './routes/search.js';
-import blogRoutes     from './routes/blogRoutes.js';
+import surahRoutes        from './routes/surah.js';
+import juzRoutes          from './routes/juz.js';
+import bookmarkRoutes     from './routes/bookmarks.js';
+import searchRoutes       from './routes/search.js';
+import blogRoutes         from './routes/blogRoutes.js';
+import notificationRoutes from './routes/notificationRoutes.js';
 
-app.use('/api/surah',     surahRoutes);
-app.use('/api/juz',       juzRoutes);
-app.use('/api/bookmarks', bookmarkRoutes);
-app.use('/api/search',    searchRoutes);
-app.use('/api/blogs',     blogRoutes);
+app.use('/api/surah',         surahRoutes);
+app.use('/api/juz',           juzRoutes);
+app.use('/api/bookmarks',     bookmarkRoutes);
+app.use('/api/search',        searchRoutes);
+app.use('/api/blogs',         blogRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Health-check
 app.get('/', (_req, res) => {
