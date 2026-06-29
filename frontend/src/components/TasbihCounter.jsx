@@ -4,8 +4,7 @@ import './TasbihCounter.css';
 export default function TasbihCounter() {
   return (
     <>
-      <span className="features-badge">✦ DIGITAL TASBIH</span>
-      <h2 className="mt-1">Daily <span className="text-gold">Tasbih</span> Counter</h2>
+      <h2>Daily <span className="text-gold">Tasbih</span> Counter</h2>
       <p className="features-subheading">
         Click to count your dhikr — SubhanAllah, Alhamdulillah, Allahu Akbar.
       </p>
@@ -15,7 +14,7 @@ export default function TasbihCounter() {
           <span className="tasbih-bead">📿</span>
           <span className="tasbih-preview-text">Start your daily dhikr</span>
         </div>
-        <Link to="/tasbih" className="btn btn-primary">
+        <Link to="/tasbih" className="btn btn-primary tasbih-open-btn">
           Open Tasbih →
         </Link>
       </div>
