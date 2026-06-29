@@ -1,3 +1,16 @@
+/* ── Remove mobile tap highlight on all interactive elements ── */
+.tasbih-ring-wrap,
+.tasbih-tap,
+.tasbih-ctrl,
+.tasbih-tgt,
+.tasbih-pill,
+.tasbih-mode-btn,
+.tasbih-focus-btn,
+.tasbih-focus-exit {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
 /* ── Page wrapper ────────────────────────────────────────── */
 .tasbih-page {
   min-height: 80vh;
