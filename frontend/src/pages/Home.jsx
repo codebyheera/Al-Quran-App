@@ -212,8 +212,7 @@ export default function Home() {
 
         {/* ── Why Al-Quran Hub ──────────────────────────────── */}
         <section className="home-section features-section">
-          <span className="features-badge">✦ WHY AL-QURAN HUB</span>
-          <h2 className="mt-1">
+          <h2>
             Everything You Need to <span className="text-gold">Read the Quran</span>
           </h2>
           <p className="features-subheading">
@@ -323,7 +322,6 @@ export default function Home() {
       {/* ── Support CTA ──────────────────────────────────────── */}
       <section className="home-cta-section">
         <div className="home-cta-inner">
-          <span className="features-badge">🤲 SUPPORT THE PROJECT</span>
           <h2 className="home-cta-heading">
             Help Keep the Quran <span className="text-gold">Free &amp; Accessible</span>
           </h2>
