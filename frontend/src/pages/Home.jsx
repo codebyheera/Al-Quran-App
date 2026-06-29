@@ -13,8 +13,9 @@ import { BlogCard } from '../components/BlogCard';
 import './Home.css';
 import './SurahList.css';
 
-const VerseOfDay   = lazy(() => import('../components/VerseOfDay'));
-const PrayerTimes  = lazy(() => import('../components/PrayerTimes'));
+const VerseOfDay      = lazy(() => import('../components/VerseOfDay'));
+const PrayerTimes     = lazy(() => import('../components/PrayerTimes'));
+const TasbihCounter   = lazy(() => import('../components/TasbihCounter'));
 
 const FEATURES = [
   {
@@ -75,7 +76,7 @@ export default function Home() {
     api.get('/api/surah')
       .then(({ data }) => setAllSurahs(data))
       .catch((err) => console.error("Could not fetch surahs for suggestions", err));
-      
+
     api.get('/api/blogs', { params: { page: 1, limit: 3 } })
       .then(({ data }) => setRecentBlogs(data.blogs || []))
       .catch((err) => console.error("Could not fetch recent blogs", err));
@@ -227,6 +228,13 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* ── Tasbih Counter ────────────────────────────────── */}
+        <section className="home-section">
+          <Suspense fallback={<div style={{ minHeight: '80px' }} />}>
+            <TasbihCounter />
+          </Suspense>
         </section>
 
         {/* ── Random Verse Of The Day ──────────────────────── */}

@@ -64,6 +64,7 @@ app.get('/sitemap.xml', async (_req, res) => {
   const staticPages = [
     { loc: 'https://alquranhub.org/',          changefreq: 'daily',   priority: '1.0' },
     { loc: 'https://alquranhub.org/quran',     changefreq: 'monthly', priority: '0.9' },
+    { loc: 'https://alquranhub.org/tasbih',    changefreq: 'monthly', priority: '0.8' },
     { loc: 'https://alquranhub.org/blog',      changefreq: 'weekly',  priority: '0.8' },
     { loc: 'https://alquranhub.org/about',     changefreq: 'monthly', priority: '0.5' },
     { loc: 'https://alquranhub.org/contact',   changefreq: 'monthly', priority: '0.5' },

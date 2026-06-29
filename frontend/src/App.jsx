@@ -20,7 +20,8 @@ const SurahList = lazy(() => import('./pages/SurahList'));
 const JuzList = lazy(() => import('./pages/JuzList'));
 const SurahView = lazy(() => import('./pages/SurahView'));
 const JuzView = lazy(() => import('./pages/JuzView'));
-const BookmarksPage = lazy(() => import('./pages/BookmarksPage'));
+const BookmarksPage  = lazy(() => import('./pages/BookmarksPage'));
+const TasbihPage     = lazy(() => import('./pages/TasbihPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
 const BlogArchive = lazy(() => import('./pages/BlogArchive'));
@@ -62,6 +63,7 @@ export default function App() {
             <Route path="/juz" element={<JuzList />} />
             <Route path="/juz/:id" element={<JuzView />} />
             <Route path="/bookmarks" element={<BookmarksPage />} />
+            <Route path="/tasbih" element={<TasbihPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/blog" element={<BlogArchive />} />
