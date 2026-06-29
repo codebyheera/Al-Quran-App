@@ -1,0 +1,547 @@
+/* ── Page wrapper ────────────────────────────────────────── */
+.tasbih-page {
+  min-height: 80vh;
+  padding: 2rem 0 4rem;
+}
+
+.tasbih-page-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.tasbih-page-subtitle {
+  margin: 0.4rem 0 2rem;
+}
+
+/* ── Focus mode button ───────────────────────────────────── */
+.tasbih-focus-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+  margin-top: 0.25rem;
+}
+.tasbih-focus-btn:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  color: var(--text-primary);
+}
+
+.tasbih-focus-exit {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 200;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.45rem 0.95rem;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.tasbih-focus-exit:hover {
+  color: var(--text-primary);
+  border-color: rgba(201, 168, 76, 0.35);
+}
+
+/* Focus mode — hide global nav/footer */
+body.tasbih-focus nav,
+body.tasbih-focus footer {
+  display: none !important;
+}
+
+.tasbih-page.focus-mode {
+  padding-top: 3rem;
+}
+
+/* ── Inner container ─────────────────────────────────────── */
+.tasbih-page-inner {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* ── Mode toggle ─────────────────────────────────────────── */
+.tasbih-mode-toggle {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 3px;
+  gap: 3px;
+  width: 100%;
+}
+
+.tasbih-mode-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 100px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.tasbih-mode-btn.active {
+  background: var(--accent-gold);
+  color: #0a1628;
+}
+.tasbih-mode-btn:not(.active):hover {
+  color: var(--text-primary);
+}
+
+/* ── Section 1: Dhikr Selector ──────────────────────────── */
+.tasbih-selector-wrap {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tasbih-selector-wrap::-webkit-scrollbar { display: none; }
+
+.tasbih-selector {
+  display: flex;
+  gap: 8px;
+  min-width: max-content;
+  width: 100%;
+}
+
+.tasbih-pill {
+  flex: 1;
+  min-width: 110px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0 0.5rem;
+}
+.tasbih-pill:hover:not(.active) { border-color: rgba(201, 168, 76, 0.35); }
+.tasbih-pill.active { background: #C9A84C; border-color: #C9A84C; }
+
+.pill-arabic {
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  direction: rtl;
+  line-height: 1.4;
+}
+.tasbih-pill.active .pill-arabic { color: #0a1628; }
+
+.pill-translit {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.tasbih-pill.active .pill-translit { color: rgba(10, 22, 40, 0.7); }
+
+/* ── Sunnah step indicator ───────────────────────────────── */
+.tasbih-sunnah-progress {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.sunnah-step-label {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: center;
+}
+.sunnah-step-label strong { color: var(--text-primary); }
+
+.sunnah-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sunnah-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  display: inline-block;
+  transition: background 0.3s;
+}
+.sunnah-dot.current { background: var(--accent-gold); }
+.sunnah-dot.done    { background: rgba(201, 168, 76, 0.4); }
+
+/* ── Sunnah all-done completion ──────────────────────────── */
+.tasbih-sunnah-complete {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 2rem 1rem;
+  animation: tb-fadein 0.4s ease;
+}
+
+.sunnah-complete-icon { font-size: 4rem; line-height: 1; }
+
+.sunnah-complete-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin: 0.25rem 0 0;
+}
+
+.sunnah-complete-sub {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.sunnah-complete-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0.75rem 0 0;
+}
+.sunnah-complete-summary span {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.sunnah-restart-btn { margin-top: 1rem; }
+
+/* ── Section 2: Counter ──────────────────────────────────── */
+.tasbih-counter {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.tasbih-done-msg {
+  color: #4ade80;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  animation: tb-fadein 0.35s ease;
+  margin: 0;
+}
+
+@keyframes tb-fadein {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Progress ring */
+.tasbih-ring-wrap {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.tasbih-ring-wrap.ring-pulse { transform: scale(0.97); }
+
+.tasbih-ring-svg { width: 280px; height: 280px; }
+
+.tasbih-ring-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.tasbih-count-num {
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.tasbih-done-icon { font-size: 4.5rem; line-height: 1; }
+
+.tasbih-ring-arabic {
+  font-size: 1.4rem;
+  color: var(--accent-gold);
+  direction: rtl;
+  line-height: 1.4;
+}
+
+.tasbih-ring-translit {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Tap button */
+.tasbih-tap {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #C9A84C;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0a1628;
+  letter-spacing: 0.08em;
+  transition: transform 0.1s ease;
+}
+.tasbih-tap:active { transform: scale(0.92); }
+
+/* Keyboard hint */
+.tasbih-kb-hint {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: -0.5rem 0 0;
+  opacity: 0.7;
+}
+
+/* Controls */
+.tasbih-controls {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.tasbih-ctrl {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+  padding: 0.6rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.tasbih-ctrl:last-child  { border-right: none; color: var(--accent-gold); }
+.tasbih-ctrl:first-child { color: rgba(201, 168, 76, 0.65); }
+.tasbih-ctrl:hover       { background: rgba(201, 168, 76, 0.08); color: var(--text-primary); }
+.tasbih-ctrl-reset       { font-size: 0.78rem; letter-spacing: 0.03em; }
+
+/* Target pills */
+.tasbih-targets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.tasbih-tgt {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.35rem 1.1rem;
+  min-width: 52px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.tasbih-tgt.active              { background: var(--accent-gold); border-color: var(--accent-gold); color: #0a1628; }
+.tasbih-tgt:hover:not(.active)  { border-color: rgba(201, 168, 76, 0.4); color: var(--text-primary); }
+
+/* Custom input */
+.tasbih-custom-input {
+  display: block;
+  width: 200px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.5rem 1.1rem;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+.tasbih-custom-input:focus { outline: none; border-color: var(--accent-gold); }
+.tasbih-custom-input::-webkit-outer-spin-button,
+.tasbih-custom-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.tasbih-custom-input[type=number] { -moz-appearance: textfield; }
+
+/* ── Section 3: Stats ────────────────────────────────────── */
+.tasbih-stats {
+  width: 100%;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.tasbih-stats-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.tasbih-stats-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  font-weight: 600;
+}
+
+.tasbih-streak-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fb923c;
+  background: rgba(251, 146, 60, 0.1);
+  border: 1px solid rgba(251, 146, 60, 0.25);
+  border-radius: 100px;
+  padding: 0.2rem 0.65rem;
+  white-space: nowrap;
+}
+
+.tasbih-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.tasbih-stat-card {
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-arabic {
+  font-size: 1rem;
+  color: var(--accent-gold);
+  direction: rtl;
+  line-height: 1.5;
+}
+.stat-name {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.stat-val {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-top: 4px;
+}
+
+/* Lifetime total */
+.tasbih-lifetime-card {
+  margin-top: 0.6rem;
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.lifetime-label {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+.lifetime-val {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  line-height: 1;
+  margin-top: 4px;
+}
+.lifetime-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* ── SEO Content Section ─────────────────────────────────── */
+.tasbih-seo-section {
+  border-top: 0.5px solid var(--border);
+  padding: 2rem 1rem 3rem;
+  margin-top: 1rem;
+}
+
+.tasbih-seo-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.tasbih-seo-section h2 {
+  color: var(--accent-gold);
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  margin: 2rem 0 0.65rem;
+  line-height: 1.3;
+}
+.tasbih-seo-section h2:first-child { margin-top: 0; }
+
+.tasbih-seo-section p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 1.2rem;
+}
+
+.tasbih-seo-section ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+.tasbih-seo-section li {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 0.45rem;
+}
+
+/* ── Mobile ──────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .tasbih-ring-wrap,
+  .tasbih-ring-svg {
+    width: 240px;
+    height: 240px;
+  }
+  .tasbih-count-num { font-size: 4rem; }
+
+  .tasbih-ctrl { padding: 0.6rem 1.1rem; }
+}
