@@ -59,51 +59,9 @@
   white-space: nowrap;
 }
 
-/* ── Mobile: full-width bottom sheet ──────────────────────── */
-@media (max-width: 520px) {
+/* ── Mobile: hide completely ──────────────────────────────── */
+@media (max-width: 768px) {
   .notif-banner {
-    /* reset centered-pill approach */
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transform: none;
-    width: 100%;
-
-    border-radius: 16px 16px 0 0;
-    border-bottom: none;
-    padding: 0.9rem 1rem calc(0.9rem + env(safe-area-inset-bottom, 0px));
-    gap: 0.7rem;
-
-    animation: notifSlideUpMobile 0.32s ease;
-  }
-
-  @keyframes notifSlideUpMobile {
-    from { opacity: 0; transform: translateY(100%); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .notif-banner-text {
-    font-size: 0.85rem;
-    flex: 1;
-  }
-
-  .notif-banner-actions {
-    flex-shrink: 0;
-  }
-}
-
-/* Very small phones: stack text + buttons vertically */
-@media (max-width: 360px) {
-  .notif-banner {
-    flex-wrap: wrap;
-  }
-
-  .notif-banner-text {
-    flex-basis: 100%;
-  }
-
-  .notif-banner-actions {
-    width: 100%;
-    justify-content: flex-end;
+    display: none;
   }
 }
