@@ -1,0 +1,171 @@
+# Al-Quran Hub
+
+> A free, ad-free platform to read and listen to the Holy Quran online, built as a community service (sadaqah jariyah) for the Muslim Ummah — with Arabic text, translation, audio recitation, and Islamic tools.
+
+Al-Quran Hub provides the complete Quran (all 114 Surahs and 30 Juz) in Arabic with translation and audio recitation, along with daily Islamic utilities like a Tasbih Counter, bookmarking, and Quran search. The platform is fully non-commercial and contains no ads.
+
+## Core Pages
+
+- [Home](https://alquranhub.org/): Read and listen to the Holy Quran online for free.
+- [All Surahs](https://alquranhub.org/surah): Browse all 114 Surahs of the Quran with translation and audio.
+- [All Juz](https://alquranhub.org/juz): Browse the Quran by Juz (Para), 1 through 30.
+- [Bookmarks](https://alquranhub.org/bookmarks): Saved verses and reading progress.
+- [Search](https://alquranhub.org/search): Search the Quran by keyword or topic.
+- [Tasbih Counter](https://alquranhub.org/tasbih): Digital counter for Dhikr and Tasbih.
+- [Support / Donate](https://alquranhub.org/support): Support the platform to keep it free and ad-free.
+
+## Blog
+
+- [Blog](https://alquranhub.org/blog): Articles on Surah benefits, virtues, and Quranic guidance.
+- [Surah Kahf Benefits](https://alquranhub.org/blog/surah-kahf-benefits): Virtues and benefits of reciting Surah Al-Kahf.
+- [Surah Yaseen Benefits](https://alquranhub.org/blog/surah-yaseen-benefits): Virtues and benefits of reciting Surah Yaseen.
+
+## Surahs (1–114)
+
+- [Surah 1: Al Faatiha](https://alquranhub.org/surah/Al-Faatiha): Read and listen to Surah Al Faatiha with translation.
+- [Surah 2: Al Baqara](https://alquranhub.org/surah/Al-Baqara): Read and listen to Surah Al Baqara with translation.
+- [Surah 3: Aal i Imraan](https://alquranhub.org/surah/Aal-i-Imraan): Read and listen to Surah Aal i Imraan with translation.
+- [Surah 4: An Nisaa](https://alquranhub.org/surah/An-Nisaa): Read and listen to Surah An Nisaa with translation.
+- [Surah 5: Al Maaida](https://alquranhub.org/surah/Al-Maaida): Read and listen to Surah Al Maaida with translation.
+- [Surah 6: Al An'aam](https://alquranhub.org/surah/Al-An'aam): Read and listen to Surah Al An'aam with translation.
+- [Surah 7: Al A'raaf](https://alquranhub.org/surah/Al-A'raaf): Read and listen to Surah Al A'raaf with translation.
+- [Surah 8: Al Anfaal](https://alquranhub.org/surah/Al-Anfaal): Read and listen to Surah Al Anfaal with translation.
+- [Surah 9: At Tawba](https://alquranhub.org/surah/At-Tawba): Read and listen to Surah At Tawba with translation.
+- [Surah 10: Yunus](https://alquranhub.org/surah/Yunus): Read and listen to Surah Yunus with translation.
+- [Surah 11: Hud](https://alquranhub.org/surah/Hud): Read and listen to Surah Hud with translation.
+- [Surah 12: Yusuf](https://alquranhub.org/surah/Yusuf): Read and listen to Surah Yusuf with translation.
+- [Surah 13: Ar Ra'd](https://alquranhub.org/surah/Ar-Ra'd): Read and listen to Surah Ar Ra'd with translation.
+- [Surah 14: Ibrahim](https://alquranhub.org/surah/Ibrahim): Read and listen to Surah Ibrahim with translation.
+- [Surah 15: Al Hijr](https://alquranhub.org/surah/Al-Hijr): Read and listen to Surah Al Hijr with translation.
+- [Surah 16: An Nahl](https://alquranhub.org/surah/An-Nahl): Read and listen to Surah An Nahl with translation.
+- [Surah 17: Al Israa](https://alquranhub.org/surah/Al-Israa): Read and listen to Surah Al Israa with translation.
+- [Surah 18: Al Kahf](https://alquranhub.org/surah/Al-Kahf): Read and listen to Surah Al Kahf with translation.
+- [Surah 19: Maryam](https://alquranhub.org/surah/Maryam): Read and listen to Surah Maryam with translation.
+- [Surah 20: Taa Haa](https://alquranhub.org/surah/Taa-Haa): Read and listen to Surah Taa Haa with translation.
+- [Surah 21: Al Anbiyaa](https://alquranhub.org/surah/Al-Anbiyaa): Read and listen to Surah Al Anbiyaa with translation.
+- [Surah 22: Al Hajj](https://alquranhub.org/surah/Al-Hajj): Read and listen to Surah Al Hajj with translation.
+- [Surah 23: Al Muminoon](https://alquranhub.org/surah/Al-Muminoon): Read and listen to Surah Al Muminoon with translation.
+- [Surah 24: An Noor](https://alquranhub.org/surah/An-Noor): Read and listen to Surah An Noor with translation.
+- [Surah 25: Al Furqaan](https://alquranhub.org/surah/Al-Furqaan): Read and listen to Surah Al Furqaan with translation.
+- [Surah 26: Ash Shu'araa](https://alquranhub.org/surah/Ash-Shu'araa): Read and listen to Surah Ash Shu'araa with translation.
+- [Surah 27: An Naml](https://alquranhub.org/surah/An-Naml): Read and listen to Surah An Naml with translation.
+- [Surah 28: Al Qasas](https://alquranhub.org/surah/Al-Qasas): Read and listen to Surah Al Qasas with translation.
+- [Surah 29: Al Ankaboot](https://alquranhub.org/surah/Al-Ankaboot): Read and listen to Surah Al Ankaboot with translation.
+- [Surah 30: Ar Room](https://alquranhub.org/surah/Ar-Room): Read and listen to Surah Ar Room with translation.
+- [Surah 31: Luqman](https://alquranhub.org/surah/Luqman): Read and listen to Surah Luqman with translation.
+- [Surah 32: As Sajda](https://alquranhub.org/surah/As-Sajda): Read and listen to Surah As Sajda with translation.
+- [Surah 33: Al Ahzaab](https://alquranhub.org/surah/Al-Ahzaab): Read and listen to Surah Al Ahzaab with translation.
+- [Surah 34: Saba](https://alquranhub.org/surah/Saba): Read and listen to Surah Saba with translation.
+- [Surah 35: Faatir](https://alquranhub.org/surah/Faatir): Read and listen to Surah Faatir with translation.
+- [Surah 36: Yaseen](https://alquranhub.org/surah/Yaseen): Read and listen to Surah Yaseen with translation.
+- [Surah 37: As Saaffaat](https://alquranhub.org/surah/As-Saaffaat): Read and listen to Surah As Saaffaat with translation.
+- [Surah 38: Saad](https://alquranhub.org/surah/Saad): Read and listen to Surah Saad with translation.
+- [Surah 39: Az Zumar](https://alquranhub.org/surah/Az-Zumar): Read and listen to Surah Az Zumar with translation.
+- [Surah 40: Ghafir](https://alquranhub.org/surah/Ghafir): Read and listen to Surah Ghafir with translation.
+- [Surah 41: Fussilat](https://alquranhub.org/surah/Fussilat): Read and listen to Surah Fussilat with translation.
+- [Surah 42: Ash Shura](https://alquranhub.org/surah/Ash-Shura): Read and listen to Surah Ash Shura with translation.
+- [Surah 43: Az Zukhruf](https://alquranhub.org/surah/Az-Zukhruf): Read and listen to Surah Az Zukhruf with translation.
+- [Surah 44: Ad Dukhaan](https://alquranhub.org/surah/Ad-Dukhaan): Read and listen to Surah Ad Dukhaan with translation.
+- [Surah 45: Al Jaathiya](https://alquranhub.org/surah/Al-Jaathiya): Read and listen to Surah Al Jaathiya with translation.
+- [Surah 46: Al Ahqaf](https://alquranhub.org/surah/Al-Ahqaf): Read and listen to Surah Al Ahqaf with translation.
+- [Surah 47: Muhammad](https://alquranhub.org/surah/Muhammad): Read and listen to Surah Muhammad with translation.
+- [Surah 48: Al Fath](https://alquranhub.org/surah/Al-Fath): Read and listen to Surah Al Fath with translation.
+- [Surah 49: Al Hujuraat](https://alquranhub.org/surah/Al-Hujuraat): Read and listen to Surah Al Hujuraat with translation.
+- [Surah 50: Qaaf](https://alquranhub.org/surah/Qaaf): Read and listen to Surah Qaaf with translation.
+- [Surah 51: Adh Dhaariyat](https://alquranhub.org/surah/Adh-Dhaariyat): Read and listen to Surah Adh Dhaariyat with translation.
+- [Surah 52: At Tur](https://alquranhub.org/surah/At-Tur): Read and listen to Surah At Tur with translation.
+- [Surah 53: An Najm](https://alquranhub.org/surah/An-Najm): Read and listen to Surah An Najm with translation.
+- [Surah 54: Al Qamar](https://alquranhub.org/surah/Al-Qamar): Read and listen to Surah Al Qamar with translation.
+- [Surah 55: Ar Rahmaan](https://alquranhub.org/surah/Ar-Rahmaan): Read and listen to Surah Ar Rahmaan with translation.
+- [Surah 56: Al Waaqia](https://alquranhub.org/surah/Al-Waaqia): Read and listen to Surah Al Waaqia with translation.
+- [Surah 57: Al Hadid](https://alquranhub.org/surah/Al-Hadid): Read and listen to Surah Al Hadid with translation.
+- [Surah 58: Al Mujaadila](https://alquranhub.org/surah/Al-Mujaadila): Read and listen to Surah Al Mujaadila with translation.
+- [Surah 59: Al Hashr](https://alquranhub.org/surah/Al-Hashr): Read and listen to Surah Al Hashr with translation.
+- [Surah 60: Al Mumtahana](https://alquranhub.org/surah/Al-Mumtahana): Read and listen to Surah Al Mumtahana with translation.
+- [Surah 61: As Saff](https://alquranhub.org/surah/As-Saff): Read and listen to Surah As Saff with translation.
+- [Surah 62: Al Jumu'a](https://alquranhub.org/surah/Al-Jumu'a): Read and listen to Surah Al Jumu'a with translation.
+- [Surah 63: Al Munaafiqoon](https://alquranhub.org/surah/Al-Munaafiqoon): Read and listen to Surah Al Munaafiqoon with translation.
+- [Surah 64: At Taghaabun](https://alquranhub.org/surah/At-Taghaabun): Read and listen to Surah At Taghaabun with translation.
+- [Surah 65: At Talaaq](https://alquranhub.org/surah/At-Talaaq): Read and listen to Surah At Talaaq with translation.
+- [Surah 66: At Tahrim](https://alquranhub.org/surah/At-Tahrim): Read and listen to Surah At Tahrim with translation.
+- [Surah 67: Al Mulk](https://alquranhub.org/surah/Al-Mulk): Read and listen to Surah Al Mulk with translation.
+- [Surah 68: Al Qalam](https://alquranhub.org/surah/Al-Qalam): Read and listen to Surah Al Qalam with translation.
+- [Surah 69: Al Haaqqa](https://alquranhub.org/surah/Al-Haaqqa): Read and listen to Surah Al Haaqqa with translation.
+- [Surah 70: Al Ma'aarij](https://alquranhub.org/surah/Al-Ma'aarij): Read and listen to Surah Al Ma'aarij with translation.
+- [Surah 71: Nooh](https://alquranhub.org/surah/Nooh): Read and listen to Surah Nooh with translation.
+- [Surah 72: Al Jinn](https://alquranhub.org/surah/Al-Jinn): Read and listen to Surah Al Jinn with translation.
+- [Surah 73: Al Muzzammil](https://alquranhub.org/surah/Al-Muzzammil): Read and listen to Surah Al Muzzammil with translation.
+- [Surah 74: Al Muddaththir](https://alquranhub.org/surah/Al-Muddaththir): Read and listen to Surah Al Muddaththir with translation.
+- [Surah 75: Al Qiyaama](https://alquranhub.org/surah/Al-Qiyaama): Read and listen to Surah Al Qiyaama with translation.
+- [Surah 76: Al Insaan](https://alquranhub.org/surah/Al-Insaan): Read and listen to Surah Al Insaan with translation.
+- [Surah 77: Al Mursalaat](https://alquranhub.org/surah/Al-Mursalaat): Read and listen to Surah Al Mursalaat with translation.
+- [Surah 78: An Naba](https://alquranhub.org/surah/An-Naba): Read and listen to Surah An Naba with translation.
+- [Surah 79: An Naazi'aat](https://alquranhub.org/surah/An-Naazi'aat): Read and listen to Surah An Naazi'aat with translation.
+- [Surah 80: Abasa](https://alquranhub.org/surah/Abasa): Read and listen to Surah Abasa with translation.
+- [Surah 81: At Takwir](https://alquranhub.org/surah/At-Takwir): Read and listen to Surah At Takwir with translation.
+- [Surah 82: Al Infitaar](https://alquranhub.org/surah/Al-Infitaar): Read and listen to Surah Al Infitaar with translation.
+- [Surah 83: Al Mutaffifin](https://alquranhub.org/surah/Al-Mutaffifin): Read and listen to Surah Al Mutaffifin with translation.
+- [Surah 84: Al Inshiqaaq](https://alquranhub.org/surah/Al-Inshiqaaq): Read and listen to Surah Al Inshiqaaq with translation.
+- [Surah 85: Al Burooj](https://alquranhub.org/surah/Al-Burooj): Read and listen to Surah Al Burooj with translation.
+- [Surah 86: At Taariq](https://alquranhub.org/surah/At-Taariq): Read and listen to Surah At Taariq with translation.
+- [Surah 87: Al A'laa](https://alquranhub.org/surah/Al-A'laa): Read and listen to Surah Al A'laa with translation.
+- [Surah 88: Al Ghaashiya](https://alquranhub.org/surah/Al-Ghaashiya): Read and listen to Surah Al Ghaashiya with translation.
+- [Surah 89: Al Fajr](https://alquranhub.org/surah/Al-Fajr): Read and listen to Surah Al Fajr with translation.
+- [Surah 90: Al Balad](https://alquranhub.org/surah/Al-Balad): Read and listen to Surah Al Balad with translation.
+- [Surah 91: Ash Shams](https://alquranhub.org/surah/Ash-Shams): Read and listen to Surah Ash Shams with translation.
+- [Surah 92: Al Lail](https://alquranhub.org/surah/Al-Lail): Read and listen to Surah Al Lail with translation.
+- [Surah 93: Ad Dhuhaa](https://alquranhub.org/surah/Ad-Dhuhaa): Read and listen to Surah Ad Dhuhaa with translation.
+- [Surah 94: Ash Sharh](https://alquranhub.org/surah/Ash-Sharh): Read and listen to Surah Ash Sharh with translation.
+- [Surah 95: At Tin](https://alquranhub.org/surah/At-Tin): Read and listen to Surah At Tin with translation.
+- [Surah 96: Al Alaq](https://alquranhub.org/surah/Al-Alaq): Read and listen to Surah Al Alaq with translation.
+- [Surah 97: Al Qadr](https://alquranhub.org/surah/Al-Qadr): Read and listen to Surah Al Qadr with translation.
+- [Surah 98: Al Bayyina](https://alquranhub.org/surah/Al-Bayyina): Read and listen to Surah Al Bayyina with translation.
+- [Surah 99: Az Zalzala](https://alquranhub.org/surah/Az-Zalzala): Read and listen to Surah Az Zalzala with translation.
+- [Surah 100: Al Aadiyaat](https://alquranhub.org/surah/Al-Aadiyaat): Read and listen to Surah Al Aadiyaat with translation.
+- [Surah 101: Al Qaari'a](https://alquranhub.org/surah/Al-Qaari'a): Read and listen to Surah Al Qaari'a with translation.
+- [Surah 102: At Takaathur](https://alquranhub.org/surah/At-Takaathur): Read and listen to Surah At Takaathur with translation.
+- [Surah 103: Al Asr](https://alquranhub.org/surah/Al-Asr): Read and listen to Surah Al Asr with translation.
+- [Surah 104: Al Humaza](https://alquranhub.org/surah/Al-Humaza): Read and listen to Surah Al Humaza with translation.
+- [Surah 105: Al Fil](https://alquranhub.org/surah/Al-Fil): Read and listen to Surah Al Fil with translation.
+- [Surah 106: Quraish](https://alquranhub.org/surah/Quraish): Read and listen to Surah Quraish with translation.
+- [Surah 107: Al Maa'un](https://alquranhub.org/surah/Al-Maa'un): Read and listen to Surah Al Maa'un with translation.
+- [Surah 108: Al Kawthar](https://alquranhub.org/surah/Al-Kawthar): Read and listen to Surah Al Kawthar with translation.
+- [Surah 109: Al Kaafiroon](https://alquranhub.org/surah/Al-Kaafiroon): Read and listen to Surah Al Kaafiroon with translation.
+- [Surah 110: An Nasr](https://alquranhub.org/surah/An-Nasr): Read and listen to Surah An Nasr with translation.
+- [Surah 111: Al Masad](https://alquranhub.org/surah/Al-Masad): Read and listen to Surah Al Masad with translation.
+- [Surah 112: Al Ikhlaas](https://alquranhub.org/surah/Al-Ikhlaas): Read and listen to Surah Al Ikhlaas with translation.
+- [Surah 113: Al Falaq](https://alquranhub.org/surah/Al-Falaq): Read and listen to Surah Al Falaq with translation.
+- [Surah 114: An Naas](https://alquranhub.org/surah/An-Naas): Read and listen to Surah An Naas with translation.
+
+## Juz (1–30)
+
+- [Juz 1](https://alquranhub.org/juz/1): Arabic recitation and translation for Juz 1.
+- [Juz 2](https://alquranhub.org/juz/2): Arabic recitation and translation for Juz 2.
+- [Juz 3](https://alquranhub.org/juz/3): Arabic recitation and translation for Juz 3.
+- [Juz 4](https://alquranhub.org/juz/4): Arabic recitation and translation for Juz 4.
+- [Juz 5](https://alquranhub.org/juz/5): Arabic recitation and translation for Juz 5.
+- [Juz 6](https://alquranhub.org/juz/6): Arabic recitation and translation for Juz 6.
+- [Juz 7](https://alquranhub.org/juz/7): Arabic recitation and translation for Juz 7.
+- [Juz 8](https://alquranhub.org/juz/8): Arabic recitation and translation for Juz 8.
+- [Juz 9](https://alquranhub.org/juz/9): Arabic recitation and translation for Juz 9.
+- [Juz 10](https://alquranhub.org/juz/10): Arabic recitation and translation for Juz 10.
+- [Juz 11](https://alquranhub.org/juz/11): Arabic recitation and translation for Juz 11.
+- [Juz 12](https://alquranhub.org/juz/12): Arabic recitation and translation for Juz 12.
+- [Juz 13](https://alquranhub.org/juz/13): Arabic recitation and translation for Juz 13.
+- [Juz 14](https://alquranhub.org/juz/14): Arabic recitation and translation for Juz 14.
+- [Juz 15](https://alquranhub.org/juz/15): Arabic recitation and translation for Juz 15.
+- [Juz 16](https://alquranhub.org/juz/16): Arabic recitation and translation for Juz 16.
+- [Juz 17](https://alquranhub.org/juz/17): Arabic recitation and translation for Juz 17.
+- [Juz 18](https://alquranhub.org/juz/18): Arabic recitation and translation for Juz 18.
+- [Juz 19](https://alquranhub.org/juz/19): Arabic recitation and translation for Juz 19.
+- [Juz 20](https://alquranhub.org/juz/20): Arabic recitation and translation for Juz 20.
+- [Juz 21](https://alquranhub.org/juz/21): Arabic recitation and translation for Juz 21.
+- [Juz 22](https://alquranhub.org/juz/22): Arabic recitation and translation for Juz 22.
+- [Juz 23](https://alquranhub.org/juz/23): Arabic recitation and translation for Juz 23.
+- [Juz 24](https://alquranhub.org/juz/24): Arabic recitation and translation for Juz 24.
+- [Juz 25](https://alquranhub.org/juz/25): Arabic recitation and translation for Juz 25.
+- [Juz 26](https://alquranhub.org/juz/26): Arabic recitation and translation for Juz 26.
+- [Juz 27](https://alquranhub.org/juz/27): Arabic recitation and translation for Juz 27.
+- [Juz 28](https://alquranhub.org/juz/28): Arabic recitation and translation for Juz 28.
+- [Juz 29](https://alquranhub.org/juz/29): Arabic recitation and translation for Juz 29.
+- [Juz 30](https://alquranhub.org/juz/30): Arabic recitation and translation for Juz 30.
