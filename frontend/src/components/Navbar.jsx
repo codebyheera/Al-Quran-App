@@ -204,7 +204,7 @@ export default function Navbar() {
           {/* Right actions */}
           <div className="navbar-actions">
             <QariDropdown reciter={reciter} changeReciter={changeReciter} reciters={reciters} />
-            <NavLink to="/bookmarks">
+            <NavLink to="/bookmarks" aria-label="Bookmarks">
               <button className="nav-icon-btn" title="Bookmarks">🔖</button>
             </NavLink>
             <ThemeDropdown theme={theme} changeTheme={changeTheme} themes={themes} />
