@@ -1,6 +1,7 @@
 
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -49,6 +50,16 @@ export default function App() {
 
   return (
     <div className={`app-root ${currentVerse ? 'has-player' : ''}`}>
+      {/* Site-wide defaults — overridden per-page by each page's own <Helmet> */}
+      <Helmet>
+        <title>Al-Quran Hub | Read Quran Pak Online Free</title>
+        <meta name="description" content="Read Quran Pak online for free with daily prayer times, Verse of the Day, and Islamic blog. Access all 114 Surahs and 30 Juz with beautiful recitation on Al-Quran Hub." />
+        <meta name="keywords" content="quran pak, read quran online, quran online, al quran" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://alquranhub.org/" />
+        <meta property="og:title" content="Al-Quran Hub | Read Quran Pak Online Free" />
+        <meta property="og:description" content="Read Quran Pak online for free with daily prayer times, Verse of the Day, and Islamic blog. Access all 114 Surahs and 30 Juz with beautiful recitation on Al-Quran Hub." />
+      </Helmet>
       <ScrollToTop />
       {/* Persistent top navigation */}
       <Navbar />
