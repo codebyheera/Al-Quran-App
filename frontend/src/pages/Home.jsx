@@ -104,7 +104,7 @@ export default function Home() {
     <div className="home page-enter">
       <Helmet>
         <title>Al-Quran Hub | Read Quran Pak Online Free</title>
-        <meta name="description" content="Read Quran Pak online for free with daily prayer times, Verse of the Day, and Islamic blog. Access all Surahs and Juz with beautiful recitation on Al-Quran Hub." />
+        <meta name="description" content="Read Quran Pak online for free with daily prayer times, Verse of the Day, and Islamic blog. Access all 114 Surahs and 30 Juz with beautiful recitation on Al-Quran Hub." />
         <meta name="keywords" content="quran pak, read quran online, quran online, al quran" />
         <link rel="canonical" href="https://alquranhub.org/" />
       </Helmet>
