@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Breadcrumb from '../components/Breadcrumb';
+import { pageSeo } from '../data/pageSeo';
 import './TasbihPage.css';
 
 const DHIKR = [
@@ -284,13 +285,13 @@ export default function TasbihPage() {
   return (
     <div className={`tasbih-page page-enter${focusMode ? ' focus-mode' : ''}`}>
       <Helmet>
-        <title>Digital Tasbih Counter Online | Al-Quran Hub</title>
-        <meta name="description" content="Count SubhanAllah, Alhamdulillah, Allahu Akbar and La ilaha illAllah with our free digital tasbih counter. Includes Sunnah Mode (33-33-34), streak tracking, and Focus Mode. No download needed." />
-        <meta name="keywords" content="tasbih counter, digital tasbih, dhikr counter, subhanallah counter, tasbih online" />
-        <link rel="canonical" href="https://alquranhub.org/tasbih" />
-        <meta property="og:title" content="Digital Tasbih Counter Online | Al-Quran Hub" />
-        <meta property="og:description" content="Count SubhanAllah, Alhamdulillah, Allahu Akbar and La ilaha illAllah with our free digital tasbih counter. Includes Sunnah Mode (33-33-34), streak tracking, and Focus Mode." />
-        <meta property="og:url" content="https://alquranhub.org/tasbih" />
+        <title>{pageSeo.tasbih.title}</title>
+        <meta name="description" content={pageSeo.tasbih.description} />
+        <meta name="keywords" content={pageSeo.tasbih.keywords} />
+        <link rel="canonical" href={`https://alquranhub.org${pageSeo.tasbih.path}`} />
+        <meta property="og:title" content={pageSeo.tasbih.title} />
+        <meta property="og:description" content={pageSeo.tasbih.ogDescription} />
+        <meta property="og:url" content={`https://alquranhub.org${pageSeo.tasbih.path}`} />
       </Helmet>
 
       {/* ── Breadcrumb + heading ── */}

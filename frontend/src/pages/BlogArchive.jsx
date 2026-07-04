@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import Breadcrumb from '../components/Breadcrumb';
 import { BlogCard, SkeletonCard } from '../components/BlogCard';
+import { pageSeo } from '../data/pageSeo';
 import './BlogArchive.css';
 
 const LIMIT = 9;
@@ -52,12 +53,9 @@ export default function BlogArchive() {
   return (
     <div className="blog-archive page-enter">
       <Helmet>
-        <title>Islamic Blog – Quran, Hadith & Spirituality | Al-Quran Hub</title>
-        <meta
-          name="description"
-          content="Explore Surah benefits, Tafsir, and Islamic guides written to deepen your connection with the Quran. Free, ad-free."
-        />
-        <link rel="canonical" href="https://alquranhub.org/blog" />
+        <title>{pageSeo.blogArchive.title}</title>
+        <meta name="description" content={pageSeo.blogArchive.description} />
+        <link rel="canonical" href={`https://alquranhub.org${pageSeo.blogArchive.path}`} />
       </Helmet>
 
       {/* ── Hero Banner ───────────────────────────────────── */}

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import Breadcrumb from '../components/Breadcrumb';
+import { pageSeo } from '../data/pageSeo';
 import './JuzList.css';
 
 export default function JuzList() {
@@ -24,9 +25,9 @@ export default function JuzList() {
   return (
     <div className="juz-list page-enter">
       <Helmet encodeSpecialCharacters={false}>
-        <title>Holy Quran Juz – Arabic Recitation Online</title>
-        <meta name="description" content="Read and listen to the complete Quran Juz online. Perfect for recitation, learning, and spiritual growth." />
-        <link rel="canonical" href="https://alquranhub.org/juz" />
+        <title>{pageSeo.juzList.title}</title>
+        <meta name="description" content={pageSeo.juzList.description} />
+        <link rel="canonical" href={`https://alquranhub.org${pageSeo.juzList.path}`} />
       </Helmet>
 
 

@@ -5,6 +5,7 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import emailjs from '@emailjs/browser';
+import { pageSeo } from '../data/pageSeo';
 import './SupportPage.css';
 
 const ACCOUNT_DETAILS = [
@@ -117,10 +118,10 @@ export default function SupportPage() {
   return (
     <div className="support-page page-enter">
       <Helmet>
-        <title>Support Al-Quran Hub | Help Keep Quran Free for Everyone</title>
-        <meta name="description" content="Support Al-Quran Hub with a donation. Help us keep the Holy Quran free and accessible online for Muslims worldwide." />
-        <meta name="keywords" content="Quran, Al-Quran Hub, donate, support, sadaqah, Islamic app, free Quran online, sadaqah jariyah, Muslim community" />
-        <link rel="canonical" href="https://alquranhub.org/support" />
+        <title>{pageSeo.support.title}</title>
+        <meta name="description" content={pageSeo.support.description} />
+        <meta name="keywords" content={pageSeo.support.keywords} />
+        <link rel="canonical" href={`https://alquranhub.org${pageSeo.support.path}`} />
       </Helmet>
 
       {/* ── Hero ── */}

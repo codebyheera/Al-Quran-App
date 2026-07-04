@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
+import { pageSeo } from '../data/pageSeo';
 import './SearchPage.css';
 
 export default function SearchPage() {
@@ -48,9 +49,9 @@ export default function SearchPage() {
   return (
     <div className="search-page page-enter">
       <Helmet>
-        <title>Search the Holy Quran – Al-Quran Hub</title>
-        <meta name="description" content="Search for any word or phrase in the Holy Quran English translation. Find Ayahs and Surahs easily with our fast search." />
-        <link rel="canonical" href="https://alquranhub.org/search" />
+        <title>{pageSeo.search.title}</title>
+        <meta name="description" content={pageSeo.search.description} />
+        <link rel="canonical" href={`https://alquranhub.org${pageSeo.search.path}`} />
       </Helmet>
       <div className="container">
         <h1 className="sp-title">Search the Quran</h1>

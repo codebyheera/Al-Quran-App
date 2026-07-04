@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { useAudio } from './context/AudioContext';
 import { useBookmarks } from './context/BookmarkContext';
+import { pageSeo } from './data/pageSeo';
 
 // ── Lazy load heavy global components ────────────────────────────────────────
 const BottomPlayer        = lazy(() => import('./components/BottomPlayer'));
@@ -52,13 +53,13 @@ export default function App() {
     <div className={`app-root ${currentVerse ? 'has-player' : ''}`}>
       {/* Site-wide defaults — overridden per-page by each page's own <Helmet> */}
       <Helmet>
-        <title>Al-Quran Hub | Read Quran Pak Online Free</title>
-        <meta name="description" content="Read Quran Pak online for free with daily prayer times, Verse of the Day, and Islamic blog. Access all 114 Surahs and 30 Juz with beautiful recitation on Al-Quran Hub." />
-        <meta name="keywords" content="quran pak, read quran online, quran online, al quran" />
+        <title>{pageSeo.home.title}</title>
+        <meta name="description" content={pageSeo.home.description} />
+        <meta name="keywords" content={pageSeo.home.keywords} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://alquranhub.org/" />
-        <meta property="og:title" content="Al-Quran Hub | Read Quran Pak Online Free" />
-        <meta property="og:description" content="Read Quran Pak online for free with daily prayer times, Verse of the Day, and Islamic blog. Access all 114 Surahs and 30 Juz with beautiful recitation on Al-Quran Hub." />
+        <meta property="og:url" content={`https://alquranhub.org${pageSeo.home.path}`} />
+        <meta property="og:title" content={pageSeo.home.title} />
+        <meta property="og:description" content={pageSeo.home.description} />
       </Helmet>
       <ScrollToTop />
       {/* Persistent top navigation */}

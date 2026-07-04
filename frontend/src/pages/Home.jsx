@@ -10,6 +10,7 @@ import { Helmet } from 'react-helmet-async';
 import { lazy, Suspense } from 'react';
 import api from '../lib/api';
 import { BlogCard } from '../components/BlogCard';
+import { pageSeo } from '../data/pageSeo';
 import './Home.css';
 import './SurahList.css';
 
@@ -103,10 +104,10 @@ export default function Home() {
   return (
     <div className="home page-enter">
       <Helmet>
-        <title>Al-Quran Hub | Read Quran Pak Online Free</title>
-        <meta name="description" content="Read Quran Pak online for free with daily prayer times, Verse of the Day, and Islamic blog. Access all 114 Surahs and 30 Juz with beautiful recitation on Al-Quran Hub." />
-        <meta name="keywords" content="quran pak, read quran online, quran online, al quran" />
-        <link rel="canonical" href="https://alquranhub.org/" />
+        <title>{pageSeo.home.title}</title>
+        <meta name="description" content={pageSeo.home.description} />
+        <meta name="keywords" content={pageSeo.home.keywords} />
+        <link rel="canonical" href={`https://alquranhub.org${pageSeo.home.path}`} />
       </Helmet>
 
       {/* ── Hero ─────────────────────────────────────────────── */}

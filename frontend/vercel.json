@@ -55,6 +55,34 @@
       "destination": "/juz/:num/index.html"
     },
     {
+      "source": "/surah",
+      "destination": "/surah/index.html"
+    },
+    {
+      "source": "/juz",
+      "destination": "/juz/index.html"
+    },
+    {
+      "source": "/bookmarks",
+      "destination": "/bookmarks/index.html"
+    },
+    {
+      "source": "/tasbih",
+      "destination": "/tasbih/index.html"
+    },
+    {
+      "source": "/search",
+      "destination": "/search/index.html"
+    },
+    {
+      "source": "/support",
+      "destination": "/support/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

@@ -1,147 +1,173 @@
+/**
+ * scripts/prerender.js — Build-time static HTML generation for SEO.
+ *
+ * The app is a client-only SPA (Vite + React). Vercel's rewrites serve the
+ * same dist/index.html for every route, so crawlers that don't execute JS
+ * (or execute it inconsistently) see identical <title>/<meta description>
+ * on every page. To fix that, this script writes a real per-route
+ * index.html into dist/<route>/index.html with the correct tags already
+ * baked in — matching vercel.json's rewrites for /surah/:name and /juz/:num.
+ *
+ * No headless browser is used: every page's title/description here is either
+ * a fully static string (copied verbatim from that page's <Helmet>) or
+ * computed from the same live Quran API data the page itself fetches
+ * (see src/data/surahSeo.js, shared with SurahView.jsx so the two never drift).
+ */
+
 import fs from 'fs';
 import path from 'path';
+import https from 'https';
+import http from 'http';
 import { fileURLToPath } from 'url';
-import express from 'express';
-import { createProxyMiddleware } from 'http-proxy-middleware';
-import puppeteer from 'puppeteer';
+import { getSurahSeo } from '../src/data/surahSeo.js';
+import { pageSeo } from '../src/data/pageSeo.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const distPath = path.resolve(__dirname, '../dist');
 
-// All 114 surah slugs (matching your API route params)
-const surahUrls = [
-  "Al-Faatiha","Al-Baqara","Aal-i-Imraan","An-Nisaa","Al-Maaida","Al-An'aam",
-  "Al-A'raaf","Al-Anfaal","At-Tawba","Yunus","Hud","Yusuf","Ar-Ra'd","Ibrahim",
-  "Al-Hijr","An-Nahl","Al-Israa","Al-Kahf","Maryam","Taa-Haa","Al-Anbiyaa",
-  "Al-Hajj","Al-Muminoon","An-Noor","Al-Furqaan","Ash-Shu'araa","An-Naml",
-  "Al-Qasas","Al-Ankaboot","Ar-Room","Luqman","As-Sajda","Al-Ahzaab","Saba",
-  "Faatir","Yaseen","As-Saaffaat","Saad","Az-Zumar","Ghafir","Fussilat",
-  "Ash-Shura","Az-Zukhruf","Ad-Dukhaan","Al-Jaathiya","Al-Ahqaf","Muhammad",
-  "Al-Fath","Al-Hujuraat","Qaaf","Adh-Dhaariyat","At-Tur","An-Najm","Al-Qamar",
-  "Ar-Rahmaan","Al-Waaqia","Al-Hadid","Al-Mujaadila","Al-Hashr","Al-Mumtahana",
-  "As-Saff","Al-Jumu'a","Al-Munaafiqoon","At-Taghaabun","At-Talaaq","At-Tahrim",
-  "Al-Mulk","Al-Qalam","Al-Haaqqa","Al-Ma'aarij","Nooh","Al-Jinn","Al-Muzzammil",
-  "Al-Muddaththir","Al-Qiyaama","Al-Insaan","Al-Mursalaat","An-Naba",
-  "An-Naazi'aat","Abasa","At-Takwir","Al-Infitaar","Al-Mutaffifin","Al-Inshiqaaq",
-  "Al-Burooj","At-Taariq","Al-A'laa","Al-Ghaashiya","Al-Fajr","Al-Balad",
-  "Ash-Shams","Al-Lail","Ad-Dhuhaa","Ash-Sharh","At-Tin","Al-Alaq","Al-Qadr",
-  "Al-Bayyina","Az-Zalzala","Al-Aadiyaat","Al-Qaari'a","At-Takaathur","Al-Asr",
-  "Al-Humaza","Al-Fil","Quraish","Al-Maa'un","Al-Kawthar","Al-Kaafiroon",
-  "An-Nasr","Al-Masad","Al-Ikhlaas","Al-Falaq","An-Naas"
-].map(slug => `/surah/${slug}`);
+const SITE_URL = 'https://alquranhub.org';
+const API_BASE = process.env.VITE_API_URL || 'https://api.alquranhub.org';
 
-const juzUrls = Array.from({ length: 30 }, (_, i) => `/juz/${i + 1}`);
-
-const routesToPrerender = [
-  '/',
-  '/surah',
-  '/juz',
-  '/bookmarks',
-  '/search',
-  ...surahUrls,
-  ...juzUrls
-];
-
-async function run() {
-  if (!fs.existsSync(distPath)) {
-    console.error('dist folder not found. Run npm run build first.');
-    process.exit(1);
-  }
-
-  // Preserve the original index.html as template
-  const templatePath = path.resolve(distPath, 'template.html');
-  if (!fs.existsSync(templatePath)) {
-    fs.copyFileSync(path.resolve(distPath, 'index.html'), templatePath);
-  }
-
-  console.log(`Starting to prerender ${routesToPrerender.length} routes...`);
-
-  const app = express();
-  
-  app.use('/api', createProxyMiddleware({ 
-    target: process.env.VITE_API_URL || 'http://localhost:5000', 
-    changeOrigin: true 
-  }));
-
-  app.use(express.static(distPath, { index: false })); // don't serve index.html automatically by static
-  
-  app.get(/.*/, (req, res) => {
-    try {
-      const html = fs.readFileSync(templatePath, 'utf-8');
-      res.send(html);
-    } catch (err) {
-      console.error("Error sending template:", err.message);
-      res.status(500).send("Error reading template");
-    }
-  });
-
-  const server = app.listen(0, async () => {
-    const port = server.address().port;
-    const baseUrl = `http://localhost:${port}`;
-    console.log(`Local server running at ${baseUrl}`);
-    
-    let browser = null;
-    try {
-      // Vercel build environment needs the specialized chromium binary
-      if (process.env.VERCEL) {
-        const chromium = (await import('@sparticuz/chromium')).default;
-        const puppeteerCore = (await import('puppeteer-core')).default;
-        browser = await puppeteerCore.launch({
-          args: chromium.args,
-          defaultViewport: chromium.defaultViewport,
-          executablePath: await chromium.executablePath(),
-          headless: chromium.headless,
-        });
-      } else {
-        browser = await puppeteer.launch({ 
-          headless: 'new', 
-          args: ['--no-sandbox', '--disable-setuid-sandbox'] 
-        });
-      }
-    } catch (launchError) {
-      console.warn('⚠️ Could not launch Puppeteer. Prerendering will fallback to SPA shell.', launchError.message);
-    }
-    
-    const templateHtml = fs.readFileSync(templatePath, 'utf-8');
-
-    for (const route of routesToPrerender) {
-      console.log(`Prerendering ${route}...`);
-      let html = templateHtml; // Fallback to SPA shell
-      
-      if (browser) {
-        let page;
-        try {
-          page = await browser.newPage();
-          await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
-          html = await page.content();
-        } catch (err) {
-          console.warn(`Timeout or error while waiting for network idle on ${route}. Saving HTML anyway.`, err.message);
-          if (page) {
-            html = await page.content().catch(() => templateHtml); // Try to salvage what loaded
-          }
-        } finally {
-          if (page) await page.close().catch(() => {});
+function fetchJson(url) {
+  return new Promise((resolve, reject) => {
+    const client = url.startsWith('https') ? https : http;
+    client
+      .get(url, { timeout: 15000 }, (res) => {
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          res.resume();
+          reject(new Error(`Request to ${url} failed with status ${res.statusCode}`));
+          return;
         }
-      }
-
-      const routeDir = path.join(distPath, route);
-      if (!fs.existsSync(routeDir)) {
-        fs.mkdirSync(routeDir, { recursive: true });
-      }
-      
-      fs.writeFileSync(path.join(routeDir, 'index.html'), html);
-    }
-
-    if (browser) {
-      await browser.close().catch(() => {});
-    }
-    server.close();
-    console.log('Prerendering complete!');
+        let body = '';
+        res.on('data', (chunk) => (body += chunk));
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(body));
+          } catch (err) {
+            reject(err);
+          }
+        });
+      })
+      .on('error', reject)
+      .on('timeout', function () {
+        this.destroy(new Error(`Request to ${url} timed out`));
+      });
   });
 }
 
-run().catch(err => {
+function escapeAttr(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function injectMeta(template, { title, description, url, keywords, ogType = 'website' }) {
+  let html = template;
+
+  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeAttr(title)}</title>`);
+
+  html = html.replace(
+    /<meta\s+name="description"[\s\S]*?\/>/,
+    `<meta name="description" content="${escapeAttr(description)}" />`
+  );
+
+  if (keywords) {
+    html = html.replace(
+      /<meta\s+name="keywords"[\s\S]*?\/>/,
+      `<meta name="keywords" content="${escapeAttr(keywords)}" />`
+    );
+  }
+
+  html = html.replace(
+    /<meta\s+property="og:title"[\s\S]*?\/>/,
+    `<meta property="og:title" content="${escapeAttr(title)}" />`
+  );
+  html = html.replace(
+    /<meta\s+property="og:description"[\s\S]*?\/>/,
+    `<meta property="og:description" content="${escapeAttr(description)}" />`
+  );
+  html = html.replace(
+    /<meta\s+property="og:url"[\s\S]*?\/>/,
+    `<meta property="og:url" content="${escapeAttr(url)}" />`
+  );
+  html = html.replace(
+    /<meta\s+property="og:type"[\s\S]*?\/>/,
+    `<meta property="og:type" content="${escapeAttr(ogType)}" />`
+  );
+
+  if (html.includes('rel="canonical"')) {
+    html = html.replace(/<link\s+rel="canonical"[\s\S]*?\/>/, `<link rel="canonical" href="${escapeAttr(url)}" />`);
+  } else {
+    html = html.replace('</head>', `  <link rel="canonical" href="${escapeAttr(url)}" />\n</head>`);
+  }
+
+  return html;
+}
+
+function writeRoute(template, route, meta) {
+  const html = injectMeta(template, { ...meta, url: `${SITE_URL}${route}` });
+  const routeDir = path.join(distPath, route);
+  fs.mkdirSync(routeDir, { recursive: true });
+  fs.writeFileSync(path.join(routeDir, 'index.html'), html);
+}
+
+// Every entry in pageSeo.js except `home` (the root route isn't a subdirectory —
+// it's dist/index.html itself, handled separately in run() below).
+const staticPages = Object.values(pageSeo)
+  .filter((page) => page.path !== '/')
+  .map((page) => ({ route: page.path, ...page }));
+
+async function run() {
+  if (!fs.existsSync(distPath)) {
+    console.error('dist folder not found. Run vite build first.');
+    process.exit(1);
+  }
+
+  const template = fs.readFileSync(path.join(distPath, 'index.html'), 'utf-8');
+
+  console.log('Syncing homepage meta with pageSeo.js...');
+  const homeHtml = injectMeta(template, { ...pageSeo.home, url: `${SITE_URL}${pageSeo.home.path}` });
+  fs.writeFileSync(path.join(distPath, 'index.html'), homeHtml);
+
+  console.log('Prerendering static pages...');
+  for (const page of staticPages) {
+    writeRoute(template, page.route, page);
+  }
+
+  console.log('Prerendering Juz pages (1-30)...');
+  for (let juzNum = 1; juzNum <= 30; juzNum++) {
+    writeRoute(template, `/juz/${juzNum}`, {
+      title: `Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`,
+      description: `Read and listen to Juz ${juzNum} of the Holy Quran online. Arabic text, English translation, and beautiful recitation available.`,
+      ogType: 'article',
+    });
+  }
+
+  console.log(`Fetching Surah list from ${API_BASE}/api/surah ...`);
+  try {
+    const surahs = await fetchJson(`${API_BASE}/api/surah`);
+    console.log(`Prerendering ${surahs.length} Surah pages...`);
+    for (const s of surahs) {
+      const seo = getSurahSeo(s.number, {
+        surahName: s.englishName,
+        nameTranslation: s.nameTranslation,
+        arabicName: s.name,
+        versesCount: s.versesCount,
+        revelation: s.revelation,
+      });
+      writeRoute(template, `/surah/${s.englishName}`, { ...seo, ogType: 'article' });
+    }
+  } catch (err) {
+    console.warn(`⚠️ Could not fetch Surah list (${err.message}). Skipping per-Surah prerendering — those routes will fall back to the SPA shell.`);
+  }
+
+  console.log('Prerendering complete!');
+}
+
+run().catch((err) => {
   console.error('Prerendering failed:', err);
   process.exit(1);
 });
