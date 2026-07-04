@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import Breadcrumb from '../components/Breadcrumb';
+import { pageSeo } from '../data/pageSeo';
 import './SurahList.css';
 
 export default function SurahList() {
@@ -36,9 +37,9 @@ export default function SurahList() {
   return (
     <div className="surah-list page-enter">
       <Helmet encodeSpecialCharacters={false}>
-        <title>Surahs of the Quran – Read & Listen Online Free</title>
-        <meta name="description" content="Access all Surahs of the Holy Quran online. Read in Arabic, listen to authentic recitations, and explore each Ayah easily." />
-        <link rel="canonical" href="https://alquranhub.org/surah" />
+        <title>{pageSeo.surahList.title}</title>
+        <meta name="description" content={pageSeo.surahList.description} />
+        <link rel="canonical" href={`https://alquranhub.org${pageSeo.surahList.path}`} />
       </Helmet>
 
 
