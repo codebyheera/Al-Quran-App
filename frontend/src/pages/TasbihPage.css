@@ -51,7 +51,7 @@
 .tasbih-focus-exit {
   position: fixed;
   top: 1rem;
-  right: 1rem;
+  left: 1rem;
   z-index: 200;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border);
@@ -74,7 +74,14 @@ body.tasbih-focus footer {
 }
 
 .tasbih-page.focus-mode {
-  padding-top: 3rem;
+  padding-top: 3.5rem;
+}
+
+/* On mobile, push page content further down so it clears the Exit button */
+@media (max-width: 480px) {
+  .tasbih-page.focus-mode {
+    padding-top: 5rem;
+  }
 }
 
 /* ── Inner container ─────────────────────────────────────── */
@@ -555,6 +562,55 @@ body.tasbih-focus footer {
     height: 240px;
   }
   .tasbih-count-num { font-size: 4rem; }
-
   .tasbih-ctrl { padding: 0.6rem 1.1rem; }
+
+  /* ── Dhikr Selector: 2×2 Grid ── */
+  .tasbih-selector-wrap {
+    overflow-x: visible;
+  }
+
+  .tasbih-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    min-width: unset;
+    width: 100%;
+  }
+
+  .tasbih-pill {
+    min-width: unset;
+    width: 100%;
+    height: 88px;
+    border-radius: 16px;
+    gap: 7px;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .pill-arabic {
+    font-size: 1.25rem;
+  }
+
+  .pill-translit {
+    font-size: 12px;
+  }
+
+  /* Active card: same gold + inner text color as desktop + glow ring */
+  .tasbih-pill.active {
+    background: #C9A84C;
+    border-color: #C9A84C;
+    box-shadow:
+      0 0 0 3px rgba(201, 168, 76, 0.35),
+      0 6px 20px rgba(201, 168, 76, 0.3);
+    transform: scale(1.02);
+  }
+
+  /* Arabic text inside active pill — dark like desktop */
+  .tasbih-pill.active .pill-arabic {
+    color: #0a1628;
+  }
+
+  /* Transliteration inside active pill — dark like desktop */
+  .tasbih-pill.active .pill-translit {
+    color: rgba(10, 22, 40, 0.75);
+  }
 }

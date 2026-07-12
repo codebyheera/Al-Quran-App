@@ -5,6 +5,7 @@ const QUICK_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'Surahs', to: '/surah' },
   { label: 'Juz', to: '/juz' },
+  { label: 'Tasbih Counter', to: '/tasbih' },
   { label: 'Bookmarks', to: '/bookmarks' },
   { label: 'Blog', to: '/blog' },
   { label: 'Support', to: '/support' },
@@ -15,6 +16,7 @@ const FEATURES = [
   'Audio Recitation by Top Reciters',
   'Word-by-Word Playback',
   'Bookmark Any Verse',
+  'Digital Tasbih Counter',
   'Multiple Premium Themes',
 ];
 

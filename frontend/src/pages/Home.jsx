@@ -10,13 +10,14 @@ import { Helmet } from 'react-helmet-async';
 import { lazy, Suspense } from 'react';
 import api from '../lib/api';
 import { BlogCard } from '../components/BlogCard';
+import PrayerTimes from '../components/PrayerTimes';
 import { pageSeo } from '../data/pageSeo';
+import { RevealSection } from '../components/RevealSection';
 import './Home.css';
 import './SurahList.css';
 
-const VerseOfDay      = lazy(() => import('../components/VerseOfDay'));
-const PrayerTimes     = lazy(() => import('../components/PrayerTimes'));
-const TasbihCounter   = lazy(() => import('../components/TasbihCounter'));
+const VerseOfDay    = lazy(() => import('../components/VerseOfDay'));
+const TasbihCounter = lazy(() => import('../components/TasbihCounter'));
 
 const FEATURES = [
   {
@@ -111,7 +112,7 @@ export default function Home() {
       </Helmet>
 
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="hero pattern-bg">
+      <RevealSection className="hero pattern-bg">
         <div className="hero-bg-orbs"></div>
         <div className="hero-content">
           <div className="hero-bismillah arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
@@ -151,30 +152,30 @@ export default function Home() {
             )}
           </div>
         </div>
-      </section>
+      </RevealSection>
 
       <div className="container">
         {/* ── Quick Access ──────────────────────────────────── */}
-        <section className="home-section">
+        <RevealSection className="home-section">
           <div className="flex-between mb-2">
             <h2>Start Reading</h2>
           </div>
           <div className="home-mode-cards">
-            <Link to="/surah" className="mode-card">
+            <Link to="/surah" className="mode-card reveal reveal-fade-up stagger-1">
               <div className="mode-card-icon">📖</div>
               <div>
                 <h3>By Surah</h3>
                 <p>Browse all 114 chapters</p>
               </div>
             </Link>
-            <Link to="/juz" className="mode-card">
+            <Link to="/juz" className="mode-card reveal reveal-fade-up stagger-2">
               <div className="mode-card-icon">📚</div>
               <div>
                 <h3>By Juz</h3>
                 <p>Browse all 30 parts</p>
               </div>
             </Link>
-            <Link to="/bookmarks" className="mode-card">
+            <Link to="/bookmarks" className="mode-card reveal reveal-fade-up stagger-3">
               <div className="mode-card-icon">🔖</div>
               <div>
                 <h3>Bookmarks</h3>
@@ -182,17 +183,17 @@ export default function Home() {
               </div>
             </Link>
           </div>
-        </section>
+        </RevealSection>
 
         {/* ── Popular Surahs ────────────────────────────────── */}
-        <section className="home-section">
+        <RevealSection className="home-section">
           <div className="flex-between mb-2">
             <h2>Popular Surahs</h2>
             <Link to="/surah" className="btn btn-ghost" style={{ fontSize: '0.85rem' }}>View All →</Link>
           </div>
           <div className="popular-grid">
-            {POPULAR.map((s) => (
-              <Link key={s.number} to={`/surah/${encodeURIComponent(s.name)}`} className="card popular-card">
+            {POPULAR.map((s, idx) => (
+              <Link key={s.number} to={`/surah/${encodeURIComponent(s.name)}`} className={`card popular-card reveal reveal-fade-up stagger-${(idx % 6) + 1} reveal-visible`}>
                 <span className="popular-num badge badge-gold">{s.number}</span>
                 <div className="popular-info">
                   <span className="popular-english">{s.name}</span>
@@ -202,17 +203,15 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        </section>
+        </RevealSection>
 
         {/* ── Prayer Times ──────────────────────────────────── */}
-        <section className="home-section">
-          <Suspense fallback={<div className="prayer-loading"><div className="spinner" /></div>}>
-            <PrayerTimes />
-          </Suspense>
-        </section>
+        <RevealSection className="home-section">
+          <PrayerTimes />
+        </RevealSection>
 
         {/* ── Why Al-Quran Hub ──────────────────────────────── */}
-        <section className="home-section features-section">
+        <RevealSection className="home-section features-section">
           <h2>
             Everything You Need to <span className="text-gold">Read the Quran</span>
           </h2>
@@ -220,55 +219,57 @@ export default function Home() {
             Built for Muslims who want a clean, distraction-free experience — no ads, no subscriptions, just the Quran.
           </p>
           <div className="features-grid">
-            {FEATURES.map((f) => (
-              <div key={f.title} className="feature-card card">
+            {FEATURES.map((f, idx) => (
+              <div key={f.title} className={`feature-card card reveal reveal-fade-up stagger-${(idx % 6) + 1} reveal-visible`}>
                 <div className="feature-icon">{f.icon}</div>
                 <h3 className="feature-title">{f.title}</h3>
                 <p className="feature-desc">{f.desc}</p>
               </div>
             ))}
           </div>
-        </section>
+        </RevealSection>
 
         {/* ── Tasbih Counter ────────────────────────────────── */}
-        <section className="home-section">
+        <RevealSection className="home-section">
           <Suspense fallback={<div style={{ minHeight: '80px' }} />}>
             <TasbihCounter />
           </Suspense>
-        </section>
+        </RevealSection>
 
         {/* ── Random Verse Of The Day ──────────────────────── */}
-        <section className="home-section votd-section">
+        <RevealSection className="home-section votd-section">
           <Suspense fallback={<div style={{ minHeight: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div className="spinner" /></div>}>
             <VerseOfDay />
           </Suspense>
-        </section>
+        </RevealSection>
 
-        {/* ── Recent Blogs ──────────────────────────────── */}
+        {/* ── Recent Blogs ────────────────────────────────── */}
         {recentBlogs.length > 0 && (
-          <section className="home-section">
+          <RevealSection className="home-section">
             <div className="flex-between mb-2">
               <h2>Newest Articles</h2>
               <Link to="/blog" className="btn btn-ghost" style={{ fontSize: '0.85rem' }}>View All →</Link>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.75rem' }}>
-              {recentBlogs.map((blog) => (
-                <BlogCard key={blog.id} blog={blog} />
+              {recentBlogs.map((blog, idx) => (
+                <div key={blog.id} className={`reveal reveal-fade-up stagger-${(idx % 6) + 1} reveal-visible`}>
+                  <BlogCard blog={blog} />
+                </div>
               ))}
             </div>
-          </section>
+          </RevealSection>
         )}
 
         {/* ── Recent Bookmarks ──────────────────────────────── */}
         {bookmarks.length > 0 && (
-          <section className="home-section">
+          <RevealSection className="home-section">
             <div className="flex-between mb-2">
               <h2>Recent Bookmarks</h2>
               <Link to="/bookmarks" className="btn btn-ghost" style={{ fontSize: '0.85rem' }}>View All →</Link>
             </div>
             <div className="recent-bookmarks">
-              {bookmarks.slice(0, 3).map((b) => (
-                <Link key={b._id} to={`/surah/${encodeURIComponent(b.surahName)}#verse-${b.verseNumber}`} className="card bookmark-preview">
+              {bookmarks.slice(0, 3).map((b, idx) => (
+                <Link key={b._id} to={`/surah/${encodeURIComponent(b.surahName)}#verse-${b.verseNumber}`} className={`card bookmark-preview reveal reveal-fade-up stagger-${(idx % 6) + 1} reveal-visible`}>
                   <div className="flex-between">
                     <span className="badge badge-gold">{b.surahName} {b.verseNumber}:{b.surahNumber}</span>
                     <span className="text-muted" style={{ fontSize: '0.75rem' }}>🔖</span>
@@ -279,19 +280,19 @@ export default function Home() {
                 </Link>
               ))}
             </div>
-          </section>
+          </RevealSection>
         )}
 
         {/* ── All Surahs (Grid) ──────────────────────────────── */}
         {allSurahs.length > 0 && (
-          <section className="home-section">
+          <RevealSection className="home-section">
             <div className="flex-between mb-2">
               <h2>All Surahs</h2>
               <Link to="/surah" className="btn btn-ghost" style={{ fontSize: '0.85rem' }}>Filter Surahs →</Link>
             </div>
             <div className="surah-grid">
-              {allSurahs.slice(0, showAllSurahs ? allSurahs.length : 42).map((s) => (
-                <Link key={s.number} to={`/surah/${s.englishName}`} className="surah-card card">
+              {allSurahs.slice(0, showAllSurahs ? allSurahs.length : 42).map((s, idx) => (
+                <Link key={s.number} to={`/surah/${s.englishName}`} className={`surah-card card reveal reveal-fade-up stagger-${(idx % 6) + 1} reveal-visible`}>
                   <div className="surah-number">
                     <span>{s.number}</span>
                   </div>
@@ -316,12 +317,12 @@ export default function Home() {
                 </button>
               </div>
             )}
-          </section>
+          </RevealSection>
         )}
       </div>
 
       {/* ── Support CTA ──────────────────────────────────────── */}
-      <section className="home-cta-section">
+      <RevealSection className="home-cta-section">
         <div className="home-cta-inner">
           <h2 className="home-cta-heading">
             Help Keep the Quran <span className="text-gold">Free &amp; Accessible</span>
@@ -330,11 +331,11 @@ export default function Home() {
             Al-Quran Hub is built and funded personally no ads, no investors, just sincere effort
             for the Ummah. Your support helps keep the servers running and new features coming.
           </p>
-<Link to="/support" className="btn btn-primary home-cta-btn">
+          <Link to="/support" className="btn btn-primary home-cta-btn">
             Support Al-Quran Hub →
           </Link>
         </div>
-      </section>
+      </RevealSection>
     </div>
   );
 }
