@@ -202,20 +202,6 @@ export default function PrayerTimes() {
     setMethod(m);
   }
 
-  // ── Render ────────────────────────────────────────────────
-
-  if (loading && !timings) {
-    return <div className="prayer-loading"><div className="spinner" /></div>;
-  }
-
-  if (error && !timings) {
-    return (
-      <p className="prayer-error">
-        Prayer times unavailable — please try again later.
-      </p>
-    );
-  }
-
   const { h, m: min, s } = countdownParts;
 
   return (
@@ -249,29 +235,27 @@ export default function PrayerTimes() {
 
         {/* Left: countdown box only — height determines card height */}
         <div className="prayer-body-left">
-          {nextKey && timings && (
-            <div className="prayer-countdown-box">
-              <span className="prayer-cd-label">Next Prayer</span>
-              <span className="prayer-cd-name">{nextKey}</span>
-              <span className="prayer-cd-time">{to12h(timings[nextKey])}</span>
-              <div className="prayer-clock">
-                <div className="prayer-clock-unit">
-                  <span className="prayer-clock-digit">{String(h).padStart(2, '0')}</span>
-                  <span className="prayer-clock-cap">HRS</span>
-                </div>
-                <span className="prayer-clock-sep">:</span>
-                <div className="prayer-clock-unit">
-                  <span className="prayer-clock-digit">{String(min).padStart(2, '0')}</span>
-                  <span className="prayer-clock-cap">MIN</span>
-                </div>
-                <span className="prayer-clock-sep">:</span>
-                <div className="prayer-clock-unit">
-                  <span className="prayer-clock-digit">{String(s).padStart(2, '0')}</span>
-                  <span className="prayer-clock-cap">SEC</span>
-                </div>
+          <div className="prayer-countdown-box">
+            <span className="prayer-cd-label">Next Prayer</span>
+            <span className="prayer-cd-name">{nextKey || '—'}</span>
+            <span className="prayer-cd-time">{nextKey && timings ? to12h(timings[nextKey]) : '—'}</span>
+            <div className="prayer-clock">
+              <div className="prayer-clock-unit">
+                <span className="prayer-clock-digit">{nextKey && timings ? String(h).padStart(2, '0') : '--'}</span>
+                <span className="prayer-clock-cap">HRS</span>
+              </div>
+              <span className="prayer-clock-sep">:</span>
+              <div className="prayer-clock-unit">
+                <span className="prayer-clock-digit">{nextKey && timings ? String(min).padStart(2, '0') : '--'}</span>
+                <span className="prayer-clock-cap">MIN</span>
+              </div>
+              <span className="prayer-clock-sep">:</span>
+              <div className="prayer-clock-unit">
+                <span className="prayer-clock-digit">{nextKey && timings ? String(s).padStart(2, '0') : '--'}</span>
+                <span className="prayer-clock-cap">SEC</span>
               </div>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Right: 5 prayer cards — fill same height as left */}
