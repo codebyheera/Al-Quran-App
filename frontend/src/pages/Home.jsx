@@ -4,11 +4,12 @@
  */
 
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useBookmarks } from '../context/BookmarkContext';
 import { Helmet } from 'react-helmet-async';
 import { lazy, Suspense } from 'react';
 import api from '../lib/api';
+import { smartSearch } from '../lib/searchEngine';
 import { BlogCard } from '../components/BlogCard';
 import PrayerTimes from '../components/PrayerTimes';
 import { pageSeo } from '../data/pageSeo';
@@ -71,36 +72,52 @@ export default function Home() {
   const [allSurahs, setAllSurahs] = useState([]);
   const [showAllSurahs, setShowAllSurahs] = useState(false);
   const [recentBlogs, setRecentBlogs] = useState([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const searchWrapperRef = useRef(null);
   const navigate = useNavigate();
   const { bookmarks } = useBookmarks();
 
   useEffect(() => {
     api.get('/api/surah')
       .then(({ data }) => setAllSurahs(data))
-      .catch((err) => console.error("Could not fetch surahs for suggestions", err));
+      .catch((err) => console.error('Could not fetch surahs for suggestions', err));
 
     api.get('/api/blogs', { params: { page: 1, limit: 3 } })
       .then(({ data }) => setRecentBlogs(data.blogs || []))
-      .catch((err) => console.error("Could not fetch recent blogs", err));
+      .catch((err) => console.error('Could not fetch recent blogs', err));
+  }, []);
+
+  // Close dropdown on outside click or Escape
+  useEffect(() => {
+    function onClickOutside(e) {
+      if (searchWrapperRef.current && !searchWrapperRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    function onKeyDown(e) {
+      if (e.key === 'Escape') setDropdownOpen(false);
+    }
+    document.addEventListener('mousedown', onClickOutside);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside);
+      document.removeEventListener('keydown', onKeyDown);
+    };
   }, []);
 
   function handleSearch(e) {
     e.preventDefault();
+    setDropdownOpen(false);
     if (query.trim()) navigate(`/search?q=${encodeURIComponent(query.trim())}`);
   }
 
-  const suggestions = query.trim() ? allSurahs.filter(s =>
-    s.englishName.toLowerCase().startsWith(query.toLowerCase()) ||
-    s.englishName.toLowerCase().includes(query.toLowerCase()) ||
-    String(s.number).includes(query) ||
-    s.name.includes(query)
-  ).sort((a, b) => {
-    const aStarts = a.englishName.toLowerCase().startsWith(query.toLowerCase());
-    const bStarts = b.englishName.toLowerCase().startsWith(query.toLowerCase());
-    if (aStarts && !bStarts) return -1;
-    if (!aStarts && bStarts) return 1;
-    return 0;
-  }).slice(0, 6) : [];
+  function handleQueryChange(e) {
+    setQuery(e.target.value);
+    setDropdownOpen(true);
+  }
+
+  const { results: suggestions, didYouMean } = smartSearch(query, allSurahs);
+  const showDropdown = dropdownOpen && (suggestions.length > 0 || didYouMean);
 
   return (
     <div className="home page-enter">
@@ -124,28 +141,58 @@ export default function Home() {
           </p>
 
           {/* Search */}
-          <div className="hero-search-wrapper">
+          <div className="hero-search-wrapper" ref={searchWrapperRef}>
             <form className="hero-search" onSubmit={handleSearch}>
               <input
                 className="input"
                 type="text"
                 placeholder="Search by Surah name, number, or keyword…"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={handleQueryChange}
+                onFocus={() => query.trim() && setDropdownOpen(true)}
+                autoComplete="off"
               />
               <button type="submit" className="btn btn-primary">Search</button>
             </form>
 
-            {suggestions.length > 0 && (
+            {showDropdown && (
               <div className="search-dropdown">
+                {/* Did You Mean banner */}
+                {didYouMean && (
+                  <div className="search-did-you-mean">
+                    <span>🔍 Did you mean&nbsp;</span>
+                    <Link
+                      to={`/surah/${didYouMean.englishName}`}
+                      className="search-dym-link"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      {didYouMean.englishName}
+                    </Link>
+                    <span>?</span>
+                  </div>
+                )}
+
                 {suggestions.map((s) => (
-                  <Link key={s.number} to={`/surah/${s.englishName}`} className="search-dropdown-item">
+                  <Link
+                    key={s.number}
+                    to={`/surah/${s.englishName}`}
+                    className="search-dropdown-item"
+                    onClick={() => setDropdownOpen(false)}
+                  >
                     <span className="search-dropdown-num badge badge-gold">{s.number}</span>
                     <div style={{ flex: 1, textAlign: 'left' }}>
                       <div style={{ fontWeight: 600 }}>{s.englishName}</div>
                       <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{s.nameTranslation}</div>
                     </div>
-                    <span className="arabic" style={{ fontSize: '1.2rem', lineHeight: '1.2' }}>{s.name}</span>
+                    <div className="search-item-right">
+                      <span className="arabic" style={{ fontSize: '1.2rem', lineHeight: '1.2' }}>{s.name}</span>
+                      {s.matchType === 'fuzzy' && (
+                        <span className="search-match-badge search-match-fuzzy">~fuzzy</span>
+                      )}
+                      {s.matchType === 'alias' && (
+                        <span className="search-match-badge search-match-alias">alias</span>
+                      )}
+                    </div>
                   </Link>
                 ))}
               </div>
