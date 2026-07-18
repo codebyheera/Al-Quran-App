@@ -186,12 +186,7 @@ export default function Home() {
                     </div>
                     <div className="search-item-right">
                       <span className="arabic" style={{ fontSize: '1.2rem', lineHeight: '1.2' }}>{s.name}</span>
-                      {s.matchType === 'fuzzy' && (
-                        <span className="search-match-badge search-match-fuzzy">~fuzzy</span>
-                      )}
-                      {s.matchType === 'alias' && (
-                        <span className="search-match-badge search-match-alias">alias</span>
-                      )}
+
                     </div>
                   </Link>
                 ))}
