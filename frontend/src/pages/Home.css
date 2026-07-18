@@ -39,7 +39,12 @@
     radial-gradient(circle at 35% 65%, rgba(201, 168, 76, 0.18) 0%, transparent 45%),
     radial-gradient(circle at 75% 25%, rgba(74, 158, 255, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 15% 15%, rgba(201, 168, 76, 0.08) 0%, transparent 40%);
-  animation: heroGlowFlow 20s infinite alternate ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .hero-bg-orbs::before {
+    animation: heroGlowFlow 20s infinite alternate ease-in-out;
+  }
 }
 
 .hero-bg-orbs::after {
