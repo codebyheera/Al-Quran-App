@@ -129,7 +129,7 @@ export default function Home() {
       </Helmet>
 
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <RevealSection className="hero pattern-bg">
+      <section className="hero pattern-bg">
         <div className="hero-bg-orbs"></div>
         <div className="hero-content">
           <div className="hero-bismillah arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
@@ -194,7 +194,7 @@ export default function Home() {
             )}
           </div>
         </div>
-      </RevealSection>
+      </section>
 
       <div className="container">
         {/* ── Quick Access ──────────────────────────────────── */}
