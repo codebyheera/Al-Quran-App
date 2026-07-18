@@ -43,12 +43,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+  <!-- Preconnect for external analytics/scripts -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+  <link rel="preconnect" href="https://www.clarity.ms" crossorigin />
+
   <!-- DNS prefetch for external APIs used at runtime -->
   <link rel="dns-prefetch" href="https://api.alquran.cloud" />
   <link rel="preconnect" href="https://cdn.alquran.cloud" crossorigin />
 
-  <!-- Inter (critical UI font) — loaded immediately -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Inter (critical UI font) — preloaded to prevent render-blocking -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
 
   <!-- Arabic fonts (large, non-critical) — loaded after page paint -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Gulzar&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
