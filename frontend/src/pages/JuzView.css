@@ -1,5 +1,10 @@
 /* JuzView.css — Juz reader page */
 
+/* Ensure scrolled-to verse isn't hidden behind the navbar */
+.verse-card {
+  scroll-margin-top: 80px;
+}
+
 .juz-view { padding: 2rem 0; }
 
 /* Header */
