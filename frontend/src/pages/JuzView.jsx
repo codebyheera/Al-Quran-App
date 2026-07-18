@@ -132,7 +132,7 @@ export default function JuzView() {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
           el.classList.add('menu-open');
           setTimeout(() => el.classList.remove('menu-open'), 1500);
         }
@@ -149,7 +149,7 @@ export default function JuzView() {
         const verseId = `verse-${currentVerse.surahNumber}:${currentVerse.number}`;
         const el = document.getElementById(verseId);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
     }
