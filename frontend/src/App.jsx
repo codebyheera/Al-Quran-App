@@ -49,17 +49,6 @@ export default function App() {
   const { currentVerse } = useAudio();
   const { toast } = useBookmarks();
 
-  // Defer heavy Tabler Icons webfont to prevent blocking mobile 3G load trace
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css';
-      document.head.appendChild(link);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className={`app-root ${currentVerse ? 'has-player' : ''}`}>
       {/* Site-wide defaults — overridden per-page by each page's own <Helmet> */}

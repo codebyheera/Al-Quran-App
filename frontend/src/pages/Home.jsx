@@ -126,7 +126,7 @@ export default function Home() {
         <meta name="description" content={pageSeo.home.description} />
         <meta name="keywords" content={pageSeo.home.keywords} />
         <link rel="canonical" href={`https://alquranhub.org${pageSeo.home.path}`} />
-      </Helmet>
+      </Helmet> 
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="hero pattern-bg">
