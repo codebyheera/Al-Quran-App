@@ -47,6 +47,9 @@
   <link rel="dns-prefetch" href="https://api.alquran.cloud" />
   <link rel="preconnect" href="https://cdn.alquran.cloud" crossorigin />
 
+  <!-- Preload local Arabic font to fix critical request chain warning -->
+  <link rel="preload" href="/fonts/me_quran-webfont.otf" as="font" type="font/otf" crossorigin="anonymous" />
+
   <!-- Inter UI font via Google Fonts (display=swap prevents render-block) -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
