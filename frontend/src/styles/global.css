@@ -3,7 +3,11 @@
    Mobile-first, dark/light mode via CSS custom properties
    ============================================================ */
 
-/* ── Google Fonts are loaded in index.html ── */
+/* ── Inter font — self-hosted (Latin subset only) — eliminates Google Fonts 1.5s network round-trip ── */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-700.css';
 
 /* ── CSS Reset ──────────────────────────────────────────────── */
 *,

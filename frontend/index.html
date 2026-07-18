@@ -39,23 +39,11 @@
   
 
 
-  <!-- Preconnect for faster font loading -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <!-- Preconnect for external analytics/scripts (Removed to fix Lighthouse preconnect warning) -->
-
   <!-- DNS prefetch for external APIs used at runtime -->
   <link rel="dns-prefetch" href="https://api.alquran.cloud" />
   <link rel="preconnect" href="https://cdn.alquran.cloud" crossorigin />
 
-  <!-- Inter (critical UI font) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <!-- Arabic fonts (large, non-critical) -->
-  <link href="https://fonts.googleapis.com/css2?family=Gulzar&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" rel="stylesheet" />
-
-  <!-- Tabler Icons (Non-blocking async load) -->
+  <!-- Tabler Icons (Non-blocking async load via print media trick) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" media="print" onload="this.media='all'" />
 
 </head>
@@ -65,8 +53,8 @@
   <script type="module" src="/src/main.jsx"></script>
 
   <!-- Analytics and tracking scripts deferred to end of body -->
-  <!-- Google Analytics -->
-  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-GR7C4XE17J"></script>
+  <!-- Google Analytics (async to prevent render-blocking) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GR7C4XE17J"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
