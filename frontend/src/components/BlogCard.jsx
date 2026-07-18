@@ -20,6 +20,13 @@ export function categoryGradient(category) {
   return CATEGORY_GRADIENTS[category] || CATEGORY_GRADIENTS.default;
 }
 
+export function optimizeCloudinaryUrl(url) {
+  if (!url || typeof url !== 'string') return url;
+  if (!url.includes('res.cloudinary.com') || url.includes('/upload/f_auto')) return url;
+  // Automatically serve WebP/AVIF, compress quality, and scale down width for cards
+  return url.replace('/upload/', '/upload/f_auto,q_auto,w_600/');
+}
+
 export function SkeletonCard() {
   return (
     <div className="blog-card skeleton-card" aria-hidden="true">
@@ -43,7 +50,7 @@ export function BlogCard({ blog }) {
         className="blog-card-img"
         style={
           blog.cover_image
-            ? { backgroundImage: `url(${blog.cover_image})` }
+            ? { backgroundImage: `url(${optimizeCloudinaryUrl(blog.cover_image)})` }
             : { background: categoryGradient(blog.category) }
         }
       >
