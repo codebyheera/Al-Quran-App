@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@fontsource/inter": "^5.2.8",
     "@fontsource/noto-nastaliq-urdu": "^5.2.8",
     "axios": "^1.6.7",
     "react": "^18.3.1",
