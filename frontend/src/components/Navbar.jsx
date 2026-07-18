@@ -5,6 +5,7 @@
 
 import { NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
+import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart } from '@tabler/icons-react';
 import { useTheme } from '../context/ThemeContext';
 import { useQari } from '../context/QariContext';
 import { useBookmarks } from '../context/BookmarkContext';
@@ -240,7 +241,7 @@ export default function Navbar() {
             <span className="sidebar-logo-text">Al-<span>Quran</span> Hub</span>
           </div>
           <button className="sidebar-close-btn" onClick={closeSidebar} aria-label="Close menu">
-            <i className="ti ti-x"></i>
+            <IconX size={24} />
           </button>
         </div>
 
@@ -267,39 +268,39 @@ export default function Navbar() {
 
         <nav className="sidebar-nav-links">
           <NavLink to="/" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <i className="ti ti-home nav-icon"></i>
+            <IconHome className="nav-icon" size={20} stroke={2} />
             <span className="nav-text">Home</span>
           </NavLink>
 
           <NavLink to="/surah" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <i className="ti ti-book nav-icon"></i>
+            <IconBook className="nav-icon" size={20} stroke={2} />
             <span className="nav-text">Surahs</span>
           </NavLink>
 
           <NavLink to="/juz" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <i className="ti ti-book-2 nav-icon"></i>
+            <IconBook2 className="nav-icon" size={20} stroke={2} />
             <span className="nav-text">Juz</span>
           </NavLink>
 
           <NavLink to="/tasbih" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <i className="ti ti-rosette nav-icon"></i>
+            <IconRosette className="nav-icon" size={20} stroke={2} />
             <span className="nav-text">Tasbih Counter</span>
           </NavLink>
 
           <NavLink to="/bookmarks" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <i className="ti ti-bookmark nav-icon"></i>
+            <IconBookmark className="nav-icon" size={20} stroke={2} />
             <span className="nav-text">Bookmarks</span>
             {bookmarks.length > 0 && <span className="nav-badge">{bookmarks.length}</span>}
           </NavLink>
 
           <NavLink to="/blog" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <i className="ti ti-writing nav-icon"></i>
+            <IconWriting className="nav-icon" size={20} stroke={2} />
             <span className="nav-text">Blog</span>
           </NavLink>
 
           <NavLink to="/support" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
-            <i className="ti ti-heart nav-icon"></i>
-            <span className="nav-text">Support</span>
+            <IconHeart className="nav-icon text-accent" size={20} stroke={2} />
+            <span className="nav-text text-accent">Support Us</span>
           </NavLink>
         </nav>
 
