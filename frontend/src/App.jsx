@@ -1,5 +1,5 @@
 
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
@@ -48,6 +48,17 @@ const PageLoader = () => (
 export default function App() {
   const { currentVerse } = useAudio();
   const { toast } = useBookmarks();
+
+  // Defer heavy Tabler Icons webfont to prevent blocking mobile 3G load trace
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css';
+      document.head.appendChild(link);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className={`app-root ${currentVerse ? 'has-player' : ''}`}>
