@@ -199,6 +199,12 @@
   margin: 0;
 }
 
+.translationBox.rtl .translationText {
+  font-family: 'Gulzar', serif;
+  font-size: 1.6rem;
+  line-height: 2.4;
+}
+
 /* ── Action row (max 3 buttons) ─────────────────────────────── */
 .actionRow {
   display: flex;
@@ -320,7 +326,7 @@
   .card { padding: 14px 16px 14px; }
 
   .headerRow { margin-bottom: 10px; }
-  .title { font-size: 1.05rem; }
+  .title { font-size: 1.35rem; }
   .dateChip { font-size: 0.75rem; }
 
   .controlRow { margin-bottom: 12px; }

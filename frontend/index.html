@@ -78,6 +78,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "x2y8m4iw1e");
   </script>
+
+  <!-- Defer loading of Urdu font until after the site completely loads -->
+  <script>
+    window.addEventListener('load', function() {
+      var style = document.createElement('style');
+      style.innerHTML = "@import url('https://fonts.googleapis.com/css2?family=Gulzar&display=swap');";
+      document.head.appendChild(style);
+    });
+  </script>
 </body>
 
 </html>
