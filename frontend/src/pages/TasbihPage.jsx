@@ -409,10 +409,10 @@ export default function TasbihPage() {
               onClick={incrementCount}
             >
               <svg viewBox="0 0 120 120" className="tasbih-ring-svg">
-                <circle cx="60" cy="60" r="54" fill="none" stroke="#1a3a22" strokeWidth="10" />
+                <circle cx="60" cy="60" r="54" fill="none" stroke="var(--border-hover)" strokeWidth="10" />
                 <circle
                   cx="60" cy="60" r="54" fill="none"
-                  stroke="#C9A84C" strokeWidth="10"
+                  stroke="var(--accent-gold)" strokeWidth="10"
                   strokeDasharray={CIRC}
                   strokeDashoffset={dashOffset}
                   strokeLinecap="round"

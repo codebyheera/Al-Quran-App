@@ -158,8 +158,8 @@ body.tasbih-focus footer {
   transition: all 0.2s;
   padding: 0 0.5rem;
 }
-.tasbih-pill:hover:not(.active) { border-color: rgba(201, 168, 76, 0.35); }
-.tasbih-pill.active { background: #C9A84C; border-color: #C9A84C; }
+.tasbih-pill:hover:not(.active) { border-color: var(--border-hover); }
+.tasbih-pill.active { background: var(--accent-gold); border-color: var(--accent-gold); }
 
 .pill-arabic {
   font-size: 1.1rem;
@@ -167,14 +167,14 @@ body.tasbih-focus footer {
   direction: rtl;
   line-height: 1.4;
 }
-.tasbih-pill.active .pill-arabic { color: #0a1628; }
+.tasbih-pill.active .pill-arabic { color: #0f0f1a; }
 
 .pill-translit {
   font-size: 11px;
   color: var(--text-secondary);
   font-weight: 600;
 }
-.tasbih-pill.active .pill-translit { color: rgba(10, 22, 40, 0.7); }
+.tasbih-pill.active .pill-translit { color: rgba(15, 15, 26, 0.8); }
 
 /* ── Sunnah step indicator ───────────────────────────────── */
 .tasbih-sunnah-progress {
@@ -323,15 +323,16 @@ body.tasbih-focus footer {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: #C9A84C;
+  background: var(--accent-gold);
   border: none;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #0a1628;
+  color: #0f0f1a;
   letter-spacing: 0.08em;
-  transition: transform 0.1s ease;
+  transition: transform 0.1s ease, filter 0.2s ease;
 }
+.tasbih-tap:hover { filter: brightness(1.1); }
 .tasbih-tap:active { transform: scale(0.92); }
 
 /* Keyboard hint */
@@ -580,37 +581,39 @@ body.tasbih-focus footer {
   .tasbih-pill {
     min-width: unset;
     width: 100%;
-    height: 88px;
-    border-radius: 16px;
-    gap: 7px;
-    padding: 0.75rem 0.5rem;
+    height: auto;
+    min-height: 96px;
+    border-radius: var(--radius-lg, 16px);
+    gap: 8px;
+    padding: 1rem 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   .pill-arabic {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
+    line-height: 1.2;
   }
 
   .pill-translit {
-    font-size: 12px;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
   }
 
-  /* Active card: same gold + inner text color as desktop + glow ring */
+  /* Active card: matches site theme accent */
   .tasbih-pill.active {
-    background: #C9A84C;
-    border-color: #C9A84C;
-    box-shadow:
-      0 0 0 3px rgba(201, 168, 76, 0.35),
-      0 6px 20px rgba(201, 168, 76, 0.3);
-    transform: scale(1.02);
+    background: var(--accent-gold);
+    border-color: var(--accent-gold);
+    box-shadow: var(--shadow-gold);
+    transform: scale(1.03);
   }
 
-  /* Arabic text inside active pill — dark like desktop */
+  /* Arabic text inside active pill */
   .tasbih-pill.active .pill-arabic {
-    color: #0a1628;
+    color: #0f0f1a;
   }
 
-  /* Transliteration inside active pill — dark like desktop */
+  /* Transliteration inside active pill */
   .tasbih-pill.active .pill-translit {
-    color: rgba(10, 22, 40, 0.75);
+    color: rgba(15, 15, 26, 0.8);
   }
 }
