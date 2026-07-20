@@ -36,10 +36,11 @@ export default function BottomPlayer() {
   const dragStartPos = useRef({ x: 0, y: 0 });
   const hasMovedWhileDragging = useRef(false);
   const autoMinimizeTimeoutRef = useRef(null);
-  // Cache viewport width to avoid forced reflow on every timer call
-  const isDesktop = useRef(typeof window !== 'undefined' && window.innerWidth > 768);
+  // Cache viewport width. Initialize to true, then update in useEffect to avoid forced reflows during React render
+  const isDesktop = useRef(true);
 
   useEffect(() => {
+    isDesktop.current = typeof window !== 'undefined' && window.innerWidth > 768;
     const updateIsDesktop = () => { isDesktop.current = window.innerWidth > 768; };
     window.addEventListener('resize', updateIsDesktop, { passive: true });
     return () => window.removeEventListener('resize', updateIsDesktop);
