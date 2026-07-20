@@ -64,11 +64,11 @@
 
 <body>
   <div id="root">
-    <!-- Pre-rendered skeleton for instant LCP paint while React loads (bismillah) -->
-    <div style="min-height: 100vh; background-color: #0f0f1a; display: flex; align-items: flex-start; justify-content: center; padding-top: 15vh;">
-      <div style="text-align: center;">
-        <div style="font-family: 'MeQuran', 'Inter', serif; font-size: 2rem; color: #c9a84c; direction: rtl; line-height: 1.8;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-      </div>
+    <!-- Loading screen shown while React JS bundle downloads — no external font dependency -->
+    <div id="app-shell" style="min-height:100vh;background:#0f0f1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;">
+      <div style="width:44px;height:44px;border-radius:50%;border:3px solid rgba(201,168,76,0.2);border-top-color:#c9a84c;animation:shell-spin 0.8s linear infinite;"></div>
+      <div style="color:#c9a84c;font-family:system-ui,sans-serif;font-size:0.9rem;letter-spacing:0.06em;opacity:0.8;">AL-QURAN HUB</div>
+      <style>#app-shell{pointer-events:none;}@keyframes shell-spin{to{transform:rotate(360deg);}}</style>
     </div>
   </div>
   <script type="module" src="/src/main.jsx"></script>
