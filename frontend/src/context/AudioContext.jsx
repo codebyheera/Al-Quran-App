@@ -11,7 +11,7 @@ export const AudioProvider = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isMinimized, setIsMinimized] = useState(window.innerWidth <= 768);
+  const [isMinimized, setIsMinimized] = useState(false); // Initialized false to prevent synchronous reflow, updated in useEffect
   const [repeatMode, setRepeatMode] = useState(0); // 0=off, 1=once, 2=twice, 3=infinite
   const [repeatCount, setRepeatCount] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
@@ -38,6 +38,13 @@ export const AudioProvider = ({ children }) => {
   }, [showUr]);
 
   const audioRef = useRef(new Audio());
+
+  // Safe client-side initialization to prevent forced reflows
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsMinimized(window.innerWidth <= 768);
+    }
+  }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
