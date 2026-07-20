@@ -64,11 +64,74 @@
 
 <body>
   <div id="root">
-    <!-- Loading screen shown while React JS bundle downloads — no external font dependency -->
-    <div id="app-shell" style="min-height:100vh;background:#0f0f1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;">
-      <div style="width:44px;height:44px;border-radius:50%;border:3px solid rgba(201,168,76,0.2);border-top-color:#c9a84c;animation:shell-spin 0.8s linear infinite;"></div>
-      <div style="color:#c9a84c;font-family:system-ui,sans-serif;font-size:0.9rem;letter-spacing:0.06em;opacity:0.8;">AL-QURAN HUB</div>
-      <style>#app-shell{pointer-events:none;}@keyframes shell-spin{to{transform:rotate(360deg);}}</style>
+    <!-- Loading screen shown while React JS bundle downloads -->
+    <div id="app-shell">
+      <style>
+        #app-shell {
+          position: fixed; inset: 0;
+          background: #0f0f1a;
+          display: flex; flex-direction: column;
+          align-items: center; justify-content: center;
+          gap: 0; pointer-events: none;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          animation: shell-fadein 0.4s ease both;
+        }
+        .shell-icon {
+          width: 64px;
+          height: 64px;
+          border-radius: 16px;
+          margin-bottom: 1.5rem;
+          animation: shell-float 2.5s ease-in-out infinite;
+          filter: drop-shadow(0 0 14px rgba(201,168,76,0.45));
+        }
+        .shell-name {
+          color: #f0f0f5;
+          font-size: 1.15rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          margin-bottom: 0.35rem;
+        }
+        .shell-sub {
+          color: rgba(201,168,76,0.7);
+          font-size: 0.72rem;
+          font-weight: 500;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          margin-bottom: 2rem;
+        }
+        .shell-spinner-wrap {
+          position: relative; width: 48px; height: 48px;
+        }
+        .shell-ring {
+          position: absolute; inset: 0;
+          border-radius: 50%;
+          border: 2.5px solid transparent;
+        }
+        .shell-ring-outer {
+          border-top-color: #c9a84c;
+          border-right-color: rgba(201,168,76,0.3);
+          animation: shell-spin 1s linear infinite;
+        }
+        .shell-ring-inner {
+          inset: 8px;
+          border-bottom-color: rgba(201,168,76,0.6);
+          animation: shell-spin 0.65s linear infinite reverse;
+        }
+        @keyframes shell-spin { to { transform: rotate(360deg); } }
+        @keyframes shell-fadein { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes shell-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
+        }
+      </style>
+      <img class="shell-icon" src="https://alquranhub.org/android-chrome-192x192.png" alt="Al-Quran Hub" width="64" height="64" />
+      <div class="shell-name">Al-Quran Hub</div>
+      <div class="shell-sub">Read · Listen · Reflect</div>
+      <div class="shell-spinner-wrap">
+        <div class="shell-ring shell-ring-outer"></div>
+        <div class="shell-ring shell-ring-inner"></div>
+      </div>
     </div>
   </div>
   <script type="module" src="/src/main.jsx"></script>
