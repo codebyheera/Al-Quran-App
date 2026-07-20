@@ -60,27 +60,61 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Gulzar&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gulzar&display=swap" media="print" onload="this.media='all'" />
 
+  <!-- Critical CSS inlined to eliminate render-blocking and ensure LCP skeleton matches React hero -->
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0f0f1a;color:#e8e0cc;font-family:'Inter',system-ui,sans-serif}
+    #root{min-height:100vh}
+    .lcp-hero-skeleton{
+      min-height:32vh;display:flex;align-items:center;justify-content:center;
+      padding:2.5rem 1.5rem 2.75rem;text-align:center;position:relative;
+      background-color:#0f0f1a;border-bottom:1px solid rgba(201,168,76,0.12);
+    }
+    .lcp-hero-content{max-width:800px;position:relative;z-index:10;width:100%;}
+    .lcp-bismillah{
+      font-size:clamp(1.3rem,3.5vw,1.9rem);
+      color:#c9a84c;margin-bottom:0.75rem;text-align:center;
+      display:block;width:100%;text-shadow:0 0 20px rgba(201,168,76,0.28);
+      letter-spacing:0.02em;direction:rtl;line-height:2;
+    }
+    /* Arabic font fallback stack matching the MeQuran webfont */
+    @font-face{
+      font-family:'MeQuran';
+      src:url('/fonts/me_quran-webfont.otf') format('opentype');
+      font-display:block;
+      font-weight:normal;
+      font-style:normal;
+    }
+    .arabic{font-family:'MeQuran','Amiri','Scheherazade New',serif;}
+  </style>
 </head>
 
 <body>
   <div id="root">
-    <!-- Pre-rendered skeleton for instant LCP paint while React loads (bismillah) -->
-    <div style="min-height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 1rem; background-color: #0f0f1a;">
-      <div style="max-width: 800px; width: 100%;">
-        <div style="font-family: 'MeQuran', 'Inter', serif; font-size: clamp(1.4rem, 3.5vw, 2.2rem); color: #c9a84c; margin-bottom: 1rem; direction: rtl; line-height: 2.5; opacity: 0.9;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <!-- Static LCP hero skeleton — pixel-perfect match to React hero so browser LCP latches onto this at 0ms -->
+    <section class="lcp-hero-skeleton">
+      <div class="lcp-hero-content">
+        <div class="lcp-bismillah arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
       </div>
-    </div>
+    </section>
   </div>
   <script type="module" src="/src/main.jsx"></script>
 
-  <!-- Analytics and tracking scripts deferred to end of body -->
-  <!-- Google Analytics (async to prevent render-blocking) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GR7C4XE17J"></script>
+  <!-- Google Analytics (Deferred to prevent main thread blocking) -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-GR7C4XE17J');
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var gtagScript = document.createElement('script');
+        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-GR7C4XE17J";
+        gtagScript.async = true;
+        document.head.appendChild(gtagScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-GR7C4XE17J');
+      }, 1500); // 1.5s delay
+    });
   </script>
 
   <!-- Microsoft Clarity (Deferred to prevent forced reflow and blocking LCP) -->

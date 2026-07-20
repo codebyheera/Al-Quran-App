@@ -22,9 +22,23 @@ export default defineConfig({
     minify: 'esbuild',   // Faster + smaller than default terser
     rollupOptions: {
       output: {
-        manualChunks: {
-          reactCore: ['react', 'react-dom'],
-          reactRouter: ['react-router-dom'],
+        manualChunks(id) {
+          // Split React core (smallest possible initial bundle)
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'react-core';
+          }
+          // Split routing away from core
+          if (id.includes('node_modules/react-router') || id.includes('node_modules/@remix-run')) {
+            return 'react-router';
+          }
+          // Split SEO/helmet
+          if (id.includes('node_modules/react-helmet')) {
+            return 'react-helmet';
+          }
+          // All other node_modules go into a vendor chunk
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
         },
       },
     },
