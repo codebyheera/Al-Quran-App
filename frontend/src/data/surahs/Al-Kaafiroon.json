@@ -1,0 +1,519 @@
+{
+  "surahNumber": 109,
+  "surahName": "Al-Kaafiroon",
+  "arabicName": "سُورَةُ الكَافِرُونَ",
+  "nameTranslation": "The Disbelievers",
+  "revelation": "Meccan",
+  "versesCount": 6,
+  "prevSurahSlug": "Al-Kawthar",
+  "nextSurahSlug": "An-Nasr",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/109.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6208,
+      "arabic": "قُلْ يَٰٓأَيُّهَا ٱلْكَٰفِرُونَ",
+      "translation": "Say, \"O disbelievers,",
+      "urduTranslation": "(اے پیغمبر ان منکران اسلام سے) کہہ دو کہ اے کافرو!",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6208.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6208.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6208.mp3",
+      "words": [
+        {
+          "id": 158,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "قُلْ",
+          "text": "قُلْ",
+          "translation": {
+            "text": "Say",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "qul",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_001_001.mp3"
+        },
+        {
+          "id": 159,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَـٰٓأَيُّهَا",
+          "text": "يَـٰٓأَيُّهَا",
+          "translation": {
+            "text": "O",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yāayyuhā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_001_002.mp3"
+        },
+        {
+          "id": 160,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْكَـٰفِرُونَ",
+          "text": "ٱلْكَـٰفِرُونَ",
+          "translation": {
+            "text": "disbelievers",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-kāfirūna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_001_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6209,
+      "arabic": "لَآ أَعْبُدُ مَا تَعْبُدُونَ",
+      "translation": "I do not worship what you worship.",
+      "urduTranslation": "جن (بتوں) کو تم پوچتے ہو ان کو میں نہیں پوجتا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6209.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6209.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6209.mp3",
+      "words": [
+        {
+          "id": 942,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "لَآ",
+          "text": "لَآ",
+          "translation": {
+            "text": "Not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_002_001.mp3"
+        },
+        {
+          "id": 943,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "أَعْبُدُ",
+          "text": "أَعْبُدُ",
+          "translation": {
+            "text": "I worship",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "aʿbudu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_002_002.mp3"
+        },
+        {
+          "id": 944,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "مَا",
+          "text": "مَا",
+          "translation": {
+            "text": "what",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_002_003.mp3"
+        },
+        {
+          "id": 945,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "تَعْبُدُونَ",
+          "text": "تَعْبُدُونَ",
+          "translation": {
+            "text": "you worship",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "taʿbudūna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_002_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6210,
+      "arabic": "وَلَآ أَنتُمْ عَٰبِدُونَ مَآ أَعْبُدُ",
+      "translation": "Nor are you worshippers of what I worship.",
+      "urduTranslation": "اور جس (خدا) کی میں عبادت کرتا ہوں اس کی تم عبادت نہیں کرتے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6210.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6210.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6210.mp3",
+      "words": [
+        {
+          "id": 2570,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَلَآ",
+          "text": "وَلَآ",
+          "translation": {
+            "text": "And not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "walā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_001.mp3"
+        },
+        {
+          "id": 2571,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "أَنتُمْ",
+          "text": "أَنتُمْ",
+          "translation": {
+            "text": "you",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "antum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_002.mp3"
+        },
+        {
+          "id": 2572,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "عَـٰبِدُونَ",
+          "text": "عَـٰبِدُونَ",
+          "translation": {
+            "text": "(are) worshippers",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ʿābidūna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_003.mp3"
+        },
+        {
+          "id": 2573,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "مَآ",
+          "text": "مَآ",
+          "translation": {
+            "text": "(of) what",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_004.mp3"
+        },
+        {
+          "id": 2574,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "أَعْبُدُ",
+          "text": "أَعْبُدُ",
+          "translation": {
+            "text": "I worship",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "aʿbudu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_005.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 4,
+      "globalNumber": 6211,
+      "arabic": "وَلَآ أَنَا۠ عَابِدٌۭ مَّا عَبَدتُّمْ",
+      "translation": "Nor will I be a worshipper of what you worship.",
+      "urduTranslation": "اور (میں پھر کہتا ہوں کہ) جن کی تم پرستش کرتے ہوں ان کی میں پرستش کرنے والا نہیں ہوں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6211.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6211.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6211.mp3",
+      "words": [
+        {
+          "id": 3992,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَلَآ",
+          "text": "وَلَآ",
+          "translation": {
+            "text": "And not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "walā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_001.mp3"
+        },
+        {
+          "id": 3993,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "أَنَا۠",
+          "text": "أَنَا۠",
+          "translation": {
+            "text": "I am",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "anā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_002.mp3"
+        },
+        {
+          "id": 3994,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "عَابِدٌۭ",
+          "text": "عَابِدٌۭ",
+          "translation": {
+            "text": "a worshipper",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ʿābidun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_003.mp3"
+        },
+        {
+          "id": 3995,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "مَّا",
+          "text": "مَّا",
+          "translation": {
+            "text": "(of) what",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_004.mp3"
+        },
+        {
+          "id": 3996,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "عَبَدتُّمْ",
+          "text": "عَبَدتُّمْ",
+          "translation": {
+            "text": "you worship",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ʿabadttum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_005.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 5,
+      "globalNumber": 6212,
+      "arabic": "وَلَآ أَنتُمْ عَٰبِدُونَ مَآ أَعْبُدُ",
+      "translation": "Nor will you be worshippers of what I worship.",
+      "urduTranslation": "اور نہ تم اس کی بندگی کرنے والے (معلوم ہوتے) ہو جس کی میں بندگی کرتا ہوں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6212.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6212.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6212.mp3",
+      "words": [
+        {
+          "id": 5290,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَلَآ",
+          "text": "وَلَآ",
+          "translation": {
+            "text": "And not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "walā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_001.mp3"
+        },
+        {
+          "id": 5291,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "أَنتُمْ",
+          "text": "أَنتُمْ",
+          "translation": {
+            "text": "you",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "antum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_002.mp3"
+        },
+        {
+          "id": 5292,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "عَـٰبِدُونَ",
+          "text": "عَـٰبِدُونَ",
+          "translation": {
+            "text": "(are) worshippers",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ʿābidūna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_003.mp3"
+        },
+        {
+          "id": 5293,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "مَآ",
+          "text": "مَآ",
+          "translation": {
+            "text": "(of) what",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_004.mp3"
+        },
+        {
+          "id": 5294,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "أَعْبُدُ",
+          "text": "أَعْبُدُ",
+          "translation": {
+            "text": "I worship",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "aʿbudu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_005.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 6,
+      "globalNumber": 6213,
+      "arabic": "لَكُمْ دِينُكُمْ وَلِىَ دِينِ",
+      "translation": "For you is your religion, and for me is my religion.\"",
+      "urduTranslation": "تم اپنے دین پر میں اپنے دین پر",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6213.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6213.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6213.mp3",
+      "words": [
+        {
+          "id": 6550,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "لَكُمْ",
+          "text": "لَكُمْ",
+          "translation": {
+            "text": "For you",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lakum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_006_001.mp3"
+        },
+        {
+          "id": 6551,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "دِينُكُمْ",
+          "text": "دِينُكُمْ",
+          "translation": {
+            "text": "(is) your religion",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "dīnukum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_006_002.mp3"
+        },
+        {
+          "id": 6552,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "وَلِىَ",
+          "text": "وَلِىَ",
+          "translation": {
+            "text": "and for me",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "waliya",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_006_003.mp3"
+        },
+        {
+          "id": 6553,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "دِينِ",
+          "text": "دِينِ",
+          "translation": {
+            "text": "(is) my religion",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "dīni",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_006_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    }
+  ]
+}

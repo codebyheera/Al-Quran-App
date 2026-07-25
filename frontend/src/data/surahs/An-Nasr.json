@@ -1,0 +1,362 @@
+{
+  "surahNumber": 110,
+  "surahName": "An-Nasr",
+  "arabicName": "سُورَةُ النَّصۡرِ",
+  "nameTranslation": "Divine Support",
+  "revelation": "Medinan",
+  "versesCount": 3,
+  "prevSurahSlug": "Al-Kaafiroon",
+  "nextSurahSlug": "Al-Masad",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/110.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6214,
+      "arabic": "إِذَا جَآءَ نَصْرُ ٱللَّهِ وَٱلْفَتْحُ",
+      "translation": "When the victory of Allah has come and the conquest,",
+      "urduTranslation": "جب خدا کی مدد آ پہنچی اور فتح (حاصل ہو گئی)",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6214.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6214.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6214.mp3",
+      "words": [
+        {
+          "id": 232,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِذَا",
+          "text": "إِذَا",
+          "translation": {
+            "text": "When",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "idhā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_001_001.mp3"
+        },
+        {
+          "id": 233,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "جَآءَ",
+          "text": "جَآءَ",
+          "translation": {
+            "text": "comes",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "jāa",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_001_002.mp3"
+        },
+        {
+          "id": 234,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "نَصْرُ",
+          "text": "نَصْرُ",
+          "translation": {
+            "text": "(the) Help",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "naṣru",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_001_003.mp3"
+        },
+        {
+          "id": 235,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "ٱللَّهِ",
+          "text": "ٱللَّهِ",
+          "translation": {
+            "text": "(of) Allah",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-lahi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_001_004.mp3"
+        },
+        {
+          "id": 236,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "وَٱلْفَتْحُ",
+          "text": "وَٱلْفَتْحُ",
+          "translation": {
+            "text": "and the Victory",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wal-fatḥu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_001_005.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6215,
+      "arabic": "وَرَأَيْتَ ٱلنَّاسَ يَدْخُلُونَ فِى دِينِ ٱللَّهِ أَفْوَاجًۭا",
+      "translation": "And you see the people entering into the religion of Allah in multitudes,",
+      "urduTranslation": "اور تم نے دیکھ لیا کہ لوگ غول کے غول خدا کے دین میں داخل ہو رہے ہیں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6215.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6215.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6215.mp3",
+      "words": [
+        {
+          "id": 1064,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَرَأَيْتَ",
+          "text": "وَرَأَيْتَ",
+          "translation": {
+            "text": "And you see",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wara-ayta",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_002_001.mp3"
+        },
+        {
+          "id": 1065,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلنَّاسَ",
+          "text": "ٱلنَّاسَ",
+          "translation": {
+            "text": "the people",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-nāsa",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_002_002.mp3"
+        },
+        {
+          "id": 1066,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "يَدْخُلُونَ",
+          "text": "يَدْخُلُونَ",
+          "translation": {
+            "text": "entering",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yadkhulūna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_002_003.mp3"
+        },
+        {
+          "id": 1067,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "فِى",
+          "text": "فِى",
+          "translation": {
+            "text": "into",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fī",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_002_004.mp3"
+        },
+        {
+          "id": 1068,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "دِينِ",
+          "text": "دِينِ",
+          "translation": {
+            "text": "(the) religion",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "dīni",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_002_005.mp3"
+        },
+        {
+          "id": 1069,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "ٱللَّهِ",
+          "text": "ٱللَّهِ",
+          "translation": {
+            "text": "(of) Allah",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-lahi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_002_006.mp3"
+        },
+        {
+          "id": 1070,
+          "position": 7,
+          "char_type_name": "word",
+          "text_uthmani": "أَفْوَاجًۭا",
+          "text": "أَفْوَاجًۭا",
+          "translation": {
+            "text": "(in) multitudes",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "afwājan",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_002_007.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6216,
+      "arabic": "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَٱسْتَغْفِرْهُ ۚ إِنَّهُۥ كَانَ تَوَّابًۢا",
+      "translation": "Then exalt [Him] with praise of your Lord and ask forgiveness of Him. Indeed, He is ever Accepting of repentance.",
+      "urduTranslation": "تو اپنے پروردگار کی تعریف کے ساتھ تسبیح کرو اور اس سے مغفرت مانگو، بے شک وہ معاف کرنے والا ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6216.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6216.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6216.mp3",
+      "words": [
+        {
+          "id": 2607,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فَسَبِّحْ",
+          "text": "فَسَبِّحْ",
+          "translation": {
+            "text": "Then glorify",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fasabbiḥ",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_003_001.mp3"
+        },
+        {
+          "id": 2608,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "بِحَمْدِ",
+          "text": "بِحَمْدِ",
+          "translation": {
+            "text": "with (the) praises",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "biḥamdi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_003_002.mp3"
+        },
+        {
+          "id": 2609,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "رَبِّكَ",
+          "text": "رَبِّكَ",
+          "translation": {
+            "text": "(of) your Lord",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "rabbika",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_003_003.mp3"
+        },
+        {
+          "id": 2610,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "وَٱسْتَغْفِرْهُ ۚ",
+          "text": "وَٱسْتَغْفِرْهُ ۚ",
+          "translation": {
+            "text": "and ask His forgiveness",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wa-is'taghfir'hu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_003_004.mp3"
+        },
+        {
+          "id": 2612,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "إِنَّهُۥ",
+          "text": "إِنَّهُۥ",
+          "translation": {
+            "text": "Indeed, He",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "innahu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_003_005.mp3"
+        },
+        {
+          "id": 2613,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "كَانَ",
+          "text": "كَانَ",
+          "translation": {
+            "text": "is",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "kāna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_003_006.mp3"
+        },
+        {
+          "id": 2614,
+          "position": 7,
+          "char_type_name": "word",
+          "text_uthmani": "تَوَّابًۢا",
+          "text": "تَوَّابًۢا",
+          "translation": {
+            "text": "Oft-Returning",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "tawwāban",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/110_003_007.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    }
+  ]
+}

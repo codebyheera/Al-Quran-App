@@ -17,6 +17,19 @@ const RECITER_MAPPING = {
   'yasser': 'ar.yasseraldossari'
 };
 
+async function axiosGetWithRetry(url, retries = 3, delay = 500) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await axios.get(url, { timeout: 10000 });
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      const backoff = delay * Math.pow(2, i);
+      console.warn(`[API Retry] Request to ${url} failed (Attempt ${i + 1}/${retries}). Retrying in ${backoff}ms... Error: ${err.message}`);
+      await new Promise(resolve => setTimeout(resolve, backoff));
+    }
+  }
+}
+
 router.get('/:surahIdentifier', async (req, res) => {
   const { surahIdentifier } = req.params;
   const num = getSurahId(surahIdentifier);
@@ -36,8 +49,8 @@ router.get('/:surahIdentifier', async (req, res) => {
     const quranComUrl = `https://api.quran.com/api/v4/verses/by_chapter/${num}?words=true&word_fields=text_uthmani&per_page=300`;
 
     const [alquranRes, quranComRes] = await Promise.all([
-      axios.get(url),
-      axios.get(quranComUrl)
+      axiosGetWithRetry(url),
+      axiosGetWithRetry(quranComUrl)
     ]);
 
     const data = alquranRes.data;
@@ -156,7 +169,7 @@ router.get('/:surahIdentifier', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const { data } = await axios.get(`${ALQURAN_BASE}/surah`);
+    const { data } = await axiosGetWithRetry(`${ALQURAN_BASE}/surah`);
     const surahs = data.data.map((s) => ({
       number:          s.number,
       name:            s.name,

@@ -1,0 +1,818 @@
+{
+  "surahNumber": 100,
+  "surahName": "Al-Aadiyaat",
+  "arabicName": "سُورَةُ العَادِيَاتِ",
+  "nameTranslation": "The Chargers",
+  "revelation": "Meccan",
+  "versesCount": 11,
+  "prevSurahSlug": "Az-Zalzala",
+  "nextSurahSlug": "Al-Qaari'a",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/100.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6147,
+      "arabic": "وَٱلْعَٰدِيَٰتِ ضَبْحًۭا",
+      "translation": "By the racers, panting,",
+      "urduTranslation": "ان سرپٹ دوڑنے والے گھوڑوں کی قسم جو ہانپ اٹھتےہیں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6147.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6147.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6147.mp3",
+      "words": [
+        {
+          "id": 13,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَٱلْعَـٰدِيَـٰتِ",
+          "text": "وَٱلْعَـٰدِيَـٰتِ",
+          "translation": {
+            "text": "By the racers",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wal-ʿādiyāti",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_001_001.mp3"
+        },
+        {
+          "id": 14,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ضَبْحًۭا",
+          "text": "ضَبْحًۭا",
+          "translation": {
+            "text": "panting",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ḍabḥan",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_001_002.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6148,
+      "arabic": "فَٱلْمُورِيَٰتِ قَدْحًۭا",
+      "translation": "And the producers of sparks [when] striking",
+      "urduTranslation": "پھر (پتھروں پر نعل) مار کر آگ نکالتے ہیں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6148.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6148.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6148.mp3",
+      "words": [
+        {
+          "id": 1941,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فَٱلْمُورِيَـٰتِ",
+          "text": "فَٱلْمُورِيَـٰتِ",
+          "translation": {
+            "text": "And the producers of sparks",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fal-mūriyāti",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_002_001.mp3"
+        },
+        {
+          "id": 1942,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "قَدْحًۭا",
+          "text": "قَدْحًۭا",
+          "translation": {
+            "text": "striking",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "qadḥan",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_002_002.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6149,
+      "arabic": "فَٱلْمُغِيرَٰتِ صُبْحًۭا",
+      "translation": "And the chargers at dawn,",
+      "urduTranslation": "پھر صبح کو چھاپہ مارتے ہیں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6149.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6149.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6149.mp3",
+      "words": [
+        {
+          "id": 3166,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فَٱلْمُغِيرَٰتِ",
+          "text": "فَٱلْمُغِيرَٰتِ",
+          "translation": {
+            "text": "And the chargers",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fal-mughīrāti",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_003_001.mp3"
+        },
+        {
+          "id": 3167,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "صُبْحًۭا",
+          "text": "صُبْحًۭا",
+          "translation": {
+            "text": "(at) dawn",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ṣub'ḥan",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_003_002.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 4,
+      "globalNumber": 6150,
+      "arabic": "فَأَثَرْنَ بِهِۦ نَقْعًۭا",
+      "translation": "Stirring up thereby [clouds of] dust,",
+      "urduTranslation": "پھر اس میں گرد اٹھاتے ہیں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6150.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6150.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6150.mp3",
+      "words": [
+        {
+          "id": 4469,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فَأَثَرْنَ",
+          "text": "فَأَثَرْنَ",
+          "translation": {
+            "text": "Then raise",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fa-atharna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_004_001.mp3"
+        },
+        {
+          "id": 4470,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "بِهِۦ",
+          "text": "بِهِۦ",
+          "translation": {
+            "text": "thereby",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bihi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_004_002.mp3"
+        },
+        {
+          "id": 4471,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "نَقْعًۭا",
+          "text": "نَقْعًۭا",
+          "translation": {
+            "text": "dust",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "naqʿan",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_004_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 5,
+      "globalNumber": 6151,
+      "arabic": "فَوَسَطْنَ بِهِۦ جَمْعًا",
+      "translation": "Arriving thereby in the center collectively,",
+      "urduTranslation": "پھر اس وقت دشمن کی فوج میں جا گھستے ہیں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6151.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6151.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6151.mp3",
+      "words": [
+        {
+          "id": 5794,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فَوَسَطْنَ",
+          "text": "فَوَسَطْنَ",
+          "translation": {
+            "text": "Then penetrate (in the) center",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fawasaṭna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_005_001.mp3"
+        },
+        {
+          "id": 5795,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "بِهِۦ",
+          "text": "بِهِۦ",
+          "translation": {
+            "text": "thereby",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bihi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_005_002.mp3"
+        },
+        {
+          "id": 5796,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "جَمْعًا",
+          "text": "جَمْعًا",
+          "translation": {
+            "text": "collectively",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "jamʿan",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_005_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 6,
+      "globalNumber": 6152,
+      "arabic": "إِنَّ ٱلْإِنسَٰنَ لِرَبِّهِۦ لَكَنُودٌۭ",
+      "translation": "Indeed mankind, to his Lord, is ungrateful.",
+      "urduTranslation": "کہ انسان اپنے پروردگار کا احسان ناشناس (اور ناشکرا) ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6152.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6152.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6152.mp3",
+      "words": [
+        {
+          "id": 7117,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِنَّ",
+          "text": "إِنَّ",
+          "translation": {
+            "text": "Indeed",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "inna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_006_001.mp3"
+        },
+        {
+          "id": 7118,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْإِنسَـٰنَ",
+          "text": "ٱلْإِنسَـٰنَ",
+          "translation": {
+            "text": "mankind",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-insāna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_006_002.mp3"
+        },
+        {
+          "id": 7119,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "لِرَبِّهِۦ",
+          "text": "لِرَبِّهِۦ",
+          "translation": {
+            "text": "to his Lord",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lirabbihi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_006_003.mp3"
+        },
+        {
+          "id": 7120,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "لَكَنُودٌۭ",
+          "text": "لَكَنُودٌۭ",
+          "translation": {
+            "text": "(is) surely ungrateful",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lakanūdun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_006_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 7,
+      "globalNumber": 6153,
+      "arabic": "وَإِنَّهُۥ عَلَىٰ ذَٰلِكَ لَشَهِيدٌۭ",
+      "translation": "And indeed, he is to that a witness.",
+      "urduTranslation": "اور وہ اس سے آگاہ بھی ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6153.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6153.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6153.mp3",
+      "words": [
+        {
+          "id": 8429,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَإِنَّهُۥ",
+          "text": "وَإِنَّهُۥ",
+          "translation": {
+            "text": "And indeed, he",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wa-innahu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_007_001.mp3"
+        },
+        {
+          "id": 8430,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "عَلَىٰ",
+          "text": "عَلَىٰ",
+          "translation": {
+            "text": "on",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ʿalā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_007_002.mp3"
+        },
+        {
+          "id": 8431,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ذَٰلِكَ",
+          "text": "ذَٰلِكَ",
+          "translation": {
+            "text": "that",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "dhālika",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_007_003.mp3"
+        },
+        {
+          "id": 8432,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "لَشَهِيدٌۭ",
+          "text": "لَشَهِيدٌۭ",
+          "translation": {
+            "text": "surely (is) a witness",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lashahīdun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_007_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 8,
+      "globalNumber": 6154,
+      "arabic": "وَإِنَّهُۥ لِحُبِّ ٱلْخَيْرِ لَشَدِيدٌ",
+      "translation": "And indeed he is, in love of wealth, intense.",
+      "urduTranslation": "وہ تو مال سے سخت محبت کرنے والا ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6154.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6154.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6154.mp3",
+      "words": [
+        {
+          "id": 9582,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَإِنَّهُۥ",
+          "text": "وَإِنَّهُۥ",
+          "translation": {
+            "text": "And indeed he",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wa-innahu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_008_001.mp3"
+        },
+        {
+          "id": 9583,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "لِحُبِّ",
+          "text": "لِحُبِّ",
+          "translation": {
+            "text": "in (the) love",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "liḥubbi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_008_002.mp3"
+        },
+        {
+          "id": 9584,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْخَيْرِ",
+          "text": "ٱلْخَيْرِ",
+          "translation": {
+            "text": "(of) wealth",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-khayri",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_008_003.mp3"
+        },
+        {
+          "id": 9585,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "لَشَدِيدٌ",
+          "text": "لَشَدِيدٌ",
+          "translation": {
+            "text": "(is) surely intense",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lashadīdun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_008_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 9,
+      "globalNumber": 6155,
+      "arabic": "۞ أَفَلَا يَعْلَمُ إِذَا بُعْثِرَ مَا فِى ٱلْقُبُورِ",
+      "translation": "But does he not know that when the contents of the graves are scattered",
+      "urduTranslation": "کیا وہ اس وقت کو نہیں جانتا کہ جو (مردے) قبروں میں ہیں وہ باہر نکال لیے جائیں گے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6155.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6155.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6155.mp3",
+      "words": [
+        {
+          "id": 10714,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "۞ أَفَلَا",
+          "text": "۞ أَفَلَا",
+          "translation": {
+            "text": "But does not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "afalā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_009_001.mp3"
+        },
+        {
+          "id": 10715,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَعْلَمُ",
+          "text": "يَعْلَمُ",
+          "translation": {
+            "text": "he know",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yaʿlamu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_009_002.mp3"
+        },
+        {
+          "id": 10716,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "إِذَا",
+          "text": "إِذَا",
+          "translation": {
+            "text": "when",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "idhā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_009_003.mp3"
+        },
+        {
+          "id": 10717,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "بُعْثِرَ",
+          "text": "بُعْثِرَ",
+          "translation": {
+            "text": "will be scattered",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "buʿ'thira",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_009_004.mp3"
+        },
+        {
+          "id": 10718,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "مَا",
+          "text": "مَا",
+          "translation": {
+            "text": "what",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_009_005.mp3"
+        },
+        {
+          "id": 10719,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "فِى",
+          "text": "فِى",
+          "translation": {
+            "text": "(is) in",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fī",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_009_006.mp3"
+        },
+        {
+          "id": 10720,
+          "position": 7,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْقُبُورِ",
+          "text": "ٱلْقُبُورِ",
+          "translation": {
+            "text": "the graves",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-qubūri",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_009_007.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 10,
+      "globalNumber": 6156,
+      "arabic": "وَحُصِّلَ مَا فِى ٱلصُّدُورِ",
+      "translation": "And that within the breasts is obtained,",
+      "urduTranslation": "اور جو (بھید) دلوں میں ہیں وہ ظاہر کر دیئے جائیں گے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6156.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6156.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6156.mp3",
+      "words": [
+        {
+          "id": 11729,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَحُصِّلَ",
+          "text": "وَحُصِّلَ",
+          "translation": {
+            "text": "And is made apparent",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "waḥuṣṣila",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_010_001.mp3"
+        },
+        {
+          "id": 11730,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "مَا",
+          "text": "مَا",
+          "translation": {
+            "text": "what",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_010_002.mp3"
+        },
+        {
+          "id": 11731,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "فِى",
+          "text": "فِى",
+          "translation": {
+            "text": "(is) in",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fī",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_010_003.mp3"
+        },
+        {
+          "id": 11732,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلصُّدُورِ",
+          "text": "ٱلصُّدُورِ",
+          "translation": {
+            "text": "the breasts",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-ṣudūri",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_010_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 600,
+      "sajda": false
+    },
+    {
+      "number": 11,
+      "globalNumber": 6157,
+      "arabic": "إِنَّ رَبَّهُم بِهِمْ يَوْمَئِذٍۢ لَّخَبِيرٌۢ",
+      "translation": "Indeed, their Lord with them, that Day, is [fully] Acquainted.",
+      "urduTranslation": "بےشک ان کا پروردگار اس روز ان سے خوب واقف ہوگا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6157.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6157.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6157.mp3",
+      "words": [
+        {
+          "id": 12259,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِنَّ",
+          "text": "إِنَّ",
+          "translation": {
+            "text": "Indeed",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "inna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_011_001.mp3"
+        },
+        {
+          "id": 12260,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "رَبَّهُم",
+          "text": "رَبَّهُم",
+          "translation": {
+            "text": "their Lord",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "rabbahum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_011_002.mp3"
+        },
+        {
+          "id": 12261,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "بِهِمْ",
+          "text": "بِهِمْ",
+          "translation": {
+            "text": "about them",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bihim",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_011_003.mp3"
+        },
+        {
+          "id": 12262,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "يَوْمَئِذٍۢ",
+          "text": "يَوْمَئِذٍۢ",
+          "translation": {
+            "text": "that Day",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yawma-idhin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_011_004.mp3"
+        },
+        {
+          "id": 12263,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "لَّخَبِيرٌۢ",
+          "text": "لَّخَبِيرٌۢ",
+          "translation": {
+            "text": "(is) surely All-Aware",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lakhabīrun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/100_011_005.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 600,
+      "sajda": false
+    }
+  ]
+}

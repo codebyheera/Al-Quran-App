@@ -1,0 +1,709 @@
+{
+  "surahNumber": 99,
+  "surahName": "Az-Zalzala",
+  "arabicName": "سُورَةُ الزَّلۡزَلَةِ",
+  "nameTranslation": "The Earthquake",
+  "revelation": "Medinan",
+  "versesCount": 8,
+  "prevSurahSlug": "Al-Bayyina",
+  "nextSurahSlug": "Al-Aadiyaat",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/099.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6139,
+      "arabic": "إِذَا زُلْزِلَتِ ٱلْأَرْضُ زِلْزَالَهَا",
+      "translation": "When the earth is shaken with its [final] earthquake",
+      "urduTranslation": "جب زمین بھونچال سے ہلا دی جائے گی",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6139.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6139.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6139.mp3",
+      "words": [
+        {
+          "id": 55,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِذَا",
+          "text": "إِذَا",
+          "translation": {
+            "text": "When",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "idhā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_001_001.mp3"
+        },
+        {
+          "id": 56,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "زُلْزِلَتِ",
+          "text": "زُلْزِلَتِ",
+          "translation": {
+            "text": "is shaken",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "zul'zilati",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_001_002.mp3"
+        },
+        {
+          "id": 57,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْأَرْضُ",
+          "text": "ٱلْأَرْضُ",
+          "translation": {
+            "text": "the earth",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-arḍu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_001_003.mp3"
+        },
+        {
+          "id": 58,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "زِلْزَالَهَا",
+          "text": "زِلْزَالَهَا",
+          "translation": {
+            "text": "(with) its earthquake",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "zil'zālahā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_001_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6140,
+      "arabic": "وَأَخْرَجَتِ ٱلْأَرْضُ أَثْقَالَهَا",
+      "translation": "And the earth discharges its burdens",
+      "urduTranslation": "اور زمین اپنے (اندر) کے بوجھ نکال ڈالے گی",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6140.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6140.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6140.mp3",
+      "words": [
+        {
+          "id": 1839,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَأَخْرَجَتِ",
+          "text": "وَأَخْرَجَتِ",
+          "translation": {
+            "text": "And brings forth",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wa-akhrajati",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_002_001.mp3"
+        },
+        {
+          "id": 1840,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْأَرْضُ",
+          "text": "ٱلْأَرْضُ",
+          "translation": {
+            "text": "the earth",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-arḍu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_002_002.mp3"
+        },
+        {
+          "id": 1841,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "أَثْقَالَهَا",
+          "text": "أَثْقَالَهَا",
+          "translation": {
+            "text": "its burdens",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "athqālahā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_002_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6141,
+      "arabic": "وَقَالَ ٱلْإِنسَٰنُ مَا لَهَا",
+      "translation": "And man says, \"What is [wrong] with it?\" -",
+      "urduTranslation": "اور انسان کہے گا کہ اس کو کیا ہوا ہے؟",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6141.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6141.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6141.mp3",
+      "words": [
+        {
+          "id": 2911,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَقَالَ",
+          "text": "وَقَالَ",
+          "translation": {
+            "text": "And says",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "waqāla",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_003_001.mp3"
+        },
+        {
+          "id": 2912,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْإِنسَـٰنُ",
+          "text": "ٱلْإِنسَـٰنُ",
+          "translation": {
+            "text": "man",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-insānu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_003_002.mp3"
+        },
+        {
+          "id": 2913,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "مَا",
+          "text": "مَا",
+          "translation": {
+            "text": "What",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_003_003.mp3"
+        },
+        {
+          "id": 2914,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "لَهَا",
+          "text": "لَهَا",
+          "translation": {
+            "text": "(is) with it",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lahā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_003_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 4,
+      "globalNumber": 6142,
+      "arabic": "يَوْمَئِذٍۢ تُحَدِّثُ أَخْبَارَهَا",
+      "translation": "That Day, it will report its news",
+      "urduTranslation": "اس روز وہ اپنے حالات بیان کردے گی",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6142.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6142.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6142.mp3",
+      "words": [
+        {
+          "id": 4356,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "يَوْمَئِذٍۢ",
+          "text": "يَوْمَئِذٍۢ",
+          "translation": {
+            "text": "That Day",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yawma-idhin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_004_001.mp3"
+        },
+        {
+          "id": 4357,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "تُحَدِّثُ",
+          "text": "تُحَدِّثُ",
+          "translation": {
+            "text": "it will report",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "tuḥaddithu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_004_002.mp3"
+        },
+        {
+          "id": 4358,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "أَخْبَارَهَا",
+          "text": "أَخْبَارَهَا",
+          "translation": {
+            "text": "its news",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "akhbārahā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_004_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 5,
+      "globalNumber": 6143,
+      "arabic": "بِأَنَّ رَبَّكَ أَوْحَىٰ لَهَا",
+      "translation": "Because your Lord has commanded it.",
+      "urduTranslation": "کیونکہ تمہارے پروردگار نے اس کو حکم بھیجا (ہوگا)",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6143.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6143.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6143.mp3",
+      "words": [
+        {
+          "id": 5612,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "بِأَنَّ",
+          "text": "بِأَنَّ",
+          "translation": {
+            "text": "Because",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bi-anna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_005_001.mp3"
+        },
+        {
+          "id": 5613,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "رَبَّكَ",
+          "text": "رَبَّكَ",
+          "translation": {
+            "text": "your Lord",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "rabbaka",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_005_002.mp3"
+        },
+        {
+          "id": 5614,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "أَوْحَىٰ",
+          "text": "أَوْحَىٰ",
+          "translation": {
+            "text": "inspired",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "awḥā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_005_003.mp3"
+        },
+        {
+          "id": 5615,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "لَهَا",
+          "text": "لَهَا",
+          "translation": {
+            "text": "[to] it",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lahā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_005_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 6,
+      "globalNumber": 6144,
+      "arabic": "يَوْمَئِذٍۢ يَصْدُرُ ٱلنَّاسُ أَشْتَاتًۭا لِّيُرَوْا۟ أَعْمَٰلَهُمْ",
+      "translation": "That Day, the people will depart separated [into categories] to be shown [the result of] their deeds.",
+      "urduTranslation": "اس دن لوگ گروہ گروہ ہو کر آئیں گے تاکہ ان کو ان کے اعمال دکھا دیئے جائیں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6144.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6144.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6144.mp3",
+      "words": [
+        {
+          "id": 6824,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "يَوْمَئِذٍۢ",
+          "text": "يَوْمَئِذٍۢ",
+          "translation": {
+            "text": "That Day",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yawma-idhin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_006_001.mp3"
+        },
+        {
+          "id": 6825,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَصْدُرُ",
+          "text": "يَصْدُرُ",
+          "translation": {
+            "text": "will proceed",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yaṣduru",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_006_002.mp3"
+        },
+        {
+          "id": 6826,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلنَّاسُ",
+          "text": "ٱلنَّاسُ",
+          "translation": {
+            "text": "the mankind",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-nāsu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_006_003.mp3"
+        },
+        {
+          "id": 6827,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "أَشْتَاتًۭا",
+          "text": "أَشْتَاتًۭا",
+          "translation": {
+            "text": "(in) scattered groups",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ashtātan",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_006_004.mp3"
+        },
+        {
+          "id": 6828,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "لِّيُرَوْا۟",
+          "text": "لِّيُرَوْا۟",
+          "translation": {
+            "text": "to be shown",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "liyuraw",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_006_005.mp3"
+        },
+        {
+          "id": 6829,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "أَعْمَـٰلَهُمْ",
+          "text": "أَعْمَـٰلَهُمْ",
+          "translation": {
+            "text": "their deeds",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "aʿmālahum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_006_006.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 7,
+      "globalNumber": 6145,
+      "arabic": "فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًۭا يَرَهُۥ",
+      "translation": "So whoever does an atom's weight of good will see it,",
+      "urduTranslation": "تو جس نے ذرہ بھر نیکی کی ہو گی وہ اس کو دیکھ لے گا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6145.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6145.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6145.mp3",
+      "words": [
+        {
+          "id": 8354,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فَمَن",
+          "text": "فَمَن",
+          "translation": {
+            "text": "So whoever",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "faman",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_007_001.mp3"
+        },
+        {
+          "id": 8355,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَعْمَلْ",
+          "text": "يَعْمَلْ",
+          "translation": {
+            "text": "does",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yaʿmal",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_007_002.mp3"
+        },
+        {
+          "id": 8356,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "مِثْقَالَ",
+          "text": "مِثْقَالَ",
+          "translation": {
+            "text": "(equal to the) weight",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mith'qāla",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_007_003.mp3"
+        },
+        {
+          "id": 8357,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "ذَرَّةٍ",
+          "text": "ذَرَّةٍ",
+          "translation": {
+            "text": "(of) an atom",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "dharratin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_007_004.mp3"
+        },
+        {
+          "id": 8358,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "خَيْرًۭا",
+          "text": "خَيْرًۭا",
+          "translation": {
+            "text": "good",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "khayran",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_007_005.mp3"
+        },
+        {
+          "id": 8359,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "يَرَهُۥ",
+          "text": "يَرَهُۥ",
+          "translation": {
+            "text": "will see it",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yarahu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_007_006.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    },
+    {
+      "number": 8,
+      "globalNumber": 6146,
+      "arabic": "وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍۢ شَرًّۭا يَرَهُۥ",
+      "translation": "And whoever does an atom's weight of evil will see it.",
+      "urduTranslation": "اور جس نے ذرہ بھر برائی کی ہوگی وہ اسے دیکھ لے گا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6146.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6146.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6146.mp3",
+      "words": [
+        {
+          "id": 9503,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَمَن",
+          "text": "وَمَن",
+          "translation": {
+            "text": "And whoever",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "waman",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_008_001.mp3"
+        },
+        {
+          "id": 9504,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَعْمَلْ",
+          "text": "يَعْمَلْ",
+          "translation": {
+            "text": "does",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yaʿmal",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_008_002.mp3"
+        },
+        {
+          "id": 9505,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "مِثْقَالَ",
+          "text": "مِثْقَالَ",
+          "translation": {
+            "text": "(equal to the) weight",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mith'qāla",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_008_003.mp3"
+        },
+        {
+          "id": 9506,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "ذَرَّةٍۢ",
+          "text": "ذَرَّةٍۢ",
+          "translation": {
+            "text": "(of) an atom",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "dharratin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_008_004.mp3"
+        },
+        {
+          "id": 9507,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "شَرًّۭا",
+          "text": "شَرًّۭا",
+          "translation": {
+            "text": "evil",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "sharran",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_008_005.mp3"
+        },
+        {
+          "id": 9508,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "يَرَهُۥ",
+          "text": "يَرَهُۥ",
+          "translation": {
+            "text": "will see it",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yarahu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/099_008_006.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 599,
+      "sajda": false
+    }
+  ]
+}

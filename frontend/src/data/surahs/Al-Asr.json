@@ -1,0 +1,282 @@
+{
+  "surahNumber": 103,
+  "surahName": "Al-Asr",
+  "arabicName": "سُورَةُ العَصۡرِ",
+  "nameTranslation": "The Declining Day, Epoch",
+  "revelation": "Meccan",
+  "versesCount": 3,
+  "prevSurahSlug": "At-Takaathur",
+  "nextSurahSlug": "Al-Humaza",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/103.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6177,
+      "arabic": "وَٱلْعَصْرِ",
+      "translation": "By time,",
+      "urduTranslation": "عصر کی قسم",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6177.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6177.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6177.mp3",
+      "words": [
+        {
+          "id": 177,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَٱلْعَصْرِ",
+          "text": "وَٱلْعَصْرِ",
+          "translation": {
+            "text": "By the time",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wal-ʿaṣri",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_001_001.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 601,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6178,
+      "arabic": "إِنَّ ٱلْإِنسَٰنَ لَفِى خُسْرٍ",
+      "translation": "Indeed, mankind is in loss,",
+      "urduTranslation": "کہ انسان نقصان میں ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6178.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6178.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6178.mp3",
+      "words": [
+        {
+          "id": 1056,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِنَّ",
+          "text": "إِنَّ",
+          "translation": {
+            "text": "Indeed",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "inna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_002_001.mp3"
+        },
+        {
+          "id": 1057,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْإِنسَـٰنَ",
+          "text": "ٱلْإِنسَـٰنَ",
+          "translation": {
+            "text": "mankind",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-insāna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_002_002.mp3"
+        },
+        {
+          "id": 1058,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "لَفِى",
+          "text": "لَفِى",
+          "translation": {
+            "text": "(is) surely, in",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lafī",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_002_003.mp3"
+        },
+        {
+          "id": 1059,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "خُسْرٍ",
+          "text": "خُسْرٍ",
+          "translation": {
+            "text": "loss",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "khus'rin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_002_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 601,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6179,
+      "arabic": "إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ وَتَوَاصَوْا۟ بِٱلْحَقِّ وَتَوَاصَوْا۟ بِٱلصَّبْرِ",
+      "translation": "Except for those who have believed and done righteous deeds and advised each other to truth and advised each other to patience.",
+      "urduTranslation": "مگر وہ لوگ جو ایمان لائے اور نیک عمل کرتے رہے اور آپس میں حق (بات) کی تلقین اور صبر کی تاکید کرتے رہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6179.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6179.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6179.mp3",
+      "words": [
+        {
+          "id": 2213,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِلَّا",
+          "text": "إِلَّا",
+          "translation": {
+            "text": "Except",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "illā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_003_001.mp3"
+        },
+        {
+          "id": 2214,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلَّذِينَ",
+          "text": "ٱلَّذِينَ",
+          "translation": {
+            "text": "those who",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "alladhīna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_003_002.mp3"
+        },
+        {
+          "id": 2215,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ءَامَنُوا۟",
+          "text": "ءَامَنُوا۟",
+          "translation": {
+            "text": "believe",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "āmanū",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_003_003.mp3"
+        },
+        {
+          "id": 2216,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "وَعَمِلُوا۟",
+          "text": "وَعَمِلُوا۟",
+          "translation": {
+            "text": "and do",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "waʿamilū",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_003_004.mp3"
+        },
+        {
+          "id": 2217,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلصَّـٰلِحَـٰتِ",
+          "text": "ٱلصَّـٰلِحَـٰتِ",
+          "translation": {
+            "text": "righteous deeds",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-ṣāliḥāti",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_003_005.mp3"
+        },
+        {
+          "id": 2218,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "وَتَوَاصَوْا۟",
+          "text": "وَتَوَاصَوْا۟",
+          "translation": {
+            "text": "and enjoin (each other)",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "watawāṣaw",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_003_006.mp3"
+        },
+        {
+          "id": 2219,
+          "position": 7,
+          "char_type_name": "word",
+          "text_uthmani": "بِٱلْحَقِّ",
+          "text": "بِٱلْحَقِّ",
+          "translation": {
+            "text": "to the truth",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bil-ḥaqi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_003_007.mp3"
+        },
+        {
+          "id": 2220,
+          "position": 8,
+          "char_type_name": "word",
+          "text_uthmani": "وَتَوَاصَوْا۟",
+          "text": "وَتَوَاصَوْا۟",
+          "translation": {
+            "text": "and enjoin (each other)",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "watawāṣaw",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_003_008.mp3"
+        },
+        {
+          "id": 2221,
+          "position": 9,
+          "char_type_name": "word",
+          "text_uthmani": "بِٱلصَّبْرِ",
+          "text": "بِٱلصَّبْرِ",
+          "translation": {
+            "text": "to [the] patience",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bil-ṣabri",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/103_003_009.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 601,
+      "sajda": false
+    }
+  ]
+}

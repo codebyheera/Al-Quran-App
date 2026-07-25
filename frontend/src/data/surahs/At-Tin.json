@@ -1,0 +1,677 @@
+{
+  "surahNumber": 95,
+  "surahName": "At-Tin",
+  "arabicName": "سُورَةُ التِّينِ",
+  "nameTranslation": "The Fig",
+  "revelation": "Meccan",
+  "versesCount": 8,
+  "prevSurahSlug": "Ash-Sharh",
+  "nextSurahSlug": "Al-Alaq",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/095.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6099,
+      "arabic": "بِّسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَٱلتِّينِ وَٱلزَّيْتُونِ",
+      "translation": "By the fig and the olive",
+      "urduTranslation": "انجیر کی قسم اور زیتون کی",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6099.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6099.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6099.mp3",
+      "words": [
+        {
+          "id": 95,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَٱلتِّينِ",
+          "text": "وَٱلتِّينِ",
+          "translation": {
+            "text": "By the fig",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wal-tīni",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_001_001.mp3"
+        },
+        {
+          "id": 96,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "وَٱلزَّيْتُونِ",
+          "text": "وَٱلزَّيْتُونِ",
+          "translation": {
+            "text": "and the olive",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wal-zaytūni",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_001_002.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 597,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6100,
+      "arabic": "وَطُورِ سِينِينَ",
+      "translation": "And [by] Mount Sinai",
+      "urduTranslation": "اور طور سینین کی",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6100.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6100.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6100.mp3",
+      "words": [
+        {
+          "id": 1481,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَطُورِ",
+          "text": "وَطُورِ",
+          "translation": {
+            "text": "And (the) Mount",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "waṭūri",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_002_001.mp3"
+        },
+        {
+          "id": 1482,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "سِينِينَ",
+          "text": "سِينِينَ",
+          "translation": {
+            "text": "Sinai",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "sīnīna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_002_002.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 597,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6101,
+      "arabic": "وَهَٰذَا ٱلْبَلَدِ ٱلْأَمِينِ",
+      "translation": "And [by] this secure city [Makkah],",
+      "urduTranslation": "اور اس امن والے شہر کی",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6101.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6101.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6101.mp3",
+      "words": [
+        {
+          "id": 2603,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَهَـٰذَا",
+          "text": "وَهَـٰذَا",
+          "translation": {
+            "text": "And this",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wahādhā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_003_001.mp3"
+        },
+        {
+          "id": 2604,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْبَلَدِ",
+          "text": "ٱلْبَلَدِ",
+          "translation": {
+            "text": "[the] city",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-baladi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_003_002.mp3"
+        },
+        {
+          "id": 2605,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْأَمِينِ",
+          "text": "ٱلْأَمِينِ",
+          "translation": {
+            "text": "[the] secure",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-amīni",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_003_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 597,
+      "sajda": false
+    },
+    {
+      "number": 4,
+      "globalNumber": 6102,
+      "arabic": "لَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ فِىٓ أَحْسَنِ تَقْوِيمٍۢ",
+      "translation": "We have certainly created man in the best of stature;",
+      "urduTranslation": "کہ ہم نے انسان کو بہت اچھی صورت میں پیدا کیا ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6102.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6102.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6102.mp3",
+      "words": [
+        {
+          "id": 4019,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "لَقَدْ",
+          "text": "لَقَدْ",
+          "translation": {
+            "text": "Indeed",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "laqad",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_004_001.mp3"
+        },
+        {
+          "id": 4020,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "خَلَقْنَا",
+          "text": "خَلَقْنَا",
+          "translation": {
+            "text": "We created",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "khalaqnā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_004_002.mp3"
+        },
+        {
+          "id": 4021,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْإِنسَـٰنَ",
+          "text": "ٱلْإِنسَـٰنَ",
+          "translation": {
+            "text": "man",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-insāna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_004_003.mp3"
+        },
+        {
+          "id": 4022,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "فِىٓ",
+          "text": "فِىٓ",
+          "translation": {
+            "text": "in",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fī",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_004_004.mp3"
+        },
+        {
+          "id": 4023,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "أَحْسَنِ",
+          "text": "أَحْسَنِ",
+          "translation": {
+            "text": "(the) best",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "aḥsani",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_004_005.mp3"
+        },
+        {
+          "id": 4024,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "تَقْوِيمٍۢ",
+          "text": "تَقْوِيمٍۢ",
+          "translation": {
+            "text": "mould",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "taqwīmin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_004_006.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 597,
+      "sajda": false
+    },
+    {
+      "number": 5,
+      "globalNumber": 6103,
+      "arabic": "ثُمَّ رَدَدْنَٰهُ أَسْفَلَ سَٰفِلِينَ",
+      "translation": "Then We return him to the lowest of the low,",
+      "urduTranslation": "پھر (رفتہ رفتہ) اس (کی حالت) کو (بدل کر) پست سے پست کر دیا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6103.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6103.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6103.mp3",
+      "words": [
+        {
+          "id": 5296,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "ثُمَّ",
+          "text": "ثُمَّ",
+          "translation": {
+            "text": "Then",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "thumma",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_005_001.mp3"
+        },
+        {
+          "id": 5297,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "رَدَدْنَـٰهُ",
+          "text": "رَدَدْنَـٰهُ",
+          "translation": {
+            "text": "We returned him",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "radadnāhu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_005_002.mp3"
+        },
+        {
+          "id": 5298,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "أَسْفَلَ",
+          "text": "أَسْفَلَ",
+          "translation": {
+            "text": "(to the) lowest",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "asfala",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_005_003.mp3"
+        },
+        {
+          "id": 5299,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "سَـٰفِلِينَ",
+          "text": "سَـٰفِلِينَ",
+          "translation": {
+            "text": "(of the) low",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "sāfilīna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_005_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 597,
+      "sajda": false
+    },
+    {
+      "number": 6,
+      "globalNumber": 6104,
+      "arabic": "إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ فَلَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍۢ",
+      "translation": "Except for those who believe and do righteous deeds, for they will have a reward uninterrupted.",
+      "urduTranslation": "مگر جو لوگ ایمان لائے اور نیک عمل کرتے رہے انکے لیے بےانتہا اجر ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6104.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6104.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6104.mp3",
+      "words": [
+        {
+          "id": 6536,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِلَّا",
+          "text": "إِلَّا",
+          "translation": {
+            "text": "Except",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "illā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_006_001.mp3"
+        },
+        {
+          "id": 6537,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلَّذِينَ",
+          "text": "ٱلَّذِينَ",
+          "translation": {
+            "text": "those who",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "alladhīna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_006_002.mp3"
+        },
+        {
+          "id": 6538,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ءَامَنُوا۟",
+          "text": "ءَامَنُوا۟",
+          "translation": {
+            "text": "believe",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "āmanū",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_006_003.mp3"
+        },
+        {
+          "id": 6539,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "وَعَمِلُوا۟",
+          "text": "وَعَمِلُوا۟",
+          "translation": {
+            "text": "and do",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "waʿamilū",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_006_004.mp3"
+        },
+        {
+          "id": 6540,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلصَّـٰلِحَـٰتِ",
+          "text": "ٱلصَّـٰلِحَـٰتِ",
+          "translation": {
+            "text": "righteous deeds",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-ṣāliḥāti",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_006_005.mp3"
+        },
+        {
+          "id": 6541,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "فَلَهُمْ",
+          "text": "فَلَهُمْ",
+          "translation": {
+            "text": "then for them",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "falahum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_006_006.mp3"
+        },
+        {
+          "id": 6542,
+          "position": 7,
+          "char_type_name": "word",
+          "text_uthmani": "أَجْرٌ",
+          "text": "أَجْرٌ",
+          "translation": {
+            "text": "(is a) reward",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ajrun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_006_007.mp3"
+        },
+        {
+          "id": 6543,
+          "position": 8,
+          "char_type_name": "word",
+          "text_uthmani": "غَيْرُ",
+          "text": "غَيْرُ",
+          "translation": {
+            "text": "never",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ghayru",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_006_008.mp3"
+        },
+        {
+          "id": 6544,
+          "position": 9,
+          "char_type_name": "word",
+          "text_uthmani": "مَمْنُونٍۢ",
+          "text": "مَمْنُونٍۢ",
+          "translation": {
+            "text": "ending",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mamnūnin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_006_009.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 597,
+      "sajda": false
+    },
+    {
+      "number": 7,
+      "globalNumber": 6105,
+      "arabic": "فَمَا يُكَذِّبُكَ بَعْدُ بِٱلدِّينِ",
+      "translation": "So what yet causes you to deny the Recompense?",
+      "urduTranslation": "تو (اے آدم زاد) پھر تو جزا کے دن کو کیوں جھٹلاتا ہے؟",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6105.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6105.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6105.mp3",
+      "words": [
+        {
+          "id": 7954,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فَمَا",
+          "text": "فَمَا",
+          "translation": {
+            "text": "Then what",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "famā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_007_001.mp3"
+        },
+        {
+          "id": 7955,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يُكَذِّبُكَ",
+          "text": "يُكَذِّبُكَ",
+          "translation": {
+            "text": "causes you to deny",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yukadhibuka",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_007_002.mp3"
+        },
+        {
+          "id": 7956,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "بَعْدُ",
+          "text": "بَعْدُ",
+          "translation": {
+            "text": "after (this)",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "baʿdu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_007_003.mp3"
+        },
+        {
+          "id": 7957,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "بِٱلدِّينِ",
+          "text": "بِٱلدِّينِ",
+          "translation": {
+            "text": "the judgment",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bil-dīni",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_007_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 597,
+      "sajda": false
+    },
+    {
+      "number": 8,
+      "globalNumber": 6106,
+      "arabic": "أَلَيْسَ ٱللَّهُ بِأَحْكَمِ ٱلْحَٰكِمِينَ",
+      "translation": "Is not Allah the most just of judges?",
+      "urduTranslation": "کیا خدا سب سے بڑا حاکم نہیں ہے؟",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6106.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6106.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6106.mp3",
+      "words": [
+        {
+          "id": 9118,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "أَلَيْسَ",
+          "text": "أَلَيْسَ",
+          "translation": {
+            "text": "Is not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "alaysa",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_008_001.mp3"
+        },
+        {
+          "id": 9119,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱللَّهُ",
+          "text": "ٱللَّهُ",
+          "translation": {
+            "text": "Allah",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-lahu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_008_002.mp3"
+        },
+        {
+          "id": 9120,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "بِأَحْكَمِ",
+          "text": "بِأَحْكَمِ",
+          "translation": {
+            "text": "(the) Most Just",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bi-aḥkami",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_008_003.mp3"
+        },
+        {
+          "id": 9121,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْحَـٰكِمِينَ",
+          "text": "ٱلْحَـٰكِمِينَ",
+          "translation": {
+            "text": "(of) the Judges",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-ḥākimīna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/095_008_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 597,
+      "sajda": false
+    }
+  ]
+}

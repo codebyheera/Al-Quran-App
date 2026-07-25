@@ -1,0 +1,582 @@
+{
+  "surahNumber": 1,
+  "surahName": "Al-Faatiha",
+  "arabicName": "سُورَةُ ٱلْفَاتِحَةِ",
+  "nameTranslation": "The Opening",
+  "revelation": "Meccan",
+  "versesCount": 7,
+  "prevSurahSlug": null,
+  "nextSurahSlug": "Al-Baqara",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/001.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 1,
+      "arabic": "﻿بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+      "translation": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+      "urduTranslation": "شروع الله کا نام لے کر جو بڑا مہربان نہایت رحم والا ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/1.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/1.mp3",
+      "words": [
+        {
+          "id": 1,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "بِسْمِ",
+          "text": "بِسْمِ",
+          "translation": {
+            "text": "In (the) name",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bis'mi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_001_001.mp3"
+        },
+        {
+          "id": 2,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱللَّهِ",
+          "text": "ٱللَّهِ",
+          "translation": {
+            "text": "(of) Allah",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-lahi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_001_002.mp3"
+        },
+        {
+          "id": 3,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلرَّحْمَـٰنِ",
+          "text": "ٱلرَّحْمَـٰنِ",
+          "translation": {
+            "text": "the Most Gracious",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-raḥmāni",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_001_003.mp3"
+        },
+        {
+          "id": 4,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلرَّحِيمِ",
+          "text": "ٱلرَّحِيمِ",
+          "translation": {
+            "text": "the Most Merciful",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-raḥīmi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_001_004.mp3"
+        }
+      ],
+      "juz": 1,
+      "page": 1,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 2,
+      "arabic": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
+      "translation": "[All] praise is [due] to Allah, Lord of the worlds -",
+      "urduTranslation": "سب طرح کی تعریف خدا ہی کو (سزاوار) ہے جو تمام مخلوقات کا پروردگار ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/2.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/2.mp3",
+      "words": [
+        {
+          "id": 1130,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْحَمْدُ",
+          "text": "ٱلْحَمْدُ",
+          "translation": {
+            "text": "All praises and thanks",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "al-ḥamdu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_002_001.mp3"
+        },
+        {
+          "id": 1131,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "لِلَّهِ",
+          "text": "لِلَّهِ",
+          "translation": {
+            "text": "(be) to Allah",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lillahi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_002_002.mp3"
+        },
+        {
+          "id": 1132,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "رَبِّ",
+          "text": "رَبِّ",
+          "translation": {
+            "text": "the Lord",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "rabbi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_002_003.mp3"
+        },
+        {
+          "id": 1133,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْعَـٰلَمِينَ",
+          "text": "ٱلْعَـٰلَمِينَ",
+          "translation": {
+            "text": "of the universe",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-ʿālamīna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_002_004.mp3"
+        }
+      ],
+      "juz": 1,
+      "page": 1,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 3,
+      "arabic": "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+      "translation": "The Entirely Merciful, the Especially Merciful,",
+      "urduTranslation": "بڑا مہربان نہایت رحم والا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/3.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/3.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/3.mp3",
+      "words": [
+        {
+          "id": 2953,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلرَّحْمَـٰنِ",
+          "text": "ٱلرَّحْمَـٰنِ",
+          "translation": {
+            "text": "The Most Gracious",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "al-raḥmāni",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_003_001.mp3"
+        },
+        {
+          "id": 2954,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلرَّحِيمِ",
+          "text": "ٱلرَّحِيمِ",
+          "translation": {
+            "text": "the Most Merciful",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-raḥīmi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_003_002.mp3"
+        }
+      ],
+      "juz": 1,
+      "page": 1,
+      "sajda": false
+    },
+    {
+      "number": 4,
+      "globalNumber": 4,
+      "arabic": "مَٰلِكِ يَوْمِ ٱلدِّينِ",
+      "translation": "Sovereign of the Day of Recompense.",
+      "urduTranslation": "انصاف کے دن کا حاکم",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/4.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/4.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/4.mp3",
+      "words": [
+        {
+          "id": 3252,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "مَـٰلِكِ",
+          "text": "مَـٰلِكِ",
+          "translation": {
+            "text": "(The) Master",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "māliki",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_004_001.mp3"
+        },
+        {
+          "id": 3253,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَوْمِ",
+          "text": "يَوْمِ",
+          "translation": {
+            "text": "(of the) Day",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yawmi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_004_002.mp3"
+        },
+        {
+          "id": 3254,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلدِّينِ",
+          "text": "ٱلدِّينِ",
+          "translation": {
+            "text": "(of the) Judgment",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-dīni",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_004_003.mp3"
+        }
+      ],
+      "juz": 1,
+      "page": 1,
+      "sajda": false
+    },
+    {
+      "number": 5,
+      "globalNumber": 5,
+      "arabic": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+      "translation": "It is You we worship and You we ask for help.",
+      "urduTranslation": "(اے پروردگار) ہم تیری ہی عبادت کرتے ہیں اور تجھ ہی سے مدد مانگتے ہیں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/5.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/5.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/5.mp3",
+      "words": [
+        {
+          "id": 5334,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِيَّاكَ",
+          "text": "إِيَّاكَ",
+          "translation": {
+            "text": "You Alone",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "iyyāka",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_005_001.mp3"
+        },
+        {
+          "id": 5335,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "نَعْبُدُ",
+          "text": "نَعْبُدُ",
+          "translation": {
+            "text": "we worship",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "naʿbudu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_005_002.mp3"
+        },
+        {
+          "id": 5336,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "وَإِيَّاكَ",
+          "text": "وَإِيَّاكَ",
+          "translation": {
+            "text": "and You Alone",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wa-iyyāka",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_005_003.mp3"
+        },
+        {
+          "id": 5337,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "نَسْتَعِينُ",
+          "text": "نَسْتَعِينُ",
+          "translation": {
+            "text": "we ask for help",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "nastaʿīnu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_005_004.mp3"
+        }
+      ],
+      "juz": 1,
+      "page": 1,
+      "sajda": false
+    },
+    {
+      "number": 6,
+      "globalNumber": 6,
+      "arabic": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
+      "translation": "Guide us to the straight path -",
+      "urduTranslation": "ہم کو سیدھے رستے چلا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6.mp3",
+      "words": [
+        {
+          "id": 6844,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "ٱهْدِنَا",
+          "text": "ٱهْدِنَا",
+          "translation": {
+            "text": "Guide us",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ih'dinā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_006_001.mp3"
+        },
+        {
+          "id": 6845,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلصِّرَٰطَ",
+          "text": "ٱلصِّرَٰطَ",
+          "translation": {
+            "text": "(to) the path",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-ṣirāṭa",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_006_002.mp3"
+        },
+        {
+          "id": 6846,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْمُسْتَقِيمَ",
+          "text": "ٱلْمُسْتَقِيمَ",
+          "translation": {
+            "text": "the straight",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-mus'taqīma",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_006_003.mp3"
+        }
+      ],
+      "juz": 1,
+      "page": 1,
+      "sajda": false
+    },
+    {
+      "number": 7,
+      "globalNumber": 7,
+      "arabic": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
+      "translation": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
+      "urduTranslation": "ان لوگوں کے رستے جن پر تو اپنا فضل وکرم کرتا رہا نہ ان کے جن پر غصے ہوتا رہا اور نہ گمراہوں کے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/7.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/7.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/7.mp3",
+      "words": [
+        {
+          "id": 8411,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "صِرَٰطَ",
+          "text": "صِرَٰطَ",
+          "translation": {
+            "text": "(The) path",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ṣirāṭa",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_007_001.mp3"
+        },
+        {
+          "id": 8412,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلَّذِينَ",
+          "text": "ٱلَّذِينَ",
+          "translation": {
+            "text": "(of) those",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "alladhīna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_007_002.mp3"
+        },
+        {
+          "id": 8413,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "أَنْعَمْتَ",
+          "text": "أَنْعَمْتَ",
+          "translation": {
+            "text": "You have bestowed (Your) Favors",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "anʿamta",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_007_003.mp3"
+        },
+        {
+          "id": 8414,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "عَلَيْهِمْ",
+          "text": "عَلَيْهِمْ",
+          "translation": {
+            "text": "on them",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ʿalayhim",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_007_004.mp3"
+        },
+        {
+          "id": 8415,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "غَيْرِ",
+          "text": "غَيْرِ",
+          "translation": {
+            "text": "not (of)",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ghayri",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_007_005.mp3"
+        },
+        {
+          "id": 8416,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْمَغْضُوبِ",
+          "text": "ٱلْمَغْضُوبِ",
+          "translation": {
+            "text": "those who earned (Your) wrath",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-maghḍūbi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_007_006.mp3"
+        },
+        {
+          "id": 8417,
+          "position": 7,
+          "char_type_name": "word",
+          "text_uthmani": "عَلَيْهِمْ",
+          "text": "عَلَيْهِمْ",
+          "translation": {
+            "text": "on themselves",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ʿalayhim",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_007_007.mp3"
+        },
+        {
+          "id": 8418,
+          "position": 8,
+          "char_type_name": "word",
+          "text_uthmani": "وَلَا",
+          "text": "وَلَا",
+          "translation": {
+            "text": "and not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "walā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_007_008.mp3"
+        },
+        {
+          "id": 8419,
+          "position": 9,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلضَّآلِّينَ",
+          "text": "ٱلضَّآلِّينَ",
+          "translation": {
+            "text": "(of) those who go astray",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-ḍālīna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/001_007_009.mp3"
+        }
+      ],
+      "juz": 1,
+      "page": 1,
+      "sajda": false
+    }
+  ]
+}

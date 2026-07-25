@@ -1,0 +1,218 @@
+{
+  "surahNumber": 108,
+  "surahName": "Al-Kawthar",
+  "arabicName": "سُورَةُ الكَوۡثَرِ",
+  "nameTranslation": "Abundance",
+  "revelation": "Meccan",
+  "versesCount": 3,
+  "prevSurahSlug": "Al-Maa'un",
+  "nextSurahSlug": "Al-Kaafiroon",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/108.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6205,
+      "arabic": "إِنَّآ أَعْطَيْنَٰكَ ٱلْكَوْثَرَ",
+      "translation": "Indeed, We have granted you, [O Muhammad], al-Kawthar.",
+      "urduTranslation": "(اے محمدﷺ) ہم نے تم کو کوثر عطا فرمائی ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6205.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6205.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6205.mp3",
+      "words": [
+        {
+          "id": 276,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِنَّآ",
+          "text": "إِنَّآ",
+          "translation": {
+            "text": "Indeed, We",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "innā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_001_001.mp3"
+        },
+        {
+          "id": 277,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "أَعْطَيْنَـٰكَ",
+          "text": "أَعْطَيْنَـٰكَ",
+          "translation": {
+            "text": "We have given you",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "aʿṭaynāka",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_001_002.mp3"
+        },
+        {
+          "id": 278,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْكَوْثَرَ",
+          "text": "ٱلْكَوْثَرَ",
+          "translation": {
+            "text": "Al-Kauthar",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-kawthara",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_001_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 602,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6206,
+      "arabic": "فَصَلِّ لِرَبِّكَ وَٱنْحَرْ",
+      "translation": "So pray to your Lord and sacrifice [to Him alone].",
+      "urduTranslation": "تو اپنے پروردگار کے لیے نماز پڑھا کرو اور قربانی دیا کرو",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6206.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6206.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6206.mp3",
+      "words": [
+        {
+          "id": 996,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فَصَلِّ",
+          "text": "فَصَلِّ",
+          "translation": {
+            "text": "So pray",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "faṣalli",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_002_001.mp3"
+        },
+        {
+          "id": 997,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "لِرَبِّكَ",
+          "text": "لِرَبِّكَ",
+          "translation": {
+            "text": "to your Lord",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lirabbika",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_002_002.mp3"
+        },
+        {
+          "id": 998,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "وَٱنْحَرْ",
+          "text": "وَٱنْحَرْ",
+          "translation": {
+            "text": "and sacrifice",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wa-in'ḥar",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_002_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 602,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6207,
+      "arabic": "إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ",
+      "translation": "Indeed, your enemy is the one cut off.",
+      "urduTranslation": "کچھ شک نہیں کہ تمہارا دشمن ہی بےاولاد رہے گا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6207.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6207.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6207.mp3",
+      "words": [
+        {
+          "id": 2556,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "إِنَّ",
+          "text": "إِنَّ",
+          "translation": {
+            "text": "Indeed",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "inna",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_003_001.mp3"
+        },
+        {
+          "id": 2557,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "شَانِئَكَ",
+          "text": "شَانِئَكَ",
+          "translation": {
+            "text": "your enemy ",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "shāni-aka",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_003_002.mp3"
+        },
+        {
+          "id": 2558,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "هُوَ",
+          "text": "هُوَ",
+          "translation": {
+            "text": "he (is)",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "huwa",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_003_003.mp3"
+        },
+        {
+          "id": 2559,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْأَبْتَرُ",
+          "text": "ٱلْأَبْتَرُ",
+          "translation": {
+            "text": "the one cut off",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-abtaru",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/108_003_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 602,
+      "sajda": false
+    }
+  ]
+}

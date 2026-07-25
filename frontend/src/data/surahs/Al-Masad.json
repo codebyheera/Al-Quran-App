@@ -1,0 +1,456 @@
+{
+  "surahNumber": 111,
+  "surahName": "Al-Masad",
+  "arabicName": "سُورَةُ المَسَدِ",
+  "nameTranslation": "The Palm Fibre",
+  "revelation": "Meccan",
+  "versesCount": 5,
+  "prevSurahSlug": "An-Nasr",
+  "nextSurahSlug": "Al-Ikhlaas",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/111.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6217,
+      "arabic": "تَبَّتْ يَدَآ أَبِى لَهَبٍۢ وَتَبَّ",
+      "translation": "May the hands of Abu Lahab be ruined, and ruined is he.",
+      "urduTranslation": "ابولہب کے ہاتھ ٹوٹیں اور وہ ہلاک ہو",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6217.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6217.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6217.mp3",
+      "words": [
+        {
+          "id": 18,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "تَبَّتْ",
+          "text": "تَبَّتْ",
+          "translation": {
+            "text": "Perish",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "tabbat",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_001_001.mp3"
+        },
+        {
+          "id": 19,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَدَآ",
+          "text": "يَدَآ",
+          "translation": {
+            "text": "(the) hands",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yadā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_001_002.mp3"
+        },
+        {
+          "id": 20,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "أَبِى",
+          "text": "أَبِى",
+          "translation": {
+            "text": "(of) Abu",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "abī",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_001_003.mp3"
+        },
+        {
+          "id": 21,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "لَهَبٍۢ",
+          "text": "لَهَبٍۢ",
+          "translation": {
+            "text": "Lahab",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lahabin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_001_004.mp3"
+        },
+        {
+          "id": 22,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "وَتَبَّ",
+          "text": "وَتَبَّ",
+          "translation": {
+            "text": "and perish he",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "watabba",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_001_005.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6218,
+      "arabic": "مَآ أَغْنَىٰ عَنْهُ مَالُهُۥ وَمَا كَسَبَ",
+      "translation": "His wealth will not avail him or that which he gained.",
+      "urduTranslation": "نہ تو اس کا مال ہی اس کے کچھ کام آیا اور نہ وہ جو اس نے کمایا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6218.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6218.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6218.mp3",
+      "words": [
+        {
+          "id": 949,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "مَآ",
+          "text": "مَآ",
+          "translation": {
+            "text": "Not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "mā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_002_001.mp3"
+        },
+        {
+          "id": 950,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "أَغْنَىٰ",
+          "text": "أَغْنَىٰ",
+          "translation": {
+            "text": "(will) avail",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "aghnā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_002_002.mp3"
+        },
+        {
+          "id": 951,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "عَنْهُ",
+          "text": "عَنْهُ",
+          "translation": {
+            "text": "him",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ʿanhu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_002_003.mp3"
+        },
+        {
+          "id": 952,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "مَالُهُۥ",
+          "text": "مَالُهُۥ",
+          "translation": {
+            "text": "his wealth",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "māluhu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_002_004.mp3"
+        },
+        {
+          "id": 953,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "وَمَا",
+          "text": "وَمَا",
+          "translation": {
+            "text": "and what",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wamā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_002_005.mp3"
+        },
+        {
+          "id": 954,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "كَسَبَ",
+          "text": "كَسَبَ",
+          "translation": {
+            "text": "he earned",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "kasaba",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_002_006.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6219,
+      "arabic": "سَيَصْلَىٰ نَارًۭا ذَاتَ لَهَبٍۢ",
+      "translation": "He will [enter to] burn in a Fire of [blazing] flame",
+      "urduTranslation": "وہ جلد بھڑکتی ہوئی آگ میں داخل ہو گا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6219.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6219.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6219.mp3",
+      "words": [
+        {
+          "id": 2625,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "سَيَصْلَىٰ",
+          "text": "سَيَصْلَىٰ",
+          "translation": {
+            "text": "He will be burnt",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "sayaṣlā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_003_001.mp3"
+        },
+        {
+          "id": 2626,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "نَارًۭا",
+          "text": "نَارًۭا",
+          "translation": {
+            "text": "(in) a Fire",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "nāran",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_003_002.mp3"
+        },
+        {
+          "id": 2627,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ذَاتَ",
+          "text": "ذَاتَ",
+          "translation": {
+            "text": "of",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "dhāta",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_003_003.mp3"
+        },
+        {
+          "id": 2628,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "لَهَبٍۢ",
+          "text": "لَهَبٍۢ",
+          "translation": {
+            "text": "Blazing Flames",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lahabin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_003_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 4,
+      "globalNumber": 6220,
+      "arabic": "وَٱمْرَأَتُهُۥ حَمَّالَةَ ٱلْحَطَبِ",
+      "translation": "And his wife [as well] - the carrier of firewood.",
+      "urduTranslation": "اور اس کی جورو بھی جو ایندھن سر پر اٹھائے پھرتی ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6220.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6220.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6220.mp3",
+      "words": [
+        {
+          "id": 4041,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَٱمْرَأَتُهُۥ",
+          "text": "وَٱمْرَأَتُهُۥ",
+          "translation": {
+            "text": "And his wife",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wa-im'ra-atuhu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_004_001.mp3"
+        },
+        {
+          "id": 4042,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "حَمَّالَةَ",
+          "text": "حَمَّالَةَ",
+          "translation": {
+            "text": "(the) carrier",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ḥammālata",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_004_002.mp3"
+        },
+        {
+          "id": 4043,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْحَطَبِ",
+          "text": "ٱلْحَطَبِ",
+          "translation": {
+            "text": "(of) firewood",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-ḥaṭabi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_004_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    },
+    {
+      "number": 5,
+      "globalNumber": 6221,
+      "arabic": "فِى جِيدِهَا حَبْلٌۭ مِّن مَّسَدٍۭ",
+      "translation": "Around her neck is a rope of [twisted] fiber.",
+      "urduTranslation": "اس کے گلے میں مونج کی رسّی ہو گی",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6221.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6221.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6221.mp3",
+      "words": [
+        {
+          "id": 5280,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فِى",
+          "text": "فِى",
+          "translation": {
+            "text": "In",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fī",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_005_001.mp3"
+        },
+        {
+          "id": 5281,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "جِيدِهَا",
+          "text": "جِيدِهَا",
+          "translation": {
+            "text": "her neck",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "jīdihā",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_005_002.mp3"
+        },
+        {
+          "id": 5282,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "حَبْلٌۭ",
+          "text": "حَبْلٌۭ",
+          "translation": {
+            "text": "(will be) a rope",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ḥablun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_005_003.mp3"
+        },
+        {
+          "id": 5283,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "مِّن",
+          "text": "مِّن",
+          "translation": {
+            "text": "of",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "min",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_005_004.mp3"
+        },
+        {
+          "id": 5284,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "مَّسَدٍۭ",
+          "text": "مَّسَدٍۭ",
+          "translation": {
+            "text": "palm-fiber",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "masadin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/111_005_005.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 603,
+      "sajda": false
+    }
+  ]
+}

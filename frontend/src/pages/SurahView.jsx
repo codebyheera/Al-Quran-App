@@ -24,8 +24,31 @@ export default function SurahView() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [surah, setSurah] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [surah, setSurah] = useState(() => {
+    const activeReciter = (typeof localStorage !== "undefined" && localStorage.getItem('selectedReciter')) || 'alafasy';
+    const checkMatch = (data) => {
+      const isIdMatch = String(data.surahNumber) === id || data.surahName.toLowerCase() === id.toLowerCase();
+      const isReciterMatch = (data.preloadedReciter || 'alafasy') === activeReciter;
+      return isIdMatch && isReciterMatch;
+    };
+    if (typeof window !== "undefined" && window.__PRELOADED_SURAH_DATA__) {
+      const data = window.__PRELOADED_SURAH_DATA__;
+      if (checkMatch(data)) return data;
+    }
+    if (typeof document !== "undefined") {
+      const scriptEl = document.getElementById("preloaded-surah-data");
+      if (scriptEl) {
+        try {
+          const data = JSON.parse(scriptEl.textContent);
+          if (checkMatch(data)) return data;
+        } catch (e) {
+          console.error("Error parsing preloaded surah data", e);
+        }
+      }
+    }
+    return null;
+  });
+  const [loading, setLoading] = useState(!surah);
   const [error, setError] = useState(null);
 
   // We'll use the ID from the URL for the API call,
@@ -102,14 +125,29 @@ export default function SurahView() {
   // Track currently playing word audio to prevent overlaps
   const wordAudioRef = useRef(null);
 
+  const isInitialMount = useRef(true);
+
   useEffect(() => {
     const isIdChange = prevIdRef.current !== id;
     prevIdRef.current = id;
 
-    if (isIdChange || !surah) {
-      setLoading(true);
-      setError(null);
-      stop(); // Stop any playing audio when switching surah
+    const activeReciter = reciter || 'alafasy';
+    const isPreloadedMatch = surah && 
+      (String(surah.surahNumber) === id || surah.surahName.toLowerCase() === id.toLowerCase()) &&
+      (surah.preloadedReciter || 'alafasy') === activeReciter;
+
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      if (isPreloadedMatch) {
+        // If we currently have matching preloaded data on initial mount, skip the API call.
+        return;
+      }
+    }
+
+    setLoading(true);
+    setError(null);
+    stop(); // Stop any playing audio when switching surah
+    if (isIdChange) {
       topRef.current?.scrollIntoView({ behavior: "smooth" });
     }
 
@@ -118,8 +156,18 @@ export default function SurahView() {
       wordAudioRef.current = null;
     }
 
-    api
-      .get(`/api/surah/${id}?reciter=${reciter}`)
+    const fetchWithRetry = async (url, retries = 3, delay = 1000) => {
+      for (let i = 0; i < retries; i++) {
+        try {
+          return await api.get(url);
+        } catch (err) {
+          if (i === retries - 1) throw err;
+          await new Promise((resolve) => setTimeout(resolve, delay * Math.pow(2, i)));
+        }
+      }
+    };
+
+    fetchWithRetry(`/api/surah/${id}?reciter=${reciter}`)
       .then(({ data }) => {
         setSurah(data);
         setLoading(false);
@@ -138,7 +186,8 @@ export default function SurahView() {
           updatePlaylist(mappedVerses);
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error("Failed to load Surah:", err);
         setError("Failed to load Surah.");
         setLoading(false);
       });
@@ -304,6 +353,17 @@ export default function SurahView() {
         const cleanTitle = pageTitle.replace(/&amp;/g, '&');
         const cleanDescription = pageDescription.replace(/&amp;/g, '&');
 
+        const articleSchema = {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": cleanTitle,
+          "description": cleanDescription,
+          "url": `https://alquranhub.org/surah/${id}`,
+          "inLanguage": "ar",
+          "mainEntityOfPage": `https://alquranhub.org/surah/${id}`,
+          "articleSection": `Surah ${surahNum}`
+        };
+
         const webPageSchema = {
           "@context": "https://schema.org",
           "@type": "WebPage",
@@ -322,6 +382,9 @@ export default function SurahView() {
           <meta property="og:description" content={cleanDescription} />
           <meta property="og:url" content={`https://alquranhub.org/surah/${id}`} />
           <meta property="og:type" content="article" />
+          <script type="application/ld+json">
+            {JSON.stringify(articleSchema)}
+          </script>
           <script type="application/ld+json">
             {JSON.stringify(webPageSchema)}
           </script>
@@ -346,7 +409,7 @@ export default function SurahView() {
           <div className="sv-header-info">
             <div className="sv-title-row">
               <h1>{surah.surahName}</h1>
-              <div className="sv-arabic-name arabic">{surah.arabicName}</div>
+              <div className="sv-arabic-name arabic" lang="ar" dir="rtl">{surah.arabicName}</div>
             </div>
             <p className="sv-subtitle text-muted">
               {surah.nameTranslation} · {surah.revelation} · {surah.versesCount}{" "}
@@ -369,7 +432,7 @@ export default function SurahView() {
 
         {/* ── Bismillah (except surah 1 & 9) ────────────── */}
         {surahNum !== 1 && surahNum !== 9 && (
-          <div className="bismillah arabic">
+          <div className="bismillah arabic" lang="ar" dir="rtl">
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
           </div>
         )}
@@ -506,7 +569,7 @@ export default function SurahView() {
 
                 <div className="verse-card-main">
                   {/* Arabic text with Word-by-Word Audio */}
-                  <div className="arabic verse-arabic" dir="rtl">
+                  <div className="arabic verse-arabic" lang="ar" dir="rtl">
                     {verse.words && verse.words.length > 0
                       ? verse.words.map((word) => {
                           // Play individual audio for this word
@@ -553,12 +616,12 @@ export default function SurahView() {
                   {(showEn || showUr || revealedVerses.has(verse.number)) && (
                     <div className="translations-container" style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px' }}>
                       {(showEn || revealedVerses.has(verse.number)) && verse.translation && (
-                        <p className="translation verse-translation" style={{ margin: 0, color: 'var(--accent-gold)', fontSize: 'var(--translation-font-size, 1rem)', lineHeight: '1.8' }}>
+                        <p className="translation verse-translation" lang="en" style={{ margin: 0, color: 'var(--accent-gold)', fontSize: 'var(--translation-font-size, 1rem)', lineHeight: '1.8' }}>
                           {verse.translation}
                         </p>
                       )}
                       {(showUr || revealedVerses.has(verse.number)) && verse.urduTranslation && (
-                        <p className="translation verse-translation-ur" dir="rtl" style={{ margin: 0, fontFamily: '"Gulzar", serif', fontStyle: 'normal', textAlign: 'right', fontSize: `calc(var(--translation-font-size, 1rem) * 1.6)`, lineHeight: '2.8', color: 'var(--accent-gold)' }}>
+                        <p className="translation verse-translation-ur" lang="ur" dir="rtl" style={{ margin: 0, fontFamily: '"Gulzar", serif', fontStyle: 'normal', textAlign: 'right', fontSize: `calc(var(--translation-font-size, 1rem) * 1.6)`, lineHeight: '2.8', color: 'var(--accent-gold)' }}>
                           {verse.urduTranslation}
                         </p>
                       )}

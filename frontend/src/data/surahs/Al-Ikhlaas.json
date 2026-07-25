@@ -1,0 +1,313 @@
+{
+  "surahNumber": 112,
+  "surahName": "Al-Ikhlaas",
+  "arabicName": "سُورَةُ الإِخۡلَاصِ",
+  "nameTranslation": "Sincerity",
+  "revelation": "Meccan",
+  "versesCount": 4,
+  "prevSurahSlug": "Al-Masad",
+  "nextSurahSlug": "Al-Falaq",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/112.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6222,
+      "arabic": "قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+      "translation": "Say, \"He is Allah, [who is] One,",
+      "urduTranslation": "کہو کہ وہ (ذات پاک جس کا نام) الله (ہے) ایک ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6222.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6222.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6222.mp3",
+      "words": [
+        {
+          "id": 6,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "قُلْ",
+          "text": "قُلْ",
+          "translation": {
+            "text": "Say",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "qul",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_001_001.mp3"
+        },
+        {
+          "id": 7,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "هُوَ",
+          "text": "هُوَ",
+          "translation": {
+            "text": "He",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "huwa",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_001_002.mp3"
+        },
+        {
+          "id": 8,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "ٱللَّهُ",
+          "text": "ٱللَّهُ",
+          "translation": {
+            "text": "(is) Allah",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-lahu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_001_003.mp3"
+        },
+        {
+          "id": 9,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "أَحَدٌ",
+          "text": "أَحَدٌ",
+          "translation": {
+            "text": "the One",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "aḥadun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_001_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 604,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6223,
+      "arabic": "ٱللَّهُ ٱلصَّمَدُ",
+      "translation": "Allah, the Eternal Refuge.",
+      "urduTranslation": "معبود برحق جو بےنیاز ہے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6223.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6223.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6223.mp3",
+      "words": [
+        {
+          "id": 916,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "ٱللَّهُ",
+          "text": "ٱللَّهُ",
+          "translation": {
+            "text": "Allah",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "al-lahu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_002_001.mp3"
+        },
+        {
+          "id": 917,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلصَّمَدُ",
+          "text": "ٱلصَّمَدُ",
+          "translation": {
+            "text": "the Eternal, the Absolute",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-ṣamadu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_002_002.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 604,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6224,
+      "arabic": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+      "translation": "He neither begets nor is born,",
+      "urduTranslation": "نہ کسی کا باپ ہے اور نہ کسی کا بیٹا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6224.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6224.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6224.mp3",
+      "words": [
+        {
+          "id": 2746,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "لَمْ",
+          "text": "لَمْ",
+          "translation": {
+            "text": "Not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lam",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_003_001.mp3"
+        },
+        {
+          "id": 2747,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَلِدْ",
+          "text": "يَلِدْ",
+          "translation": {
+            "text": "He begets",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yalid",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_003_002.mp3"
+        },
+        {
+          "id": 2748,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "وَلَمْ",
+          "text": "وَلَمْ",
+          "translation": {
+            "text": "and not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "walam",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_003_003.mp3"
+        },
+        {
+          "id": 2749,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "يُولَدْ",
+          "text": "يُولَدْ",
+          "translation": {
+            "text": "He is begotten",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yūlad",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_003_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 604,
+      "sajda": false
+    },
+    {
+      "number": 4,
+      "globalNumber": 6225,
+      "arabic": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+      "translation": "Nor is there to Him any equivalent.\"",
+      "urduTranslation": "اور کوئی اس کا ہمسر نہیں",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6225.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6225.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6225.mp3",
+      "words": [
+        {
+          "id": 4136,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَلَمْ",
+          "text": "وَلَمْ",
+          "translation": {
+            "text": "And not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "walam",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_004_001.mp3"
+        },
+        {
+          "id": 4137,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَكُن",
+          "text": "يَكُن",
+          "translation": {
+            "text": "is",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yakun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_004_002.mp3"
+        },
+        {
+          "id": 4138,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "لَّهُۥ",
+          "text": "لَّهُۥ",
+          "translation": {
+            "text": "for Him",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "lahu",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_004_003.mp3"
+        },
+        {
+          "id": 4139,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "كُفُوًا",
+          "text": "كُفُوًا",
+          "translation": {
+            "text": "equivalent",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "kufuwan",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_004_004.mp3"
+        },
+        {
+          "id": 4140,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "أَحَدٌۢ",
+          "text": "أَحَدٌۢ",
+          "translation": {
+            "text": "any [one]",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "aḥadun",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/112_004_005.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 604,
+      "sajda": false
+    }
+  ]
+}

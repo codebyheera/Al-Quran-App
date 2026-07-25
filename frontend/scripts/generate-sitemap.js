@@ -66,6 +66,31 @@ async function main() {
 
   let sitemap = readFileSync(SITEMAP_PATH, 'utf-8');
 
+  // Inject/update lastmod for Surah pages
+  const currentDate = new Date().toISOString().slice(0, 10);
+  sitemap = sitemap.replace(
+    /<!-- Surah Pages -->([\s\S]*?)<!-- Juz Pages/g,
+    (match, p1) => {
+      const updated = p1.replace(
+        /<url><loc>(https:\/\/alquranhub\.org\/surah\/[^<]+)<\/loc>(?:<lastmod>[^<]+<\/lastmod>)?<\/url>/g,
+        (m, loc) => `<url><loc>${loc}</loc><lastmod>${currentDate}</lastmod></url>`
+      );
+      return `<!-- Surah Pages -->${updated}<!-- Juz Pages`;
+    }
+  );
+
+  // Inject/update lastmod for Juz pages
+  sitemap = sitemap.replace(
+    /<!-- Juz Pages \(1–30\) -->([\s\S]*?)<\/urlset>/g,
+    (match, p1) => {
+      const updated = p1.replace(
+        /<url><loc>(https:\/\/alquranhub\.org\/juz\/[^<]+)<\/loc>(?:<lastmod>[^<]+<\/lastmod>)?<\/url>/g,
+        (m, loc) => `<url><loc>${loc}</loc><lastmod>${currentDate}</lastmod></url>`
+      );
+      return `<!-- Juz Pages (1–30) -->${updated}</urlset>`;
+    }
+  );
+
   // Remove previously injected blog URLs so re-runs don't duplicate
   sitemap = sitemap.replace(
     /\n?  <!-- Blog Pages \(auto-generated\) -->[\s\S]*?<!-- End Blog Pages -->\n?/,
@@ -79,7 +104,7 @@ async function main() {
   );
 
   writeFileSync(SITEMAP_PATH, sitemap, 'utf-8');
-  console.log(`✅ sitemap.xml updated with ${blogs.length} blog URL(s).`);
+  console.log(`✅ sitemap.xml updated with ${blogs.length} blog URL(s) and current lastmod dates.`);
 }
 
 main();

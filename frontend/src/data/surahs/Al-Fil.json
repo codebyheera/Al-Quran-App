@@ -1,0 +1,456 @@
+{
+  "surahNumber": 105,
+  "surahName": "Al-Fil",
+  "arabicName": "سُورَةُ الفِيلِ",
+  "nameTranslation": "The Elephant",
+  "revelation": "Meccan",
+  "versesCount": 5,
+  "prevSurahSlug": "Al-Humaza",
+  "nextSurahSlug": "Quraish",
+  "surahAudioUrl": "https://server8.mp3quran.net/afs/105.mp3",
+  "verses": [
+    {
+      "number": 1,
+      "globalNumber": 6189,
+      "arabic": "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَٰبِ ٱلْفِيلِ",
+      "translation": "Have you not considered, [O Muhammad], how your Lord dealt with the companions of the elephant?",
+      "urduTranslation": "کیا تم نے نہیں دیکھا کہ تمہارے پروردگار نے ہاتھی والوں کے ساتھ کیا کیا",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6189.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6189.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6189.mp3",
+      "words": [
+        {
+          "id": 137,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "أَلَمْ",
+          "text": "أَلَمْ",
+          "translation": {
+            "text": "Have not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "alam",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_001_001.mp3"
+        },
+        {
+          "id": 138,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "تَرَ",
+          "text": "تَرَ",
+          "translation": {
+            "text": "you seen",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "tara",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_001_002.mp3"
+        },
+        {
+          "id": 139,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "كَيْفَ",
+          "text": "كَيْفَ",
+          "translation": {
+            "text": "how",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "kayfa",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_001_003.mp3"
+        },
+        {
+          "id": 140,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "فَعَلَ",
+          "text": "فَعَلَ",
+          "translation": {
+            "text": "dealt",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "faʿala",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_001_004.mp3"
+        },
+        {
+          "id": 141,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "رَبُّكَ",
+          "text": "رَبُّكَ",
+          "translation": {
+            "text": "your Lord",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "rabbuka",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_001_005.mp3"
+        },
+        {
+          "id": 142,
+          "position": 6,
+          "char_type_name": "word",
+          "text_uthmani": "بِأَصْحَـٰبِ",
+          "text": "بِأَصْحَـٰبِ",
+          "translation": {
+            "text": "with (the) Companions",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "bi-aṣḥābi",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_001_006.mp3"
+        },
+        {
+          "id": 143,
+          "position": 7,
+          "char_type_name": "word",
+          "text_uthmani": "ٱلْفِيلِ",
+          "text": "ٱلْفِيلِ",
+          "translation": {
+            "text": "(of the) Elephant",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "l-fīli",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_001_007.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 601,
+      "sajda": false
+    },
+    {
+      "number": 2,
+      "globalNumber": 6190,
+      "arabic": "أَلَمْ يَجْعَلْ كَيْدَهُمْ فِى تَضْلِيلٍۢ",
+      "translation": "Did He not make their plan into misguidance?",
+      "urduTranslation": "کیا ان کا داؤں غلط نہیں کیا؟ (گیا)",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6190.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6190.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6190.mp3",
+      "words": [
+        {
+          "id": 1019,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "أَلَمْ",
+          "text": "أَلَمْ",
+          "translation": {
+            "text": "Did not",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "alam",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_002_001.mp3"
+        },
+        {
+          "id": 1020,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "يَجْعَلْ",
+          "text": "يَجْعَلْ",
+          "translation": {
+            "text": "He make",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "yajʿal",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_002_002.mp3"
+        },
+        {
+          "id": 1021,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "كَيْدَهُمْ",
+          "text": "كَيْدَهُمْ",
+          "translation": {
+            "text": "their plan",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "kaydahum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_002_003.mp3"
+        },
+        {
+          "id": 1022,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "فِى",
+          "text": "فِى",
+          "translation": {
+            "text": "go",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fī",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_002_004.mp3"
+        },
+        {
+          "id": 1023,
+          "position": 5,
+          "char_type_name": "word",
+          "text_uthmani": "تَضْلِيلٍۢ",
+          "text": "تَضْلِيلٍۢ",
+          "translation": {
+            "text": "astray",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "taḍlīlin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_002_005.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 601,
+      "sajda": false
+    },
+    {
+      "number": 3,
+      "globalNumber": 6191,
+      "arabic": "وَأَرْسَلَ عَلَيْهِمْ طَيْرًا أَبَابِيلَ",
+      "translation": "And He sent against them birds in flocks,",
+      "urduTranslation": "اور ان پر جھلڑ کے جھلڑ جانور بھیجے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6191.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6191.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6191.mp3",
+      "words": [
+        {
+          "id": 2361,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "وَأَرْسَلَ",
+          "text": "وَأَرْسَلَ",
+          "translation": {
+            "text": "And He sent",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "wa-arsala",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_003_001.mp3"
+        },
+        {
+          "id": 2362,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "عَلَيْهِمْ",
+          "text": "عَلَيْهِمْ",
+          "translation": {
+            "text": "against them",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ʿalayhim",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_003_002.mp3"
+        },
+        {
+          "id": 2363,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "طَيْرًا",
+          "text": "طَيْرًا",
+          "translation": {
+            "text": "birds",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "ṭayran",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_003_003.mp3"
+        },
+        {
+          "id": 2364,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "أَبَابِيلَ",
+          "text": "أَبَابِيلَ",
+          "translation": {
+            "text": "(in) flocks",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "abābīla",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_003_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 601,
+      "sajda": false
+    },
+    {
+      "number": 4,
+      "globalNumber": 6192,
+      "arabic": "تَرْمِيهِم بِحِجَارَةٍۢ مِّن سِجِّيلٍۢ",
+      "translation": "Striking them with stones of hard clay,",
+      "urduTranslation": "جو ان پر کھنگر کی پتھریاں پھینکتے تھے",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6192.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6192.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6192.mp3",
+      "words": [
+        {
+          "id": 3867,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "تَرْمِيهِم",
+          "text": "تَرْمِيهِم",
+          "translation": {
+            "text": "Striking them",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "tarmīhim",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_004_001.mp3"
+        },
+        {
+          "id": 3868,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "بِحِجَارَةٍۢ",
+          "text": "بِحِجَارَةٍۢ",
+          "translation": {
+            "text": "with stones",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "biḥijāratin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_004_002.mp3"
+        },
+        {
+          "id": 3869,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "مِّن",
+          "text": "مِّن",
+          "translation": {
+            "text": "of",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "min",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_004_003.mp3"
+        },
+        {
+          "id": 3870,
+          "position": 4,
+          "char_type_name": "word",
+          "text_uthmani": "سِجِّيلٍۢ",
+          "text": "سِجِّيلٍۢ",
+          "translation": {
+            "text": "baked clay",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "sijjīlin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_004_004.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 601,
+      "sajda": false
+    },
+    {
+      "number": 5,
+      "globalNumber": 6193,
+      "arabic": "فَجَعَلَهُمْ كَعَصْفٍۢ مَّأْكُولٍۭ",
+      "translation": "And He made them like eaten straw.",
+      "urduTranslation": "تو ان کو ایسا کر دیا جیسے کھایا ہوا بھس",
+      "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6193.mp3",
+      "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/6193.mp3",
+      "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/6193.mp3",
+      "words": [
+        {
+          "id": 5092,
+          "position": 1,
+          "char_type_name": "word",
+          "text_uthmani": "فَجَعَلَهُمْ",
+          "text": "فَجَعَلَهُمْ",
+          "translation": {
+            "text": "Then He made them",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "fajaʿalahum",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_005_001.mp3"
+        },
+        {
+          "id": 5093,
+          "position": 2,
+          "char_type_name": "word",
+          "text_uthmani": "كَعَصْفٍۢ",
+          "text": "كَعَصْفٍۢ",
+          "translation": {
+            "text": "like straw",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "kaʿaṣfin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_005_002.mp3"
+        },
+        {
+          "id": 5094,
+          "position": 3,
+          "char_type_name": "word",
+          "text_uthmani": "مَّأْكُولٍۭ",
+          "text": "مَّأْكُولٍۭ",
+          "translation": {
+            "text": "eaten up",
+            "language_name": "english"
+          },
+          "transliteration": {
+            "text": "makūlin",
+            "language_name": "english"
+          },
+          "audioUrl": "https://audio.qurancdn.com/wbw/105_005_003.mp3"
+        }
+      ],
+      "juz": 30,
+      "page": 601,
+      "sajda": false
+    }
+  ]
+}
