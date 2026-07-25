@@ -168,7 +168,16 @@ export default function BlogPost() {
   }, [blog?.content]);
 
   /* ── Loading ── */
-  if (loading) return <PostSkeleton />;
+  if (loading) return (
+    <>
+      <Helmet>
+        <title>Blog Article | Al-Quran Hub</title>
+        <meta name="description" content="Read Islamic articles, Quranic guidance, and Surah benefits on the Al-Quran Hub Blog." />
+        <link rel="canonical" href={`https://alquranhub.org/blog/${slug}`} />
+      </Helmet>
+      <PostSkeleton />
+    </>
+  );
 
   /* ── 404 ── */
   if (notFound || !blog) {

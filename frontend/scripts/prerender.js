@@ -83,41 +83,41 @@ function escapeAttr(str) {
 function injectMeta(template, { title, description, url, keywords, ogType = 'website' }) {
   let html = template;
 
-  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeAttr(title)}</title>`);
+  html = html.replace(/<title(?:[^>]*)?>[\s\S]*?<\/title>/, `<title data-rh="true">${escapeAttr(title)}</title>`);
 
   html = html.replace(
-    /<meta\s+name="description"[\s\S]*?\/>/,
-    `<meta name="description" content="${escapeAttr(description)}" />`
+    /<meta\s+(?:data-rh="true"\s+)?name="description"[\s\S]*?\/>/,
+    `<meta data-rh="true" name="description" content="${escapeAttr(description)}" />`
   );
 
   if (keywords) {
     html = html.replace(
-      /<meta\s+name="keywords"[\s\S]*?\/>/,
-      `<meta name="keywords" content="${escapeAttr(keywords)}" />`
+      /<meta\s+(?:data-rh="true"\s+)?name="keywords"[\s\S]*?\/>/,
+      `<meta data-rh="true" name="keywords" content="${escapeAttr(keywords)}" />`
     );
   }
 
   html = html.replace(
-    /<meta\s+property="og:title"[\s\S]*?\/>/,
-    `<meta property="og:title" content="${escapeAttr(title)}" />`
+    /<meta\s+(?:data-rh="true"\s+)?property="og:title"[\s\S]*?\/>/,
+    `<meta data-rh="true" property="og:title" content="${escapeAttr(title)}" />`
   );
   html = html.replace(
-    /<meta\s+property="og:description"[\s\S]*?\/>/,
-    `<meta property="og:description" content="${escapeAttr(description)}" />`
+    /<meta\s+(?:data-rh="true"\s+)?property="og:description"[\s\S]*?\/>/,
+    `<meta data-rh="true" property="og:description" content="${escapeAttr(description)}" />`
   );
   html = html.replace(
-    /<meta\s+property="og:url"[\s\S]*?\/>/,
-    `<meta property="og:url" content="${escapeAttr(url)}" />`
+    /<meta\s+(?:data-rh="true"\s+)?property="og:url"[\s\S]*?\/>/,
+    `<meta data-rh="true" property="og:url" content="${escapeAttr(url)}" />`
   );
   html = html.replace(
-    /<meta\s+property="og:type"[\s\S]*?\/>/,
-    `<meta property="og:type" content="${escapeAttr(ogType)}" />`
+    /<meta\s+(?:data-rh="true"\s+)?property="og:type"[\s\S]*?\/>/,
+    `<meta data-rh="true" property="og:type" content="${escapeAttr(ogType)}" />`
   );
 
   if (html.includes('rel="canonical"')) {
-    html = html.replace(/<link\s+rel="canonical"[\s\S]*?\/>/, `<link rel="canonical" href="${escapeAttr(url)}" />`);
+    html = html.replace(/<link\s+(?:data-rh="true"\s+)?rel="canonical"[\s\S]*?\/>/, `<link data-rh="true" rel="canonical" href="${escapeAttr(url)}" />`);
   } else {
-    html = html.replace('</head>', `  <link rel="canonical" href="${escapeAttr(url)}" />\n</head>`);
+    html = html.replace('</head>', `  <link data-rh="true" rel="canonical" href="${escapeAttr(url)}" />\n</head>`);
   }
 
   return html;
@@ -128,24 +128,24 @@ function injectHelmet(template, helmet) {
 
   const titleHtml = helmet.title.toString();
   if (titleHtml) {
-    html = html.replace(/<title>[\s\S]*?<\/title>/, titleHtml);
+    html = html.replace(/<title(?:[^>]*)?>[\s\S]*?<\/title>/, titleHtml);
   }
 
   const linkHtml = helmet.link.toString();
   if (linkHtml) {
     if (html.includes('rel="canonical"')) {
-      html = html.replace(/<link\s+rel="canonical"[\s\S]*?\/>/, '');
+      html = html.replace(/<link\s+(?:data-rh="true"\s+)?rel="canonical"[\s\S]*?\/>/g, '');
     }
     html = html.replace('</head>', `  ${linkHtml}\n</head>`);
   }
 
   const metaHtml = helmet.meta.toString();
   if (metaHtml) {
-    html = html.replace(/<meta\s+name="description"[\s\S]*?\/>/, '');
-    html = html.replace(/<meta\s+property="og:title"[\s\S]*?\/>/, '');
-    html = html.replace(/<meta\s+property="og:description"[\s\S]*?\/>/, '');
-    html = html.replace(/<meta\s+property="og:url"[\s\S]*?\/>/, '');
-    html = html.replace(/<meta\s+property="og:type"[\s\S]*?\/>/, '');
+    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?name="description"[\s\S]*?\/>/g, '');
+    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?property="og:title"[\s\S]*?\/>/g, '');
+    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?property="og:description"[\s\S]*?\/>/g, '');
+    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?property="og:url"[\s\S]*?\/>/g, '');
+    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?property="og:type"[\s\S]*?\/>/g, '');
     
     html = html.replace('</head>', `  ${metaHtml}\n</head>`);
   }

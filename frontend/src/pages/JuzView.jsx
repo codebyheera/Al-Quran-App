@@ -210,8 +210,27 @@ export default function JuzView() {
   const toggleUr = () => setShowUr((prev) => !prev);
 
 
-  if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Juz…</p></div>;
-  if (error) return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
+  if (loading) return (
+    <div className="loading-center">
+      <Helmet encodeSpecialCharacters={false}>
+        <title>{`Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`}</title>
+        <meta name="description" content={`Read and listen to Juz ${juzNum} of the Holy Quran online. Arabic text, English translation, and beautiful recitation available.`} />
+        <link rel="canonical" href={`https://alquranhub.org/juz/${juzNum}`} />
+      </Helmet>
+      <div className="spinner" />
+      <p>Loading Juz…</p>
+    </div>
+  );
+  if (error) return (
+    <div className="loading-center">
+      <Helmet encodeSpecialCharacters={false}>
+        <title>{`Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`}</title>
+        <meta name="description" content={`Read and listen to Juz ${juzNum} of the Holy Quran online.`} />
+        <link rel="canonical" href={`https://alquranhub.org/juz/${juzNum}`} />
+      </Helmet>
+      <p style={{ color: '#e74c3c' }}>{error}</p>
+    </div>
+  );
 
   const verses = juz.verses;
 

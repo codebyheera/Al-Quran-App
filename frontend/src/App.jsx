@@ -1,6 +1,6 @@
 
 import { lazy, Suspense, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
@@ -48,18 +48,18 @@ const PageLoader = () => (
 export default function App() {
   const { currentVerse } = useAudio();
   const { toast } = useBookmarks();
+  const location = useLocation();
+  const canonicalUrl = `https://alquranhub.org${location.pathname === '/' ? '' : location.pathname}`;
 
   return (
     <div className={`app-root ${currentVerse ? 'has-player' : ''}`}>
       {/* Site-wide defaults — overridden per-page by each page's own <Helmet> */}
       <Helmet>
-        <title>{pageSeo.home.title}</title>
-        <meta name="description" content={pageSeo.home.description} />
+        <title>Al-Quran Hub | Read Quran Pak Online Free</title>
         <meta name="keywords" content={pageSeo.home.keywords} />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://alquranhub.org${pageSeo.home.path}`} />
-        <meta property="og:title" content={pageSeo.home.title} />
-        <meta property="og:description" content={pageSeo.home.description} />
+        <meta property="og:url" content={`https://alquranhub.org${location.pathname}`} />
       </Helmet>
       <ScrollToTop />
       {/* Persistent top navigation */}

@@ -31,8 +31,27 @@ export default function SurahList() {
       s.name.includes(query)
   );
 
-  if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Surahs…</p></div>;
-  if (error) return <div className="loading-center"><p style={{ color: '#e74c3c' }}>{error}</p></div>;
+  if (loading) return (
+    <div className="loading-center">
+      <Helmet encodeSpecialCharacters={false}>
+        <title>{pageSeo.surahList.title}</title>
+        <meta name="description" content={pageSeo.surahList.description} />
+        <link rel="canonical" href={`https://alquranhub.org${pageSeo.surahList.path}`} />
+      </Helmet>
+      <div className="spinner" />
+      <p>Loading Surahs…</p>
+    </div>
+  );
+  if (error) return (
+    <div className="loading-center">
+      <Helmet encodeSpecialCharacters={false}>
+        <title>{pageSeo.surahList.title}</title>
+        <meta name="description" content={pageSeo.surahList.description} />
+        <link rel="canonical" href={`https://alquranhub.org${pageSeo.surahList.path}`} />
+      </Helmet>
+      <p style={{ color: '#e74c3c' }}>{error}</p>
+    </div>
+  );
 
   return (
     <div className="surah-list page-enter">
