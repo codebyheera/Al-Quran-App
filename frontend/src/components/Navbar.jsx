@@ -229,10 +229,28 @@ export default function Navbar() {
         className={`sidebar-backdrop ${sidebarOpen ? 'visible' : ''}`}
         onClick={closeSidebar}
         aria-hidden="true"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          opacity: sidebarOpen ? 1 : 0,
+          pointerEvents: sidebarOpen ? 'auto' : 'none',
+          zIndex: 200
+        }}
       />
 
       {/* Sidebar panel */}
-      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`} aria-label="Mobile navigation">
+      <aside
+        className={`sidebar ${sidebarOpen ? 'open' : ''}`}
+        aria-label="Mobile navigation"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          transform: sidebarOpen ? 'translateX(0)' : 'translateX(-100%)',
+          zIndex: 300
+        }}
+      >
 
         {/* Sidebar Header */}
         <div className="sidebar-header">
