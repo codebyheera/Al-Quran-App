@@ -27,18 +27,18 @@ const PRAYERS = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
 
 // ── Popular Surahs ─────────────────────────────────────────────────────────
 const POPULAR_SURAHS = [
-  { number: 1,   englishName: "Al-Fatihah", name: "الفاتحة", versesCount: 7, nameTranslation: "The Opening", revelation: "Meccan" },
-  { number: 36,  englishName: "Ya-Sin",     name: "يس", versesCount: 83, nameTranslation: "Ya Sin", revelation: "Meccan" },
-  { number: 18,  englishName: "Al-Kahf",    name: "الكهف", versesCount: 110, nameTranslation: "The Cave", revelation: "Meccan" },
-  { number: 55,  englishName: "Ar-Rahman",  name: "الرحمن", versesCount: 78, nameTranslation: "The Beneficent", revelation: "Medinan" },
-  { number: 67,  englishName: "Al-Mulk",    name: "الملك", versesCount: 30, nameTranslation: "The Sovereignty", revelation: "Meccan" },
-  { number: 56,  englishName: "Al-Waqi'ah", name: "الواقعة", versesCount: 96, nameTranslation: "The Inevitable", revelation: "Meccan" },
-  { number: 2,   englishName: "Al-Baqarah", name: "البقرة", versesCount: 286, nameTranslation: "The Cow", revelation: "Medinan" },
-  { number: 19,  englishName: "Maryam",     name: "مريم", versesCount: 98, nameTranslation: "Mary", revelation: "Meccan" },
-  { number: 12,  englishName: "Yusuf",      name: "يوسف", versesCount: 111, nameTranslation: "Joseph", revelation: "Meccan" },
-  { number: 112, englishName: "Al-Ikhlas",  name: "الإخلاص", versesCount: 4, nameTranslation: "The Sincerity", revelation: "Meccan" },
-  { number: 113, englishName: "Al-Falaq",   name: "الفلق", versesCount: 5, nameTranslation: "The Daybreak", revelation: "Meccan" },
-  { number: 114, englishName: "An-Nas",     name: "الناس", versesCount: 6, nameTranslation: "Mankind", revelation: "Meccan" },
+  { number: 1,   englishName: "Al-Faatiha",  name: "الفاتحة", versesCount: 7,   nameTranslation: "The Opening",     revelation: "Meccan"  },
+  { number: 36,  englishName: "Yaseen",       name: "يس",      versesCount: 83,  nameTranslation: "Ya Sin",           revelation: "Meccan"  },
+  { number: 18,  englishName: "Al-Kahf",      name: "الكهف",   versesCount: 110, nameTranslation: "The Cave",         revelation: "Meccan"  },
+  { number: 55,  englishName: "Ar-Rahmaan",   name: "الرحمن",  versesCount: 78,  nameTranslation: "The Beneficent",  revelation: "Medinan" },
+  { number: 67,  englishName: "Al-Mulk",      name: "الملك",   versesCount: 30,  nameTranslation: "The Sovereignty", revelation: "Meccan"  },
+  { number: 56,  englishName: "Al-Waaqia",    name: "الواقعة", versesCount: 96,  nameTranslation: "The Inevitable",  revelation: "Meccan"  },
+  { number: 2,   englishName: "Al-Baqara",    name: "البقرة",  versesCount: 286, nameTranslation: "The Cow",         revelation: "Medinan" },
+  { number: 19,  englishName: "Maryam",       name: "مريم",    versesCount: 98,  nameTranslation: "Mary",            revelation: "Meccan"  },
+  { number: 12,  englishName: "Yusuf",        name: "يوسف",    versesCount: 111, nameTranslation: "Joseph",          revelation: "Meccan"  },
+  { number: 112, englishName: "Al-Ikhlaas",   name: "الإخلاص", versesCount: 4,   nameTranslation: "The Sincerity",   revelation: "Meccan"  },
+  { number: 113, englishName: "Al-Falaq",     name: "الفلق",   versesCount: 5,   nameTranslation: "The Daybreak",    revelation: "Meccan"  },
+  { number: 114, englishName: "An-Naas",      name: "الناس",   versesCount: 6,   nameTranslation: "Mankind",         revelation: "Meccan"  },
 ];
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
