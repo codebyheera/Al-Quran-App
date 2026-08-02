@@ -44,6 +44,7 @@ import bookmarkRoutes     from './routes/bookmarks.js';
 import searchRoutes       from './routes/search.js';
 import blogRoutes         from './routes/blogRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
+import prayerTimesRoutes  from './routes/prayerTimes.js';
 
 app.use('/api/surah',         surahRoutes);
 app.use('/api/juz',           juzRoutes);
@@ -51,6 +52,7 @@ app.use('/api/bookmarks',     bookmarkRoutes);
 app.use('/api/search',        searchRoutes);
 app.use('/api/blogs',         blogRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/prayer-times',  prayerTimesRoutes);
 
 // Health-check
 app.get('/', (_req, res) => {
@@ -61,13 +63,24 @@ app.get('/', (_req, res) => {
 import { supabase } from './lib/supabase.js';
 
 app.get('/sitemap.xml', async (_req, res) => {
+  const PRAYER_CITY_SLUGS = [
+    'lahore', 'karachi', 'islamabad', 'faisalabad', 'rawalpindi',
+    'multan', 'peshawar', 'gujranwala', 'sialkot', 'quetta',
+  ];
+
   const staticPages = [
-    { loc: 'https://alquranhub.org/',          changefreq: 'daily',   priority: '1.0' },
-    { loc: 'https://alquranhub.org/quran',     changefreq: 'monthly', priority: '0.9' },
-    { loc: 'https://alquranhub.org/tasbih',    changefreq: 'monthly', priority: '0.8' },
-    { loc: 'https://alquranhub.org/blog',      changefreq: 'weekly',  priority: '0.8' },
-    { loc: 'https://alquranhub.org/about',     changefreq: 'monthly', priority: '0.5' },
-    { loc: 'https://alquranhub.org/contact',   changefreq: 'monthly', priority: '0.5' },
+    { loc: 'https://alquranhub.org/',                    changefreq: 'daily',   priority: '1.0' },
+    { loc: 'https://alquranhub.org/quran',               changefreq: 'monthly', priority: '0.9' },
+    { loc: 'https://alquranhub.org/tasbih',              changefreq: 'monthly', priority: '0.8' },
+    { loc: 'https://alquranhub.org/blog',                changefreq: 'weekly',  priority: '0.8' },
+    { loc: 'https://alquranhub.org/about',               changefreq: 'monthly', priority: '0.5' },
+    { loc: 'https://alquranhub.org/contact',             changefreq: 'monthly', priority: '0.5' },
+    { loc: 'https://alquranhub.org/prayer-times',        changefreq: 'daily',   priority: '0.9' },
+    ...PRAYER_CITY_SLUGS.map((slug) => ({
+      loc: `https://alquranhub.org/prayer-times/${slug}`,
+      changefreq: 'daily',
+      priority: '0.85',
+    })),
   ];
 
   try {

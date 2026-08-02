@@ -28,6 +28,8 @@ const SearchPage = lazy(() => import('./pages/SearchPage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
 const BlogArchive = lazy(() => import('./pages/BlogArchive'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
+const PrayerTimesHub = lazy(() => import('./pages/PrayerTimesHub'));
+const PrayerCityPage = lazy(() => import('./pages/PrayerCityPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // ── Lightweight loader ───────────────────────────────────────────────────────
@@ -80,6 +82,8 @@ export default function App() {
             <Route path="/support" element={<SupportPage />} />
             <Route path="/blog" element={<BlogArchive />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/prayer-times" element={<PrayerTimesHub />} />
+            <Route path="/prayer-times/:city" element={<PrayerCityPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

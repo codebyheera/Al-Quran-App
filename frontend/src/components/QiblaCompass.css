@@ -1,0 +1,97 @@
+/* QiblaCompass.css */
+
+.qibla-compass-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.qibla-compass-svg {
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+}
+
+.qibla-ring-outer {
+  fill: var(--bg-card);
+  stroke: rgba(201, 168, 76, 0.3);
+  stroke-width: 2;
+}
+
+.qibla-ring-face {
+  fill: var(--bg-primary);
+  stroke: rgba(201, 168, 76, 0.1);
+  stroke-width: 1;
+}
+
+.qibla-tick {
+  stroke: rgba(201, 168, 76, 0.4);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.qibla-tick-major {
+  stroke: var(--accent-gold);
+  stroke-width: 2;
+}
+
+.qibla-cardinal {
+  fill: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-ui);
+}
+
+.qibla-cardinal-n {
+  fill: var(--accent-gold);
+  font-weight: 800;
+}
+
+.qibla-needle-north {
+  fill: var(--accent-gold);
+  filter: drop-shadow(0 2px 8px rgba(201, 168, 76, 0.5));
+}
+
+.qibla-needle-south {
+  fill: #2a3a5a;
+}
+
+.qibla-pivot {
+  fill: var(--bg-card);
+  stroke: var(--accent-gold);
+  stroke-width: 2;
+}
+
+.qibla-kaaba-icon {
+  font-size: 1.2rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.qibla-degree-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qibla-degree-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.qibla-degree-caption {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.2rem;
+}
+
+/* Permission Button */
+.qibla-permission-btn {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+}

@@ -1,0 +1,559 @@
+/* PrayerCityPage.css */
+
+.pt-city {
+  padding-bottom: 4rem;
+}
+
+/* ── Breadcrumb wrapper ───────────────────────────────────────── */
+.pt-city-breadcrumb-wrap {
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+.pt-city-hero {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.pt-city-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  opacity: 0.5;
+}
+
+.pt-city-hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .pt-city-hero__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.pt-city-hero__country {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 0.5rem;
+}
+
+.pt-city-hero__title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.pt-city-hero__dates {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.pt-city-hero__hijri-sep {
+  color: var(--accent-gold);
+  margin-right: 0.6rem;
+  font-weight: 700;
+}
+
+.pt-city-hero__method {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: rgba(201, 168, 76, 0.05);
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+/* ── Hero Countdown Box ───────────────────────────────────────── */
+.pt-city-hero__cd-box {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 2rem;
+  text-align: center;
+  min-width: 260px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.pt-city-hero__cd-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.pt-city-hero__cd-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pt-city-hero__cd-time {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.pt-city-hero__cd-digits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pt-city-hero__cd-unit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pt-city-hero__cd-num {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.pt-city-hero__cd-cap {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.pt-city-hero__cd-sep {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  opacity: 0.5;
+  padding-bottom: 0.2em;
+}
+
+/* ── Prayers Grid ─────────────────────────────────────────────── */
+.pt-city-prayers__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .pt-city-prayers__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .pt-city-prayers__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.pt-city-prayer-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.pt-city-prayer-card.is-sunrise {
+  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pt-city-prayer-card.is-next {
+  border-color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.08);
+  box-shadow: 0 0 0 1px rgba(201, 168, 76, 0.2), var(--shadow-gold);
+  transform: translateY(-4px);
+}
+
+.pt-city-prayer-card__icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.pt-city-prayer-card__label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.pt-city-prayer-card.is-next .pt-city-prayer-card__label {
+  color: var(--accent-gold);
+}
+
+.pt-city-prayer-card__arabic {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.pt-city-prayer-card__time {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.pt-city-prayer-card__cd {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-top: 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.pt-city-prayer-card__next-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.6rem;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.pt-city-prayers__loading,
+.pt-city-prayers__error {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+}
+
+/* ── Qibla Section ────────────────────────────────────────────── */
+.pt-city-qibla__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .pt-city-qibla__inner {
+    grid-template-columns: 1fr auto;
+    padding: 3rem;
+  }
+}
+
+.pt-city-qibla__text h2 {
+  margin-bottom: 1rem;
+}
+.pt-city-qibla__text p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Monthly Timetable ────────────────────────────────────────── */
+.pt-city-calendar {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.pt-city-calendar__header {
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+@media (min-width: 640px) {
+  .pt-city-calendar__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.pt-city-calendar__header h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.pt-city-calendar__actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn.pt-city-cal-toggle {
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn.pt-city-cal-print {
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+}
+.btn.pt-city-cal-print:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.pt-city-calendar__body {
+  padding: 0;
+}
+
+.pt-city-calendar__loading,
+.pt-city-calendar__error {
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.pt-city-calendar__table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pt-city-cal__table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.pt-city-cal__table th,
+.pt-city-cal__table td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.pt-city-cal__table th {
+  background: rgba(0, 0, 0, 0.15);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+}
+
+.pt-city-cal__table td {
+  color: var(--text-primary);
+}
+
+.pt-city-cal__day {
+  font-weight: 700;
+  color: var(--accent-gold) !important;
+}
+
+.pt-city-calendar__note {
+  padding: 1.25rem 2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* ── Nearby Cities ────────────────────────────────────────────── */
+.pt-city-nearby__sub {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.pt-city-nearby__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.pt-city-nearby__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  padding: 1.25rem;
+}
+
+.pt-city-nearby__name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pt-city-nearby__arabic {
+  color: var(--accent-gold);
+  opacity: 0.7;
+}
+
+.pt-city-nearby__cta {
+  font-size: 0.8rem;
+  color: var(--accent-gold);
+  font-weight: 600;
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.2s ease;
+}
+
+.pt-city-nearby__card:hover .pt-city-nearby__cta {
+  transform: translateX(4px);
+}
+
+/* ── Quran CTA ────────────────────────────────────────────────── */
+.pt-city-quran-cta {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(22, 33, 62, 0.9) 100%);
+}
+
+.pt-city-quran-cta__icon {
+  font-size: 3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pt-city-quran-cta h2 {
+  margin: 0 0 0.5rem;
+}
+
+.pt-city-quran-cta p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.pt-city-quran-cta__btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ── Print Styles (Gap 6) ─────────────────────────────────────── */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Reset layout constraints for print */
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .pt-city-hero {
+    background: none;
+    border: none;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    page-break-after: avoid;
+  }
+
+  .pt-city-hero__title {
+    color: black !important;
+  }
+  
+  .pt-city-hero__dates,
+  .pt-city-hero__method {
+    color: #333 !important;
+  }
+  .pt-city-hero__method {
+    border: none;
+    padding: 0;
+  }
+
+  .pt-city-calendar {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .pt-city-calendar__header {
+    border: none;
+    padding: 0 0 1rem 0;
+  }
+
+  .pt-city-calendar__header h2 {
+    font-size: 1.5rem;
+    color: black;
+  }
+
+  .pt-city-cal__table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .pt-city-cal__table th,
+  .pt-city-cal__table td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    color: black !important;
+    text-align: center;
+  }
+  
+  .pt-city-cal__table th {
+    background: #f5f5f5 !important;
+  }
+
+  .pt-city-cal__day {
+    color: black !important;
+    font-weight: bold;
+  }
+
+  .pt-city-calendar__note {
+    background: none;
+    text-align: left;
+    padding: 1rem 0;
+    color: #555;
+  }
+}

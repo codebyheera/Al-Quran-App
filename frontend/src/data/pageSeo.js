@@ -53,4 +53,15 @@ export const pageSeo = {
     title: 'Islamic Blog – Quran, Hadith & Spirituality | Al-Quran Hub',
     description: 'Explore Surah benefits, Tafsir, and Islamic guides written to deepen your connection with the Quran. Free, ad-free.',
   },
+  prayerTimesHub: {
+    path: '/prayer-times',
+    title: 'Namaz & Prayer Times in Pakistan | Al-Quran Hub',
+    description: 'Accurate daily prayer times for 10 Pakistani cities — Fajr, Dhuhr, Asr, Maghrib & Isha. Free Qibla compass, Hanafi method, updated daily.',
+    keywords: 'prayer times pakistan, namaz timings, qibla direction, fajr time, maghrib time, hanafi prayer times',
+  },
 };
+
+
+
+
+

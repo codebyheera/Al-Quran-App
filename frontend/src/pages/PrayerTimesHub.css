@@ -1,0 +1,392 @@
+/* PrayerTimesHub.css */
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+.pt-hub-hero {
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem 3.5rem;
+  text-align: center;
+  position: relative;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+  overflow: hidden;
+}
+
+.pt-hub-hero__bg-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 30% 60%, rgba(201, 168, 76, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(74, 158, 255, 0.07) 0%, transparent 50%);
+  animation: heroGlowFlow 20s infinite alternate ease-in-out;
+}
+
+@keyframes heroGlowFlow {
+  0%   { transform: scale(1) translate(0, 0); }
+  50%  { transform: scale(1.04) translate(2%, -2%); }
+  100% { transform: scale(1.08) translate(-2%, 3%); }
+}
+
+.pt-hub-hero__content {
+  max-width: 860px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.pt-hub-hero__badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 100px;
+  padding: 0.25rem 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.pt-hub-hero__title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+  color: var(--text-primary);
+}
+
+.pt-hub-hero__sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+/* ── Hero widget ──────────────────────────────────────────────── */
+.pt-hub-hero__widget {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.pt-hub-hero__location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.pt-hub-hero__loc-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  box-shadow: 0 0 8px rgba(201, 168, 76, 0.6);
+  animation: locPulse 2s infinite;
+}
+@keyframes locPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.pt-hub-hero__loading {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Countdown */
+.pt-hub-hero__countdown {
+  margin-bottom: 1.25rem;
+}
+.pt-hub-hero__cd-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+.pt-hub-hero__cd-label strong {
+  color: var(--accent-gold);
+}
+.pt-hub-hero__cd-digits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+.pt-hub-hero__cd-unit {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.pt-hub-hero__cd-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pt-hub-hero__cd-num {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.pt-hub-hero__cd-cap {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.pt-hub-hero__cd-sep {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  opacity: 0.5;
+  align-self: flex-start;
+  padding-top: 0.1em;
+}
+
+/* Prayer pills */
+.pt-hub-hero__prayers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+.pt-hub-hero__prayer-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.9rem;
+  transition: var(--transition);
+  min-width: 70px;
+}
+.pt-hub-hero__prayer-pill.active {
+  border-color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.1);
+  box-shadow: var(--shadow-gold);
+}
+.pt-hub-hero__prayer-key {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.pt-hub-hero__prayer-pill.active .pt-hub-hero__prayer-key {
+  color: var(--accent-gold);
+}
+.pt-hub-hero__prayer-val {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ── Cities grid ──────────────────────────────────────────────── */
+.pt-hub-cities-sub {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.pt-hub-cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.pt-hub-city-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+  padding: 1.1rem 1.2rem 1rem;
+}
+
+.pt-hub-city-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.04) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.pt-hub-city-card:hover::before { opacity: 1; }
+
+.pt-hub-city-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.pt-hub-city-card__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.pt-hub-city-card__arabic {
+  font-size: 1rem;
+  color: var(--accent-gold);
+  opacity: 0.75;
+}
+
+.pt-hub-city-card__next-prayer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.pt-hub-city-card__prayer-name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-gold);
+}
+.pt-hub-city-card__prayer-time {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pt-hub-city-card__countdown {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+}
+.pt-hub-city-card__cd-label {
+  color: var(--text-muted);
+}
+.pt-hub-city-card__cd-value {
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.pt-hub-city-card__error {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.pt-hub-city-card__arrow {
+  align-self: flex-end;
+  color: var(--accent-gold);
+  font-size: 1rem;
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.2s ease;
+}
+.pt-hub-city-card:hover .pt-hub-city-card__arrow {
+  transform: translateX(4px);
+}
+
+/* Skeleton shimmer */
+.pt-hub-city-card__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.skeleton-line {
+  height: 14px;
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-card-hover) 50%, var(--bg-secondary) 75%);
+  background-size: 200% 100%;
+  border-radius: 4px;
+  animation: shimmer 1.4s infinite;
+}
+.skeleton-line.short { width: 60%; }
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Section shared badge ─────────────────────────────────────── */
+.pt-hub-section-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 100px;
+  padding: 0.18rem 0.7rem;
+  margin-bottom: 0.6rem;
+}
+
+/* ── Qibla section ────────────────────────────────────────────── */
+.pt-hub-qibla-section { }
+
+.pt-hub-qibla-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .pt-hub-qibla-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .pt-hub-qibla-compass {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.pt-hub-qibla-text p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+.pt-hub-qibla-note {
+  font-size: 0.8rem !important;
+  color: var(--text-muted) !important;
+  font-style: italic;
+}
+
+.pt-hub-qibla-compass {
+  flex-shrink: 0;
+}
+
+/* ── Verse of the Day ─────────────────────────────────────────── */
+.pt-hub-vod-wrapper {
+  width: 100%;
+}
+.skeleton-vod {
+  height: 200px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+/* ── Popular Surahs ───────────────────────────────────────────── */
+.pt-hub-view-all {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+}

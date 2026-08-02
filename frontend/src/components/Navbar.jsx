@@ -5,7 +5,7 @@
 
 import { NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart } from '@tabler/icons-react';
+import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock } from '@tabler/icons-react';
 import { useTheme } from '../context/ThemeContext';
 import { useQari } from '../context/QariContext';
 import { useBookmarks } from '../context/BookmarkContext';
@@ -28,17 +28,13 @@ function QariDropdown({ reciter, changeReciter, reciters }) {
   return (
     <div className="navbar-dropdown" ref={ref}>
       <button
-        className={`dropdown-trigger ${open ? 'open' : ''}`}
+        className={`dropdown-trigger icon-only ${open ? 'open' : ''}`}
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        title="Select Reciter"
+        title={`Select Reciter (${current?.name})`}
       >
         <span className="dropdown-trigger-icon">🎙️</span>
-        <span className="dropdown-trigger-label">{current?.name}</span>
-        <svg className={`dropdown-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-          <path d="M7 10l5 5 5-5z" />
-        </svg>
       </button>
 
       {open && (
@@ -83,17 +79,13 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
   return (
     <div className="navbar-dropdown" ref={ref}>
       <button
-        className={`dropdown-trigger ${open ? 'open' : ''}`}
+        className={`dropdown-trigger icon-only ${open ? 'open' : ''}`}
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
         title="Select Theme"
       >
         <span className="dropdown-trigger-icon">🌗</span>
-        <span className="dropdown-trigger-label">Theme</span>
-        <svg className={`dropdown-chevron ${open ? 'rotated' : ''}`} viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-          <path d="M7 10l5 5 5-5z" />
-        </svg>
       </button>
 
       {open && (
@@ -198,6 +190,7 @@ export default function Navbar() {
             <NavLink to="/surah" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Surahs</NavLink>
             <NavLink to="/juz" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Juz</NavLink>
             <NavLink to="/tasbih" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Tasbih</NavLink>
+            <NavLink to="/prayer-times" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Prayer Times</NavLink>
             <NavLink to="/bookmarks" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Bookmarks</NavLink>
             <NavLink to="/blog" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Blog</NavLink>
             <NavLink to="/support" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Support</NavLink>
@@ -303,6 +296,11 @@ export default function Navbar() {
           <NavLink to="/tasbih" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
             <IconRosette className="nav-icon" size={20} stroke={2} />
             <span className="nav-text">Tasbih Counter</span>
+          </NavLink>
+
+          <NavLink to="/prayer-times" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
+            <IconClock className="nav-icon" size={20} stroke={2} />
+            <span className="nav-text">Prayer Times</span>
           </NavLink>
 
           <NavLink to="/bookmarks" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
