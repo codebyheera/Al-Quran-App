@@ -340,17 +340,6 @@ export default function PrayerTimesHub() {
             { '@type': 'ListItem', position: 2, name: 'Prayer Times', item: canonicalUrl },
           ],
         })}</script>
-        {/* FAQPage schema */}
-        <script type="application/ld+json" id="hub-faq-schema">{JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: [
-            { '@type': 'Question', name: 'What time is Fajr prayer today?', acceptedAnswer: { '@type': 'Answer', text: 'Fajr time changes daily based on the position of the sun. Our prayer times are calculated using the University of Islamic Sciences, Karachi method (Hanafi) and updated automatically every day.' } },
-            { '@type': 'Question', name: 'Which calculation method is used?', acceptedAnswer: { '@type': 'Answer', text: 'We use the University of Islamic Sciences, Karachi method with the Hanafi school for Asr time calculation. This is the standard method followed in Pakistan, India, and Bangladesh.' } },
-            { '@type': 'Question', name: 'Do prayer times change daily?', acceptedAnswer: { '@type': 'Answer', text: "Yes — prayer times shift slightly each day as the sun's position changes throughout the year. Our times are generated daily based on precise astronomical calculations." } },
-            { '@type': 'Question', name: 'How accurate are these prayer timings?', acceptedAnswer: { '@type': 'Answer', text: 'Our times are generated using precise astronomical calculations with the exact latitude and longitude of each city. They are as accurate as any printed timetable using the same calculation method.' } },
-          ],
-        })}</script>
       </Helmet>
 
       {/* ── HERO ─────────────────────────────────────────────── */}
