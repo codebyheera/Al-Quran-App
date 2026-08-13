@@ -16,6 +16,7 @@
 .blog-card {
   display: flex;
   flex-direction: column;
+  height: 100%;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -47,7 +48,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%);
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 35%),
+    linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%);
 }
 
 .blog-card-img-icon {
@@ -61,15 +64,16 @@
   top: 0.85rem;
   left: 0.85rem;
   z-index: 2;
-  background: rgba(201, 168, 76, 0.18);
+  background: rgba(201, 168, 76, 0.28);
   color: var(--accent-gold);
-  border: 1px solid rgba(201, 168, 76, 0.3);
+  border: 1px solid rgba(201, 168, 76, 0.4);
   border-radius: 100px;
   padding: 0.2rem 0.65rem;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
 }
 

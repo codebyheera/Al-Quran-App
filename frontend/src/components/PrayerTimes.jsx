@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useAutoLocation } from '../hooks/useAutoLocation';
 
 const PRAYERS = [
   { key: 'Fajr',    arabic: 'الفجر' },
@@ -87,9 +88,8 @@ function writeCache(loc, method, school, timings) {
 // ── Component ────────────────────────────────────────────────
 
 export default function PrayerTimes() {
+  const { coords, city }                    = useAutoLocation();
   const [timings, setTimings]               = useState(null);
-  const [city, setCity]                     = useState('Karachi');
-  const [coords, setCoords]                 = useState(null);
   const [loading, setLoading]               = useState(true);
   const [error, setError]                   = useState(false);
   const [nextKey, setNextKey]               = useState(null);
@@ -99,46 +99,8 @@ export default function PrayerTimes() {
 
   const hasLoadedRef = useRef(false);
 
-  // ── Effect 1: one-time geo detection ──────────────────────
+  // ── Fetch timings whenever coords or method changes ────────
   useEffect(() => {
-    let cancelled = false;
-
-    if (!('geolocation' in navigator)) {
-      setCoords('fallback');
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        if (cancelled) return;
-        const { latitude, longitude } = pos.coords;
-        fetch(
-          `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
-        )
-          .then((r) => r.json())
-          .then((json) => {
-            if (!cancelled)
-              setCity(
-                json.address?.city    ||
-                json.address?.town    ||
-                json.address?.village ||
-                'Your Location'
-              );
-          })
-          .catch(() => {});
-        setCoords({ lat: latitude, lng: longitude });
-      },
-      () => { if (!cancelled) setCoords('fallback'); },
-      { timeout: 6000 }
-    );
-
-    return () => { cancelled = true; };
-  }, []);
-
-  // ── Effect 2: fetch timings whenever coords or method changes
-  useEffect(() => {
-    if (coords === null) return;
-
     let cancelled = false;
     let timer     = null;
 
@@ -147,21 +109,12 @@ export default function PrayerTimes() {
       setError(false);
 
       try {
-        const loc    = coords === 'fallback'
-          ? 'karachi'
-          : `${coords.lat.toFixed(2)}_${coords.lng.toFixed(2)}`;
+        const loc    = `${coords.lat.toFixed(2)}_${coords.lng.toFixed(2)}`;
         const cached = readCache(loc, method.method, method.school);
 
         let t;
         if (cached) {
           t = cached;
-        } else if (coords === 'fallback') {
-          const res = await fetch(
-            `https://api.aladhan.com/v1/timingsByCity?city=Karachi&country=Pakistan&method=${method.method}&school=${method.school}&tune=0,0,0,0,0,0,0,0,0`
-          );
-          if (!res.ok) throw new Error('fetch failed');
-          ({ data: { timings: t } } = await res.json());
-          writeCache('karachi', method.method, method.school, t);
         } else {
           const res = await fetch(
             `https://api.aladhan.com/v1/timings?latitude=${coords.lat}&longitude=${coords.lng}&method=${method.method}&school=${method.school}&tune=0,0,0,0,0,0,0,0,0`

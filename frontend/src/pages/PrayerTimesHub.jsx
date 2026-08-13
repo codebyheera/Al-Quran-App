@@ -16,6 +16,7 @@ import { CITIES, calcQiblaBearing } from '../data/prayerCities';
 import QiblaCompass from '../components/QiblaCompass';
 import PrayerFaqSection from '../components/PrayerFaqSection';
 import { RevealSection } from '../components/RevealSection';
+import { useAutoLocation } from '../hooks/useAutoLocation';
 import api from '../lib/api';
 import './PrayerTimesHub.css';
 import './SurahList.css';
@@ -160,38 +161,10 @@ function CityCard({ city, now }) {
 
 // ── Hero: user's detected location + live widget ─────────────────────────────
 function HeroWidget() {
-  const [coords, setCoords]   = useState('fallback'); // Default to fallback for instant load
-  const [city, setCity]       = useState(DEFAULT_CITY.name);
+  const { coords, city }       = useAutoLocation();
   const [timings, setTimings] = useState(null);
   const [nextKey, setNextKey] = useState(null);
   const [cd, setCd]           = useState(null);
-
-  // Geo detect — fetch immediately in background
-  useEffect(() => {
-    if (!('geolocation' in navigator)) return;
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        // Reverse geocode city name
-        fetch(
-          `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
-        )
-          .then((r) => r.json())
-          .then((json) => {
-            setCity(
-              json.address?.city    ||
-              json.address?.town    ||
-              json.address?.village ||
-              DEFAULT_CITY.name
-            );
-          })
-          .catch(() => {});
-        setCoords({ lat: latitude, lng: longitude });
-      },
-      () => {}, // Ignore errors, already on fallback
-      { timeout: 7000 }
-    );
-  }, []);
 
   // Fetch timings once coords resolved
   useEffect(() => {
@@ -201,7 +174,7 @@ function HeroWidget() {
     async function load() {
       try {
         let t;
-        if (coords === 'fallback') {
+        if (coords.isFallback) {
           try {
             const { data } = await api.get('/api/prayer-times/city/lahore');
             t = data.timings;
@@ -292,20 +265,8 @@ export default function PrayerTimesHub() {
     return () => clearInterval(id);
   }, []);
 
-  // Hero-section user coords for Qibla (mirrors HeroWidget logic, lighter)
-  const [userCoords, setUserCoords] = useState({
-    lat: DEFAULT_CITY.lat,
-    lng: DEFAULT_CITY.lng,
-  });
-
-  useEffect(() => {
-    if (!('geolocation' in navigator)) return;
-    navigator.geolocation.getCurrentPosition(
-      (pos) => setUserCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      () => {},
-      { timeout: 7000 }
-    );
-  }, []);
+  // Hero-section user coords for Qibla — shares detection with HeroWidget
+  const { coords: userCoords } = useAutoLocation();
 
   const canonicalUrl = 'https://alquranhub.org/prayer-times';
 
