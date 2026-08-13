@@ -37,3 +37,5 @@ Desktop.ini
 backend/out.log
 backend/crash.log
 backend/test-mongo.js
+.vercel
+.env*
