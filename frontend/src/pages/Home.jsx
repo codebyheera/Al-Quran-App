@@ -12,6 +12,7 @@ import api from '../lib/api';
 import { smartSearch } from '../lib/searchEngine';
 import { BlogCard } from '../components/BlogCard';
 import PrayerTimes from '../components/PrayerTimes';
+import StreakWidget from '../components/StreakWidget';
 import { pageSeo } from '../data/pageSeo';
 import { RevealSection } from '../components/RevealSection';
 import './Home.css';
@@ -194,6 +195,9 @@ export default function Home() {
             )}
           </div>
         </div>
+
+        {/* ── Daily Reading Streak — lives inside the hero, divided only by a hairline ── */}
+        <StreakWidget />
       </section>
 
       <div className="container">

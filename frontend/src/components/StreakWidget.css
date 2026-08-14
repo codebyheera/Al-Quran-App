@@ -1,0 +1,205 @@
+/* components/StreakWidget.css — Daily Reading Streak strip
+   Lives inside the hero (Home.jsx nests it right after .hero-content) so
+   it shares the hero's own background — no separate color of its own.
+   The only separation from the hero content above it is a subtle
+   hairline (border-top), not a boxed card. */
+
+.streak-strip {
+  width: 100%;
+  margin-top: 1.75rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.14);
+}
+
+.streak-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.25rem;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.1rem 1rem;
+}
+
+/* Setup/edit state: stacked and fully centered, matching the hero's own
+   centered text convention — the prompt on one line, goal buttons as a
+   single group on the line below, so it never wraps into a lopsided
+   two-line split like a plain wrapping row would. */
+.streak-strip-setup {
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Tight group so the flame sits right next to its count/label instead of
+   sharing the wider gap used between the row's other elements. */
+.streak-strip-fire {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+/* Brighter, custom orange so the flame pops against any theme background
+   — emoji glyphs can't be recolored via CSS, so this uses a colorable
+   icon (@tabler/icons-react) instead of the 🔥 emoji. */
+.streak-flame-icon {
+  color: #f0a63a;
+  flex-shrink: 0;
+}
+
+.streak-strip-count {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.streak-strip-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.streak-strip-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* ── Progress bar / complete message ─────────────────────────────── */
+.streak-strip-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.streak-strip-progress-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.streak-strip-bar {
+  width: 110px;
+  height: 6px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  overflow: hidden;
+}
+
+[data-theme="light"] .streak-strip-bar {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+.streak-strip-bar-fill {
+  height: 100%;
+  background: linear-gradient(135deg, var(--accent-gold), #a8882a);
+  border-radius: 100px;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.streak-strip-complete {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ── Buttons — compact pill, deliberately unlike the boxier hero Search
+   button so it reads as its own distinct action. ─────────────────── */
+.streak-strip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  height: 40px;
+  padding: 0 1.1rem;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1.5px solid var(--accent-gold);
+  color: var(--accent-gold);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.streak-strip-btn:hover {
+  background: rgba(201, 168, 76, 0.2);
+  color: var(--accent-gold-light);
+  border-color: var(--accent-gold-light);
+  transform: translateY(-1px);
+}
+
+.streak-goal-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.streak-goal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 1.1rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.streak-goal-btn:hover {
+  border-color: rgba(201, 168, 76, 0.5);
+  color: var(--text-primary);
+}
+
+.streak-goal-btn.active {
+  border-color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.14);
+  color: var(--accent-gold);
+}
+
+.streak-edit-link {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.3rem 0.2rem;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.streak-edit-link:hover {
+  color: var(--accent-gold);
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .streak-strip-inner {
+    padding: 1rem 1rem 1.1rem;
+  }
+
+  .streak-strip-text {
+    width: 100%;
+  }
+
+  .streak-goal-options {
+    width: 100%;
+  }
+
+  .streak-strip-btn {
+    flex: 1 1 auto;
+  }
+}

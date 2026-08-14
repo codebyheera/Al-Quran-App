@@ -18,9 +18,11 @@ import Breadcrumb from "../components/Breadcrumb";
 import SurahFaqSection from "../components/SurahFaqSection";
 import { getSurahFaqs, getSurahFaqSchema } from "../data/surahFaqs";
 import { getSurahSeo } from "../data/surahSeo";
+import { useReadingTimer } from "../hooks/useReadingTimer";
 import "./SurahView.css";
 
 export default function SurahView() {
+  useReadingTimer(); // counts active time on this page toward the daily reading streak
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();

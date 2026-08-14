@@ -10,6 +10,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useQari } from '../context/QariContext';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
+import NotificationBell from './NotificationBell';
 import '../styles/Navbar.css';
 
 function QariDropdown({ reciter, changeReciter, reciters }) {
@@ -202,6 +203,7 @@ export default function Navbar() {
             <NavLink to="/bookmarks" aria-label="Bookmarks">
               <button className="nav-icon-btn" title="Bookmarks">🔖</button>
             </NavLink>
+            <NotificationBell />
             <ThemeDropdown theme={theme} changeTheme={changeTheme} themes={themes} />
 
             {/* Hamburger (mobile only) */}

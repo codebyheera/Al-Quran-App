@@ -13,9 +13,11 @@ import AudioDropdown from '../components/AudioDropdown';
 import { useAudio } from '../context/AudioContext';
 import { useQari } from '../context/QariContext';
 import Breadcrumb from '../components/Breadcrumb';
+import { useReadingTimer } from '../hooks/useReadingTimer';
 import './JuzView.css';
 
 export default function JuzView() {
+  useReadingTimer(); // counts active time on this page toward the daily reading streak
   const { id } = useParams();
   const juzNum = parseInt(id);
   const navigate = useNavigate();

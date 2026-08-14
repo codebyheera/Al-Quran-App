@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import { useAudio } from './context/AudioContext';
 import { useBookmarks } from './context/BookmarkContext';
 import { pageSeo } from './data/pageSeo';
+import { getStreakData } from './lib/streakUtils';
 
 // ── Lazy load heavy global components ────────────────────────────────────────
 const BottomPlayer        = lazy(() => import('./components/BottomPlayer'));
@@ -52,6 +53,13 @@ export default function App() {
   const { toast } = useBookmarks();
   const location = useLocation();
   const canonicalUrl = `https://alquranhub.org${location.pathname === '/' ? '' : location.pathname}`;
+
+  // Runs once per app load (App wraps every route) so the daily reading
+  // streak's date rollover — and the "missed the goal, reset streak"
+  // check — happens regardless of which page the visitor lands on first.
+  useEffect(() => {
+    getStreakData();
+  }, []);
 
   return (
     <div className={`app-root ${currentVerse ? 'has-player' : ''}`}>
