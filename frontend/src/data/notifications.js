@@ -11,10 +11,15 @@
  */
 export const notifications = [
   {
+    id: '2',
+    title: 'New: Daily Reading Streak',
+    message: 'Set a daily reading goal and build your streak read any Surah or Juz to reach it. Track your progress right on the homepage.',
+    date: '2026-08-14',
+  },
+  {
     id: '1',
     title: 'New Reciters Added',
     message: '3 new reciters have been added to Al-Quran Hub: Abdul Samad, Abdul Rahman Al-Sudais, and Saad Al-Ghamdi.',
     date: '2026-08-14',
-    link: '/surah/Al-Faatiha',
   },
 ];
