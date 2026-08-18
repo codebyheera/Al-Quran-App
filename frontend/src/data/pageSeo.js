@@ -48,6 +48,11 @@ export const pageSeo = {
     description: 'Support Al-Quran Hub with a donation. Help us keep the Holy Quran free and accessible online for Muslims worldwide.',
     keywords: 'Quran, Al-Quran Hub, donate, support, sadaqah, Islamic app, free Quran online, sadaqah jariyah, Muslim community',
   },
+  contact: {
+    path: '/contact',
+    title: 'Contact Al-Quran Hub | Feedback & Suggestions',
+    description: 'Get in touch with the Al-Quran Hub team — share feedback, suggestions, or a dua. We would love to hear from you.',
+  },
   blogArchive: {
     path: '/blog',
     title: 'Islamic Blog – Quran, Hadith & Spirituality | Al-Quran Hub',

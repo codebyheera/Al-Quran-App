@@ -7,9 +7,13 @@ const QUICK_LINKS = [
   { label: 'Juz', to: '/juz' },
   { label: 'Tasbih Counter', to: '/tasbih' },
   { label: 'Prayer Times', to: '/prayer-times' },
+];
+
+const MORE_LINKS = [
   { label: 'Bookmarks', to: '/bookmarks' },
   { label: 'Blog', to: '/blog' },
   { label: 'Support', to: '/support' },
+  { label: 'Contact', to: '/contact' },
 ];
 
 const FEATURES = [
@@ -70,6 +74,18 @@ export default function Footer() {
           <h4 className="footer-col-title">Quick Links</h4>
           <ul className="footer-list">
             {QUICK_LINKS.map(link => (
+              <li key={link.to}>
+                <Link to={link.to} className="footer-link">{link.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* ── More ── */}
+        <div className="footer-col">
+          <h4 className="footer-col-title">More</h4>
+          <ul className="footer-list">
+            {MORE_LINKS.map(link => (
               <li key={link.to}>
                 <Link to={link.to} className="footer-link">{link.label}</Link>
               </li>

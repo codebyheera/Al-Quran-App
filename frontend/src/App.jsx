@@ -27,6 +27,7 @@ const BookmarksPage  = lazy(() => import('./pages/BookmarksPage'));
 const TasbihPage     = lazy(() => import('./pages/TasbihPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 const BlogArchive = lazy(() => import('./pages/BlogArchive'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const PrayerTimesHub = lazy(() => import('./pages/PrayerTimesHub'));
@@ -88,6 +89,7 @@ export default function App() {
             <Route path="/tasbih" element={<TasbihPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/support" element={<SupportPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/blog" element={<BlogArchive />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/prayer-times" element={<PrayerTimesHub />} />
