@@ -40,6 +40,11 @@ export const AudioProvider = ({ children }) => {
 
   const audioRef = useRef(new Audio());
   const currentObjectUrlRef = useRef(null);
+  // Tracks which logical URL we've already retried once after a load error,
+  // so a genuinely broken track can't retry forever, but a transient network
+  // hiccup (CDN rate-limit, brief connectivity blip) gets one automatic
+  // second chance instead of the player just silently doing nothing.
+  const errorRetryUrlRef = useRef(null);
   // The "real" (CDN) URL currently loaded, independent of what audioRef's
   // actual .src is — that can be a blob: object URL when playing from cache,
   // which must never be compared directly against a freshly-computed CDN URL
@@ -111,12 +116,39 @@ export const AudioProvider = ({ children }) => {
 
     const handlePlay = () => {
       setIsPlaying(true);
+      errorRetryUrlRef.current = null; // this track is loading fine now
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
       animationFrameId = requestAnimationFrame(tick);
     };
     const handlePause = () => {
       setIsPlaying(false);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+    // The underlying resource failed to load (dropped connection, CDN
+    // briefly rate-limiting, etc.) — give it exactly one automatic retry
+    // before giving up on this track so a transient blip doesn't leave
+    // the player just sitting there looking broken.
+    const handleError = () => {
+      const failedUrl = currentLogicalUrlRef.current;
+      if (!failedUrl) return;
+
+      if (errorRetryUrlRef.current === failedUrl) {
+        // Already retried this exact track and it failed again — move on.
+        errorRetryUrlRef.current = null;
+        if (playlist.length > 0 && currentIndex < playlist.length - 1) {
+          skipNext();
+        } else {
+          setIsPlaying(false);
+        }
+        return;
+      }
+
+      errorRetryUrlRef.current = failedUrl;
+      setTimeout(async () => {
+        if (currentLogicalUrlRef.current !== failedUrl) return; // user moved on already
+        await applyTrackSrc(failedUrl);
+        audio.play().catch(console.error);
+      }, 1200);
     };
     const handleEnded = async () => {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -184,6 +216,7 @@ export const AudioProvider = ({ children }) => {
     audio.addEventListener('pause', handlePause);
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('error', handleError);
 
     // If audio is already playing when this effect re-runs, kickstart the tick
     if (!audio.paused) {
@@ -196,6 +229,7 @@ export const AudioProvider = ({ children }) => {
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('error', handleError);
     };
   }, [playlist, currentIndex, repeatMode, repeatCount, currentVerse, combineStep, audioLanguage, showEn, showUr]);
 

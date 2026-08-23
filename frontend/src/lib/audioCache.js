@@ -7,16 +7,35 @@
 
 export const AUDIO_CACHE_NAME = 'quran-audio-cache-v1';
 
-// The recitation CDNs don't send CORS headers, so a direct cross-origin
+// Most recitation CDNs don't send CORS headers, so a direct cross-origin
 // fetch() (needed to read bytes into Cache Storage) is blocked by the
 // browser — even though <audio src> playback never needed CORS in the first
-// place. Route the *caching* fetch through our own backend, which fetches
-// the CDN server-side (no CORS between servers) and streams it back from an
-// origin the frontend already has CORS access to. Live playback still uses
-// the direct CDN URL untouched — only background caching goes via proxy.
+// place. For those, route the *caching* fetch through our own backend,
+// which fetches the CDN server-side (no CORS between servers) and streams it
+// back from an origin the frontend already has CORS access to. Live
+// playback always uses the direct CDN URL untouched either way.
+//
+// everyayah.com is the exception — it actually sends
+// `Access-Control-Allow-Origin: *`, so fetch() can read it directly. Skipping
+// the proxy for it avoids an unnecessary hop and (more importantly) avoids
+// routing that traffic through our backend's shared IP, which is what made a
+// burst of prefetch requests trip the CDN's rate limit for *live* playback
+// too when everything went through the proxy.
 const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) || '';
+const DIRECT_FETCH_HOSTS = new Set(['everyayah.com', 'www.everyayah.com']);
+
 function buildProxyUrl(audioUrl) {
   return `${API_BASE}/api/audio-proxy?url=${encodeURIComponent(audioUrl)}`;
+}
+
+function resolveCachingFetchUrl(audioUrl) {
+  try {
+    const { hostname } = new URL(audioUrl);
+    if (DIRECT_FETCH_HOSTS.has(hostname)) return audioUrl;
+  } catch {
+    // fall through to proxy
+  }
+  return buildProxyUrl(audioUrl);
 }
 
 const CACHE_UPDATED_EVENT = 'quran-audio-cache-updated';
@@ -115,7 +134,7 @@ export async function cacheAudioInBackground(audioUrl) {
       notifyCacheUpdated(audioUrl);
       return true;
     }
-    const response = await fetch(buildProxyUrl(audioUrl));
+    const response = await fetch(resolveCachingFetchUrl(audioUrl));
     if (!response.ok) return false;
     await cache.put(audioUrl, response.clone());
     notifyCacheUpdated(audioUrl);
@@ -141,10 +160,22 @@ export async function cacheAudioInBackground(audioUrl) {
 // ── Look-ahead prefetching ──────────────────────────────────────────────
 // While one ayah plays, quietly download the next ones in the playlist so
 // advancing through a whole Surah never waits on the free API again.
+//
+// This has to be paced gently: firing a whole Surah's worth of requests
+// back-to-back trips the CDN's burst rate-limiting, and in local dev the
+// browser and this app's own backend proxy share the same outbound IP, so
+// that rate-limit can end up blocking the ayah that's actually trying to
+// play live too — the prefetching was defeating its own purpose.
 
-const MAX_CONCURRENT_PREFETCH = 2;
+const MAX_CONCURRENT_PREFETCH = 1;
+const PREFETCH_PACE_MS = 500; // minimum gap between the end of one prefetch and the start of the next
+const PREFETCH_FAILURE_COOLDOWN_MS = 60000; // back off this long after a run of failures (likely rate-limited)
+const PREFETCH_FAILURE_THRESHOLD = 3;
+
 let prefetchQueue = [];
 let activePrefetches = 0;
+let consecutiveFailures = 0;
+let resumeAt = 0;
 const seenForPrefetch = new Set();
 // URL -> in-flight cacheAudioInBackground() promise, so playback can piggy-back
 // on a download that's already happening instead of firing a second, competing
@@ -153,14 +184,27 @@ const seenForPrefetch = new Set();
 const inFlightPrefetch = new Map();
 
 function pumpPrefetchQueue() {
+  if (Date.now() < resumeAt) return; // cooling down after repeated failures
   while (activePrefetches < MAX_CONCURRENT_PREFETCH && prefetchQueue.length > 0) {
     const url = prefetchQueue.shift();
     activePrefetches++;
-    const promise = cacheAudioInBackground(url).finally(() => {
-      activePrefetches--;
-      inFlightPrefetch.delete(url);
-      pumpPrefetchQueue();
-    });
+    const promise = cacheAudioInBackground(url)
+      .then((success) => {
+        consecutiveFailures = success ? 0 : consecutiveFailures + 1;
+        if (!success && consecutiveFailures >= PREFETCH_FAILURE_THRESHOLD) {
+          // Several in a row failing almost certainly means the CDN/proxy is
+          // rate-limiting us, not that these specific files are missing.
+          // Stop hammering it — retry once things have had time to cool down.
+          resumeAt = Date.now() + PREFETCH_FAILURE_COOLDOWN_MS;
+          prefetchQueue = [];
+          consecutiveFailures = 0;
+        }
+      })
+      .finally(() => {
+        activePrefetches--;
+        inFlightPrefetch.delete(url);
+        setTimeout(pumpPrefetchQueue, PREFETCH_PACE_MS);
+      });
     inFlightPrefetch.set(url, promise);
   }
 }

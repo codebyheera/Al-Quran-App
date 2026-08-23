@@ -4,9 +4,11 @@
 
 /* ── SHARED TOKENS ── */
 :root {
-  /* Player accent follows the active theme accent color */
-  --bp-accent: var(--accent-green);
-  --bp-accent-hover: var(--accent-gold);
+  /* Player accent follows the active theme's accent color, same as every
+     other control in the app (AudioPlayer, AudioDropdown, buttons, etc.) —
+     this is what makes it re-theme automatically when the theme changes. */
+  --bp-accent: var(--accent-gold);
+  --bp-accent-hover: var(--accent-gold-light);
   --bp-radius: 14px;
   --bp-btn-size: 34px;
   --bp-transition: 0.2s ease;
@@ -30,8 +32,8 @@
 }
 
 .bp-btn:hover {
-  background: rgba(127, 119, 221, 0.1);
-  color: var(--color-text-primary, #111);
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
 }
 
 .bp-btn.active {
@@ -62,7 +64,7 @@
   position: relative;
   height: 3px;
   border-radius: 2px;
-  background: rgba(127, 119, 221, 0.18);
+  background: var(--border);
 }
 
 .bp-slider-fill {
@@ -106,9 +108,9 @@
 
 .bp-speed:hover {
   border-color: var(--bp-accent-hover);
-  background: rgba(201, 168, 76, 0.08);
+  background: color-mix(in srgb, var(--accent-gold) 8%, transparent);
   color: var(--bp-accent-hover);
-  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-gold) 8%, transparent);
 }
 
 /* ════════════════════════════════════════
@@ -494,9 +496,9 @@
 
 .bp-mobile-speed:hover {
   border-color: var(--bp-accent-hover);
-  background: rgba(201, 168, 76, 0.08);
+  background: color-mix(in srgb, var(--accent-gold) 8%, transparent);
   color: var(--bp-accent-hover);
-  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-gold) 8%, transparent);
 }
 
 /* ════════════════════════════════════════

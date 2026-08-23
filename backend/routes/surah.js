@@ -128,8 +128,13 @@ router.get('/:surahIdentifier', async (req, res) => {
         arabic: arabicText,
       translation: englishEdition?.ayahs[i]?.text || '',
       urduTranslation: urduEdition?.ayahs[i]?.text || '',
-      audioUrl: (isGhamidi || internalReciter === 'sudais' || internalReciter === 'yasser')
-        ? buildEveryAyahUrl(internalReciter, num, arabicAyah.numberInSurah) 
+      // everyayah.com is far more reliable for these reciters than the
+      // alquran.cloud-sourced cdn.islamic.network URLs — Abdul Samad's audio
+      // there is only available at 64kbps, a cold/lightly-cached path that
+      // was intermittently failing (unlike the heavily-cached 128kbps paths
+      // other reciters like Alafasy use on that same CDN).
+      audioUrl: (isGhamidi || internalReciter === 'sudais' || internalReciter === 'yasser' || internalReciter === 'abdulsamad')
+        ? buildEveryAyahUrl(internalReciter, num, arabicAyah.numberInSurah)
         : (audioEdition?.ayahs[i]?.audio || ''),
       englishAudioUrl: enAudioEdition?.ayahs[i]?.audio || '',
       urduAudioUrl: urAudioEdition?.ayahs[i]?.audio || '',

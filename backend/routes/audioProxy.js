@@ -20,6 +20,8 @@ const router = express.Router();
 const ALLOWED_HOSTS = new Set([
   'cdn.islamic.network',
   'audio.qurancdn.com',
+  'everyayah.com',
+  'www.everyayah.com',
 ]);
 
 function isAllowedAudioUrl(rawUrl) {
@@ -40,7 +42,12 @@ async function fetchUpstream(url, attempt = 1) {
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AlQuranHub-AudioProxy/1.0)' },
     });
   } catch (err) {
-    if (attempt < 2) return fetchUpstream(url, attempt + 1); // one retry for transient blips
+    if (attempt < 2) {
+      // A brief pause before retrying — an instant retry is pointless if the
+      // first failure was the CDN rate-limiting a burst of requests.
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      return fetchUpstream(url, attempt + 1);
+    }
     throw err;
   }
 }
