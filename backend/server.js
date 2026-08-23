@@ -38,6 +38,16 @@ const audioProxyLimiter = rateLimit({
   message: { message: "Too many audio requests from this IP, please try again shortly" }
 });
 
+// The AI chatbot calls a paid LLM per request, so it gets a much stricter
+// limiter: 10 messages per hour per IP.
+const chatLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "You've reached the chat limit (10 messages per hour). Please try again later." },
+});
+
 // CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
@@ -56,6 +66,7 @@ import blogRoutes         from './routes/blogRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import prayerTimesRoutes  from './routes/prayerTimes.js';
 import audioProxyRoutes   from './routes/audioProxy.js';
+import chatRoutes         from './routes/chat.js';
 
 app.use('/api/surah',         surahRoutes);
 app.use('/api/juz',           juzRoutes);
@@ -65,6 +76,7 @@ app.use('/api/blogs',         blogRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/prayer-times',  prayerTimesRoutes);
 app.use('/api/audio-proxy',   audioProxyLimiter, audioProxyRoutes);
+app.use('/api/chat',          chatLimiter, chatRoutes);
 
 // Health-check
 app.get('/', (_req, res) => {
@@ -72,58 +84,25 @@ app.get('/', (_req, res) => {
 });
 
 // Sitemap
-import { supabase } from './lib/supabase.js';
+import { getSitePages } from './lib/sitePages.js';
 
 app.get('/sitemap.xml', async (_req, res) => {
-  const PRAYER_CITY_SLUGS = [
-    'lahore', 'karachi', 'islamabad', 'faisalabad', 'rawalpindi',
-    'multan', 'peshawar', 'gujranwala', 'sialkot', 'quetta',
-  ];
-
-  const staticPages = [
-    { loc: 'https://alquranhub.org/',                    changefreq: 'daily',   priority: '1.0' },
-    { loc: 'https://alquranhub.org/quran',               changefreq: 'monthly', priority: '0.9' },
-    { loc: 'https://alquranhub.org/tasbih',              changefreq: 'monthly', priority: '0.8' },
-    { loc: 'https://alquranhub.org/blog',                changefreq: 'weekly',  priority: '0.8' },
-    { loc: 'https://alquranhub.org/about',               changefreq: 'monthly', priority: '0.5' },
-    { loc: 'https://alquranhub.org/contact',             changefreq: 'monthly', priority: '0.5' },
-    { loc: 'https://alquranhub.org/prayer-times',        changefreq: 'daily',   priority: '0.9' },
-    ...PRAYER_CITY_SLUGS.map((slug) => ({
-      loc: `https://alquranhub.org/prayer-times/${slug}`,
-      changefreq: 'daily',
-      priority: '0.85',
-    })),
-  ];
-
   try {
-    const { data: blogs, error } = await supabase
-      .from('blogs')
-      .select('slug, created_at')
-      .eq('is_published', true)
-      .order('created_at', { ascending: false });
+    const pages = await getSitePages();
 
-    if (error) throw error;
-
-    const staticUrls = staticPages.map(p => `
+    const urls = pages
+      .filter((p) => p.crawlable)
+      .map((p) => `
   <url>
     <loc>${p.loc}</loc>
+    ${p.lastmod ? `<lastmod>${p.lastmod}</lastmod>` : ''}
     <changefreq>${p.changefreq}</changefreq>
     <priority>${p.priority}</priority>
-  </url>`).join('');
-
-    const blogUrls = (blogs || []).map(b => {
-      const lastmod = b.created_at ? b.created_at.slice(0, 10) : '';
-      return `
-  <url>
-    <loc>https://alquranhub.org/blog/${b.slug}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>`;
-    }).join('');
+  </url>`)
+      .join('');
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticUrls}${blogUrls}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}
 </urlset>`;
 
     res.header('Content-Type', 'application/xml');

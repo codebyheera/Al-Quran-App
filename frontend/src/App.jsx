@@ -14,6 +14,7 @@ import { getStreakData } from './lib/streakUtils';
 const BottomPlayer        = lazy(() => import('./components/BottomPlayer'));
 const SupportPopup        = lazy(() => import('./components/SupportPopup'));
 const NotificationBanner  = lazy(() => import('./components/NotificationBanner'));
+const ChatWidget          = lazy(() => import('./components/ChatWidget'));
 
 // ── Home is eagerly loaded (critical first paint) ────────────────────────────
 import Home from './pages/Home';
@@ -54,6 +55,11 @@ export default function App() {
   const { toast } = useBookmarks();
   const location = useLocation();
   const canonicalUrl = `https://alquranhub.org${location.pathname === '/' ? '' : location.pathname}`;
+
+  // Surah pages are /surah/:id, where :id is usually the canonical name
+  // slug (e.g. "At-Tawba") — the backend normalizes numeric ids too.
+  const surahPageMatch = location.pathname.match(/^\/surah\/([^/]+)/);
+  const currentSurahSlug = surahPageMatch ? decodeURIComponent(surahPageMatch[1]) : null;
 
   // Runs once per app load (App wraps every route) so the daily reading
   // streak's date rollover — and the "missed the goal, reset streak"
@@ -116,6 +122,11 @@ export default function App() {
       {/* Push notification permission banner */}
       <Suspense fallback={null}>
         <NotificationBanner />
+      </Suspense>
+
+      {/* Global AI chat assistant */}
+      <Suspense fallback={null}>
+        <ChatWidget currentSurahSlug={currentSurahSlug} />
       </Suspense>
     </div>
   );
