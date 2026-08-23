@@ -1,0 +1,46 @@
+.surah-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin: 0 0 1.75rem;
+  padding: 1.25rem 1.4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.surah-intro__para {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: 0.98rem;
+  line-height: 1.85;
+}
+
+.surah-intro__para:first-child {
+  color: var(--text-primary);
+}
+
+.surah-intro__link {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: var(--transition);
+}
+
+.surah-intro__link:hover {
+  color: var(--accent-gold-light);
+}
+
+@media (max-width: 640px) {
+  .surah-intro {
+    padding: 1rem 1.1rem;
+    margin-bottom: 1.4rem;
+    gap: 0.75rem;
+  }
+
+  .surah-intro__para {
+    font-size: 0.93rem;
+    line-height: 1.75;
+  }
+}

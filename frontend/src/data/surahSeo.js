@@ -44,9 +44,9 @@ export const surahSeo = {
       "Read and listen to Surah Al-Anfal (Spoils of War) - Chapter 8. 75 verses on Battle of Badr, faith & unity. Arabic & English — Free on Al-Quran Hub.",
   },
   9: {
-    title: "Surah Tawbah | Read & Listen Online Free — Al-Quran Hub",
+    title: "Surah Tawbah: Read & Listen Free | Al Quran Hub",
     description:
-      "Read and listen to Surah Tawbah (The Repentance) — Chapter 9 of the Holy Quran. 129 verses. Arabic & English — Free on Al-Quran Hub.",
+      "Read and listen to Surah Tawbah, Chapter 9 of the Holy Quran with 129 verses. Arabic text, audio recitation and translation, free on Al Quran Hub.",
   },
   10: {
     title: "Surah Younus | Read & Listen Online Free — Al-Quran Hub",

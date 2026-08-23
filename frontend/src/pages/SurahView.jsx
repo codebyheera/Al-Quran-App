@@ -19,6 +19,8 @@ import Breadcrumb from "../components/Breadcrumb";
 import SurahFaqSection from "../components/SurahFaqSection";
 import { getSurahFaqs, getSurahFaqSchema } from "../data/surahFaqs";
 import { getSurahSeo } from "../data/surahSeo";
+import SurahIntro from "../components/SurahIntro";
+import { getSurahContent } from "../data/surah-content";
 import { useReadingTimer } from "../hooks/useReadingTimer";
 import "./SurahView.css";
 
@@ -366,6 +368,8 @@ export default function SurahView() {
     pageTitle,
   });
 
+  const surahContentData = getSurahContent(surah.surahName);
+
   return (
     <div
       className="surah-view page-enter"
@@ -537,6 +541,13 @@ export default function SurahView() {
           </div>
         </div>
 
+        {/* ── Intro (above) + FAQ (below) around the verse list ── */}
+        <SurahIntro
+          intro={surahContentData?.intro}
+          faqs={surahContentData?.faqs}
+          surahName={surah.surahName}
+          pageUrl={`https://alquranhub.org/surah/${id}`}
+        >
         {/* ── Verse list ──────────────────────────────────── */}
         <div className="verse-list">
           {verses.map((verse, index) => {
@@ -689,6 +700,7 @@ export default function SurahView() {
             );
           })}
         </div>
+        </SurahIntro>
 
         {/* ── Prev / Next navigation ──────────────────────── */}
         {faqItems.length > 0 && (
