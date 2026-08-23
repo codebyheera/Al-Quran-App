@@ -43,3 +43,32 @@
   border-radius: 2px;
   transition: width 0.1s linear;
 }
+
+.audio-cache-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.audio-cache-indicator.offline {
+  color: var(--accent-gold);
+  opacity: 0.75;
+}
+
+.audio-cache-spinner {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid rgba(201, 168, 76, 0.3);
+  border-top-color: var(--accent-gold);
+  border-radius: 50%;
+  animation: audio-cache-spin 0.7s linear infinite;
+}
+
+@keyframes audio-cache-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

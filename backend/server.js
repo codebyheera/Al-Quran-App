@@ -23,10 +23,20 @@ const PORT = process.env.PORT || 5000;
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-  message: { message: "Too many requests from this IP, please try again after 15 minutes" }
+  message: { message: "Too many requests from this IP, please try again after 15 minutes" },
+  // The audio proxy has its own, much more generous limiter below — a single
+  // Surah can legitimately need hundreds of ayah audio requests.
+  skip: (req) => req.path.startsWith('/api/audio-proxy'),
 });
 
 app.use(limiter);
+
+// Audio proxy gets its own generous limiter instead of the general API one.
+const audioProxyLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 2000,
+  message: { message: "Too many audio requests from this IP, please try again shortly" }
+});
 
 // CORS configuration
 app.use(cors({
@@ -45,6 +55,7 @@ import searchRoutes       from './routes/search.js';
 import blogRoutes         from './routes/blogRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import prayerTimesRoutes  from './routes/prayerTimes.js';
+import audioProxyRoutes   from './routes/audioProxy.js';
 
 app.use('/api/surah',         surahRoutes);
 app.use('/api/juz',           juzRoutes);
@@ -53,6 +64,7 @@ app.use('/api/search',        searchRoutes);
 app.use('/api/blogs',         blogRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/prayer-times',  prayerTimesRoutes);
+app.use('/api/audio-proxy',   audioProxyLimiter, audioProxyRoutes);
 
 // Health-check
 app.get('/', (_req, res) => {

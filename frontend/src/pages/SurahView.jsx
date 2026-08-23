@@ -13,6 +13,7 @@ import { useBookmarks } from "../context/BookmarkContext";
 import AudioDropdown from "../components/AudioDropdown";
 import { useAudio } from "../context/AudioContext";
 import { useQari } from "../context/QariContext";
+import { queuePrefetch } from "../lib/audioCache";
 import { Helmet } from "react-helmet-async";
 import Breadcrumb from "../components/Breadcrumb";
 import SurahFaqSection from "../components/SurahFaqSection";
@@ -211,6 +212,20 @@ export default function SurahView() {
     }
   }, [loading, surah, location.hash]);
 
+  // As soon as the Surah loads, quietly start downloading the first few
+  // ayahs in the background — so by the time the user taps Play (either the
+  // per-ayah button or the header "Play Surah" button), audio is already
+  // cached and starts instantly instead of paying the CDN round-trip.
+  useEffect(() => {
+    if (!surah?.verses?.length) return;
+    const lookahead = surah.verses.slice(0, 4).map((v) => {
+      if (audioLanguage === "en") return v.englishAudioUrl || v.audioUrl;
+      if (audioLanguage === "ur") return v.urduAudioUrl || v.audioUrl;
+      return v.audioUrl;
+    });
+    queuePrefetch(lookahead);
+  }, [surah, audioLanguage]);
+
   // Auto-scroll when currentVerse changes
   useEffect(() => {
     if (currentVerse && surah) {
@@ -252,14 +267,10 @@ export default function SurahView() {
     if (isCurrentSurahPlaying) {
       togglePlay();
     } else {
-      // Prepare verses for the global playlist
-      const playlistVerses = surah.verses.map((v) => ({
-        ...v,
-        surahNumber: surahNum,
-        surahName: surah.surahName,
-        audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl,
-      }));
-      playPlaylist(playlistVerses, 0);
+      // Reuse the same playlist array already built for the per-ayah buttons
+      // (mappedPlaylist below) instead of rebuilding it — keeps this button
+      // exactly as cheap to click as an individual ayah's play button.
+      playPlaylist(mappedPlaylist, 0);
     }
   }
 

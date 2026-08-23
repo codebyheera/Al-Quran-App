@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useRef, useEffect } from 'react';
+import { clearAudioCache, queuePrefetch, resetPrefetchQueue, loadPlayableSrc } from '../lib/audioCache';
 
 const AudioContext = createContext();
 
@@ -38,6 +39,63 @@ export const AudioProvider = ({ children }) => {
   }, [showUr]);
 
   const audioRef = useRef(new Audio());
+  const currentObjectUrlRef = useRef(null);
+  // The "real" (CDN) URL currently loaded, independent of what audioRef's
+  // actual .src is — that can be a blob: object URL when playing from cache,
+  // which must never be compared directly against a freshly-computed CDN URL
+  // (they'd never match, causing a false "track changed" reload mid-playback).
+  const currentLogicalUrlRef = useRef(null);
+  // Bumped on every applyTrackSrc call so a slower, older call can detect it
+  // was superseded by a newer one and avoid clobbering the newer track's
+  // src/state once its own (now-stale) cache lookup finally resolves.
+  const trackLoadTokenRef = useRef(0);
+  const [isTrackDownloading, setIsTrackDownloading] = useState(false);
+  const [isTrackOffline, setIsTrackOffline] = useState(false);
+
+  // Hybrid cache-first / stream-first src resolution for the shared <audio> element.
+  // Cache hit: play from an object URL (fully offline). Cache miss: stream the
+  // original URL immediately, and cache it in the background for next time.
+  const applyTrackSrc = async (url) => {
+    const token = ++trackLoadTokenRef.current;
+    currentLogicalUrlRef.current = url || null;
+
+    if (currentObjectUrlRef.current) {
+      URL.revokeObjectURL(currentObjectUrlRef.current);
+      currentObjectUrlRef.current = null;
+    }
+    setIsTrackDownloading(false);
+    setIsTrackOffline(false);
+
+    if (!url) return;
+
+    const { src, fromCache, backgroundPromise } = await loadPlayableSrc(url);
+    if (trackLoadTokenRef.current !== token) return; // superseded by a newer call
+
+    if (fromCache) {
+      currentObjectUrlRef.current = src;
+      audioRef.current.src = src;
+      setIsTrackOffline(true);
+      return;
+    }
+
+    audioRef.current.src = src;
+    setIsTrackDownloading(true);
+    backgroundPromise?.then((success) => {
+      if (trackLoadTokenRef.current !== token) return;
+      setIsTrackDownloading(false);
+      if (success) setIsTrackOffline(true);
+    });
+  };
+
+  // Revoke the last object URL when the player unmounts
+  useEffect(() => {
+    return () => {
+      if (currentObjectUrlRef.current) {
+        URL.revokeObjectURL(currentObjectUrlRef.current);
+        currentObjectUrlRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -60,7 +118,7 @@ export const AudioProvider = ({ children }) => {
       setIsPlaying(false);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
-    const handleEnded = () => {
+    const handleEnded = async () => {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
 
       // Handle Combine mode logic
@@ -69,14 +127,14 @@ export const AudioProvider = ({ children }) => {
           // Finished Arabic, check if English should play
           if (showEn && currentVerse.englishAudioUrl) {
             setCombineStep(1);
-            audio.src = currentVerse.englishAudioUrl;
+            await applyTrackSrc(currentVerse.englishAudioUrl);
             audio.play().catch(console.error);
             return;
           }
           // If no English, fall through to check Urdu
           if (showUr && currentVerse.urduAudioUrl) {
             setCombineStep(2);
-            audio.src = currentVerse.urduAudioUrl;
+            await applyTrackSrc(currentVerse.urduAudioUrl);
             audio.play().catch(console.error);
             return;
           }
@@ -84,7 +142,7 @@ export const AudioProvider = ({ children }) => {
           // Finished English, check if Urdu should play
           if (showUr && currentVerse.urduAudioUrl) {
             setCombineStep(2);
-            audio.src = currentVerse.urduAudioUrl;
+            await applyTrackSrc(currentVerse.urduAudioUrl);
             audio.play().catch(console.error);
             return;
           }
@@ -155,47 +213,67 @@ export const AudioProvider = ({ children }) => {
     return verse.audioUrl || verse.audio;
   };
 
+  // Look ahead in the playlist and quietly download upcoming ayahs so the
+  // rest of the Surah plays back-to-back with no per-ayah network wait.
+  const prefetchUpcoming = (verses, fromIndex, lang) => {
+    const upcoming = verses.slice(fromIndex + 1);
+    if (!upcoming.length) return;
+    const urls = upcoming.map((v) => getAudioForLanguage(v, lang));
+    if (lang === 'combine') {
+      if (showEn) urls.push(...upcoming.map((v) => v.englishAudioUrl).filter(Boolean));
+      if (showUr) urls.push(...upcoming.map((v) => v.urduAudioUrl).filter(Boolean));
+    }
+    queuePrefetch(urls);
+  };
+
   // Handle Playback Language Changes
   useEffect(() => {
     if (currentVerse) {
       setCombineStep(0); // Reset combine step if user changes language mid-playback
       const newSrc = getAudioForLanguage(currentVerse, audioLanguage);
-      if (audioRef.current.src !== newSrc) {
+      if (currentLogicalUrlRef.current !== newSrc) {
         const wasPlaying = !audioRef.current.paused;
-        audioRef.current.src = newSrc;
-        // Optionally reset currentTime to 0 on language change
-        audioRef.current.currentTime = 0;
-        if (wasPlaying) {
-          audioRef.current.play().catch(console.error);
-        }
+        (async () => {
+          await applyTrackSrc(newSrc);
+          // Optionally reset currentTime to 0 on language change
+          audioRef.current.currentTime = 0;
+          if (wasPlaying) {
+            audioRef.current.play().catch(console.error);
+          }
+        })();
       }
     }
   }, [audioLanguage, currentVerse]);
 
-  const playVerse = (verse) => {
+  const playVerse = async (verse) => {
     setPlaylist([]);
     setCurrentIndex(-1);
     setCurrentVerse(verse);
     setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
     setCombineStep(0);
-    audioRef.current.src = getAudioForLanguage(verse, audioLanguage);
+    await applyTrackSrc(getAudioForLanguage(verse, audioLanguage));
     audioRef.current.play().catch(console.error);
   };
 
-  const playPlaylist = (verses, startIdx = 0) => {
+  const playPlaylist = async (verses, startIdx = 0) => {
     setPlaylist(verses);
     setCurrentIndex(startIdx);
     setCurrentVerse(verses[startIdx]);
     setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
     setCombineStep(0);
-    audioRef.current.src = getAudioForLanguage(verses[startIdx], audioLanguage);
+    await applyTrackSrc(getAudioForLanguage(verses[startIdx], audioLanguage));
     audioRef.current.play().catch(console.error);
+    resetPrefetchQueue();
+    prefetchUpcoming(verses, startIdx, audioLanguage);
   };
 
   const updatePlaylist = (newPlaylist) => {
     setPlaylist(newPlaylist);
+    if (currentIndex >= 0) {
+      prefetchUpcoming(newPlaylist, currentIndex, audioLanguage);
+    }
   };
 
   const togglePlay = () => {
@@ -215,7 +293,7 @@ export const AudioProvider = ({ children }) => {
     setRepeatCount(0);
   };
 
-  const skipNext = () => {
+  const skipNext = async () => {
     if (playlist.length > 0 && currentIndex < playlist.length - 1) {
       const nextIdx = currentIndex + 1;
       const nextVerse = playlist[nextIdx];
@@ -223,12 +301,13 @@ export const AudioProvider = ({ children }) => {
       setCurrentVerse(nextVerse);
       setRepeatCount(0);
       setCombineStep(0);
-      audioRef.current.src = getAudioForLanguage(nextVerse, audioLanguage);
+      await applyTrackSrc(getAudioForLanguage(nextVerse, audioLanguage));
       audioRef.current.play().catch(console.error);
+      prefetchUpcoming(playlist, nextIdx, audioLanguage);
     }
   };
 
-  const skipPrev = () => {
+  const skipPrev = async () => {
     if (playlist.length > 0 && currentIndex > 0) {
       const prevIdx = currentIndex - 1;
       const prevVerse = playlist[prevIdx];
@@ -236,8 +315,9 @@ export const AudioProvider = ({ children }) => {
       setCurrentVerse(prevVerse);
       setRepeatCount(0);
       setCombineStep(0);
-      audioRef.current.src = getAudioForLanguage(prevVerse, audioLanguage);
+      await applyTrackSrc(getAudioForLanguage(prevVerse, audioLanguage));
       audioRef.current.play().catch(console.error);
+      prefetchUpcoming(playlist, prevIdx, audioLanguage);
     }
   };
 
@@ -270,6 +350,13 @@ export const AudioProvider = ({ children }) => {
     setPlaybackSpeed(speeds[nextIdx]);
   };
 
+  // Wipes all downloaded/offline-cached audio (for a settings/storage-management screen)
+  const clearDownloadedAudio = async () => {
+    const success = await clearAudioCache();
+    if (success) setIsTrackOffline(false);
+    return success;
+  };
+
   return (
     <AudioContext.Provider value={{
       currentVerse,
@@ -299,7 +386,10 @@ export const AudioProvider = ({ children }) => {
       showEn,
       setShowEn,
       showUr,
-      setShowUr
+      setShowUr,
+      isTrackDownloading,
+      isTrackOffline,
+      clearDownloadedAudio
     }}>
       {children}
     </AudioContext.Provider>
