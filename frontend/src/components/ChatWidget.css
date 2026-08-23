@@ -132,6 +132,19 @@
   color: var(--text-primary);
 }
 
+.chat-widget__beta-badge {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  flex-shrink: 0;
+}
+
 .chat-widget__close-btn {
   width: 30px;
   height: 30px;

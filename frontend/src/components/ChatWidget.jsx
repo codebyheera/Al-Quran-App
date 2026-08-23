@@ -174,6 +174,7 @@ export default function ChatWidget({ currentSurahSlug = null }) {
             <div className="chat-widget__header-title">
               <span className="chat-widget__header-icon">☪</span>
               <div className="chat-widget__header-name">Noor</div>
+              <span className="chat-widget__beta-badge">Beta</span>
             </div>
             <button
               type="button"
