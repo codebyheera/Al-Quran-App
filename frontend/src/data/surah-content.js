@@ -54,6 +54,44 @@ export const surahContent = {
     ],
   },
 
+  "Ar-Ra'd": {
+    intro: [
+      "Surah Ar-Ra'd (The Thunder) is the 13th chapter of the Quran, revealed in Makkah before the Prophet Muhammad (peace be upon him) migrated to Madinah. Its name comes from a powerful moment in the surah where thunder itself is described as glorifying and praising Allah, along with the angels who stand in awe of Him. This chapter takes its readers through the wonders of the natural world — the sky held up without visible pillars, the sun and moon moving in perfect order, rivers flowing, and different plants growing side by side from the same soil yet tasting completely different. Each of these is presented as a quiet sign for anyone willing to reflect. You can explore the [full Quran with translation and audio](/) on Al-Quran Hub.",
+      "Beyond nature, Surah Ar-Ra'd carries one of the most quoted verses in the Quran, Ayah 11, which reminds us that Allah does not change the condition of a people until they change what is within themselves. It is a verse often turned to for motivation and self-reflection. Later, Ayah 28 offers a different kind of comfort, teaching that hearts find true peace only through the remembrance of Allah. Together, these themes make Ar-Ra'd a chapter about looking outward at creation and inward at the heart — and finding the same truth in both.",
+    ],
+    faqs: [
+      {
+        question: "What does Surah Ar-Ra'd mean?",
+        answer:
+          "Surah Ar-Ra'd means \"The Thunder\" in English. The surah gets its name from a verse that describes thunder praising and glorifying Allah, along with the angels who are in awe of Him.",
+      },
+      {
+        question: "How many verses are in Surah Ar-Ra'd?",
+        answer:
+          "Surah Ar-Ra'd has 43 verses (ayahs) and is the 13th chapter of the Quran.",
+      },
+      {
+        question: "Is Surah Ar-Ra'd a Makki or Madani surah?",
+        answer:
+          "Surah Ar-Ra'd is a Makki surah, meaning it was revealed in Makkah before the Prophet Muhammad (peace be upon him) migrated to Madinah.",
+      },
+      {
+        question: "Which Juz is Surah Ar-Ra'd in?",
+        answer: "Surah Ar-Ra'd falls in Juz 13 of the Quran.",
+      },
+      {
+        question: "What is the main message of Surah Ar-Ra'd?",
+        answer:
+          "The surah reflects on the signs of Allah's power found in nature such as the sky, the sun, the moon, and the earth, and connects them to the peace that comes from remembering Allah, as mentioned in Ayah 28.",
+      },
+      {
+        question: "What is special about Ayah 11 of Surah Ar-Ra'd?",
+        answer:
+          "Ayah 11 is one of the most well-known verses in the Quran. It teaches that Allah does not change the condition of a people until they change what is within themselves, making it a popular verse for reflection and self-improvement.",
+      },
+    ],
+  },
+
   // TODO: add remaining 113 Surahs here, one at a time.
   // Copy the At-Tawba shape above — key = surah.surahName slug (see
   // backend/data/surahMapping.js englishNamesToIds for the exact string),

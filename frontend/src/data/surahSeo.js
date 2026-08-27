@@ -64,9 +64,9 @@ export const surahSeo = {
       "Read and listen to Surah Yousaf (Joseph) — Ch 12. 111 verses - the Quran story. Patience, faith & forgiveness. Arabic & English. Free on Al-Quran Hub.",
   },
   13: {
-    title: "Surah Ar-Rad | Read & Listen Online Free — Al-Quran Hub",
+    title: "Surah Ar-Rad: Read & Listen Free – Al-Quran Hub",
     description:
-      "Read and listen to Surah Ar-Rad (Thunder) - Ch 13. 43 verses on Allah's power & nature signs. Verses 11 & 28. Arabic & English. Free on Al-Quran Hub.",
+      "Read & listen to Surah Ar-Rad (The Thunder) online free. Chapter 13, 43 verses with Arabic, audio & English translation. Includes Ayah 11 & 28.",
   },
   14: {
     title: "Surah ibrahim | Read & Listen Online Free — Al-Quran Hub",
