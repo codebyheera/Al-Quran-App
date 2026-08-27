@@ -15,6 +15,7 @@ const BottomPlayer        = lazy(() => import('./components/BottomPlayer'));
 const SupportPopup        = lazy(() => import('./components/SupportPopup'));
 const NotificationBanner  = lazy(() => import('./components/NotificationBanner'));
 const ChatWidget          = lazy(() => import('./components/ChatWidget'));
+const DaroodReminderToast = lazy(() => import('./components/DaroodReminderToast'));
 
 // ── Home is eagerly loaded (critical first paint) ────────────────────────────
 import Home from './pages/Home';
@@ -33,6 +34,7 @@ const BlogArchive = lazy(() => import('./pages/BlogArchive'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const PrayerTimesHub = lazy(() => import('./pages/PrayerTimesHub'));
 const PrayerCityPage = lazy(() => import('./pages/PrayerCityPage'));
+const DuroodSharifPage = lazy(() => import('./pages/DuroodSharifPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // ── Lightweight loader ───────────────────────────────────────────────────────
@@ -100,6 +102,7 @@ export default function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/prayer-times" element={<PrayerTimesHub />} />
             <Route path="/prayer-times/:city" element={<PrayerCityPage />} />
+            <Route path="/durood-sharif" element={<DuroodSharifPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
@@ -127,6 +130,11 @@ export default function App() {
       {/* Global AI chat assistant */}
       <Suspense fallback={null}>
         <ChatWidget currentSurahSlug={currentSurahSlug} />
+      </Suspense>
+
+      {/* Daily Durood reminder toast — delayed, dismissible, site-wide */}
+      <Suspense fallback={null}>
+        <DaroodReminderToast />
       </Suspense>
     </div>
   );

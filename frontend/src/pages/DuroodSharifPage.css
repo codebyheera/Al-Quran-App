@@ -1,0 +1,346 @@
+/* ── Remove mobile tap highlight ─────────────────────────── */
+.darood-tap,
+.darood-ctrl {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+/* ── Page wrapper ─────────────────────────────────────────── */
+.darood-page {
+  min-height: 80vh;
+  padding: 2rem 0 4rem;
+}
+
+/* Header (breadcrumb/h1/subtitle) shares this same centered column as the
+   rest of the page's content — everything lines up on one left edge
+   instead of a full-width header sitting above a narrower centered body.
+   The header pieces sit tightly together (see negative margins below),
+   with the parent's 2rem flex `gap` doing the larger spacing between
+   sections from the subtitle onward. */
+.darood-page-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Breadcrumb already carries its own 1.25rem margin-bottom; cancel most of
+   the parent's 2rem gap so breadcrumb→h1 spacing matches the rest of the
+   site (~1.25rem) instead of stacking to ~3.25rem. */
+.darood-page-inner > .breadcrumb {
+  margin-bottom: -0.75rem;
+}
+
+.darood-page-inner h1 {
+  margin: 0;
+}
+
+/* Same idea for h1→subtitle: keep it tight (0.4rem), let the 2rem gap
+   handle the larger space from the subtitle down to the next section. */
+.darood-page-subtitle {
+  margin: -1.6rem 0 0;
+}
+
+/* ── Full Durood text card ───────────────────────────────── */
+.darood-text-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  cursor: default; /* .card defaults to a pointer cursor for clickable cards */
+}
+
+.darood-text-arabic {
+  font-size: clamp(1.5rem, 4vw + 0.6rem, var(--arabic-font-size));
+  line-height: 1.9;
+  overflow-wrap: break-word;
+}
+
+/* Lighter, warmer tint than --text-secondary for legible contrast against
+   the dark card background, while italics keep it visually distinct from
+   the (non-italic) translation below it. */
+.darood-text-translit {
+  font-style: italic;
+  color: var(--accent-gold-light);
+  line-height: 1.6;
+}
+
+.darood-text-translation {
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ── Share row ────────────────────────────────────────────── */
+.darood-share-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.darood-share-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.darood-share-btn:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+.darood-share-whatsapp {
+  color: #25d366;
+  border-color: rgba(37, 211, 102, 0.35);
+}
+
+.darood-share-whatsapp:hover {
+  background: rgba(37, 211, 102, 0.08);
+  border-color: #25d366;
+}
+
+.darood-share-copy {
+  color: var(--accent-gold);
+}
+
+/* ── Counter ──────────────────────────────────────────────── */
+.darood-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.darood-tap {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: transform 0.1s ease, filter 0.2s ease;
+}
+.darood-tap:hover { filter: brightness(1.1); }
+.darood-tap:active { transform: scale(0.94); }
+
+.darood-count-num {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #0f0f1a;
+  line-height: 1;
+}
+
+.darood-tap-hint {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #0f0f1a;
+  opacity: 0.75;
+}
+
+.darood-controls {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.darood-ctrl {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+  padding: 0.6rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.darood-ctrl:last-child  { border-right: none; color: var(--accent-gold); }
+.darood-ctrl:first-child { color: rgba(201, 168, 76, 0.65); }
+.darood-ctrl:hover       { background: rgba(201, 168, 76, 0.08); color: var(--text-primary); }
+
+.darood-ctrl,
+.darood-reset-yes,
+.darood-reset-cancel {
+  min-height: 44px;
+}
+
+/* ── Inline reset confirmation — replaces the Reset button in place ── */
+.darood-reset-confirm {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-right: 1px solid var(--border);
+}
+
+.darood-reset-confirm-text {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.darood-reset-yes,
+.darood-reset-cancel {
+  border: none;
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.darood-reset-yes {
+  background: var(--accent-gold);
+  color: #0f0f1a;
+}
+.darood-reset-yes:hover { filter: brightness(1.1); }
+
+.darood-reset-cancel {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.darood-reset-cancel:hover { color: var(--text-primary); border-color: var(--border-hover); }
+
+.darood-save-note {
+  margin: -0.5rem 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Lifetime stat card ──────────────────────────────────── */
+.darood-lifetime-card {
+  width: 100%;
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.lifetime-label {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+.lifetime-val {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  line-height: 1;
+  margin-top: 4px;
+}
+.lifetime-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* ── Related features ─────────────────────────────────────── */
+.darood-related {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.darood-related-title {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.darood-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.85rem;
+}
+
+.darood-related-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 1.1rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  text-decoration: none;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.darood-related-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.darood-related-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* ── Tablet ───────────────────────────────────────────────── */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .darood-page-inner {
+    max-width: 680px;
+  }
+}
+
+/* ── Mobile ───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .darood-share-row {
+    flex-direction: column;
+  }
+
+  .darood-related-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .darood-tap { width: 130px; height: 130px; }
+  .darood-count-num { font-size: 2.6rem; }
+}
+
+/* ── Very small phones ────────────────────────────────────── */
+@media (max-width: 360px) {
+  .darood-tap { width: 110px; height: 110px; }
+  .darood-count-num { font-size: 2.1rem; }
+  .darood-tap-hint { font-size: 0.62rem; }
+
+  .darood-ctrl { padding: 0.6rem 0.9rem; font-size: 0.78rem; }
+
+  .darood-reset-confirm-text { display: none; } /* keep Yes/Cancel from wrapping on very narrow screens */
+}

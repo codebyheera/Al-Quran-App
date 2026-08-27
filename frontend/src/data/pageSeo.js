@@ -58,6 +58,13 @@ export const pageSeo = {
     title: 'Islamic Blog – Quran, Hadith & Spirituality | Al-Quran Hub',
     description: 'Explore Surah benefits, Tafsir, and Islamic guides written to deepen your connection with the Quran. Free, ad-free.',
   },
+  duroodSharif: {
+    path: '/durood-sharif',
+    title: 'Durood Sharif — Durood-e-Ibrahim with Translation | Al-Quran Hub',
+    description:
+      'Read Durood-e-Ibrahim in Arabic with transliteration and English translation, and count your daily recitations with our free Durood counter.',
+    keywords: 'durood sharif, durood e ibrahim, durood counter, salawat, blessings on the prophet',
+  },
   prayerTimesHub: {
     path: '/prayer-times',
     title: 'Namaz & Prayer Times in Pakistan | Al-Quran Hub',

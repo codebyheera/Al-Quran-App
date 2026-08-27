@@ -33,6 +33,7 @@ const STATIC_PAGES = [
   { path: '/surah', label: 'Browse all Surahs', crawlable: true, changefreq: 'monthly', priority: '0.9' },
   { path: '/juz', label: 'Browse all Juz (Para)', crawlable: true, changefreq: 'monthly', priority: '0.85' },
   { path: '/tasbih', label: 'Tasbih Counter', crawlable: true, changefreq: 'monthly', priority: '0.8' },
+  { path: '/durood-sharif', label: 'Durood Sharif', crawlable: true, changefreq: 'monthly', priority: '0.8' },
   { path: '/prayer-times', label: 'Prayer Times', crawlable: true, changefreq: 'daily', priority: '0.9' },
   { path: '/blog', label: 'Blog', crawlable: true, changefreq: 'weekly', priority: '0.8' },
   { path: '/support', label: 'Support / Donate', crawlable: true, changefreq: 'monthly', priority: '0.5' },

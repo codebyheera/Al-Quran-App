@@ -13,10 +13,10 @@ export default function SupportPopup() {
     const hasShown = sessionStorage.getItem('supportPopupShown');
 
     if (!hasShown) {
-      // Show popup after 5 seconds
+      // Show popup after 8 minutes
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 5000);
+      }, 8 * 60 * 1000);
 
       return () => clearTimeout(timer);
     }
