@@ -92,6 +92,44 @@ export const surahContent = {
     ],
   },
 
+  "Al-Hadid": {
+    intro: [
+      "Surah Al-Hadid (The Iron) is the 57th chapter of the Quran, revealed in Madinah. It falls in Juz 27 and contains 29 verses. The surah opens by describing how everything in the heavens and the earth glorifies Allah, setting the tone for a chapter about faith, sacrifice, and true wealth. Its name comes from Ayah 25, where iron is mentioned as something Allah sent down with great strength, benefiting people both as a tool and as a symbol of firmness. You can [explore more of the Quran with translation and audio](/) on Al-Quran Hub.",
+      "Surah Al-Hadid encourages believers to spend in the way of Allah and reminds them that this worldly life is temporary, compared to a passing rain that brings green growth before it withers away. It also speaks about light being given to the believers on the Day of Judgment, guiding them forward, while highlighting the difference between sincere faith and mere words. Together, these themes make Al-Hadid a chapter about strength, both physical and spiritual, and the lasting reward that comes from true belief.",
+    ],
+    faqs: [
+      {
+        question: "What does Surah Al-Hadid mean?",
+        answer:
+          "Surah Al-Hadid means \"The Iron\" in English. It gets its name from Ayah 25, which mentions iron as something sent down by Allah with great strength and benefit for people.",
+      },
+      {
+        question: "How many verses are in Surah Al-Hadid?",
+        answer:
+          "Surah Al-Hadid has 29 verses and is the 57th chapter of the Quran.",
+      },
+      {
+        question: "Is Surah Al-Hadid a Makki or Madani surah?",
+        answer:
+          "Surah Al-Hadid is a Madani surah, meaning it was revealed in Madinah after the Prophet Muhammad's (peace be upon him) migration.",
+      },
+      {
+        question: "Which Juz is Surah Al-Hadid in?",
+        answer: "Surah Al-Hadid falls in Juz 27 of the Quran.",
+      },
+      {
+        question: "What is the main message of Surah Al-Hadid?",
+        answer:
+          "The surah focuses on spending in the way of Allah, the temporary nature of worldly life, and the light given to true believers on the Day of Judgment.",
+      },
+      {
+        question: "Why is iron mentioned in Surah Al-Hadid?",
+        answer:
+          "Iron is mentioned in Ayah 25 as a blessing from Allah, symbolizing both physical strength and the firmness needed to stand for justice.",
+      },
+    ],
+  },
+
   // TODO: add remaining 113 Surahs here, one at a time.
   // Copy the At-Tawba shape above — key = surah.surahName slug (see
   // backend/data/surahMapping.js englishNamesToIds for the exact string),

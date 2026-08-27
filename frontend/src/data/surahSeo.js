@@ -188,6 +188,11 @@ export const surahSeo = {
     description:
       "Explore As-Saffat, the 37th chapter of the Quran, with English translation & audio recitation. Read Surah As-Saffat verse by verse free on Al-Quran Hub.",
   },
+  57: {
+    title: "Surah Al-Hadid | Read & Listen Online Free — Al-Quran Hub",
+    description:
+      "Read and listen to Surah Al-Hadid (The Iron) - Ch 57. 29 verses on faith, charity & divine justice. Arabic & English. Free on Al-Quran Hub.",
+  },
 };
 
 // Surahs 38-114 don't have hand-written copy yet — fall back to a generated
