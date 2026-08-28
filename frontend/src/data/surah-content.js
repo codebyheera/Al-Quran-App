@@ -130,6 +130,14 @@ export const surahContent = {
     ],
   },
 
+  "Al-Kahf": {
+    intro: [
+      "Surah Al-Kahf, meaning \"The Cave,\" is the 18th chapter of the Quran and one of the most beloved surahs among Muslims worldwide. Revealed in Makkah, it contains 110 verses and tells four remarkable stories that carry deep lessons for daily life. The most famous of these is the story of the People of the Cave, a group of young believers who took refuge from a tyrant king and were protected by Allah for over 300 years.",
+      "Muslims are strongly encouraged to recite Surah Al-Kahf every Friday. According to authentic hadith, reciting it brings light between the two Fridays and offers protection from the trials of Dajjal, the false messiah who will appear before the Day of Judgment. The surah also covers the stories of two men with gardens, Musa and Khidr, and Dhul Qarnayn, each teaching valuable lessons about faith, humility, and the true nature of worldly life.",
+      "Below, you can read the complete text of Surah Al-Kahf with Arabic script and full translation. Listen to the recitation, bookmark your favorite verses, and reflect on the timeless wisdom this surah offers.",
+    ],
+  },
+
   // TODO: add remaining 113 Surahs here, one at a time.
   // Copy the At-Tawba shape above — key = surah.surahName slug (see
   // backend/data/surahMapping.js englishNamesToIds for the exact string),

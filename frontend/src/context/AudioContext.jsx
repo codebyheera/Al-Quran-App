@@ -22,7 +22,9 @@ export const AudioProvider = ({ children }) => {
   const [showEn, setShowEn] = useState(() => {
     const val = localStorage.getItem("showEn");
     if (val !== null) return val === "true";
-    return localStorage.getItem("showTranslation") === "true"; // fallback
+    const legacyVal = localStorage.getItem("showTranslation");
+    if (legacyVal !== null) return legacyVal === "true"; // fallback
+    return true; // English translation on by default for new visitors
   });
 
   const [showUr, setShowUr] = useState(() => {

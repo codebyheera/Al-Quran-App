@@ -89,9 +89,9 @@ export const surahSeo = {
       "Surah Al-Isra (Chapter 17) – 111 verses on Isra & Miraj, parents' rights & moral laws. Arabic + English. Free on Al-Quran Hub.",
   },
   18: {
-    title: "Surah Kahf – Read & Listen Online Free | Al-Quran Hub",
+    title: "Surah Al-Kahf: Read & Listen Online | Al-Quran Hub",
     description:
-      "Read Surah Kahf full online – Surah Al-Kahf Chapter 18, 110 verses. Arabic text, English translation & audio recitation. Free on Al-Quran Hub.",
+      "Read and listen to Surah Al-Kahf online. Full Arabic text with English translation, audio recitation, and bookmarking, free on Al-Quran Hub.",
   },
   19: {
     title: "Surah Maryam – Read Online Free | Al-Quran Hub",

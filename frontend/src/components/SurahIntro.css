@@ -17,10 +17,6 @@
   line-height: 1.85;
 }
 
-.surah-intro__para:first-child {
-  color: var(--text-primary);
-}
-
 .surah-intro__link {
   color: var(--accent-gold);
   text-decoration: underline;
