@@ -59,7 +59,7 @@ const POPULAR = [
   { number: 1,   name: 'Al-Faatiha',  arabic: 'الفاتحة',   verses: 7   },
   { number: 2,   name: 'Al-Baqarah',  arabic: 'البقرة',    verses: 286 },
   { number: 18,  name: 'Al-Kahf',     arabic: 'الكهف',     verses: 110 },
-  { number: 36,  name: 'Ya-Seen',     arabic: 'يس',        verses: 83  },
+  { number: 36,  name: 'Yaseen',      arabic: 'يس',        verses: 83  },
   { number: 55,  name: 'Ar-Rahmaan',  arabic: 'الرحمن',    verses: 78  },
   { number: 56,  name: 'Al-Waaqia',   arabic: 'الواقعة',   verses: 96  },
   { number: 67,  name: 'Al-Mulk',     arabic: 'الملك',     verses: 30  },
