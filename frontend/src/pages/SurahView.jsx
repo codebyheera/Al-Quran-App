@@ -388,7 +388,13 @@ export default function SurahView() {
           "url": `https://alquranhub.org/surah/${id}`,
           "inLanguage": "ar",
           "mainEntityOfPage": `https://alquranhub.org/surah/${id}`,
-          "articleSection": `Surah ${surahNum}`
+          "articleSection": `Surah ${surahNum}`,
+          "image": "https://alquranhub.org/og-image.png",
+          "author": {
+            "@type": "Organization",
+            "name": "Al-Quran Hub",
+            "url": "https://alquranhub.org"
+          }
         };
 
         const webPageSchema = {

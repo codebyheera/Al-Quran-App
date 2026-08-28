@@ -212,7 +212,7 @@ export default function BlogPost() {
       url:     'https://alquranhub.org',
     },
     datePublished: blog.created_at,
-    image:         blog.cover_image || undefined,
+    image:         blog.cover_image || 'https://alquranhub.org/og-image.png',
     url:           `https://alquranhub.org/blog/${blog.slug}`,
   });
 

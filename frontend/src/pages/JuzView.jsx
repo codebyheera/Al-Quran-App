@@ -253,6 +253,27 @@ export default function JuzView() {
     current.verses.push(v);
   }
 
+  const jvTitle = `Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`;
+  const jvDescription = `Read and listen to Juz ${juzNum} of the Holy Quran online. Arabic text, English translation, and beautiful recitation available.`;
+  const jvUrl = `https://alquranhub.org/juz/${juzNum}`;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": jvTitle,
+    "description": jvDescription,
+    "url": jvUrl,
+    "inLanguage": "ar",
+    "mainEntityOfPage": jvUrl,
+    "articleSection": `Juz ${juzNum}`,
+    "image": "https://alquranhub.org/og-image.png",
+    "author": {
+      "@type": "Organization",
+      "name": "Al-Quran Hub",
+      "url": "https://alquranhub.org"
+    }
+  };
+
   return (
     <div
       className="juz-view page-enter"
@@ -260,9 +281,12 @@ export default function JuzView() {
       style={{ '--arabic-font-size': `${fontSize}rem`, '--translation-font-size': `${translationFontSize}rem` }}
     >
       <Helmet encodeSpecialCharacters={false}>
-        <title>{`Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`}</title>
-        <meta name="description" content={`Read and listen to Juz ${juzNum} of the Holy Quran online. Arabic text, English translation, and beautiful recitation available.`} />
-        <link rel="canonical" href={`https://alquranhub.org/juz/${juzNum}`} />
+        <title>{jvTitle}</title>
+        <meta name="description" content={jvDescription} />
+        <link rel="canonical" href={jvUrl} />
+        <script type="application/ld+json">
+          {JSON.stringify(articleSchema)}
+        </script>
       </Helmet>
       <div className="container">
         {/* ── Breadcrumb Navigation ───────────────────────── */}

@@ -29,6 +29,15 @@ export default function BottomPlayer() {
 
   const { selectedReciter } = useQari();
 
+  // Reciter photos are hotlinked from third-party hosts, which can be slow
+  // or briefly unreachable — keep the fallback icon showing until the photo
+  // has actually finished loading, so a slow/broken load never flashes the
+  // browser's native broken-image glyph.
+  const [artLoaded, setArtLoaded] = useState(false);
+  useEffect(() => {
+    setArtLoaded(false);
+  }, [selectedReciter?.image]);
+
   const [position, setPosition] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isScrubbing, setIsScrubbing] = useState(false);
@@ -168,9 +177,11 @@ export default function BottomPlayer() {
               src={selectedReciter?.image}
               alt={selectedReciter?.name}
               className="bp-mini-img"
-              onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+              style={{ display: artLoaded ? 'block' : 'none' }}
+              onLoad={() => setArtLoaded(true)}
+              onError={(e) => { e.target.style.display = 'none'; }}
             />
-            <div className="bp-mini-img-fallback" style={{ display: 'none' }}>
+            <div className="bp-mini-img-fallback" style={{ display: artLoaded ? 'none' : 'flex' }}>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                 <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
               </svg>
@@ -325,9 +336,11 @@ export default function BottomPlayer() {
                     src={selectedReciter?.image}
                     alt={selectedReciter?.name}
                     className="bp-artwork-img"
-                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                    style={{ display: artLoaded ? 'block' : 'none' }}
+                    onLoad={() => setArtLoaded(true)}
+                    onError={(e) => { e.target.style.display = 'none'; }}
                   />
-                  <div className="bp-artwork-fallback" style={{ display: 'none' }}>
+                  <div className="bp-artwork-fallback" style={{ display: artLoaded ? 'none' : 'flex' }}>
                     <svg viewBox="0 0 24 24" width="48" height="48" fill="none">
                       <circle cx="12" cy="12" r="10" stroke="#7F77DD" strokeWidth="1" />
                       <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" fill="#7F77DD" opacity=".6" />
