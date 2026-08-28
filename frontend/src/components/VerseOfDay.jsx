@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import useHijriDate from '../hooks/useHijriDate';
 import styles from './VerseOfDay.module.css';
 
 /* ── Icons ─────────────────────────────────────────────────── */
@@ -72,27 +73,11 @@ const VerseOfDay = ({ hijriDate }) => {
   const [toastKey, setToastKey]       = useState(0);
   const [showTranslit, setShowTranslit] = useState(false);
   const [shareOpen, setShareOpen]     = useState(false);
-  const [gregorianDate, setGregorianDate] = useState('');
-  const [computedHijri, setComputedHijri] = useState('');
+  const { hijri: computedHijri, gregorianShort: gregorianDate } = useHijriDate();
 
   const toastTimeoutRef = useRef(null);
   const shareRef        = useRef(null);
   const navigate        = useNavigate();
-
-  /* ── Dates ── */
-  useEffect(() => {
-    const today = new Date();
-    setGregorianDate(today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }));
-    try {
-      const islamicMonths = ["Muharram","Safar","Rabiʻ I","Rabiʻ II","Jumada I","Jumada II","Rajab","Shaʻban","Ramadan","Shawwal","Dhuʻl-Qiʻdah","Dhuʻl-Hijjah"];
-      const fmt   = new Intl.DateTimeFormat('en-US-u-ca-islamic-umalqura', { day: 'numeric', month: 'numeric', year: 'numeric' });
-      const parts = fmt.formatToParts(today);
-      const day   = parts.find(p => p.type === 'day')?.value;
-      const mon   = parseInt(parts.find(p => p.type === 'month')?.value, 10);
-      const year  = parts.find(p => p.type === 'year')?.value;
-      if (day && !isNaN(mon) && year) setComputedHijri(`${day} ${islamicMonths[mon - 1] || mon} ${year}`);
-    } catch { setComputedHijri(''); }
-  }, []);
 
   /* ── Fetch verse ── */
   useEffect(() => {

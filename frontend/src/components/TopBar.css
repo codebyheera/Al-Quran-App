@@ -1,0 +1,99 @@
+/* ============================================================
+   TopBar.css — Announcement bar above the main navbar
+   Hidden below the tablet breakpoint (768px); fixed height so it
+   never causes layout shift while the date fills in client-side.
+   ============================================================ */
+
+.topbar {
+  display: none;
+  height: 38px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+  .topbar {
+    display: flex;
+  }
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 1024px) {
+  .topbar-inner {
+    padding: 0 1.5rem;
+  }
+}
+
+/* ── Date ─────────────────────────────────────────────────── */
+.topbar-date {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  line-height: 1;
+  font-family: var(--font-ui);
+  font-size: 0.73rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--accent-gold);
+  opacity: 0.9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar-sep {
+  opacity: 0.45;
+  font-size: 0.6rem;
+}
+
+/* ── Social icons ─────────────────────────────────────────── */
+.topbar-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.topbar-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  line-height: 0;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.topbar-social-link svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+  display: block;
+}
+
+.topbar-social-link:hover {
+  color: var(--accent-gold);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}

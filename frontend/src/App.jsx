@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
+import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { useAudio } from './context/AudioContext';
@@ -81,6 +82,8 @@ export default function App() {
         <meta property="og:url" content={`https://alquranhub.org${location.pathname}`} />
       </Helmet>
       <ScrollToTop />
+      {/* Thin utility bar: Hijri/Gregorian date + socials — tablet/desktop only */}
+      <TopBar />
       {/* Persistent top navigation */}
       <Navbar />
 
