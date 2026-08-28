@@ -179,7 +179,7 @@ export const surahSeo = {
       "Read Surah Fatir (Chapter 35) online with English translation & audio recitation. Explore Fatir Surah for free on Al-Quran Hub.",
   },
   36: {
-    title: "Surah Yaseen Full | Read Online — Al-Quran Hub.",
+    title: "Surah Yaseen: Read & Listen Online | Al-Quran Hub",
     description:
       "Read Surah Yaseen full online with English translation & audio recitation. Explore Yaseen Shareef & Surah Yasin for free on Al-Quran Hub.",
   },

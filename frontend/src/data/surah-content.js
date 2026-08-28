@@ -138,6 +138,14 @@ export const surahContent = {
     ],
   },
 
+  "Yaseen": {
+    intro: [
+      "Surah Yaseen is the 36th chapter of the Quran and one of the most frequently recited surahs among Muslims. Revealed in Makkah, it contains 83 verses and is often called the \"heart of the Quran\" because of its powerful message about faith, resurrection, and the signs of Allah's mercy.",
+      "Many Muslims recite Surah Yaseen regularly, especially in the morning or evening, and it holds special importance when recited for the sick or for those who have passed away. If you want to explore its rewards in more depth, you can read about the [benefits of reciting Surah Yaseen](/blog/surah-yaseen-benefits) on Al-Quran Hub. The surah reminds readers of the Day of Judgment, tells the story of the messengers sent to a disbelieving town, and reflects deeply on the wonders of creation, from the sun and moon to the cycle of life itself.",
+      "Below, you can read the full text of Surah Yaseen with Arabic script and English translation. Listen to the recitation, bookmark the verses that move you, and reflect on the deep wisdom this surah carries.",
+    ],
+  },
+
   // TODO: add remaining 113 Surahs here, one at a time.
   // Copy the At-Tawba shape above — key = surah.surahName slug (see
   // backend/data/surahMapping.js englishNamesToIds for the exact string),
