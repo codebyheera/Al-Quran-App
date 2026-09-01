@@ -107,6 +107,33 @@ export const surahFaqs = {
         "Surah Yaseen consists of 83 verses (Ayaat) and is commonly divided into 5 thematic sections (Ruku).",
     },
   ],
+  43: [
+    {
+      question: "Where was Surah Az-Zukhruf revealed and how many verses does it have?",
+      answer:
+        "Surah Az-Zukhruf is a Makkan surah, meaning it was revealed in Makkah. It has 89 verses in total and is the 43rd surah of the Quran.",
+    },
+    {
+      question: "What does the name \"Az-Zukhruf\" mean?",
+      answer:
+        "Az-Zukhruf means gold and worldly ornaments. The name comes from a verse in the surah stating that if wealth alone were a sign of success, Allah would have given even the disbelievers houses of gold, but true success does not come from worldly riches.",
+    },
+    {
+      question: "What is the main theme of Surah Az-Zukhruf?",
+      answer:
+        "The surah mainly corrects the disbelievers' idea that material wealth is proof of Allah's favor. It reminds readers that the comforts of this world are temporary, and real success lies in the Hereafter, not in gold or possessions.",
+    },
+    {
+      question: "Which prophets are mentioned in Surah Az-Zukhruf?",
+      answer:
+        "The surah mentions Prophet Ibrahim (AS) and his call to worship one God, the story of Prophet Musa (AS) and Firaun, and a reference to Prophet Isa (AS), showing that all prophets carried the same core message across different times.",
+    },
+    {
+      question: "What does Surah Az-Zukhruf teach about the Day of Judgment?",
+      answer:
+        "Toward the end, the surah describes scenes from the Day of Judgment and warns that those who chase worldly pleasures while ignoring the Hereafter will face serious consequences for that choice.",
+    },
+  ],
   67: [
     {
       question: "Why is Surah Al-Mulk recited before sleeping?",

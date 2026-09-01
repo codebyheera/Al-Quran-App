@@ -146,6 +146,14 @@ export const surahContent = {
     ],
   },
 
+  "Az-Zukhruf": {
+    intro: [
+      "Surah Az-Zukhruf is the 43rd surah of the Quran, revealed in Makkah, and it has 89 verses. The name \"Zukhruf\" means gold or worldly decoration, and it comes from a part of the surah where the disbelievers of Makkah are corrected for thinking that wealth and material comfort are signs of Allah's approval. The surah explains again and again that the glitter of this world does not last, and true success is only in the Hereafter.",
+      "The surah also talks about Prophet Ibrahim (AS) inviting his people to worship one God, the story of Prophet Musa (AS) and Firaun, and a mention of Prophet Isa (AS). Through these stories, it shows that every prophet, in every era, brought the same core message. Near the end, the surah describes the Day of Judgment and reminds people that those who get lost in the shine of this world while forgetting the Hereafter will face the consequences of that choice. You can explore the [full Quran with translation and audio](/) on Al-Quran Hub.",
+      "Below, you can read the complete text of Surah Az-Zukhruf with Arabic script and English translation. Listen to the recitation, bookmark the verses that move you, and reflect on the timeless wisdom this surah carries.",
+    ],
+  },
+
   // TODO: add remaining 113 Surahs here, one at a time.
   // Copy the At-Tawba shape above — key = surah.surahName slug (see
   // backend/data/surahMapping.js englishNamesToIds for the exact string),

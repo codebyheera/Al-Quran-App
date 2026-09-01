@@ -188,6 +188,11 @@ export const surahSeo = {
     description:
       "Explore As-Saffat, the 37th chapter of the Quran, with English translation & audio recitation. Read Surah As-Saffat verse by verse free on Al-Quran Hub.",
   },
+  43: {
+    title: "Surah Az-Zukhruf: Read with English Translation",
+    description:
+      "Read Surah Az-Zukhruf online with English translation and audio recitation. Learn why gold and wealth are not signs of Allah's favor.",
+  },
   57: {
     title: "Surah Al-Hadid | Read & Listen Online Free — Al-Quran Hub",
     description:
