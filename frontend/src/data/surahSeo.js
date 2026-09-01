@@ -193,6 +193,11 @@ export const surahSeo = {
     description:
       "Read Surah Az-Zukhruf online with English translation and audio recitation. Learn why gold and wealth are not signs of Allah's favor.",
   },
+  46: {
+    title: "Surah Al-Ahqaf: Read with English Translation",
+    description:
+      "Read Surah Al-Ahqaf online with English translation and audio recitation. Discover the story of the people of Aad and Prophet Hud.",
+  },
   57: {
     title: "Surah Al-Hadid | Read & Listen Online Free — Al-Quran Hub",
     description:

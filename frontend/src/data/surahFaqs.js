@@ -134,6 +134,33 @@ export const surahFaqs = {
         "Toward the end, the surah describes scenes from the Day of Judgment and warns that those who chase worldly pleasures while ignoring the Hereafter will face serious consequences for that choice.",
     },
   ],
+  46: [
+    {
+      question: "Where was Surah Al-Ahqaf revealed and how many verses does it have?",
+      answer:
+        "Surah Al-Ahqaf is a Makkan surah, meaning it was revealed in Makkah. It has 35 verses in total and is the 46th surah of the Quran.",
+    },
+    {
+      question: "What does the name \"Al-Ahqaf\" mean?",
+      answer:
+        "Al-Ahqaf means the sand dunes or sandy tracts. This was the region where the people of Aad lived, and their story of destruction due to disbelief is a central part of this surah.",
+    },
+    {
+      question: "What is the main theme of Surah Al-Ahqaf?",
+      answer:
+        "The surah warns the disbelievers of Makkah by reminding them of earlier nations, especially the people of Aad, who were destroyed despite their strength and power because they rejected the message of their prophet.",
+    },
+    {
+      question: "What is the story of the jinn mentioned in this surah?",
+      answer:
+        "The surah describes a group of jinn who listened to the Quran being recited and believed in it, then went back to warn their own people. This shows that sincere guidance can reach anyone willing to accept it.",
+    },
+    {
+      question: "What does Surah Al-Ahqaf teach about patience?",
+      answer:
+        "Toward the end, the surah advises the Prophet to be patient just as the earlier messengers of strong will were patient, and it reminds that the Day of Judgment will surely come no matter how long people take to believe.",
+    },
+  ],
   67: [
     {
       question: "Why is Surah Al-Mulk recited before sleeping?",

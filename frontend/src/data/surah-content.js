@@ -154,6 +154,14 @@ export const surahContent = {
     ],
   },
 
+  "Al-Ahqaf": {
+    intro: [
+      "Surah Al-Ahqaf is the 46th surah of the Quran, revealed in Makkah, and it has 35 verses. The name \"Al-Ahqaf\" refers to the sand dunes, a place where the people of Aad used to live, and their story is mentioned in this surah as a warning to those who reject the truth. The surah opens by talking about the creation of the heavens and the earth, and it questions the disbelievers on what proof they have for worshipping anything besides Allah.",
+      "A major part of the surah addresses the disbelievers of Makkah directly, reminding them of earlier nations who were destroyed because they denied their prophets, especially the people of Aad who were known for their strength and pride but were still punished for their rejection. The surah also mentions a group of jinn who listened to the Quran and believed in it, showing that guidance reaches those who are willing to listen with an open heart. Toward the end, it advises patience, the same patience shown by the earlier messengers, and reminds that the Day of Judgment will come regardless of how long people delay believing in it. You can explore the [full Quran with translation and audio](/) on Al-Quran Hub.",
+      "Below, you can read the complete text of Surah Al-Ahqaf with Arabic script and English translation. Listen to the recitation, bookmark the verses that move you, and reflect on the timeless wisdom this surah carries.",
+    ],
+  },
+
   // TODO: add remaining 113 Surahs here, one at a time.
   // Copy the At-Tawba shape above — key = surah.surahName slug (see
   // backend/data/surahMapping.js englishNamesToIds for the exact string),
