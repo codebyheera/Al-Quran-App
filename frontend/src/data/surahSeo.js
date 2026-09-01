@@ -193,6 +193,11 @@ export const surahSeo = {
     description:
       "Read Surah Az-Zukhruf online with English translation and audio recitation. Learn why gold and wealth are not signs of Allah's favor.",
   },
+  45: {
+    title: "Surah Al-Jathiya: Read with English Translation",
+    description:
+      "Read Surah Al-Jathiya online with English translation and audio recitation. Learn about the signs of Allah and the Day of Judgment.",
+  },
   46: {
     title: "Surah Al-Ahqaf: Read with English Translation",
     description:

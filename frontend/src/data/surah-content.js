@@ -154,6 +154,41 @@ export const surahContent = {
     ],
   },
 
+  "Al-Jaathiya": {
+    intro: [
+      "One day, every person will stand in front of Allah, and this is the main picture that Surah Al-Jathiya shows us. The surah gets its name from verse 28, where it describes the Day of Judgment, when every nation will be seen kneeling down, waiting to be questioned about what they did in this world. This is the 45th surah of the Quran, revealed in Makkah, and it has 37 verses.",
+      "Most of the surah talks about the signs of Allah that are all around us, in the sky, the earth, the change between night and day, and even in our own bodies, asking why people still turn away when the proof is so clear. It also gives a strong warning to people who follow their own desires like a god, choosing what feels good instead of what is right. The surah ends by reminding us that all power and praise belong to Allah alone, in this world and in the next, and that nothing is hidden from His knowledge or His judgment. You can explore the [full Quran with translation and audio](/) on Al-Quran Hub.",
+      "Below, you can read the complete text of Surah Al-Jathiya with Arabic script and English translation. Listen to the recitation, bookmark the verses that move you, and reflect on the timeless wisdom this surah carries.",
+    ],
+    faqs: [
+      {
+        question: "Where was Surah Al-Jathiya revealed and how many verses does it have?",
+        answer:
+          "Surah Al-Jathiya is a Makkan surah, meaning it was revealed in Makkah. It has 37 verses in total and is the 45th surah of the Quran.",
+      },
+      {
+        question: "What does the name \"Al-Jathiya\" mean?",
+        answer:
+          "Al-Jathiya means \"kneeling down.\" It comes from verse 28, which describes how every nation will be seen kneeling on the Day of Judgment while waiting to be questioned about their deeds.",
+      },
+      {
+        question: "What is the main theme of Surah Al-Jathiya?",
+        answer:
+          "The surah points to the many signs of Allah found in creation, like the sky, the earth, and the human body, and asks why people still deny the truth despite such clear proof.",
+      },
+      {
+        question: "What warning does this surah give about desires?",
+        answer:
+          "The surah warns against following one's own desires as if they were a god, choosing what feels good over what is actually right, and explains that this kind of thinking leads a person away from guidance.",
+      },
+      {
+        question: "How does Surah Al-Jathiya end?",
+        answer:
+          "The surah ends by reminding readers that all power and praise belong to Allah alone, both in this life and the next, and that nothing is ever hidden from His knowledge or judgment.",
+      },
+    ],
+  },
+
   "Al-Ahqaf": {
     intro: [
       "Surah Al-Ahqaf is the 46th surah of the Quran, revealed in Makkah, and it has 35 verses. The name \"Al-Ahqaf\" refers to the sand dunes, a place where the people of Aad used to live, and their story is mentioned in this surah as a warning to those who reject the truth. The surah opens by talking about the creation of the heavens and the earth, and it questions the disbelievers on what proof they have for worshipping anything besides Allah.",
