@@ -13,6 +13,9 @@ import AudioDropdown from '../components/AudioDropdown';
 import { useAudio } from '../context/AudioContext';
 import { useQari } from '../context/QariContext';
 import Breadcrumb from '../components/Breadcrumb';
+import SurahIntro from '../components/SurahIntro';
+import { getJuzContent } from '../data/juz-content';
+import { getJuzSeo } from '../data/juzSeo';
 import { useReadingTimer } from '../hooks/useReadingTimer';
 import './JuzView.css';
 
@@ -211,12 +214,13 @@ export default function JuzView() {
   const toggleEn = () => setShowEn((prev) => !prev);
   const toggleUr = () => setShowUr((prev) => !prev);
 
+  const juzSeoData = getJuzSeo(juzNum);
 
   if (loading) return (
     <div className="loading-center">
       <Helmet encodeSpecialCharacters={false}>
-        <title>{`Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`}</title>
-        <meta name="description" content={`Read and listen to Juz ${juzNum} of the Holy Quran online. Arabic text, English translation, and beautiful recitation available.`} />
+        <title>{juzSeoData.title}</title>
+        <meta name="description" content={juzSeoData.description} />
         <link rel="canonical" href={`https://alquranhub.org/juz/${juzNum}`} />
       </Helmet>
       <div className="spinner" />
@@ -226,8 +230,8 @@ export default function JuzView() {
   if (error) return (
     <div className="loading-center">
       <Helmet encodeSpecialCharacters={false}>
-        <title>{`Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`}</title>
-        <meta name="description" content={`Read and listen to Juz ${juzNum} of the Holy Quran online.`} />
+        <title>{juzSeoData.title}</title>
+        <meta name="description" content={juzSeoData.description} />
         <link rel="canonical" href={`https://alquranhub.org/juz/${juzNum}`} />
       </Helmet>
       <p style={{ color: '#e74c3c' }}>{error}</p>
@@ -253,8 +257,8 @@ export default function JuzView() {
     current.verses.push(v);
   }
 
-  const jvTitle = `Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`;
-  const jvDescription = `Read and listen to Juz ${juzNum} of the Holy Quran online. Arabic text, English translation, and beautiful recitation available.`;
+  const jvTitle = juzSeoData.title;
+  const jvDescription = juzSeoData.description;
   const jvUrl = `https://alquranhub.org/juz/${juzNum}`;
 
   const articleSchema = {
@@ -354,6 +358,14 @@ export default function JuzView() {
             </div>
           </div>
         </div>
+
+        {/* ── Intro (above verses, unique editorial content for SEO) ── */}
+        <SurahIntro
+          intro={getJuzContent(juzNum)?.intro}
+          faqs={getJuzContent(juzNum)?.faqs}
+          surahName={`Juz ${juzNum}`}
+          pageUrl={jvUrl}
+        >
 
         {/* Surah groups */}
         {groups.map((group) => (
@@ -484,6 +496,8 @@ export default function JuzView() {
             })}
           </div>
         ))}
+
+        </SurahIntro>
 
         {/* Prev/Next */}
         <div className="sv-nav">

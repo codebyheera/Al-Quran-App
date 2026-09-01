@@ -159,9 +159,26 @@
 
 .jv-verse {
   /* Ensure it inherits global .verse-card padding instead of overriding it to 0 */
-} 
+}
 /* The verse cards inside JuzView use the same HTML structure as SurahView.
    Mobile responsive adjustments for .verse-card are handled in global.css */
+
+/* Prev/Next nav — .sv-nav is shared with SurahView but its spacing rules
+   live in SurahView.css, which isn't loaded on the /juz route (separate
+   code-split chunk), so it needs its own copy here. */
+.sv-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+}
+.sv-nav .btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
 
 /* ── Mobile ─────────────────────────────── */
 @media (max-width: 640px) {

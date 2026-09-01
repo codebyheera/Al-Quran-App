@@ -22,6 +22,7 @@ import ReactDOMServer from 'react-dom/server';
 import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { getSurahSeo } from '../src/data/surahSeo.js';
+import { getJuzSeo } from '../src/data/juzSeo.js';
 import { pageSeo } from '../src/data/pageSeo.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -271,9 +272,10 @@ async function run() {
 
   console.log('Prerendering Juz pages (1-30)...');
   for (let juzNum = 1; juzNum <= 30; juzNum++) {
+    const juzSeoData = getJuzSeo(juzNum);
     writeRoute(template, `/juz/${juzNum}`, {
-      title: `Juz ${juzNum} – Arabic Recitation & English Translation - Al-Quran Hub`,
-      description: `Read and listen to Juz ${juzNum} of the Holy Quran online. Arabic text, English translation, and beautiful recitation available.`,
+      title: juzSeoData.title,
+      description: juzSeoData.description,
       ogType: 'article',
     });
   }
