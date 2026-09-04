@@ -24,7 +24,9 @@ export default function BottomPlayer() {
     skipBackward,
     playbackSpeed,
     audioLanguage,
-    setAudioLanguage
+    setAudioLanguage,
+    audioError,
+    retryAudio
   } = useAudio();
 
   const { selectedReciter } = useQari();
@@ -219,6 +221,11 @@ export default function BottomPlayer() {
               <div className="bp-track">
                 <span className="bp-surah">{currentVerse.surahName || 'Surah'}</span>
                 <span className="bp-ayah">Ayah {currentVerse.number}</span>
+                {audioError && (
+                  <button className="bp-audio-error" onClick={retryAudio}>
+                    Audio load nahi ho saka, dobara try karein
+                  </button>
+                )}
               </div>
 
               {/* Center: controls + progress */}
@@ -354,6 +361,11 @@ export default function BottomPlayer() {
             <div className="bp-mobile-info">
               <div className="bp-mobile-surah">{currentVerse.surahName || 'Surah'}</div>
               <div className="bp-mobile-ayah">Ayah {currentVerse.number}</div>
+              {audioError && (
+                <button className="bp-audio-error" onClick={retryAudio}>
+                  Audio load nahi ho saka, dobara try karein
+                </button>
+              )}
             </div>
 
             {/* Progress */}

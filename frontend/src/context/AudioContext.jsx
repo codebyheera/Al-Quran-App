@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useRef, useEffect } from 'react';
 import { clearAudioCache, queuePrefetch, resetPrefetchQueue, loadPlayableSrc } from '../lib/audioCache';
+import { getAudioUrlWithFallback } from '../lib/audioSource';
 
 const AudioContext = createContext();
 
@@ -58,6 +59,15 @@ export const AudioProvider = ({ children }) => {
   const trackLoadTokenRef = useRef(0);
   const [isTrackDownloading, setIsTrackDownloading] = useState(false);
   const [isTrackOffline, setIsTrackOffline] = useState(false);
+  // Urdu audio has two sources: Supabase Storage (primary) and the Al Quran
+  // Cloud API (fallback). While an Urdu track is loaded, this holds
+  // { fallbackUrl, triedFallback } so handleError knows to switch to the
+  // fallback exactly once instead of retrying the same (broken) URL.
+  // null whenever the currently-loaded track isn't Urdu-with-a-fallback.
+  // TODO: Remove Al Quran Cloud fallback after 2026-10-05 once Supabase
+  // Urdu audio is confirmed 100% complete and reliable — see lib/audioSource.js.
+  const urduFallbackStateRef = useRef(null);
+  const [audioError, setAudioError] = useState(false);
 
   // Hybrid cache-first / stream-first src resolution for the shared <audio> element.
   // Cache hit: play from an object URL (fully offline). Cache miss: stream the
@@ -65,6 +75,7 @@ export const AudioProvider = ({ children }) => {
   const applyTrackSrc = async (url) => {
     const token = ++trackLoadTokenRef.current;
     currentLogicalUrlRef.current = url || null;
+    setAudioError(false);
 
     if (currentObjectUrlRef.current) {
       URL.revokeObjectURL(currentObjectUrlRef.current);
@@ -134,6 +145,27 @@ export const AudioProvider = ({ children }) => {
       const failedUrl = currentLogicalUrlRef.current;
       if (!failedUrl) return;
 
+      // Urdu track: Supabase (primary) failed — silently switch to the Al
+      // Quran Cloud fallback exactly once. No flicker, no user-facing error.
+      // TODO: Remove Al Quran Cloud fallback after 2026-10-05 once Supabase
+      // Urdu audio is confirmed 100% complete and reliable.
+      const urduState = urduFallbackStateRef.current;
+      if (urduState && !urduState.triedFallback) {
+        urduState.triedFallback = true;
+        if (typeof import.meta !== 'undefined' && import.meta.env?.DEV) {
+          console.log(`Supabase audio failed for ${currentVerse?.surahNumber}:${currentVerse?.number}, falling back to Al Quran Cloud API`);
+        }
+        applyTrackSrc(urduState.fallbackUrl).then(() => audio.play().catch(console.error));
+        return;
+      }
+      if (urduState && urduState.triedFallback) {
+        // Both Supabase and the Al Quran Cloud fallback failed for this ayah.
+        urduFallbackStateRef.current = null;
+        setIsPlaying(false);
+        setAudioError(true);
+        return;
+      }
+
       if (errorRetryUrlRef.current === failedUrl) {
         // Already retried this exact track and it failed again — move on.
         errorRetryUrlRef.current = null;
@@ -161,6 +193,7 @@ export const AudioProvider = ({ children }) => {
           // Finished Arabic, check if English should play
           if (showEn && currentVerse.englishAudioUrl) {
             setCombineStep(1);
+            urduFallbackStateRef.current = null;
             await applyTrackSrc(currentVerse.englishAudioUrl);
             audio.play().catch(console.error);
             return;
@@ -168,7 +201,7 @@ export const AudioProvider = ({ children }) => {
           // If no English, fall through to check Urdu
           if (showUr && currentVerse.urduAudioUrl) {
             setCombineStep(2);
-            await applyTrackSrc(currentVerse.urduAudioUrl);
+            await applyUrduAwareTrackSrc(currentVerse);
             audio.play().catch(console.error);
             return;
           }
@@ -176,7 +209,7 @@ export const AudioProvider = ({ children }) => {
           // Finished English, check if Urdu should play
           if (showUr && currentVerse.urduAudioUrl) {
             setCombineStep(2);
-            await applyTrackSrc(currentVerse.urduAudioUrl);
+            await applyUrduAwareTrackSrc(currentVerse);
             audio.play().catch(console.error);
             return;
           }
@@ -249,15 +282,48 @@ export const AudioProvider = ({ children }) => {
     return verse.audioUrl || verse.audio;
   };
 
+  // Reusable Urdu audio source resolver: tries Supabase Storage first, and
+  // arms urduFallbackStateRef so a load error silently switches to the Al
+  // Quran Cloud URL exactly once (see handleError above).
+  // TODO: Remove Al Quran Cloud fallback after 2026-10-05 once Supabase
+  // Urdu audio is confirmed 100% complete and reliable.
+  const applyUrduAwareTrackSrc = async (verse) => {
+    const { primary, fallback } = getAudioUrlWithFallback(verse);
+    urduFallbackStateRef.current = fallback ? { fallbackUrl: fallback, triedFallback: false } : null;
+    await applyTrackSrc(primary);
+  };
+
+  // Same resolution getAudioForLanguage/applyUrduAwareTrackSrc would apply,
+  // without the side effect — used to detect "did the track actually change".
+  const resolveAudioSrc = (verse, lang) => {
+    if (lang === 'ur') {
+      const { primary, fallback } = getAudioUrlWithFallback(verse);
+      return primary || fallback;
+    }
+    return getAudioForLanguage(verse, lang);
+  };
+
+  // Single entry point every playback call site uses to load a verse's
+  // audio for the current language, routing Urdu through the Supabase/Al
+  // Quran Cloud fallback and everything else through the plain single-source path.
+  const resolveAndApplyTrackSrc = async (verse, lang) => {
+    if (lang === 'ur') {
+      await applyUrduAwareTrackSrc(verse);
+    } else {
+      urduFallbackStateRef.current = null;
+      await applyTrackSrc(getAudioForLanguage(verse, lang));
+    }
+  };
+
   // Look ahead in the playlist and quietly download upcoming ayahs so the
   // rest of the Surah plays back-to-back with no per-ayah network wait.
   const prefetchUpcoming = (verses, fromIndex, lang) => {
     const upcoming = verses.slice(fromIndex + 1);
     if (!upcoming.length) return;
-    const urls = upcoming.map((v) => getAudioForLanguage(v, lang));
+    const urls = upcoming.map((v) => resolveAudioSrc(v, lang));
     if (lang === 'combine') {
       if (showEn) urls.push(...upcoming.map((v) => v.englishAudioUrl).filter(Boolean));
-      if (showUr) urls.push(...upcoming.map((v) => v.urduAudioUrl).filter(Boolean));
+      if (showUr) urls.push(...upcoming.map((v) => resolveAudioSrc(v, 'ur')).filter(Boolean));
     }
     queuePrefetch(urls);
   };
@@ -266,11 +332,11 @@ export const AudioProvider = ({ children }) => {
   useEffect(() => {
     if (currentVerse) {
       setCombineStep(0); // Reset combine step if user changes language mid-playback
-      const newSrc = getAudioForLanguage(currentVerse, audioLanguage);
+      const newSrc = resolveAudioSrc(currentVerse, audioLanguage);
       if (currentLogicalUrlRef.current !== newSrc) {
         const wasPlaying = !audioRef.current.paused;
         (async () => {
-          await applyTrackSrc(newSrc);
+          await resolveAndApplyTrackSrc(currentVerse, audioLanguage);
           // Optionally reset currentTime to 0 on language change
           audioRef.current.currentTime = 0;
           if (wasPlaying) {
@@ -288,7 +354,7 @@ export const AudioProvider = ({ children }) => {
     setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
     setCombineStep(0);
-    await applyTrackSrc(getAudioForLanguage(verse, audioLanguage));
+    await resolveAndApplyTrackSrc(verse, audioLanguage);
     audioRef.current.play().catch(console.error);
   };
 
@@ -299,7 +365,7 @@ export const AudioProvider = ({ children }) => {
     setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
     setCombineStep(0);
-    await applyTrackSrc(getAudioForLanguage(verses[startIdx], audioLanguage));
+    await resolveAndApplyTrackSrc(verses[startIdx], audioLanguage);
     audioRef.current.play().catch(console.error);
     resetPrefetchQueue();
     prefetchUpcoming(verses, startIdx, audioLanguage);
@@ -337,7 +403,7 @@ export const AudioProvider = ({ children }) => {
       setCurrentVerse(nextVerse);
       setRepeatCount(0);
       setCombineStep(0);
-      await applyTrackSrc(getAudioForLanguage(nextVerse, audioLanguage));
+      await resolveAndApplyTrackSrc(nextVerse, audioLanguage);
       audioRef.current.play().catch(console.error);
       prefetchUpcoming(playlist, nextIdx, audioLanguage);
     }
@@ -351,7 +417,7 @@ export const AudioProvider = ({ children }) => {
       setCurrentVerse(prevVerse);
       setRepeatCount(0);
       setCombineStep(0);
-      await applyTrackSrc(getAudioForLanguage(prevVerse, audioLanguage));
+      await resolveAndApplyTrackSrc(prevVerse, audioLanguage);
       audioRef.current.play().catch(console.error);
       prefetchUpcoming(playlist, prevIdx, audioLanguage);
     }
@@ -393,6 +459,16 @@ export const AudioProvider = ({ children }) => {
     return success;
   };
 
+  // User-triggered retry after both Urdu sources failed (see handleError).
+  // Re-resolves the current verse's audio from scratch (Supabase first
+  // again) without disturbing the playlist/currentIndex the user was on.
+  const retryAudio = async () => {
+    if (!currentVerse) return;
+    setCombineStep(0);
+    await resolveAndApplyTrackSrc(currentVerse, audioLanguage);
+    audioRef.current.play().catch(console.error);
+  };
+
   return (
     <AudioContext.Provider value={{
       currentVerse,
@@ -425,7 +501,9 @@ export const AudioProvider = ({ children }) => {
       setShowUr,
       isTrackDownloading,
       isTrackOffline,
-      clearDownloadedAudio
+      clearDownloadedAudio,
+      audioError,
+      retryAudio
     }}>
       {children}
     </AudioContext.Provider>

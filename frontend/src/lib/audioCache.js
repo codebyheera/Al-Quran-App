@@ -24,6 +24,15 @@ export const AUDIO_CACHE_NAME = 'quran-audio-cache-v1';
 const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) || '';
 const DIRECT_FETCH_HOSTS = new Set(['everyayah.com', 'www.everyayah.com']);
 
+// Supabase Storage's public buckets also send `Access-Control-Allow-Origin: *`
+// (confirmed live), so the Urdu audio fallback's primary source (see
+// lib/audioSource.js) can be fetched directly too — and it isn't in
+// backend/routes/audioProxy.js's host allowlist anyway, so routing it through
+// the proxy would just fail caching silently.
+function isSupabaseStorageHost(hostname) {
+  return hostname === 'supabase.co' || hostname.endsWith('.supabase.co');
+}
+
 function buildProxyUrl(audioUrl) {
   return `${API_BASE}/api/audio-proxy?url=${encodeURIComponent(audioUrl)}`;
 }
@@ -31,7 +40,7 @@ function buildProxyUrl(audioUrl) {
 function resolveCachingFetchUrl(audioUrl) {
   try {
     const { hostname } = new URL(audioUrl);
-    if (DIRECT_FETCH_HOSTS.has(hostname)) return audioUrl;
+    if (DIRECT_FETCH_HOSTS.has(hostname) || isSupabaseStorageHost(hostname)) return audioUrl;
   } catch {
     // fall through to proxy
   }

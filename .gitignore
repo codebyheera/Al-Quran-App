@@ -39,3 +39,8 @@ backend/crash.log
 backend/test-mongo.js
 .vercel
 .env*
+
+# One-off script run artifacts (logs / resumability state)
+backend/scripts/*.log
+backend/scripts/progress.json
+backend/scripts/failed-ayats.json
