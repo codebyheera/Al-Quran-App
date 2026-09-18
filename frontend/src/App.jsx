@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
+import ScrollTopButton from './components/ScrollTopButton';
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -125,6 +126,9 @@ export default function App() {
       <Suspense fallback={null}>
         <SupportPopup />
       </Suspense>
+
+      {/* Floating back-to-top arrow — site-wide, appears past 300px of scroll */}
+      <ScrollTopButton />
 
       {/* First-visit translation language prompt — desktop only, dismissible */}
       <Suspense fallback={null}>
