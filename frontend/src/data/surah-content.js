@@ -197,6 +197,44 @@ export const surahContent = {
     ],
   },
 
+  "Al-Waaqia": {
+    intro: [
+      "Surah Al-Waaqia is the 56th chapter of the Quran. It has 96 verses and was revealed in Makkah. The name means \"The Inevitable,\" pointing to the Day of Judgment, an event that will surely happen. This surah describes what takes place on that day and divides people into three groups: those foremost in faith, the people of the right, and the people of the left. It gives a clear picture of the rewards in Paradise and the punishment in Hell. It also reminds every believer that all provision and sustenance comes from Allah alone. Many Muslims recite this surah every night, following a hadith that connects it with protection from poverty. Read this and other surahs on [Al-Quran Hub](/), with Arabic text, English translation, and audio recitation.",
+    ],
+    faqs: [
+      {
+        question: "What does Surah Al-Waaqia mean?",
+        answer:
+          "Al-Waaqia means \"The Inevitable\" or \"The Event.\" It refers to the Day of Judgment, a day that will certainly come to pass.",
+      },
+      {
+        question: "How many verses are in Surah Al-Waaqia?",
+        answer:
+          "Surah Al-Waaqia has 96 verses. It is the 56th surah in the Quran and belongs to the 27th Juz.",
+      },
+      {
+        question: "Is Surah Al-Waaqia a Meccan or Medinan surah?",
+        answer:
+          "Surah Al-Waaqia is a Meccan surah, revealed to Prophet Muhammad (peace be upon him) during his time in Makkah.",
+      },
+      {
+        question: "What is Surah Al-Waaqia about?",
+        answer:
+          "The surah describes the Day of Judgment in detail. It explains how people will be divided into three groups based on their deeds, and describes the rewards of Paradise along with the punishment of Hell.",
+      },
+      {
+        question: "What are the benefits of reciting Surah Al-Waaqia?",
+        answer:
+          "Many scholars mention that reciting Surah Al-Waaqia helps a person rely on Allah for provision and sustenance. A hadith reported by Ibn Asakir links its nightly recitation with protection from poverty, though its chain is debated among scholars. Beyond this, the surah strengthens faith in the afterlife and encourages gratitude.",
+      },
+      {
+        question: "When is the best time to recite Surah Al-Waaqia?",
+        answer:
+          "Many people recite Surah Al-Waaqia after Maghrib or Isha prayer, especially at night. It can be recited at any time of the day.",
+      },
+    ],
+  },
+
   // TODO: add remaining 113 Surahs here, one at a time.
   // Copy the At-Tawba shape above — key = surah.surahName slug (see
   // backend/data/surahMapping.js englishNamesToIds for the exact string),

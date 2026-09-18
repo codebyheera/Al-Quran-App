@@ -203,6 +203,11 @@ export const surahSeo = {
     description:
       "Read Surah Al-Ahqaf online with English translation and audio recitation. Discover the story of the people of Aad and Prophet Hud.",
   },
+  56: {
+    title: "Surah Al-Waaqia (The Inevitable) - Read, Listen, Benefits & FAQs",
+    description:
+      "Read Surah Al-Waaqia with Arabic text, English translation, and audio. Learn its meaning, 96 verses, and the benefits of reciting it daily.",
+  },
   57: {
     title: "Surah Al-Hadid | Read & Listen Online Free — Al-Quran Hub",
     description:
