@@ -11,6 +11,7 @@ import { useQari } from '../context/QariContext';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
 import NotificationBell from './NotificationBell';
+import LanguagePrefDropdown from './LanguagePrefDropdown';
 import '../styles/Navbar.css';
 
 function QariDropdown({ reciter, changeReciter, reciters }) {
@@ -199,6 +200,8 @@ export default function Navbar() {
 
           {/* Right actions */}
           <div className="navbar-actions">
+            {/* Translation language preference — desktop only */}
+            <LanguagePrefDropdown />
             <QariDropdown reciter={reciter} changeReciter={changeReciter} reciters={reciters} />
             <NavLink to="/bookmarks" aria-label="Bookmarks">
               <button className="nav-icon-btn" title="Bookmarks">🔖</button>

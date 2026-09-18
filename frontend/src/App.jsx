@@ -17,6 +17,7 @@ const SupportPopup        = lazy(() => import('./components/SupportPopup'));
 const NotificationBanner  = lazy(() => import('./components/NotificationBanner'));
 const ChatWidget          = lazy(() => import('./components/ChatWidget'));
 const DaroodReminderToast = lazy(() => import('./components/DaroodReminderToast'));
+const LanguagePrompt      = lazy(() => import('./components/LanguagePrompt'));
 
 // ── Home is eagerly loaded (critical first paint) ────────────────────────────
 import Home from './pages/Home';
@@ -123,6 +124,11 @@ export default function App() {
       {/* Global Support Popup */}
       <Suspense fallback={null}>
         <SupportPopup />
+      </Suspense>
+
+      {/* First-visit translation language prompt — desktop only, dismissible */}
+      <Suspense fallback={null}>
+        <LanguagePrompt />
       </Suspense>
 
       {/* Push notification permission banner */}

@@ -116,7 +116,8 @@ export default function SurahView() {
     showEn,
     setShowEn,
     showUr,
-    setShowUr
+    setShowUr,
+    setPreferredLanguage
   } = useAudio();
   const { reciter } = useQari();
 
@@ -297,28 +298,23 @@ export default function SurahView() {
     }
   }
 
+  // Turning a translation ON is also a statement of preference, so it's
+  // recorded as one — that keeps this page and the navbar switcher in sync.
+  // Turning one OFF just hides the text; the stored preference stays put.
   const toggleEn = () => {
-    setShowEn((prev) => {
-      const newVal = !prev;
-      localStorage.setItem("showEn", newVal);
-      if (newVal) {
-        setShowUr(false);
-        localStorage.setItem("showUr", false);
-      }
-      return newVal;
-    });
+    if (showEn) {
+      setShowEn(false);
+      return;
+    }
+    setPreferredLanguage("english", { applyAudio: false });
   };
 
   const toggleUr = () => {
-    setShowUr((prev) => {
-      const newVal = !prev;
-      localStorage.setItem("showUr", newVal);
-      if (newVal) {
-        setShowEn(false);
-        localStorage.setItem("showEn", false);
-      }
-      return newVal;
-    });
+    if (showUr) {
+      setShowUr(false);
+      return;
+    }
+    setPreferredLanguage("urdu", { applyAudio: false });
   };
 
   if (loading)

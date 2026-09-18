@@ -1,0 +1,138 @@
+/**
+ * components/LanguagePreference.css
+ * Styles for the first-visit language prompt (LanguagePrompt.jsx) and the
+ * navbar preference switcher (LanguagePrefDropdown.jsx). Both are desktop-only.
+ */
+
+/* ── First-visit bottom banner ─────────────────────────────────────────────── */
+
+.lang-prompt {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9500; /* above the push-notification banner (9000) */
+
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 14px;
+  padding: 0.85rem 1.1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+
+  width: min(500px, calc(100vw - 2rem));
+
+  animation: langPromptSlideUp 0.35s ease;
+}
+
+@keyframes langPromptSlideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lang-prompt { animation: none; }
+}
+
+/* Sit above the bottom audio player when a track is loaded, mirroring how
+   the Durood reminder toast gets out of its way. */
+.app-root.has-player .lang-prompt {
+  bottom: 6.5rem;
+}
+
+/* While the prompt is up, push the notification banner above it so the two
+   bottom-centre banners never overlap. */
+body.lang-prompt-open .notif-banner {
+  bottom: 6.5rem;
+}
+
+body.lang-prompt-open .app-root.has-player .notif-banner {
+  bottom: 11.75rem;
+}
+
+.lang-prompt-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.lang-prompt-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.lang-prompt-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.lang-prompt-btn {
+  background: transparent;
+  color: var(--accent-gold);
+  border: 1px solid var(--border-hover);
+  border-radius: 8px;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.lang-prompt-btn:hover {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: var(--bg-card);
+}
+
+.lang-prompt-btn:focus-visible,
+.lang-prompt-close:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+.lang-prompt-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 0.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.lang-prompt-close:hover {
+  color: var(--text-primary);
+}
+
+/* Desktop-only feature — hidden outright below the mobile breakpoint, so
+   even a resize mid-session can't leave it stranded on a phone layout. */
+@media (max-width: 768px) {
+  .lang-prompt { display: none; }
+  body.lang-prompt-open .notif-banner { bottom: 1.25rem; }
+}
+
+/* ── Navbar preference switcher ────────────────────────────────────────────── */
+
+.lang-pref-dropdown {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .lang-pref-dropdown { display: block; }
+}
+
+.lang-pref-trigger-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}

@@ -17,8 +17,19 @@ export const AudioProvider = ({ children }) => {
   const [repeatMode, setRepeatMode] = useState(0); // 0=off, 1=once, 2=twice, 3=infinite
   const [repeatCount, setRepeatCount] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
-  const [audioLanguage, setAudioLanguage] = useState('ar'); // 'ar', 'en', 'ur', 'combine'
+  // Persisted so a visitor who picked "Arabic + Urdu" once doesn't silently
+  // drop back to Arabic-only on their next visit. New visitors who already
+  // chose a translation language start on 'combine' (Arabic + that language).
+  const [audioLanguage, setAudioLanguage] = useState(() => {
+    const saved = localStorage.getItem('audioLanguage'); // 'ar', 'en', 'ur', 'combine'
+    if (saved) return saved;
+    return localStorage.getItem('preferredLanguage') ? 'combine' : 'ar';
+  });
   const [combineStep, setCombineStep] = useState(0); // 0=ar, 1=en, 2=ur
+
+  useEffect(() => {
+    localStorage.setItem('audioLanguage', audioLanguage);
+  }, [audioLanguage]);
 
   const [showEn, setShowEn] = useState(() => {
     const val = localStorage.getItem("showEn");
@@ -40,6 +51,30 @@ export const AudioProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("showUr", showUr);
   }, [showUr]);
+
+  // ── Translation language preference ────────────────────────────────────────
+  // 'english' | 'urdu', or null when the visitor has never been asked. This is
+  // the single switch behind both the on-page translation (showEn/showUr) and
+  // which combined recitation the Play button will use — it never starts
+  // playback by itself.
+  const [preferredLanguage, setPreferredLanguageState] = useState(
+    () => localStorage.getItem("preferredLanguage")
+  );
+
+  // applyAudio: false records the preference and switches the on-page
+  // translation without touching what the player is set to — used by the
+  // Surah page's own English/Urdu text toggles, where silently rewriting the
+  // audio language mid-session would be surprising.
+  const setPreferredLanguage = (lang, { applyAudio = true } = {}) => {
+    localStorage.setItem("preferredLanguage", lang);
+    setPreferredLanguageState(lang);
+    // showEn/showUr are mutually exclusive — the preference picks the winner.
+    setShowEn(lang === "english");
+    setShowUr(lang === "urdu");
+    // Arabic + preferred language. The user can still override this from the
+    // audio dropdown in the player at any time.
+    if (applyAudio) setAudioLanguage("combine");
+  };
 
   const audioRef = useRef(new Audio());
   const currentObjectUrlRef = useRef(null);
@@ -499,6 +534,8 @@ export const AudioProvider = ({ children }) => {
       setShowEn,
       showUr,
       setShowUr,
+      preferredLanguage,
+      setPreferredLanguage,
       isTrackDownloading,
       isTrackOffline,
       clearDownloadedAudio,
