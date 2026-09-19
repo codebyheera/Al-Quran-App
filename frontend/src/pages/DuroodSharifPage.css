@@ -51,6 +51,43 @@
   cursor: default; /* .card defaults to a pointer cursor for clickable cards */
 }
 
+/* ── Play recitation button ──────────────────────────────── */
+.darood-audio-btn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: var(--radius-sm);
+  color: var(--accent-gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.darood-audio-btn:hover:not(:disabled) {
+  background: rgba(201, 168, 76, 0.18);
+  border-color: var(--accent-gold);
+}
+
+.darood-audio-btn:disabled,
+.darood-audio-btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.darood-audio-spinner {
+  animation: darood-audio-spin 0.8s linear infinite;
+}
+
+@keyframes darood-audio-spin {
+  to { transform: rotate(360deg); }
+}
+
 .darood-text-arabic {
   font-size: clamp(1.5rem, 4vw + 0.6rem, var(--arabic-font-size));
   line-height: 1.9;

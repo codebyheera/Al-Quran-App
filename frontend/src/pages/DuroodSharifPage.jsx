@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Breadcrumb from '../components/Breadcrumb';
 import SurahIntro from '../components/SurahIntro';
 import { pageSeo } from '../data/pageSeo';
+import { getDuroodAudioUrl } from '../lib/audioSource';
 import './DuroodSharifPage.css';
+
+const DUROOD_AUDIO_URL = getDuroodAudioUrl();
 
 const ARABIC =
   'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ';
@@ -65,6 +68,24 @@ const CopyIcon = () => (
   </svg>
 );
 
+const PlayIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M8 5v14l11-7z" />
+  </svg>
+);
+
+const PauseIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+  </svg>
+);
+
+const LoadingIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true" className="darood-audio-spinner">
+    <path d="M12 3a9 9 0 1 0 9 9" />
+  </svg>
+);
+
 // ── localStorage helpers — same today-keyed pattern TasbihPage uses,
 // so a day rollover resets the count without any extra bookkeeping. ──
 function getToday() {
@@ -92,10 +113,54 @@ export default function DuroodSharifPage() {
   const [confirmingReset, setConfirmingReset] = useState(false);
   const [copyLabel, setCopyLabel] = useState('Copy link');
 
+  // 'idle' | 'loading' | 'playing' | 'error'. 'error' covers both a real
+  // playback failure and the file not existing yet in Supabase Storage —
+  // either way the button disables itself instead of doing nothing on click.
+  const [audioState, setAudioState] = useState('idle');
+  const audioRef = useRef(null);
+
   useEffect(() => {
     setCount(loadToday());
     setLifetime(loadLifetime());
   }, []);
+
+  useEffect(() => {
+    const audio = new Audio(DUROOD_AUDIO_URL);
+    audio.preload = 'none';
+    audioRef.current = audio;
+
+    const handleEnded = () => setAudioState('idle');
+    const handleError = () => setAudioState('error');
+    const handleCanPlay = () => setAudioState((s) => (s === 'loading' ? 'playing' : s));
+
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('error', handleError);
+    audio.addEventListener('canplay', handleCanPlay);
+
+    return () => {
+      audio.pause();
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('error', handleError);
+      audio.removeEventListener('canplay', handleCanPlay);
+      audioRef.current = null;
+    };
+  }, []);
+
+  function toggleAudio() {
+    const audio = audioRef.current;
+    if (!audio || audioState === 'error') return;
+
+    if (audioState === 'playing') {
+      audio.pause();
+      setAudioState('idle');
+      return;
+    }
+
+    setAudioState('loading');
+    audio.play()
+      .then(() => setAudioState('playing'))
+      .catch(() => setAudioState('error'));
+  }
 
   function increment() {
     const next = count + 1;
@@ -171,6 +236,22 @@ export default function DuroodSharifPage() {
         </section>
 
         <div className="darood-text-card card">
+          <button
+            type="button"
+            className={`darood-audio-btn${audioState === 'error' ? ' darood-audio-btn--disabled' : ''}`}
+            onClick={toggleAudio}
+            disabled={audioState === 'error'}
+            aria-label={audioState === 'playing' ? 'Pause Durood recitation' : 'Play Durood recitation'}
+            aria-pressed={audioState === 'playing'}
+          >
+            {audioState === 'loading' && <LoadingIcon />}
+            {audioState === 'playing' && <PauseIcon />}
+            {(audioState === 'idle' || audioState === 'error') && <PlayIcon />}
+            <span>
+              {audioState === 'error' ? 'Audio unavailable' : audioState === 'playing' ? 'Pause recitation' : 'Play recitation'}
+            </span>
+          </button>
+
           <p className="darood-text-arabic arabic">{ARABIC}</p>
           <p className="darood-text-translit">{TRANSLIT}</p>
           <p className="darood-text-translation">{TRANSLATION}</p>

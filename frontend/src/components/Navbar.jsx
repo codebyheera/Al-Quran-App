@@ -5,7 +5,7 @@
 
 import { NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock } from '@tabler/icons-react';
+import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock, IconMoonStars } from '@tabler/icons-react';
 import { useTheme } from '../context/ThemeContext';
 import { useQari } from '../context/QariContext';
 import { useBookmarks } from '../context/BookmarkContext';
@@ -306,6 +306,11 @@ export default function Navbar() {
           <NavLink to="/prayer-times" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
             <IconClock className="nav-icon" size={20} stroke={2} />
             <span className="nav-text">Prayer Times</span>
+          </NavLink>
+
+          <NavLink to="/durood-sharif" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
+            <IconMoonStars className="nav-icon" size={20} stroke={2} />
+            <span className="nav-text">Durood Sharif</span>
           </NavLink>
 
           <NavLink to="/bookmarks" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>

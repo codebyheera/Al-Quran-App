@@ -16,6 +16,7 @@ const SUPABASE_URL =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_URL) ||
   'https://hjuaeuelhwnjomagnmtx.supabase.co';
 const SUPABASE_URDU_BUCKET = 'quran-audio-urdu';
+const SUPABASE_MISC_AUDIO_BUCKET = 'misc-audio';
 
 /** Builds the Supabase Storage public URL for a given ayah's Urdu audio. */
 export function getSupabaseUrduAudioUrl(surahNumber, ayahNumber) {
@@ -23,6 +24,17 @@ export function getSupabaseUrduAudioUrl(surahNumber, ayahNumber) {
   const s = String(surahNumber).padStart(3, '0');
   const a = String(ayahNumber).padStart(3, '0');
   return `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_URDU_BUCKET}/${s}_${a}.mp3`;
+}
+
+/**
+ * Public URL for the Durood-e-Ibrahim recitation clip (DuroodSharifPage's
+ * play button). Uploaded via backend/scripts/upload-durood-audio.js into the
+ * "misc-audio" bucket — a general-purpose bucket for one-off audio clips
+ * that aren't per-ayah Quran/Urdu recitation, so they don't crowd the
+ * per-ayah buckets above.
+ */
+export function getDuroodAudioUrl() {
+  return `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_MISC_AUDIO_BUCKET}/durood-e-ibrahim.mp3`;
 }
 
 /**

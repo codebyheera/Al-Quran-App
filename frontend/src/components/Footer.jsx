@@ -12,6 +12,7 @@ const QUICK_LINKS = [
 
 const MORE_LINKS = [
   { label: 'Bookmarks', to: '/bookmarks' },
+  { label: 'Durood Sharif', to: '/durood-sharif' },
   { label: 'Blog', to: '/blog' },
   { label: 'Support', to: '/support' },
   { label: 'Contact', to: '/contact' },
