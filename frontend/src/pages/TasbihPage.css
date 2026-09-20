@@ -130,15 +130,19 @@ body.tasbih-focus footer {
 /* ── Section 1: Dhikr Selector ──────────────────────────── */
 .tasbih-selector-wrap {
   width: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
 }
-.tasbih-selector-wrap::-webkit-scrollbar { display: none; }
 
+/* flex-wrap (not a horizontal-scroll row) so every dhikr pill is always
+   visible without a scroll gesture — with 5 dhikr now, a fixed-width
+   non-wrapping row needed horizontal scrolling to reach the 5th pill, with
+   no visible scroll affordance, so it looked missing entirely. A lone pill
+   wrapped onto its own row still fills the full width automatically via
+   flex-grow (flex: 1 below), so there's no leftover empty-gap case to
+   special-case here the way the grids elsewhere on this page need to. */
 .tasbih-selector {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  min-width: max-content;
   width: 100%;
 }
 
