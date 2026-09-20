@@ -6,6 +6,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { IconBell } from '@tabler/icons-react';
 import { notifications } from '../data/notifications';
 
 const STORAGE_KEY = 'lastReadNotificationId';
@@ -59,7 +60,7 @@ export default function NotificationBell() {
         aria-expanded={open}
         title="Notifications"
       >
-        <span className="dropdown-trigger-icon">🔔</span>
+        <IconBell size={18} stroke={1.8} className="dropdown-trigger-icon" />
         {unread && <span className="notif-badge-dot" aria-hidden="true" />}
       </button>
 

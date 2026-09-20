@@ -1,19 +1,22 @@
 /* ── Darood Reminder Toast ────────────────────────────────────
    Fixed bottom-right on desktop, bottom-center full-width (minus
-   margins) on mobile. The bottom offset (9.5rem / 14.75rem with
-   the audio player active) is deliberately stacked to clear the
-   two floating buttons below it in the bottom-right corner:
-   the ChatWidget launcher at bottom:1.25rem (56px tall, see
-   ChatWidget.css) and the scroll-to-top button above it at
-   bottom:5.5rem (48px tall, see ScrollTopButton.css). Both shift
-   up when .has-player is set on .app-root, and this toast tracks
-   that same shift so the three never overlap.
+   margins) on mobile. The bottom offset (5.5rem / 10.75rem with
+   the audio player active) is stacked to clear the ChatWidget
+   launcher below it in the bottom-right corner (bottom:1.25rem,
+   56px tall, see ChatWidget.css). ChatWidget shifts up when
+   .has-player is set on .app-root, and this toast tracks that
+   same shift so the two never overlap.
+
+   (There used to be a second floating button — scroll-to-top —
+   stacked below this one too, accounted for in these offsets; it
+   was removed, so if you're wondering why these numbers look
+   smaller than you remember, that's why.)
    ──────────────────────────────────────────────────────────── */
 
 .darood-toast {
   position: fixed;
   right: clamp(0.75rem, 3vw, 1.25rem);
-  bottom: 9.5rem;
+  bottom: 5.5rem;
   z-index: 1050;
 
   width: min(340px, calc(100vw - 1.5rem));
@@ -33,9 +36,9 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Stay clear of the floating buttons when the audio player is active */
+/* Stay clear of the ChatWidget launcher when the audio player is active */
 .app-root.has-player .darood-toast {
-  bottom: 14.75rem;
+  bottom: 10.75rem;
 }
 
 .darood-toast-close {
@@ -112,10 +115,10 @@
 /* ── Tablets / small laptops: same layout, slightly tighter offset ── */
 @media (max-width: 900px) {
   .darood-toast {
-    bottom: 9rem;
+    bottom: 5rem;
   }
   .app-root.has-player .darood-toast {
-    bottom: 14rem;
+    bottom: 10rem;
   }
 }
 
@@ -138,12 +141,12 @@
   .darood-toast {
     left: 0.5rem;
     right: 0.5rem;
-    bottom: 8.5rem;
+    bottom: 4.5rem;
     padding: 0.7rem 0.8rem 0.8rem;
   }
 
   .app-root.has-player .darood-toast {
-    bottom: 13.5rem;
+    bottom: 9.5rem;
   }
 
   .darood-toast-icon {
@@ -164,9 +167,9 @@
    doesn't eat too much of a short viewport ─────────────────── */
 @media (max-height: 480px) and (orientation: landscape) {
   .darood-toast {
-    bottom: 7.5rem;
+    bottom: 3.5rem;
   }
   .app-root.has-player .darood-toast {
-    bottom: 10.5rem;
+    bottom: 6.5rem;
   }
 }

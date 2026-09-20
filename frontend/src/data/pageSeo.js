@@ -56,6 +56,16 @@ export const pageSeo = {
     title: 'Contact Al-Quran Hub | Feedback & Suggestions',
     description: 'Get in touch with the Al-Quran Hub team — share feedback, suggestions, or a dua. We would love to hear from you.',
   },
+  privacyPolicy: {
+    path: '/privacy-policy',
+    title: 'Privacy Policy | Al-Quran Hub',
+    description: 'How Al-Quran Hub collects, uses, and protects your information, including our use of Google Analytics and Search Console.',
+  },
+  terms: {
+    path: '/terms-and-conditions',
+    title: 'Terms & Conditions | Al-Quran Hub',
+    description: 'The rules for using Al-Quran Hub, including content sources, attribution requirements, and important disclaimers.',
+  },
   blogArchive: {
     path: '/blog',
     title: 'Islamic Blog – Quran, Hadith & Spirituality | Al-Quran Hub',

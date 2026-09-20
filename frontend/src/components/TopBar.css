@@ -9,9 +9,11 @@
   height: 38px;
   overflow: hidden;
   box-sizing: border-box;
-  background: var(--bg-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Solid (not the translucent --bg-glass token), same color as the navbar
+     below it (var(--bg-card)) — a distinct darker shade wasn't wanted, so
+     the border-bottom line alone marks where the top bar ends and the
+     navbar begins. */
+  background: var(--bg-card);
   border-bottom: 1px solid var(--border);
 }
 
@@ -72,26 +74,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  color: var(--text-secondary);
+  /* var(--text-primary) rather than --text-secondary: the "secondary" text
+     tone is a saturated theme tint in some themes (e.g. a pale mint-green
+     in Emerald), which read as washed-out here. --text-primary is a near-
+     white/neutral in every theme, so it still follows the active theme but
+     shows up clearly against the dark topbar background. */
+  color: var(--text-primary);
+  opacity: 0.85;
   line-height: 0;
   text-decoration: none;
-  transition: var(--transition);
+  transition: color 0.3s ease, opacity 0.3s ease, border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
 }
 
 .topbar-social-link svg {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   fill: currentColor;
   display: block;
 }
 
 .topbar-social-link:hover {
   color: var(--accent-gold);
+  opacity: 1;
   border-color: var(--border-hover);
   background: var(--bg-card-hover);
   transform: translateY(-2px);

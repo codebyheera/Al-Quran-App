@@ -42,7 +42,6 @@ export default function LanguagePrefDropdown() {
         aria-expanded={open}
         title={`Translation language (${current.name})`}
       >
-        <span className="dropdown-trigger-icon" aria-hidden="true">🌐</span>
         <span className="lang-pref-trigger-label">{current.short}</span>
         <svg
           className={`dropdown-chevron ${open ? 'rotated' : ''}`}

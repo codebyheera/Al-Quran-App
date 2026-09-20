@@ -82,10 +82,22 @@ function escapeAttr(str) {
     .replace(/>/g, '&gt;');
 }
 
-function injectMeta(template, { title, description, url, keywords, ogType = 'website', jsonLd }) {
+function injectMeta(template, { title, description, url, keywords, ogType = 'website', jsonLd, robots }) {
   let html = template;
 
   html = html.replace(/<title(?:[^>]*)?>[\s\S]*?<\/title>/, `<title data-rh="true">${escapeAttr(title)}</title>`);
+
+  // Optional robots directive (e.g. "noindex, follow" for Privacy Policy).
+  // Must be baked into the *static* HTML, not left to client-side Helmet —
+  // Google's first-wave crawl reads this pass, so a noindex that only shows
+  // up after JS renders risks the page getting indexed before it's ever seen.
+  if (robots) {
+    if (html.includes('name="robots"')) {
+      html = html.replace(/<meta\s+(?:data-rh="true"\s+)?name="robots"[\s\S]*?\/>/, `<meta data-rh="true" name="robots" content="${escapeAttr(robots)}" />`);
+    } else {
+      html = html.replace('</head>', `  <meta data-rh="true" name="robots" content="${escapeAttr(robots)}" />\n</head>`);
+    }
+  }
 
   html = html.replace(
     /<meta\s+(?:data-rh="true"\s+)?name="description"[\s\S]*?\/>/,
@@ -287,7 +299,12 @@ async function run() {
     const jsonLd = page.route === '/tasbih'
       ? buildTasbihFaqSchema(`${SITE_URL}${page.route}`)
       : undefined;
-    writeRoute(template, page.route, { ...page, jsonLd });
+    // Privacy Policy + Terms: dofollow (links still pass value/get crawled)
+    // but noindex (legal boilerplate pages shouldn't compete for search
+    // rankings) — matches each page's own runtime <Helmet> tag.
+    const NOINDEX_ROUTES = new Set(['/privacy-policy', '/terms-and-conditions']);
+    const robots = NOINDEX_ROUTES.has(page.route) ? 'noindex, follow' : undefined;
+    writeRoute(template, page.route, { ...page, jsonLd, robots });
   }
 
   console.log('Prerendering Juz pages (1-30)...');

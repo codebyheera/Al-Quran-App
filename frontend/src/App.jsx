@@ -3,7 +3,6 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
-import ScrollTopButton from './components/ScrollTopButton';
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -33,6 +32,8 @@ const TasbihPage     = lazy(() => import('./pages/TasbihPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
 const BlogArchive = lazy(() => import('./pages/BlogArchive'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const PrayerTimesHub = lazy(() => import('./pages/PrayerTimesHub'));
@@ -103,6 +104,8 @@ export default function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-and-conditions" element={<TermsPage />} />
             <Route path="/blog" element={<BlogArchive />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/prayer-times" element={<PrayerTimesHub />} />
@@ -128,7 +131,6 @@ export default function App() {
       </Suspense>
 
       {/* Floating back-to-top arrow — site-wide, appears past 300px of scroll */}
-      <ScrollTopButton />
 
       {/* First-visit translation language prompt — desktop only, dismissible */}
       <Suspense fallback={null}>

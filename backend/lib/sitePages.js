@@ -38,6 +38,12 @@ const STATIC_PAGES = [
   { path: '/blog', label: 'Blog', crawlable: true, changefreq: 'weekly', priority: '0.8' },
   { path: '/support', label: 'Support / Donate', crawlable: true, changefreq: 'monthly', priority: '0.5' },
   { path: '/contact', label: 'Contact', crawlable: true, changefreq: 'monthly', priority: '0.5' },
+  // crawlable: false — noindex'd (see PrivacyPolicyPage.jsx), so it's left out
+  // of the public XML sitemap the same way search/bookmarks are, even though
+  // it's a normal, linked (dofollow), fetchable page otherwise.
+  { path: '/privacy-policy', label: 'Privacy Policy', crawlable: false },
+  // Same reasoning as Privacy Policy above — noindex'd (see TermsPage.jsx).
+  { path: '/terms-and-conditions', label: 'Terms & Conditions', crawlable: false },
   { path: '/search', label: 'Search the Quran', crawlable: false },
   { path: '/bookmarks', label: 'Your bookmarked verses', crawlable: false },
   ...PRAYER_CITY_SLUGS.map((slug) => ({

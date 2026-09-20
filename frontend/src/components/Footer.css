@@ -1,42 +1,60 @@
 /* ============================================================
    Footer.css — Professional footer aligned with the Navbar
+
+   Colors come from the app's CSS custom properties (var(--accent-gold)
+   etc. — see src/styles/global.css), not fixed hex values, so the footer
+   follows whichever of the site's 7 themes the user has picked instead of
+   being stuck on one palette. Spacing/typography/animation values below
+   otherwise follow the requested spec (40px/20px padding, 30px section
+   gap, 0.3s ease hover transitions, -3px social icon lift) — except
+   margin-top, deliberately left at 0 below: .app-root has no flex/sticky-
+   footer setup, so a fixed 60px margin-top here doesn't push the footer
+   down on short pages, it just adds a visible empty gap after whatever
+   content (e.g. a page's CTA banner) happens to sit right above it.
    ============================================================ */
 
 .footer {
-  background: var(--bg-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  /* Solid, opaque background (not the translucent --bg-glass token) so the
+     footer reads as a solid bar rather than a see-through overlay. */
+  background: var(--bg-card);
   border-top: 1px solid var(--border);
-  margin-top: auto;
+  margin-top: 0;
+  font-family: var(--font-ui);
   /* Push above the bottom player when it's active */
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 /* ── Inner grid ─────────────────────────────────────────────── */
+/* Desktop (1024px+): brand column + 3 narrower columns (Quick Links, More,
+   Features) — a 4-way split rather than a literal 3-column grid, since the
+   center section itself is two link columns. */
 .footer-inner {
   display: grid;
   grid-template-columns: 2fr 1fr 0.85fr 1.3fr;
-  gap: 2rem;
+  gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 2rem;
+  padding: 40px 20px;
 }
 
-@media (max-width: 768px) {
+/* Tablet (768px–1023px): 2-column adjusted layout, brand spans full width */
+@media (max-width: 1023px) {
   .footer-inner {
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 30px;
   }
   .footer-brand {
     grid-column: 1 / -1;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile (480px–767px): single column stack */
+@media (max-width: 767px) {
   .footer-inner {
     grid-template-columns: 1fr;
   }
 }
+
 
 /* ── Brand ──────────────────────────────────────────────────── */
 .footer-logo {
@@ -65,7 +83,7 @@
 }
 
 .footer-tagline {
-  font-size: 0.88rem;
+  font-size: 14px;
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 1rem;
@@ -73,7 +91,7 @@
 }
 
 .footer-verse {
-  font-size: 0.82rem;
+  font-size: 13px;
   color: var(--text-muted);
   font-style: italic;
   line-height: 1.6;
@@ -88,7 +106,7 @@
   font-style: normal;
   font-weight: 600;
   color: var(--accent-gold);
-  font-size: 0.78rem;
+  font-size: 12px;
 }
 
 .footer-socials {
@@ -107,7 +125,7 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   color: var(--text-secondary);
-  transition: var(--transition);
+  transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .social-icon-link svg {
@@ -120,7 +138,7 @@
   color: var(--accent-gold);
   border-color: var(--border-hover);
   background: var(--bg-card-hover);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-gold);
 }
 
@@ -131,7 +149,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent-gold);
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
 }
 
 .footer-list {
@@ -139,13 +157,15 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  margin: 0;
+  padding: 0;
 }
 
 .footer-link {
-  font-size: 0.88rem;
+  font-size: 14px;
   color: var(--text-secondary);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.3s ease;
 }
 
 .footer-link:hover {
@@ -156,27 +176,25 @@
   display: flex;
   align-items: flex-start;
   gap: 0.55rem;
-  font-size: 0.85rem;
+  font-size: 13px;
   line-height: 1.4;
   color: var(--text-secondary);
 }
 
-.footer-feature-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent-gold);
+.footer-feature-check {
+  color: var(--accent-gold);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.4;
   flex-shrink: 0;
-  opacity: 0.7;
-  margin-top: 0.5em;
 }
 
 /* ── Bottom bar ─────────────────────────────────────────────── */
 .footer-bottom {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(201, 168, 76, 0.2);
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.1rem 1.5rem;
+  padding: 1.1rem 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -185,8 +203,9 @@
 }
 
 .footer-credit {
-  font-size: 0.85rem;
+  font-size: 13px;
   color: var(--text-secondary);
+  margin: 0;
 }
 
 .footer-heart {
@@ -197,17 +216,57 @@
 .footer-author {
   color: var(--accent-gold);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-author:hover {
+  color: var(--accent-gold);
+  text-decoration: underline;
 }
 
 .footer-copy {
-  font-size: 0.8rem;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
-@media (max-width: 480px) {
+.footer-bottom-sep {
+  color: var(--text-muted);
+  margin: 0 0.4em;
+}
+
+.footer-legal {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-legal-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-legal-link {
+  font-size: 13px;
+}
+
+@media (max-width: 767px) {
   .footer-bottom {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+/* Small mobile (<480px): stacked bottom links, left-aligned */
+@media (max-width: 479px) {
+  .footer-credit {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .footer-credit .footer-bottom-sep {
+    display: none;
   }
 }

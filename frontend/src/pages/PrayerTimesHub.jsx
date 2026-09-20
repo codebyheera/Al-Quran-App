@@ -308,7 +308,7 @@ export default function PrayerTimesHub() {
         <div className="pt-hub-hero__bg-orbs" />
         <div className="pt-hub-hero__content">
           <h1 className="pt-hub-hero__title">
-            Namaz & Prayer Times in <span className="text-gold">Pakistan</span>
+            Prayer <span className="text-gold">Times</span>
           </h1>
           <p className="pt-hub-hero__sub">
             Accurate daily prayer times for your location — Fajr, Dhuhr, Asr, Maghrib &amp; Isha.

@@ -3,9 +3,9 @@
  * Includes rich slide-in sidebar for mobile, Qari and Theme dropdowns.
  */
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock, IconMoonStars } from '@tabler/icons-react';
+import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock, IconMoonStars, IconSearch, IconChevronDown, IconMailbox, IconMicrophone2, IconMoon, IconSun } from '@tabler/icons-react';
 import { useTheme } from '../context/ThemeContext';
 import { useQari } from '../context/QariContext';
 import { useBookmarks } from '../context/BookmarkContext';
@@ -36,7 +36,7 @@ function QariDropdown({ reciter, changeReciter, reciters }) {
         aria-expanded={open}
         title={`Select Reciter (${current?.name})`}
       >
-        <span className="dropdown-trigger-icon">🎙️</span>
+        <IconMicrophone2 size={18} stroke={1.8} className="dropdown-trigger-icon" />
       </button>
 
       {open && (
@@ -87,7 +87,9 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
         aria-expanded={open}
         title="Select Theme"
       >
-        <span className="dropdown-trigger-icon">🌗</span>
+        {theme === 'light'
+          ? <IconSun size={18} stroke={1.8} className="dropdown-trigger-icon" />
+          : <IconMoon size={18} stroke={1.8} className="dropdown-trigger-icon" />}
       </button>
 
       {open && (
@@ -112,6 +114,60 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
               )}
             </button>
           ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// "More" dropdown — consolidates the lower-priority links (Bookmarks,
+// Support, Contact) out of the main inline row so the desktop nav doesn't
+// feel crowded, same open/close pattern as QariDropdown/ThemeDropdown above.
+function MoreDropdown({ bookmarkCount }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="navbar-dropdown navbar-more" ref={ref}>
+      <button
+        className={`navbar-link navbar-more-trigger ${open ? 'open' : ''}`}
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+      >
+        More
+        <IconChevronDown size={15} stroke={2} className="navbar-more-chevron" />
+      </button>
+
+      {open && (
+        <div className="dropdown-panel navbar-more-panel" role="menu">
+          <NavLink to="/bookmarks" className="dropdown-option" role="menuitem" onClick={() => setOpen(false)}>
+            <span className="dropdown-option-info">
+              <IconBookmark size={16} stroke={2} />
+              <span className="dropdown-option-name">Bookmarks</span>
+            </span>
+            {bookmarkCount > 0 && <span className="nav-badge">{bookmarkCount}</span>}
+          </NavLink>
+          <NavLink to="/support" className="dropdown-option" role="menuitem" onClick={() => setOpen(false)}>
+            <span className="dropdown-option-info">
+              <IconHeart size={16} stroke={2} />
+              <span className="dropdown-option-name">Support</span>
+            </span>
+          </NavLink>
+          <NavLink to="/contact" className="dropdown-option" role="menuitem" onClick={() => setOpen(false)}>
+            <span className="dropdown-option-info">
+              <IconMailbox size={16} stroke={2} />
+              <span className="dropdown-option-name">Contact</span>
+            </span>
+          </NavLink>
         </div>
       )}
     </div>
@@ -186,26 +242,27 @@ export default function Navbar() {
             <span className="navbar-logo-text">Al-<span>Quran</span> Hub</span>
           </NavLink>
 
-          {/* Nav links (desktop) */}
+          {/* Nav links (desktop) — priority-ordered; lower-priority links
+              (Bookmarks/Support/Contact) live in the "More" dropdown instead
+              of the inline row, so this doesn't feel crowded. */}
           <div className="navbar-links">
-            <NavLink to="/" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Home</NavLink>
+            <NavLink to="/" end className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Home</NavLink>
             <NavLink to="/surah" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Surahs</NavLink>
             <NavLink to="/juz" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Juz</NavLink>
             <NavLink to="/tasbih" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Tasbih</NavLink>
             <NavLink to="/prayer-times" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Prayer Times</NavLink>
-            <NavLink to="/bookmarks" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Bookmarks</NavLink>
             <NavLink to="/blog" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Blog</NavLink>
-            <NavLink to="/support" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>Support</NavLink>
+            <MoreDropdown bookmarkCount={bookmarks.length} />
           </div>
 
           {/* Right actions */}
           <div className="navbar-actions">
+            <Link to="/search" className="nav-icon-btn" aria-label="Search" title="Search">
+              <IconSearch size={19} stroke={1.8} />
+            </Link>
             {/* Translation language preference — desktop only */}
             <LanguagePrefDropdown />
             <QariDropdown reciter={reciter} changeReciter={changeReciter} reciters={reciters} />
-            <NavLink to="/bookmarks" aria-label="Bookmarks">
-              <button className="nav-icon-btn" title="Bookmarks">🔖</button>
-            </NavLink>
             <NotificationBell />
             <ThemeDropdown theme={theme} changeTheme={changeTheme} themes={themes} />
 
@@ -283,7 +340,7 @@ export default function Navbar() {
         <div className="sidebar-nav-label">NAVIGATION</div>
 
         <nav className="sidebar-nav-links">
-          <NavLink to="/" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
+          <NavLink to="/" end className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
             <IconHome className="nav-icon" size={20} stroke={2} />
             <span className="nav-text">Home</span>
           </NavLink>
