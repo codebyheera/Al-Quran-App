@@ -29,10 +29,13 @@ export const pageSeo = {
   },
   tasbih: {
     path: '/tasbih',
-    title: 'Digital Tasbih Counter Online | Al-Quran Hub',
+    // Rewritten 2026-09-20 for CTR (was pos. 11, 0.6% CTR on "tasbih online"-type
+    // queries) — leads with the Sunnah Mode 33-33-34 differentiator since that's
+    // what competitors (mytasbih.com, qilaj.com) don't offer as a guided flow.
+    title: 'Digital Tasbih Counter – Sunnah Mode 33-33-34 | Al-Quran Hub',
     description:
-      'Count SubhanAllah, Alhamdulillah, Allahu Akbar and La ilaha illAllah with our free digital tasbih counter. Includes Sunnah Mode (33-33-34), streak tracking, and Focus Mode. No download needed.',
-    keywords: 'tasbih counter, digital tasbih, dhikr counter, subhanallah counter, tasbih online',
+      "Free tasbih counter with Sunnah Mode (33-33-34) — no app download needed. Count SubhanAllah, Alhamdulillah & more, with streak tracking and Focus Mode.",
+    keywords: 'tasbih counter, digital tasbih, dhikr counter, subhanallah counter, tasbih online, tasbih counter online, online tasbih counter',
     ogDescription:
       'Count SubhanAllah, Alhamdulillah, Allahu Akbar and La ilaha illAllah with our free digital tasbih counter. Includes Sunnah Mode (33-33-34), streak tracking, and Focus Mode.',
   },

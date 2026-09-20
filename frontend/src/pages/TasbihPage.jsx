@@ -1,15 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import Breadcrumb from '../components/Breadcrumb';
+import SurahFaqSection from '../components/SurahFaqSection';
 import { pageSeo } from '../data/pageSeo';
+import { TASBIH_FAQS, buildTasbihFaqSchema } from '../data/tasbihFaqs';
 import './TasbihPage.css';
 
 const DHIKR = [
-  { id: 'subhanallah',   arabic: 'سُبْحَانَ اللَّه',          translit: 'SubhanAllah',      meaning: 'Glory be to Allah' },
-  { id: 'alhamdulillah', arabic: 'اَلْحَمْدُ لِلَّه',         translit: 'Alhamdulillah',    meaning: 'All praise to Allah' },
-  { id: 'allahuakbar',   arabic: 'اَللَّهُ أَكْبَر',          translit: 'Allahu Akbar',     meaning: 'Allah is the Greatest' },
-  { id: 'lailaha',       arabic: 'لَا إِلٰهَ إِلَّا اللَّه', translit: 'La ilaha illAllah', meaning: 'There is no god but Allah' },
+  { id: 'subhanallah',    arabic: 'سُبْحَانَ اللَّه',           translit: 'SubhanAllah',       meaning: 'Glory be to Allah' },
+  { id: 'alhamdulillah',  arabic: 'اَلْحَمْدُ لِلَّه',          translit: 'Alhamdulillah',     meaning: 'All praise to Allah' },
+  { id: 'allahuakbar',    arabic: 'اَللَّهُ أَكْبَر',           translit: 'Allahu Akbar',      meaning: 'Allah is the Greatest' },
+  { id: 'lailaha',        arabic: 'لَا إِلٰهَ إِلَّا اللَّه',  translit: 'La ilaha illAllah', meaning: 'There is no god but Allah' },
+  // Added 2026-09-20 to close a competitor gap (mytasbih.com/qilaj.com both
+  // offer this as a selectable dhikr) — works with the existing generic
+  // DHIKR.map() selector/stats UI below with no other changes needed.
+  { id: 'astaghfirullah', arabic: 'أَسْتَغْفِرُ اللَّه',        translit: 'Astaghfirullah',    meaning: 'I seek forgiveness from Allah' },
 ];
+
 
 const SUNNAH_STEPS = [
   { id: 'subhanallah',   arabic: 'سُبْحَانَ اللَّه',  translit: 'SubhanAllah',   target: 33 },
@@ -292,6 +300,9 @@ export default function TasbihPage() {
         <meta property="og:title" content={pageSeo.tasbih.title} />
         <meta property="og:description" content={pageSeo.tasbih.ogDescription} />
         <meta property="og:url" content={`https://alquranhub.org${pageSeo.tasbih.path}`} />
+        <script type="application/ld+json">
+          {JSON.stringify(buildTasbihFaqSchema(`https://alquranhub.org${pageSeo.tasbih.path}`))}
+        </script>
       </Helmet>
 
       {/* ── Breadcrumb + heading ── */}
@@ -527,6 +538,17 @@ export default function TasbihPage() {
               <li>Your count is saved automatically — come back anytime</li>
               <li>Use Sunnah Mode for guided after-prayer dhikr (33-33-34)</li>
             </ul>
+
+            <div className="tasbih-related">
+              <Link to="/durood-sharif" className="tasbih-related-card">
+                <span className="tasbih-related-icon" aria-hidden="true">🤲</span>
+                <span className="tasbih-related-text">
+                  <strong>Reciting Durood Sharif?</strong> Read the full Durood-e-Ibrahim text with translation, audio, and its own daily counter.
+                </span>
+              </Link>
+            </div>
+
+            <SurahFaqSection title="Frequently Asked Questions" items={TASBIH_FAQS} />
           </div>
         </div>
       )}

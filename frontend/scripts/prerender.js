@@ -24,6 +24,7 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { getSurahSeo } from '../src/data/surahSeo.js';
 import { getJuzSeo } from '../src/data/juzSeo.js';
 import { pageSeo } from '../src/data/pageSeo.js';
+import { buildTasbihFaqSchema } from '../src/data/tasbihFaqs.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -81,7 +82,7 @@ function escapeAttr(str) {
     .replace(/>/g, '&gt;');
 }
 
-function injectMeta(template, { title, description, url, keywords, ogType = 'website' }) {
+function injectMeta(template, { title, description, url, keywords, ogType = 'website', jsonLd }) {
   let html = template;
 
   html = html.replace(/<title(?:[^>]*)?>[\s\S]*?<\/title>/, `<title data-rh="true">${escapeAttr(title)}</title>`);
@@ -119,6 +120,13 @@ function injectMeta(template, { title, description, url, keywords, ogType = 'web
     html = html.replace(/<link\s+(?:data-rh="true"\s+)?rel="canonical"[\s\S]*?\/>/, `<link data-rh="true" rel="canonical" href="${escapeAttr(url)}" />`);
   } else {
     html = html.replace('</head>', `  <link data-rh="true" rel="canonical" href="${escapeAttr(url)}" />\n</head>`);
+  }
+
+  // Optional structured data (e.g. FAQPage) for static (meta-only) pages —
+  // needed so it's present in the *initial* HTML rather than only appearing
+  // once client-side Helmet runs (see the tasbih FAQ prerendering note below).
+  if (jsonLd) {
+    html = html.replace('</head>', `  <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n</head>`);
   }
 
   return html;
@@ -267,7 +275,13 @@ async function run() {
 
   console.log('Prerendering static pages...');
   for (const page of staticPages) {
-    writeRoute(template, page.route, page);
+    // Tasbih is the only static page with an on-page FAQ section (see
+    // TasbihPage.jsx + data/tasbihFaqs.js) — bake its FAQPage schema into the
+    // static HTML too, same reasoning as everywhere else jsonLd is used here.
+    const jsonLd = page.route === '/tasbih'
+      ? buildTasbihFaqSchema(`${SITE_URL}${page.route}`)
+      : undefined;
+    writeRoute(template, page.route, { ...page, jsonLd });
   }
 
   console.log('Prerendering Juz pages (1-30)...');
