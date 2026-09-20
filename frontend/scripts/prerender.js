@@ -280,6 +280,51 @@ async function run() {
     });
   }
 
+  // Blog posts previously had NO prerendering at all (unlike Surah/Juz above),
+  // so Googlebot's crawl could catch BlogPost.jsx's loading-skeleton Helmet
+  // ("Blog Article | Al-Quran Hub" / generic description) or even the raw
+  // index.html defaults, before the client-side data fetch + Helmet update
+  // finished — this is exactly what showed up as wrong titles/descriptions
+  // in Google search results. Meta-only injection (same approach as the Juz
+  // pages above, not a full ReactDOMServer render like Surah pages) is enough
+  // to fix that: it guarantees the *initial* HTML already has the real
+  // per-post title/description, independent of how long the client-side
+  // fetch takes.
+  console.log('Prerendering blog post pages...');
+  try {
+    let allBlogs = [];
+    let page = 1;
+    while (true) {
+      const res = await fetchJsonWithRetry(`${API_BASE}/api/blogs?page=${page}&limit=50`);
+      allBlogs = allBlogs.concat(res.blogs || []);
+      if (page >= (res.totalPages || 1)) break;
+      page++;
+    }
+
+    console.log(`Found ${allBlogs.length} published blog posts.`);
+    let blogPrerenderFailures = 0;
+    for (const b of allBlogs) {
+      try {
+        const full = await fetchJsonWithRetry(`${API_BASE}/api/blogs/${b.slug}`);
+        writeRoute(template, `/blog/${full.slug}`, {
+          title: `${full.meta_title || full.title} | Al-Quran Hub Blog`,
+          description: full.meta_description || full.excerpt || '',
+          ogType: 'article',
+        });
+      } catch (err) {
+        blogPrerenderFailures++;
+        console.error(`❌ Failed to prerender blog "${b.slug}": ${err.message}`);
+      }
+    }
+    if (blogPrerenderFailures > 0) {
+      console.error(`❌ ${blogPrerenderFailures}/${allBlogs.length} blog posts failed to prerender.`);
+      process.exit(1);
+    }
+  } catch (err) {
+    console.error(`❌ Could not fetch blog list from ${API_BASE}/api/blogs: ${err.message}`);
+    process.exit(1);
+  }
+
   // Programmatic Vite Dev Server to resolve JSX components via SSR transform
   console.log('Starting programmatic Vite Server for JSX SSR transform...');
   const vite = await createServer({
