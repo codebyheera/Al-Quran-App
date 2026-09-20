@@ -125,8 +125,14 @@ function injectMeta(template, { title, description, url, keywords, ogType = 'web
   // Optional structured data (e.g. FAQPage) for static (meta-only) pages —
   // needed so it's present in the *initial* HTML rather than only appearing
   // once client-side Helmet runs (see the tasbih FAQ prerendering note below).
+  // data-rh="true" matters here: it's the exact attribute react-helmet-async
+  // stamps on tags it renders (confirmed against this app's own SSR'd Surah
+  // pages' JSON-LD output), which is how it recognizes and REPLACES this tag
+  // on hydration instead of leaving it in place and appending a duplicate —
+  // without it, TasbihPage.jsx's own <Helmet> FAQ schema showed up as a
+  // second, identical FAQPage block alongside this one.
   if (jsonLd) {
-    html = html.replace('</head>', `  <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n</head>`);
+    html = html.replace('</head>', `  <script data-rh="true" type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n</head>`);
   }
 
   return html;
