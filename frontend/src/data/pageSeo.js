@@ -7,7 +7,7 @@ export const pageSeo = {
     path: '/',
     title: 'Al-Quran Hub | Read Quran Pak Online Free',
     description:
-      'Read Quran Pak online for free with daily prayer times, Verse of the Day, and Islamic blog. Access all 114 Surahs and 30 Juz with beautiful recitation on Al-Quran Hub.',
+      'Free Quran Pak reading, prayer times, Verse of the Day & Islamic blog. Explore all 114 Surahs and 30 Juz on Al-Quran Hub.',
     keywords: 'quran pak, read quran online, quran online, al quran',
   },
   surahList: {
