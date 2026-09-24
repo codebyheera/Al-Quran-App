@@ -11,10 +11,11 @@
  */
 export const notifications = [
   {
-    id: '2',
-    title: 'New: Daily Reading Streak',
-    message: 'Set a daily reading goal and build your streak read any Surah or Juz to reach it. Track your progress right on the homepage.',
-    date: '2026-08-14',
+    id: '3',
+    title: 'New: Continue Reading',
+    message: 'You can now pick up right where you stopped. Just open the homepage and tap the Continue Reading card to jump back to your last ayah.',
+    date: '2026-09-25',
+    link: '/',
   },
   {
     id: '1',

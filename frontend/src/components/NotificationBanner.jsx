@@ -45,7 +45,7 @@ export default function NotificationBanner() {
     <div className="notif-banner" role="alert">
       <span className="notif-banner-icon">🌙</span>
       <p className="notif-banner-text">
-        Get daily Quran reminders — free, ad-free, always.
+        Get daily Quran reminders. Free, no ads, always.
       </p>
       <div className="notif-banner-actions">
         <button

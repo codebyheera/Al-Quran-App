@@ -14,6 +14,7 @@ import { BlogCard } from '../components/BlogCard';
 import PrayerTimes from '../components/PrayerTimes';
 import StreakWidget from '../components/StreakWidget';
 import { pageSeo } from '../data/pageSeo';
+import { getLastReading } from '../lib/readingProgress';
 import { RevealSection } from '../components/RevealSection';
 import './Home.css';
 import './SurahList.css';
@@ -23,32 +24,61 @@ const TasbihCounter = lazy(() => import('../components/TasbihCounter'));
 
 const FEATURES = [
   {
-    icon: '🎧',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5Z" />
+        <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5Z" />
+      </svg>
+    ),
     title: 'Top Reciters',
     desc: 'Listen to beautiful recitations by Mishary Al-Afasy, Abdul Rahman Al-Sudais, and more.',
   },
   {
-    icon: '📖',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 6.5c-1.5-1-3.5-1.5-5.5-1.5C5.3 5 4.1 5.2 3 5.5v13c1.1-.3 2.3-.5 3.5-.5 2 0 4 .5 5.5 1.5 1.5-1 3.5-1.5 5.5-1.5 1.2 0 2.4.2 3.5.5v-13c-1.1-.3-2.3-.5-3.5-.5-2 0-4 .5-5.5 1.5Z" />
+        <path d="M12 6.5v13" />
+      </svg>
+    ),
     title: 'Arabic with Translation',
     desc: 'Read every Surah with clear Arabic text, English translation, and word-by-word meaning.',
   },
   {
-    icon: '🔖',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 3h12v18l-6-4-6 4V3Z" />
+      </svg>
+    ),
     title: 'Bookmark Any Verse',
     desc: 'Save your favorite verses and pick up exactly where you left off — anytime.',
   },
   {
-    icon: '🌙',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3Z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    ),
     title: '100% Ad-Free',
     desc: 'No ads, no banners, no tracking. Just you and the words of Allah.',
   },
   {
-    icon: '📱',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="6" y="2" width="12" height="20" rx="2" />
+        <path d="M11 18h2" />
+      </svg>
+    ),
     title: 'Mobile Friendly',
     desc: 'Optimized for every device — read and listen comfortably on your phone or tablet.',
   },
   {
-    icon: '🆓',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" />
+      </svg>
+    ),
     title: 'Completely Free',
     desc: 'Al-Quran Hub is and will always be free — built as sadaqah jariyah for the Ummah.',
   },
@@ -77,6 +107,13 @@ export default function Home() {
   const searchWrapperRef = useRef(null);
   const navigate = useNavigate();
   const { bookmarks } = useBookmarks();
+  const [lastReading, setLastReading] = useState(null);
+
+  // Read on mount only (not during render) so this stays SSR/prerender-safe —
+  // localStorage doesn't exist in the Node build that generates static HTML.
+  useEffect(() => {
+    setLastReading(getLastReading());
+  }, []);
 
   useEffect(() => {
     api.get('/api/surah')
@@ -120,6 +157,33 @@ export default function Home() {
   const { results: suggestions, didYouMean } = smartSearch(query, allSurahs);
   const showDropdown = dropdownOpen && (suggestions.length > 0 || didYouMean);
 
+  const developerJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': 'https://alquranhub.org/#founder',
+        name: 'Muhammad Subhan Naeem',
+        jobTitle: 'Founder & Developer',
+        url: 'https://alquranhub.org',
+        image: 'https://avatars.githubusercontent.com/codebyheera',
+        sameAs: [
+          'https://github.com/codebyheera',
+          'https://www.linkedin.com/in/codebysubhan/',
+          'https://medium.com/@muhammadsubhan189345',
+          'https://about.me/muhammadsubhannaeem',
+        ],
+        worksFor: { '@id': 'https://alquranhub.org/#organization' },
+      },
+      {
+        '@type': 'Organization',
+        '@id': 'https://alquranhub.org/#organization',
+        name: 'Al-Quran Hub',
+        url: 'https://alquranhub.org',
+      },
+    ],
+  });
+
   return (
     <div className="home page-enter">
       <Helmet>
@@ -127,7 +191,8 @@ export default function Home() {
         <meta name="description" content={pageSeo.home.description} />
         <meta name="keywords" content={pageSeo.home.keywords} />
         <link rel="canonical" href={`https://alquranhub.org${pageSeo.home.path}`} />
-      </Helmet> 
+        <script type="application/ld+json">{developerJsonLd}</script>
+      </Helmet>
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="hero pattern-bg">
@@ -208,21 +273,73 @@ export default function Home() {
           </div>
           <div className="home-mode-cards">
             <Link to="/surah" className="mode-card reveal reveal-fade-up stagger-1">
-              <div className="mode-card-icon">📖</div>
+              <div className="mode-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 6.5c-1.5-1-3.5-1.5-5.5-1.5C5.3 5 4.1 5.2 3 5.5v13c1.1-.3 2.3-.5 3.5-.5 2 0 4 .5 5.5 1.5 1.5-1 3.5-1.5 5.5-1.5 1.2 0 2.4.2 3.5.5v-13c-1.1-.3-2.3-.5-3.5-.5-2 0-4 .5-5.5 1.5Z" />
+                  <path d="M12 6.5v13" />
+                </svg>
+              </div>
               <div>
                 <h3>By Surah</h3>
                 <p>Browse all 114 chapters</p>
               </div>
             </Link>
             <Link to="/juz" className="mode-card reveal reveal-fade-up stagger-2">
-              <div className="mode-card-icon">📚</div>
+              <div className="mode-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 3 2 8l10 5 10-5-10-5Z" />
+                  <path d="M2 12l10 5 10-5" />
+                  <path d="M2 16l10 5 10-5" />
+                </svg>
+              </div>
               <div>
                 <h3>By Juz</h3>
                 <p>Browse all 30 parts</p>
               </div>
             </Link>
-            <Link to="/bookmarks" className="mode-card reveal reveal-fade-up stagger-3">
-              <div className="mode-card-icon">🔖</div>
+            {lastReading ? (
+              <Link
+                to={lastReading.url}
+                className="mode-card reveal reveal-fade-up stagger-3"
+                aria-label={`Continue reading Surah ${lastReading.surahName}, Ayah ${lastReading.ayahNumber}`}
+              >
+                <div className="mode-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 11a9 9 0 1 0 2.6-6.3" />
+                    <path d="M3 4v5h5" />
+                    <path d="M12 8v4l3 2" />
+                  </svg>
+                </div>
+                <div>
+                  <h3>Continue Reading</h3>
+                  <p>{lastReading.surahName} · Ayah {lastReading.ayahNumber}</p>
+                </div>
+              </Link>
+            ) : (
+              <Link
+                to="/surah"
+                className="mode-card reveal reveal-fade-up stagger-3"
+                aria-label="Start your Quran reading journey"
+              >
+                <div className="mode-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 11a9 9 0 1 0 2.6-6.3" />
+                    <path d="M3 4v5h5" />
+                    <path d="M12 8v4l3 2" />
+                  </svg>
+                </div>
+                <div>
+                  <h3>Continue Reading</h3>
+                  <p>Start your Quran reading journey</p>
+                </div>
+              </Link>
+            )}
+            <Link to="/bookmarks" className="mode-card reveal reveal-fade-up stagger-4">
+              <div className="mode-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 3h12v18l-6-4-6 4V3Z" />
+                </svg>
+              </div>
               <div>
                 <h3>Bookmarks</h3>
                 <p>{bookmarks.length} saved verses</p>
@@ -365,6 +482,61 @@ export default function Home() {
             )}
           </RevealSection>
         )}
+
+        {/* ── Developer Note ─────────────────────────────────── */}
+        <RevealSection className="home-section">
+          <div className="developer-note reveal reveal-fade-up stagger-1 reveal-visible">
+            <img
+              className="developer-note-avatar"
+              src="https://avatars.githubusercontent.com/codebyheera"
+              alt="Muhammad Subhan Naeem, developer of Al-Quran Hub"
+              width={72}
+              height={72}
+              loading="lazy"
+            />
+            <div className="developer-note-text">
+              <div className="developer-note-header">
+                <div className="developer-note-name">Muhammad Subhan Naeem</div>
+                <span className="developer-note-role">Founder & Developer</span>
+              </div>
+              <p className="developer-note-message">
+                I built this site on my own so anyone can read and listen to the Quran without ads or distractions.
+                If Al-Quran Hub has benefited you, please remember me and my family in your duas.
+              </p>
+              <p className="developer-note-dua">May Allah accept this effort. Ameen</p>
+              <div className="developer-note-socials">
+                <a href="https://github.com/codebyheera" target="_blank" rel="noopener noreferrer"
+                  className="developer-note-social-btn" aria-label="GitHub">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/>
+                  </svg>
+                  GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/codebysubhan/" target="_blank" rel="noopener noreferrer"
+                  className="developer-note-social-btn" aria-label="LinkedIn">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68zm1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                  </svg>
+                  LinkedIn
+                </a>
+                <a href="https://medium.com/@muhammadsubhan189345" target="_blank" rel="noopener noreferrer"
+                  className="developer-note-social-btn" aria-label="Medium">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+                  </svg>
+                  Medium
+                </a>
+                <a href="https://about.me/muhammadsubhannaeem" target="_blank" rel="noopener noreferrer"
+                  className="developer-note-social-btn" aria-label="About.me">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                  </svg>
+                  About.me
+                </a>
+              </div>
+            </div>
+          </div>
+        </RevealSection>
       </div>
 
       {/* ── Support CTA ──────────────────────────────────────── */}

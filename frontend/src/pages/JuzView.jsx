@@ -3,7 +3,7 @@
  * Similar to SurahView but groups verses by Surah within the Juz
  */
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
@@ -17,6 +17,7 @@ import SurahIntro from '../components/SurahIntro';
 import { getJuzContent } from '../data/juz-content';
 import { getJuzSeo } from '../data/juzSeo';
 import { useReadingTimer } from '../hooks/useReadingTimer';
+import { useReadingProgress } from '../hooks/useReadingProgress';
 import './JuzView.css';
 
 export default function JuzView() {
@@ -29,6 +30,20 @@ export default function JuzView() {
   const [juz, setJuz] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Powers the homepage "Continue Reading" card — tracks which ayah the
+  // user is currently viewing and saves it as their last reading position.
+  const readingProgressItems = useMemo(() => {
+    if (!juz?.verses?.length) return [];
+    return juz.verses.map((v) => ({
+      elementId: `verse-${v.surahNumber}:${v.number}`,
+      surahNumber: v.surahNumber,
+      surahName: v.surahName,
+      ayahNumber: v.number,
+      url: `/surah/${v.surahNumber}#verse-${v.number}`,
+    }));
+  }, [juz]);
+  useReadingProgress(readingProgressItems);
 
   const [fontSize, setFontSize] = useState(() => {
     return parseFloat(localStorage.getItem('arabicFontSize')) || 2.2;

@@ -5,7 +5,7 @@
  * Includes Previous/Next navigation.
  */
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import api from "../lib/api";
 import AudioPlayer from "../components/AudioPlayer";
@@ -22,6 +22,7 @@ import { getSurahSeo } from "../data/surahSeo";
 import SurahIntro from "../components/SurahIntro";
 import { getSurahContent } from "../data/surah-content";
 import { useReadingTimer } from "../hooks/useReadingTimer";
+import { useReadingProgress } from "../hooks/useReadingProgress";
 import "./SurahView.css";
 
 export default function SurahView() {
@@ -59,6 +60,20 @@ export default function SurahView() {
   // We'll use the ID from the URL for the API call,
   // and use surah.surahNumber for numeric logic once loaded.
   const surahNum = surah?.surahNumber || parseInt(id) || null;
+
+  // Powers the homepage "Continue Reading" card — tracks which ayah the
+  // user is currently viewing and saves it as their last reading position.
+  const readingProgressItems = useMemo(() => {
+    if (!surah?.verses?.length || !surahNum) return [];
+    return surah.verses.map((v) => ({
+      elementId: `verse-${v.number}`,
+      surahNumber: surahNum,
+      surahName: surah.surahName,
+      ayahNumber: v.number,
+      url: `/surah/${surahNum}#verse-${v.number}`,
+    }));
+  }, [surah, surahNum]);
+  useReadingProgress(readingProgressItems);
 
   const [fontSize, setFontSize] = useState(() => {
     return parseFloat(localStorage.getItem("arabicFontSize")) || 2.2;
