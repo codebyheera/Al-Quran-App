@@ -276,21 +276,25 @@ export default function JuzView() {
   const jvDescription = juzSeoData.description;
   const jvUrl = `https://alquranhub.org/juz/${juzNum}`;
 
-  const articleSchema = {
+  const webPageSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": jvTitle,
-    "description": jvDescription,
+    "@type": "WebPage",
+    "name": jvTitle,
     "url": jvUrl,
-    "inLanguage": "ar",
-    "mainEntityOfPage": jvUrl,
-    "articleSection": `Juz ${juzNum}`,
-    "image": "https://alquranhub.org/og-image.png",
-    "author": {
-      "@type": "Organization",
-      "name": "Al-Quran Hub",
-      "url": "https://alquranhub.org"
-    }
+    "description": jvDescription,
+    "inLanguage": "ar"
+  };
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Surahs in Juz ${juzNum}`,
+    "itemListElement": groups.map((group, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": `https://alquranhub.org/surah/${group.surahName}`,
+      "name": `Surah ${group.surahName}`
+    }))
   };
 
   return (
@@ -303,8 +307,15 @@ export default function JuzView() {
         <title>{jvTitle}</title>
         <meta name="description" content={jvDescription} />
         <link rel="canonical" href={jvUrl} />
+        <meta property="og:title" content={jvTitle} />
+        <meta property="og:description" content={jvDescription} />
+        <meta property="og:url" content={jvUrl} />
+        <meta property="og:type" content="website" />
         <script type="application/ld+json">
-          {JSON.stringify(articleSchema)}
+          {JSON.stringify(webPageSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(itemListSchema)}
         </script>
       </Helmet>
       <div className="container">

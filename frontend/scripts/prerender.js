@@ -313,7 +313,7 @@ async function run() {
     writeRoute(template, `/juz/${juzNum}`, {
       title: juzSeoData.title,
       description: juzSeoData.description,
-      ogType: 'article',
+      ogType: 'website',
     });
   }
 

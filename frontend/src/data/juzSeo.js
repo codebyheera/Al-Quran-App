@@ -8,6 +8,11 @@ export const juzSeo = {
     description:
       "Read Juz 5 online with English translation and audio recitation. Covers Surah An-Nisa verses 24 to 147, from marriage to inheritance.",
   },
+  21: {
+    title: "Juz 21 (Para 21) - Read Full Arabic Text | Al-Quran Hub",
+    description:
+      "Juz 21 (Para 21) covers Surah Al-Ankabut, Ar-Rum, Luqman, and As-Sajdah. Read the Arabic text with Urdu translation and listen to free audio recitation.",
+  },
 };
 
 export function getJuzSeo(juzNum) {
