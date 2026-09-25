@@ -235,6 +235,41 @@ export const surahContent = {
     ],
   },
 
+  "Ash-Sharh": {
+    intro: [
+      "Surah Ash-Sharh, also known as Al-Inshirah, is the 94th surah of the Quran. It is a Makki surah, revealed in Makkah, and has only 8 verses, making it one of the shorter chapters in the Quran.",
+      "This surah brings comfort and reassurance to Prophet Muhammad (peace be upon him) during a time of hardship. Allah reminds him that He has opened up his chest, lifted the heavy burden from him, and raised his name in honor. The most well known part of this surah is the promise repeated twice: \"with hardship comes ease.\" This line has given hope to millions of Muslims across generations, reminding them that difficult times never last forever and relief is always close by.",
+      "Surah Ash-Sharh is often read alongside Surah Ad-Duha, since both were revealed around the same period and carry a similar message of patience and hope.",
+    ],
+    faqs: [
+      {
+        question: "What is Surah Ash-Sharh about?",
+        answer:
+          "Surah Ash-Sharh is about finding comfort during hard times. It reminds the reader that Allah eases the burdens of those who remain patient, and that no difficulty lasts forever. This message makes it one of the most comforting chapters people turn to when going through tough situations.",
+      },
+      {
+        question: "What are the benefits of reciting Surah Ash-Sharh?",
+        answer:
+          "Many people recite Surah Ash-Sharh for peace of mind and relief from stress or worry. Since the surah focuses on hope after hardship, it is often read during periods of anxiety, sadness, or when facing a difficult decision. Some also recite it alongside Surah Ad-Duha for added comfort.",
+      },
+      {
+        question: "Why is Surah Ash-Sharh also called Al-Inshirah?",
+        answer:
+          "The surah is known by two names because both come from its central theme, the opening or expansion of the chest. Ash-Sharh and Al-Inshirah are used interchangeably, and you will find both names in different translations and Quran apps.",
+      },
+      {
+        question: "What does \"with hardship comes ease\" mean in Surah Ash-Sharh?",
+        answer:
+          "This phrase appears twice in the surah and is considered its most powerful message. It teaches that ease is not just possible after hardship, it is guaranteed to come alongside it. Scholars often explain this as a reminder that struggle and relief are closely connected, not separate events.",
+      },
+      {
+        question: "When is the best time to recite Surah Ash-Sharh?",
+        answer:
+          "There is no fixed time required for this surah, but many people choose to recite it during moments of stress, before starting something difficult, or as part of their daily Quran reading. Its short length also makes it easy to memorize and recite regularly.",
+      },
+    ],
+  },
+
   // TODO: add remaining 113 Surahs here, one at a time.
   // Copy the At-Tawba shape above — key = surah.surahName slug (see
   // backend/data/surahMapping.js englishNamesToIds for the exact string),

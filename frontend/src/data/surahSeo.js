@@ -213,6 +213,11 @@ export const surahSeo = {
     description:
       "Read and listen to Surah Al-Hadid (The Iron) - Ch 57. 29 verses on faith, charity & divine justice. Arabic & English. Free on Al-Quran Hub.",
   },
+  94: {
+    title: "Surah Ash-Sharh (Al-Inshirah) - The Relief | Al Quran Hub",
+    description:
+      "Feeling overwhelmed? Surah Ash-Sharh reminds us that ease always follows hardship. Read Arabic text, Urdu translation, and listen to audio tilawat free.",
+  },
 };
 
 // Surahs 38-114 don't have hand-written copy yet — fall back to a generated
