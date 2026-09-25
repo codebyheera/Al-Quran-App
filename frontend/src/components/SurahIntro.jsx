@@ -16,6 +16,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import SurahFaqSection from "./SurahFaqSection";
+import SurahRelated from "./SurahRelated";
 import "./SurahIntro.css";
 
 // Content strings may embed a link as `[anchor text](/path)` — used for
@@ -81,14 +82,16 @@ function buildFaqSchema(faqs, pageUrl) {
 export default function SurahIntro({
   intro = [],
   faqs = [],
+  related = [],
   surahName,
   pageUrl,
   children,
 }) {
   const hasIntro = Array.isArray(intro) && intro.length > 0;
   const hasFaqs = Array.isArray(faqs) && faqs.length > 0;
+  const hasRelated = Array.isArray(related) && related.length > 0;
 
-  if (!hasIntro && !hasFaqs) {
+  if (!hasIntro && !hasFaqs && !hasRelated) {
     return <>{children}</>;
   }
 
@@ -127,6 +130,8 @@ export default function SurahIntro({
           }))}
         />
       )}
+
+      {hasRelated && <SurahRelated items={related} />}
     </>
   );
 }

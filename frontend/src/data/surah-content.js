@@ -239,7 +239,7 @@ export const surahContent = {
     intro: [
       "Surah Ash-Sharh, also known as Al-Inshirah, is the 94th surah of the Quran. It is a Makki surah, revealed in Makkah, and has only 8 verses, making it one of the shorter chapters in the Quran.",
       "This surah brings comfort and reassurance to Prophet Muhammad (peace be upon him) during a time of hardship. Allah reminds him that He has opened up his chest, lifted the heavy burden from him, and raised his name in honor. The most well known part of this surah is the promise repeated twice: \"with hardship comes ease.\" This line has given hope to millions of Muslims across generations, reminding them that difficult times never last forever and relief is always close by.",
-      "Surah Ash-Sharh is often read alongside Surah Ad-Duha, since both were revealed around the same period and carry a similar message of patience and hope.",
+      "Surah Ash-Sharh is often read alongside [Surah Ad-Duha](/surah/Ad-Dhuhaa), since both were revealed around the same period and carry a similar message of patience and hope.",
     ],
     faqs: [
       {
@@ -267,6 +267,11 @@ export const surahContent = {
         answer:
           "There is no fixed time required for this surah, but many people choose to recite it during moments of stress, before starting something difficult, or as part of their daily Quran reading. Its short length also makes it easy to memorize and recite regularly.",
       },
+    ],
+    related: [
+      { label: "Surah Ad-Duha", slug: "Ad-Dhuhaa" },
+      { label: "Surah At-Tin", slug: "At-Tin" },
+      { label: "Surah Al-Alaq", slug: "Al-Alaq" },
     ],
   },
 

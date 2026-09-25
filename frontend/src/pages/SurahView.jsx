@@ -542,6 +542,7 @@ export default function SurahView() {
         <SurahIntro
           intro={surahContentData?.intro}
           faqs={surahContentData?.faqs}
+          related={surahContentData?.related}
           surahName={surah.surahName}
           pageUrl={`https://alquranhub.org/surah/${id}`}
         >
