@@ -391,23 +391,6 @@ export default function SurahView() {
         const cleanTitle = pageTitle.replace(/&amp;/g, '&');
         const cleanDescription = pageDescription.replace(/&amp;/g, '&');
 
-        const articleSchema = {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": cleanTitle,
-          "description": cleanDescription,
-          "url": `https://alquranhub.org/surah/${id}`,
-          "inLanguage": "ar",
-          "mainEntityOfPage": `https://alquranhub.org/surah/${id}`,
-          "articleSection": `Surah ${surahNum}`,
-          "image": "https://alquranhub.org/og-image.png",
-          "author": {
-            "@type": "Organization",
-            "name": "Al-Quran Hub",
-            "url": "https://alquranhub.org"
-          }
-        };
-
         const webPageSchema = {
           "@context": "https://schema.org",
           "@type": "WebPage",
@@ -425,10 +408,7 @@ export default function SurahView() {
           <meta property="og:title" content={cleanTitle} />
           <meta property="og:description" content={cleanDescription} />
           <meta property="og:url" content={`https://alquranhub.org/surah/${id}`} />
-          <meta property="og:type" content="article" />
-          <script type="application/ld+json">
-            {JSON.stringify(articleSchema)}
-          </script>
+          <meta property="og:type" content="website" />
           <script type="application/ld+json">
             {JSON.stringify(webPageSchema)}
           </script>
