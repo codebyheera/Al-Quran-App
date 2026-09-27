@@ -13,6 +13,42 @@
  */
 
 export const juzContent = {
+  4: {
+    intro: [
+      "Juz 4 covers the final part of [Surah Aal-i-Imran](/surah/Aal-i-Imraan), from verse 93 to the end of the surah at verse 200, and then moves into the opening twenty three verses of [Surah An-Nisa](/surah/An-Nisaa).",
+      "The section from Surah Aal-i-Imran reflects on the aftermath of the Battle of Uhud, a difficult moment for the early Muslim community in Madinah. It calls believers to unity, patience, and steadfastness, reminding them not to lose hope after setbacks. It also touches on the shared history between Muslims and the People of the Book, pointing out where beliefs align and where they differ, while urging Muslims to hold firmly to their faith.",
+      "The juz then opens Surah An-Nisa, which lays out some of the most important guidance on justice within the family. These verses address the fair treatment of orphans, the rights of women, and the rules of inheritance, setting a foundation for a just and caring society.",
+      "Juz 4 moves from lessons learned through hardship to practical guidance for building a fair community, connecting faith with everyday responsibility. You can read more Juz and explore the complete [Quran online free](/) on Al Quran Hub.",
+    ],
+    faqs: [
+      {
+        question: "What surahs are included in Juz 4?",
+        answer:
+          "Juz 4 covers the final part of Surah Aal-i-Imran, from verse 93 to verse 200, and the opening twenty three verses of Surah An-Nisa. It is often known by its opening words, \"Lan Tanaloo.\"",
+      },
+      {
+        question: "Where does Juz 4 start and end in the Quran?",
+        answer:
+          "Juz 4 begins at Surah Aal-i-Imran, verse 93, and ends at Surah An-Nisa, verse 23. It picks up right where Juz 3 leaves off and continues into the start of the fourth chapter.",
+      },
+      {
+        question: "What is the main theme of Juz 4?",
+        answer:
+          "Juz 4 reflects on the lessons of the Battle of Uhud and calls believers to patience and unity after hardship. It then shifts into Surah An-Nisa, which focuses on justice within the family, including the rights of orphans, women, and fair inheritance.",
+      },
+      {
+        question: "What does Juz 4 say about orphans and inheritance?",
+        answer:
+          "The opening verses of Surah An-Nisa in this juz set clear guidance on protecting the wealth of orphans and dividing inheritance fairly among family members. These verses are often referenced when discussing Islamic laws on family and property rights.",
+      },
+      {
+        question: "Why is the Battle of Uhud mentioned in Juz 4?",
+        answer:
+          "The Battle of Uhud was a difficult experience for the early Muslim community, and Surah Aal-i-Imran uses it as a lesson on the importance of obedience, unity, and not losing hope after a setback. This part of the juz encourages believers to learn from hardship rather than be discouraged by it.",
+      },
+    ],
+  },
+
   5: {
     intro: [
       "Juz 5 is entirely made up of one surah, Surah An-Nisa, covering verses 24 to 147. It comes right after the events of the Battle of Uhud, and a lot of what is discussed here connects to that difficult period for the early Muslim community in Madinah.",

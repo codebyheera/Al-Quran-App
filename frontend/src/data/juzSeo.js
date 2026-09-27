@@ -3,6 +3,11 @@
 // so prerendered pages always match exactly what the live page renders — single source of truth.
 
 export const juzSeo = {
+  4: {
+    title: "Juz 4 / Para 4 Quran - Arabic, Urdu Translation & Audio",
+    description:
+      "Read Juz 4 (Para 4), also known as Lan Tanaloo, online. Covers Surah Aal-i-Imran and An-Nisa with Arabic text, Urdu translation, and free audio tilawat.",
+  },
   5: {
     title: "Juz 5: Read with English Translation - Al-Quran Hub",
     description:
