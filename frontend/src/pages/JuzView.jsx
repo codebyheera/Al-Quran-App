@@ -249,7 +249,7 @@ export default function JuzView() {
         <meta name="description" content={juzSeoData.description} />
         <link rel="canonical" href={`https://alquranhub.org/juz/${juzNum}`} />
       </Helmet>
-      <p style={{ color: '#e74c3c' }}>{error}</p>
+      <p style={{ color: 'var(--error)' }}>{error}</p>
     </div>
   );
 

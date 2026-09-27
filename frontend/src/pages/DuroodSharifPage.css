@@ -138,13 +138,13 @@
 }
 
 .darood-share-whatsapp {
-  color: #25d366;
+  color: var(--accent-green);
   border-color: rgba(37, 211, 102, 0.35);
 }
 
 .darood-share-whatsapp:hover {
   background: rgba(37, 211, 102, 0.08);
-  border-color: #25d366;
+  border-color: var(--accent-green);
 }
 
 .darood-share-copy {
@@ -179,7 +179,7 @@
 .darood-count-num {
   font-size: 3.2rem;
   font-weight: 700;
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
   line-height: 1;
 }
 
@@ -187,7 +187,7 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
   opacity: 0.75;
 }
 
@@ -250,7 +250,7 @@
 
 .darood-reset-yes {
   background: var(--accent-gold);
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
 }
 .darood-reset-yes:hover { filter: brightness(1.1); }
 

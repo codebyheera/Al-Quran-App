@@ -27,6 +27,7 @@ export default function AudioPlayer({ verse, fullPlaylist, index }) {
         className={`audio-play-btn ${isCurrent && isPlaying ? 'playing' : ''}`}
         onClick={handleToggle}
         title={isCurrent && isPlaying ? 'Pause' : 'Play recitation'}
+        aria-label={isCurrent && isPlaying ? 'Pause' : 'Play recitation'}
       >
         {isCurrent && isPlaying ? '⏸' : '▶'}
       </button>

@@ -96,7 +96,7 @@
 
   background: linear-gradient(135deg, var(--accent-gold), #a8882a);
   border-radius: var(--radius-sm);
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
   font-weight: 600;
   font-size: 0.85rem;
   text-align: center;

@@ -1,7 +1,10 @@
 /**
  * components/LanguagePreference.css
- * Styles for the first-visit language prompt (LanguagePrompt.jsx) and the
- * navbar preference switcher (LanguagePrefDropdown.jsx). Both are desktop-only.
+ * Styles for the first-visit language prompt (LanguagePrompt.jsx, a large
+ * bottom banner — desktop-only, see its own media query below) and the
+ * navbar preference switcher (LanguagePrefDropdown.jsx, a compact icon-only
+ * dropdown on mobile — stays visible at every width like its QariDropdown/
+ * ThemeDropdown siblings in the navbar).
  */
 
 /* ── First-visit bottom banner ─────────────────────────────────────────────── */
@@ -121,14 +124,6 @@ body.lang-prompt-open .app-root.has-player .notif-banner {
 }
 
 /* ── Navbar preference switcher ────────────────────────────────────────────── */
-
-.lang-pref-dropdown {
-  display: none;
-}
-
-@media (min-width: 769px) {
-  .lang-pref-dropdown { display: block; }
-}
 
 .lang-pref-trigger-label {
   font-size: 0.75rem;

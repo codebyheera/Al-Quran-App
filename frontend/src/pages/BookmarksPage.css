@@ -51,7 +51,7 @@
   padding: 0.2rem 0.4rem;
   border-radius: var(--radius-sm);
 }
-.bm-delete:hover { color: #e74c3c; background: rgba(231,76,60,0.08); }
+.bm-delete:hover { color: var(--error); background: rgba(231,76,60,0.08); }
 
 /* Go-to button */
 .bm-goto { width: 100%; justify-content: center; font-size: 0.85rem; }

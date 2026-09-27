@@ -1,10 +1,9 @@
 /**
  * components/LanguagePrefDropdown.jsx — Change the translation language
- * preference at any time from the navbar. Desktop only (hidden by CSS below
- * the mobile breakpoint).
+ * preference at any time from the navbar, at any screen size.
  *
  * Reuses the navbar's existing dropdown markup/classes so it matches the
- * Qari and Theme dropdowns exactly.
+ * Qari and Theme dropdowns exactly, including staying visible on mobile.
  */
 
 import { useState, useRef, useEffect } from 'react';
@@ -25,8 +24,15 @@ export default function LanguagePrefDropdown() {
     function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     }
+    function handleEscape(e) {
+      if (e.key === 'Escape') setOpen(false);
+    }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, []);
 
   // Never asked yet (prompt still pending or dismissed on mobile) — show the

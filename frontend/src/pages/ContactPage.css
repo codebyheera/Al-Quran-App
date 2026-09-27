@@ -123,7 +123,7 @@
   background: rgba(76, 201, 129, 0.08);
   border: 1px solid rgba(76, 201, 129, 0.25);
   border-radius: var(--radius-md);
-  color: #4cc981;
+  color: var(--accent-green);
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.5;

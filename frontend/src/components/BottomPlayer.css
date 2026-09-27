@@ -173,7 +173,7 @@
   padding: 0;
   margin-top: 2px;
   font-size: 11px;
-  color: #e74c3c;
+  color: var(--error);
   text-align: left;
   cursor: pointer;
   text-decoration: underline;

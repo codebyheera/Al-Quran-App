@@ -4,7 +4,7 @@
   padding: 20px 24px 20px;
   border-radius: var(--radius-lg, 16px);
   color: var(--text-primary);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-ui);
   width: 100%;
   box-sizing: border-box;
   position: relative;
@@ -78,33 +78,84 @@
   align-items: center;
 }
 
-.langSelect {
-  appearance: none;
-  -webkit-appearance: none;
+/* Custom trigger + panel — a native <select>'s dropdown list is styled by
+   the OS/browser (white background, default font) and can't follow the
+   site's dark theme, which looked jarringly out of place. This popover is
+   fully themeable instead. */
+.langTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   color: var(--text-primary);
-  padding: 6px 28px 6px 10px;
+  padding: 6px 10px;
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 500;
+  font-family: inherit;
   cursor: pointer;
   transition: border-color 0.18s;
-  font-family: inherit;
-  /* Custom chevron via bg-image */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a0a8c0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
 }
 
-.langSelect:focus {
-  outline: none;
+.langTrigger:hover,
+.langTriggerOpen {
   border-color: var(--accent-gold);
 }
 
-.langSelect option {
+.langChevron {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.18s ease;
+}
+
+.langChevronOpen {
+  transform: rotate(180deg);
+}
+
+.langPanel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 140px;
   background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 6px;
+  z-index: 20;
+  animation: langPanelIn 0.15s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+@keyframes langPanelIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.langOption {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
   color: var(--text-primary);
+  font-size: 0.85rem;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.langOption:hover {
+  background: var(--bg-card-hover);
+}
+
+.langOptionSelected {
+  color: var(--accent-gold);
+  font-weight: 600;
+  background: rgba(201, 168, 76, 0.1);
 }
 
 .translitToggle {
@@ -201,8 +252,8 @@
 
 .translationBox.rtl .translationText {
   font-family: 'Gulzar', serif;
-  font-size: 1.6rem;
-  line-height: 2.4;
+  font-size: clamp(1.15rem, 4.5vw, 1.6rem);
+  line-height: 2.1;
 }
 
 /* ── Action row (max 3 buttons) ─────────────────────────────── */
@@ -278,7 +329,7 @@
 
 .shareOption:hover { background: var(--bg-card-hover); }
 
-.waColor { color: #25D366; display: flex; }
+.waColor { color: var(--accent-green); display: flex; }
 
 /* ── Loading ────────────────────────────────────────────────── */
 .loadingWrap {
@@ -333,6 +384,7 @@
 
   .arabicText { font-size: clamp(1.2rem, 5vw, 1.6rem); line-height: 2; margin-bottom: 12px; }
   .translationText { font-size: 0.95rem; }
+  .translationBox.rtl .translationText { font-size: clamp(1.05rem, 5.5vw, 1.3rem); line-height: 1.9; }
 
   .actionRow { gap: 7px; }
   .actionBtn { padding: 7px 12px; font-size: 0.83rem; }

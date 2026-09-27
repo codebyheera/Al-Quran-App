@@ -54,7 +54,7 @@
   align-items: center;
   padding: 0.22rem 0.65rem;
   background: var(--accent-gold);
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
   font-weight: 700;
   font-size: 0.8rem;
   border-radius: var(--radius-sm);

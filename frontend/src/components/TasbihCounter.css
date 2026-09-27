@@ -29,6 +29,6 @@
 .tasbih-open-btn:hover {
   filter: none;
   transform: none;
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
   white-space: nowrap;
 }

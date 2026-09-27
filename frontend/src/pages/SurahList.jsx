@@ -49,7 +49,7 @@ export default function SurahList() {
         <meta name="description" content={pageSeo.surahList.description} />
         <link rel="canonical" href={`https://alquranhub.org${pageSeo.surahList.path}`} />
       </Helmet>
-      <p style={{ color: '#e74c3c' }}>{error}</p>
+      <p style={{ color: 'var(--error)' }}>{error}</p>
     </div>
   );
 

@@ -73,10 +73,12 @@ const VerseOfDay = ({ hijriDate }) => {
   const [toastKey, setToastKey]       = useState(0);
   const [showTranslit, setShowTranslit] = useState(false);
   const [shareOpen, setShareOpen]     = useState(false);
+  const [langOpen, setLangOpen]       = useState(false);
   const { hijri: computedHijri, gregorianShort: gregorianDate } = useHijriDate();
 
   const toastTimeoutRef = useRef(null);
   const shareRef        = useRef(null);
+  const langRef         = useRef(null);
   const navigate        = useNavigate();
 
   /* ── Fetch verse ── */
@@ -107,11 +109,33 @@ const VerseOfDay = ({ hijriDate }) => {
     fetchVerse();
   }, [randomOffset]);
 
-  /* ── Close share popover on outside click ── */
+  /* ── Close share popover on outside click / Escape ── */
   useEffect(() => {
     const handler = (e) => { if (shareRef.current && !shareRef.current.contains(e.target)) setShareOpen(false); };
+    const escHandler = (e) => { if (e.key === 'Escape') setShareOpen(false); };
     document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    document.addEventListener('keydown', escHandler);
+    return () => {
+      document.removeEventListener('mousedown', handler);
+      document.removeEventListener('keydown', escHandler);
+    };
+  }, []);
+
+  /* ── Close language dropdown on outside click / Escape ── */
+  useEffect(() => {
+    const handler = (e) => { if (langRef.current && !langRef.current.contains(e.target)) setLangOpen(false); };
+    const escHandler = (e) => { if (e.key === 'Escape') setLangOpen(false); };
+    document.addEventListener('mousedown', handler);
+    document.addEventListener('keydown', escHandler);
+    return () => {
+      document.removeEventListener('mousedown', handler);
+      document.removeEventListener('keydown', escHandler);
+    };
+  }, []);
+
+  /* ── Clear any pending toast timeout on unmount ── */
+  useEffect(() => {
+    return () => { if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current); };
   }, []);
 
   /* ── Helpers ── */
@@ -163,17 +187,40 @@ const VerseOfDay = ({ hijriDate }) => {
 
       {/* ── Language dropdown + transliteration toggle row ── */}
       <div className={styles.controlRow}>
-        <div className={styles.langSelectWrap}>
-          <select
-            className={styles.langSelect}
-            value={lang}
-            onChange={e => setLang(e.target.value)}
-            aria-label="Select translation language"
+        <div className={styles.langSelectWrap} ref={langRef}>
+          <button
+            type="button"
+            className={`${styles.langTrigger} ${langOpen ? styles.langTriggerOpen : ''}`}
+            onClick={() => setLangOpen(o => !o)}
+            aria-haspopup="listbox"
+            aria-expanded={langOpen}
           >
-            {LANG_OPTIONS.map(o => (
-              <option key={o.value} value={o.value}>{o.label}</option>
-            ))}
-          </select>
+            <span>{LANG_OPTIONS.find(o => o.value === lang)?.label}</span>
+            <svg
+              className={`${styles.langChevron} ${langOpen ? styles.langChevronOpen : ''}`}
+              viewBox="0 0 24 24" width="12" height="12" fill="none"
+              stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+
+          {langOpen && (
+            <div className={styles.langPanel} role="listbox">
+              {LANG_OPTIONS.map(o => (
+                <button
+                  key={o.value}
+                  type="button"
+                  role="option"
+                  aria-selected={o.value === lang}
+                  className={`${styles.langOption} ${o.value === lang ? styles.langOptionSelected : ''}`}
+                  onClick={() => { setLang(o.value); setLangOpen(false); }}
+                >
+                  {o.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         {lang === 'en' && (
           <button

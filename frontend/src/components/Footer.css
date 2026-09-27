@@ -49,7 +49,7 @@
 }
 
 /* Mobile (480px–767px): single column stack */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .footer-inner {
     grid-template-columns: 1fr;
   }
@@ -250,7 +250,7 @@
   font-size: 13px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
@@ -259,7 +259,7 @@
 }
 
 /* Small mobile (<480px): stacked bottom links, left-aligned */
-@media (max-width: 479px) {
+@media (max-width: 480px) {
   .footer-credit {
     display: flex;
     flex-direction: column;

@@ -102,9 +102,26 @@
 .streak-strip-complete {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem 0.45rem 0.55rem;
+  border-radius: 100px;
+  background: rgba(46, 204, 113, 0.12);
+  border: 1px solid rgba(46, 204, 113, 0.28);
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.streak-strip-complete-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent-green);
+  color: #08331c;
 }
 
 /* ── Buttons — compact pill, deliberately unlike the boxier hero Search
@@ -188,7 +205,9 @@
 /* ── Mobile ───────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .streak-strip-inner {
+    flex-direction: column;
     padding: 1rem 1rem 1.1rem;
+    gap: 0.75rem;
   }
 
   .streak-strip-text {
@@ -199,7 +218,32 @@
     width: 100%;
   }
 
+  .streak-strip-progress {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .streak-strip-bar {
+    flex: 1;
+    max-width: 160px;
+  }
+
+  .streak-strip-complete {
+    max-width: 100%;
+    white-space: normal;
+    text-align: left;
+  }
+
   .streak-strip-btn {
-    flex: 1 1 auto;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .streak-edit-link {
+    padding-top: 0.15rem;
+    border-top: 1px solid rgba(201, 168, 76, 0.1);
+    margin-top: 0.1rem;
+    width: 100%;
+    text-align: center;
   }
 }

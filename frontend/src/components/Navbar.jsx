@@ -23,8 +23,15 @@ function QariDropdown({ reciter, changeReciter, reciters }) {
     function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     }
+    function handleEscape(e) {
+      if (e.key === 'Escape') setOpen(false);
+    }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, []);
 
   return (
@@ -74,8 +81,15 @@ function ThemeDropdown({ theme, changeTheme, themes }) {
     function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     }
+    function handleEscape(e) {
+      if (e.key === 'Escape') setOpen(false);
+    }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, []);
 
   return (
@@ -131,8 +145,15 @@ function MoreDropdown({ bookmarkCount }) {
     function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     }
+    function handleEscape(e) {
+      if (e.key === 'Escape') setOpen(false);
+    }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, []);
 
   return (
@@ -182,6 +203,7 @@ export default function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const playingResumeTimerRef = useRef(null);
 
   // Lock body scroll when sidebar is open
   useEffect(() => {
@@ -196,10 +218,24 @@ export default function Navbar() {
   // Handle header hiding when playing
   useEffect(() => {
     if (!isPlaying) {
-      setIsHidden(false);
-      return;
+      // In "combine" mode (Arabic + translation audio back-to-back), the
+      // <audio> element briefly fires a native 'pause' event while the next
+      // track's src is being swapped in, so `isPlaying` flickers false then
+      // true again a moment later even though playback never really
+      // stopped. Reacting to that instantly made the header pop back in
+      // and vanish again right away. Wait a beat before actually revealing
+      // it — if playback resumes within that window (the normal
+      // track-switch case), the reveal is cancelled and the header just
+      // stays hidden the whole time.
+      playingResumeTimerRef.current = setTimeout(() => setIsHidden(false), 350);
+      return () => clearTimeout(playingResumeTimerRef.current);
     }
-    
+
+    if (playingResumeTimerRef.current) {
+      clearTimeout(playingResumeTimerRef.current);
+      playingResumeTimerRef.current = null;
+    }
+
     // Wrap layout read in rAF to avoid forced reflow
     requestAnimationFrame(() => {
       if (window.scrollY >= 10) {
@@ -260,7 +296,7 @@ export default function Navbar() {
             <Link to="/search" className="nav-icon-btn" aria-label="Search" title="Search">
               <IconSearch size={19} stroke={1.8} />
             </Link>
-            {/* Translation language preference — desktop only */}
+            {/* Translation language preference */}
             <LanguagePrefDropdown />
             <QariDropdown reciter={reciter} changeReciter={changeReciter} reciters={reciters} />
             <NotificationBell />

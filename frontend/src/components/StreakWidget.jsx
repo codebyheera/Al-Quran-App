@@ -8,7 +8,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { IconFlameFilled } from '@tabler/icons-react';
+import { IconFlameFilled, IconCheck } from '@tabler/icons-react';
 import { getStreakData, setDailyGoal } from '../lib/streakUtils';
 import './StreakWidget.css';
 
@@ -71,7 +71,7 @@ export default function StreakWidget() {
   // ── States B & C: goal is set ────────────────────────────────────────
   return (
     <div className="streak-strip">
-      <div className="streak-strip-inner">
+      <div className={`streak-strip-inner ${goalComplete ? 'streak-strip-inner--complete' : ''}`}>
         <div className="streak-strip-fire">
           <IconFlameFilled className="streak-flame-icon" size={22} />
           <span className="streak-strip-count">{data.currentStreak}</span>
@@ -80,7 +80,10 @@ export default function StreakWidget() {
 
         {goalComplete ? (
           <span className="streak-strip-complete">
-            <span aria-hidden="true">✅</span> Today&rsquo;s goal complete! Come back tomorrow.
+            <span className="streak-strip-complete-icon" aria-hidden="true">
+              <IconCheck size={13} stroke={3} />
+            </span>
+            Today&rsquo;s goal complete! Come back tomorrow.
           </span>
         ) : (
           <div className="streak-strip-progress">

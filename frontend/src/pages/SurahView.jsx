@@ -352,7 +352,7 @@ export default function SurahView() {
           <meta name="description" content={`Read and listen to Surah ${id} of the Holy Quran online on Al-Quran Hub.`} />
           <link rel="canonical" href={`https://alquranhub.org/surah/${id}`} />
         </Helmet>
-        <p style={{ color: "#e74c3c" }}>{error}</p>
+        <p style={{ color: "var(--error)" }}>{error}</p>
       </div>
     );
 

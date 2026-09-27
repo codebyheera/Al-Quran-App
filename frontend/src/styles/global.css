@@ -67,6 +67,12 @@ video {
   --font-ui: 'Inter', sans-serif;
   --font-arabic: 'MeQuran', 'KFGQPC Uthmanic Script HAFS', 'Amiri', 'Traditional Arabic', 'Scheherazade New', 'Gulzar', 'Noto Nastaliq Urdu', serif;
   --arabic-font-size: 2.2rem;
+
+  /* Dark text used on top of the gold accent color (buttons/badges/pills) —
+     accent-gold stays light across every theme, so one dark value works
+     everywhere and doesn't need a per-theme override. */
+  --on-accent-gold: #1a1000;
+  --error: #e0554f;
 }
 
 /* ── Light Mode ─────────────────────────────────────────────── */

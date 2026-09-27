@@ -637,7 +637,7 @@
 
 .home-cta-btn:hover {
   filter: none;
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
 }
 
 
@@ -726,7 +726,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #4ade80;
+  background: var(--accent-green);
   flex-shrink: 0;
   position: relative;
 }
@@ -957,6 +957,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 210px;
+  max-width: calc(100vw - 2rem);
   background: var(--bg-card);
   border: 1px solid rgba(201, 168, 76, 0.4);
   border-radius: var(--radius-sm, 6px);
@@ -1089,6 +1090,13 @@
     font-size: 1rem;
     min-width: 1.65rem;
     padding: 0.12rem 0.28rem;
+  }
+
+  /* Narrower so it can't clip off the left/right screen edge when its
+     trigger card sits near the edge of a 320-375px viewport. */
+  .prayer-tooltip {
+    width: 180px;
+    font-size: 11px;
   }
 }
 

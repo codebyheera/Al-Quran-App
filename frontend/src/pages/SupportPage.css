@@ -253,7 +253,7 @@
 
 .payment-tab.active {
   background: var(--accent-gold);
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
   box-shadow: var(--shadow-gold);
 }
 
@@ -327,7 +327,7 @@
   gap: 4px;
   font-size: 0.68rem;
   font-weight: 700;
-  color: #4cc981;
+  color: var(--accent-green);
   background: rgba(76, 201, 129, 0.1);
   border: 1px solid rgba(76, 201, 129, 0.25);
   border-radius: 100px;
@@ -421,8 +421,8 @@
 
 .copy-btn.copied {
   background: rgba(76, 201, 129, 0.1);
-  border-color: #4cc981;
-  color: #4cc981;
+  border-color: var(--accent-green);
+  color: var(--accent-green);
 }
 
 /* ── INTERNATIONAL NOTES ───────────────────── */

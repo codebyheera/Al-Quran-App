@@ -170,7 +170,7 @@
   gap: 0.5rem;
   padding: 0.75rem 1.6rem;
   background: linear-gradient(135deg, var(--accent-gold), #a8882a);
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
   font-weight: 700;
   font-size: 0.95rem;
   border: none;
@@ -184,7 +184,7 @@
 .not-found-btn-home:hover {
   filter: brightness(1.15);
   transform: translateY(-2px);
-  color: #0f0f1a;
+  color: var(--on-accent-gold);
 }
 
 .not-found-btn-back {

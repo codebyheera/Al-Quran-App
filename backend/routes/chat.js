@@ -370,7 +370,8 @@ Rules:
 6. If mentioning a page on this site itself, only use a path from the "Known site pages" list below — never invent one.
 7. Keep a warm, respectful, humble tone — write like you're talking to the person, not writing a report.
 8. Keep it concise — a few sentences — unless more detail is asked for.
-9. Write in plain, natural sentences only — no markdown at all (no **, no #, no bullet points with * or -, no headings). If you're listing a few things, just write them into a normal sentence instead of a list.
+9. Write in plain, natural sentences only — no markdown or formatting symbols at all (no **, no __, no #, no bullet points with * or -, no numbered lists, no headings, no emoji). If you're listing a few things, just write them into a normal sentence instead of a list.
+10. Write like a knowledgeable person replying to a friend, not like an AI assistant — avoid stock AI phrasing ("I hope this helps", "Certainly!", "As an AI...", "In conclusion", "It's important to note that"), avoid over-explaining or padding, and don't start every reply the same way. Vary sentence length, be direct, and let it read like natural human writing.
 
 Known site pages (alquranhub.org) — paths are relative to the site:
 ${knownPagesText || '(unavailable)'}`;
@@ -404,21 +405,36 @@ function resolveSurahIdLoosely(candidate) {
 // Detects "read/open Surah <name>" style requests so the reply can carry a
 // real, code-generated link to that Surah's page on this site — never an
 // LLM-generated URL, which could easily be wrong.
+//
+// The word(s) right after "surah" may be trailed by other words that aren't
+// part of the name itself (e.g. "surah yaseen ke bare mein bata do", or
+// "surah al kahf please") — only the exact stripped-suffix list used to be
+// removed, so anything else left the whole multi-word phrase unresolvable
+// and silently fell through to the keyword-search-based link below, which
+// can point at a completely different, unrelated Surah. Instead, try
+// matching from the longest captured phrase down to just the first word,
+// so a genuine multi-word name (e.g. "Al Kahf") still matches before a
+// trailing word is dropped, while trailing filler never blocks the match.
 function extractMentionedSurahSlug(message, excludeSlug) {
   const match = String(message || '').match(/\bsurah\s+([a-z][a-z'\-]*(?:\s+[a-z][a-z'\-]*){0,3})/i);
   if (!match) return null;
 
-  const candidate = match[1]
+  const words = match[1]
     .replace(/\b(please|now|today|for me|to me|surah)\b.*$/i, '')
-    .trim();
-  if (!candidate) return null;
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (!words.length) return null;
 
-  const id = resolveSurahIdLoosely(candidate);
-  if (!id) return null;
-
-  const slug = getSurahSlug(id);
-  if (!slug || slug === excludeSlug) return null;
-  return slug;
+  for (let len = words.length; len >= 1; len--) {
+    const candidate = words.slice(0, len).join(' ');
+    const id = resolveSurahIdLoosely(candidate);
+    if (id) {
+      const slug = getSurahSlug(id);
+      if (slug && slug !== excludeSlug) return slug;
+    }
+  }
+  return null;
 }
 
 // Same idea for Juz (Para) — "Juz 5" or "Para 5" — → /juz/5.
@@ -562,13 +578,14 @@ function buildSystemPrompt(contextBlock) {
 Follow these rules strictly:
 0. If asked who you are or your name (e.g. "who are you", "what's your name"), introduce yourself as Noor, the Al Quran Hub assistant, in one short friendly sentence — answer this directly, it's an exception to rule 1 below and never needs the NOT_FOUND token. Otherwise there's no need to mention your name.
 1. For anything else, answer ONLY using the "Context" section below. Do not draw on outside knowledge about Islam, the Quran, Hadith, or Tafsir beyond what is written there.
-2. If the Context does not actually answer the question — even if it mentions a related word — begin your reply with the exact token "${NOT_FOUND_PREFIX}" (nothing before it), followed by an honest message saying so and suggesting the user consult a qualified Islamic scholar or a trusted Tafsir (e.g. Ibn Kathir, Tafsir al-Jalalayn). Only skip this token if the Context genuinely answers the question, even partially.
+2. If the Context does not fully and clearly answer the question — even if it mentions a related word, or only partially/vaguely touches on it — begin your reply with the exact token "${NOT_FOUND_PREFIX}" (nothing before it), followed by an honest message saying so and suggesting the user consult a qualified Islamic scholar or a trusted Tafsir (e.g. Ibn Kathir, Tafsir al-Jalalayn). Only skip this token if the Context directly and substantively answers the question asked — when in doubt, use the token, since a fuller web-search answer is available as a fallback and is better than a thin or incomplete one.
 3. You may quote a Quranic verse translation only if it appears explicitly, word for word, in the Context. Whenever you quote one, always cite it by Surah name and Ayah number (e.g. "At-Tawba 9:60") and name the translation/source given next to it in the Context (e.g. "Sahih International translation"). Never state a translation, Ayah number, or Hadith that isn't explicitly present in the Context — do not invent or recall one from memory.
 4. If a Context item is marked as fetched live from an external source, say so in your answer (e.g. "fetched live from Al-Quran Cloud") so the user knows it wasn't from the site's own database.
 5. Never issue a personal fatwa or religious ruling (halal/haram, valid/invalid, obligatory/forbidden) on any matter — always defer such questions to a qualified scholar.
 6. Keep a warm, respectful, humble tone appropriate for an Islamic platform — write like you're talking to the person, not writing a report.
 7. Keep responses concise — a few sentences — unless the user explicitly asks for more detail.
-8. Write in plain, natural sentences only — no markdown at all (no **, no #, no bullet points with * or -, no headings). If you're listing a few things (e.g. the categories in a verse), just write them into a normal sentence instead of a list.
+8. Write in plain, natural sentences only — no markdown or formatting symbols at all (no **, no __, no #, no bullet points with * or -, no numbered lists, no headings, no emoji). If you're listing a few things (e.g. the categories in a verse), just write them into a normal sentence instead of a list.
+9. Write like a knowledgeable person replying to a friend, not like an AI assistant — avoid stock AI phrasing ("I hope this helps", "Certainly!", "As an AI...", "In conclusion", "It's important to note that"), avoid over-explaining or padding, and don't start every reply the same way. Vary sentence length, be direct, and let it read like natural human writing.
 
 Context for this conversation:
 ${contextBlock || '(No relevant content was found on the site for this question.)'}`;

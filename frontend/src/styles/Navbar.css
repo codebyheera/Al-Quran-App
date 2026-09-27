@@ -285,7 +285,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem 1.25rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
 
@@ -383,7 +384,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 1.25rem 1.25rem;
+  padding: 1rem 1.25rem;
 }
 
 .stat-box {
@@ -623,11 +624,38 @@
   min-width: 160px;
 }
 
+/* ── AudioDropdown ── */
+.dropdown-trigger-label-mobile {
+  display: none;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.audio-custom-dropdown.compact .dropdown-trigger-icon,
+.audio-custom-dropdown.compact .dropdown-trigger-label {
+  display: none;
+}
+
+.audio-custom-dropdown.compact .dropdown-trigger-label-mobile {
+  display: inline;
+}
+
+.audio-custom-dropdown.compact .dropdown-chevron {
+  margin-left: -2px;
+}
+
 /* ── AudioDropdown Panel Responsive Positioning ── */
 .dropdown-panel.audio-dropdown-panel {
   left: 50%;
   right: auto;
   margin-left: -80px;
+}
+
+.dropdown-panel.audio-dropdown-panel.upwards {
+  top: auto;
+  bottom: calc(100% + 8px);
+  transform-origin: bottom;
 }
 
 @media (max-width: 768px) {
