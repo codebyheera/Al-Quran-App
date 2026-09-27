@@ -225,6 +225,19 @@
     min-width: 170px;
     max-width: calc(100vw - 24px);
   }
+
+  /* AudioDropdown (on SurahView/JuzView, not the cramped top navbar) needs
+     its label visible even on mobile — unlike Qari/Theme, its icon alone
+     (🎧) can't tell the user which audio language is currently selected.
+     Only the BottomPlayer's compact instance intentionally goes icon-only,
+     via its own `.compact` class further down. */
+  .audio-custom-dropdown:not(.compact) .dropdown-trigger-label {
+    display: inline;
+  }
+
+  .audio-custom-dropdown:not(.compact) .dropdown-chevron {
+    display: inline-block;
+  }
 }
 
 /* ============================================================
@@ -424,6 +437,34 @@
   color: var(--text-muted);
   padding: 0.5rem 1.25rem;
   margin-top: 0.5rem;
+}
+
+/* Translation language toggle (mobile home for LanguagePrefDropdown) */
+.sidebar-lang-toggle {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem 1.25rem 0.75rem;
+}
+
+.sidebar-lang-option {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.sidebar-lang-option.active {
+  border-color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--accent-gold);
+  font-weight: 600;
 }
 
 /* Nav links */

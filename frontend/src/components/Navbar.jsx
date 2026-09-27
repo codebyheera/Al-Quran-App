@@ -199,7 +199,7 @@ export default function Navbar() {
   const { theme, changeTheme, themes } = useTheme();
   const { reciter, changeReciter, reciters } = useQari();
   const { bookmarks } = useBookmarks();
-  const { isPlaying } = useAudio();
+  const { isPlaying, preferredLanguage, setPreferredLanguage } = useAudio();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const lastScrollY = useRef(0);
@@ -422,6 +422,25 @@ export default function Navbar() {
             <span className="nav-text text-accent">Support Us</span>
           </NavLink>
         </nav>
+
+        <div className="sidebar-nav-label">TRANSLATION</div>
+        <div className="sidebar-lang-toggle" role="radiogroup" aria-label="Translation language">
+          {[{ id: 'english', name: 'English' }, { id: 'urdu', name: 'اردو' }].map((o) => {
+            const active = (preferredLanguage || 'english') === o.id;
+            return (
+              <button
+                key={o.id}
+                type="button"
+                role="radio"
+                aria-checked={active}
+                className={`sidebar-lang-option ${active ? 'active' : ''}`}
+                onClick={() => setPreferredLanguage(o.id)}
+              >
+                {o.name}
+              </button>
+            );
+          })}
+        </div>
 
         {/* Footer */}
         <div className="sidebar-bottom-footer">
