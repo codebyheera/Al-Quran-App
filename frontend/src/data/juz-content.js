@@ -49,6 +49,41 @@ export const juzContent = {
     ],
   },
 
+  26: {
+    intro: [
+      "Juz 26 begins with [Surah Al-Ahqaf](/surah/Al-Ahqaf) and continues through four more complete surahs, [Surah Muhammad](/surah/Muhammad), [Surah Al-Fath](/surah/Al-Fath), [Surah Al-Hujurat](/surah/Al-Hujuraat), and [Surah Qaf](/surah/Qaaf), before ending in the first thirty verses of [Surah Adh-Dhariyat](/surah/Adh-Dhaariyat).",
+      "Surah Al-Ahqaf opens with a warning through the story of the people of Ad, reminding readers that strength and power mean nothing without gratitude to Allah. Surah Muhammad, sometimes called Al-Qital, speaks about the struggles faced by the early Muslim community and the difference between those who truly believe and those who only claim to. Surah Al-Fath celebrates the treaty of Hudaybiyyah, describing it as a clear victory even though it did not look like one at the time. Surah Al-Hujurat then shifts to everyday manners, teaching believers how to treat one another with respect, avoid suspicion and backbiting, and build a community based on brotherhood. Surah Qaf turns attention back to the Day of Judgment, describing resurrection and accountability in vivid detail. The juz closes with the opening of Surah Adh-Dhariyat, which points to the signs of Allah in the natural world and shares the story of Prophet Ibrahim's guests.",
+      "Juz 26 moves between hardship, victory, good manners, and the reminder of the hereafter, offering a wide range of lessons for daily life and faith. You can read more Juz and explore the complete [Quran online free](/) on Al-Quran Hub.",
+    ],
+    faqs: [
+      {
+        question: "What surahs are included in Juz 26?",
+        answer:
+          "Juz 26 includes five complete surahs, Al-Ahqaf, Muhammad, Al-Fath, Al-Hujurat, and Qaf, along with the opening thirty verses of Surah Adh-Dhariyat.",
+      },
+      {
+        question: "Where does Juz 26 start and end in the Quran?",
+        answer:
+          "Juz 26 begins at the first verse of Surah Al-Ahqaf and ends at verse 30 of Surah Adh-Dhariyat. It is one of the fuller juz, covering six different surahs in total.",
+      },
+      {
+        question: "What is the main theme of Juz 26?",
+        answer:
+          "Juz 26 covers a wide range of topics, including warnings from past nations, the struggles of the early Muslim community, the victory of the Hudaybiyyah treaty, guidance on good manners, and reminders about the Day of Judgment.",
+      },
+      {
+        question: "What is Surah Al-Hujurat about in Juz 26?",
+        answer:
+          "Surah Al-Hujurat focuses on manners and social conduct among believers. It teaches Muslims to avoid mockery, suspicion, and backbiting, and to treat one another with respect regardless of background, since true honor comes from piety, not status.",
+      },
+      {
+        question: "Why is Surah Muhammad also called Al-Qital?",
+        answer:
+          "Surah Muhammad is sometimes called Al-Qital, meaning fighting, because it discusses the early battles faced by the Muslim community and draws a clear line between sincere believers and those whose faith was weak or false.",
+      },
+    ],
+  },
+
   5: {
     intro: [
       "Juz 5 is entirely made up of one surah, Surah An-Nisa, covering verses 24 to 147. It comes right after the events of the Battle of Uhud, and a lot of what is discussed here connects to that difficult period for the early Muslim community in Madinah.",

@@ -8,6 +8,11 @@ export const juzSeo = {
     description:
       "Read Juz 4 (Para 4), also known as Lan Tanaloo, online. Covers Surah Aal-i-Imran and An-Nisa with Arabic text, Urdu translation, and free audio tilawat.",
   },
+  26: {
+    title: "Juz 26 (Para 26) - Arabic Text & Translation | Al-Quran Hub",
+    description:
+      "Juz 26 (Para 26) covers Surah Al-Ahqaf, Muhammad, Al-Fath, Al-Hujurat, and Qaf. Read Arabic text with Urdu translation and listen to free audio recitation.",
+  },
   5: {
     title: "Juz 5: Read with English Translation - Al-Quran Hub",
     description:
