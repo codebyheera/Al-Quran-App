@@ -24,6 +24,43 @@ const CHIPS = [
   { icon: "🕐", label: "Prayer Times", message: "Prayer times in Lahore" },
 ];
 
+const POS_KEY = "chatWidgetPos";
+const DRAG_THRESHOLD = 5;
+const EDGE_GAP = 8;
+
+function clampPos(p, size) {
+  return {
+    x: Math.min(Math.max(EDGE_GAP, p.x), window.innerWidth - size - EDGE_GAP),
+    y: Math.min(Math.max(EDGE_GAP, p.y), window.innerHeight - size - EDGE_GAP),
+  };
+}
+
+function loadPos() {
+  try {
+    const p = JSON.parse(localStorage.getItem(POS_KEY));
+    return p && Number.isFinite(p.x) && Number.isFinite(p.y) ? p : null;
+  } catch {
+    return null;
+  }
+}
+
+// Anchors the widget to whichever corner the dragged button is nearest, so
+// the desktop panel always opens toward the middle of the screen instead of
+// running off an edge.
+function widgetStyleFor(pos, size) {
+  if (!pos || typeof window === "undefined") return undefined;
+  const onLeft = pos.x + size / 2 < window.innerWidth / 2;
+  const onTop = pos.y + size / 2 < window.innerHeight / 2;
+  return {
+    left: onLeft ? pos.x : "auto",
+    right: onLeft ? "auto" : window.innerWidth - pos.x - size,
+    top: onTop ? pos.y : "auto",
+    bottom: onTop ? "auto" : window.innerHeight - pos.y - size,
+    alignItems: onLeft ? "flex-start" : "flex-end",
+    flexDirection: onTop ? "column-reverse" : "column",
+  };
+}
+
 function formatSurahName(slug) {
   return String(slug || "").replace(/-/g, " ");
 }
@@ -67,6 +104,68 @@ export default function ChatWidget({ currentSurahSlug = null }) {
   const panelRef = useRef(null);
   const toggleRef = useRef(null);
   const inputRef = useRef(null);
+  const [pos, setPos] = useState(loadPos);
+  const [isDragging, setIsDragging] = useState(false);
+  const posRef = useRef(pos);
+  const dragRef = useRef(null);
+  const suppressClickRef = useRef(false);
+
+  useEffect(() => {
+    posRef.current = pos;
+  }, [pos]);
+
+  // Keep a saved position on-screen after a resize/rotation.
+  useEffect(() => {
+    const handleResize = () => {
+      setPos((p) => (p && toggleRef.current ? clampPos(p, toggleRef.current.offsetWidth) : p));
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  function handlePointerDown(e) {
+    if (e.button !== 0) return;
+    const rect = toggleRef.current.getBoundingClientRect();
+    dragRef.current = { startX: e.clientX, startY: e.clientY, originX: rect.left, originY: rect.top, moved: false };
+    toggleRef.current.setPointerCapture(e.pointerId);
+  }
+
+  function handlePointerMove(e) {
+    const d = dragRef.current;
+    if (!d) return;
+    const dx = e.clientX - d.startX;
+    const dy = e.clientY - d.startY;
+    if (!d.moved && Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
+    if (!d.moved) {
+      d.moved = true;
+      setIsDragging(true);
+    }
+    setPos(clampPos({ x: d.originX + dx, y: d.originY + dy }, toggleRef.current.offsetWidth));
+  }
+
+  function handlePointerUp() {
+    const d = dragRef.current;
+    dragRef.current = null;
+    if (!d?.moved) return;
+    // The browser still fires a click after the drag ends — swallow it so
+    // dropping the button doesn't also open/close the chat.
+    suppressClickRef.current = true;
+    setIsDragging(false);
+    try {
+      localStorage.setItem(POS_KEY, JSON.stringify(posRef.current));
+    } catch {
+      // Storage unavailable (private mode) — position just won't persist.
+    }
+  }
+
+  function handleToggleClick() {
+    if (suppressClickRef.current) {
+      suppressClickRef.current = false;
+      return;
+    }
+    setIsOpen((o) => !o);
+  }
 
   useEffect(() => {
     listEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -157,7 +256,7 @@ export default function ChatWidget({ currentSurahSlug = null }) {
   }
 
   return (
-    <div className="chat-widget">
+    <div className="chat-widget" style={widgetStyleFor(pos, toggleRef.current?.offsetWidth || 56)}>
       {isOpen && (
         <div className="chat-widget__backdrop" onClick={() => setIsOpen(false)} aria-hidden="true" />
       )}
@@ -276,8 +375,12 @@ export default function ChatWidget({ currentSurahSlug = null }) {
       <button
         ref={toggleRef}
         type="button"
-        className={`chat-widget__toggle ${isOpen ? "is-open" : ""}`}
-        onClick={() => setIsOpen((o) => !o)}
+        className={`chat-widget__toggle ${isOpen ? "is-open" : ""} ${isDragging ? "is-dragging" : ""}`}
+        onClick={handleToggleClick}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
         aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}
         aria-expanded={isOpen}
       >

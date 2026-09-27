@@ -33,6 +33,21 @@
   box-shadow: var(--shadow), var(--shadow-gold);
   transition: var(--transition);
   flex-shrink: 0;
+  /* Draggable: stop touch-drags from scrolling the page underneath. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.chat-widget__toggle.is-dragging,
+.chat-widget__toggle.is-dragging:hover {
+  cursor: grabbing;
+  transform: scale(1.06);
+  transition: none;
+}
+
+.chat-widget__toggle.is-dragging::before {
+  display: none;
 }
 
 .chat-widget__toggle:hover {
