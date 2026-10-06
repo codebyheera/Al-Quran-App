@@ -83,6 +83,13 @@ export default function App() {
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://alquranhub.org${location.pathname}`} />
+        {/* Declared here so react-helmet-async doesn't strip index.html's
+            data-rh og tags on hydration (it removes any data-rh tag no
+            <Helmet> claims) — pages can still override og:image per-page */}
+        <meta property="og:site_name" content="Al-Quran Hub" />
+        <meta property="og:image" content="https://alquranhub.org/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Helmet>
       <ScrollToTop />
       {/* Thin utility bar: Hijri/Gregorian date + socials — tablet/desktop only */}

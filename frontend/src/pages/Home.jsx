@@ -190,6 +190,8 @@ export default function Home() {
         <title>{pageSeo.home.title}</title>
         <meta name="description" content={pageSeo.home.description} />
         <meta name="keywords" content={pageSeo.home.keywords} />
+        <meta property="og:title" content={pageSeo.home.title} />
+        <meta property="og:description" content={pageSeo.home.description} />
         <link rel="canonical" href={`https://alquranhub.org${pageSeo.home.path}`} />
         <script type="application/ld+json">{developerJsonLd}</script>
       </Helmet>
