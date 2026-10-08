@@ -203,6 +203,11 @@ export const surahSeo = {
     description:
       "Read Surah Al-Ahqaf online with English translation and audio recitation. Discover the story of the people of Aad and Prophet Hud.",
   },
+  51: {
+    title: "Surah Adh-Dhariyat (Az-Zariyat) - Urdu Translation & Audio",
+    description:
+      "Why were we created? Surah Adh-Dhariyat (Az-Zariyat) answers in verse 56. Read the Arabic text with Urdu and English translation and listen to audio.",
+  },
   56: {
     title: "Surah Al-Waaqia (The Inevitable) - Read, Listen, Benefits & FAQs",
     description:

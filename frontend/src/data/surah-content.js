@@ -197,6 +197,41 @@ export const surahContent = {
     ],
   },
 
+  "Adh-Dhaariyat": {
+    intro: [
+      "Surah Adh-Dhariyat is the 51st surah of the Quran. It is a Makki surah with 60 verses, and its name means the winds that scatter. It opens with Allah swearing by the winds, the clouds heavy with rain, the ships that glide with ease, and the angels who carry out His orders, all to make one point clear: the promise of the Day of Judgment is true.",
+      "The surah then describes people who are mindful of Allah. They slept little at night, asked for forgiveness before dawn, and kept a fair share of their wealth for those in need. It asks readers to look at the signs of Allah in the earth and within themselves. It also shares the story of Prophet Ibrahim's honored guests, along with short reminders of what happened to the people of Lut, Firaun, Ad, Thamud, and the people of Nuh.",
+      "Near the end comes one of the best known verses of the Quran, where Allah says He created jinn and mankind only to worship Him. This surah is split between [Juz 26](/juz/26) and [Juz 27](/juz/27), and it leaves the reader with a simple reminder that Allah is the one who provides for everyone.",
+    ],
+    faqs: [
+      {
+        question: "What is Surah Adh-Dhariyat about?",
+        answer:
+          "Surah Adh-Dhariyat is about the certainty of the Day of Judgment and the purpose of life. It describes the qualities of people who are mindful of Allah, shares the story of Prophet Ibrahim's guests, and reminds readers of past nations who rejected their prophets. It ends with a clear message that Allah created jinn and mankind to worship Him.",
+      },
+      {
+        question: "What does Adh-Dhariyat mean?",
+        answer:
+          "Adh-Dhariyat means \"the winds that scatter.\" The name comes from the very first verse, where Allah swears by the winds that spread dust and carry clouds. It is the 51st surah of the Quran.",
+      },
+      {
+        question: "Which verse of Surah Adh-Dhariyat says Allah created mankind to worship Him?",
+        answer:
+          "It is verse 56, one of the most quoted verses of this surah. In it, Allah says He created jinn and mankind only so that they would worship Him. It is often shared as a short reminder of the purpose of life.",
+      },
+      {
+        question: "What does Surah Adh-Dhariyat say about rizq?",
+        answer:
+          "Verse 22 says that your provision is in the heaven, along with what you have been promised. Many people read this verse when they feel worried about money or livelihood, since it reminds us that rizq is in Allah's hands. The surah also ends by calling Allah the Provider, the Possessor of strength.",
+      },
+      {
+        question: "How many verses does Surah Adh-Dhariyat have, and which juz is it in?",
+        answer:
+          "It has 60 verses and is a Makki surah. It is split between two juz. Verses 1 to 30 are in Juz 26, and verses 31 to 60 are in Juz 27.",
+      },
+    ],
+  },
+
   "Al-Waaqia": {
     intro: [
       "Surah Al-Waaqia is the 56th chapter of the Quran. It has 96 verses and was revealed in Makkah. The name means \"The Inevitable,\" pointing to the Day of Judgment, an event that will surely happen. This surah describes what takes place on that day and divides people into three groups: those foremost in faith, the people of the right, and the people of the left. It gives a clear picture of the rewards in Paradise and the punishment in Hell. It also reminds every believer that all provision and sustenance comes from Allah alone. Many Muslims recite this surah every night, following a hadith that connects it with protection from poverty. Read this and other surahs on [Al-Quran Hub](/), with Arabic text, English translation, and audio recitation.",
