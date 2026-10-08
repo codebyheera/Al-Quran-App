@@ -146,6 +146,42 @@ export const surahContent = {
     ],
   },
 
+  "Az-Zumar": {
+    intro: [
+      "Surah Az-Zumar is the 39th surah of the Quran. It is a Makki surah with 75 verses. Its name means \"the groups,\" and it comes from the end of the surah, where people are led to Paradise or Hell in separate groups on the Day of Judgment.",
+      "The main message of this surah is to worship Allah alone with a sincere heart. It reminds readers that no one else deserves devotion, and it asks them to think about the signs of Allah in the sky, the rain, and the growth of plants. It also compares those who know and those who do not, and it promises that the patient will be rewarded without limit.",
+      "One of the most loved verses of the Quran is in this surah. Allah tells those who have wronged themselves not to lose hope in His mercy, because He forgives all sins for those who turn back to Him. The surah ends with a powerful picture of the Day of Judgment, when the trumpet is blown and every group is brought forward.",
+      "Surah Az-Zumar is spread across two juz. The first part is in [Juz 23](/juz/23) and the rest is in [Juz 24](/juz/24).",
+    ],
+    faqs: [
+      {
+        question: "What is Surah Az-Zumar about?",
+        answer:
+          "Surah Az-Zumar is about worshipping Allah alone with a sincere heart. It reminds readers of the signs of Allah in creation, compares those who know with those who do not, and ends with a clear picture of how people will be led in groups to Paradise or Hell on the Day of Judgment.",
+      },
+      {
+        question: "What does Az-Zumar mean?",
+        answer:
+          "Az-Zumar means \"the groups\" or \"the troops.\" The name comes from the last part of the surah, where the disbelievers are driven to Hell in groups and the believers are led to Paradise in groups. It is the 39th surah of the Quran and has 75 verses.",
+      },
+      {
+        question: "What does verse 53 of Surah Az-Zumar say?",
+        answer:
+          "Verse 53 is one of the most hopeful verses in the Quran. Allah tells those who have wronged themselves not to lose hope in His mercy, and says He forgives all sins for those who turn back to Him. Many people read it when they feel weighed down by their mistakes.",
+      },
+      {
+        question: "Which juz is Surah Az-Zumar in?",
+        answer:
+          "Surah Az-Zumar is spread across two juz. Verses 1 to 31 are in Juz 23, and verses 32 to 75 are in Juz 24.",
+      },
+      {
+        question: "What are the benefits of reciting Surah Az-Zumar?",
+        answer:
+          "It is reported in Jami at-Tirmidhi from Aisha (may Allah be pleased with her) that the Prophet (peace be upon him) would not sleep until he had recited Surah Al-Isra and Surah Az-Zumar. Many Muslims follow this example by reading it at night.",
+      },
+    ],
+  },
+
   "Az-Zukhruf": {
     intro: [
       "Surah Az-Zukhruf is the 43rd surah of the Quran, revealed in Makkah, and it has 89 verses. The name \"Zukhruf\" means gold or worldly decoration, and it comes from a part of the surah where the disbelievers of Makkah are corrected for thinking that wealth and material comfort are signs of Allah's approval. The surah explains again and again that the glitter of this world does not last, and true success is only in the Hereafter.",

@@ -188,6 +188,11 @@ export const surahSeo = {
     description:
       "Explore As-Saffat, the 37th chapter of the Quran, with English translation & audio recitation. Read Surah As-Saffat verse by verse free on Al-Quran Hub.",
   },
+  39: {
+    title: "Surah Az-Zumar (Zumar) - Urdu Translation & Audio",
+    description:
+      "Never lose hope in Allah's mercy. Read Surah Az-Zumar with Arabic text, Urdu and English translation and listen to audio. Includes verse 53.",
+  },
   43: {
     title: "Surah Az-Zukhruf: Read with English Translation",
     description:
