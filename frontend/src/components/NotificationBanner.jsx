@@ -1,33 +1,32 @@
-import { useState, useEffect } from 'react';
 import usePushNotification from '../hooks/usePushNotification';
+import { usePopupTurn } from '../lib/popupQueue';
 import './NotificationBanner.css';
 
 const DISMISS_KEY  = 'notif_dismissed_until';
 const DISMISS_DAYS = 7;
 
+function isSnoozed() {
+  try {
+    const until = localStorage.getItem(DISMISS_KEY);
+    return Boolean(until && Date.now() < Number(until));
+  } catch {
+    return false;
+  }
+}
+
 export default function NotificationBanner() {
   const { permission, setPermission, subscribed, loading, subscribeUser } = usePushNotification();
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
-    if (permission === 'granted' || permission === 'denied' || subscribed) return;
-
-    try {
-      const until = localStorage.getItem(DISMISS_KEY);
-      if (until && Date.now() < Number(until)) return;
-    } catch {}
-
-    // Small delay so it doesn't flash immediately on page load
-    const t = setTimeout(() => setVisible(true), 3000);
-    return () => clearTimeout(t);
-  }, [permission, subscribed]);
+  const wanted = 'serviceWorker' in navigator && 'PushManager' in window
+    && permission !== 'granted' && permission !== 'denied' && !subscribed
+    && !isSnoozed();
+  // Waits its turn in the popup queue instead of showing on page load.
+  const [visible, done] = usePopupTurn('notifications', wanted);
 
   function dismiss() {
     try {
       localStorage.setItem(DISMISS_KEY, String(Date.now() + DISMISS_DAYS * 86400_000));
     } catch {}
-    setVisible(false);
+    done();
   }
 
   async function handleAllow() {
@@ -36,7 +35,7 @@ export default function NotificationBanner() {
     if (result === 'granted') {
       await subscribeUser();
     }
-    setVisible(false);
+    done();
   }
 
   if (!visible) return null;

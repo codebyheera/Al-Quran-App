@@ -8,29 +8,21 @@
  * audio playback.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAudio } from '../context/AudioContext';
 import useIsDesktop from '../hooks/useIsDesktop';
+import { usePopupTurn } from '../lib/popupQueue';
 import './LanguagePreference.css';
 
 export default function LanguagePrompt() {
   const { preferredLanguage, setPreferredLanguage } = useAudio();
   const isDesktop = useIsDesktop();
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    // Already chosen (or dismissed, which also stores a preference) — never ask again.
-    if (preferredLanguage) return;
-    if (!isDesktop) return;
-
-    // Small delay so it slides up after the page has settled instead of
-    // fighting the first paint.
-    const t = setTimeout(() => setVisible(true), 1200);
-    return () => clearTimeout(t);
-  }, [preferredLanguage, isDesktop]);
+  // Already chosen (or dismissed, which also stores a preference) — never ask
+  // again. Otherwise it waits its turn in the popup queue.
+  const [visible, done] = usePopupTurn('language', !preferredLanguage && isDesktop);
 
   // Nudge the push-notification banner (which also lives at the bottom
-  // centre, on a 3s delay) out of the way for as long as this one is up.
+  // centre) out of the way for as long as this one is up.
   useEffect(() => {
     if (!visible) return;
     document.body.classList.add('lang-prompt-open');
@@ -39,7 +31,7 @@ export default function LanguagePrompt() {
 
   function choose(lang) {
     setPreferredLanguage(lang);
-    setVisible(false);
+    done();
   }
 
   // Dismissing without choosing still settles on a default, so the visitor

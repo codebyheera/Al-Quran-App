@@ -1,30 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { usePopupTurn } from '../lib/popupQueue';
 import './SupportPopup.css';
 
 export default function SupportPopup() {
-  const [isOpen, setIsOpen] = useState(false);
+  // Once per session, and only when its turn comes in the popup queue.
+  const [alreadyShown] = useState(() => {
+    try { return Boolean(sessionStorage.getItem('supportPopupShown')); } catch { return false; }
+  });
+  const [isOpen, done] = usePopupTurn('support', !alreadyShown);
   const contentRef = useRef(null);
   const closeBtnRef = useRef(null);
   const previouslyFocusedRef = useRef(null);
 
-  useEffect(() => {
-    // Check if the popup has already been shown in this session
-    const hasShown = sessionStorage.getItem('supportPopupShown');
-
-    if (!hasShown) {
-      // Show popup after 8 minutes
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, 8 * 60 * 1000);
-
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
   const handleClose = () => {
-    setIsOpen(false);
-    sessionStorage.setItem('supportPopupShown', 'true');
+    try { sessionStorage.setItem('supportPopupShown', 'true'); } catch {}
+    done();
   };
 
   // Focus trap + Escape-to-close + restore focus on close
