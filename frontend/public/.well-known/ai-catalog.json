@@ -1,0 +1,36 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Al-Quran Hub",
+    "identifier": "alquranhub.org",
+    "documentationUrl": "https://alquranhub.org/llms.txt",
+    "logoUrl": "https://alquranhub.org/android-chrome-512x512.png"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:alquranhub.org:docs:llms",
+      "type": "text/markdown",
+      "displayName": "Al-Quran Hub LLM Guide",
+      "description": "Overview of Al-Quran Hub, a free, ad-free platform to read and listen to the Holy Quran, with links to all 114 Surahs, 30 Juz, blog articles and Islamic tools.",
+      "tags": ["quran", "islam", "surah", "juz", "translation", "recitation"],
+      "updatedAt": "2026-10-12T00:00:00Z",
+      "url": "https://alquranhub.org/llms.txt"
+    },
+    {
+      "identifier": "urn:air:alquranhub.org:sitemap:main",
+      "type": "application/xml",
+      "displayName": "Al-Quran Hub Sitemap",
+      "description": "XML sitemap listing every Surah, Juz, blog article and tool page on Al-Quran Hub.",
+      "tags": ["sitemap"],
+      "url": "https://alquranhub.org/sitemap.xml"
+    },
+    {
+      "identifier": "urn:air:alquranhub.org:web:home",
+      "type": "text/html",
+      "displayName": "Al-Quran Hub",
+      "description": "Read Quran Pak online free: Arabic text with translation, audio recitation, prayer times, Verse of the Day, Tasbih counter, bookmarks, search and Islamic blog.",
+      "tags": ["quran", "prayer-times", "tasbih", "islamic-blog"],
+      "url": "https://alquranhub.org/"
+    }
+  ]
+}

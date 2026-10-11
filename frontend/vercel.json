@@ -19,6 +19,23 @@
       ]
     },
     {
+      "source": "/.well-known/ai-catalog.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/ai-catalog+json"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
       "source": "/site.webmanifest",
       "headers": [
         {
@@ -87,7 +104,7 @@
       "destination": "/blog/:slug/index.html"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/|\\.well-known/).*)",
       "destination": "/index.html"
     }
   ]
