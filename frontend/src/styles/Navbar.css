@@ -124,28 +124,6 @@
   justify-self: end;
 }
 
-.nav-icon-btn {
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--text-secondary);
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1rem;
-  text-decoration: none;
-  transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-}
-
-.nav-icon-btn:hover {
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
-  transform: scale(1.1);
-}
-
 /* ── Hamburger button ─────────────────────────────────────── */
 .hamburger {
   display: none;
@@ -206,10 +184,6 @@
   }
 
   .navbar-search {
-    display: none;
-  }
-
-  .nav-icon-btn {
     display: none;
   }
 
@@ -439,7 +413,7 @@
   margin-top: 0.5rem;
 }
 
-/* Translation language toggle (mobile home for LanguagePrefDropdown) */
+/* Translation language toggle (also in the header's Settings drawer) */
 .sidebar-lang-toggle {
   display: flex;
   gap: 0.5rem;

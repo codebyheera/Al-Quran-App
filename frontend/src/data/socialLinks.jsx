@@ -1,6 +1,6 @@
 /**
  * data/socialLinks.jsx — Single source of truth for social media links.
- * Shared by Footer and TopBar so both stay in sync automatically.
+ * Used by the Footer.
  */
 
 const InstagramIcon = () => (

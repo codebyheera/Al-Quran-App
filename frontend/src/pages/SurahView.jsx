@@ -23,6 +23,7 @@ import SurahIntro from "../components/SurahIntro";
 import { getSurahContent } from "../data/surah-content";
 import { useReadingTimer } from "../hooks/useReadingTimer";
 import { useReadingProgress } from "../hooks/useReadingProgress";
+import useArabicFontSize from "../hooks/useArabicFontSize";
 import "./SurahView.css";
 
 export default function SurahView() {
@@ -75,9 +76,7 @@ export default function SurahView() {
   }, [surah, surahNum]);
   useReadingProgress(readingProgressItems);
 
-  const [fontSize, setFontSize] = useState(() => {
-    return parseFloat(localStorage.getItem("arabicFontSize")) || 2.2;
-  });
+  const [fontSize, setArabicFontSize] = useArabicFontSize();
 
   const [translationFontSize, setTranslationFontSize] = useState(() => {
     return parseFloat(localStorage.getItem("translationFontSize")) || 1.0;
@@ -260,11 +259,7 @@ export default function SurahView() {
   }, [currentVerse, surah, surahNum]);
 
   function handleFontChange(delta) {
-    setFontSize((prev) => {
-      const newSize = Math.min(Math.max(prev + delta, 1.4), 4.0);
-      localStorage.setItem("arabicFontSize", newSize);
-      return newSize;
-    });
+    setArabicFontSize(fontSize + delta);
   }
 
   function handleTranslationFontChange(delta) {

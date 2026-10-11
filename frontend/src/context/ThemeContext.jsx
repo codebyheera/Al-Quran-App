@@ -25,12 +25,21 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('quran-theme', theme);
+    // Remember the last dark-family theme so the header's light/dark toggle
+    // can return to it instead of always falling back to the default.
+    if (theme !== 'light') localStorage.setItem('quran-last-dark-theme', theme);
   }, [theme]);
 
   const changeTheme = (newTheme) => setTheme(newTheme);
 
+  // Quick light/dark switch for the header — every theme except 'light' counts as dark.
+  const isLight = theme === 'light';
+  const toggleLightDark = () => {
+    setTheme(isLight ? (localStorage.getItem('quran-last-dark-theme') || 'emerald') : 'light');
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, changeTheme, themes: THEMES }}>
+    <ThemeContext.Provider value={{ theme, changeTheme, themes: THEMES, isLight, toggleLightDark }}>
       {children}
     </ThemeContext.Provider>
   );

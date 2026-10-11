@@ -1,0 +1,715 @@
+/* ============================================================
+   HeaderActions.css — Navbar icon cluster + Settings drawer
+   Exact palette on the default (emerald) theme; other themes map
+   the same tokens onto their own variables so nothing clashes.
+   ============================================================ */
+
+.hdr-actions,
+.sd-root {
+  --hdr-void: #081310;
+  --hdr-base: #0d2117;
+  --hdr-raised: #15301f;
+  --hdr-overlay: #1c3f28;
+  --hdr-border: #24462f;
+  --hdr-text: #f6f2e7;
+  --hdr-text-2: #9fb8a6;
+  --hdr-meta: #84a08d;
+  --hdr-gold: #e0b04e;
+  --hdr-gold-hover: #f4cd77;
+  --hdr-on-gold: #1a1206;
+  --hdr-font: 'Plus Jakarta Sans', var(--font-ui);
+}
+
+[data-theme]:not([data-theme="emerald"]) .hdr-actions,
+[data-theme]:not([data-theme="emerald"]) .sd-root {
+  --hdr-void: var(--bg-primary);
+  --hdr-base: var(--bg-card);
+  --hdr-raised: var(--bg-secondary);
+  --hdr-overlay: var(--bg-card-hover);
+  --hdr-border: var(--border);
+  --hdr-text: var(--text-primary);
+  --hdr-text-2: var(--text-secondary);
+  --hdr-meta: var(--text-muted);
+  --hdr-gold: var(--accent-gold);
+  --hdr-gold-hover: var(--accent-gold-light, var(--accent-gold));
+  --hdr-on-gold: var(--on-accent-gold);
+}
+
+/* ── Cluster ──────────────────────────────────────────────── */
+.hdr-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hdr-bell {
+  z-index: 200;
+}
+
+.hdr-icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-secondary); /* same as .navbar-link */
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out;
+}
+
+.hdr-icon-btn:hover {
+  background: var(--hdr-overlay);
+  color: var(--hdr-gold);
+}
+
+.hdr-icon-btn.is-active {
+  background: var(--hdr-overlay);
+  border-color: var(--hdr-gold);
+  color: var(--hdr-gold);
+}
+
+/* Icon micro-animations */
+.hdr-icon-btn svg {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hdr-icon-btn:hover .hdr-ico-search {
+  transform: rotate(-12deg) scale(1.08);
+}
+
+.hdr-icon-btn:hover .hdr-ico-gear,
+.hdr-icon-btn.is-active .hdr-ico-gear {
+  transform: rotate(90deg);
+}
+
+.hdr-ico-theme.is-switching {
+  animation: hdrThemeIn 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hdr-icon-btn:hover .hdr-ico-theme {
+  transform: rotate(20deg);
+}
+
+@keyframes hdrThemeIn {
+  from { opacity: 0; transform: rotate(-90deg) scale(0.6); }
+  to   { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hdr-icon-btn svg { transition: none; animation: none; }
+}
+
+.hdr-icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--hdr-void), 0 0 0 4px var(--hdr-gold);
+}
+
+.hdr-icon-btn .notif-badge-dot {
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background: var(--hdr-gold);
+  border: none;
+}
+
+/* Tooltip */
+.hdr-icon-btn[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, -4px);
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: var(--hdr-raised);
+  border: 1px solid var(--hdr-border);
+  color: var(--hdr-text);
+  font-family: var(--hdr-font);
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease-out, transform 150ms ease-out;
+  z-index: 400;
+}
+
+.hdr-icon-btn[data-tip]:hover::after,
+.hdr-icon-btn[data-tip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Don't show tooltips while their dropdown/drawer is open */
+.hdr-icon-btn[aria-expanded="true"]::after {
+  display: none;
+}
+
+/* Last button sits at the screen edge — anchor its tooltip to the right */
+.hdr-actions > .hdr-icon-btn:last-child::after {
+  left: auto;
+  right: 0;
+  transform: translate(0, -4px);
+}
+.hdr-actions > .hdr-icon-btn:last-child:hover::after,
+.hdr-actions > .hdr-icon-btn:last-child:focus-visible::after {
+  transform: translate(0, 0);
+}
+
+@media (hover: none) {
+  .hdr-icon-btn[data-tip]::after { display: none; }
+}
+
+@media (max-width: 767px) {
+  .hdr-icon-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Theme switching lives in the Settings drawer on phones */
+  .hdr-theme-btn {
+    display: none;
+  }
+}
+
+/* ── Drawer ───────────────────────────────────────────────── */
+.sd-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9600; /* above the language prompt (9500) and toasts */
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear 320ms;
+}
+
+.sd-root.is-open {
+  visibility: visible;
+  pointer-events: auto;
+  transition: visibility 0s;
+}
+
+.sd-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 10, 8, 0.6);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 280ms ease-out;
+}
+
+.sd-root.is-open .sd-overlay {
+  opacity: 1;
+}
+
+.sd-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  height: 100dvh;
+  width: 400px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* Same solid surface as the site header and footer */
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  color: var(--hdr-text);
+  font-family: var(--hdr-font);
+  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45);
+  transform: translateX(100%);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  outline: none;
+}
+
+.sd-root.is-open .sd-panel {
+  transform: translateX(0);
+}
+
+@media (max-width: 767px) {
+  .sd-panel { width: 100%; border-left: none; }
+}
+
+/* Header */
+.sd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--hdr-border);
+}
+
+.sd-header-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sd-header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--hdr-gold) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hdr-gold) 35%, transparent);
+  color: var(--hdr-gold);
+}
+
+.sd-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--hdr-text);
+}
+
+.sd-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--hdr-border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--hdr-text-2);
+  cursor: pointer;
+  transition: background 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out, transform 200ms ease-out;
+}
+
+.sd-close:hover {
+  background: var(--hdr-overlay);
+  border-color: var(--hdr-gold);
+  color: var(--hdr-gold);
+  transform: rotate(90deg);
+}
+
+/* Body + cards */
+.sd-body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hdr-border) transparent;
+}
+
+.sd-card {
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--hdr-raised);
+  border: 1px solid var(--hdr-border);
+}
+
+/* Cards slide up one after another when the drawer opens */
+.sd-root.is-open .sd-card {
+  animation: sdCardIn 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(80ms + var(--i, 0) * 50ms);
+}
+
+@keyframes sdCardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sd-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.sd-card-icon {
+  flex-shrink: 0;
+  color: var(--hdr-gold);
+}
+
+.sd-card-title {
+  flex: 1;
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--hdr-text-2);
+}
+
+.sd-value {
+  min-width: 42px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hdr-gold) 14%, transparent);
+  color: var(--hdr-gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sd-hint {
+  margin: 10px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--hdr-meta);
+}
+
+/* Shared focus ring inside the drawer */
+.sd-root button:focus-visible,
+.sd-range:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--hdr-void), 0 0 0 4px var(--hdr-gold);
+}
+
+/* Arabic preview */
+.sd-preview {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 18px 14px;
+  border-radius: 12px;
+  /* Same surface as the verse cards in the selected theme */
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+.sd-preview .sd-arabic-preview {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  line-height: 1.9;
+  color: var(--text-arabic, var(--hdr-text));
+  overflow-wrap: anywhere;
+  transition: font-size 150ms ease-out;
+}
+
+/* Slider */
+.sd-range-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.sd-step-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--hdr-border);
+  background: var(--hdr-base);
+  color: var(--hdr-text);
+  cursor: pointer;
+  transition: background 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out, transform 150ms ease-out;
+}
+
+.sd-step-btn:hover:not(:disabled) {
+  background: var(--hdr-overlay);
+  border-color: var(--hdr-gold);
+  color: var(--hdr-gold);
+}
+
+.sd-step-btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.sd-step-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+@media (max-width: 767px) {
+  .sd-step-btn { width: 44px; height: 44px; }
+}
+
+.sd-range {
+  flex: 1;
+  height: 32px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sd-range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--hdr-gold) var(--fill, 0%), var(--hdr-overlay) var(--fill, 0%));
+}
+.sd-range::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--hdr-overlay);
+}
+.sd-range::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--hdr-gold);
+}
+
+.sd-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: var(--hdr-gold);
+  border: 3px solid var(--hdr-void);
+  box-shadow: 0 0 0 1px var(--hdr-gold), 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 150ms ease-out;
+}
+.sd-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--hdr-gold);
+  border: 3px solid var(--hdr-void);
+  box-shadow: 0 0 0 1px var(--hdr-gold), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.sd-range:hover::-webkit-slider-thumb,
+.sd-range:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+/* Segmented EN / UR with a sliding thumb */
+.sd-segmented {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--hdr-void);
+  border: 1px solid var(--hdr-border);
+}
+
+.sd-segmented-thumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 9px;
+  background: var(--hdr-gold);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--hdr-gold) 30%, transparent);
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sd-segmented.second .sd-segmented-thumb {
+  transform: translateX(100%);
+}
+
+.sd-segmented button {
+  position: relative;
+  z-index: 1;
+  height: 40px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--hdr-text-2);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 200ms ease-out;
+}
+
+.sd-segmented button:hover:not(.active) {
+  color: var(--hdr-gold);
+}
+
+.sd-segmented button.active {
+  color: var(--hdr-on-gold);
+}
+
+/* Toggle rows */
+.sd-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 46px;
+  padding: 0 4px;
+  border: none;
+  border-top: 1px solid var(--hdr-border);
+  background: transparent;
+  color: var(--hdr-text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.sd-card-head + .sd-toggle-row {
+  border-top: none;
+}
+
+.sd-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--hdr-overlay);
+  border: 1px solid var(--hdr-border);
+  transition: background 200ms ease-out, border-color 200ms ease-out;
+}
+
+.sd-switch span {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--hdr-text-2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), background 200ms ease-out;
+}
+
+.sd-switch.on {
+  background: var(--hdr-gold);
+  border-color: var(--hdr-gold);
+}
+
+.sd-switch.on span {
+  transform: translateX(18px);
+  background: var(--hdr-on-gold);
+}
+
+/* Radio-style option lists (reciter, theme) */
+.sd-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sd-theme-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.sd-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--hdr-border);
+  border-radius: 10px;
+  background: var(--hdr-base);
+  color: var(--hdr-text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out, transform 150ms ease-out;
+}
+
+.sd-option:hover {
+  background: var(--hdr-overlay);
+  border-color: color-mix(in srgb, var(--hdr-gold) 45%, var(--hdr-border));
+}
+
+.sd-option:active {
+  transform: scale(0.98);
+}
+
+.sd-option.active {
+  background: color-mix(in srgb, var(--hdr-gold) 10%, var(--hdr-overlay));
+  border-color: var(--hdr-gold);
+  color: var(--hdr-gold);
+}
+
+.sd-radio {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--hdr-meta);
+  transition: border-color 150ms ease-out, box-shadow 150ms ease-out, background 150ms ease-out;
+}
+
+.sd-option.active .sd-radio {
+  border-color: var(--hdr-gold);
+  background: var(--hdr-gold);
+  box-shadow: inset 0 0 0 3px var(--hdr-overlay);
+}
+
+/* Footer */
+.sd-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--hdr-border);
+  background: var(--bg-card);
+}
+
+.sd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 46px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out, transform 150ms ease-out;
+}
+
+.sd-btn:active {
+  transform: scale(0.98);
+}
+
+.sd-btn-outline {
+  background: transparent;
+  border: 1px solid var(--hdr-border);
+  color: var(--hdr-text);
+}
+
+.sd-btn-outline:hover {
+  border-color: var(--hdr-gold);
+  color: var(--hdr-gold);
+}
+
+.sd-btn-gold {
+  background: var(--hdr-gold);
+  border: 1px solid var(--hdr-gold);
+  color: var(--hdr-on-gold);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--hdr-gold) 25%, transparent);
+}
+
+.sd-btn-gold:hover {
+  background: var(--hdr-gold-hover);
+  border-color: var(--hdr-gold-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sd-panel, .sd-overlay, .sd-root, .sd-segmented-thumb, .sd-switch span { transition: none; }
+  .sd-root.is-open .sd-card { animation: none; }
+}

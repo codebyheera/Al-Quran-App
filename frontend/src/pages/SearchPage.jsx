@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import { pageSeo } from '../data/pageSeo';
@@ -12,6 +12,8 @@ import './SearchPage.css';
 
 export default function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // The URL param is the single source of truth for the active search
   const urlQuery = searchParams.get('q') || '';
@@ -38,6 +40,18 @@ export default function SearchPage() {
         setLoading(false);
       });
   }, [urlQuery]); // ← triggered on every URL change, including from homepage
+
+  // Esc closes search (opened via the header button or Ctrl+K / "/"),
+  // returning to the page the visitor came from.
+  useEffect(() => {
+    function handleEscape(e) {
+      if (e.key !== 'Escape') return;
+      if (location.key !== 'default') navigate(-1);
+      else navigate('/');
+    }
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [location.key, navigate]);
 
   function handleSubmit(e) {
     e.preventDefault();

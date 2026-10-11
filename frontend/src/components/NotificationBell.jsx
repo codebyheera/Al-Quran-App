@@ -41,8 +41,15 @@ export default function NotificationBell() {
     function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     }
+    function handleEscape(e) {
+      if (e.key === 'Escape') setOpen(false);
+    }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, []);
 
   function markAllRead() {
@@ -51,17 +58,22 @@ export default function NotificationBell() {
     setOpen(false);
   }
 
+  // Nothing unread → no bell in the header at all.
+  if (!unread) return null;
+
   return (
-    <div className="navbar-dropdown" ref={ref}>
+    <div className="navbar-dropdown hdr-bell" ref={ref}>
       <button
-        className={`dropdown-trigger icon-only ${open ? 'open' : ''}`}
+        type="button"
+        className={`hdr-icon-btn ${open ? 'is-active' : ''}`}
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="true"
         aria-expanded={open}
-        title="Notifications"
+        aria-label="Notifications"
+        data-tip="Notifications"
       >
-        <IconBell size={18} stroke={1.8} className="dropdown-trigger-icon" />
-        {unread && <span className="notif-badge-dot" aria-hidden="true" />}
+        <IconBell size={20} stroke={1.5} />
+        <span className="notif-badge-dot" aria-hidden="true" />
       </button>
 
       {open && (

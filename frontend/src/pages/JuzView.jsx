@@ -18,6 +18,7 @@ import { getJuzContent } from '../data/juz-content';
 import { getJuzSeo } from '../data/juzSeo';
 import { useReadingTimer } from '../hooks/useReadingTimer';
 import { useReadingProgress } from '../hooks/useReadingProgress';
+import useArabicFontSize from '../hooks/useArabicFontSize';
 import './JuzView.css';
 
 export default function JuzView() {
@@ -45,9 +46,7 @@ export default function JuzView() {
   }, [juz]);
   useReadingProgress(readingProgressItems);
 
-  const [fontSize, setFontSize] = useState(() => {
-    return parseFloat(localStorage.getItem('arabicFontSize')) || 2.2;
-  });
+  const [fontSize, setArabicFontSize] = useArabicFontSize();
 
   const [translationFontSize, setTranslationFontSize] = useState(() => {
     return parseFloat(localStorage.getItem('translationFontSize')) || 1.0;
@@ -178,11 +177,7 @@ export default function JuzView() {
 
 
   function handleFontChange(delta) {
-    setFontSize((prev) => {
-      const newSize = Math.min(Math.max(prev + delta, 1.4), 4.0);
-      localStorage.setItem('arabicFontSize', newSize);
-      return newSize;
-    });
+    setArabicFontSize(fontSize + delta);
   }
 
   function handleTranslationFontChange(delta) {

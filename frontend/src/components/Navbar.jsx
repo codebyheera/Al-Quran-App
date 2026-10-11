@@ -1,142 +1,20 @@
 /**
  * components/Navbar.jsx — Sticky top navigation bar
- * Includes rich slide-in sidebar for mobile, Qari and Theme dropdowns.
+ * Includes rich slide-in sidebar for mobile; the right-side icon cluster
+ * (search, theme, notifications, settings) lives in HeaderActions.
  */
 
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock, IconMoonStars, IconSearch, IconChevronDown, IconMailbox, IconMicrophone2, IconMoon, IconSun } from '@tabler/icons-react';
-import { useTheme } from '../context/ThemeContext';
-import { useQari } from '../context/QariContext';
+import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock, IconMoonStars, IconChevronDown, IconMailbox } from '@tabler/icons-react';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
-import NotificationBell from './NotificationBell';
-import LanguagePrefDropdown from './LanguagePrefDropdown';
+import HeaderActions from './HeaderActions';
 import '../styles/Navbar.css';
-
-function QariDropdown({ reciter, changeReciter, reciters }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-  const current = reciters.find((r) => r.id === reciter);
-
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
-    }
-    function handleEscape(e) {
-      if (e.key === 'Escape') setOpen(false);
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleEscape);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, []);
-
-  return (
-    <div className="navbar-dropdown" ref={ref}>
-      <button
-        className={`dropdown-trigger icon-only ${open ? 'open' : ''}`}
-        onClick={() => setOpen((o) => !o)}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        title={`Select Reciter (${current?.name})`}
-      >
-        <IconMicrophone2 size={18} stroke={1.8} className="dropdown-trigger-icon" />
-      </button>
-
-      {open && (
-        <div className="dropdown-panel" role="listbox">
-          <div className="dropdown-panel-header">Reciter</div>
-          {reciters.map((r) => (
-            <button
-              key={r.id}
-              className={`dropdown-option ${r.id === reciter ? 'selected' : ''}`}
-              role="option"
-              aria-selected={r.id === reciter}
-              onClick={() => { changeReciter(r.id); setOpen(false); }}
-            >
-              <span className="dropdown-option-info">
-                <span className="dropdown-option-name">{r.name}</span>
-              </span>
-              {r.id === reciter && (
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
-                </svg>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ThemeDropdown({ theme, changeTheme, themes }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
-    }
-    function handleEscape(e) {
-      if (e.key === 'Escape') setOpen(false);
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleEscape);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, []);
-
-  return (
-    <div className="navbar-dropdown" ref={ref}>
-      <button
-        className={`dropdown-trigger icon-only ${open ? 'open' : ''}`}
-        onClick={() => setOpen((o) => !o)}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        title="Select Theme"
-      >
-        {theme === 'light'
-          ? <IconSun size={18} stroke={1.8} className="dropdown-trigger-icon" />
-          : <IconMoon size={18} stroke={1.8} className="dropdown-trigger-icon" />}
-      </button>
-
-      {open && (
-        <div className="dropdown-panel theme-panel" role="listbox">
-          <div className="dropdown-panel-header">Theme</div>
-          {themes.map((t) => (
-            <button
-              key={t.id}
-              className={`dropdown-option ${t.id === theme ? 'selected' : ''}`}
-              role="option"
-              aria-selected={t.id === theme}
-              onClick={() => { changeTheme(t.id); setOpen(false); }}
-            >
-              <span className="dropdown-option-info">
-                <span className="dropdown-trigger-icon">{t.icon}</span>
-                <span className="dropdown-option-name">{t.name}</span>
-              </span>
-              {t.id === theme && (
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
-                </svg>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 // "More" dropdown — consolidates the lower-priority links (Bookmarks,
 // Support, Contact) out of the main inline row so the desktop nav doesn't
-// feel crowded, same open/close pattern as QariDropdown/ThemeDropdown above.
+// feel crowded.
 function MoreDropdown({ bookmarkCount }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -196,8 +74,6 @@ function MoreDropdown({ bookmarkCount }) {
 }
 
 export default function Navbar() {
-  const { theme, changeTheme, themes } = useTheme();
-  const { reciter, changeReciter, reciters } = useQari();
   const { bookmarks } = useBookmarks();
   const { isPlaying, preferredLanguage, setPreferredLanguage } = useAudio();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -293,14 +169,8 @@ export default function Navbar() {
 
           {/* Right actions */}
           <div className="navbar-actions">
-            <Link to="/search" className="nav-icon-btn" aria-label="Search" title="Search">
-              <IconSearch size={19} stroke={1.8} />
-            </Link>
-            {/* Translation language preference */}
-            <LanguagePrefDropdown />
-            <QariDropdown reciter={reciter} changeReciter={changeReciter} reciters={reciters} />
-            <NotificationBell />
-            <ThemeDropdown theme={theme} changeTheme={changeTheme} themes={themes} />
+            {/* Search · Theme · Bell (when unread) · Settings */}
+            <HeaderActions />
 
             {/* Hamburger (mobile only) */}
             <button

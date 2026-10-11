@@ -24,7 +24,10 @@ const CHIPS = [
   { icon: "🕐", label: "Prayer Times", message: "Prayer times in Lahore" },
 ];
 
-const POS_KEY = "chatWidgetPos";
+// v2: earlier saved positions are discarded so every visitor starts at the
+// default bottom-right corner again until they drag it themselves.
+const POS_KEY = "chatWidgetPos.v2";
+const LEGACY_POS_KEY = "chatWidgetPos";
 const DRAG_THRESHOLD = 5;
 const EDGE_GAP = 8;
 
@@ -37,6 +40,7 @@ function clampPos(p, size) {
 
 function loadPos() {
   try {
+    localStorage.removeItem(LEGACY_POS_KEY);
     const p = JSON.parse(localStorage.getItem(POS_KEY));
     return p && Number.isFinite(p.x) && Number.isFinite(p.y) ? p : null;
   } catch {
