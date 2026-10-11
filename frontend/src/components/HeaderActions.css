@@ -88,6 +88,24 @@
   transform: rotate(90deg);
 }
 
+/* Bell swings from its top on hover, like a ring */
+.hdr-ico-bell {
+  transform-origin: 50% 15%;
+}
+
+.hdr-icon-btn:hover .hdr-ico-bell,
+.hdr-icon-btn.is-active .hdr-ico-bell {
+  animation: hdrBellRing 600ms ease-in-out;
+}
+
+@keyframes hdrBellRing {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(14deg); }
+  40% { transform: rotate(-12deg); }
+  60% { transform: rotate(8deg); }
+  80% { transform: rotate(-4deg); }
+}
+
 .hdr-ico-theme.is-switching {
   animation: hdrThemeIn 400ms cubic-bezier(0.22, 1, 0.36, 1);
 }

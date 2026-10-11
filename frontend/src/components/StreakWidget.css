@@ -105,8 +105,10 @@
   gap: 0.5rem;
   padding: 0.45rem 0.9rem 0.45rem 0.55rem;
   border-radius: 100px;
-  background: rgba(46, 204, 113, 0.12);
-  border: 1px solid rgba(46, 204, 113, 0.28);
+  /* Theme accent, so it matches whichever theme is selected */
+  background: color-mix(in srgb, var(--accent-gold) 12%, transparent);
+  border: 1px solid var(--border-hover);
+  animation: streakCompleteIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   font-size: 0.83rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -120,8 +122,17 @@
   height: 20px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--accent-green);
-  color: #08331c;
+  background: var(--accent-gold);
+  color: var(--on-accent-gold);
+}
+
+@keyframes streakCompleteIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streak-strip-complete { animation: none; }
 }
 
 /* ── Buttons — compact pill, deliberately unlike the boxier hero Search

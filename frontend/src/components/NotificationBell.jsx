@@ -52,42 +52,34 @@ export default function NotificationBell() {
     };
   }, []);
 
-  function markAllRead() {
-    if (latestId !== null) saveLastReadId(latestId);
-    setUnread(false);
-    setOpen(false);
+  // Opening the bell counts as reading — the dot clears, the bell stays.
+  function handleToggle() {
+    setOpen((o) => !o);
+    if (unread) {
+      if (latestId !== null) saveLastReadId(latestId);
+      setUnread(false);
+    }
   }
-
-  // Nothing unread → no bell in the header at all.
-  if (!unread) return null;
 
   return (
     <div className="navbar-dropdown hdr-bell" ref={ref}>
       <button
         type="button"
         className={`hdr-icon-btn ${open ? 'is-active' : ''}`}
-        onClick={() => setOpen((o) => !o)}
+        onClick={handleToggle}
         aria-haspopup="true"
         aria-expanded={open}
         aria-label="Notifications"
         data-tip="Notifications"
       >
-        <IconBell size={20} stroke={1.5} />
-        <span className="notif-badge-dot" aria-hidden="true" />
+        <IconBell size={20} stroke={1.75} className="hdr-ico-bell" />
+        {unread && <span className="notif-badge-dot" aria-hidden="true" />}
       </button>
 
       {open && (
         <div className="dropdown-panel notif-panel" role="menu">
           <div className="notif-panel-header">
             <span className="notif-panel-title">Notifications</span>
-            <button
-              type="button"
-              className="notif-mark-read-btn"
-              onClick={markAllRead}
-              disabled={!unread}
-            >
-              Mark all as read
-            </button>
           </div>
 
           <div className="notif-list">

@@ -804,26 +804,6 @@
   color: var(--text-muted);
 }
 
-.notif-mark-read-btn {
-  background: transparent;
-  border: none;
-  color: var(--accent-gold);
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-}
-
-.notif-mark-read-btn:hover:not(:disabled) {
-  text-decoration: underline;
-}
-
-.notif-mark-read-btn:disabled {
-  color: var(--text-muted);
-  cursor: default;
-  opacity: 0.6;
-}
-
 .notif-list {
   max-height: 340px;
   overflow-y: auto;
