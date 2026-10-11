@@ -6,7 +6,7 @@
  * lib/streakUtils.js) — no backend, no login.
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { IconFlameFilled, IconCheck } from '@tabler/icons-react';
 import { getStreakData, setDailyGoal } from '../lib/streakUtils';
@@ -15,12 +15,13 @@ import './StreakWidget.css';
 const GOAL_OPTIONS = [5, 10, 15];
 
 export default function StreakWidget() {
-  const [data, setData] = useState(null);
+  // Read synchronously on the first render (not in an effect) so the strip is
+  // part of the very first paint. Rendering null first and inserting the strip
+  // after mount pushed everything below the hero down — a 0.18 CLS on mobile.
+  // Safe because Home is client-rendered; the build-time snapshot (see
+  // scripts/prerender.js) runs this against a stubbed, empty localStorage.
+  const [data, setData] = useState(() => getStreakData());
   const [editingGoal, setEditingGoal] = useState(false);
-
-  useEffect(() => {
-    setData(getStreakData());
-  }, []);
 
   const chooseGoal = useCallback((minutes) => {
     setData(setDailyGoal(minutes));

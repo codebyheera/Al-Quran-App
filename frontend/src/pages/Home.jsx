@@ -490,7 +490,8 @@ export default function Home() {
           <div className="developer-note reveal reveal-fade-up stagger-1 reveal-visible">
             <img
               className="developer-note-avatar"
-              src="https://avatars.githubusercontent.com/codebyheera"
+              src="https://avatars.githubusercontent.com/codebyheera?s=144"
+              srcSet="https://avatars.githubusercontent.com/codebyheera?s=144 1x, https://avatars.githubusercontent.com/codebyheera?s=288 2x"
               alt="Muhammad Subhan Naeem, developer of Al-Quran Hub"
               width={72}
               height={72}

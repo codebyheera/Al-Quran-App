@@ -63,7 +63,7 @@
   <link rel="dns-prefetch" href="https://cdn.islamic.network" />
 
   <!-- Preload local Arabic font to fix critical request chain warning -->
-  <link rel="preload" href="/fonts/me_quran-webfont.otf" as="font" type="font/otf" crossorigin="anonymous" />
+  <link rel="preload" href="/fonts/me_quran-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
   <!-- Inter UI font via Google Fonts (display=swap prevents render-block) -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
@@ -80,13 +80,20 @@
   <script type="module" src="/src/main.jsx"></script>
 
   <!-- Analytics and tracking scripts deferred to end of body -->
-  <!-- Google Analytics (async to prevent render-blocking) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GR7C4XE17J"></script>
+  <!-- Google Analytics — the gtag() queue is set up immediately (so the page_view
+       is recorded), but the 166 KB library is only fetched after the load event,
+       so it no longer competes with the app bundle on mobile -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-GR7C4XE17J');
+    window.addEventListener('load', function() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GR7C4XE17J';
+      document.body.appendChild(s);
+    });
   </script>
 
   <!-- Microsoft Clarity (Deferred to prevent forced reflow and blocking LCP) -->

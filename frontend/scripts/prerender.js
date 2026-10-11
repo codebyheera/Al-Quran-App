@@ -381,6 +381,54 @@ async function run() {
   const { AudioProvider } = await vite.ssrLoadModule('/src/context/AudioContext.jsx');
   const { QariProvider } = await vite.ssrLoadModule('/src/context/QariContext.jsx');
 
+  // Homepage snapshot — the full App shell (Navbar, hero, Footer) rendered at "/"
+  // and baked into dist/index.html, so mobile paints the hero from HTML + CSS
+  // instead of waiting on the JS bundle (Home was fully client-rendered before,
+  // which is what made mobile FCP/LCP slow). main.jsx sees data-prerender=
+  // "snapshot" and createRoot()s over it rather than hydrating, since
+  // localStorage-driven UI (streak, bookmarks, theme) can't match a build-time
+  // render. Lazy components render their Suspense fallbacks here.
+  console.log('Prerendering homepage snapshot...');
+  {
+    const { default: App } = await vite.ssrLoadModule('/src/App.jsx');
+    let homeAppHtml = '';
+    try {
+      homeAppHtml = ReactDOMServer.renderToString(
+        React.createElement(MemoryRouter, { initialEntries: ['/'] },
+          React.createElement(HelmetProvider, { context: {} },
+            React.createElement(ThemeProvider, null,
+              React.createElement(QariProvider, null,
+                React.createElement(BookmarkProvider, null,
+                  React.createElement(AudioProvider, null,
+                    React.createElement(App)
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    } catch (renderErr) {
+      console.error('❌ Failed to SSR render homepage snapshot:', renderErr);
+      await vite.close();
+      process.exit(1);
+    }
+    if (!homeAppHtml.includes('hero-bismillah')) {
+      console.error('❌ Homepage snapshot is missing the hero — refusing to ship it.');
+      await vite.close();
+      process.exit(1);
+    }
+    const indexPath = path.join(distPath, 'index.html');
+    const shellHtml = fs.readFileSync(indexPath, 'utf-8');
+    // Empty-root copy for vercel.json's SPA catch-all rewrite — routes without
+    // their own prerendered file (e.g. /prayer-times/:city, 404s) must not
+    // flash the homepage snapshot or serve it to crawlers.
+    fs.writeFileSync(path.join(distPath, 'app-shell.html'), shellHtml);
+    const indexHtml = shellHtml
+      .replace('<div id="root"></div>', () => `<div id="root" data-prerender="snapshot">${homeAppHtml}</div>`);
+    fs.writeFileSync(indexPath, indexHtml);
+  }
+
   // Load page component
   const { default: SurahView } = await vite.ssrLoadModule('/src/pages/SurahView.jsx');
 

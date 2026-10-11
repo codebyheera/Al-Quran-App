@@ -45,7 +45,13 @@ const app = (
   </StrictMode>
 );
 
-if (rootElement.hasChildNodes()) {
+if (rootElement.dataset.prerender === 'snapshot') {
+  // Homepage: the static HTML is a build-time snapshot (see scripts/prerender.js)
+  // shown only so mobile gets a fast first paint. It is not hydrated — client-only
+  // state (streak, bookmarks, theme) differs from the snapshot — so React renders
+  // fresh and replaces it in a single commit.
+  createRoot(rootElement).render(app);
+} else if (rootElement.hasChildNodes()) {
   hydrateRoot(rootElement, app);
 } else {
   createRoot(rootElement).render(app);
