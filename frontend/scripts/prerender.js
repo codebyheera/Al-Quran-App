@@ -26,6 +26,7 @@ import { getJuzSeo } from '../src/data/juzSeo.js';
 import { pageSeo } from '../src/data/pageSeo.js';
 import { buildTasbihFaqSchema } from '../src/data/tasbihFaqs.js';
 import { buildSurahListSchema } from '../src/data/surahListSchema.js';
+import { buildJuzListSchema } from '../src/data/juzListSchema.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -323,12 +324,15 @@ async function run() {
     // TasbihPage.jsx + data/tasbihFaqs.js) — bake its FAQPage schema into the
     // static HTML too, same reasoning as everywhere else jsonLd is used here.
     // /surah gets its CollectionPage + ItemList graph (see data/surahListSchema.js),
-    // built from the committed Surah cache so it doesn't depend on the API.
+    // built from the committed Surah cache so it doesn't depend on the API; /juz
+    // gets the equivalent graph from data/juzListSchema.js (static, 1-30).
     const jsonLd = page.route === '/tasbih'
       ? buildTasbihFaqSchema(`${SITE_URL}${page.route}`)
       : page.route === pageSeo.surahList.path
         ? buildSurahListSchema(readCachedSurahList())
-        : undefined;
+        : page.route === pageSeo.juzList.path
+          ? buildJuzListSchema()
+          : undefined;
     // Privacy Policy + Terms: dofollow (links still pass value/get crawled)
     // but noindex (legal boilerplate pages shouldn't compete for search
     // rankings) — matches each page's own runtime <Helmet> tag.

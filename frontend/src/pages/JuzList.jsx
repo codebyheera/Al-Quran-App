@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import Breadcrumb from '../components/Breadcrumb';
 import { pageSeo } from '../data/pageSeo';
+import { buildJuzListSchema } from '../data/juzListSchema';
 import './JuzList.css';
 
 export default function JuzList() {
@@ -20,20 +21,27 @@ export default function JuzList() {
       .catch(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="loading-center"><div className="spinner" /><p>Loading Juz list…</p></div>;
+  // Rendered in the loading state too — the schema doesn't depend on the API data.
+  const seo = (
+    <Helmet encodeSpecialCharacters={false}>
+      <title>{pageSeo.juzList.title}</title>
+      <meta name="description" content={pageSeo.juzList.description} />
+      <link rel="canonical" href={`https://alquranhub.org${pageSeo.juzList.path}`} />
+      <script type="application/ld+json">{JSON.stringify(buildJuzListSchema())}</script>
+    </Helmet>
+  );
+
+  if (loading) return <div className="loading-center">{seo}<div className="spinner" /><p>Loading Juz list…</p></div>;
 
   return (
     <div className="juz-list page-enter">
-      <Helmet encodeSpecialCharacters={false}>
-        <title>{pageSeo.juzList.title}</title>
-        <meta name="description" content={pageSeo.juzList.description} />
-        <link rel="canonical" href={`https://alquranhub.org${pageSeo.juzList.path}`} />
-      </Helmet>
+      {seo}
 
 
       <div className="container">
         {/* ── Breadcrumb Navigation ───────────────────────── */}
-        <Breadcrumb crumbs={[
+        {/* BreadcrumbList is part of buildJuzListSchema's @graph above */}
+        <Breadcrumb schema={false} crumbs={[
           { label: 'Home', href: '/' },
           { label: 'Juz', href: '/juz' },
         ]} />
