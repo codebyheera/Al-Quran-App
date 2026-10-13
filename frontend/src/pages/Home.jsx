@@ -157,15 +157,57 @@ export default function Home() {
   const { results: suggestions, didYouMean } = smartSearch(query, allSurahs);
   const showDropdown = dropdownOpen && (suggestions.length > 0 || didYouMean);
 
-  const developerJsonLd = JSON.stringify({
+  const homeJsonLd = JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': 'https://alquranhub.org/#website',
+        url: 'https://alquranhub.org/',
+        name: 'Al-Quran Hub',
+        description: pageSeo.home.description,
+        inLanguage: 'en',
+        publisher: { '@id': 'https://alquranhub.org/#organization' },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: 'https://alquranhub.org/search?q={search_term_string}',
+          },
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'Organization',
+        '@id': 'https://alquranhub.org/#organization',
+        name: 'Al-Quran Hub',
+        url: 'https://alquranhub.org/',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://alquranhub.org/android-chrome-512x512.png',
+          width: 512,
+          height: 512,
+        },
+        founder: { '@id': 'https://alquranhub.org/#founder' },
+      },
+      {
+        '@type': 'WebPage',
+        '@id': 'https://alquranhub.org/#webpage',
+        url: 'https://alquranhub.org/',
+        name: pageSeo.home.title,
+        description: pageSeo.home.description,
+        inLanguage: 'en',
+        isPartOf: { '@id': 'https://alquranhub.org/#website' },
+        about: { '@id': 'https://alquranhub.org/#organization' },
+        publisher: { '@id': 'https://alquranhub.org/#organization' },
+        primaryImageOfPage: { '@type': 'ImageObject', url: 'https://alquranhub.org/og-image.png' },
+      },
       {
         '@type': 'Person',
         '@id': 'https://alquranhub.org/#founder',
         name: 'Muhammad Subhan Naeem',
         jobTitle: 'Founder & Developer',
-        url: 'https://alquranhub.org',
+        url: 'https://alquranhub.org/',
         image: 'https://avatars.githubusercontent.com/codebyheera',
         sameAs: [
           'https://github.com/codebyheera',
@@ -174,12 +216,6 @@ export default function Home() {
           'https://about.me/muhammadsubhannaeem',
         ],
         worksFor: { '@id': 'https://alquranhub.org/#organization' },
-      },
-      {
-        '@type': 'Organization',
-        '@id': 'https://alquranhub.org/#organization',
-        name: 'Al-Quran Hub',
-        url: 'https://alquranhub.org',
       },
     ],
   });
@@ -193,7 +229,7 @@ export default function Home() {
         <meta property="og:title" content={pageSeo.home.title} />
         <meta property="og:description" content={pageSeo.home.description} />
         <link rel="canonical" href={`https://alquranhub.org${pageSeo.home.path}`} />
-        <script type="application/ld+json">{developerJsonLd}</script>
+        <script type="application/ld+json">{homeJsonLd}</script>
       </Helmet>
 
       {/* ── Hero ─────────────────────────────────────────────── */}

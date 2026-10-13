@@ -391,11 +391,12 @@ async function run() {
   console.log('Prerendering homepage snapshot...');
   {
     const { default: App } = await vite.ssrLoadModule('/src/App.jsx');
+    const homeHelmetContext = {};
     let homeAppHtml = '';
     try {
       homeAppHtml = ReactDOMServer.renderToString(
         React.createElement(MemoryRouter, { initialEntries: ['/'] },
-          React.createElement(HelmetProvider, { context: {} },
+          React.createElement(HelmetProvider, { context: homeHelmetContext },
             React.createElement(ThemeProvider, null,
               React.createElement(QariProvider, null,
                 React.createElement(BookmarkProvider, null,
@@ -424,7 +425,18 @@ async function run() {
     // their own prerendered file (e.g. /prayer-times/:city, 404s) must not
     // flash the homepage snapshot or serve it to crawlers.
     fs.writeFileSync(path.join(distPath, 'app-shell.html'), shellHtml);
+    // Home's JSON-LD (WebSite/Organization/WebPage/Person) lives in its <Helmet>,
+    // so bake those script tags into the initial HTML for crawlers. Title/meta/
+    // canonical are already set by injectMeta above. Helmet renders them with
+    // data-rh="true", so the client-side Helmet replaces rather than duplicates them.
+    const homeScriptHtml = homeHelmetContext.helmet?.script.toString() || '';
+    if (!homeScriptHtml.includes('application/ld+json')) {
+      console.error('❌ Homepage snapshot is missing its JSON-LD — refusing to ship it.');
+      await vite.close();
+      process.exit(1);
+    }
     const indexHtml = shellHtml
+      .replace('</head>', () => `  ${homeScriptHtml}\n</head>`)
       .replace('<div id="root"></div>', () => `<div id="root" data-prerender="snapshot">${homeAppHtml}</div>`);
     fs.writeFileSync(indexPath, indexHtml);
   }
