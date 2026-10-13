@@ -165,7 +165,7 @@ export default function Home() {
         '@id': 'https://alquranhub.org/#website',
         url: 'https://alquranhub.org/',
         name: 'Al-Quran Hub',
-        description: pageSeo.home.description,
+        description: 'Al-Quran Hub — a free, ad-free platform to read, listen and reflect on the Holy Quran.',
         inLanguage: 'en',
         publisher: { '@id': 'https://alquranhub.org/#organization' },
         potentialAction: {
@@ -195,7 +195,7 @@ export default function Home() {
         '@id': 'https://alquranhub.org/#webpage',
         url: 'https://alquranhub.org/',
         name: pageSeo.home.title,
-        description: pageSeo.home.description,
+        description: 'Explore all 114 Surahs and 30 Juz with Arabic text, English translation, audio recitation, prayer times, and daily Verse of the Day.',
         inLanguage: 'en',
         isPartOf: { '@id': 'https://alquranhub.org/#website' },
         about: { '@id': 'https://alquranhub.org/#organization' },
