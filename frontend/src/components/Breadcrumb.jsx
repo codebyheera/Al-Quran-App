@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import './Breadcrumb.css';
 
-export default function Breadcrumb({ crumbs = [] }) {
+// Pass schema={false} when the page already includes a BreadcrumbList in its
+// own JSON-LD @graph (e.g. SurahList), so it isn't emitted twice.
+export default function Breadcrumb({ crumbs = [], schema: withSchema = true }) {
   if (!crumbs || crumbs.length === 0) return null;
 
   const schema = {
@@ -20,11 +22,13 @@ export default function Breadcrumb({ crumbs = [] }) {
 
   return (
     <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(schema)}
-        </script>
-      </Helmet>
+      {withSchema && (
+        <Helmet>
+          <script type="application/ld+json">
+            {JSON.stringify(schema)}
+          </script>
+        </Helmet>
+      )}
 
       <nav className="breadcrumb" aria-label="Breadcrumb">
         <ol className="breadcrumb-list">

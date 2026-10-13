@@ -25,6 +25,7 @@ import { getSurahSeo } from '../src/data/surahSeo.js';
 import { getJuzSeo } from '../src/data/juzSeo.js';
 import { pageSeo } from '../src/data/pageSeo.js';
 import { buildTasbihFaqSchema } from '../src/data/tasbihFaqs.js';
+import { buildSurahListSchema } from '../src/data/surahListSchema.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -185,6 +186,31 @@ function injectHelmet(template, helmet) {
   return html;
 }
 
+// Surah summaries (number, englishName, nameTranslation, …) from the committed
+// src/data/surahs/*.json cache, in Quran order. Exits if any of the 114 are missing,
+// so the /surah ItemList can never ship incomplete.
+function readCachedSurahList() {
+  const list = fs.readdirSync(cacheDir)
+    .filter((f) => f.endsWith('.json'))
+    .map((f) => {
+      const content = JSON.parse(fs.readFileSync(path.join(cacheDir, f), 'utf-8'));
+      return {
+        number: content.surahNumber,
+        englishName: content.surahName,
+        name: content.arabicName,
+        nameTranslation: content.nameTranslation,
+        versesCount: content.versesCount,
+        revelation: content.revelation,
+      };
+    })
+    .sort((a, b) => a.number - b.number);
+  if (list.length !== 114) {
+    console.error(`❌ Expected 114 cached Surahs in ${cacheDir}, found ${list.length}.`);
+    process.exit(1);
+  }
+  return list;
+}
+
 function writeRoute(template, route, meta) {
   const html = injectMeta(template, { ...meta, url: `${SITE_URL}${route}` });
   const routeDir = path.join(distPath, route);
@@ -296,9 +322,13 @@ async function run() {
     // Tasbih is the only static page with an on-page FAQ section (see
     // TasbihPage.jsx + data/tasbihFaqs.js) — bake its FAQPage schema into the
     // static HTML too, same reasoning as everywhere else jsonLd is used here.
+    // /surah gets its CollectionPage + ItemList graph (see data/surahListSchema.js),
+    // built from the committed Surah cache so it doesn't depend on the API.
     const jsonLd = page.route === '/tasbih'
       ? buildTasbihFaqSchema(`${SITE_URL}${page.route}`)
-      : undefined;
+      : page.route === pageSeo.surahList.path
+        ? buildSurahListSchema(readCachedSurahList())
+        : undefined;
     // Privacy Policy + Terms: dofollow (links still pass value/get crawled)
     // but noindex (legal boilerplate pages shouldn't compete for search
     // rankings) — matches each page's own runtime <Helmet> tag.
@@ -380,6 +410,24 @@ async function run() {
   const { BookmarkProvider } = await vite.ssrLoadModule('/src/context/BookmarkContext.jsx');
   const { AudioProvider } = await vite.ssrLoadModule('/src/context/AudioContext.jsx');
   const { QariProvider } = await vite.ssrLoadModule('/src/context/QariContext.jsx');
+  const { default: App, preloadRoute } = await vite.ssrLoadModule('/src/App.jsx');
+
+  // Full App (Navbar, page, Footer) at `url`, inside the same provider tree as main.jsx.
+  const renderAppAt = (url, helmetContext) => ReactDOMServer.renderToString(
+    React.createElement(MemoryRouter, { initialEntries: [url] },
+      React.createElement(HelmetProvider, { context: helmetContext },
+        React.createElement(ThemeProvider, null,
+          React.createElement(QariProvider, null,
+            React.createElement(BookmarkProvider, null,
+              React.createElement(AudioProvider, null,
+                React.createElement(App)
+              )
+            )
+          )
+        )
+      )
+    )
+  );
 
   // Homepage snapshot — the full App shell (Navbar, hero, Footer) rendered at "/"
   // and baked into dist/index.html, so mobile paints the hero from HTML + CSS
@@ -390,25 +438,10 @@ async function run() {
   // render. Lazy components render their Suspense fallbacks here.
   console.log('Prerendering homepage snapshot...');
   {
-    const { default: App } = await vite.ssrLoadModule('/src/App.jsx');
     const homeHelmetContext = {};
     let homeAppHtml = '';
     try {
-      homeAppHtml = ReactDOMServer.renderToString(
-        React.createElement(MemoryRouter, { initialEntries: ['/'] },
-          React.createElement(HelmetProvider, { context: homeHelmetContext },
-            React.createElement(ThemeProvider, null,
-              React.createElement(QariProvider, null,
-                React.createElement(BookmarkProvider, null,
-                  React.createElement(AudioProvider, null,
-                    React.createElement(App)
-                  )
-                )
-              )
-            )
-          )
-        )
-      );
+      homeAppHtml = renderAppAt('/', homeHelmetContext);
     } catch (renderErr) {
       console.error('❌ Failed to SSR render homepage snapshot:', renderErr);
       await vite.close();
@@ -439,6 +472,48 @@ async function run() {
       .replace('</head>', () => `  ${homeScriptHtml}\n</head>`)
       .replace('<div id="root"></div>', () => `<div id="root" data-prerender="snapshot">${homeAppHtml}</div>`);
     fs.writeFileSync(indexPath, indexHtml);
+  }
+
+  // /surah snapshot — same approach as the homepage, so the intro text and all
+  // 114 Surah links are in the initial HTML. SurahList is lazy, so it's preloaded
+  // first (otherwise this render would only contain <PageLoader />), and the
+  // Surah list is embedded as #preloaded-surah-list so the client's first render
+  // matches without waiting on the API. Title/meta/canonical/JSON-LD were already
+  // written into dist/surah/index.html by writeRoute above.
+  console.log('Prerendering /surah snapshot...');
+  {
+    const surahListPath = pageSeo.surahList.path;
+    const surahList = readCachedSurahList();
+    let surahListHtml = '';
+    try {
+      await preloadRoute[surahListPath]();
+      globalThis.window.__PRELOADED_SURAH_LIST__ = surahList;
+      surahListHtml = renderAppAt(surahListPath, {});
+    } catch (renderErr) {
+      console.error('❌ Failed to SSR render /surah snapshot:', renderErr);
+      await vite.close();
+      process.exit(1);
+    } finally {
+      delete globalThis.window.__PRELOADED_SURAH_LIST__;
+    }
+    const linkCount = (surahListHtml.match(/class="surah-card card"/g) || []).length;
+    if (!surahListHtml.includes('sl-intro') || linkCount !== 114) {
+      console.error(`❌ /surah snapshot is incomplete (intro: ${surahListHtml.includes('sl-intro')}, Surah cards: ${linkCount}/114) — refusing to ship it.`);
+      await vite.close();
+      process.exit(1);
+    }
+    const surahListFile = path.join(distPath, surahListPath, 'index.html');
+    // `<` escaped so the embedded JSON can never close its <script> early.
+    const preloadedJson = JSON.stringify(surahList).replace(/</g, '\\u003c');
+    const surahListPage = fs.readFileSync(surahListFile, 'utf-8')
+      .replace('</head>', () => `  <script id="preloaded-surah-list" type="application/json">${preloadedJson}</script>\n</head>`)
+      .replace('<div id="root"></div>', () => `<div id="root" data-prerender="snapshot">${surahListHtml}</div>`);
+    if (!surahListPage.includes('data-prerender="snapshot"')) {
+      console.error('❌ Could not find an empty #root in dist/surah/index.html.');
+      await vite.close();
+      process.exit(1);
+    }
+    fs.writeFileSync(surahListFile, surahListPage);
   }
 
   // Load page component

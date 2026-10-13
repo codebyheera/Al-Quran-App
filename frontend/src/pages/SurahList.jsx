@@ -9,19 +9,39 @@ import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import Breadcrumb from '../components/Breadcrumb';
 import { pageSeo } from '../data/pageSeo';
+import { buildSurahListSchema } from '../data/surahListSchema';
 import './SurahList.css';
 
+// The prerendered /surah page (scripts/prerender.js) embeds the Surah list, so
+// the page renders complete on first paint without waiting for the API:
+// window.__PRELOADED_SURAH_LIST__ during the build-time render, and the
+// #preloaded-surah-list script tag in the browser.
+function getPreloadedSurahList() {
+  if (typeof window !== 'undefined' && window.__PRELOADED_SURAH_LIST__) {
+    return window.__PRELOADED_SURAH_LIST__;
+  }
+  if (typeof document !== 'undefined') {
+    const scriptEl = document.getElementById('preloaded-surah-list');
+    if (scriptEl) {
+      try { return JSON.parse(scriptEl.textContent); } catch { /* fall back to the API */ }
+    }
+  }
+  return null;
+}
+
 export default function SurahList() {
-  const [surahs, setSurahs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [preloaded] = useState(getPreloadedSurahList);
+  const [surahs, setSurahs] = useState(preloaded || []);
+  const [loading, setLoading] = useState(!preloaded);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
+    if (preloaded) return;
     api.get('/api/surah')
       .then(({ data }) => { setSurahs(data); setLoading(false); })
       .catch(() => { setError('Failed to load Surahs'); setLoading(false); });
-  }, []);
+  }, [preloaded]);
 
   // Filter by name or number
   const filtered = surahs.filter(
@@ -59,12 +79,14 @@ export default function SurahList() {
         <title>{pageSeo.surahList.title}</title>
         <meta name="description" content={pageSeo.surahList.description} />
         <link rel="canonical" href={`https://alquranhub.org${pageSeo.surahList.path}`} />
+        <script type="application/ld+json">{JSON.stringify(buildSurahListSchema(surahs))}</script>
       </Helmet>
 
 
       <div className="container">
         {/* ── Breadcrumb Navigation ───────────────────────── */}
-        <Breadcrumb crumbs={[
+        {/* BreadcrumbList is part of buildSurahListSchema's @graph above */}
+        <Breadcrumb schema={false} crumbs={[
           { label: 'Home', href: '/' },
           { label: 'Surahs', href: '/surah' },
         ]} />
@@ -83,6 +105,13 @@ export default function SurahList() {
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
+
+        <p className="sl-intro text-muted">
+          The Holy Quran is divided into 114 Surahs (chapters), revealed over 23 years to Prophet Muhammad ﷺ.
+          Of these, 86 are Meccan (revealed in Makkah) and 28 are Medinan (revealed in Madinah). The shortest
+          Surah is Al-Kawthar (3 verses) and the longest is Al-Baqarah (286 verses). Browse the complete list
+          below to read, listen, and reflect.
+        </p>
 
         {/* Grid */}
         <div className="surah-grid">

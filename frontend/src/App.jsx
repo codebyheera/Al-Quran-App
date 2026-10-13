@@ -21,8 +21,25 @@ const LanguagePrompt      = lazy(() => import('./components/LanguagePrompt'));
 // ── Home is eagerly loaded (critical first paint) ────────────────────────────
 import Home from './pages/Home';
 
+// lazy() that can also be loaded ahead of render: once preload() resolves, the
+// page renders synchronously instead of suspending. Used for pages whose HTML
+// is prerendered as a snapshot (see preloadRoute below + main.jsx), so neither
+// the build-time render nor the first client render falls back to <PageLoader />.
+function lazyWithPreload(factory) {
+  let loaded = null;
+  const LazyPage = lazy(factory);
+  const Page = (props) => (loaded ? <loaded.default {...props} /> : <LazyPage {...props} />);
+  Page.preload = () => factory().then((mod) => { loaded = mod; return mod; });
+  return Page;
+}
+
 // ── Lazy load all other pages ─────────────────────────────────────────────────
-const SurahList = lazy(() => import('./pages/SurahList'));
+const SurahList = lazyWithPreload(() => import('./pages/SurahList'));
+
+// Routes with a prerendered page snapshot → the preload for their lazy page.
+export const preloadRoute = {
+  '/surah': SurahList.preload,
+};
 const JuzList = lazy(() => import('./pages/JuzList'));
 const SurahView = lazy(() => import('./pages/SurahView'));
 const JuzView = lazy(() => import('./pages/JuzView'));
@@ -60,6 +77,10 @@ export default function App() {
   const { toast } = useBookmarks();
   const location = useLocation();
   const canonicalUrl = `https://alquranhub.org${location.pathname === '/' ? '' : location.pathname}`;
+  // Static routes' og:title/og:description, from the same pageSeo entry that
+  // prerender.js bakes into their HTML.
+  const normalizedPath = location.pathname.replace(/\/+$/, '') || '/';
+  const routeSeo = Object.values(pageSeo).find((page) => page.path === normalizedPath);
 
   // Surah pages are /surah/:id, where :id is usually the canonical name
   // slug (e.g. "At-Tawba") — the backend normalizes numeric ids too.
@@ -89,6 +110,11 @@ export default function App() {
         <meta property="og:image" content="https://alquranhub.org/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        {/* Same reason: without these, static pages whose own <Helmet> has no
+            og:title/og:description (e.g. /surah, /juz) lost the prerendered
+            ones once JS ran. Pages that set their own still override them. */}
+        {routeSeo && <meta property="og:title" content={routeSeo.title} />}
+        {routeSeo && <meta property="og:description" content={routeSeo.ogDescription || routeSeo.description} />}
       </Helmet>
       <ScrollToTop />
       {/* Persistent top navigation */}
