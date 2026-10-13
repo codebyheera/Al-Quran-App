@@ -32,7 +32,10 @@ export function ThemeProvider({ children }) {
   // Emerald unless the visitor has picked a theme themselves. Only explicit
   // choices are stored (THEME_KEY); the old 'quran-theme' key was written
   // automatically for everyone, so it's ignored.
-  const [theme, setTheme] = useState(() => readStorage(THEME_KEY) || DEFAULT_THEME);
+  const [theme, setTheme] = useState(() => {
+    const saved = readStorage(THEME_KEY);
+    return THEMES.some((t) => t.id === saved) ? saved : DEFAULT_THEME;
+  });
 
   // Apply theme class to <html> whenever it changes
   useEffect(() => {

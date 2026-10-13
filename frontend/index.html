@@ -3,6 +3,16 @@
 
 <head>
   <meta charset="UTF-8" />
+  <!-- Apply a returning visitor's saved theme before first paint (no emerald flash).
+       Keep the key and theme list in sync with src/context/ThemeContext.jsx. -->
+  <script>
+    try {
+      var t = localStorage.getItem('quran-theme-choice');
+      if (['dark', 'light', 'emerald', 'sapphire', 'obsidian', 'sunset', 'amethyst'].indexOf(t) !== -1) {
+        document.documentElement.setAttribute('data-theme', t);
+      }
+    } catch (e) {}
+  </script>
   <!-- Pinterest Site Verification -->
   <meta name="p:domain_verify" content="30f02ed5ef20d9e14861c89fc846e40e"/>
   <!-- Yandex Site Verification -->
