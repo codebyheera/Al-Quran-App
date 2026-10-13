@@ -24,7 +24,7 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { getSurahSeo } from '../src/data/surahSeo.js';
 import { getJuzSeo } from '../src/data/juzSeo.js';
 import { pageSeo } from '../src/data/pageSeo.js';
-import { buildTasbihFaqSchema } from '../src/data/tasbihFaqs.js';
+import { buildTasbihSchema } from '../src/data/tasbihFaqs.js';
 import { buildSurahListSchema } from '../src/data/surahListSchema.js';
 import { buildJuzListSchema } from '../src/data/juzListSchema.js';
 
@@ -321,13 +321,14 @@ async function run() {
   console.log('Prerendering static pages...');
   for (const page of staticPages) {
     // Tasbih is the only static page with an on-page FAQ section (see
-    // TasbihPage.jsx + data/tasbihFaqs.js) — bake its FAQPage schema into the
-    // static HTML too, same reasoning as everywhere else jsonLd is used here.
+    // TasbihPage.jsx + data/tasbihFaqs.js) — bake its schema graph (FAQPage,
+    // WebApplication, WebPage, BreadcrumbList) into the static HTML too, same
+    // reasoning as everywhere else jsonLd is used here.
     // /surah gets its CollectionPage + ItemList graph (see data/surahListSchema.js),
     // built from the committed Surah cache so it doesn't depend on the API; /juz
     // gets the equivalent graph from data/juzListSchema.js (static, 1-30).
     const jsonLd = page.route === '/tasbih'
-      ? buildTasbihFaqSchema(`${SITE_URL}${page.route}`)
+      ? buildTasbihSchema(`${SITE_URL}${page.route}`, page)
       : page.route === pageSeo.surahList.path
         ? buildSurahListSchema(readCachedSurahList())
         : page.route === pageSeo.juzList.path

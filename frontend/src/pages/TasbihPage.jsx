@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Breadcrumb from '../components/Breadcrumb';
 import SurahFaqSection from '../components/SurahFaqSection';
 import { pageSeo } from '../data/pageSeo';
-import { TASBIH_FAQS, buildTasbihFaqSchema } from '../data/tasbihFaqs';
+import { TASBIH_FAQS, buildTasbihSchema } from '../data/tasbihFaqs';
 import './TasbihPage.css';
 
 const DHIKR = [
@@ -301,14 +301,15 @@ export default function TasbihPage() {
         <meta property="og:description" content={pageSeo.tasbih.ogDescription} />
         <meta property="og:url" content={`https://alquranhub.org${pageSeo.tasbih.path}`} />
         <script type="application/ld+json">
-          {JSON.stringify(buildTasbihFaqSchema(`https://alquranhub.org${pageSeo.tasbih.path}`))}
+          {JSON.stringify(buildTasbihSchema(`https://alquranhub.org${pageSeo.tasbih.path}`, pageSeo.tasbih))}
         </script>
       </Helmet>
 
       {/* ── Breadcrumb + heading ── */}
       {!focusMode && (
         <div className="container">
-          <Breadcrumb crumbs={[
+          {/* BreadcrumbList is part of buildTasbihSchema's @graph above */}
+          <Breadcrumb schema={false} crumbs={[
             { label: 'Home', href: '/' },
             { label: 'Tasbih', href: '/tasbih' },
           ]} />

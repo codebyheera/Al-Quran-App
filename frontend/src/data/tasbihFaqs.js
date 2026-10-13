@@ -6,8 +6,9 @@
  * same data — same reasoning as pageSeo.js's shared title/description: if the
  * FAQ text only existed inside TasbihPage.jsx, prerender.js (which never
  * mounts that component for static pages — see its Juz/blog/tasbih handling)
- * would have no way to bake the FAQPage JSON-LD into the static HTML, and it
- * would only reach Google via the slower JS-rendering pass.
+ * would have no way to bake the page's JSON-LD (buildTasbihSchema: FAQPage,
+ * WebApplication, WebPage, BreadcrumbList) into the static HTML, and it would
+ * only reach Google via the slower JS-rendering pass.
  *
  * TODO: the Astaghfirullah answer deliberately avoids citing a specific
  * hadith number/wording — verify the exact reference (likely Sahih
@@ -49,15 +50,82 @@ export const TASBIH_FAQS = [
   },
 ];
 
-export function buildTasbihFaqSchema(pageUrl) {
+const SITE_URL = 'https://alquranhub.org';
+
+// Full JSON-LD @graph for /tasbih: WebPage + WebApplication (the counter itself)
+// + FAQPage + BreadcrumbList, linked by @id to the site-wide WebSite/Organization
+// nodes that Home.jsx defines in full. The BreadcrumbList lives here rather than
+// in <Breadcrumb>, which TasbihPage hides in Focus Mode.
+export function buildTasbihSchema(pageUrl, { title, description }) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    '@id': `${pageUrl}#tasbih-faq`,
-    mainEntity: TASBIH_FAQS.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
-    })),
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: title,
+        description,
+        inLanguage: 'en',
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        publisher: { '@id': `${SITE_URL}/#organization` },
+        breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+        mainEntity: { '@id': `${pageUrl}#app` },
+      },
+      {
+        '@type': 'WebApplication',
+        '@id': `${pageUrl}#app`,
+        name: 'Digital Tasbih Counter',
+        url: pageUrl,
+        description:
+          'Free online tasbih (dhikr) counter with Sunnah Mode for the 33-33-34 after-prayer sequence, custom targets, daily streak tracking and Focus Mode.',
+        applicationCategory: 'LifestyleApplication',
+        operatingSystem: 'Any',
+        browserRequirements: 'Requires JavaScript. Works in any modern web browser.',
+        inLanguage: 'en',
+        isAccessibleForFree: true,
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        featureList: [
+          'Sunnah Mode: SubhanAllah 33, Alhamdulillah 33, Allahu Akbar 34',
+          'Normal Mode with 33, 99, 100 or custom targets',
+          'Daily streak tracking saved on your device',
+          'Distraction-free Focus Mode',
+          'No app download or sign-up required',
+        ],
+        publisher: { '@id': `${SITE_URL}/#organization` },
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${pageUrl}#tasbih-faq`,
+        url: pageUrl,
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        mainEntity: TASBIH_FAQS.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Tasbih', item: pageUrl },
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        url: `${SITE_URL}/`,
+        name: 'Al-Quran Hub',
+        publisher: { '@id': `${SITE_URL}/#organization` },
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: 'Al-Quran Hub',
+        url: `${SITE_URL}/`,
+      },
+    ],
   };
 }
