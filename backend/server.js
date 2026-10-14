@@ -5,7 +5,9 @@
  */
 
 import 'dotenv/config'; // ← loads .env BEFORE all other module bodies execute
+import './instrument.js'; // Sentry — after dotenv (needs SENTRY_DSN), before express
 
+import * as Sentry from '@sentry/node';
 import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
@@ -111,6 +113,20 @@ app.get('/sitemap.xml', async (_req, res) => {
     console.error('Sitemap error:', err.message);
     res.status(500).send('Failed to generate sitemap.');
   }
+});
+
+// ── Error handling ───────────────────────────────────────────────────────────
+// Reports errors that reach Express (thrown in a route or passed to next(err))
+// to Sentry. Errors a route catches and answers itself aren't reported.
+Sentry.setupExpressErrorHandler(app);
+
+// Final error handler: wait for Sentry to send the event before responding —
+// Vercel can freeze the function as soon as the response is sent.
+app.use(async (err, _req, res, _next) => {
+  console.error('Unhandled error:', err);
+  await Sentry.flush(2000);
+  if (res.headersSent) return;
+  res.status(err.status || err.statusCode || 500).json({ message: 'Internal server error' });
 });
 
 // Listen locally only — Vercel Serverless uses the exported app

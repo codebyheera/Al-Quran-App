@@ -3,6 +3,8 @@
  * Wraps the app with ThemeProvider, BookmarkProvider, QariProvider, and AudioProvider
  */
 
+import './lib/sentry'; // first, so errors during startup are caught too
+
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
