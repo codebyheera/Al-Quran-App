@@ -8,6 +8,7 @@ import 'dotenv/config'; // ← loads .env BEFORE all other module bodies execute
 import './instrument.js'; // Sentry — after dotenv (needs SENTRY_DSN), before express
 
 import * as Sentry from '@sentry/node';
+import { reportError } from './lib/reportError.js';
 import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
@@ -110,7 +111,7 @@ app.get('/sitemap.xml', async (_req, res) => {
     res.header('Content-Type', 'application/xml');
     res.send(xml);
   } catch (err) {
-    console.error('Sitemap error:', err.message);
+    await reportError(err, { route: 'GET /sitemap.xml' });
     res.status(500).send('Failed to generate sitemap.');
   }
 });

@@ -29,6 +29,7 @@ import express from 'express';
 import axios from 'axios';
 import { supabase } from '../lib/supabase.js';
 import { getChatCompletion } from '../lib/groqClient.js';
+import { reportError } from '../lib/reportError.js';
 import { loadQuranData } from '../lib/quranData.js';
 import { getSitePages, PRAYER_CITY_SLUGS } from '../lib/sitePages.js';
 import { getSurahId, getSurahSlug } from '../data/surahMapping.js';
@@ -700,7 +701,7 @@ router.post('/', async (req, res) => {
           reply = siteDeclineReply;
         }
       } catch (err) {
-        console.error('[chat] Web fallback failed:', err.message);
+        await reportError(err, { route: 'POST /api/chat (web fallback)', level: 'warning' });
         reply = siteDeclineReply;
       }
     }
@@ -731,7 +732,7 @@ router.post('/', async (req, res) => {
 
     res.json({ reply, source, ...(link && { link }) });
   } catch (err) {
-    console.error('[chat] Error:', err.message);
+    await reportError(err, { route: 'POST /api/chat' });
     res.status(500).json({ error: 'Something went wrong. Please try again shortly.' });
   }
 });

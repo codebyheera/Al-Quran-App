@@ -12,6 +12,7 @@
 
 import express from 'express';
 import axios from 'axios';
+import { reportError } from '../lib/reportError.js';
 
 const router = express.Router();
 
@@ -79,7 +80,7 @@ router.get('/', async (req, res) => {
 
     upstream.data.pipe(res);
   } catch (err) {
-    console.error('Audio proxy failed for', url, err.message);
+    await reportError(err, { route: 'GET /api/audio-proxy', level: 'warning', extra: { url } });
     res.status(502).json({ message: 'Failed to fetch audio from source' });
   }
 });

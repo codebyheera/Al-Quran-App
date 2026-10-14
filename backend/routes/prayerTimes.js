@@ -30,6 +30,7 @@
  */
 
 import express from 'express';
+import { reportError } from '../lib/reportError.js';
 
 const router = express.Router();
 
@@ -148,7 +149,7 @@ router.get('/city/:slug', async (req, res) => {
       try {
         date.hijri = await fetchCorrectedHijri();
       } catch (hijriErr) {
-        console.error(`[prayer-times] ${slug} hijri correction:`, hijriErr.message);
+        await reportError(hijriErr, { route: 'GET /api/prayer-times/city/:slug (hijri correction)', level: 'warning', extra: { slug } });
         // Fall through with Aladhan's uncorrected hijri date rather than failing the request.
       }
     }
@@ -157,7 +158,7 @@ router.get('/city/:slug', async (req, res) => {
     setCache(cacheKey, { timings, date, slug });
     return res.json(payload);
   } catch (err) {
-    console.error(`[prayer-times] ${slug}:`, err.message);
+    await reportError(err, { route: 'GET /api/prayer-times/city/:slug', level: 'warning', extra: { slug } });
     return res.status(502).json({ error: 'Failed to fetch prayer times' });
   }
 });
@@ -191,7 +192,7 @@ router.get('/city/:slug/calendar', async (req, res) => {
     setCache(cacheKey, { calendar, year, month, slug });
     return res.json(payload);
   } catch (err) {
-    console.error(`[prayer-times/calendar] ${slug}:`, err.message);
+    await reportError(err, { route: 'GET /api/prayer-times/city/:slug/calendar', level: 'warning', extra: { slug } });
     return res.status(502).json({ error: 'Failed to fetch calendar' });
   }
 });
@@ -213,7 +214,7 @@ router.get('/hijri-date', async (req, res) => {
     };
     return res.json(payload);
   } catch (err) {
-    console.error('[prayer-times/hijri-date]', err.message);
+    await reportError(err, { route: 'GET /api/prayer-times/hijri-date', level: 'warning' });
     return res.status(502).json({ error: 'Failed to fetch Hijri date' });
   }
 });

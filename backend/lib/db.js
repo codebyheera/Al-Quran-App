@@ -4,6 +4,7 @@
  */
 
 import pkg from 'pg';
+import { reportError } from './reportError.js';
 const { Pool } = pkg;
 
 if (!process.env.DATABASE_URL) {
@@ -26,7 +27,7 @@ pool.on('error', (err) => {
 pool.query('SELECT 1').then(() => {
   console.log('✅ Connected to Supabase PostgreSQL');
 }).catch((err) => {
-  console.error('❌ Failed to connect to Supabase PostgreSQL:', err.message);
+  reportError(err, { route: 'db: initial Supabase PostgreSQL connection' });
 });
 
 export default pool;

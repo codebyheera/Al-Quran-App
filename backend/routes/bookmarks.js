@@ -15,6 +15,7 @@
 
 import express from 'express';
 import { supabase } from '../lib/supabase.js';
+import { reportError } from '../lib/reportError.js';
 
 const router = express.Router();
 
@@ -80,13 +81,13 @@ router.get('/', async (req, res) => {
     );
 
     if (error) {
-      console.error('[GET /api/bookmarks] Supabase error:', error);
+      await reportError(error, { route: 'GET /api/bookmarks' });
       return res.status(500).json({ error: getErrorMessage(error) });
     }
 
     return res.json(data);
   } catch (err) {
-    console.error('[GET /api/bookmarks] Unexpected error:', err.message);
+    await reportError(err, { route: 'GET /api/bookmarks' });
     return res.status(500).json({ error: `Server error: ${err.message}` });
   }
 });
@@ -150,13 +151,13 @@ router.post('/', async (req, res) => {
     );
 
     if (error) {
-      console.error('[POST /api/bookmarks] Insert error:', error);
+      await reportError(error, { route: 'POST /api/bookmarks' });
       return res.status(500).json({ error: getErrorMessage(error) });
     }
 
     return res.status(201).json(data);
   } catch (err) {
-    console.error('[POST /api/bookmarks] Unexpected error:', err.message);
+    await reportError(err, { route: 'POST /api/bookmarks' });
     return res.status(500).json({ error: `Server error: ${err.message}` });
   }
 });
@@ -180,7 +181,7 @@ router.delete('/:id', async (req, res) => {
     );
 
     if (error) {
-      console.error('[DELETE /api/bookmarks] Supabase error:', error);
+      await reportError(error, { route: 'DELETE /api/bookmarks/:id' });
       return res.status(500).json({ error: getErrorMessage(error) });
     }
 
@@ -192,7 +193,7 @@ router.delete('/:id', async (req, res) => {
 
     return res.json({ message: 'Bookmark deleted successfully.', id });
   } catch (err) {
-    console.error('[DELETE /api/bookmarks] Unexpected error:', err.message);
+    await reportError(err, { route: 'DELETE /api/bookmarks/:id' });
     return res.status(500).json({ error: `Server error: ${err.message}` });
   }
 });
@@ -217,7 +218,7 @@ router.delete('/', async (req, res) => {
     );
 
     if (error) {
-      console.error('[DELETE /api/bookmarks] Supabase error:', error);
+      await reportError(error, { route: 'DELETE /api/bookmarks' });
       return res.status(500).json({ error: getErrorMessage(error) });
     }
 
@@ -229,7 +230,7 @@ router.delete('/', async (req, res) => {
 
     return res.json({ message: 'Bookmark deleted successfully.' });
   } catch (err) {
-    console.error('[DELETE /api/bookmarks] Unexpected error:', err.message);
+    await reportError(err, { route: 'DELETE /api/bookmarks' });
     return res.status(500).json({ error: `Server error: ${err.message}` });
   }
 });

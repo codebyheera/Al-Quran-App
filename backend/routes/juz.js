@@ -4,6 +4,7 @@
 
 import express from 'express';
 import axios from 'axios';
+import { reportError } from '../lib/reportError.js';
 const router = express.Router();
 
 const ALQURAN_BASE = 'https://api.alquran.cloud/v1';
@@ -129,7 +130,7 @@ router.get('/:juzNumber', async (req, res) => {
       verses,
     });
   } catch (err) {
-    console.error('Juz fetch error:', err.message);
+    await reportError(err, { route: 'GET /api/juz/:juzNumber', extra: { juzNumber: req.params.juzNumber } });
     res.status(500).json({ error: 'Failed to fetch Juz data.' });
   }
 });
@@ -158,6 +159,7 @@ router.get('/', async (req, res) => {
 
     res.json(result);
   } catch (err) {
+    await reportError(err, { route: 'GET /api/juz' });
     res.status(500).json({ error: 'Failed to build Juz list.' });
   }
 });

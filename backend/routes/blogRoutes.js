@@ -6,6 +6,7 @@
 
 import express from 'express';
 import { supabase } from '../lib/supabase.js';
+import { reportError } from '../lib/reportError.js';
 
 const router = express.Router();
 
@@ -41,7 +42,7 @@ router.get('/', async (req, res) => {
       totalPages: Math.ceil((count || 0) / limit),
     });
   } catch (err) {
-    console.error('Blog list error:', err.message);
+    await reportError(err, { route: 'GET /api/blogs' });
     res.status(500).json({ error: 'Failed to fetch blogs.' });
   }
 });
@@ -67,7 +68,7 @@ router.get('/:slug', async (req, res) => {
 
     res.json(blog);
   } catch (err) {
-    console.error('Blog fetch error:', err.message);
+    await reportError(err, { route: 'GET /api/blogs/:slug', extra: { slug: req.params.slug } });
     res.status(500).json({ error: 'Failed to fetch blog post.' });
   }
 });

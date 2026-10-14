@@ -4,6 +4,7 @@
 
 import express from 'express';
 import { loadQuranData } from '../lib/quranData.js';
+import { reportError } from '../lib/reportError.js';
 
 const router = express.Router();
 
@@ -50,7 +51,7 @@ router.get('/', async (req, res) => {
 
     res.json({ count: matches.length, matches });
   } catch (err) {
-    console.error('[search] Error:', err.message);
+    await reportError(err, { route: 'GET /api/search', extra: { q: req.query.q } });
     res.status(500).json({ error: 'Search temporarily unavailable.' });
   }
 });

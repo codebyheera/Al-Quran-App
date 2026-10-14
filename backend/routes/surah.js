@@ -5,6 +5,7 @@
 import express from 'express';
 import axios from 'axios';
 import { getSurahId, getSurahSlug } from '../data/surahMapping.js';
+import { reportError } from '../lib/reportError.js';
 const router = express.Router();
 
 const ALQURAN_BASE = 'https://api.alquran.cloud/v1';
@@ -167,7 +168,7 @@ router.get('/:surahIdentifier', async (req, res) => {
       verses,
     });
   } catch (err) {
-    console.error('Surah fetch error:', err.message);
+    await reportError(err, { route: 'GET /api/surah/:surahIdentifier', extra: { surahIdentifier: req.params.surahIdentifier } });
     res.status(500).json({ error: 'Failed to fetch Surah data.' });
   }
 });
@@ -185,7 +186,7 @@ router.get('/', async (req, res) => {
     }));
     res.json(surahs);
   } catch (err) {
-    console.error('Surah list error:', err.message);
+    await reportError(err, { route: 'GET /api/surah' });
     res.status(500).json({ error: 'Failed to fetch Surah list.' });
   }
 });
