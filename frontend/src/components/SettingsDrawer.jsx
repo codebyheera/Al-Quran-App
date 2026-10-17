@@ -13,7 +13,7 @@ import {
   IconX, IconAdjustmentsHorizontal, IconTextSize, IconLanguage, IconBook,
   IconMicrophone2, IconPalette, IconRefresh, IconCheck, IconPlus, IconMinus,
 } from '@tabler/icons-react';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme, DEFAULT_THEME } from '../context/ThemeContext';
 import { useAudio } from '../context/AudioContext';
 import { useQari } from '../context/QariContext';
 import useArabicFontSize, {
@@ -25,7 +25,6 @@ const LANGUAGES = [
   { id: 'urdu', label: 'UR', name: 'Urdu' },
 ];
 
-const DEFAULT_THEME = 'emerald';
 const DEFAULT_RECITER = 'alafasy';
 const FONTS_HREF = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap';
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';

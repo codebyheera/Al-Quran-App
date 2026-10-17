@@ -17,7 +17,9 @@ export const THEMES = [
   { id: 'amethyst', name: 'Amethyst', icon: '🔮' }
 ];
 
-export const DEFAULT_THEME = 'emerald';
+export const DEFAULT_THEME = 'light';
+// Where the header's light/dark toggle goes when no dark theme was picked before.
+const DEFAULT_DARK_THEME = 'emerald';
 const THEME_KEY = 'quran-theme-choice';
 
 function readStorage(key) {
@@ -29,7 +31,7 @@ function writeStorage(key, value) {
 }
 
 export function ThemeProvider({ children }) {
-  // Emerald unless the visitor has picked a theme themselves. Only explicit
+  // Light unless the visitor has picked a theme themselves. Only explicit
   // choices are stored (THEME_KEY); the old 'quran-theme' key was written
   // automatically for everyone, so it's ignored.
   const [theme, setTheme] = useState(() => {
@@ -53,7 +55,7 @@ export function ThemeProvider({ children }) {
   // Quick light/dark switch for the header — every theme except 'light' counts as dark.
   const isLight = theme === 'light';
   const toggleLightDark = () => {
-    changeTheme(isLight ? (readStorage('quran-last-dark-theme') || DEFAULT_THEME) : 'light');
+    changeTheme(isLight ? (readStorage('quran-last-dark-theme') || DEFAULT_DARK_THEME) : 'light');
   };
 
   return (
