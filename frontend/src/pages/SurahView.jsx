@@ -17,10 +17,12 @@ import { queuePrefetch } from "../lib/audioCache";
 import { Helmet } from "react-helmet-async";
 import Breadcrumb from "../components/Breadcrumb";
 import SurahFaqSection from "../components/SurahFaqSection";
-import { getSurahFaqs, getSurahFaqSchema } from "../data/surahFaqs";
+import { getSurahFaqs } from "../data/surahFaqs";
 import { getSurahSeo } from "../data/surahSeo";
-import SurahIntro from "../components/SurahIntro";
+import SurahIntro, { stripLinks } from "../components/SurahIntro";
+import SurahSchema from "../components/seo/SurahSchema";
 import { getSurahContent } from "../data/surah-content";
+import { getRevelationOrder } from "../data/surahRevelationOrder";
 import { useReadingTimer } from "../hooks/useReadingTimer";
 import { useReadingProgress } from "../hooks/useReadingProgress";
 import useArabicFontSize from "../hooks/useArabicFontSize";
@@ -368,13 +370,17 @@ export default function SurahView() {
     ? surahSeoData.description
     : "Read and listen to the Holy Quran online.";
 
-  const faqSchema = getSurahFaqSchema({
-    surahNumber: surahNum,
-    pageUrl: `https://alquranhub.org/surah/${id}`,
-    pageTitle,
-  });
-
   const surahContentData = getSurahContent(surah.surahName);
+
+  // Both FAQ sections that render on this page (SurahIntro's + SurahFaqSection's)
+  // go into ONE FAQPage node — Google expects at most one FAQPage per page.
+  const schemaFaqs = [
+    ...faqItems,
+    ...(surahContentData?.faqs || []).map((item) => ({
+      question: stripLinks(item.question),
+      answer: stripLinks(item.answer),
+    })),
+  ];
 
   return (
     <div
@@ -386,16 +392,8 @@ export default function SurahView() {
         const cleanTitle = pageTitle.replace(/&amp;/g, '&');
         const cleanDescription = pageDescription.replace(/&amp;/g, '&');
 
-        const webPageSchema = {
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "name": cleanTitle,
-          "url": `https://alquranhub.org/surah/${id}`,
-          "description": cleanDescription,
-          "inLanguage": "ar"
-        };
-
         return (
+        <>
         <Helmet encodeSpecialCharacters={false}>
           <title>{cleanTitle}</title>
           <meta name="description" content={cleanDescription} />
@@ -404,20 +402,30 @@ export default function SurahView() {
           <meta property="og:description" content={cleanDescription} />
           <meta property="og:url" content={`https://alquranhub.org/surah/${id}`} />
           <meta property="og:type" content="website" />
-          <script type="application/ld+json">
-            {JSON.stringify(webPageSchema)}
-          </script>
-          {faqSchema && (
-            <script type="application/ld+json">
-              {JSON.stringify(faqSchema)}
-            </script>
-          )}
         </Helmet>
+        <SurahSchema
+          surah={{
+            number: surahNum,
+            slug: id,
+            englishName: surah.surahName,
+            englishTranslation: surah.nameTranslation,
+            arabicName: surah.arabicName,
+            verseCount: surah.versesCount,
+            revelationType: surah.revelation,
+            revelationOrder: getRevelationOrder(surahNum),
+            juzStart: verses[0]?.juz,
+            juzEnd: verses[verses.length - 1]?.juz,
+          }}
+          faqs={schemaFaqs}
+          pageTitle={cleanTitle}
+          pageDescription={cleanDescription}
+        />
+        </>
         );
       })()}
       <div className="container">
         {/* ── Breadcrumb Navigation ───────────────────────── */}
-        <Breadcrumb crumbs={[
+        <Breadcrumb schema={false} crumbs={[
           { label: 'Home', href: '/' },
           { label: 'Surahs', href: '/surah' },
           { label: surah?.surahName || `Surah ${id}`, href: `/surah/${id}` },
@@ -540,6 +548,7 @@ export default function SurahView() {
           related={surahContentData?.related}
           surahName={surah.surahName}
           pageUrl={`https://alquranhub.org/surah/${id}`}
+          schema={false}
         >
         {/* ── Verse list ──────────────────────────────────── */}
         <div className="verse-list">

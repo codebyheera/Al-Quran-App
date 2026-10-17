@@ -24,7 +24,7 @@ import "./SurahIntro.css";
 // text baked right into the editorial copy in surah-content.js.
 const LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g;
 
-function stripLinks(text) {
+export function stripLinks(text) {
   return String(text || "").replace(LINK_PATTERN, "$1");
 }
 
@@ -85,6 +85,9 @@ export default function SurahIntro({
   related = [],
   surahName,
   pageUrl,
+  // Pass schema={false} when the page already includes these FAQs in its
+  // own JSON-LD @graph (e.g. SurahView via SurahSchema), so they aren't emitted twice.
+  schema = true,
   children,
 }) {
   const hasIntro = Array.isArray(intro) && intro.length > 0;
@@ -97,7 +100,7 @@ export default function SurahIntro({
 
   return (
     <>
-      {hasFaqs && (
+      {schema && hasFaqs && (
         <Helmet>
           <script type="application/ld+json">
             {JSON.stringify(buildFaqSchema(faqs, pageUrl))}
