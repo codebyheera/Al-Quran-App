@@ -90,7 +90,13 @@ router.get('/cron', async (req, res) => {
   });
 
   let sent = 0, failed = 0, deleted = 0;
-  const failureReasons = {}; // non-410 push failures, "<status>: <message>" → count
+  const failureReasons = {}; // unexpected push failures, "<status>: <message>" → count
+  const vapidMismatch = [];  // endpoints rejected with 403 "VAPID credentials … do not correspond"
+
+  const deleteSubscription = async (endpoint) => {
+    await supabase.from('push_subscriptions').delete().eq('endpoint', endpoint);
+    deleted++;
+  };
 
   await Promise.all(
     (subscriptions || []).map(async (sub) => {
@@ -106,13 +112,14 @@ router.get('/cron', async (req, res) => {
         sent++;
       } catch (err) {
         failed++;
-        // 410 Gone = user unsubscribed from browser; clean up stale record
-        if (err.statusCode === 410) {
-          await supabase
-            .from('push_subscriptions')
-            .delete()
-            .eq('endpoint', sub.endpoint);
-          deleted++;
+        // 410 Gone / 404 Not Found = subscription unsubscribed or expired; clean up stale record
+        if (err.statusCode === 410 || err.statusCode === 404) {
+          await deleteSubscription(sub.endpoint);
+        } else if (err.statusCode === 403 && /VAPID credentials/i.test(err.body || '')) {
+          // Created with an older VAPID key — can never be delivered with the current one.
+          // The browser re-subscribes with the current key on the user's next visit
+          // (see frontend usePushNotification.js).
+          vapidMismatch.push(sub.endpoint);
         } else {
           const reason = `${err.statusCode ?? 'no status'}: ${err.body || err.message}`.slice(0, 200);
           failureReasons[reason] = (failureReasons[reason] || 0) + 1;
@@ -121,10 +128,22 @@ router.get('/cron', async (req, res) => {
     })
   );
 
+  // Only delete VAPID-mismatched subscriptions if some push succeeded this run:
+  // if *every* push hit this error, our own VAPID keys are likely misconfigured,
+  // and deleting would wipe out every subscriber.
+  if (vapidMismatch.length > 0) {
+    if (sent > 0) {
+      await Promise.all(vapidMismatch.map(deleteSubscription));
+    } else {
+      const reason = '403: VAPID credentials mismatch on every subscription (check VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY)';
+      failureReasons[reason] = vapidMismatch.length;
+    }
+  }
+
   console.log(`Cron push: sent=${sent} failed=${failed} deleted=${deleted}`);
 
   // One summary event per run rather than one per failed subscription.
-  // 410 Gone (user unsubscribed) is routine and not reported.
+  // Stale subscriptions (410/404, old VAPID key) are routine and not reported.
   const unexpectedFailures = failed - deleted;
   if (unexpectedFailures > 0) {
     await reportError(new Error(`Daily push: ${unexpectedFailures} notification(s) failed`), {
