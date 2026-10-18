@@ -20,7 +20,7 @@ import { createServer } from 'vite';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { HelmetProvider } from 'react-helmet-async';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { getSurahSeo } from '../src/data/surahSeo.js';
 import { getJuzSeo } from '../src/data/juzSeo.js';
 import { pageSeo } from '../src/data/pageSeo.js';
@@ -46,6 +46,8 @@ function fetchJson(url) {
           reject(new Error(`Request to ${url} failed with status ${res.statusCode}`));
           return;
         }
+        // Decode as a stream so multi-byte UTF-8 chars split across chunks stay intact
+        res.setEncoding('utf8');
         let body = '';
         res.on('data', (chunk) => (body += chunk));
         res.on('end', () => {
@@ -170,13 +172,14 @@ function injectHelmet(template, helmet) {
 
   const metaHtml = helmet.meta.toString();
   if (metaHtml) {
-    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?name="description"[\s\S]*?\/>/g, '');
-    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?property="og:title"[\s\S]*?\/>/g, '');
-    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?property="og:description"[\s\S]*?\/>/g, '');
-    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?property="og:url"[\s\S]*?\/>/g, '');
-    html = html.replace(/<meta\s+(?:data-rh="true"\s+)?property="og:type"[\s\S]*?\/>/g, '');
-    
-    html = html.replace('</head>', `  ${metaHtml}\n</head>`);
+    // Drop the template's copy of every meta tag Helmet emits (the full App's
+    // <Helmet> also sets keywords, og:site_name, og:image, …), so none is duplicated.
+    for (const [, attr, key] of metaHtml.matchAll(/<meta[^>]*?\b(name|property)="([^"]+)"/g)) {
+      const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      html = html.replace(new RegExp(`<meta\\s+(?:data-rh="true"\\s+)?${attr}="${escaped}"[^>]*?\\/>\\s*`, 'g'), '');
+    }
+
+    html = html.replace('</head>', () => `  ${metaHtml}\n</head>`);
   }
 
   const scriptHtml = helmet.script.toString();
@@ -210,6 +213,32 @@ function readCachedSurahList() {
     process.exit(1);
   }
   return list;
+}
+
+// <link> tags for the CSS of a lazy page chunk (and every chunk it statically
+// imports), from Vite's build manifest. Prerendered pages paint their markup
+// before the JS loads the lazy chunk, so without these the page is unstyled
+// until then — e.g. the breadcrumb chevron SVG flashed at full width.
+// Files the template already links (the main entry CSS) are skipped. The hrefs
+// match what Vite's preloader looks for, so it won't load them a second time.
+function lazyPageCssLinks(manifest, entry, template) {
+  const css = new Set();
+  const seen = new Set();
+  const visit = (key) => {
+    if (seen.has(key) || !manifest[key]) return;
+    seen.add(key);
+    (manifest[key].css || []).forEach((file) => css.add(file));
+    (manifest[key].imports || []).forEach(visit);
+  };
+  visit(entry);
+  if (!seen.has(entry)) {
+    console.error(`❌ ${entry} not found in the Vite manifest.`);
+    process.exit(1);
+  }
+  return [...css]
+    .filter((file) => !template.includes(`/${file}"`))
+    .map((file) => `<link rel="stylesheet" crossorigin href="/${file}">`)
+    .join('\n  ');
 }
 
 function writeRoute(template, route, meta) {
@@ -313,6 +342,15 @@ async function run() {
   }
 
   const template = fs.readFileSync(path.join(distPath, 'index.html'), 'utf-8');
+
+  const manifestPath = path.join(distPath, '.vite', 'manifest.json');
+  if (!fs.existsSync(manifestPath)) {
+    console.error('❌ dist/.vite/manifest.json not found. Is build.manifest enabled in vite.config.js?');
+    process.exit(1);
+  }
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+  // Only needed at build time — don't deploy it.
+  fs.rmSync(path.join(distPath, '.vite'), { recursive: true, force: true });
 
   console.log('Syncing homepage meta with pageSeo.js...');
   const homeHtml = injectMeta(template, { ...pageSeo.home, url: `${SITE_URL}${pageSeo.home.path}` });
@@ -510,8 +548,9 @@ async function run() {
     const surahListFile = path.join(distPath, surahListPath, 'index.html');
     // `<` escaped so the embedded JSON can never close its <script> early.
     const preloadedJson = JSON.stringify(surahList).replace(/</g, '\\u003c');
+    const surahListCss = lazyPageCssLinks(manifest, 'src/pages/SurahList.jsx', template);
     const surahListPage = fs.readFileSync(surahListFile, 'utf-8')
-      .replace('</head>', () => `  <script id="preloaded-surah-list" type="application/json">${preloadedJson}</script>\n</head>`)
+      .replace('</head>', () => `  ${surahListCss}\n  <script id="preloaded-surah-list" type="application/json">${preloadedJson}</script>\n</head>`)
       .replace('<div id="root"></div>', () => `<div id="root" data-prerender="snapshot">${surahListHtml}</div>`);
     if (!surahListPage.includes('data-prerender="snapshot"')) {
       console.error('❌ Could not find an empty #root in dist/surah/index.html.');
@@ -521,8 +560,13 @@ async function run() {
     fs.writeFileSync(surahListFile, surahListPage);
   }
 
-  // Load page component
-  const { default: SurahView } = await vite.ssrLoadModule('/src/pages/SurahView.jsx');
+  // Surah pages are full-App snapshots too (Navbar + SurahView + Footer), so the
+  // client's first render matches them — previously only SurahView was rendered,
+  // so hydrating the full App mismatched, React threw the markup away and showed
+  // <PageLoader /> until the SurahView chunk loaded. SurahView is lazy, so it's
+  // preloaded once here (otherwise each render would only contain <PageLoader />).
+  await preloadRoute['/surah/:id']();
+  const surahViewCss = lazyPageCssLinks(manifest, 'src/pages/SurahView.jsx', template);
 
   console.log(`Fetching Surah list from ${API_BASE}/api/surah ...`);
   let surahs = [];
@@ -584,23 +628,7 @@ async function run() {
     const helmetContext = {};
     let appHtml = '';
     try {
-      appHtml = ReactDOMServer.renderToString(
-        React.createElement(MemoryRouter, { initialEntries: [`/surah/${s.englishName}`] },
-          React.createElement(HelmetProvider, { context: helmetContext },
-            React.createElement(ThemeProvider, null,
-              React.createElement(QariProvider, null,
-                React.createElement(BookmarkProvider, null,
-                  React.createElement(AudioProvider, null,
-                    React.createElement(Routes, null,
-                      React.createElement(Route, { path: "/surah/:id", element: React.createElement(SurahView) })
-                    )
-                  )
-                )
-              )
-            )
-          )
-        )
-      );
+      appHtml = renderAppAt(`/surah/${s.englishName}`, helmetContext);
     } catch (renderErr) {
       console.error(`❌ Failed to SSR render Surah ${s.englishName}:`, renderErr);
       await vite.close();
@@ -614,10 +642,10 @@ async function run() {
 
     // Inject data and markup into #root (replacing the static loading shell)
     let html = template;
-    html = html.replace(/<div id="root">[\s\S]*?<\/div>/, () => `<div id="root">${appHtml}</div>`);
+    html = html.replace('<div id="root"></div>', () => `<div id="root" data-prerender="snapshot">${appHtml}</div>`);
 
     const preloadedScript = `\n  <script id="preloaded-surah-data" type="application/json">${JSON.stringify(fullSurah)}</script>`;
-    html = html.replace('</head>', `  ${preloadedScript}\n</head>`);
+    html = html.replace('</head>', () => `  ${surahViewCss}\n  ${preloadedScript}\n</head>`);
     html = injectHelmet(html, helmet);
 
     // Save output
@@ -648,18 +676,25 @@ async function run() {
       continue;
     }
 
-    // Verify root is not empty
-    const rootMatches = htmlContent.match(/<div id="root">([\s\S]*?)<\/div>/);
+    // Verify #root holds the snapshot (everything from it to </body>)
+    const rootMatches = htmlContent.match(/<div id="root" data-prerender="snapshot">([\s\S]*)<\/body>/);
     if (!rootMatches || !rootMatches[1] || rootMatches[1].trim() === '') {
-      console.error(`❌ Validation failed: ${filePath} has an empty #root element.`);
+      console.error(`❌ Validation failed: ${filePath} has no #root snapshot.`);
       validationPassed = false;
       continue;
     }
 
-    // Verify root contains Arabic content & no error strings
+    // Verify root contains every verse & no error/loading fallbacks
     const rootContent = rootMatches[1];
-    if (rootContent.includes('Failed to load Surah') || rootContent.includes('spinner')) {
+    if (rootContent.includes('Failed to load Surah') || rootContent.includes('class="spinner"') || rootContent.includes('>Loading...<')) {
       console.error(`❌ Validation failed: ${filePath} contains error fallback or loading spinner.`);
+      validationPassed = false;
+      continue;
+    }
+
+    const verseCards = (rootContent.match(/class="verse-card /g) || []).length;
+    if (s.versesCount && verseCards !== s.versesCount) {
+      console.error(`❌ Validation failed: ${filePath} has ${verseCards}/${s.versesCount} verses.`);
       validationPassed = false;
       continue;
     }

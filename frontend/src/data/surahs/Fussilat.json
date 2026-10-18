@@ -2307,7 +2307,7 @@
             "language_name": "english"
           },
           "transliteration": {
-            "text": "l-��alīmi",
+            "text": "l-ʿalīmi",
             "language_name": "english"
           },
           "audioUrl": "https://audio.qurancdn.com/wbw/041_012_019.mp3"
@@ -4436,7 +4436,7 @@
           "position": 10,
           "char_type_name": "word",
           "text_uthmani": "أَنطَقَ",
-          "text": "أَن��َقَ",
+          "text": "أَنطَقَ",
           "translation": {
             "text": "makes speak",
             "language_name": "english"
@@ -7453,7 +7453,7 @@
       "globalNumber": 4252,
       "arabic": "وَلَا تَسْتَوِى ٱلْحَسَنَةُ وَلَا ٱلسَّيِّئَةُ ۚ ٱدْفَعْ بِٱلَّتِى هِىَ أَحْسَنُ فَإِذَا ٱلَّذِى بَيْنَكَ وَبَيْنَهُۥ عَدَٰوَةٌۭ كَأَنَّهُۥ وَلِىٌّ حَمِيمٌۭ",
       "translation": "And not equal are the good deed and the bad. Repel [evil] by that [deed] which is better; and thereupon the one whom between you and him is enmity [will become] as though he was a devoted friend.",
-      "urduTranslation": "اور بھلائی اور برائی برابر نہیں ہوسکتی۔ تو (سخت کلامی کا) ای��ے طریق سے جواب دو جو بہت اچھا ہو (ایسا کرنے سے تم دیکھو گے) کہ جس میں اور تم میں دشمنی تھی گویا وہ تمہارا گرم جوش دوست ہے",
+      "urduTranslation": "اور بھلائی اور برائی برابر نہیں ہوسکتی۔ تو (سخت کلامی کا) ایسے طریق سے جواب دو جو بہت اچھا ہو (ایسا کرنے سے تم دیکھو گے) کہ جس میں اور تم میں دشمنی تھی گویا وہ تمہارا گرم جوش دوست ہے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/4252.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/4252.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/4252.mp3",
@@ -9762,7 +9762,7 @@
           "id": 42709,
           "position": 10,
           "char_type_name": "word",
-          "text_uthmani": "تَنزِ��لٌۭ",
+          "text_uthmani": "تَنزِيلٌۭ",
           "text": "تَنزِيلٌۭ",
           "translation": {
             "text": "A Revelation",

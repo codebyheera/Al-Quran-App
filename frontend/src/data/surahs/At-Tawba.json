@@ -3313,7 +3313,7 @@
     {
       "number": 12,
       "globalNumber": 1247,
-      "arabic": "وَإِن نَّكَثُوٓا۟ أَيْمَٰنَهُم مِّنۢ بَعْدِ عَهْدِهِمْ وَطَعَنُوا۟ فِى دِينِكُمْ فَقَٰتِلُوٓا۟ أَئِمَّةَ ٱلْكُفْر�� ۙ إِنَّهُمْ لَآ أَيْمَٰنَ لَهُمْ لَعَلَّهُمْ يَنتَهُونَ",
+      "arabic": "وَإِن نَّكَثُوٓا۟ أَيْمَٰنَهُم مِّنۢ بَعْدِ عَهْدِهِمْ وَطَعَنُوا۟ فِى دِينِكُمْ فَقَٰتِلُوٓا۟ أَئِمَّةَ ٱلْكُفْرِ ۙ إِنَّهُمْ لَآ أَيْمَٰنَ لَهُمْ لَعَلَّهُمْ يَنتَهُونَ",
       "translation": "And if they break their oaths after their treaty and defame your religion, then fight the leaders of disbelief, for indeed, there are no oaths [sacred] to them; [fight them that] they might cease.",
       "urduTranslation": "اور اگر عہد کرنے کے بعد اپنی قسموں کو توڑ ڈالیں اور تمہارے دین میں طعنے کرنے لگیں تو ان کفر کے پیشواؤں سے جنگ کرو (یہ یہ بےایمان لوگ ہیں اور) ان کی قسموں کا کچھ اعتبار نہیں ہے۔ عجب نہیں کہ (اپنی حرکات سے) باز آجائیں",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1247.mp3",
@@ -6339,7 +6339,7 @@
           "position": 5,
           "char_type_name": "word",
           "text_uthmani": "ٱللَّهَ",
-          "text": "ٱل��َّهَ",
+          "text": "ٱللَّهَ",
           "translation": {
             "text": "Allah ",
             "language_name": "english"
@@ -8608,7 +8608,7 @@
     {
       "number": 29,
       "globalNumber": 1264,
-      "arabic": "قَٰتِلُوا۟ ٱلَّذِينَ لَا يُؤْمِنُونَ بِٱللَّهِ وَلَا بِٱلْيَو��مِ ٱلْءَاخِرِ وَلَا يُحَرِّمُونَ مَا حَرَّمَ ٱللَّهُ وَرَسُولُهُۥ وَلَا يَدِينُونَ دِينَ ٱلْحَقِّ مِنَ ٱلَّذِينَ أُوتُوا۟ ٱلْكِتَٰبَ حَتَّىٰ يُعْطُوا۟ ٱلْجِزْيَةَ عَن يَدٍۢ وَهُمْ صَٰغِرُونَ",
+      "arabic": "قَٰتِلُوا۟ ٱلَّذِينَ لَا يُؤْمِنُونَ بِٱللَّهِ وَلَا بِٱلْيَوْمِ ٱلْءَاخِرِ وَلَا يُحَرِّمُونَ مَا حَرَّمَ ٱللَّهُ وَرَسُولُهُۥ وَلَا يَدِينُونَ دِينَ ٱلْحَقِّ مِنَ ٱلَّذِينَ أُوتُوا۟ ٱلْكِتَٰبَ حَتَّىٰ يُعْطُوا۟ ٱلْجِزْيَةَ عَن يَدٍۢ وَهُمْ صَٰغِرُونَ",
       "translation": "Fight those who do not believe in Allah or in the Last Day and who do not consider unlawful what Allah and His Messenger have made unlawful and who do not adopt the religion of truth from those who were given the Scripture - [fight] until they give the jizyah willingly while they are humbled.",
       "urduTranslation": "جو اہل کتاب میں سے خدا پر ایمان نہیں لاتے اور نہ روز آخرت پر (یقین رکھتے ہیں) اور نہ ان چیزوں کو حرام سمجھتے ہیں جو خدا اور اس کے رسول نے حرام کی ہیں اور نہ دین حق کو قبول کرتے ہیں ان سے جنگ کرو یہاں تک کہ ذلیل ہوکر اپنے ہاتھ سے جزیہ دیں",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1264.mp3",
@@ -18383,7 +18383,7 @@
           "position": 13,
           "char_type_name": "word",
           "text_uthmani": "مِنْهَآ",
-          "text": "مِنْهَا��",
+          "text": "مِنْهَآ",
           "translation": {
             "text": "from it",
             "language_name": "english"
@@ -19117,7 +19117,7 @@
           "position": 22,
           "char_type_name": "word",
           "text_uthmani": "حَكِيمٌۭ",
-          "text": "حَكِيمٌ��",
+          "text": "حَكِيمٌۭ",
           "translation": {
             "text": "All-Wise",
             "language_name": "english"
@@ -38503,7 +38503,7 @@
       "globalNumber": 1355,
       "arabic": "مَا كَانَ لِأَهْلِ ٱلْمَدِينَةِ وَمَنْ حَوْلَهُم مِّنَ ٱلْأَعْرَابِ أَن يَتَخَلَّفُوا۟ عَن رَّسُولِ ٱللَّهِ وَلَا يَرْغَبُوا۟ بِأَنفُسِهِمْ عَن نَّفْسِهِۦ ۚ ذَٰلِكَ بِأَنَّهُمْ لَا يُصِيبُهُمْ ظَمَأٌۭ وَلَا نَصَبٌۭ وَلَا مَخْمَصَةٌۭ فِى سَبِيلِ ٱللَّهِ وَلَا يَطَـُٔونَ مَوْطِئًۭا يَغِيظُ ٱلْكُفَّارَ وَلَا يَنَالُونَ مِنْ عَدُوٍّۢ نَّيْلًا إِلَّا كُتِبَ لَهُم بِهِۦ عَمَلٌۭ صَٰلِحٌ ۚ إِنَّ ٱللَّهَ لَا يُضِيعُ أَجْرَ ٱلْمُحْسِنِينَ",
       "translation": "It was not [proper] for the people of Madinah and those surrounding them of the bedouins that they remain behind after [the departure of] the Messenger of Allah or that they prefer themselves over his self. That is because they are not afflicted by thirst or fatigue or hunger in the cause of Allah, nor do they tread on any ground that enrages the disbelievers, nor do they inflict upon an enemy any infliction but that is registered for them as a righteous deed. Indeed, Allah does not allow to be lost the reward of the doers of good.",
-      "urduTranslation": "اہل مدینہ کو اور جو ان کے آس پاس دیہاتی رہتے ہیں ان کو شایاں نہ تھا کہ پیغمبر خدا سے پیچھے رہ جائیں اور نہ یہ کہ اپنی جانوں کو ��ن کی جان سے زیادہ عزیز رکھیں۔ یہ اس لیے کہ انہیں خدا کی راہ میں تکلیف پہنچتی ہے پیاس کی، محنت کی یا بھوک کی یا وہ ایسی جگہ چلتے ہیں کہ کافروں کو غصہ آئے یا دشمنوں سے کوئی چیز لیتے ہیں تو ہر بات پر ان کے لیے عمل نیک لکھا جاتا ہے۔ کچھ شک نہیں کہ خدا نیکو کاروں کا اجر ضائع نہیں کرتا",
+      "urduTranslation": "اہل مدینہ کو اور جو ان کے آس پاس دیہاتی رہتے ہیں ان کو شایاں نہ تھا کہ پیغمبر خدا سے پیچھے رہ جائیں اور نہ یہ کہ اپنی جانوں کو ان کی جان سے زیادہ عزیز رکھیں۔ یہ اس لیے کہ انہیں خدا کی راہ میں تکلیف پہنچتی ہے پیاس کی، محنت کی یا بھوک کی یا وہ ایسی جگہ چلتے ہیں کہ کافروں کو غصہ آئے یا دشمنوں سے کوئی چیز لیتے ہیں تو ہر بات پر ان کے لیے عمل نیک لکھا جاتا ہے۔ کچھ شک نہیں کہ خدا نیکو کاروں کا اجر ضائع نہیں کرتا",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1355.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/1355.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/1355.mp3",

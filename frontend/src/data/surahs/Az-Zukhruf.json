@@ -4095,7 +4095,7 @@
           "id": 27693,
           "position": 2,
           "char_type_name": "word",
-          "text_uthmani": "مِ��ْهُمْ ۖ",
+          "text_uthmani": "مِنْهُمْ ۖ",
           "text": "مِنْهُمْ ۖ",
           "translation": {
             "text": "from them",
@@ -4461,7 +4461,7 @@
           "position": 1,
           "char_type_name": "word",
           "text_uthmani": "وَجَعَلَهَا",
-          "text": "وَجَ��َلَهَا",
+          "text": "وَجَعَلَهَا",
           "translation": {
             "text": "And he made it",
             "language_name": "english"

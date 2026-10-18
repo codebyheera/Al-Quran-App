@@ -2242,7 +2242,7 @@
           "position": 19,
           "char_type_name": "word",
           "text_uthmani": "يَكُونَ",
-          "text": "يَكُو��َ",
+          "text": "يَكُونَ",
           "translation": {
             "text": "it becomes",
             "language_name": "english"
@@ -5072,7 +5072,7 @@
       "globalNumber": 5141,
       "arabic": "كَمَثَلِ ٱلَّذِينَ مِن قَبْلِهِمْ قَرِيبًۭا ۖ ذَاقُوا۟ وَبَالَ أَمْرِهِمْ وَلَهُمْ عَذَابٌ أَلِيمٌۭ",
       "translation": "[Theirs is] like the example of those shortly before them: they tasted the bad consequence of their affair, and they will have a painful punishment.",
-      "urduTranslation": "ان کا حال ان لوگوں کا سا ہے جو ان سے کچھ ہی پیشتر اپنے کاموں کی سزا کا مزہ چکھ چکے ہیں۔ اور (ابھی) ان کے لئے دکھ دینے والا عذاب (تی��ر) ہے",
+      "urduTranslation": "ان کا حال ان لوگوں کا سا ہے جو ان سے کچھ ہی پیشتر اپنے کاموں کی سزا کا مزہ چکھ چکے ہیں۔ اور (ابھی) ان کے لئے دکھ دینے والا عذاب (تیار) ہے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/5141.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/5141.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/5141.mp3",
@@ -5815,7 +5815,7 @@
           "position": 6,
           "char_type_name": "word",
           "text_uthmani": "وَلْتَنظُرْ",
-          "text": "وَلْتَنظُر��",
+          "text": "وَلْتَنظُرْ",
           "translation": {
             "text": "and let look",
             "language_name": "english"

@@ -5300,7 +5300,7 @@
           "position": 7,
           "char_type_name": "word",
           "text_uthmani": "كَذِبًا",
-          "text": "��َذِبًا",
+          "text": "كَذِبًا",
           "translation": {
             "text": "a lie",
             "language_name": "english"
@@ -43848,7 +43848,7 @@
           "position": 30,
           "char_type_name": "word",
           "text_uthmani": "فَمَنِ",
-          "text": "فَ��َنِ",
+          "text": "فَمَنِ",
           "translation": {
             "text": "But whoever",
             "language_name": "english"

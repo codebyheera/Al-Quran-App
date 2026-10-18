@@ -3242,7 +3242,7 @@
           "position": 2,
           "char_type_name": "word",
           "text_uthmani": "تَرَبَّصُوا۟",
-          "text": "تَرَب��َصُوا۟",
+          "text": "تَرَبَّصُوا۟",
           "translation": {
             "text": "Wait",
             "language_name": "english"
@@ -4003,7 +4003,7 @@
           "id": 38793,
           "position": 3,
           "char_type_name": "word",
-          "text_uthmani": "خَزَا��ئِنُ",
+          "text_uthmani": "خَزَآئِنُ",
           "text": "خَزَآئِنُ",
           "translation": {
             "text": "(are the) treasures",

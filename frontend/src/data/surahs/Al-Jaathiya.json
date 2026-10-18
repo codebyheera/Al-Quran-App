@@ -1477,7 +1477,7 @@
       "globalNumber": 4483,
       "arabic": "مِّن وَرَآئِهِمْ جَهَنَّمُ ۖ وَلَا يُغْنِى عَنْهُم مَّا كَسَبُوا۟ شَيْـًۭٔا وَلَا مَا ٱتَّخَذُوا۟ مِن دُونِ ٱللَّهِ أَوْلِيَآءَ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ",
       "translation": "Before them is Hell, and what they had earned will not avail them at all nor what they had taken besides Allah as allies. And they will have a great punishment.",
-      "urduTranslation": "ان کے سامنے دوزخ ہے۔ اور جو کام وہ کرتے رہے کچھ بھی ان کے کام نہ آئیں گے۔ اور نہ وہی (��ام آئیں گے) جن کو انہوں نے خدا کے سوا معبود بنا رکھا تھا۔ اور ان کے لئے بڑا عذاب ہے",
+      "urduTranslation": "ان کے سامنے دوزخ ہے۔ اور جو کام وہ کرتے رہے کچھ بھی ان کے کام نہ آئیں گے۔ اور نہ وہی (کام آئیں گے) جن کو انہوں نے خدا کے سوا معبود بنا رکھا تھا۔ اور ان کے لئے بڑا عذاب ہے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/4483.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/4483.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/4483.mp3",
@@ -2235,7 +2235,7 @@
           "id": 14810,
           "position": 1,
           "char_type_name": "word",
-          "text_uthmani": "��َسَخَّرَ",
+          "text_uthmani": "وَسَخَّرَ",
           "text": "وَسَخَّرَ",
           "translation": {
             "text": "And He has subjected",

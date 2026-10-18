@@ -35,13 +35,20 @@ function lazyWithPreload(factory) {
 
 // ── Lazy load all other pages ─────────────────────────────────────────────────
 const SurahList = lazyWithPreload(() => import('./pages/SurahList'));
+const SurahView = lazyWithPreload(() => import('./pages/SurahView'));
 
 // Routes with a prerendered page snapshot → the preload for their lazy page.
 export const preloadRoute = {
   '/surah': SurahList.preload,
+  '/surah/:id': SurahView.preload,
 };
+
+// The preloadRoute entry for a concrete pathname (e.g. /surah/Al-Kahf → '/surah/:id').
+export function getRoutePreload(pathname) {
+  const path = pathname.replace(/\/+$/, '') || '/';
+  return preloadRoute[path] || (/^\/surah\/[^/]+$/.test(path) ? preloadRoute['/surah/:id'] : undefined);
+}
 const JuzList = lazy(() => import('./pages/JuzList'));
-const SurahView = lazy(() => import('./pages/SurahView'));
 const JuzView = lazy(() => import('./pages/JuzView'));
 const BookmarksPage  = lazy(() => import('./pages/BookmarksPage'));
 const TasbihPage     = lazy(() => import('./pages/TasbihPage'));

@@ -4138,7 +4138,7 @@
           "position": 23,
           "char_type_name": "word",
           "text_uthmani": "أَوْزِعْنِىٓ",
-          "text": "أَوْزِ��ْنِىٓ",
+          "text": "أَوْزِعْنِىٓ",
           "translation": {
             "text": "grant me (the) power",
             "language_name": "english"
@@ -10614,7 +10614,7 @@
           "position": 15,
           "char_type_name": "word",
           "text_uthmani": "يُوعَدُونَ",
-          "text": "ي��وعَدُونَ",
+          "text": "يُوعَدُونَ",
           "translation": {
             "text": "they were promised",
             "language_name": "english"

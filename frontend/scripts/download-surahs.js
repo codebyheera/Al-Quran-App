@@ -27,6 +27,8 @@ function fetchJson(url) {
           reject(new Error(`Request to ${url} failed with status ${res.statusCode}`));
           return;
         }
+        // Decode as a stream so multi-byte UTF-8 chars split across chunks stay intact
+        res.setEncoding('utf8');
         let body = '';
         res.on('data', (chunk) => (body += chunk));
         res.on('end', () => {
@@ -76,8 +78,8 @@ async function main() {
     const s = surahs[i];
     const filePath = path.join(cacheDir, `${s.englishName}.json`);
 
-    // Only download if file is missing
-    if (fs.existsSync(filePath)) {
+    // Only download if file is missing or contains U+FFFD (corrupted UTF-8 from an earlier bad fetch)
+    if (fs.existsSync(filePath) && !fs.readFileSync(filePath, 'utf-8').includes('�')) {
       console.log(`[${i + 1}/114] Cache exists for Surah ${s.number} (${s.englishName}), skipping.`);
       continue;
     }

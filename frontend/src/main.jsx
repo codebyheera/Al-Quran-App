@@ -14,7 +14,7 @@ import { BookmarkProvider } from './context/BookmarkContext';
 import { AudioProvider }    from './context/AudioContext';
 import { QariProvider }     from './context/QariContext';
 import { HelmetProvider }   from 'react-helmet-async';
-import App, { preloadRoute } from './App';
+import App, { getRoutePreload } from './App';
 
 import './styles/global.css';
 // NOTE: @fontsource/noto-nastaliq-urdu removed — already loaded via Google Fonts CDN in index.html
@@ -48,13 +48,13 @@ const app = (
 );
 
 if (rootElement.dataset.prerender === 'snapshot') {
-  // Homepage + /surah: the static HTML is a build-time snapshot (see
+  // Homepage, /surah and /surah/:id: the static HTML is a build-time snapshot (see
   // scripts/prerender.js) shown so the page paints before the JS runs. It is not
   // hydrated — client-only state (streak, bookmarks, theme) differs from the
   // snapshot — so React renders fresh and replaces it in a single commit. A lazy
   // page is loaded first, otherwise that commit would swap the snapshot for
   // <PageLoader />; the snapshot stays on screen in the meantime.
-  const preload = preloadRoute[window.location.pathname.replace(/\/+$/, '') || '/'];
+  const preload = getRoutePreload(window.location.pathname);
   const render = () => createRoot(rootElement).render(app);
   if (preload) preload().then(render, render);
   else render();

@@ -2307,7 +2307,7 @@
     {
       "number": 10,
       "globalNumber": 303,
-      "arabic": "إِنَّ ٱلَّذِينَ كَفَرُوا۟ لَن تُغْنِىَ عَنْهُمْ أَمْوَٰلُهُمْ وَ��َآ أَوْلَٰدُهُم مِّنَ ٱللَّهِ شَيْـًۭٔا ۖ وَأُو۟لَٰٓئِكَ هُمْ وَقُودُ ٱلنَّارِ",
+      "arabic": "إِنَّ ٱلَّذِينَ كَفَرُوا۟ لَن تُغْنِىَ عَنْهُمْ أَمْوَٰلُهُمْ وَلَآ أَوْلَٰدُهُم مِّنَ ٱللَّهِ شَيْـًۭٔا ۖ وَأُو۟لَٰٓئِكَ هُمْ وَقُودُ ٱلنَّارِ",
       "translation": "Indeed, those who disbelieve - never will their wealth or their children avail them against Allah at all. And it is they who are fuel for the Fire.",
       "urduTranslation": "جو لوگ کافر ہوئے (اس دن) نہ تو ان کا مال ہی خدا (کے عذاب) سے ان کو بچا سکے گا اور نہ ان کی اولاد ہی (کچھ کام آئے گی) اور یہ لوگ آتش (جہنم) کا ایندھن ہوں گے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/303.mp3",
@@ -6806,7 +6806,7 @@
       "globalNumber": 318,
       "arabic": "فَكَيْفَ إِذَا جَمَعْنَٰهُمْ لِيَوْمٍۢ لَّا رَيْبَ فِيهِ وَوُفِّيَتْ كُلُّ نَفْسٍۢ مَّا كَسَبَتْ وَهُمْ لَا يُظْلَمُونَ",
       "translation": "So how will it be when We assemble them for a Day about which there is no doubt? And each soul will be compensated [in full for] what it earned, and they will not be wronged.",
-      "urduTranslation": "تو اس وقت کیا حال ہوگا جب ہم ان کو جمع کریں گے (یعنی) اس رو�� جس (کے آنے) میں کچھ بھی شک نہیں اور ہر نفس اپنے اعمال کا پورا پورا بدلہ پائے گا اور ان پر ظلم نہیں کیا جائے گا",
+      "urduTranslation": "تو اس وقت کیا حال ہوگا جب ہم ان کو جمع کریں گے (یعنی) اس روز جس (کے آنے) میں کچھ بھی شک نہیں اور ہر نفس اپنے اعمال کا پورا پورا بدلہ پائے گا اور ان پر ظلم نہیں کیا جائے گا",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/318.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/318.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/318.mp3",
@@ -11336,7 +11336,7 @@
       "globalNumber": 332,
       "arabic": "فَنَادَتْهُ ٱلْمَلَٰٓئِكَةُ وَهُوَ قَآئِمٌۭ يُصَلِّى فِى ٱلْمِحْرَابِ أَنَّ ٱللَّهَ يُبَشِّرُكَ بِيَحْيَىٰ مُصَدِّقًۢا بِكَلِمَةٍۢ مِّنَ ٱللَّهِ وَسَيِّدًۭا وَحَصُورًۭا وَنَبِيًّۭا مِّنَ ٱلصَّٰلِحِينَ",
       "translation": "So the angels called him while he was standing in prayer in the chamber, \"Indeed, Allah gives you good tidings of John, confirming a word from Allah and [who will be] honorable, abstaining [from women], and a prophet from among the righteous.\"",
-      "urduTranslation": "وہ ابھی عبادت گاہ میں کھڑے نماز ہی پڑھ رہے تھے کہ فرشتوں نے آواز دی کہ (زکریا) خدا تمہیں یحییٰ کی بشارت دیتا ہے جو خدا کے فیض یعنی (عیسیٰ) کی تصدیق کریں گے اور سردار ہوں گے اور عورتوں سے رغبت نہ رکھنے والے اور (خدا کے) پیغمبر (یعنی) نیکو کاروں میں ��وں گے",
+      "urduTranslation": "وہ ابھی عبادت گاہ میں کھڑے نماز ہی پڑھ رہے تھے کہ فرشتوں نے آواز دی کہ (زکریا) خدا تمہیں یحییٰ کی بشارت دیتا ہے جو خدا کے فیض یعنی (عیسیٰ) کی تصدیق کریں گے اور سردار ہوں گے اور عورتوں سے رغبت نہ رکھنے والے اور (خدا کے) پیغمبر (یعنی) نیکو کاروں میں ہوں گے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/332.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/332.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/332.mp3",
@@ -12876,7 +12876,7 @@
           "id": 44227,
           "position": 16,
           "char_type_name": "word",
-          "text_uthmani": "و��مَا",
+          "text_uthmani": "وَمَا",
           "text": "وَمَا",
           "translation": {
             "text": "and not",
@@ -23310,7 +23310,7 @@
       "globalNumber": 374,
       "arabic": "وَإِذْ أَخَذَ ٱللَّهُ مِيثَٰقَ ٱلنَّبِيِّۦنَ لَمَآ ءَاتَيْتُكُم مِّن كِتَٰبٍۢ وَحِكْمَةٍۢ ثُمَّ جَآءَكُمْ رَسُولٌۭ مُّصَدِّقٌۭ لِّمَا مَعَكُمْ لَتُؤْمِنُنَّ بِهِۦ وَلَتَنصُرُنَّهُۥ ۚ قَالَ ءَأَقْرَرْتُمْ وَأَخَذْتُمْ عَلَىٰ ذَٰلِكُمْ إِصْرِى ۖ قَالُوٓا۟ أَقْرَرْنَا ۚ قَالَ فَٱشْهَدُوا۟ وَأَنَا۠ مَعَكُم مِّنَ ٱلشَّٰهِدِينَ",
       "translation": "And [recall, O People of the Scripture], when Allah took the covenant of the prophets, [saying], \"Whatever I give you of the Scripture and wisdom and then there comes to you a messenger confirming what is with you, you [must] believe in him and support him.\" [Allah] said, \"Have you acknowledged and taken upon that My commitment?\" They said, \"We have acknowledged it.\" He said, \"Then bear witness, and I am with you among the witnesses.\"",
-      "urduTranslation": "اور جب خدا نے پیغمبروں سے عہد لیا کہ جب میں تم کو کتاب اور دانائی عطا کروں پھر تمہارے پاس کوئی پیغمبر آئے جو تمہاری کتاب کی تصدیق کرے تو تمھیں ضرور اس پر ایمان ��انا ہوگا اور ضرور اس کی مدد کرنی ہوگی اور (عہد لینے کے بعد) پوچھا کہ بھلا تم نے اقرار کیا اور اس اقرار پر میرا ذمہ لیا (یعنی مجھے ضامن ٹہرایا) انہوں نے کہا (ہاں) ہم نے اقرار کیا (خدا نے) فرمایا کہ تم (اس عہد وپیمان کے) گواہ رہو اور میں بھی تمہارے ساتھ گواہ ہوں",
+      "urduTranslation": "اور جب خدا نے پیغمبروں سے عہد لیا کہ جب میں تم کو کتاب اور دانائی عطا کروں پھر تمہارے پاس کوئی پیغمبر آئے جو تمہاری کتاب کی تصدیق کرے تو تمھیں ضرور اس پر ایمان لانا ہوگا اور ضرور اس کی مدد کرنی ہوگی اور (عہد لینے کے بعد) پوچھا کہ بھلا تم نے اقرار کیا اور اس اقرار پر میرا ذمہ لیا (یعنی مجھے ضامن ٹہرایا) انہوں نے کہا (ہاں) ہم نے اقرار کیا (خدا نے) فرمایا کہ تم (اس عہد وپیمان کے) گواہ رہو اور میں بھی تمہارے ساتھ گواہ ہوں",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/374.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/374.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/374.mp3",
@@ -34832,7 +34832,7 @@
           "id": 76393,
           "position": 17,
           "char_type_name": "word",
-          "text_uthmani": "إِنّ��",
+          "text_uthmani": "إِنَّ",
           "text": "إِنَّ",
           "translation": {
             "text": "Indeed",
@@ -50570,7 +50570,7 @@
           "position": 7,
           "char_type_name": "word",
           "text_uthmani": "تَخَافُوهُمْ",
-          "text": "تَخَ��فُوهُمْ",
+          "text": "تَخَافُوهُمْ",
           "translation": {
             "text": "fear them",
             "language_name": "english"
@@ -54510,7 +54510,7 @@
           "id": 84231,
           "position": 21,
           "char_type_name": "word",
-          "text_uthmani": "ذَٰلِ��َ",
+          "text_uthmani": "ذَٰلِكَ",
           "text": "ذَٰلِكَ",
           "translation": {
             "text": "that",
@@ -55264,7 +55264,7 @@
     {
       "number": 189,
       "globalNumber": 482,
-      "arabic": "وَلِلَّهِ مُلْكُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۗ وَٱللَّهُ عَلَىٰ كُلِّ شَىْءٍۢ قَ��ِيرٌ",
+      "arabic": "وَلِلَّهِ مُلْكُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۗ وَٱللَّهُ عَلَىٰ كُلِّ شَىْءٍۢ قَدِيرٌ",
       "translation": "And to Allah belongs the dominion of the heavens and the earth, and Allah is over all things competent.",
       "urduTranslation": "اور آسمانوں اور زمین کی بادشاہی خدا ہی کو ہے اور خدا ہر چیز پر قادر ہے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/482.mp3",

@@ -49,6 +49,8 @@ export default function Breadcrumb({ crumbs = [], schema: withSchema = true }) {
                   <svg
                     className="breadcrumb-sep"
                     viewBox="0 0 6 10"
+                    width="5"
+                    height="9"
                     fill="none"
                     aria-hidden="true"
                   >

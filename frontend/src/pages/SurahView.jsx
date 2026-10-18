@@ -5,7 +5,7 @@
  * Includes Previous/Next navigation.
  */
 
-import { useEffect, useState, useRef, useMemo } from "react";
+import { Fragment, useEffect, useState, useRef, useMemo } from "react";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import api from "../lib/api";
 import AudioPlayer from "../components/AudioPlayer";
@@ -630,18 +630,22 @@ export default function SurahView() {
                             }
                           };
 
+                          // The space keeps words separate in the text itself (search
+                          // engines, copy-paste, screen readers); visually the flex
+                          // gap does the spacing and this whitespace is not rendered.
                           return (
-                            <span
-                              key={word.id || word.position}
-                              className={`quran-word${activeWordId === word.id ? " quran-word--active" : ""}`}
-                              onClick={playWordAudio}
-                              title={word.translation?.text || ""}
-                              style={{
-                                cursor: word.audioUrl ? "pointer" : "text",
-                              }}
-                            >
-                              {word.text_uthmani || word.text}
-                            </span>
+                            <Fragment key={word.id || word.position}>
+                              <span
+                                className={`quran-word${activeWordId === word.id ? " quran-word--active" : ""}`}
+                                onClick={playWordAudio}
+                                title={word.translation?.text || ""}
+                                style={{
+                                  cursor: word.audioUrl ? "pointer" : "text",
+                                }}
+                              >
+                                {word.text_uthmani || word.text}
+                              </span>{" "}
+                            </Fragment>
                           );
                         })
                       : // Fallback if words aren't loaded or available

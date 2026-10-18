@@ -731,7 +731,7 @@
       "globalNumber": 2033,
       "arabic": "وَقَضَيْنَآ إِلَىٰ بَنِىٓ إِسْرَٰٓءِيلَ فِى ٱلْكِتَٰبِ لَتُفْسِدُنَّ فِى ٱلْأَرْضِ مَرَّتَيْنِ وَلَتَعْلُنَّ عُلُوًّۭا كَبِيرًۭا",
       "translation": "And We conveyed to the Children of Israel in the Scripture that, \"You will surely cause corruption on the earth twice, and you will surely reach [a degree of] great haughtiness.",
-      "urduTranslation": "اور ہم نے کتاب میں بنی اسرائیل سے کہہ دیا تھا کہ زمین میں ��و دفعہ فساد مچاؤ گے اور بڑی سرکشی کرو گے",
+      "urduTranslation": "اور ہم نے کتاب میں بنی اسرائیل سے کہہ دیا تھا کہ زمین میں دو دفعہ فساد مچاؤ گے اور بڑی سرکشی کرو گے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2033.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/2033.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/2033.mp3",
@@ -3310,7 +3310,7 @@
     {
       "number": 15,
       "globalNumber": 2044,
-      "arabic": "مَّنِ ٱهْتَدَىٰ فَإِنَّمَا يَهْتَدِى لِنَف��سِهِۦ ۖ وَمَن ضَلَّ فَإِنَّمَا يَضِلُّ عَلَيْهَا ۚ وَلَا تَزِرُ وَازِرَةٌۭ وِزْرَ أُخْرَىٰ ۗ وَمَا كُنَّا مُعَذِّبِينَ حَتَّىٰ نَبْعَثَ رَسُولًۭا",
+      "arabic": "مَّنِ ٱهْتَدَىٰ فَإِنَّمَا يَهْتَدِى لِنَفْسِهِۦ ۖ وَمَن ضَلَّ فَإِنَّمَا يَضِلُّ عَلَيْهَا ۚ وَلَا تَزِرُ وَازِرَةٌۭ وِزْرَ أُخْرَىٰ ۗ وَمَا كُنَّا مُعَذِّبِينَ حَتَّىٰ نَبْعَثَ رَسُولًۭا",
       "translation": "Whoever is guided is only guided for [the benefit of] his soul. And whoever errs only errs against it. And no bearer of burdens will bear the burden of another. And never would We punish until We sent a messenger.",
       "urduTranslation": "جو شخص ہدایت اختیار کرتا ہے تو اپنے لئے اختیار کرتا ہے۔ اور جو گمراہ ہوتا ہے گمراہی کا ضرر بھی اسی کو ہوگا۔ اور کوئی شخص کسی دوسرے کا بوجھ نہیں اٹھائے گا۔ اور جب تک ہم پیغمبر نہ بھیج لیں عذاب نہیں دیا کرتے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2044.mp3",
@@ -4055,7 +4055,7 @@
           "id": 18997,
           "position": 10,
           "char_type_name": "word",
-          "text_uthmani": "بِذ��نُوبِ",
+          "text_uthmani": "بِذُنُوبِ",
           "text": "بِذُنُوبِ",
           "translation": {
             "text": "concerning the sins",
@@ -8201,7 +8201,7 @@
     {
       "number": 36,
       "globalNumber": 2065,
-      "arabic": "وَلَا تَقْفُ مَا لَيْسَ لَكَ بِهِۦ عِلْمٌ ۚ إِنَّ ٱلسَّمْعَ وَ��لْبَصَرَ وَٱلْفُؤَادَ كُلُّ أُو۟لَٰٓئِكَ كَانَ عَنْهُ مَسْـُٔولًۭا",
+      "arabic": "وَلَا تَقْفُ مَا لَيْسَ لَكَ بِهِۦ عِلْمٌ ۚ إِنَّ ٱلسَّمْعَ وَٱلْبَصَرَ وَٱلْفُؤَادَ كُلُّ أُو۟لَٰٓئِكَ كَانَ عَنْهُ مَسْـُٔولًۭا",
       "translation": "And do not pursue that of which you have no knowledge. Indeed, the hearing, the sight and the heart - about all those [one] will be questioned.",
       "urduTranslation": "اور (اے بندے) جس چیز کا تجھے علم نہیں اس کے پیچھے نہ پڑ۔ کہ کان اور آنکھ اور دل ان سب (جوارح) سے ضرور باز پرس ہوگی",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2065.mp3",
@@ -12008,7 +12008,7 @@
     {
       "number": 53,
       "globalNumber": 2082,
-      "arabic": "وَقُل لِّعِبَادِى يَقُولُوا۟ ٱلَّتِى هِىَ أَحْسَنُ ۚ إِنَّ ��لشَّيْطَٰنَ يَنزَغُ بَيْنَهُمْ ۚ إِنَّ ٱلشَّيْطَٰنَ كَانَ لِلْإِنسَٰنِ عَدُوًّۭا مُّبِينًۭا",
+      "arabic": "وَقُل لِّعِبَادِى يَقُولُوا۟ ٱلَّتِى هِىَ أَحْسَنُ ۚ إِنَّ ٱلشَّيْطَٰنَ يَنزَغُ بَيْنَهُمْ ۚ إِنَّ ٱلشَّيْطَٰنَ كَانَ لِلْإِنسَٰنِ عَدُوًّۭا مُّبِينًۭا",
       "translation": "And tell My servants to say that which is best. Indeed, Satan induces [dissension] among them. Indeed Satan is ever, to mankind, a clear enemy.",
       "urduTranslation": "اور میرے بندوں سے کہہ دو کہ (لوگوں سے) ایسی باتیں کہا کریں جو بہت پسندیدہ ہوں۔ کیونکہ شیطان (بری باتوں سے) ان میں فساد ڈلوا دیتا ہے۔ کچھ شک نہیں کہ شیطان انسان کا کھلا دشمن ہے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2082.mp3",
@@ -15021,7 +15021,7 @@
     {
       "number": 64,
       "globalNumber": 2093,
-      "arabic": "وَٱسْتَفْزِزْ مَنِ ٱسْتَطَعْتَ مِنْهُم بِصَوْتِكَ وَأَجْلِبْ عَ��َيْهِم بِخَيْلِكَ وَرَجِلِكَ وَشَارِكْهُمْ فِى ٱلْأَمْوَٰلِ وَٱلْأَوْلَٰدِ وَعِدْهُمْ ۚ وَمَا يَعِدُهُمُ ٱلشَّيْطَٰنُ إِلَّا غُرُورًا",
+      "arabic": "وَٱسْتَفْزِزْ مَنِ ٱسْتَطَعْتَ مِنْهُم بِصَوْتِكَ وَأَجْلِبْ عَلَيْهِم بِخَيْلِكَ وَرَجِلِكَ وَشَارِكْهُمْ فِى ٱلْأَمْوَٰلِ وَٱلْأَوْلَٰدِ وَعِدْهُمْ ۚ وَمَا يَعِدُهُمُ ٱلشَّيْطَٰنُ إِلَّا غُرُورًا",
       "translation": "And incite [to senselessness] whoever you can among them with your voice and assault them with your horses and foot soldiers and become a partner in their wealth and their children and promise them.\" But Satan does not promise them except delusion.",
       "urduTranslation": "اور ان میں سے جس کو بہکا سکے اپنی آواز سے بہکاتا رہ۔ اور ان پر اپنے سواروں اور پیاروں کو چڑھا کر لاتا رہ اور ان کے مال اور اولاد میں شریک ہوتا رہ اور ان سے وعدے کرتا رہ۔ اور شیطان جو وعدے ان سے کرتا ہے سب دھوکا ہے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2093.mp3",
@@ -18784,7 +18784,7 @@
             "language_name": "english"
           },
           "transliteration": {
-            "text": "yab��athaka",
+            "text": "yabʿathaka",
             "language_name": "english"
           },
           "audioUrl": "https://audio.qurancdn.com/wbw/017_079_009.mp3"

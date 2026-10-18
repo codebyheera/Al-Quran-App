@@ -2328,7 +2328,7 @@
     {
       "number": 21,
       "globalNumber": 4435,
-      "arabic": "وَإِن لَّمْ تُؤْمِنُ��ا۟ لِى فَٱعْتَزِلُونِ",
+      "arabic": "وَإِن لَّمْ تُؤْمِنُوا۟ لِى فَٱعْتَزِلُونِ",
       "translation": "But if you do not believe me, then leave me alone.\"",
       "urduTranslation": "اور اگر تم مجھ پر ایمان نہیں لاتے تو مجھ سے الگ ہو جاؤ",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/4435.mp3",
@@ -6081,7 +6081,7 @@
           "position": 7,
           "char_type_name": "word",
           "text_uthmani": "ٱلْأُولَىٰ ۖ",
-          "text": "ٱلْ��ُولَىٰ ۖ",
+          "text": "ٱلْأُولَىٰ ۖ",
           "translation": {
             "text": "the first",
             "language_name": "english"

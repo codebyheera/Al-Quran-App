@@ -709,7 +709,7 @@
           "id": 2868,
           "position": 7,
           "char_type_name": "word",
-          "text_uthmani": "مُشْرِ��َةًۭ",
+          "text_uthmani": "مُشْرِكَةًۭ",
           "text": "مُشْرِكَةًۭ",
           "translation": {
             "text": "a polytheist woman",
@@ -4597,7 +4597,7 @@
           "id": 21762,
           "position": 17,
           "char_type_name": "word",
-          "text_uthmani": "يَعْل��مُ",
+          "text_uthmani": "يَعْلَمُ",
           "text": "يَعْلَمُ",
           "translation": {
             "text": "knows",
@@ -15526,7 +15526,7 @@
           "id": 48705,
           "position": 4,
           "char_type_name": "word",
-          "text_uthmani": "��َمِ",
+          "text_uthmani": "أَمِ",
           "text": "أَمِ",
           "translation": {
             "text": "or",

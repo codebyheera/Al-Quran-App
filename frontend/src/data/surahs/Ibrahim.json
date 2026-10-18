@@ -2415,7 +2415,7 @@
           "id": 10646,
           "position": 7,
           "char_type_name": "word",
-          "text_uthmani": "��َوْمِ",
+          "text_uthmani": "قَوْمِ",
           "text": "قَوْمِ",
           "translation": {
             "text": "the people",
@@ -4497,7 +4497,7 @@
       "globalNumber": 1764,
       "arabic": "وَلَنُسْكِنَنَّكُمُ ٱلْأَرْضَ مِنۢ بَعْدِهِمْ ۚ ذَٰلِكَ لِمَنْ خَافَ مَقَامِى وَخَافَ وَعِيدِ",
       "translation": "And We will surely cause you to dwell in the land after them. That is for he who fears My position and fears My threat.\"",
-      "urduTranslation": "اور ان کے ب��د تم کو اس زمین میں آباد کریں گے۔ یہ اس شخص کے لیے ہے جو (قیامت کے روز) میرے سامنے کھڑے ہونے سے ڈرے اور میرے عذاب سے خوف کرے",
+      "urduTranslation": "اور ان کے بعد تم کو اس زمین میں آباد کریں گے۔ یہ اس شخص کے لیے ہے جو (قیامت کے روز) میرے سامنے کھڑے ہونے سے ڈرے اور میرے عذاب سے خوف کرے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1764.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/1764.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/1764.mp3",
@@ -9017,7 +9017,7 @@
           "id": 34091,
           "position": 7,
           "char_type_name": "word",
-          "text_uthmani": "وَيُنفِ��ُوا۟",
+          "text_uthmani": "وَيُنفِقُوا۟",
           "text": "وَيُنفِقُوا۟",
           "translation": {
             "text": "and (to) spend",

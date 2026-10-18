@@ -36,6 +36,7 @@ export default defineConfig({
   build: {
     target: 'es2015',
     cssCodeSplit: true,   // Split CSS per chunk for faster per-page loading
+    manifest: true,       // Read by scripts/prerender.js to link lazy-page CSS (then deleted)
     minify: 'esbuild',   // Faster + smaller than default terser
     sourcemap: sentryAuthToken ? 'hidden' : false, // see sentryVitePlugin above
     rollupOptions: {

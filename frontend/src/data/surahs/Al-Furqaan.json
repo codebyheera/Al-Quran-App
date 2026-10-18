@@ -6012,7 +6012,7 @@
           "id": 31082,
           "position": 3,
           "char_type_name": "word",
-          "text_uthmani": "لَ��ْ",
+          "text_uthmani": "لَمْ",
           "text": "لَمْ",
           "translation": {
             "text": "not",
@@ -10517,7 +10517,7 @@
           "position": 6,
           "char_type_name": "word",
           "text_uthmani": "جِهَادًۭا",
-          "text": "جِهَادًۭ��",
+          "text": "جِهَادًۭا",
           "translation": {
             "text": "a striving",
             "language_name": "english"

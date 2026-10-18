@@ -1812,7 +1812,7 @@
       "globalNumber": 1912,
       "arabic": "يُنۢبِتُ لَكُم بِهِ ٱلزَّرْعَ وَٱلزَّيْتُونَ وَٱلنَّخِيلَ وَٱلْأَعْنَٰبَ وَمِن كُلِّ ٱلثَّمَرَٰتِ ۗ إِنَّ فِى ذَٰلِكَ لَءَايَةًۭ لِّقَوْمٍۢ يَتَفَكَّرُونَ",
       "translation": "He causes to grow for you thereby the crops, olives, palm trees, grapevines, and from all the fruits. Indeed in that is a sign for a people who give thought.",
-      "urduTranslation": "اسی پانی سے وہ تمہارے لیے کھیتی او�� زیتون اور کھجور اور انگور (اور بےشمار درخت) اُگاتا ہے۔ اور ہر طرح کے پھل (پیدا کرتا ہے) غور کرنے والوں کے لیے اس میں (قدرتِ خدا کی بڑی) نشانی ہے",
+      "urduTranslation": "اسی پانی سے وہ تمہارے لیے کھیتی اور زیتون اور کھجور اور انگور (اور بےشمار درخت) اُگاتا ہے۔ اور ہر طرح کے پھل (پیدا کرتا ہے) غور کرنے والوں کے لیے اس میں (قدرتِ خدا کی بڑی) نشانی ہے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1912.mp3",
       "englishAudioUrl": "https://cdn.islamic.network/quran/audio/192/en.walk/1912.mp3",
       "urduAudioUrl": "https://cdn.islamic.network/quran/audio/64/ur.khan/1912.mp3",
@@ -3307,7 +3307,7 @@
     {
       "number": 18,
       "globalNumber": 1919,
-      "arabic": "وَإِن تَعُدُّوا۟ نِعْمَةَ ٱللَّهِ لَا تُحْصُوهَآ ۗ إِنَّ ٱ��لَّهَ لَغَفُورٌۭ رَّحِيمٌۭ",
+      "arabic": "وَإِن تَعُدُّوا۟ نِعْمَةَ ٱللَّهِ لَا تُحْصُوهَآ ۗ إِنَّ ٱللَّهَ لَغَفُورٌۭ رَّحِيمٌۭ",
       "translation": "And if you should count the favors of Allah, you could not enumerate them. Indeed, Allah is Forgiving and Merciful.",
       "urduTranslation": "اور اگر تم خدا کی نعمتوں کو شمار کرنا چاہو تو گن نہ سکو۔ بےشک خدا بخشنے والا مہربان ہے",
       "audioUrl": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1919.mp3",
@@ -5165,7 +5165,7 @@
           "id": 30394,
           "position": 6,
           "char_type_name": "word",
-          "text_uthmani": "أَ��ْنَ",
+          "text_uthmani": "أَيْنَ",
           "text": "أَيْنَ",
           "translation": {
             "text": "Where",
@@ -26257,7 +26257,7 @@
           "id": 73425,
           "position": 2,
           "char_type_name": "word",
-          "text_uthmani": "بِأَنَّهُم��",
+          "text_uthmani": "بِأَنَّهُمُ",
           "text": "بِأَنَّهُمُ",
           "translation": {
             "text": "because",
@@ -27039,7 +27039,7 @@
           "position": 17,
           "char_type_name": "word",
           "text_uthmani": "لَغَفُورٌۭ",
-          "text": "��َغَفُورٌۭ",
+          "text": "لَغَفُورٌۭ",
           "translation": {
             "text": "surely is Oft-Forgiving",
             "language_name": "english"
@@ -29159,7 +29159,7 @@
           "position": 14,
           "char_type_name": "word",
           "text_uthmani": "أَنفُسَهُمْ",
-          "text": "أَنف��سَهُمْ",
+          "text": "أَنفُسَهُمْ",
           "translation": {
             "text": "themselves",
             "language_name": "english"
