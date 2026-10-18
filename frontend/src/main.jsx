@@ -47,19 +47,22 @@ const app = (
   </StrictMode>
 );
 
-if (rootElement.dataset.prerender === 'snapshot') {
-  // Homepage, /surah and /surah/:id: the static HTML is a build-time snapshot (see
-  // scripts/prerender.js) shown so the page paints before the JS runs. It is not
-  // hydrated — client-only state (streak, bookmarks, theme) differs from the
-  // snapshot — so React renders fresh and replaces it in a single commit. A lazy
-  // page is loaded first, otherwise that commit would swap the snapshot for
-  // <PageLoader />; the snapshot stays on screen in the meantime.
-  const preload = getRoutePreload(window.location.pathname);
-  const render = () => createRoot(rootElement).render(app);
-  if (preload) preload().then(render, render);
-  else render();
-} else if (rootElement.hasChildNodes()) {
-  hydrateRoot(rootElement, app);
-} else {
-  createRoot(rootElement).render(app);
-}
+// The landing page's lazy chunk is loaded before the first render (prerender.js
+// <link>s it in the HTML, so it downloads alongside the main bundle). Otherwise
+// that render would suspend and show <PageLoader /> before the page itself.
+//
+// Homepage, /surah and /surah/:id: the static HTML is a build-time snapshot (see
+// scripts/prerender.js) shown so the page paints before the JS runs. It is not
+// hydrated — client-only state (streak, bookmarks, theme) differs from the
+// snapshot — so React renders fresh and replaces it in a single commit; the
+// snapshot stays on screen in the meantime.
+const start = () => {
+  if (rootElement.dataset.prerender === 'snapshot' || !rootElement.hasChildNodes()) {
+    createRoot(rootElement).render(app);
+  } else {
+    hydrateRoot(rootElement, app);
+  }
+};
+const preload = getRoutePreload(window.location.pathname);
+if (preload) preload().then(start, start);
+else start();

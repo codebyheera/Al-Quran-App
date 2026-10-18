@@ -215,18 +215,24 @@ function readCachedSurahList() {
   return list;
 }
 
-// <link> tags for the CSS of a lazy page chunk (and every chunk it statically
-// imports), from Vite's build manifest. Prerendered pages paint their markup
-// before the JS loads the lazy chunk, so without these the page is unstyled
-// until then — e.g. the breadcrumb chevron SVG flashed at full width.
-// Files the template already links (the main entry CSS) are skipped. The hrefs
-// match what Vite's preloader looks for, so it won't load them a second time.
-function lazyPageCssLinks(manifest, entry, template) {
+// <link> tags for a lazy page chunk (and every chunk it statically imports),
+// from Vite's build manifest:
+//  - its CSS: prerendered pages paint their markup before the JS loads the lazy
+//    chunk, so without these the page is unstyled until then — e.g. the
+//    breadcrumb chevron SVG flashed at full width.
+//  - its JS as modulepreload: main.jsx waits for the landing page's chunk before
+//    the first render, so it should download alongside the main bundle rather
+//    than after it.
+// Files the template already links (the main entry) are skipped. The hrefs match
+// what Vite's preloader looks for, so it won't load them a second time.
+function lazyPageHeadLinks(manifest, entry, template) {
   const css = new Set();
+  const js = new Set();
   const seen = new Set();
   const visit = (key) => {
     if (seen.has(key) || !manifest[key]) return;
     seen.add(key);
+    js.add(manifest[key].file);
     (manifest[key].css || []).forEach((file) => css.add(file));
     (manifest[key].imports || []).forEach(visit);
   };
@@ -235,17 +241,23 @@ function lazyPageCssLinks(manifest, entry, template) {
     console.error(`❌ ${entry} not found in the Vite manifest.`);
     process.exit(1);
   }
-  return [...css]
-    .filter((file) => !template.includes(`/${file}"`))
-    .map((file) => `<link rel="stylesheet" crossorigin href="/${file}">`)
-    .join('\n  ');
+  const notInTemplate = (file) => !template.includes(`/${file}"`);
+  return [
+    ...[...css].filter(notInTemplate).map((file) => `<link rel="stylesheet" crossorigin href="/${file}">`),
+    ...[...js].filter(notInTemplate).map((file) => `<link rel="modulepreload" crossorigin href="/${file}">`),
+  ].join('\n  ');
 }
+
+// Routes written by writeRoute (meta-only, empty #root) — they get their lazy
+// page's <link>s once App.jsx's route table is loaded (see linkLazyPages below).
+const writtenRoutes = [];
 
 function writeRoute(template, route, meta) {
   const html = injectMeta(template, { ...meta, url: `${SITE_URL}${route}` });
   const routeDir = path.join(distPath, route);
   fs.mkdirSync(routeDir, { recursive: true });
   fs.writeFileSync(path.join(routeDir, 'index.html'), html);
+  writtenRoutes.push(route);
 }
 
 const staticPages = Object.values(pageSeo)
@@ -453,7 +465,16 @@ async function run() {
   const { BookmarkProvider } = await vite.ssrLoadModule('/src/context/BookmarkContext.jsx');
   const { AudioProvider } = await vite.ssrLoadModule('/src/context/AudioContext.jsx');
   const { QariProvider } = await vite.ssrLoadModule('/src/context/QariContext.jsx');
-  const { default: App, preloadRoute } = await vite.ssrLoadModule('/src/App.jsx');
+  const { default: App, preloadRoute, findRoute } = await vite.ssrLoadModule('/src/App.jsx');
+
+  console.log('Linking lazy page chunks into prerendered routes...');
+  for (const route of writtenRoutes) {
+    const lazyRoute = findRoute(route);
+    if (!lazyRoute) continue;
+    const file = path.join(distPath, route, 'index.html');
+    const links = lazyPageHeadLinks(manifest, lazyRoute.src, template);
+    fs.writeFileSync(file, fs.readFileSync(file, 'utf-8').replace('</head>', () => `  ${links}\n</head>`));
+  }
 
   // Full App (Navbar, page, Footer) at `url`, inside the same provider tree as main.jsx.
   const renderAppAt = (url, helmetContext) => ReactDOMServer.renderToString(
@@ -548,9 +569,9 @@ async function run() {
     const surahListFile = path.join(distPath, surahListPath, 'index.html');
     // `<` escaped so the embedded JSON can never close its <script> early.
     const preloadedJson = JSON.stringify(surahList).replace(/</g, '\\u003c');
-    const surahListCss = lazyPageCssLinks(manifest, 'src/pages/SurahList.jsx', template);
+    // (Its lazy page <link>s were added by the linking pass above.)
     const surahListPage = fs.readFileSync(surahListFile, 'utf-8')
-      .replace('</head>', () => `  ${surahListCss}\n  <script id="preloaded-surah-list" type="application/json">${preloadedJson}</script>\n</head>`)
+      .replace('</head>', () => `  <script id="preloaded-surah-list" type="application/json">${preloadedJson}</script>\n</head>`)
       .replace('<div id="root"></div>', () => `<div id="root" data-prerender="snapshot">${surahListHtml}</div>`);
     if (!surahListPage.includes('data-prerender="snapshot"')) {
       console.error('❌ Could not find an empty #root in dist/surah/index.html.');
@@ -566,7 +587,7 @@ async function run() {
   // <PageLoader /> until the SurahView chunk loaded. SurahView is lazy, so it's
   // preloaded once here (otherwise each render would only contain <PageLoader />).
   await preloadRoute['/surah/:id']();
-  const surahViewCss = lazyPageCssLinks(manifest, 'src/pages/SurahView.jsx', template);
+  const surahViewLinks = lazyPageHeadLinks(manifest, 'src/pages/SurahView.jsx', template);
 
   console.log(`Fetching Surah list from ${API_BASE}/api/surah ...`);
   let surahs = [];
@@ -645,7 +666,7 @@ async function run() {
     html = html.replace('<div id="root"></div>', () => `<div id="root" data-prerender="snapshot">${appHtml}</div>`);
 
     const preloadedScript = `\n  <script id="preloaded-surah-data" type="application/json">${JSON.stringify(fullSurah)}</script>`;
-    html = html.replace('</head>', () => `  ${surahViewCss}\n  ${preloadedScript}\n</head>`);
+    html = html.replace('</head>', () => `  ${surahViewLinks}\n  ${preloadedScript}\n</head>`);
     html = injectHelmet(html, helmet);
 
     // Save output

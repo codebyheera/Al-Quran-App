@@ -1,6 +1,6 @@
 
-import { lazy, Suspense, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { Routes, Route, useLocation, matchPath } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
@@ -22,60 +22,90 @@ const LanguagePrompt      = lazy(() => import('./components/LanguagePrompt'));
 import Home from './pages/Home';
 
 // lazy() that can also be loaded ahead of render: once preload() resolves, the
-// page renders synchronously instead of suspending. Used for pages whose HTML
-// is prerendered as a snapshot (see preloadRoute below + main.jsx), so neither
-// the build-time render nor the first client render falls back to <PageLoader />.
+// page renders synchronously instead of suspending. main.jsx preloads the
+// landing page before the first render (and prerender.js before the build-time
+// render), and App prefetches common pages when idle, so <PageLoader /> only
+// shows for a page that genuinely hasn't downloaded yet.
 function lazyWithPreload(factory) {
   let loaded = null;
-  const LazyPage = lazy(factory);
-  const Page = (props) => (loaded ? <loaded.default {...props} /> : <LazyPage {...props} />);
-  Page.preload = () => factory().then((mod) => { loaded = mod; return mod; });
+  let promise = null;
+  const load = () => (promise ||= factory().then((mod) => { loaded = mod; return mod; }));
+  const LazyPage = lazy(load);
+  // Chosen once per mount: switching from LazyPage to the loaded component
+  // mid-life (e.g. after an idle prefetch) would remount the page and lose its state.
+  const Page = (props) => {
+    const [Component] = useState(() => (loaded ? loaded.default : LazyPage));
+    return <Component {...props} />;
+  };
+  Page.preload = load;
   return Page;
 }
 
 // ── Lazy load all other pages ─────────────────────────────────────────────────
-const SurahList = lazyWithPreload(() => import('./pages/SurahList'));
-const SurahView = lazyWithPreload(() => import('./pages/SurahView'));
+const SurahList         = lazyWithPreload(() => import('./pages/SurahList'));
+const SurahView         = lazyWithPreload(() => import('./pages/SurahView'));
+const JuzList           = lazyWithPreload(() => import('./pages/JuzList'));
+const JuzView           = lazyWithPreload(() => import('./pages/JuzView'));
+const BookmarksPage     = lazyWithPreload(() => import('./pages/BookmarksPage'));
+const TasbihPage        = lazyWithPreload(() => import('./pages/TasbihPage'));
+const SearchPage        = lazyWithPreload(() => import('./pages/SearchPage'));
+const SupportPage       = lazyWithPreload(() => import('./pages/SupportPage'));
+const ContactPage       = lazyWithPreload(() => import('./pages/ContactPage'));
+const PrivacyPolicyPage = lazyWithPreload(() => import('./pages/PrivacyPolicyPage'));
+const TermsPage         = lazyWithPreload(() => import('./pages/TermsPage'));
+const BlogArchive       = lazyWithPreload(() => import('./pages/BlogArchive'));
+const BlogPost          = lazyWithPreload(() => import('./pages/BlogPost'));
+const PrayerTimesHub    = lazyWithPreload(() => import('./pages/PrayerTimesHub'));
+const PrayerCityPage    = lazyWithPreload(() => import('./pages/PrayerCityPage'));
+const DuroodSharifPage  = lazyWithPreload(() => import('./pages/DuroodSharifPage'));
+const NotFound          = lazyWithPreload(() => import('./pages/NotFound'));
 
-// Routes with a prerendered page snapshot → the preload for their lazy page.
-export const preloadRoute = {
-  '/surah': SurahList.preload,
-  '/surah/:id': SurahView.preload,
-};
+// Lazy routes. `src` is the page's module, which prerender.js looks up in Vite's
+// build manifest to <link> its JS + CSS in the route's static HTML.
+export const ROUTES = [
+  { path: '/surah',                src: 'src/pages/SurahList.jsx',         Page: SurahList },
+  { path: '/surah/:id',            src: 'src/pages/SurahView.jsx',         Page: SurahView },
+  { path: '/juz',                  src: 'src/pages/JuzList.jsx',           Page: JuzList },
+  { path: '/juz/:id',              src: 'src/pages/JuzView.jsx',           Page: JuzView },
+  { path: '/bookmarks',            src: 'src/pages/BookmarksPage.jsx',     Page: BookmarksPage },
+  { path: '/tasbih',               src: 'src/pages/TasbihPage.jsx',        Page: TasbihPage },
+  { path: '/search',               src: 'src/pages/SearchPage.jsx',        Page: SearchPage },
+  { path: '/support',              src: 'src/pages/SupportPage.jsx',       Page: SupportPage },
+  { path: '/contact',              src: 'src/pages/ContactPage.jsx',       Page: ContactPage },
+  { path: '/privacy-policy',       src: 'src/pages/PrivacyPolicyPage.jsx', Page: PrivacyPolicyPage },
+  { path: '/terms-and-conditions', src: 'src/pages/TermsPage.jsx',         Page: TermsPage },
+  { path: '/blog',                 src: 'src/pages/BlogArchive.jsx',       Page: BlogArchive },
+  { path: '/blog/:slug',           src: 'src/pages/BlogPost.jsx',          Page: BlogPost },
+  { path: '/prayer-times',         src: 'src/pages/PrayerTimesHub.jsx',    Page: PrayerTimesHub },
+  { path: '/prayer-times/:city',   src: 'src/pages/PrayerCityPage.jsx',    Page: PrayerCityPage },
+  { path: '/durood-sharif',        src: 'src/pages/DuroodSharifPage.jsx',  Page: DuroodSharifPage },
+];
 
-// The preloadRoute entry for a concrete pathname (e.g. /surah/Al-Kahf → '/surah/:id').
-export function getRoutePreload(pathname) {
-  const path = pathname.replace(/\/+$/, '') || '/';
-  return preloadRoute[path] || (/^\/surah\/[^/]+$/.test(path) ? preloadRoute['/surah/:id'] : undefined);
+// Route pattern → preload for its lazy page.
+export const preloadRoute = Object.fromEntries(ROUTES.map(({ path, Page }) => [path, Page.preload]));
+
+// The lazy route a concrete pathname renders (e.g. /surah/Al-Kahf → '/surah/:id').
+export function findRoute(pathname) {
+  return ROUTES.find(({ path }) => matchPath(path, pathname));
 }
-const JuzList = lazy(() => import('./pages/JuzList'));
-const JuzView = lazy(() => import('./pages/JuzView'));
-const BookmarksPage  = lazy(() => import('./pages/BookmarksPage'));
-const TasbihPage     = lazy(() => import('./pages/TasbihPage'));
-const SearchPage = lazy(() => import('./pages/SearchPage'));
-const SupportPage = lazy(() => import('./pages/SupportPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
-const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
-const TermsPage = lazy(() => import('./pages/TermsPage'));
-const BlogArchive = lazy(() => import('./pages/BlogArchive'));
-const BlogPost = lazy(() => import('./pages/BlogPost'));
-const PrayerTimesHub = lazy(() => import('./pages/PrayerTimesHub'));
-const PrayerCityPage = lazy(() => import('./pages/PrayerCityPage'));
-const DuroodSharifPage = lazy(() => import('./pages/DuroodSharifPage'));
-const NotFound = lazy(() => import('./pages/NotFound'));
+
+// The preload for the page a pathname renders: undefined for Home (not lazy),
+// NotFound's for unknown paths.
+export function getRoutePreload(pathname) {
+  if (matchPath('/', pathname)) return undefined;
+  return findRoute(pathname)?.Page.preload || NotFound.preload;
+}
+
+// Prefetched once the browser is idle, so navigating to them from the Navbar
+// renders instantly instead of showing <PageLoader />.
+const PREFETCH_PAGES = [SurahList, SurahView, JuzList, JuzView, TasbihPage, PrayerTimesHub, BlogArchive, BookmarksPage];
 
 // ── Lightweight loader ───────────────────────────────────────────────────────
+// Same spinner as the pages' own loading states, in the active theme's colors;
+// fades in after a short delay (see .page-loader) so a quick load shows nothing.
 const PageLoader = () => (
-  <div style={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    background: '#0b1622',
-    color: '#C9A84C',
-    fontSize: '1.2rem',
-  }}>
-    Loading...
+  <div className="loading-center page-loader" role="status" aria-label="Loading">
+    <div className="spinner" />
   </div>
 );
 
@@ -99,6 +129,15 @@ export default function App() {
   // check — happens regardless of which page the visitor lands on first.
   useEffect(() => {
     getStreakData();
+  }, []);
+
+  // Skipped on Data Saver — prefetching is a nicety, not worth the user's data.
+  useEffect(() => {
+    if (navigator.connection?.saveData) return;
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 2000));
+    const cancel = window.cancelIdleCallback || clearTimeout;
+    const id = idle(() => PREFETCH_PAGES.forEach((Page) => Page.preload().catch(() => {})));
+    return () => cancel(id);
   }, []);
 
   return (
@@ -132,22 +171,9 @@ export default function App() {
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/surah" element={<SurahList />} />
-            <Route path="/surah/:id" element={<SurahView />} />
-            <Route path="/juz" element={<JuzList />} />
-            <Route path="/juz/:id" element={<JuzView />} />
-            <Route path="/bookmarks" element={<BookmarksPage />} />
-            <Route path="/tasbih" element={<TasbihPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/support" element={<SupportPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-            <Route path="/terms-and-conditions" element={<TermsPage />} />
-            <Route path="/blog" element={<BlogArchive />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/prayer-times" element={<PrayerTimesHub />} />
-            <Route path="/prayer-times/:city" element={<PrayerCityPage />} />
-            <Route path="/durood-sharif" element={<DuroodSharifPage />} />
+            {ROUTES.map(({ path, Page }) => (
+              <Route key={path} path={path} element={<Page />} />
+            ))}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

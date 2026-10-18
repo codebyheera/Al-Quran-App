@@ -582,6 +582,19 @@ a:hover {
   color: var(--text-muted);
 }
 
+/* Route-level loader (App.jsx <PageLoader />): stays invisible for 200ms, so a
+   page chunk that arrives quickly never flashes a spinner. */
+.page-loader {
+  opacity: 0;
+  animation: page-loader-in 0.2s ease 0.2s forwards;
+}
+
+@keyframes page-loader-in {
+  to {
+    opacity: 1;
+  }
+}
+
 /* ── Decorative geometric pattern ────────────────────────────── */
 .pattern-bg {
   background-image:
