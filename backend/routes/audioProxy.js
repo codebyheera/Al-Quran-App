@@ -18,9 +18,11 @@ const router = express.Router();
 
 // Only ever proxy known, trusted Quran audio hosts — never an arbitrary URL,
 // so this can't be turned into an open proxy.
+// audio.qurancdn.com (word-by-word audio) is deliberately NOT here: it's licensed
+// to Quran.com by the Tafsir Center without redistribution rights, so it must
+// only ever play directly from Quran.com's CDN, never be re-served from our origin.
 const ALLOWED_HOSTS = new Set([
   'cdn.islamic.network',
-  'audio.qurancdn.com',
   'everyayah.com',
   'www.everyayah.com',
 ]);
