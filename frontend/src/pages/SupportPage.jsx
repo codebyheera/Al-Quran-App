@@ -131,7 +131,7 @@ export default function SupportPage() {
           </h1>
           <p className="support-hero-sub">
             Al-Quran Hub is built with love — no ads, no subscriptions, no paywalls.
-            Your sadaqah helps us maintain servers, add features, and serve the Ummah.
+            Your sadaqah goes only toward the server and hosting costs that keep it online for the Ummah.
           </p>
           <div className="support-hero-ayah">
             <span className="arabic">مَن ذَا الَّذِي يُقْرِضُ اللَّهَ قَرْضًا حَسَنًا فَيُضَاعِفَهُ لَهُ أَضْعَافًا كَثِيرَةً</span>

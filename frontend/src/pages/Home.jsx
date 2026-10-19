@@ -585,8 +585,8 @@ export default function Home() {
             Help Keep the Quran <span className="text-gold">Free &amp; Accessible</span>
           </h2>
           <p className="home-cta-sub">
-            Al-Quran Hub is built and funded personally no ads, no investors, just sincere effort
-            for the Ummah. Your support helps keep the servers running and new features coming.
+            Al-Quran Hub is built and funded personally — no ads, no investors, just sincere effort
+            for the Ummah. Your support goes only toward the server and hosting costs that keep it online.
           </p>
           <Link to="/support" className="btn btn-primary home-cta-btn">
             Support Al-Quran Hub →
