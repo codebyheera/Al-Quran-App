@@ -15,6 +15,10 @@ const BottomPlayer        = lazy(() => import('./components/BottomPlayer'));
 const SupportPopup        = lazy(() => import('./components/SupportPopup'));
 const NotificationBanner  = lazy(() => import('./components/NotificationBanner'));
 const ChatWidget          = lazy(() => import('./components/ChatWidget'));
+
+// Noor AI chatbot is hidden for now. Set to true to bring it back —
+// ChatWidget.jsx/.css and backend/routes/chat.js are kept as-is.
+const SHOW_CHAT_WIDGET = false;
 const DaroodReminderToast = lazy(() => import('./components/DaroodReminderToast'));
 const LanguagePrompt      = lazy(() => import('./components/LanguagePrompt'));
 
@@ -206,9 +210,11 @@ export default function App() {
       </Suspense>
 
       {/* Global AI chat assistant */}
-      <Suspense fallback={null}>
-        <ChatWidget currentSurahSlug={currentSurahSlug} />
-      </Suspense>
+      {SHOW_CHAT_WIDGET && (
+        <Suspense fallback={null}>
+          <ChatWidget currentSurahSlug={currentSurahSlug} />
+        </Suspense>
+      )}
 
       {/* Daily Durood reminder toast — delayed, dismissible, site-wide */}
       <Suspense fallback={null}>
