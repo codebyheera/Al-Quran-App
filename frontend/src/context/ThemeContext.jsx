@@ -4,6 +4,7 @@
  */
 
 import { createContext, useContext, useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
 
 const ThemeContext = createContext();
 
@@ -47,9 +48,28 @@ export function ThemeProvider({ children }) {
     if (theme !== 'light') writeStorage('quran-last-dark-theme', theme);
   }, [theme]);
 
+  // Switching themes used to animate the colors of every element on the page
+  // at once (their `transition`s), which took seconds on long Surahs. Now all
+  // transitions are paused for the switch, so it costs a single repaint, and
+  // where supported the old and new screens simply cross-fade (one cheap
+  // GPU snapshot fade instead of thousands of animated elements).
   const changeTheme = (newTheme) => {
     writeStorage(THEME_KEY, newTheme);
-    setTheme(newTheme);
+    const root = document.documentElement;
+    const apply = () => {
+      root.setAttribute('data-theme', newTheme); // paint the new colors right away
+      flushSync(() => setTheme(newTheme));
+    };
+    const done = () => requestAnimationFrame(() => root.classList.remove('theme-switching'));
+
+    root.classList.add('theme-switching');
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (document.startViewTransition && !reduceMotion) {
+      document.startViewTransition(apply).finished.finally(done);
+    } else {
+      apply();
+      requestAnimationFrame(done);
+    }
   };
 
   // Quick light/dark switch for the header — every theme except 'light' counts as dark.

@@ -10,6 +10,7 @@
 import { useRef, useState } from 'react';
 import { IconArrowRight } from '@tabler/icons-react';
 import { useBookmarks } from '../context/BookmarkContext';
+import { scrollToVerse } from '../lib/scrollToVerse';
 import './GoToVerse.css';
 
 const GLOW_MS = 2200;
@@ -37,7 +38,7 @@ export default function GoToVerse({ total, surahName }) {
     setInvalid(false);
     // Close the phone keyboard first so the scroll lands in the right place.
     inputRef.current?.blur();
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToVerse(el);
     // Shareable URL, without triggering the router's own hash handling.
     window.history.replaceState(window.history.state, '', `#verse-${n}`);
     el.classList.remove('verse-card--jump');

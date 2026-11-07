@@ -645,16 +645,6 @@
   transform-origin: bottom;
 }
 
-@media (max-width: 768px) {
-  /* Right-align inside BottomPlayer on mobile to prevent overflowing right screen edge */
-  .bp-mobile-controls .dropdown-panel.audio-dropdown-panel,
-  .bp-actions .dropdown-panel.audio-dropdown-panel {
-    left: auto;
-    right: 0;
-    margin-left: 0;
-  }
-}
-
 @keyframes dropdownPanelIn {
   from {
     opacity: 0;

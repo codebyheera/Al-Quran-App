@@ -13,7 +13,9 @@ export const AudioProvider = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isMinimized, setIsMinimized] = useState(window.innerWidth <= 768);
+  // The player bar is compact on every screen, so it starts expanded; the
+  // listener can still shrink it to the floating pill.
+  const [isMinimized, setIsMinimized] = useState(false);
   const [repeatMode, setRepeatMode] = useState(0); // 0=off, 1=once, 2=twice, 3=infinite
   const [repeatCount, setRepeatCount] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
@@ -386,7 +388,6 @@ export const AudioProvider = ({ children }) => {
     setPlaylist([]);
     setCurrentIndex(-1);
     setCurrentVerse(verse);
-    setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
     setCombineStep(0);
     await resolveAndApplyTrackSrc(verse, audioLanguage);
@@ -397,7 +398,6 @@ export const AudioProvider = ({ children }) => {
     setPlaylist(verses);
     setCurrentIndex(startIdx);
     setCurrentVerse(verses[startIdx]);
-    setIsMinimized(window.innerWidth <= 768);
     setRepeatCount(0);
     setCombineStep(0);
     await resolveAndApplyTrackSrc(verses[startIdx], audioLanguage);
@@ -480,6 +480,18 @@ export const AudioProvider = ({ children }) => {
     setProgress(newTime);
   };
 
+  // Direct setters for the player's Options panel (it lists every choice).
+  const PLAYBACK_SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 2];
+  const setSpeed = (speed) => {
+    if (PLAYBACK_SPEEDS.includes(speed)) setPlaybackSpeed(speed);
+  };
+  const setRepeat = (mode) => {
+    if ([0, 1, 2, 3].includes(mode)) {
+      setRepeatMode(mode);
+      setRepeatCount(0);
+    }
+  };
+
   const toggleSpeed = () => {
     const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
     const currentIdx = speeds.indexOf(playbackSpeed);
@@ -517,6 +529,8 @@ export const AudioProvider = ({ children }) => {
       setIsMinimized,
       toggleRepeat,
       toggleSpeed,
+      setSpeed,
+      setRepeat,
       skipForward,
       skipBackward,
       playVerse,

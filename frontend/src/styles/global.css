@@ -21,6 +21,35 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Theme switch (ThemeContext.changeTheme): no per-element color transitions,
+   so the new theme is one repaint; the View Transition below cross-fades it. */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.28s;
+  animation-timing-function: ease;
+}
+
+/* Long Surahs have thousands of elements: let the browser skip layout and
+   paint for verses that are off screen (it remembers each verse's real
+   height once shown, so scrolling stays steady). */
+.verse-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 280px;
+}
+
+/* While jumping to a verse (lib/scrollToVerse.js): real heights everywhere,
+   so the scroll lands exactly on the verse. */
+html.verses-rendered .verse-card {
+  content-visibility: visible;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -780,8 +809,40 @@ input[type="search"]::-webkit-search-cancel-button:hover {
 }
 
 /* ── Page transition ─────────────────────────────────────────── */
+/* `backwards` (not `both`): once done, no transform is left on the whole page
+   (a lingering transform makes every fixed child and repaint more costly). */
 .page-enter {
-  animation: fadeUp 0.35s ease both;
+  animation: fadeUp 0.35s ease backwards;
+}
+
+/* ── Subtle motion (transform/opacity only, GPU-cheap) ───────── */
+@media (prefers-reduced-motion: no-preference) {
+  /* Buttons give a small press response */
+  .btn:active:not(:disabled) {
+    transform: scale(0.97);
+    transition-duration: 0.08s;
+  }
+
+  /* Cards ease up as they scroll into view — driven by the browser's
+     scroll timeline (no JavaScript); browsers without it show them as is.
+     Not on verse cards: on long Surahs it costs scroll smoothness, and
+     smooth reading matters more there. */
+  @supports (animation-timeline: view()) {
+    .surah-grid .surah-card:not(.reveal),
+    .sp-results .sp-card,
+    .bookmark-card,
+    .juz-grid > * {
+      /* backwards: after the entry range the card's own hover lift works */
+      animation: cardInView linear backwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@keyframes cardInView {
+  from { opacity: 0.35; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeUp {
@@ -989,6 +1050,10 @@ input[type="search"]::-webkit-search-cancel-button:hover {
 /* Base reveal state */
 .reveal {
   opacity: 0;
+}
+
+/* GPU hint only until revealed — kept on 100+ cards it costs memory/jank */
+.reveal:not(.reveal-visible) {
   will-change: opacity, transform;
 }
 

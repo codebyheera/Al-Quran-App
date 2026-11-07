@@ -20,6 +20,7 @@ import { useReadingTimer } from '../hooks/useReadingTimer';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import useArabicFontSize from '../hooks/useArabicFontSize';
 import useQuranScript, { verseHasIndopak } from '../hooks/useQuranScript';
+import { scrollToVerse } from '../lib/scrollToVerse';
 import './JuzView.css';
 
 export default function JuzView() {
@@ -104,6 +105,9 @@ export default function JuzView() {
     showUr,
     setShowUr
   } = useAudio();
+  // Latest playing verse, readable inside async fetch callbacks
+  const currentVerseRef = useRef(currentVerse);
+  currentVerseRef.current = currentVerse;
   const { reciter } = useQari();
   const { addBookmark, removeBookmark, isBookmarked, bookmarks } = useBookmarks();
   const topRef = useRef(null);
@@ -129,22 +133,41 @@ export default function JuzView() {
       wordAudioRef.current = null;
     }
     
+    // A reciter change on the same Juz refetches quietly (no loader, audio
+    // keeps playing); only a new Juz shows the loader.
+    const isReload = isJuzChange || !juz;
     api.get(`/api/juz/${juzNum}?reciter=${reciter}`)
-      .then(({ data }) => { 
-        setJuz(data); 
-        setLoading(false); 
-
-        // Update background playlist if currently playing this juz
-        if (!isJuzChange && updatePlaylist) {
-          const mappedVerses = data.verses.map(v => ({
-            ...v,
-            audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl
-          }));
-          updatePlaylist(mappedVerses);
-        }
+      .then(({ data }) => {
+        setJuz(data);
+        setLoading(false);
+        if (!isJuzChange) syncPlaylist(data, audioLanguage);
       })
-      .catch(() => { setError('Failed to load Juz.'); setLoading(false); });
-  }, [juzNum, reciter, audioLanguage]);
+      .catch(() => {
+        if (isReload) setError('Failed to load Juz.');
+        setLoading(false);
+      });
+  }, [juzNum, reciter]);
+
+  // Recitation language: every verse already has its Arabic, English and Urdu
+  // audio, so nothing is refetched — only the playing playlist is updated.
+  const prevLangRef = useRef(audioLanguage);
+  useEffect(() => {
+    if (prevLangRef.current === audioLanguage) return;
+    prevLangRef.current = audioLanguage;
+    if (juz) syncPlaylist(juz, audioLanguage);
+  }, [audioLanguage]);
+
+  // Refresh the queued ayahs only while this Juz is the one playing.
+  function syncPlaylist(data, lang) {
+    const playing = currentVerseRef.current;
+    if (!updatePlaylist || !playing) return;
+    const inThisJuz = data.verses.some((v) => v.surahNumber === playing.surahNumber && v.number === playing.number);
+    if (!inThisJuz) return;
+    updatePlaylist(data.verses.map((v) => ({
+      ...v,
+      audio: lang === 'en' ? v.englishAudioUrl : lang === 'ur' ? v.urduAudioUrl : v.audioUrl,
+    })));
+  }
 
   // Auto-scroll on initial load if hash is present
   useEffect(() => {
@@ -153,7 +176,7 @@ export default function JuzView() {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scrollToVerse(el);
           el.classList.add('menu-open');
           setTimeout(() => el.classList.remove('menu-open'), 1500);
         }
@@ -170,7 +193,7 @@ export default function JuzView() {
         const verseId = `verse-${currentVerse.surahNumber}:${currentVerse.number}`;
         const el = document.getElementById(verseId);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scrollToVerse(el);
         }
       }
     }
@@ -405,8 +428,8 @@ export default function JuzView() {
             {group.verses.map((verse, idx) => {
               const verseUid = `${verse.surahNumber}:${verse.number}`;
               const bookmarked = isBookmarked(verse.surahNumber, verse.number);
-              const verseAudio = audioLanguage === 'en' ? verse.englishAudioUrl : audioLanguage === 'ur' ? verse.urduAudioUrl : verse.audioUrl;
-              const isPlayingVerse = currentVerse?.audio === verseAudio;
+              // Matched by Surah + ayah, not audio URL, so it survives a language switch
+              const isPlayingVerse = currentVerse?.surahNumber === verse.surahNumber && currentVerse?.number === verse.number;
               const isMenuOpen = activeMenu === verseUid;
               // IndoPak only when the whole verse has it; otherwise Uthmani.
               const showIndopak = quranScript === 'indopak' && verseHasIndopak(verse);

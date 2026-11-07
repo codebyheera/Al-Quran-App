@@ -28,6 +28,7 @@ import { useReadingProgress } from "../hooks/useReadingProgress";
 import useArabicFontSize from "../hooks/useArabicFontSize";
 import useQuranScript, { verseHasIndopak } from "../hooks/useQuranScript";
 import GoToVerse from "../components/GoToVerse";
+import { scrollToVerse } from "../lib/scrollToVerse";
 import "./SurahView.css";
 
 export default function SurahView() {
@@ -138,6 +139,9 @@ export default function SurahView() {
     setShowUr,
     setPreferredLanguage
   } = useAudio();
+  // Latest playing verse, readable inside async fetch callbacks
+  const currentVerseRef = useRef(currentVerse);
+  currentVerseRef.current = currentVerse;
   const { reciter } = useQari();
 
   const { addBookmark, removeBookmark, isBookmarked, bookmarks } =
@@ -169,9 +173,15 @@ export default function SurahView() {
       }
     }
 
-    setLoading(true);
-    setError(null);
-    stop(); // Stop any playing audio when switching surah
+    // A new Surah shows the loader and stops recitation. A reciter change on
+    // the same Surah refetches quietly in the background instead: the page
+    // stays as it is and the current ayah keeps playing.
+    const isReload = isIdChange || !surah;
+    if (isReload) {
+      setLoading(true);
+      setError(null);
+      stop();
+    }
     if (isIdChange) {
       topRef.current?.scrollIntoView({ behavior: "smooth" });
     }
@@ -200,23 +210,37 @@ export default function SurahView() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Update background playlist if currently playing
-        if (!isIdChange && updatePlaylist) {
-          const mappedVerses = data.verses.map((v) => ({
-            ...v,
-            surahNumber: data.surahNumber,
-            surahName: data.surahName,
-            audio: audioLanguage === 'en' ? v.englishAudioUrl : audioLanguage === 'ur' ? v.urduAudioUrl : v.audioUrl,
-          }));
-          updatePlaylist(mappedVerses);
-        }
+        // New reciter's audio for the rest of the playlist, if this Surah is playing
+        if (!isIdChange) syncPlaylist(data, audioLanguage);
       })
       .catch((err) => {
         console.error("Failed to load Surah:", err);
-        setError("Failed to load Surah.");
+        // A failed background refresh keeps the page that is already shown.
+        if (isReload) setError("Failed to load Surah.");
         setLoading(false);
       });
-  }, [id, reciter, audioLanguage]);
+  }, [id, reciter]);
+
+  // Recitation language: every verse already carries its Arabic, English and
+  // Urdu audio, so nothing is refetched — only the playing playlist is
+  // pointed at the new language (AudioContext switches the current ayah).
+  const prevLangRef = useRef(audioLanguage);
+  useEffect(() => {
+    if (prevLangRef.current === audioLanguage) return;
+    prevLangRef.current = audioLanguage;
+    if (surah) syncPlaylist(surah, audioLanguage);
+  }, [audioLanguage]);
+
+  // Refresh the queued ayahs only while this Surah is the one playing.
+  function syncPlaylist(data, lang) {
+    if (!updatePlaylist || currentVerseRef.current?.surahNumber !== data.surahNumber) return;
+    updatePlaylist(data.verses.map((v) => ({
+      ...v,
+      surahNumber: data.surahNumber,
+      surahName: data.surahName,
+      audio: lang === 'en' ? v.englishAudioUrl : lang === 'ur' ? v.urduAudioUrl : v.audioUrl,
+    })));
+  }
 
   // Auto-scroll on initial load if hash is present
   useEffect(() => {
@@ -225,7 +249,7 @@ export default function SurahView() {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          scrollToVerse(el);
           // Add a temporary highlight effect
           el.classList.add("menu-open");
           setTimeout(() => el.classList.remove("menu-open"), 1500);
@@ -257,7 +281,7 @@ export default function SurahView() {
         const verseId = `verse-${currentVerse.number}`;
         const el = document.getElementById(verseId);
         if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          scrollToVerse(el);
         }
       }
     }
@@ -563,8 +587,8 @@ export default function SurahView() {
         <div className="verse-list">
           {verses.map((verse, index) => {
             const bookmarked = isBookmarked(surahNum, verse.number);
-            const verseAudio = audioLanguage === 'en' ? verse.englishAudioUrl : audioLanguage === 'ur' ? verse.urduAudioUrl : verse.audioUrl;
-            const isPlayingVerse = currentVerse?.audio === verseAudio;
+            // Matched by Surah + ayah, not audio URL, so it survives a language switch
+            const isPlayingVerse = currentVerse?.surahNumber === surahNum && currentVerse?.number === verse.number;
             const isMenuOpen = activeMenu === verse.number;
             // IndoPak only when the whole verse has it; otherwise Uthmani.
             const showIndopak = quranScript === "indopak" && verseHasIndopak(verse);

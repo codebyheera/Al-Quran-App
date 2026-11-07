@@ -11,7 +11,10 @@ export default function AudioPlayer({ verse, fullPlaylist, index }) {
 
   if (!verse?.audio) return null;
 
-  const isCurrent = currentVerse?.audio === verse.audio;
+  // Same Surah + ayah (the audio URL changes with the recitation language)
+  const isCurrent = currentVerse && verse.surahNumber != null
+    ? currentVerse.surahNumber === verse.surahNumber && currentVerse.number === verse.number
+    : currentVerse?.audio === verse.audio;
 
   function handleToggle() {
     if (isCurrent) {
