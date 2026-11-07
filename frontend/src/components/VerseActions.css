@@ -1,0 +1,251 @@
+/* ============================================================
+   VerseActions.css — "Ayah options" sheet / dialog
+   Global theme tokens only, so it follows every theme.
+   Phones: bottom sheet. Desktop: centered dialog.
+   ============================================================ */
+
+.va-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1010; /* above the recitation player (1000–1004) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.va-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  animation: vaFadeIn 0.22s ease both;
+}
+
+.va-panel {
+  position: relative;
+  width: min(400px, 100%);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow), var(--shadow-gold);
+  outline: none;
+  animation: vaDialogIn 0.26s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 0.2s ease;
+}
+
+.va-root.is-closing .va-overlay { animation: vaFadeOut 0.2s ease both; }
+.va-root.is-closing .va-panel { animation: vaDialogOut 0.2s ease-in both; }
+
+/* ── Header ─────────────────────────────────────────────── */
+.va-head {
+  padding: 1rem 1rem 0.5rem;
+}
+
+.va-handle { display: none; }
+
+.va-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.va-head-text {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+/* Same look as the verse number badge on the cards */
+.va-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-hover);
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--accent-gold);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.va-title {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.va-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.va-close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.va-close:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+/* ── Actions ────────────────────────────────────────────── */
+.va-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.25rem 0.5rem 0.75rem;
+}
+
+.va-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  min-height: 52px;
+  padding: 0.5rem 0.6rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.va-item:hover:not(:disabled),
+.va-item:active:not(:disabled) {
+  background: var(--bg-card-hover);
+}
+
+.va-item:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.va-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--accent-gold);
+}
+
+.va-item.is-active .va-icon {
+  background: var(--accent-gold);
+  color: var(--on-accent-gold);
+}
+
+.va-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.va-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.va-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.va-root button:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+/* ── Phones: bottom sheet ───────────────────────────────── */
+@media (max-width: 768px) {
+  .va-root {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .va-panel {
+    width: 100%;
+    max-height: 85vh;
+    border-bottom: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    animation: vaSheetIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .va-root.is-closing .va-panel { animation: vaSheetOut 0.2s ease-in both; }
+
+  .va-head {
+    padding: 0.5rem 1.1rem 0.5rem;
+    touch-action: none; /* lets the swipe-down gesture work */
+  }
+
+  .va-handle {
+    display: block;
+    width: 40px;
+    height: 4px;
+    margin: 0 auto 0.75rem;
+    border-radius: 999px;
+    background: var(--border-hover);
+  }
+
+  .va-list { padding: 0.25rem 0.6rem 1rem; }
+}
+
+@keyframes vaFadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes vaFadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+@keyframes vaDialogIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes vaDialogOut {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.97); }
+}
+
+@keyframes vaSheetIn {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes vaSheetOut {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .va-overlay, .va-panel,
+  .va-root.is-closing .va-overlay,
+  .va-root.is-closing .va-panel { animation-duration: 0.01ms; }
+}

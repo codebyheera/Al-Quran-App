@@ -1,0 +1,340 @@
+/* ============================================================
+   VerseToolbar.css — Verse card top bar + card layout.
+   One responsive design for every screen (phones → large desktops).
+   Global theme tokens only, so it follows every theme.
+
+   Breakpoints
+     > 1024px   large: roomy padding
+     641–1024   tablet: same bar, slightly tighter
+     ≤ 640      phone: Copy/Share move into ⋯, bigger tap targets
+     ≤ 400      small phone: icon-only buttons, reference shows "1:1"
+   ============================================================ */
+
+/* ── Card ─────────────────────────────────────────────── */
+.verse-card {
+  flex-direction: column;
+  gap: 0;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1rem;
+  border-left: 1px solid var(--border);
+  box-shadow: none;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Surah page spaces cards with the list's gap, not margins */
+.verse-list { gap: 1rem; }
+.verse-list > .verse-card { margin-bottom: 0; }
+
+/* No jump on hover, just a gentle border change */
+.verse-card:hover {
+  transform: none;
+  border-color: var(--border-hover);
+  border-left-color: var(--border-hover);
+  box-shadow: none;
+}
+
+/* Only the playing ayah gets the gold edge */
+.verse-card.active-playing {
+  transform: none;
+  border-left: 3px solid var(--accent-gold) !important;
+  background: rgba(201, 168, 76, 0.05) !important;
+  box-shadow: var(--shadow-gold) !important;
+}
+
+/* The footer (old play + bookmark) is replaced by the top bar */
+.verse-card .verse-card-footer { display: none; }
+
+/* No extra empty space under the last line (translation or Arabic) */
+.verse-card-main > :last-child { margin-bottom: 0 !important; }
+
+/* ── Top bar ──────────────────────────────────────────── */
+.vt-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Reference: ① Al-Faatiha · 1:1 */
+.vt-ref {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.vt-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border-hover);
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--accent-gold);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.vt-ref-text {
+  min-width: 0;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+.vt-dot { opacity: 0.6; }
+
+.active-playing .vt-num {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: var(--on-accent-gold);
+}
+
+.active-playing .vt-ref-text { color: var(--accent-gold); }
+
+/* ── Actions ──────────────────────────────────────────── */
+.vt-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+/* Mouse users: actions are soft until the card is hovered */
+@media (hover: hover) {
+  .vt-actions {
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+  }
+  .verse-card:hover .vt-actions,
+  .verse-card:focus-within .vt-actions,
+  .active-playing .vt-actions {
+    opacity: 1;
+  }
+}
+
+/* Pills: Play + Translation */
+.vt-play,
+.vt-translate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  height: 34px;
+  padding: 0 0.85rem 0 0.7rem;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.vt-play {
+  margin-right: 0.25rem;
+  border: 1px solid var(--border-hover);
+  background: transparent;
+  color: var(--accent-gold);
+}
+
+.vt-play:hover:not(:disabled) {
+  background: rgba(201, 168, 76, 0.12);
+  border-color: var(--accent-gold);
+}
+
+.vt-play.is-playing {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: var(--on-accent-gold);
+}
+
+.vt-play:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.vt-translate {
+  margin-right: 0.25rem;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.vt-translate:hover { border-color: var(--border-hover); color: var(--text-primary); }
+
+.vt-translate.is-on {
+  border-color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.12);
+  color: var(--accent-gold);
+}
+
+.vt-play:active:not(:disabled),
+.vt-translate:active { transform: scale(0.96); }
+
+/* Little moving sound bars while this ayah is playing */
+.vt-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.vt-eq span {
+  width: 2px;
+  height: 100%;
+  border-radius: 1px;
+  background: currentColor;
+  transform-origin: bottom;
+  animation: vtEq 0.9s ease-in-out infinite;
+}
+.vt-eq span:nth-child(2) { animation-delay: -0.3s; }
+.vt-eq span:nth-child(3) { animation-delay: -0.6s; }
+
+@keyframes vtEq {
+  0%, 100% { transform: scaleY(0.35); }
+  50%      { transform: scaleY(1); }
+}
+
+/* Icon buttons: Bookmark, Copy, Share, More */
+.vt-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.vt-icon:hover,
+.vt-icon:active {
+  background: var(--bg-card-hover);
+  color: var(--accent-gold);
+}
+
+.vt-icon.is-on { color: var(--accent-gold); }
+
+/* Tooltips — only where there is a mouse */
+@media (hover: hover) {
+  /* Shown below the button: above it there isn't enough room before the
+     card's top edge. */
+  .vt-icon[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translate(-50%, -4px);
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    z-index: 5;
+  }
+
+  .vt-icon[data-tip]:hover::after,
+  .vt-icon[data-tip]:focus-visible::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* Last button (More): line the tooltip up with its right edge so it
+     never runs past the card */
+  .vt-icon[data-tip]:last-child::after {
+    left: auto;
+    right: 0;
+    transform: translateY(-4px);
+  }
+
+  .vt-icon[data-tip]:last-child:hover::after,
+  .vt-icon[data-tip]:last-child:focus-visible::after {
+    transform: translateY(0);
+  }
+}
+
+.vt-play:focus-visible,
+.vt-translate:focus-visible,
+.vt-icon:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+/* ── Large screens ────────────────────────────────────── */
+@media (min-width: 1025px) {
+  .verse-card { padding: 1.75rem 2rem; }
+}
+
+/* ── Phones ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .verse-card {
+    padding: 0.9rem 1rem 1.1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .verse-list { gap: 0.75rem; }
+  .verse-card { margin-bottom: 0.75rem; }
+
+  .vt-bar {
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+  }
+
+  /* Copy and Share are in the ⋯ sheet on phones */
+  .vt-wide-only { display: none; }
+
+  /* Bigger tap targets */
+  .vt-icon { width: 40px; height: 40px; border-radius: var(--radius-md); }
+  .vt-play,
+  .vt-translate { height: 36px; }
+  .vt-num { min-width: 32px; height: 32px; }
+  .vt-actions { gap: 0.1rem; }
+}
+
+/* ── Small phones ─────────────────────────────────────── */
+@media (max-width: 400px) {
+  .verse-card { padding: 0.8rem 0.85rem 1rem; }
+
+  /* Icon-only pills, short reference */
+  .vt-label,
+  .vt-ref-name { display: none; }
+
+  .vt-play,
+  .vt-translate {
+    width: 36px;
+    padding: 0;
+    gap: 0;
+    margin-right: 0.15rem;
+  }
+
+  .vt-play.is-playing { width: auto; padding: 0 0.6rem; gap: 0.3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vt-eq span { animation: none; transform: scaleY(0.7); }
+}

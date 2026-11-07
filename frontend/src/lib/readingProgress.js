@@ -37,11 +37,12 @@ export function getLastReading() {
  * Moving to a different Surah always updates, since that's a deliberate
  * navigation to a new spot.
  */
-export function saveLastReading({ surahNumber, surahName, ayahNumber, url }) {
+export function saveLastReading({ surahNumber, surahName, ayahNumber, url }, { force = false } = {}) {
   if (!surahNumber || !ayahNumber || !url) return;
 
   const existing = getLastReading();
-  if (existing && existing.surahNumber === surahNumber && ayahNumber < existing.ayahNumber) {
+  // `force`: the user picked this ayah themselves ("Mark as last read").
+  if (!force && existing && existing.surahNumber === surahNumber && ayahNumber < existing.ayahNumber) {
     return;
   }
 

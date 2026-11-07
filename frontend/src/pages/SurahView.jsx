@@ -8,7 +8,6 @@
 import { Fragment, useEffect, useState, useRef, useMemo } from "react";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import api from "../lib/api";
-import AudioPlayer from "../components/AudioPlayer";
 import { useBookmarks } from "../context/BookmarkContext";
 import AudioDropdown from "../components/AudioDropdown";
 import { useAudio } from "../context/AudioContext";
@@ -28,6 +27,8 @@ import { useReadingProgress } from "../hooks/useReadingProgress";
 import useArabicFontSize from "../hooks/useArabicFontSize";
 import useQuranScript, { verseHasIndopak } from "../hooks/useQuranScript";
 import GoToVerse from "../components/GoToVerse";
+import VerseActions from "../components/VerseActions";
+import VerseToolbar from "../components/VerseToolbar";
 import { scrollToVerse } from "../lib/scrollToVerse";
 import "./SurahView.css";
 
@@ -88,6 +89,7 @@ export default function SurahView() {
     return parseFloat(localStorage.getItem("translationFontSize")) || 1.0;
   });
 
+  // Index (in the playlist) of the verse whose "Ayah options" sheet is open
   const [activeMenu, setActiveMenu] = useState(null);
   // Per-verse translation reveal (used when global showTranslation is off)
   const [revealedVerses, setRevealedVerses] = useState(new Set());
@@ -103,25 +105,9 @@ export default function SurahView() {
       return next;
     });
   };
-  const menuTimeoutRef = useRef(null);
-
-  const toggleMenu = (e, menuId) => {
+  const openMenu = (e, verseIndex) => {
     e.stopPropagation();
-    if (activeMenu === menuId) {
-      setActiveMenu(null);
-      if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
-    } else {
-      setActiveMenu(menuId);
-      if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
-      menuTimeoutRef.current = setTimeout(() => {
-        setActiveMenu(null);
-      }, 2000);
-    }
-  };
-
-  const handleFeatureClick = () => {
-    setActiveMenu(null);
-    if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+    setActiveMenu(verseIndex);
   };
 
   const {
@@ -589,56 +575,30 @@ export default function SurahView() {
             const bookmarked = isBookmarked(surahNum, verse.number);
             // Matched by Surah + ayah, not audio URL, so it survives a language switch
             const isPlayingVerse = currentVerse?.surahNumber === surahNum && currentVerse?.number === verse.number;
-            const isMenuOpen = activeMenu === verse.number;
             // IndoPak only when the whole verse has it; otherwise Uthmani.
             const showIndopak = quranScript === "indopak" && verseHasIndopak(verse);
 
             return (
               <div
                 key={verse.number}
-                className={`verse-card ${isPlayingVerse ? "active-playing" : ""} ${isMenuOpen ? "menu-open" : ""}`}
+                className={`verse-card ${isPlayingVerse ? "active-playing" : ""}`}
                 id={`verse-${verse.number}`}
-                onClick={() => {
-                  // Close menu if clicking outside
-                  if (isMenuOpen) setActiveMenu(null);
-                }}
               >
-                <div className="verse-top-actions">
-                  <button
-                    className="verse-menu-btn"
-                    onClick={(e) => toggleMenu(e, verse.number)}
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="20"
-                      height="20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                      strokeLinecap="round"
-                    >
-                      <circle cx="12" cy="12" r="1.5"></circle>
-                      <circle cx="12" cy="5" r="1.5"></circle>
-                      <circle cx="12" cy="19" r="1.5"></circle>
-                    </svg>
-                  </button>
-                  {/* Translate toggle — mobile only, visible when both translations are off */}
-                  {(!showEn && !showUr) && (
-                    <button
-                      className={`verse-translate-btn ${revealedVerses.has(verse.number) ? "active" : ""}`}
-                      onClick={(e) => toggleVerseTranslation(e, verse.number)}
-                      title="Show translation"
-                    >
-                      Translation
-                    </button>
-                  )}
-                </div>
-                {/* Header section with Ayah number */}
-                <div className="verse-card-side">
-                  <div className="verse-badge">{verse.number}</div>
-                </div>
 
                 <div className="verse-card-main">
+                  {/* Top bar: ayah number + Play, Bookmark, Copy, Share, More (responsive) */}
+                  <VerseToolbar
+                    verse={mappedPlaylist[index]}
+                    playlist={mappedPlaylist}
+                    index={index}
+                    bookmarked={bookmarked}
+                    onBookmark={handleBookmark}
+                    onMore={(e) => openMenu(e, index)}
+                    translationToggle={!showEn && !showUr ? {
+                      shown: revealedVerses.has(verse.number),
+                      onToggle: (e) => toggleVerseTranslation(e, verse.number),
+                    } : null}
+                  />
                   {/* Arabic text with Word-by-Word Audio */}
                   <div
                     className={`arabic verse-arabic${showIndopak ? " arabic--indopak" : ""}`}
@@ -713,45 +673,22 @@ export default function SurahView() {
                     </div>
                   )}
 
-                  {/* Footer section with controls */}
-                  <div
-                    className="verse-card-footer"
-                    onClickCapture={handleFeatureClick}
-                  >
-                    <div
-                      className="verse-card-logo"
-                      style={{
-                        display: "none",
-                        color: "var(--accent-gold)",
-                        fontWeight: "bold",
-                        fontSize: "0.9rem",
-                        alignItems: "center",
-                        gap: "4px",
-                      }}
-                    >
-                      <span style={{ fontSize: "1.1rem" }}>☪</span> QApp
-                    </div>
-                    <AudioPlayer
-                      verse={mappedPlaylist[index]}
-                      fullPlaylist={mappedPlaylist}
-                      index={index}
-                    />
-                    <button
-                      className={`btn btn-ghost bookmark-btn ${bookmarked ? "bookmarked" : ""}`}
-                      onClick={() => handleBookmark(verse)}
-                      title={
-                        bookmarked ? "Remove bookmark" : "Bookmark this verse"
-                      }
-                    >
-                      {bookmarked ? "🔖 Bookmarked" : "🔖 Bookmark"}
-                    </button>
-                  </div>
                 </div>
               </div>
             );
           })}
         </div>
         </SurahIntro>
+
+        {/* "Ayah options" — one sheet for the whole page */}
+        <VerseActions
+          verse={activeMenu != null ? mappedPlaylist[activeMenu] : null}
+          playlist={mappedPlaylist}
+          index={activeMenu ?? -1}
+          bookmarked={activeMenu != null && isBookmarked(surahNum, mappedPlaylist[activeMenu]?.number)}
+          onBookmark={handleBookmark}
+          onClose={() => setActiveMenu(null)}
+        />
 
         {/* ── Prev / Next navigation ──────────────────────── */}
         {faqItems.length > 0 && (

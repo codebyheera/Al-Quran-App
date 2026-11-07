@@ -19,15 +19,16 @@ import { useTheme, DEFAULT_THEME } from '../context/ThemeContext';
 import { useAudio } from '../context/AudioContext';
 import { useQari } from '../context/QariContext';
 import useArabicFontSize, {
-  ARABIC_FONT_MIN, ARABIC_FONT_MAX, ARABIC_FONT_STEP, ARABIC_FONT_DEFAULT,
+  ARABIC_FONT_MIN, ARABIC_FONT_MAX, ARABIC_FONT_STEP, getArabicFontDefault,
 } from '../hooks/useArabicFontSize';
 import useQuranScript, { QURAN_SCRIPTS, QURAN_SCRIPT_DEFAULT } from '../hooks/useQuranScript';
 
-// Quick size presets shown under the slider (values in rem).
-const SIZE_PRESETS = [1.6, ARABIC_FONT_DEFAULT, 2.6, 3.2];
+// Quick size presets shown under the slider (values in rem). The middle-left
+// one is this screen's default (2.0 on phones, 2.4 on desktop).
+const presetsFor = (def) => (def > 2.2 ? [2.0, def, 2.8, 3.2] : [1.6, def, 2.6, 3.2]);
 
 // Number scale under the slider.
-const SCALE_MARKS = [ARABIC_FONT_MIN, ARABIC_FONT_DEFAULT, 3.0, ARABIC_FONT_MAX];
+const marksFor = (def) => [ARABIC_FONT_MIN, def, 3.0, ARABIC_FONT_MAX];
 
 const pct = (v) => ((v - ARABIC_FONT_MIN) / (ARABIC_FONT_MAX - ARABIC_FONT_MIN)) * 100;
 
@@ -59,6 +60,9 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
   const { preferredLanguage, setPreferredLanguage, showEn, setShowEn, showUr, setShowUr } = useAudio();
   const { reciter, changeReciter, reciters } = useQari();
   const [arabicSize, setArabicSize] = useArabicFontSize();
+  const fontDefault = getArabicFontDefault();
+  const SIZE_PRESETS = presetsFor(fontDefault);
+  const SCALE_MARKS = marksFor(fontDefault);
   const [quranScript, setQuranScript] = useQuranScript();
   const isIndopak = quranScript === 'indopak';
   const panelRef = useRef(null);
@@ -113,7 +117,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
     changeTheme(DEFAULT_THEME);
     setPreferredLanguage('english', { applyAudio: false });
     changeReciter(DEFAULT_RECITER);
-    setArabicSize(ARABIC_FONT_DEFAULT);
+    setArabicSize(fontDefault);
     setQuranScript(QURAN_SCRIPT_DEFAULT);
   }
 
@@ -168,7 +172,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
               <div className="sd-size-display" aria-live="polite">
                 <span className="sd-size-num">{arabicSize.toFixed(1)}</span>
                 <span className="sd-size-meta">
-                  {Math.round((arabicSize / ARABIC_FONT_DEFAULT) * 100)}% of default
+                  {Math.round((arabicSize / fontDefault) * 100)}% of default
                 </span>
               </div>
               <button
@@ -222,7 +226,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
                     onClick={() => setArabicSize(v)}
                   >
                     <span className="sd-size-preset-label">{v.toFixed(1)}</span>
-                    {v === ARABIC_FONT_DEFAULT && (
+                    {v === fontDefault && (
                       <span className="sd-size-preset-num">Default</span>
                     )}
                   </button>

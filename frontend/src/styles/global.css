@@ -506,16 +506,6 @@ html[data-quran-script="indopak"] .verse-arabic[data-script="uthmani"] {
   border-color: var(--accent-gold);
 }
 
-.verse-menu-btn {
-  display: none;
-}
-
-/* Container for the translate + three-dots group (mobile) */
-.verse-top-actions {
-  display: none;
-}
-
-
 /* ── Buttons ─────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
@@ -881,137 +871,10 @@ input[type="search"]::-webkit-search-cancel-button:hover {
     padding: 1.25rem 0;
   }
 
-  /* Verse card: Convert to column layout so side content leaves the side */
-  .verse-card {
-    flex-direction: column;
-    padding: 3.25rem 1.25rem 4rem 1.25rem;
-    /* Increased top padding to provide space below translation button, and bottom padding */
-    gap: 0;
-    transition: padding 0.3s ease;
-  }
-
-  /* Menu pop-up state doesn't change padding */
-
-  .verse-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: static;
-    width: 32px;
-    height: 32px;
-    border: none;
-    background: transparent;
-    color: var(--text-secondary);
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 5;
-    transition: background 0.2s;
-    flex-shrink: 0;
-  }
-
-  .verse-menu-btn:active {
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  /* Wrapper for translate + three-dots buttons (top-left on mobile) */
-  .verse-top-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    /* Gap for pill spacing */
-    position: absolute;
-    top: 0.8rem;
-    left: 0.8rem;
-    z-index: 5;
-  }
-
-  /* Per-verse translation toggle button */
-  .verse-translate-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.35rem 0.8rem;
-    border: 1px solid var(--border);
-    background: var(--bg-secondary);
-    color: var(--text-secondary);
-    border-radius: 100px;
-    /* Pill shape */
-    font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  .verse-translate-btn:active,
-  .verse-translate-btn.active {
-    color: var(--accent-gold);
-    background: rgba(201, 168, 76, 0.1);
-  }
-
-  /* Hide the desktop side container, we will move the badge via CSS ordering or flex */
-  .verse-card-side {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    bottom: 0.9rem;
-    left: 1rem;
-    z-index: 2;
-  }
-
   /* Shrink the Arabic font a bit so it fits on phone */
   .verse-arabic {
     line-height: 1.9 !important;
     margin-bottom: 0.75rem;
-  }
-
-  /* Popup menu for 3-dots on mobile */
-  .verse-card-footer {
-    display: none;
-    /* Hidden by default on mobile */
-    position: absolute;
-    top: 3.25rem;
-    left: 1rem;
-    background: var(--bg-card-hover);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    /* Make the popup pill-shaped for a richer feel */
-    padding: 0.75rem 1.25rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-    z-index: 20;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    min-width: max-content;
-    animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-origin: top left;
-
-    /* Reset desktop properties */
-    margin-top: 0;
-    border-top: none;
-  }
-
-  .verse-card.menu-open .verse-card-footer {
-    display: flex;
-    /* Show when active */
-  }
-
-  .verse-card.menu-open .verse-card-logo {
-    display: flex !important;
-    /* Show logo in mobile menu */
-  }
-
-  @keyframes popIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95) translateY(-4px);
-    }
-
-    to {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
   }
 
   /* Cleanup duplicated CSS blocks */

@@ -13,11 +13,12 @@
       }
     } catch (e) {}
   </script>
-  <!-- Quran script preference (Uthmani default). For IndoPak, mark <html> and
-       start the font download early. Keep in sync with src/hooks/useQuranScript.js. -->
+  <!-- Quran script preference (IndoPak default; Uthmani only when chosen). For
+       IndoPak, mark <html> and start the font download early.
+       Keep in sync with src/hooks/useQuranScript.js. -->
   <script>
     try {
-      if (localStorage.getItem('quranScript') === 'indopak') {
+      if (localStorage.getItem('quranScript') !== 'uthmani') {
         document.documentElement.setAttribute('data-quran-script', 'indopak');
         var f = document.createElement('link');
         f.rel = 'preload'; f.as = 'font'; f.type = 'font/woff2'; f.crossOrigin = 'anonymous';

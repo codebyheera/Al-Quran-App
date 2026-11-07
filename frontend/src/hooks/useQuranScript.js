@@ -21,7 +21,8 @@ export const QURAN_SCRIPTS = [
   { id: 'uthmani', name: 'Uthmani' },
   { id: 'indopak', name: 'IndoPak' },
 ];
-export const QURAN_SCRIPT_DEFAULT = 'uthmani';
+// New visitors start with IndoPak (keep in sync with the script in index.html).
+export const QURAN_SCRIPT_DEFAULT = 'indopak';
 
 function readScript() {
   try {

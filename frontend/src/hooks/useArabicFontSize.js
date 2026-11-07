@@ -14,13 +14,25 @@ const CHANGE_EVENT = 'arabic-font-size-change';
 export const ARABIC_FONT_MIN = 1.4;
 export const ARABIC_FONT_MAX = 4.0;
 export const ARABIC_FONT_STEP = 0.2;
-export const ARABIC_FONT_DEFAULT = 2.0;
+// Default size for visitors who haven't picked one: bigger on desktop.
+export const ARABIC_FONT_DEFAULT = 2.0;          // phones & tablets
+export const ARABIC_FONT_DEFAULT_DESKTOP = 2.4;  // ≥ 1024px wide
+
+/** The default size for this screen (no saved preference). */
+export function getArabicFontDefault() {
+  try {
+    if (window.matchMedia('(min-width: 1024px)').matches) return ARABIC_FONT_DEFAULT_DESKTOP;
+  } catch {
+    // no window (build-time prerender)
+  }
+  return ARABIC_FONT_DEFAULT;
+}
 
 function readSize() {
   try {
-    return parseFloat(localStorage.getItem(STORAGE_KEY)) || ARABIC_FONT_DEFAULT;
+    return parseFloat(localStorage.getItem(STORAGE_KEY)) || getArabicFontDefault();
   } catch {
-    return ARABIC_FONT_DEFAULT;
+    return getArabicFontDefault();
   }
 }
 
