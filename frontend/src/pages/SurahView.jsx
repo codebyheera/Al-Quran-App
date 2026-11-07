@@ -26,6 +26,7 @@ import { getRevelationOrder } from "../data/surahRevelationOrder";
 import { useReadingTimer } from "../hooks/useReadingTimer";
 import { useReadingProgress } from "../hooks/useReadingProgress";
 import useArabicFontSize from "../hooks/useArabicFontSize";
+import useQuranScript, { verseHasIndopak } from "../hooks/useQuranScript";
 import "./SurahView.css";
 
 export default function SurahView() {
@@ -79,6 +80,7 @@ export default function SurahView() {
   useReadingProgress(readingProgressItems);
 
   const [fontSize, setArabicFontSize] = useArabicFontSize();
+  const [quranScript] = useQuranScript();
 
   const [translationFontSize, setTranslationFontSize] = useState(() => {
     return parseFloat(localStorage.getItem("translationFontSize")) || 1.0;
@@ -557,6 +559,8 @@ export default function SurahView() {
             const verseAudio = audioLanguage === 'en' ? verse.englishAudioUrl : audioLanguage === 'ur' ? verse.urduAudioUrl : verse.audioUrl;
             const isPlayingVerse = currentVerse?.audio === verseAudio;
             const isMenuOpen = activeMenu === verse.number;
+            // IndoPak only when the whole verse has it; otherwise Uthmani.
+            const showIndopak = quranScript === "indopak" && verseHasIndopak(verse);
 
             return (
               <div
@@ -605,7 +609,12 @@ export default function SurahView() {
 
                 <div className="verse-card-main">
                   {/* Arabic text with Word-by-Word Audio */}
-                  <div className="arabic verse-arabic" lang="ar" dir="rtl">
+                  <div
+                    className={`arabic verse-arabic${showIndopak ? " arabic--indopak" : ""}`}
+                    lang="ar"
+                    dir="rtl"
+                    data-script={showIndopak ? "indopak" : quranScript === "indopak" ? "fallback" : "uthmani"}
+                  >
                     {verse.words && verse.words.length > 0
                       ? verse.words.map((word) => {
                           // Play individual audio for this word
@@ -643,13 +652,18 @@ export default function SurahView() {
                                   cursor: word.audioUrl ? "pointer" : "text",
                                 }}
                               >
-                                {word.text_uthmani || word.text}
+                                {showIndopak ? word.text_indopak : (word.text_uthmani || word.text)}
                               </span>{" "}
                             </Fragment>
                           );
                         })
                       : // Fallback if words aren't loaded or available
                         verse.arabic}
+                    {/* IndoPak ayah-end marker: the font draws the ayah number
+                        with its Ruku/Sajda signs. Shown exactly as received. */}
+                    {showIndopak && (
+                      <span className="quran-ayah-end">{verse.indopakEnd}</span>
+                    )}
                   </div>
 
                   {/* Translations — shown if global toggle is on, OR this verse is individually revealed */}

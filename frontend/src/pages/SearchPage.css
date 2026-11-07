@@ -24,6 +24,123 @@
   padding: 0 1.25rem;
 }
 
+/* Sections */
+.sp-section { margin-bottom: 2rem; }
+.sp-section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* Instant Surah / Ayah results */
+.sp-suggestions {
+  max-width: 620px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.sp-hint {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.sp-hint kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  background: var(--bg-card);
+}
+
+.sp-try {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--accent-gold);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Popular shortcuts */
+.sp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sp-chip {
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.sp-chip:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* Browse all Surahs */
+.sp-browse-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.sp-browse-head .sp-section-title { margin-bottom: 0; }
+
+.sp-filter {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+}
+
+.sp-filter-btn {
+  border: none;
+  background: transparent;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sp-filter-btn.active {
+  background: var(--accent-gold);
+  color: var(--on-accent-gold);
+}
+
+/* Load more */
+.sp-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 480px) {
+  .sp-form .btn { padding: 0 1rem; }
+}
+
 /* Result count / status */
 .sp-count { margin-bottom: 1rem; font-size: 0.9rem; }
 

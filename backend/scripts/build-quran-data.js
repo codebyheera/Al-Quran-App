@@ -37,6 +37,10 @@ for (const file of files) {
     console.error(`❌ ${file} is incomplete (verses or word-by-word data missing).`);
     process.exit(1);
   }
+  if (surah.verses.some((v) => !v.indopakEnd || v.words.some((w) => !w.text_indopak))) {
+    console.error(`❌ ${file} has no IndoPak text — run scripts/add-indopak-text.js first.`);
+    process.exit(1);
+  }
   delete surah.preloadedReciter;
   fs.writeFileSync(path.join(OUT_DIR, `${surah.surahNumber}.json`), JSON.stringify(surah), 'utf8');
   totalVerses += surah.verses.length;

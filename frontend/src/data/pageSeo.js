@@ -43,7 +43,7 @@ export const pageSeo = {
     path: '/search',
     title: 'Search the Holy Quran – Al-Quran Hub',
     description:
-      'Search for any word or phrase in the Holy Quran English translation. Find Ayahs and Surahs easily with our fast search.',
+      'Search the Holy Quran by Surah name (any spelling), number, Ayah reference like 2:255, Juz, or any word in the English translation. Fast, typo-tolerant search.',
   },
   support: {
     path: '/support',

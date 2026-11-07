@@ -33,7 +33,8 @@
             "text": "tabāraka",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_001.mp3",
+          "text_indopak": "تَبٰرَكَ"
         },
         {
           "id": 573,
@@ -49,7 +50,8 @@
             "text": "alladhī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_002.mp3",
+          "text_indopak": "الَّذِیْ"
         },
         {
           "id": 574,
@@ -65,7 +67,8 @@
             "text": "biyadihi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_003.mp3",
+          "text_indopak": "بِیَدِهِ"
         },
         {
           "id": 575,
@@ -81,7 +84,8 @@
             "text": "l-mul'ku",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_004.mp3",
+          "text_indopak": "الْمُلْكُ ؗ"
         },
         {
           "id": 576,
@@ -97,7 +101,8 @@
             "text": "wahuwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_005.mp3",
+          "text_indopak": "وَهُوَ"
         },
         {
           "id": 577,
@@ -113,7 +118,8 @@
             "text": "ʿalā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_006.mp3",
+          "text_indopak": "عَلٰی"
         },
         {
           "id": 578,
@@ -129,7 +135,8 @@
             "text": "kulli",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_007.mp3",
+          "text_indopak": "كُلِّ"
         },
         {
           "id": 579,
@@ -145,7 +152,8 @@
             "text": "shayin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_008.mp3",
+          "text_indopak": "شَیْءٍ"
         },
         {
           "id": 580,
@@ -161,12 +169,14 @@
             "text": "qadīrun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_001_009.mp3",
+          "text_indopak": "قَدِیْرُ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟ۙ"
     },
     {
       "number": 2,
@@ -192,7 +202,8 @@
             "text": "alladhī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_001.mp3",
+          "text_indopak": "لَّذِیْ"
         },
         {
           "id": 1463,
@@ -208,7 +219,8 @@
             "text": "khalaqa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_002.mp3",
+          "text_indopak": "خَلَقَ"
         },
         {
           "id": 1464,
@@ -224,7 +236,8 @@
             "text": "l-mawta",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_003.mp3",
+          "text_indopak": "الْمَوْتَ"
         },
         {
           "id": 1465,
@@ -240,7 +253,8 @@
             "text": "wal-ḥayata",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_004.mp3",
+          "text_indopak": "وَالْحَیٰوةَ"
         },
         {
           "id": 1466,
@@ -256,7 +270,8 @@
             "text": "liyabluwakum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_005.mp3",
+          "text_indopak": "لِیَبْلُوَكُمْ"
         },
         {
           "id": 1467,
@@ -272,7 +287,8 @@
             "text": "ayyukum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_006.mp3",
+          "text_indopak": "اَیُّكُمْ"
         },
         {
           "id": 1468,
@@ -288,7 +304,8 @@
             "text": "aḥsanu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_007.mp3",
+          "text_indopak": "اَحْسَنُ"
         },
         {
           "id": 1469,
@@ -304,7 +321,8 @@
             "text": "ʿamalan",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_008.mp3",
+          "text_indopak": "عَمَلًا ؕ"
         },
         {
           "id": 1471,
@@ -320,7 +338,8 @@
             "text": "wahuwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_009.mp3",
+          "text_indopak": "وَهُوَ"
         },
         {
           "id": 1472,
@@ -336,7 +355,8 @@
             "text": "l-ʿazīzu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_010.mp3",
+          "text_indopak": "الْعَزِیْزُ"
         },
         {
           "id": 1473,
@@ -352,12 +372,14 @@
             "text": "l-ghafūru",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_002_011.mp3",
+          "text_indopak": "الْغَفُوْرُ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟ۙ"
     },
     {
       "number": 3,
@@ -383,7 +405,8 @@
             "text": "alladhī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_001.mp3",
+          "text_indopak": "الَّذِیْ"
         },
         {
           "id": 2526,
@@ -399,7 +422,8 @@
             "text": "khalaqa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_002.mp3",
+          "text_indopak": "خَلَقَ"
         },
         {
           "id": 2527,
@@ -415,7 +439,8 @@
             "text": "sabʿa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_003.mp3",
+          "text_indopak": "سَبْعَ"
         },
         {
           "id": 2528,
@@ -431,7 +456,8 @@
             "text": "samāwātin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_004.mp3",
+          "text_indopak": "سَمٰوٰتٍ"
         },
         {
           "id": 2529,
@@ -447,7 +473,8 @@
             "text": "ṭibāqan",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_005.mp3",
+          "text_indopak": "طِبَاقًا ؕ"
         },
         {
           "id": 2531,
@@ -463,7 +490,8 @@
             "text": "mā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_006.mp3",
+          "text_indopak": "مَا"
         },
         {
           "id": 2532,
@@ -479,7 +507,8 @@
             "text": "tarā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_007.mp3",
+          "text_indopak": "تَرٰی"
         },
         {
           "id": 2533,
@@ -495,7 +524,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_008.mp3",
+          "text_indopak": "فِیْ"
         },
         {
           "id": 2534,
@@ -511,7 +541,8 @@
             "text": "khalqi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_009.mp3",
+          "text_indopak": "خَلْقِ"
         },
         {
           "id": 2535,
@@ -527,7 +558,8 @@
             "text": "l-raḥmāni",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_010.mp3",
+          "text_indopak": "الرَّحْمٰنِ"
         },
         {
           "id": 2536,
@@ -543,7 +575,8 @@
             "text": "min",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_011.mp3",
+          "text_indopak": "مِنْ"
         },
         {
           "id": 2537,
@@ -559,7 +592,8 @@
             "text": "tafāwutin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_012.mp3",
+          "text_indopak": "تَفٰوُتٍ ؕ"
         },
         {
           "id": 2539,
@@ -575,7 +609,8 @@
             "text": "fa-ir'jiʿi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_013.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_013.mp3",
+          "text_indopak": "فَارْجِعِ"
         },
         {
           "id": 2540,
@@ -591,7 +626,8 @@
             "text": "l-baṣara",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_014.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_014.mp3",
+          "text_indopak": "الْبَصَرَ ۙ"
         },
         {
           "id": 2541,
@@ -607,7 +643,8 @@
             "text": "hal",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_015.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_015.mp3",
+          "text_indopak": "هَلْ"
         },
         {
           "id": 2542,
@@ -623,7 +660,8 @@
             "text": "tarā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_016.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_016.mp3",
+          "text_indopak": "تَرٰی"
         },
         {
           "id": 2543,
@@ -639,7 +677,8 @@
             "text": "min",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_017.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_017.mp3",
+          "text_indopak": "مِنْ"
         },
         {
           "id": 2544,
@@ -655,12 +694,14 @@
             "text": "fuṭūrin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_018.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_003_018.mp3",
+          "text_indopak": "فُطُوْرٍ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 4,
@@ -686,7 +727,8 @@
             "text": "thumma",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_001.mp3",
+          "text_indopak": "ثُمَّ"
         },
         {
           "id": 3943,
@@ -702,7 +744,8 @@
             "text": "ir'jiʿi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_002.mp3",
+          "text_indopak": "ارْجِعِ"
         },
         {
           "id": 3944,
@@ -718,7 +761,8 @@
             "text": "l-baṣara",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_003.mp3",
+          "text_indopak": "الْبَصَرَ"
         },
         {
           "id": 3945,
@@ -734,7 +778,8 @@
             "text": "karratayni",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_004.mp3",
+          "text_indopak": "كَرَّتَیْنِ"
         },
         {
           "id": 3946,
@@ -750,7 +795,8 @@
             "text": "yanqalib",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_005.mp3",
+          "text_indopak": "یَنْقَلِبْ"
         },
         {
           "id": 3947,
@@ -766,7 +812,8 @@
             "text": "ilayka",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_006.mp3",
+          "text_indopak": "اِلَیْكَ"
         },
         {
           "id": 3948,
@@ -782,7 +829,8 @@
             "text": "l-baṣaru",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_007.mp3",
+          "text_indopak": "الْبَصَرُ"
         },
         {
           "id": 3949,
@@ -798,7 +846,8 @@
             "text": "khāsi-an",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_008.mp3",
+          "text_indopak": "خَاسِئًا"
         },
         {
           "id": 3950,
@@ -814,7 +863,8 @@
             "text": "wahuwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_009.mp3",
+          "text_indopak": "وَّهُوَ"
         },
         {
           "id": 3951,
@@ -830,12 +880,14 @@
             "text": "ḥasīrun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_004_010.mp3",
+          "text_indopak": "حَسِیْرٌ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 5,
@@ -861,7 +913,8 @@
             "text": "walaqad",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_001.mp3",
+          "text_indopak": "وَلَقَدْ"
         },
         {
           "id": 5167,
@@ -877,7 +930,8 @@
             "text": "zayyannā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_002.mp3",
+          "text_indopak": "زَیَّنَّا"
         },
         {
           "id": 5168,
@@ -893,7 +947,8 @@
             "text": "l-samāa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_003.mp3",
+          "text_indopak": "السَّمَآءَ"
         },
         {
           "id": 5169,
@@ -909,7 +964,8 @@
             "text": "l-dun'yā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_004.mp3",
+          "text_indopak": "الدُّنْیَا"
         },
         {
           "id": 5170,
@@ -925,7 +981,8 @@
             "text": "bimaṣābīḥa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_005.mp3",
+          "text_indopak": "بِمَصَابِیْحَ"
         },
         {
           "id": 5171,
@@ -941,7 +998,8 @@
             "text": "wajaʿalnāhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_006.mp3",
+          "text_indopak": "وَجَعَلْنٰهَا"
         },
         {
           "id": 5172,
@@ -957,7 +1015,8 @@
             "text": "rujūman",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_007.mp3",
+          "text_indopak": "رُجُوْمًا"
         },
         {
           "id": 5173,
@@ -973,7 +1032,8 @@
             "text": "lilshayāṭīni",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_008.mp3",
+          "text_indopak": "لِّلشَّیٰطِیْنِ"
         },
         {
           "id": 5175,
@@ -989,7 +1049,8 @@
             "text": "wa-aʿtadnā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_009.mp3",
+          "text_indopak": "وَاَعْتَدْنَا"
         },
         {
           "id": 5176,
@@ -1005,7 +1066,8 @@
             "text": "lahum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_010.mp3",
+          "text_indopak": "لَهُمْ"
         },
         {
           "id": 5177,
@@ -1021,7 +1083,8 @@
             "text": "ʿadhāba",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_011.mp3",
+          "text_indopak": "عَذَابَ"
         },
         {
           "id": 5178,
@@ -1037,12 +1100,14 @@
             "text": "l-saʿīri",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_005_012.mp3",
+          "text_indopak": "السَّعِیْرِ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 6,
@@ -1068,7 +1133,8 @@
             "text": "walilladhīna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_001.mp3",
+          "text_indopak": "وَلِلَّذِیْنَ"
         },
         {
           "id": 6462,
@@ -1084,7 +1150,8 @@
             "text": "kafarū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_002.mp3",
+          "text_indopak": "كَفَرُوْا"
         },
         {
           "id": 6463,
@@ -1100,7 +1167,8 @@
             "text": "birabbihim",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_003.mp3",
+          "text_indopak": "بِرَبِّهِمْ"
         },
         {
           "id": 6464,
@@ -1116,7 +1184,8 @@
             "text": "ʿadhābu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_004.mp3",
+          "text_indopak": "عَذَابُ"
         },
         {
           "id": 6465,
@@ -1132,7 +1201,8 @@
             "text": "jahannama",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_005.mp3",
+          "text_indopak": "جَهَنَّمَ ؕ"
         },
         {
           "id": 6467,
@@ -1148,7 +1218,8 @@
             "text": "wabi'sa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_006.mp3",
+          "text_indopak": "وَبِئْسَ"
         },
         {
           "id": 6468,
@@ -1164,12 +1235,14 @@
             "text": "l-maṣīru",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_006_007.mp3",
+          "text_indopak": "الْمَصِیْرُ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 7,
@@ -1195,7 +1268,8 @@
             "text": "idhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_001.mp3",
+          "text_indopak": "اِذَاۤ"
         },
         {
           "id": 7855,
@@ -1211,7 +1285,8 @@
             "text": "ul'qū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_002.mp3",
+          "text_indopak": "اُلْقُوْا"
         },
         {
           "id": 7856,
@@ -1227,7 +1302,8 @@
             "text": "fīhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_003.mp3",
+          "text_indopak": "فِیْهَا"
         },
         {
           "id": 7857,
@@ -1243,7 +1319,8 @@
             "text": "samiʿū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_004.mp3",
+          "text_indopak": "سَمِعُوْا"
         },
         {
           "id": 7858,
@@ -1259,7 +1336,8 @@
             "text": "lahā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_005.mp3",
+          "text_indopak": "لَهَا"
         },
         {
           "id": 7859,
@@ -1275,7 +1353,8 @@
             "text": "shahīqan",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_006.mp3",
+          "text_indopak": "شَهِیْقًا"
         },
         {
           "id": 7860,
@@ -1291,7 +1370,8 @@
             "text": "wahiya",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_007.mp3",
+          "text_indopak": "وَّهِیَ"
         },
         {
           "id": 7861,
@@ -1307,12 +1387,14 @@
             "text": "tafūru",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_007_008.mp3",
+          "text_indopak": "تَفُوْرُ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟ۙ"
     },
     {
       "number": 8,
@@ -1338,7 +1420,8 @@
             "text": "takādu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_001.mp3",
+          "text_indopak": "تَكَادُ"
         },
         {
           "id": 9039,
@@ -1354,7 +1437,8 @@
             "text": "tamayyazu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_002.mp3",
+          "text_indopak": "تَمَیَّزُ"
         },
         {
           "id": 9040,
@@ -1370,7 +1454,8 @@
             "text": "mina",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_003.mp3",
+          "text_indopak": "مِنَ"
         },
         {
           "id": 9041,
@@ -1386,7 +1471,8 @@
             "text": "l-ghayẓi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_004.mp3",
+          "text_indopak": "الْغَیْظِ ؕ"
         },
         {
           "id": 9043,
@@ -1402,7 +1488,8 @@
             "text": "kullamā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_005.mp3",
+          "text_indopak": "كُلَّمَاۤ"
         },
         {
           "id": 9044,
@@ -1418,7 +1505,8 @@
             "text": "ul'qiya",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_006.mp3",
+          "text_indopak": "اُلْقِیَ"
         },
         {
           "id": 9045,
@@ -1434,7 +1522,8 @@
             "text": "fīhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_007.mp3",
+          "text_indopak": "فِیْهَا"
         },
         {
           "id": 9046,
@@ -1450,7 +1539,8 @@
             "text": "fawjun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_008.mp3",
+          "text_indopak": "فَوْجٌ"
         },
         {
           "id": 9047,
@@ -1466,7 +1556,8 @@
             "text": "sa-alahum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_009.mp3",
+          "text_indopak": "سَاَلَهُمْ"
         },
         {
           "id": 9048,
@@ -1482,7 +1573,8 @@
             "text": "khazanatuhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_010.mp3",
+          "text_indopak": "خَزَنَتُهَاۤ"
         },
         {
           "id": 9049,
@@ -1498,7 +1590,8 @@
             "text": "alam",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_011.mp3",
+          "text_indopak": "اَلَمْ"
         },
         {
           "id": 9050,
@@ -1514,7 +1607,8 @@
             "text": "yatikum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_012.mp3",
+          "text_indopak": "یَاْتِكُمْ"
         },
         {
           "id": 9051,
@@ -1530,12 +1624,14 @@
             "text": "nadhīrun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_013.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_008_013.mp3",
+          "text_indopak": "نَذِیْرٌ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 9,
@@ -1561,7 +1657,8 @@
             "text": "qālū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_001.mp3",
+          "text_indopak": "قَالُوْا"
         },
         {
           "id": 10241,
@@ -1577,7 +1674,8 @@
             "text": "balā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_002.mp3",
+          "text_indopak": "بَلٰی"
         },
         {
           "id": 10242,
@@ -1593,7 +1691,8 @@
             "text": "qad",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_003.mp3",
+          "text_indopak": "قَدْ"
         },
         {
           "id": 10243,
@@ -1609,7 +1708,8 @@
             "text": "jāanā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_004.mp3",
+          "text_indopak": "جَآءَنَا"
         },
         {
           "id": 10244,
@@ -1625,7 +1725,8 @@
             "text": "nadhīrun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_005.mp3",
+          "text_indopak": "نَذِیْرٌ ۙ۬"
         },
         {
           "id": 10245,
@@ -1641,7 +1742,8 @@
             "text": "fakadhabnā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_006.mp3",
+          "text_indopak": "فَكَذَّبْنَا"
         },
         {
           "id": 10246,
@@ -1657,7 +1759,8 @@
             "text": "waqul'nā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_007.mp3",
+          "text_indopak": "وَقُلْنَا"
         },
         {
           "id": 10247,
@@ -1673,7 +1776,8 @@
             "text": "mā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_008.mp3",
+          "text_indopak": "مَا"
         },
         {
           "id": 10248,
@@ -1689,7 +1793,8 @@
             "text": "nazzala",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_009.mp3",
+          "text_indopak": "نَزَّلَ"
         },
         {
           "id": 10249,
@@ -1705,7 +1810,8 @@
             "text": "l-lahu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_010.mp3",
+          "text_indopak": "اللّٰهُ"
         },
         {
           "id": 10250,
@@ -1721,7 +1827,8 @@
             "text": "min",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_011.mp3",
+          "text_indopak": "مِنْ"
         },
         {
           "id": 10251,
@@ -1737,7 +1844,8 @@
             "text": "shayin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_012.mp3",
+          "text_indopak": "شَیْءٍ ۖۚ"
         },
         {
           "id": 10252,
@@ -1753,7 +1861,8 @@
             "text": "in",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_013.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_013.mp3",
+          "text_indopak": "اِنْ"
         },
         {
           "id": 10253,
@@ -1769,7 +1878,8 @@
             "text": "antum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_014.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_014.mp3",
+          "text_indopak": "اَنْتُمْ"
         },
         {
           "id": 10254,
@@ -1785,7 +1895,8 @@
             "text": "illā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_015.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_015.mp3",
+          "text_indopak": "اِلَّا"
         },
         {
           "id": 10255,
@@ -1801,7 +1912,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_016.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_016.mp3",
+          "text_indopak": "فِیْ"
         },
         {
           "id": 10256,
@@ -1817,7 +1929,8 @@
             "text": "ḍalālin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_017.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_017.mp3",
+          "text_indopak": "ضَلٰلٍ"
         },
         {
           "id": 10257,
@@ -1833,12 +1946,14 @@
             "text": "kabīrin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_018.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_009_018.mp3",
+          "text_indopak": "كَبِیْرٍ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 10,
@@ -1864,7 +1979,8 @@
             "text": "waqālū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_001.mp3",
+          "text_indopak": "وَقَالُوْا"
         },
         {
           "id": 11498,
@@ -1880,7 +1996,8 @@
             "text": "law",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_002.mp3",
+          "text_indopak": "لَوْ"
         },
         {
           "id": 11499,
@@ -1896,7 +2013,8 @@
             "text": "kunnā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_003.mp3",
+          "text_indopak": "كُنَّا"
         },
         {
           "id": 11500,
@@ -1912,7 +2030,8 @@
             "text": "nasmaʿu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_004.mp3",
+          "text_indopak": "نَسْمَعُ"
         },
         {
           "id": 11501,
@@ -1928,7 +2047,8 @@
             "text": "aw",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_005.mp3",
+          "text_indopak": "اَوْ"
         },
         {
           "id": 11502,
@@ -1944,7 +2064,8 @@
             "text": "naʿqilu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_006.mp3",
+          "text_indopak": "نَعْقِلُ"
         },
         {
           "id": 11503,
@@ -1960,7 +2081,8 @@
             "text": "mā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_007.mp3",
+          "text_indopak": "مَا"
         },
         {
           "id": 11504,
@@ -1976,7 +2098,8 @@
             "text": "kunnā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_008.mp3",
+          "text_indopak": "كُنَّا"
         },
         {
           "id": 11505,
@@ -1992,7 +2115,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_009.mp3",
+          "text_indopak": "فِیْۤ"
         },
         {
           "id": 11506,
@@ -2008,7 +2132,8 @@
             "text": "aṣḥābi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_010.mp3",
+          "text_indopak": "اَصْحٰبِ"
         },
         {
           "id": 11507,
@@ -2024,12 +2149,14 @@
             "text": "l-saʿīri",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_010_011.mp3",
+          "text_indopak": "السَّعِیْرِ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 11,
@@ -2055,7 +2182,8 @@
             "text": "fa-iʿ'tarafū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_001.mp3",
+          "text_indopak": "فَاعْتَرَفُوْا"
         },
         {
           "id": 12796,
@@ -2071,7 +2199,8 @@
             "text": "bidhanbihim",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_002.mp3",
+          "text_indopak": "بِذَنْۢبِهِمْ ۚ"
         },
         {
           "id": 12797,
@@ -2087,7 +2216,8 @@
             "text": "fasuḥ'qan",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_003.mp3",
+          "text_indopak": "فَسُحْقًا"
         },
         {
           "id": 12798,
@@ -2103,7 +2233,8 @@
             "text": "li-aṣḥābi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_004.mp3",
+          "text_indopak": "لِّاَصْحٰبِ"
         },
         {
           "id": 12799,
@@ -2119,12 +2250,14 @@
             "text": "l-saʿīri",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_011_005.mp3",
+          "text_indopak": "السَّعِیْرِ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 12,
@@ -2150,7 +2283,8 @@
             "text": "inna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_001.mp3",
+          "text_indopak": "اِنَّ"
         },
         {
           "id": 13923,
@@ -2166,7 +2300,8 @@
             "text": "alladhīna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_002.mp3",
+          "text_indopak": "الَّذِیْنَ"
         },
         {
           "id": 13924,
@@ -2182,7 +2317,8 @@
             "text": "yakhshawna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_003.mp3",
+          "text_indopak": "یَخْشَوْنَ"
         },
         {
           "id": 13925,
@@ -2198,7 +2334,8 @@
             "text": "rabbahum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_004.mp3",
+          "text_indopak": "رَبَّهُمْ"
         },
         {
           "id": 13926,
@@ -2214,7 +2351,8 @@
             "text": "bil-ghaybi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_005.mp3",
+          "text_indopak": "بِالْغَیْبِ"
         },
         {
           "id": 13927,
@@ -2230,7 +2368,8 @@
             "text": "lahum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_006.mp3",
+          "text_indopak": "لَهُمْ"
         },
         {
           "id": 13928,
@@ -2246,7 +2385,8 @@
             "text": "maghfiratun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_007.mp3",
+          "text_indopak": "مَّغْفِرَةٌ"
         },
         {
           "id": 13929,
@@ -2262,7 +2402,8 @@
             "text": "wa-ajrun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_008.mp3",
+          "text_indopak": "وَّاَجْرٌ"
         },
         {
           "id": 13930,
@@ -2278,12 +2419,14 @@
             "text": "kabīrun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_012_009.mp3",
+          "text_indopak": "كَبِیْرٌ"
         }
       ],
       "juz": 29,
       "page": 562,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 13,
@@ -2309,7 +2452,8 @@
             "text": "wa-asirrū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_001.mp3",
+          "text_indopak": "وَاَسِرُّوْا"
         },
         {
           "id": 15126,
@@ -2325,7 +2469,8 @@
             "text": "qawlakum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_002.mp3",
+          "text_indopak": "قَوْلَكُمْ"
         },
         {
           "id": 15127,
@@ -2341,7 +2486,8 @@
             "text": "awi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_003.mp3",
+          "text_indopak": "اَوِ"
         },
         {
           "id": 15128,
@@ -2357,7 +2503,8 @@
             "text": "ij'harū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_004.mp3",
+          "text_indopak": "اجْهَرُوْا"
         },
         {
           "id": 15129,
@@ -2373,7 +2520,8 @@
             "text": "bihi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_005.mp3",
+          "text_indopak": "بِهٖ ؕ"
         },
         {
           "id": 15131,
@@ -2389,7 +2537,8 @@
             "text": "innahu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_006.mp3",
+          "text_indopak": "اِنَّهٗ"
         },
         {
           "id": 15132,
@@ -2405,7 +2554,8 @@
             "text": "ʿalīmun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_007.mp3",
+          "text_indopak": "عَلِیْمٌۢ"
         },
         {
           "id": 15133,
@@ -2421,7 +2571,8 @@
             "text": "bidhāti",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_008.mp3",
+          "text_indopak": "بِذَاتِ"
         },
         {
           "id": 15134,
@@ -2437,12 +2588,14 @@
             "text": "l-ṣudūri",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_013_009.mp3",
+          "text_indopak": "الصُّدُوْرِ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 14,
@@ -2468,7 +2621,8 @@
             "text": "alā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_001.mp3",
+          "text_indopak": "اَلَا"
         },
         {
           "id": 16203,
@@ -2484,7 +2638,8 @@
             "text": "yaʿlamu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_002.mp3",
+          "text_indopak": "یَعْلَمُ"
         },
         {
           "id": 16204,
@@ -2500,7 +2655,8 @@
             "text": "man",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_003.mp3",
+          "text_indopak": "مَنْ"
         },
         {
           "id": 16205,
@@ -2516,7 +2672,8 @@
             "text": "khalaqa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_004.mp3",
+          "text_indopak": "خَلَقَ ؕ"
         },
         {
           "id": 16206,
@@ -2532,7 +2689,8 @@
             "text": "wahuwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_005.mp3",
+          "text_indopak": "وَهُوَ"
         },
         {
           "id": 16207,
@@ -2548,7 +2706,8 @@
             "text": "l-laṭīfu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_006.mp3",
+          "text_indopak": "اللَّطِیْفُ"
         },
         {
           "id": 16208,
@@ -2564,12 +2723,14 @@
             "text": "l-khabīru",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_014_007.mp3",
+          "text_indopak": "الْخَبِیْرُ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟۠"
     },
     {
       "number": 15,
@@ -2595,7 +2756,8 @@
             "text": "huwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_001.mp3",
+          "text_indopak": "هُوَ"
         },
         {
           "id": 17390,
@@ -2611,7 +2773,8 @@
             "text": "alladhī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_002.mp3",
+          "text_indopak": "الَّذِیْ"
         },
         {
           "id": 17391,
@@ -2627,7 +2790,8 @@
             "text": "jaʿala",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_003.mp3",
+          "text_indopak": "جَعَلَ"
         },
         {
           "id": 17392,
@@ -2643,7 +2807,8 @@
             "text": "lakumu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_004.mp3",
+          "text_indopak": "لَكُمُ"
         },
         {
           "id": 17393,
@@ -2659,7 +2824,8 @@
             "text": "l-arḍa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_005.mp3",
+          "text_indopak": "الْاَرْضَ"
         },
         {
           "id": 17394,
@@ -2675,7 +2841,8 @@
             "text": "dhalūlan",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_006.mp3",
+          "text_indopak": "ذَلُوْلًا"
         },
         {
           "id": 17395,
@@ -2691,7 +2858,8 @@
             "text": "fa-im'shū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_007.mp3",
+          "text_indopak": "فَامْشُوْا"
         },
         {
           "id": 17396,
@@ -2707,7 +2875,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_008.mp3",
+          "text_indopak": "فِیْ"
         },
         {
           "id": 17397,
@@ -2723,7 +2892,8 @@
             "text": "manākibihā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_009.mp3",
+          "text_indopak": "مَنَاكِبِهَا"
         },
         {
           "id": 17398,
@@ -2739,7 +2909,8 @@
             "text": "wakulū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_010.mp3",
+          "text_indopak": "وَكُلُوْا"
         },
         {
           "id": 17399,
@@ -2755,7 +2926,8 @@
             "text": "min",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_011.mp3",
+          "text_indopak": "مِنْ"
         },
         {
           "id": 17400,
@@ -2771,7 +2943,8 @@
             "text": "riz'qihi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_012.mp3",
+          "text_indopak": "رِّزْقِهٖ ؕ"
         },
         {
           "id": 17402,
@@ -2787,7 +2960,8 @@
             "text": "wa-ilayhi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_013.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_013.mp3",
+          "text_indopak": "وَاِلَیْهِ"
         },
         {
           "id": 17403,
@@ -2803,12 +2977,14 @@
             "text": "l-nushūru",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_014.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_015_014.mp3",
+          "text_indopak": "النُّشُوْرُ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 16,
@@ -2834,7 +3010,8 @@
             "text": "a-amintum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_001.mp3",
+          "text_indopak": "ءَاَمِنْتُمْ"
         },
         {
           "id": 18480,
@@ -2850,7 +3027,8 @@
             "text": "man",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_002.mp3",
+          "text_indopak": "مَّنْ"
         },
         {
           "id": 18481,
@@ -2866,7 +3044,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_003.mp3",
+          "text_indopak": "فِی"
         },
         {
           "id": 18482,
@@ -2882,7 +3061,8 @@
             "text": "l-samāi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_004.mp3",
+          "text_indopak": "السَّمَآءِ"
         },
         {
           "id": 18483,
@@ -2898,7 +3078,8 @@
             "text": "an",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_005.mp3",
+          "text_indopak": "اَنْ"
         },
         {
           "id": 18484,
@@ -2914,7 +3095,8 @@
             "text": "yakhsifa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_006.mp3",
+          "text_indopak": "یَّخْسِفَ"
         },
         {
           "id": 18485,
@@ -2930,7 +3112,8 @@
             "text": "bikumu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_007.mp3",
+          "text_indopak": "بِكُمُ"
         },
         {
           "id": 18486,
@@ -2946,7 +3129,8 @@
             "text": "l-arḍa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_008.mp3",
+          "text_indopak": "الْاَرْضَ"
         },
         {
           "id": 18487,
@@ -2962,7 +3146,8 @@
             "text": "fa-idhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_009.mp3",
+          "text_indopak": "فَاِذَا"
         },
         {
           "id": 18488,
@@ -2978,7 +3163,8 @@
             "text": "hiya",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_010.mp3",
+          "text_indopak": "هِیَ"
         },
         {
           "id": 18489,
@@ -2994,12 +3180,14 @@
             "text": "tamūru",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_016_011.mp3",
+          "text_indopak": "تَمُوْرُ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟ۙ"
     },
     {
       "number": 17,
@@ -3025,7 +3213,8 @@
             "text": "am",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_001.mp3",
+          "text_indopak": "اَمْ"
         },
         {
           "id": 19456,
@@ -3041,7 +3230,8 @@
             "text": "amintum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_002.mp3",
+          "text_indopak": "اَمِنْتُمْ"
         },
         {
           "id": 19457,
@@ -3057,7 +3247,8 @@
             "text": "man",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_003.mp3",
+          "text_indopak": "مَّنْ"
         },
         {
           "id": 19458,
@@ -3073,7 +3264,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_004.mp3",
+          "text_indopak": "فِی"
         },
         {
           "id": 19459,
@@ -3089,7 +3281,8 @@
             "text": "l-samāi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_005.mp3",
+          "text_indopak": "السَّمَآءِ"
         },
         {
           "id": 19460,
@@ -3105,7 +3298,8 @@
             "text": "an",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_006.mp3",
+          "text_indopak": "اَنْ"
         },
         {
           "id": 19461,
@@ -3121,7 +3315,8 @@
             "text": "yur'sila",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_007.mp3",
+          "text_indopak": "یُّرْسِلَ"
         },
         {
           "id": 19462,
@@ -3137,7 +3332,8 @@
             "text": "ʿalaykum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_008.mp3",
+          "text_indopak": "عَلَیْكُمْ"
         },
         {
           "id": 19463,
@@ -3153,7 +3349,8 @@
             "text": "ḥāṣiban",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_009.mp3",
+          "text_indopak": "حَاصِبًا ؕ"
         },
         {
           "id": 19465,
@@ -3169,7 +3366,8 @@
             "text": "fasataʿlamūna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_010.mp3",
+          "text_indopak": "فَسَتَعْلَمُوْنَ"
         },
         {
           "id": 19466,
@@ -3185,7 +3383,8 @@
             "text": "kayfa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_011.mp3",
+          "text_indopak": "كَیْفَ"
         },
         {
           "id": 19467,
@@ -3201,12 +3400,14 @@
             "text": "nadhīri",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_017_012.mp3",
+          "text_indopak": "نَذِیْرِ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 18,
@@ -3232,7 +3433,8 @@
             "text": "walaqad",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_001.mp3",
+          "text_indopak": "وَلَقَدْ"
         },
         {
           "id": 20540,
@@ -3248,7 +3450,8 @@
             "text": "kadhaba",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_002.mp3",
+          "text_indopak": "كَذَّبَ"
         },
         {
           "id": 20541,
@@ -3264,7 +3467,8 @@
             "text": "alladhīna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_003.mp3",
+          "text_indopak": "الَّذِیْنَ"
         },
         {
           "id": 20542,
@@ -3280,7 +3484,8 @@
             "text": "min",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_004.mp3",
+          "text_indopak": "مِنْ"
         },
         {
           "id": 20543,
@@ -3296,7 +3501,8 @@
             "text": "qablihim",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_005.mp3",
+          "text_indopak": "قَبْلِهِمْ"
         },
         {
           "id": 20544,
@@ -3312,7 +3518,8 @@
             "text": "fakayfa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_006.mp3",
+          "text_indopak": "فَكَیْفَ"
         },
         {
           "id": 20545,
@@ -3328,7 +3535,8 @@
             "text": "kāna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_007.mp3",
+          "text_indopak": "كَانَ"
         },
         {
           "id": 20546,
@@ -3344,12 +3552,14 @@
             "text": "nakīri",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_018_008.mp3",
+          "text_indopak": "نَكِیْرِ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 19,
@@ -3375,7 +3585,8 @@
             "text": "awalam",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_001.mp3",
+          "text_indopak": "اَوَلَمْ"
         },
         {
           "id": 21618,
@@ -3391,7 +3602,8 @@
             "text": "yaraw",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_002.mp3",
+          "text_indopak": "یَرَوْا"
         },
         {
           "id": 21619,
@@ -3407,7 +3619,8 @@
             "text": "ilā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_003.mp3",
+          "text_indopak": "اِلَی"
         },
         {
           "id": 21620,
@@ -3423,7 +3636,8 @@
             "text": "l-ṭayri",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_004.mp3",
+          "text_indopak": "الطَّیْرِ"
         },
         {
           "id": 21621,
@@ -3439,7 +3653,8 @@
             "text": "fawqahum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_005.mp3",
+          "text_indopak": "فَوْقَهُمْ"
         },
         {
           "id": 21622,
@@ -3455,7 +3670,8 @@
             "text": "ṣāffātin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_006.mp3",
+          "text_indopak": "صٰٓفّٰتٍ"
         },
         {
           "id": 21623,
@@ -3471,7 +3687,8 @@
             "text": "wayaqbiḍ'na",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_007.mp3",
+          "text_indopak": "وَّیَقْبِضْنَ ؔؕۘ"
         },
         {
           "id": 21625,
@@ -3487,7 +3704,8 @@
             "text": "mā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_008.mp3",
+          "text_indopak": "مَا"
         },
         {
           "id": 21626,
@@ -3503,7 +3721,8 @@
             "text": "yum'sikuhunna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_009.mp3",
+          "text_indopak": "یُمْسِكُهُنَّ"
         },
         {
           "id": 21627,
@@ -3519,7 +3738,8 @@
             "text": "illā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_010.mp3",
+          "text_indopak": "اِلَّا"
         },
         {
           "id": 21628,
@@ -3535,7 +3755,8 @@
             "text": "l-raḥmānu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_011.mp3",
+          "text_indopak": "الرَّحْمٰنُ ؕ"
         },
         {
           "id": 21630,
@@ -3551,7 +3772,8 @@
             "text": "innahu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_012.mp3",
+          "text_indopak": "اِنَّهٗ"
         },
         {
           "id": 21631,
@@ -3567,7 +3789,8 @@
             "text": "bikulli",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_013.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_013.mp3",
+          "text_indopak": "بِكُلِّ"
         },
         {
           "id": 21632,
@@ -3583,7 +3806,8 @@
             "text": "shayin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_014.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_014.mp3",
+          "text_indopak": "شَیْءٍ"
         },
         {
           "id": 21633,
@@ -3599,12 +3823,14 @@
             "text": "baṣīrun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_015.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_019_015.mp3",
+          "text_indopak": "بَصِیْرٌ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 20,
@@ -3630,7 +3856,8 @@
             "text": "amman",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_001.mp3",
+          "text_indopak": "اَمَّنْ"
         },
         {
           "id": 22686,
@@ -3646,7 +3873,8 @@
             "text": "hādhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_002.mp3",
+          "text_indopak": "هٰذَا"
         },
         {
           "id": 22687,
@@ -3662,7 +3890,8 @@
             "text": "alladhī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_003.mp3",
+          "text_indopak": "الَّذِیْ"
         },
         {
           "id": 22688,
@@ -3678,7 +3907,8 @@
             "text": "huwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_004.mp3",
+          "text_indopak": "هُوَ"
         },
         {
           "id": 22689,
@@ -3694,7 +3924,8 @@
             "text": "jundun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_005.mp3",
+          "text_indopak": "جُنْدٌ"
         },
         {
           "id": 22690,
@@ -3710,7 +3941,8 @@
             "text": "lakum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_006.mp3",
+          "text_indopak": "لَّكُمْ"
         },
         {
           "id": 22691,
@@ -3726,7 +3958,8 @@
             "text": "yanṣurukum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_007.mp3",
+          "text_indopak": "یَنْصُرُكُمْ"
         },
         {
           "id": 22692,
@@ -3742,7 +3975,8 @@
             "text": "min",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_008.mp3",
+          "text_indopak": "مِّنْ"
         },
         {
           "id": 22693,
@@ -3758,7 +3992,8 @@
             "text": "dūni",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_009.mp3",
+          "text_indopak": "دُوْنِ"
         },
         {
           "id": 22694,
@@ -3774,7 +4009,8 @@
             "text": "l-raḥmāni",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_010.mp3",
+          "text_indopak": "الرَّحْمٰنِ ؕ"
         },
         {
           "id": 22696,
@@ -3790,7 +4026,8 @@
             "text": "ini",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_011.mp3",
+          "text_indopak": "اِنِ"
         },
         {
           "id": 22697,
@@ -3806,7 +4043,8 @@
             "text": "l-kāfirūna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_012.mp3",
+          "text_indopak": "الْكٰفِرُوْنَ"
         },
         {
           "id": 22698,
@@ -3822,7 +4060,8 @@
             "text": "illā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_013.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_013.mp3",
+          "text_indopak": "اِلَّا"
         },
         {
           "id": 22699,
@@ -3838,7 +4077,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_014.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_014.mp3",
+          "text_indopak": "فِیْ"
         },
         {
           "id": 22700,
@@ -3854,12 +4094,14 @@
             "text": "ghurūrin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_015.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_020_015.mp3",
+          "text_indopak": "غُرُوْرٍ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟ۚ"
     },
     {
       "number": 21,
@@ -3885,7 +4127,8 @@
             "text": "amman",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_001.mp3",
+          "text_indopak": "اَمَّنْ"
         },
         {
           "id": 23873,
@@ -3901,7 +4144,8 @@
             "text": "hādhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_002.mp3",
+          "text_indopak": "هٰذَا"
         },
         {
           "id": 23874,
@@ -3917,7 +4161,8 @@
             "text": "alladhī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_003.mp3",
+          "text_indopak": "الَّذِیْ"
         },
         {
           "id": 23875,
@@ -3933,7 +4178,8 @@
             "text": "yarzuqukum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_004.mp3",
+          "text_indopak": "یَرْزُقُكُمْ"
         },
         {
           "id": 23876,
@@ -3949,7 +4195,8 @@
             "text": "in",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_005.mp3",
+          "text_indopak": "اِنْ"
         },
         {
           "id": 23877,
@@ -3965,7 +4212,8 @@
             "text": "amsaka",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_006.mp3",
+          "text_indopak": "اَمْسَكَ"
         },
         {
           "id": 23878,
@@ -3981,7 +4229,8 @@
             "text": "riz'qahu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_007.mp3",
+          "text_indopak": "رِزْقَهٗ ۚ"
         },
         {
           "id": 23880,
@@ -3997,7 +4246,8 @@
             "text": "bal",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_008.mp3",
+          "text_indopak": "بَلْ"
         },
         {
           "id": 23881,
@@ -4013,7 +4263,8 @@
             "text": "lajjū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_009.mp3",
+          "text_indopak": "لَّجُّوْا"
         },
         {
           "id": 23882,
@@ -4029,7 +4280,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_010.mp3",
+          "text_indopak": "فِیْ"
         },
         {
           "id": 23883,
@@ -4045,7 +4297,8 @@
             "text": "ʿutuwwin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_011.mp3",
+          "text_indopak": "عُتُوٍّ"
         },
         {
           "id": 23884,
@@ -4061,12 +4314,14 @@
             "text": "wanufūrin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_021_012.mp3",
+          "text_indopak": "وَّنُفُوْرٍ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 22,
@@ -4092,7 +4347,8 @@
             "text": "afaman",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_001.mp3",
+          "text_indopak": "اَفَمَنْ"
         },
         {
           "id": 24868,
@@ -4108,7 +4364,8 @@
             "text": "yamshī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_002.mp3",
+          "text_indopak": "یَّمْشِیْ"
         },
         {
           "id": 24869,
@@ -4124,7 +4381,8 @@
             "text": "mukibban",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_003.mp3",
+          "text_indopak": "مُكِبًّا"
         },
         {
           "id": 24870,
@@ -4140,7 +4398,8 @@
             "text": "ʿalā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_004.mp3",
+          "text_indopak": "عَلٰی"
         },
         {
           "id": 24871,
@@ -4156,7 +4415,8 @@
             "text": "wajhihi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_005.mp3",
+          "text_indopak": "وَجْهِهٖۤ"
         },
         {
           "id": 24872,
@@ -4172,7 +4432,8 @@
             "text": "ahdā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_006.mp3",
+          "text_indopak": "اَهْدٰۤی"
         },
         {
           "id": 24873,
@@ -4188,7 +4449,8 @@
             "text": "amman",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_007.mp3",
+          "text_indopak": "اَمَّنْ"
         },
         {
           "id": 24874,
@@ -4204,7 +4466,8 @@
             "text": "yamshī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_008.mp3",
+          "text_indopak": "یَّمْشِیْ"
         },
         {
           "id": 24875,
@@ -4220,7 +4483,8 @@
             "text": "sawiyyan",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_009.mp3",
+          "text_indopak": "سَوِیًّا"
         },
         {
           "id": 24876,
@@ -4236,7 +4500,8 @@
             "text": "ʿalā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_010.mp3",
+          "text_indopak": "عَلٰی"
         },
         {
           "id": 24877,
@@ -4252,7 +4517,8 @@
             "text": "ṣirāṭin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_011.mp3",
+          "text_indopak": "صِرَاطٍ"
         },
         {
           "id": 24878,
@@ -4268,12 +4534,14 @@
             "text": "mus'taqīmin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_022_012.mp3",
+          "text_indopak": "مُّسْتَقِیْمٍ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 23,
@@ -4299,7 +4567,8 @@
             "text": "qul",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_001.mp3",
+          "text_indopak": "قُلْ"
         },
         {
           "id": 25908,
@@ -4315,7 +4584,8 @@
             "text": "huwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_002.mp3",
+          "text_indopak": "هُوَ"
         },
         {
           "id": 25909,
@@ -4331,7 +4601,8 @@
             "text": "alladhī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_003.mp3",
+          "text_indopak": "الَّذِیْۤ"
         },
         {
           "id": 25910,
@@ -4347,7 +4618,8 @@
             "text": "ansha-akum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_004.mp3",
+          "text_indopak": "اَنْشَاَكُمْ"
         },
         {
           "id": 25911,
@@ -4363,7 +4635,8 @@
             "text": "wajaʿala",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_005.mp3",
+          "text_indopak": "وَجَعَلَ"
         },
         {
           "id": 25912,
@@ -4379,7 +4652,8 @@
             "text": "lakumu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_006.mp3",
+          "text_indopak": "لَكُمُ"
         },
         {
           "id": 25913,
@@ -4395,7 +4669,8 @@
             "text": "l-samʿa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_007.mp3",
+          "text_indopak": "السَّمْعَ"
         },
         {
           "id": 25914,
@@ -4411,7 +4686,8 @@
             "text": "wal-abṣāra",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_008.mp3",
+          "text_indopak": "وَالْاَبْصَارَ"
         },
         {
           "id": 25915,
@@ -4427,7 +4703,8 @@
             "text": "wal-afidata",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_009.mp3",
+          "text_indopak": "وَالْاَفْـِٕدَةَ ؕ"
         },
         {
           "id": 25917,
@@ -4443,7 +4720,8 @@
             "text": "qalīlan",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_010.mp3",
+          "text_indopak": "قَلِیْلًا"
         },
         {
           "id": 25918,
@@ -4459,7 +4737,8 @@
             "text": "mā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_011.mp3",
+          "text_indopak": "مَّا"
         },
         {
           "id": 25919,
@@ -4475,12 +4754,14 @@
             "text": "tashkurūna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_023_012.mp3",
+          "text_indopak": "تَشْكُرُوْنَ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 24,
@@ -4506,7 +4787,8 @@
             "text": "qul",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_001.mp3",
+          "text_indopak": "قُلْ"
         },
         {
           "id": 26987,
@@ -4522,7 +4804,8 @@
             "text": "huwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_002.mp3",
+          "text_indopak": "هُوَ"
         },
         {
           "id": 26988,
@@ -4538,7 +4821,8 @@
             "text": "alladhī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_003.mp3",
+          "text_indopak": "الَّذِیْ"
         },
         {
           "id": 26989,
@@ -4554,7 +4838,8 @@
             "text": "dhara-akum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_004.mp3",
+          "text_indopak": "ذَرَاَكُمْ"
         },
         {
           "id": 26990,
@@ -4570,7 +4855,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_005.mp3",
+          "text_indopak": "فِی"
         },
         {
           "id": 26991,
@@ -4586,7 +4872,8 @@
             "text": "l-arḍi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_006.mp3",
+          "text_indopak": "الْاَرْضِ"
         },
         {
           "id": 26992,
@@ -4602,7 +4889,8 @@
             "text": "wa-ilayhi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_007.mp3",
+          "text_indopak": "وَاِلَیْهِ"
         },
         {
           "id": 26993,
@@ -4618,12 +4906,14 @@
             "text": "tuḥ'sharūna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_024_008.mp3",
+          "text_indopak": "تُحْشَرُوْنَ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 25,
@@ -4649,7 +4939,8 @@
             "text": "wayaqūlūna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_001.mp3",
+          "text_indopak": "وَیَقُوْلُوْنَ"
         },
         {
           "id": 27969,
@@ -4665,7 +4956,8 @@
             "text": "matā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_002.mp3",
+          "text_indopak": "مَتٰی"
         },
         {
           "id": 27970,
@@ -4681,7 +4973,8 @@
             "text": "hādhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_003.mp3",
+          "text_indopak": "هٰذَا"
         },
         {
           "id": 27971,
@@ -4697,7 +4990,8 @@
             "text": "l-waʿdu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_004.mp3",
+          "text_indopak": "الْوَعْدُ"
         },
         {
           "id": 27972,
@@ -4713,7 +5007,8 @@
             "text": "in",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_005.mp3",
+          "text_indopak": "اِنْ"
         },
         {
           "id": 27973,
@@ -4729,7 +5024,8 @@
             "text": "kuntum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_006.mp3",
+          "text_indopak": "كُنْتُمْ"
         },
         {
           "id": 27974,
@@ -4745,12 +5041,14 @@
             "text": "ṣādiqīna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_025_007.mp3",
+          "text_indopak": "صٰدِقِیْنَ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 26,
@@ -4776,7 +5074,8 @@
             "text": "qul",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_001.mp3",
+          "text_indopak": "قُلْ"
         },
         {
           "id": 28804,
@@ -4792,7 +5091,8 @@
             "text": "innamā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_002.mp3",
+          "text_indopak": "اِنَّمَا"
         },
         {
           "id": 28805,
@@ -4808,7 +5108,8 @@
             "text": "l-ʿil'mu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_003.mp3",
+          "text_indopak": "الْعِلْمُ"
         },
         {
           "id": 28806,
@@ -4824,7 +5125,8 @@
             "text": "ʿinda",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_004.mp3",
+          "text_indopak": "عِنْدَ"
         },
         {
           "id": 28807,
@@ -4840,7 +5142,8 @@
             "text": "l-lahi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_005.mp3",
+          "text_indopak": "اللّٰهِ ۪"
         },
         {
           "id": 28808,
@@ -4856,7 +5159,8 @@
             "text": "wa-innamā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_006.mp3",
+          "text_indopak": "وَاِنَّمَاۤ"
         },
         {
           "id": 28809,
@@ -4872,7 +5176,8 @@
             "text": "anā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_007.mp3",
+          "text_indopak": "اَنَا"
         },
         {
           "id": 28810,
@@ -4888,7 +5193,8 @@
             "text": "nadhīrun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_008.mp3",
+          "text_indopak": "نَذِیْرٌ"
         },
         {
           "id": 28811,
@@ -4904,12 +5210,14 @@
             "text": "mubīnun",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_026_009.mp3",
+          "text_indopak": "مُّبِیْنٌ"
         }
       ],
       "juz": 29,
       "page": 563,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 27,
@@ -4935,7 +5243,8 @@
             "text": "falammā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_001.mp3",
+          "text_indopak": "فَلَمَّا"
         },
         {
           "id": 29775,
@@ -4951,7 +5260,8 @@
             "text": "ra-awhu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_002.mp3",
+          "text_indopak": "رَاَوْهُ"
         },
         {
           "id": 29776,
@@ -4967,7 +5277,8 @@
             "text": "zul'fatan",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_003.mp3",
+          "text_indopak": "زُلْفَةً"
         },
         {
           "id": 29777,
@@ -4983,7 +5294,8 @@
             "text": "sīat",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_004.mp3",
+          "text_indopak": "سِیْٓـَٔتْ"
         },
         {
           "id": 29778,
@@ -4999,7 +5311,8 @@
             "text": "wujūhu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_005.mp3",
+          "text_indopak": "وُجُوْهُ"
         },
         {
           "id": 29779,
@@ -5015,7 +5328,8 @@
             "text": "alladhīna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_006.mp3",
+          "text_indopak": "الَّذِیْنَ"
         },
         {
           "id": 29780,
@@ -5031,7 +5345,8 @@
             "text": "kafarū",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_007.mp3",
+          "text_indopak": "كَفَرُوْا"
         },
         {
           "id": 29781,
@@ -5047,7 +5362,8 @@
             "text": "waqīla",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_008.mp3",
+          "text_indopak": "وَقِیْلَ"
         },
         {
           "id": 29782,
@@ -5063,7 +5379,8 @@
             "text": "hādhā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_009.mp3",
+          "text_indopak": "هٰذَا"
         },
         {
           "id": 29783,
@@ -5079,7 +5396,8 @@
             "text": "alladhī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_010.mp3",
+          "text_indopak": "الَّذِیْ"
         },
         {
           "id": 29784,
@@ -5095,7 +5413,8 @@
             "text": "kuntum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_011.mp3",
+          "text_indopak": "كُنْتُمْ"
         },
         {
           "id": 29785,
@@ -5111,7 +5430,8 @@
             "text": "bihi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_012.mp3",
+          "text_indopak": "بِهٖ"
         },
         {
           "id": 29786,
@@ -5127,12 +5447,14 @@
             "text": "taddaʿūna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_013.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_027_013.mp3",
+          "text_indopak": "تَدَّعُوْنَ"
         }
       ],
       "juz": 29,
       "page": 564,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 28,
@@ -5158,7 +5480,8 @@
             "text": "qul",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_001.mp3",
+          "text_indopak": "قُلْ"
         },
         {
           "id": 30890,
@@ -5174,7 +5497,8 @@
             "text": "ara-aytum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_002.mp3",
+          "text_indopak": "اَرَءَیْتُمْ"
         },
         {
           "id": 30891,
@@ -5190,7 +5514,8 @@
             "text": "in",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_003.mp3",
+          "text_indopak": "اِنْ"
         },
         {
           "id": 30892,
@@ -5206,7 +5531,8 @@
             "text": "ahlakaniya",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_004.mp3",
+          "text_indopak": "اَهْلَكَنِیَ"
         },
         {
           "id": 30893,
@@ -5222,7 +5548,8 @@
             "text": "l-lahu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_005.mp3",
+          "text_indopak": "اللّٰهُ"
         },
         {
           "id": 30894,
@@ -5238,7 +5565,8 @@
             "text": "waman",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_006.mp3",
+          "text_indopak": "وَمَنْ"
         },
         {
           "id": 30895,
@@ -5254,7 +5582,8 @@
             "text": "maʿiya",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_007.mp3",
+          "text_indopak": "مَّعِیَ"
         },
         {
           "id": 30896,
@@ -5270,7 +5599,8 @@
             "text": "aw",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_008.mp3",
+          "text_indopak": "اَوْ"
         },
         {
           "id": 30897,
@@ -5286,7 +5616,8 @@
             "text": "raḥimanā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_009.mp3",
+          "text_indopak": "رَحِمَنَا ۙ"
         },
         {
           "id": 30898,
@@ -5302,7 +5633,8 @@
             "text": "faman",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_010.mp3",
+          "text_indopak": "فَمَنْ"
         },
         {
           "id": 30899,
@@ -5318,7 +5650,8 @@
             "text": "yujīru",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_011.mp3",
+          "text_indopak": "یُّجِیْرُ"
         },
         {
           "id": 30900,
@@ -5334,7 +5667,8 @@
             "text": "l-kāfirīna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_012.mp3",
+          "text_indopak": "الْكٰفِرِیْنَ"
         },
         {
           "id": 30901,
@@ -5350,7 +5684,8 @@
             "text": "min",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_013.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_013.mp3",
+          "text_indopak": "مِنْ"
         },
         {
           "id": 30902,
@@ -5366,7 +5701,8 @@
             "text": "ʿadhābin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_014.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_014.mp3",
+          "text_indopak": "عَذَابٍ"
         },
         {
           "id": 30903,
@@ -5382,12 +5718,14 @@
             "text": "alīmin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_015.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_028_015.mp3",
+          "text_indopak": "اَلِیْمٍ"
         }
       ],
       "juz": 29,
       "page": 564,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 29,
@@ -5413,7 +5751,8 @@
             "text": "qul",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_001.mp3",
+          "text_indopak": "قُلْ"
         },
         {
           "id": 31906,
@@ -5429,7 +5768,8 @@
             "text": "huwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_002.mp3",
+          "text_indopak": "هُوَ"
         },
         {
           "id": 31907,
@@ -5445,7 +5785,8 @@
             "text": "l-raḥmānu",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_003.mp3",
+          "text_indopak": "الرَّحْمٰنُ"
         },
         {
           "id": 31908,
@@ -5461,7 +5802,8 @@
             "text": "āmannā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_004.mp3",
+          "text_indopak": "اٰمَنَّا"
         },
         {
           "id": 31909,
@@ -5477,7 +5819,8 @@
             "text": "bihi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_005.mp3",
+          "text_indopak": "بِهٖ"
         },
         {
           "id": 31910,
@@ -5493,7 +5836,8 @@
             "text": "waʿalayhi",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_006.mp3",
+          "text_indopak": "وَعَلَیْهِ"
         },
         {
           "id": 31911,
@@ -5509,7 +5853,8 @@
             "text": "tawakkalnā",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_007.mp3",
+          "text_indopak": "تَوَكَّلْنَا ۚ"
         },
         {
           "id": 31913,
@@ -5525,7 +5870,8 @@
             "text": "fasataʿlamūna",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_008.mp3",
+          "text_indopak": "فَسَتَعْلَمُوْنَ"
         },
         {
           "id": 31914,
@@ -5541,7 +5887,8 @@
             "text": "man",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_009.mp3",
+          "text_indopak": "مَنْ"
         },
         {
           "id": 31915,
@@ -5557,7 +5904,8 @@
             "text": "huwa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_010.mp3",
+          "text_indopak": "هُوَ"
         },
         {
           "id": 31916,
@@ -5573,7 +5921,8 @@
             "text": "fī",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_011.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_011.mp3",
+          "text_indopak": "فِیْ"
         },
         {
           "id": 31917,
@@ -5589,7 +5938,8 @@
             "text": "ḍalālin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_012.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_012.mp3",
+          "text_indopak": "ضَلٰلٍ"
         },
         {
           "id": 31918,
@@ -5605,12 +5955,14 @@
             "text": "mubīnin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_013.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_029_013.mp3",
+          "text_indopak": "مُّبِیْنٍ"
         }
       ],
       "juz": 29,
       "page": 564,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟"
     },
     {
       "number": 30,
@@ -5636,7 +5988,8 @@
             "text": "qul",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_001.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_001.mp3",
+          "text_indopak": "قُلْ"
         },
         {
           "id": 32538,
@@ -5652,7 +6005,8 @@
             "text": "ara-aytum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_002.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_002.mp3",
+          "text_indopak": "اَرَءَیْتُمْ"
         },
         {
           "id": 32539,
@@ -5668,7 +6022,8 @@
             "text": "in",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_003.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_003.mp3",
+          "text_indopak": "اِنْ"
         },
         {
           "id": 32540,
@@ -5684,7 +6039,8 @@
             "text": "aṣbaḥa",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_004.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_004.mp3",
+          "text_indopak": "اَصْبَحَ"
         },
         {
           "id": 32541,
@@ -5700,7 +6056,8 @@
             "text": "māukum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_005.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_005.mp3",
+          "text_indopak": "مَآؤُكُمْ"
         },
         {
           "id": 32542,
@@ -5716,7 +6073,8 @@
             "text": "ghawran",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_006.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_006.mp3",
+          "text_indopak": "غَوْرًا"
         },
         {
           "id": 32543,
@@ -5732,7 +6090,8 @@
             "text": "faman",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_007.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_007.mp3",
+          "text_indopak": "فَمَنْ"
         },
         {
           "id": 32544,
@@ -5748,7 +6107,8 @@
             "text": "yatīkum",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_008.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_008.mp3",
+          "text_indopak": "یَّاْتِیْكُمْ"
         },
         {
           "id": 32545,
@@ -5764,7 +6124,8 @@
             "text": "bimāin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_009.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_009.mp3",
+          "text_indopak": "بِمَآءٍ"
         },
         {
           "id": 32546,
@@ -5780,12 +6141,14 @@
             "text": "maʿīnin",
             "language_name": "english"
           },
-          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_010.mp3"
+          "audioUrl": "https://audio.qurancdn.com/wbw/067_030_010.mp3",
+          "text_indopak": "مَّعِیْنٍ"
         }
       ],
       "juz": 29,
       "page": 564,
-      "sajda": false
+      "sajda": false,
+      "indopakEnd": "۟۠"
     }
   ]
 }

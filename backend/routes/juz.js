@@ -73,6 +73,7 @@ function buildLocalJuz(num, reciter) {
         englishAudioUrl: v.englishAudioUrl,
         urduAudioUrl:    v.urduAudioUrl,
         words:           v.words,
+        indopakEnd:      v.indopakEnd,
         juz:             v.juz,
         page:            v.page,
         sajda:           v.sajda

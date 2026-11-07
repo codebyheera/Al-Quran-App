@@ -14,7 +14,7 @@ const CHANGE_EVENT = 'arabic-font-size-change';
 export const ARABIC_FONT_MIN = 1.4;
 export const ARABIC_FONT_MAX = 4.0;
 export const ARABIC_FONT_STEP = 0.2;
-export const ARABIC_FONT_DEFAULT = 2.2;
+export const ARABIC_FONT_DEFAULT = 2.0;
 
 function readSize() {
   try {

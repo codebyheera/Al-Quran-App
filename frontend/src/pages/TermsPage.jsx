@@ -19,7 +19,7 @@ import { pageSeo } from '../data/pageSeo';
 import './LegalPage.css';
 
 const PAGE_URL = `https://alquranhub.org${pageSeo.terms.path}`;
-const LAST_UPDATED = '20th September 2026';
+const LAST_UPDATED = '7th November 2026';
 
 export default function TermsPage() {
   return (
@@ -106,6 +106,15 @@ export default function TermsPage() {
             <li>The Quran&apos;s Arabic text is not copyrighted</li>
             <li>You can freely use, share, and study it</li>
             <li>Text is sourced via the Al Quran Cloud API (Uthmani script) and the Quran.com API (word-by-word breakdown)</li>
+            <li>The optional IndoPak script is the Quran.com API&apos;s IndoPak Nastaleeq text (<code>text_indopak_nastaleeq</code>)</li>
+          </ul>
+
+          <p><strong>IndoPak Quran Font</strong></p>
+          <ul>
+            <li>The IndoPak script uses the font <strong>&ldquo;AlQuran IndoPak by QuranWBW&rdquo;</strong> from <a href="https://quranwbw.com" target="_blank" rel="noopener noreferrer">QuranWBW.com</a>, made by Ayman Siddiqui</li>
+            <li>Font credits: &copy; Al Qalam, &copy; Ghandhara, &copy; KFGQPC (King Fahad Glorious Quran Printing Complex), &copy; Ayman Siddiqui. Credits: Abdul Majeed Khan, Arif Karim, Shakir-ul-Qadree, Jawad, and other contributors</li>
+            <li>The Quran text and the font are used unmodified, under restricted permission from QuranWBW, only to display the Quran text</li>
+            <li>The font is not for sale, modification or redistribution — please do not copy it from this site</li>
           </ul>
 
           <p><strong>Translations</strong></p>

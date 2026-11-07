@@ -20,6 +20,8 @@ import { useAutoLocation } from '../hooks/useAutoLocation';
 import api from '../lib/api';
 import './PrayerTimesHub.css';
 import './SurahList.css';
+import SurahCard from '../components/SurahCard';
+import { getSurah } from '../data/surahIndex';
 
 const VerseOfDay = lazy(() => import('../components/VerseOfDay'));
 
@@ -27,20 +29,8 @@ const VerseOfDay = lazy(() => import('../components/VerseOfDay'));
 const PRAYERS = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
 
 // ── Popular Surahs ─────────────────────────────────────────────────────────
-const POPULAR_SURAHS = [
-  { number: 1,   englishName: "Al-Faatiha",  name: "الفاتحة", versesCount: 7,   nameTranslation: "The Opening",     revelation: "Meccan"  },
-  { number: 36,  englishName: "Yaseen",       name: "يس",      versesCount: 83,  nameTranslation: "Ya Sin",           revelation: "Meccan"  },
-  { number: 18,  englishName: "Al-Kahf",      name: "الكهف",   versesCount: 110, nameTranslation: "The Cave",         revelation: "Meccan"  },
-  { number: 55,  englishName: "Ar-Rahmaan",   name: "الرحمن",  versesCount: 78,  nameTranslation: "The Beneficent",  revelation: "Medinan" },
-  { number: 67,  englishName: "Al-Mulk",      name: "الملك",   versesCount: 30,  nameTranslation: "The Sovereignty", revelation: "Meccan"  },
-  { number: 56,  englishName: "Al-Waaqia",    name: "الواقعة", versesCount: 96,  nameTranslation: "The Inevitable",  revelation: "Meccan"  },
-  { number: 2,   englishName: "Al-Baqara",    name: "البقرة",  versesCount: 286, nameTranslation: "The Cow",         revelation: "Medinan" },
-  { number: 19,  englishName: "Maryam",       name: "مريم",    versesCount: 98,  nameTranslation: "Mary",            revelation: "Meccan"  },
-  { number: 12,  englishName: "Yusuf",        name: "يوسف",    versesCount: 111, nameTranslation: "Joseph",          revelation: "Meccan"  },
-  { number: 112, englishName: "Al-Ikhlaas",   name: "الإخلاص", versesCount: 4,   nameTranslation: "The Sincerity",   revelation: "Meccan"  },
-  { number: 113, englishName: "Al-Falaq",     name: "الفلق",   versesCount: 5,   nameTranslation: "The Daybreak",    revelation: "Meccan"  },
-  { number: 114, englishName: "An-Naas",      name: "الناس",   versesCount: 6,   nameTranslation: "Mankind",         revelation: "Meccan"  },
-];
+// Same data (and harakat Arabic names) as every other Surah card.
+const POPULAR_SURAHS = [1, 36, 18, 55, 67, 56, 2, 19, 12, 112, 113, 114].map(getSurah);
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 function to12h(timeStr) {
@@ -382,22 +372,7 @@ export default function PrayerTimesHub() {
           </p>
           <div className="surah-grid">
             {POPULAR_SURAHS.map(s => (
-              <Link key={s.number} to={`/surah/${s.englishName}`} className="surah-card card">
-                <div className="surah-number">
-                  <span>{s.number}</span>
-                </div>
-                <div className="surah-info">
-                  <span className="surah-english">{s.englishName}</span>
-                  <span className="surah-translation text-muted">{s.nameTranslation}</span>
-                </div>
-                <div className="surah-meta">
-                  <span className="arabic surah-arabic-name">{s.name}</span>
-                  <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end', marginTop: '0.35rem' }}>
-                    <span className="badge badge-muted">{s.versesCount} verses</span>
-                    <span className={`badge ${s.revelation === 'Meccan' ? 'badge-gold' : 'badge-green'}`}>{s.revelation}</span>
-                  </div>
-                </div>
-              </Link>
+              <SurahCard key={s.number} surah={s} />
             ))}
           </div>
         </RevealSection>

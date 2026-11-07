@@ -4,13 +4,13 @@
  */
 
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import Breadcrumb from '../components/Breadcrumb';
 import { pageSeo } from '../data/pageSeo';
 import { buildSurahListSchema } from '../data/surahListSchema';
 import './SurahList.css';
+import SurahCard from '../components/SurahCard';
 
 // The prerendered /surah page (scripts/prerender.js) embeds the Surah list, so
 // the page renders complete on first paint without waiting for the API:
@@ -116,22 +116,7 @@ export default function SurahList() {
         {/* Grid */}
         <div className="surah-grid">
           {filtered.map((s) => (
-            <Link key={s.number} to={`/surah/${s.englishName}`} className="surah-card card">
-              <div className="surah-number">
-                <span>{s.number}</span>
-              </div>
-              <div className="surah-info">
-                <span className="surah-english">{s.englishName}</span>
-                <span className="surah-translation text-muted">{s.nameTranslation}</span>
-              </div>
-              <div className="surah-meta">
-                <span className="arabic surah-arabic-name">{s.name}</span>
-                <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end', marginTop: '0.35rem' }}>
-                  <span className="badge badge-muted">{s.versesCount} verses</span>
-                  <span className={`badge ${s.revelation === 'Meccan' ? 'badge-gold' : 'badge-green'}`}>{s.revelation}</span>
-                </div>
-              </div>
-            </Link>
+            <SurahCard key={s.number} surah={s} />
           ))}
         </div>
 

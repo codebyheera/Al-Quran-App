@@ -13,6 +13,19 @@
       }
     } catch (e) {}
   </script>
+  <!-- Quran script preference (Uthmani default). For IndoPak, mark <html> and
+       start the font download early. Keep in sync with src/hooks/useQuranScript.js. -->
+  <script>
+    try {
+      if (localStorage.getItem('quranScript') === 'indopak') {
+        document.documentElement.setAttribute('data-quran-script', 'indopak');
+        var f = document.createElement('link');
+        f.rel = 'preload'; f.as = 'font'; f.type = 'font/woff2'; f.crossOrigin = 'anonymous';
+        f.href = '/fonts/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2';
+        document.head.appendChild(f);
+      }
+    } catch (e) {}
+  </script>
   <!-- Pinterest Site Verification -->
   <meta name="p:domain_verify" content="30f02ed5ef20d9e14861c89fc846e40e"/>
   <!-- Yandex Site Verification -->

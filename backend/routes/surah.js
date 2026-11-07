@@ -10,6 +10,7 @@ import { getSurahId, getSurahSlug } from '../data/surahMapping.js';
 import { reportError } from '../lib/reportError.js';
 import { getJson, cachedBuild, setPublicCache } from '../lib/upstream.js';
 import { readLocalSurah } from '../lib/localQuran.js';
+import { fetchIndopakChapter, applyIndopakToVerse } from '../lib/indopak.js';
 const router = express.Router();
 
 const ALQURAN_BASE = 'https://api.alquran.cloud/v1';
@@ -95,10 +96,15 @@ async function buildSurah(num, internalReciter) {
 
   // Word-by-word data is an enhancement (the page falls back to the plain
   // Arabic text), so a Quran.com failure must not fail the whole Surah.
-  const [data, quranCom] = await Promise.all([
+  const [data, quranCom, indopak] = await Promise.all([
     getJson(url),
     getJson(quranComUrl).catch((err) => {
       console.warn(`[surah] Word-by-word data unavailable for Surah ${num}: ${err.message}`);
+      return null;
+    }),
+    // Optional too: without it the page shows Uthmani for every verse.
+    fetchIndopakChapter(num).catch((err) => {
+      console.warn(`[surah] IndoPak text unavailable for Surah ${num}: ${err.message}`);
       return null;
     }),
   ]);
@@ -170,6 +176,7 @@ async function buildSurah(num, internalReciter) {
       sajda: arabicAyah.sajda || false
     };
   });
+  if (indopak) verses.forEach((v) => applyIndopakToVerse(v, indopak));
 
   return {
     complete: !!quranCom,

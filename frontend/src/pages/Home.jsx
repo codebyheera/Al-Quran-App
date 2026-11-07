@@ -4,12 +4,14 @@
  */
 
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useBookmarks } from '../context/BookmarkContext';
 import { Helmet } from 'react-helmet-async';
 import { lazy, Suspense } from 'react';
 import api from '../lib/api';
-import { smartSearch } from '../lib/searchEngine';
+import { searchQuran } from '../lib/searchEngine';
+import SearchSuggestions, { moveActive } from '../components/SearchSuggestions';
+import { getSurah } from '../data/surahIndex';
 import { BlogCard } from '../components/BlogCard';
 import PrayerTimes from '../components/PrayerTimes';
 import StreakWidget from '../components/StreakWidget';
@@ -18,6 +20,7 @@ import { getLastReading } from '../lib/readingProgress';
 import { RevealSection } from '../components/RevealSection';
 import './Home.css';
 import './SurahList.css';
+import SurahCard from '../components/SurahCard';
 
 const VerseOfDay    = lazy(() => import('../components/VerseOfDay'));
 const TasbihCounter = lazy(() => import('../components/TasbihCounter'));
@@ -85,18 +88,11 @@ const FEATURES = [
 ];
 
 // Popular Surahs — static quick-access shown on the home page
-const POPULAR = [
-  { number: 1,   name: 'Al-Faatiha',  arabic: 'الفاتحة',   verses: 7   },
-  { number: 2,   name: 'Al-Baqarah',  arabic: 'البقرة',    verses: 286 },
-  { number: 18,  name: 'Al-Kahf',     arabic: 'الكهف',     verses: 110 },
-  { number: 36,  name: 'Yaseen',      arabic: 'يس',        verses: 83  },
-  { number: 55,  name: 'Ar-Rahmaan',  arabic: 'الرحمن',    verses: 78  },
-  { number: 56,  name: 'Al-Waaqia',   arabic: 'الواقعة',   verses: 96  },
-  { number: 67,  name: 'Al-Mulk',     arabic: 'الملك',     verses: 30  },
-  { number: 93,  name: 'Ad-Duhaa',    arabic: 'الضحى',     verses: 11  },
-  { number: 94,  name: 'ash-sharh',   arabic: 'الشرح',     verses: 8   },
-  { number: 112, name: 'Al-Ikhlaas',  arabic: 'الإخلاص',   verses: 4   },
-];
+// (names, harakat Arabic names and verse counts from data/surahIndex.js)
+const POPULAR = [1, 2, 18, 36, 55, 56, 67, 93, 94, 112].map((n) => {
+  const s = getSurah(n);
+  return { number: n, name: s.englishName, arabic: s.shortName, verses: s.versesCount };
+});
 
 export default function Home() {
   const [query, setQuery] = useState('');
@@ -104,6 +100,7 @@ export default function Home() {
   const [showAllSurahs, setShowAllSurahs] = useState(false);
   const [recentBlogs, setRecentBlogs] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const searchWrapperRef = useRef(null);
   const navigate = useNavigate();
   const { bookmarks } = useBookmarks();
@@ -143,19 +140,28 @@ export default function Home() {
     };
   }, []);
 
+  const smart = useMemo(() => searchQuran(query, { limit: 6 }), [query]);
+  const showDropdown = dropdownOpen && smart.items.length > 0;
+
+  // Enter opens a highlighted or certain result ("surah yaseen", "2:255");
+  // anything else goes to the full search page.
   function handleSearch(e) {
     e.preventDefault();
     setDropdownOpen(false);
-    if (query.trim()) navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+    const picked = activeIndex >= 0 && showDropdown ? smart.items[activeIndex] : smart.best;
+    if (picked) navigate(picked.url);
+    else if (query.trim()) navigate(`/search?q=${encodeURIComponent(query.trim())}`);
   }
 
   function handleQueryChange(e) {
     setQuery(e.target.value);
+    setActiveIndex(-1);
     setDropdownOpen(true);
   }
 
-  const { results: suggestions, didYouMean } = smartSearch(query, allSurahs);
-  const showDropdown = dropdownOpen && (suggestions.length > 0 || didYouMean);
+  function handleQueryKeyDown(e) {
+    if (showDropdown) moveActive(e, smart.items.length, activeIndex, setActiveIndex);
+  }
 
   const homeJsonLd = JSON.stringify({
     '@context': 'https://schema.org',
@@ -250,50 +256,28 @@ export default function Home() {
               <input
                 className="input"
                 type="text"
-                placeholder="Search by Surah name, number, or keyword…"
+                placeholder="Surah name, number, ayah (2:255) or a word…"
+                aria-label="Search the Quran"
                 value={query}
                 onChange={handleQueryChange}
+                onKeyDown={handleQueryKeyDown}
                 onFocus={() => query.trim() && setDropdownOpen(true)}
                 autoComplete="off"
+                aria-controls="home-suggestions"
+                aria-activedescendant={showDropdown && activeIndex >= 0 ? `home-suggestions-${activeIndex}` : undefined}
               />
               <button type="submit" className="btn btn-primary">Search</button>
             </form>
 
             {showDropdown && (
               <div className="search-dropdown">
-                {/* Did You Mean banner */}
-                {didYouMean && (
-                  <div className="search-did-you-mean">
-                    <span>🔍 Did you mean&nbsp;</span>
-                    <Link
-                      to={`/surah/${didYouMean.englishName}`}
-                      className="search-dym-link"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      {didYouMean.englishName}
-                    </Link>
-                    <span>?</span>
-                  </div>
-                )}
-
-                {suggestions.map((s) => (
-                  <Link
-                    key={s.number}
-                    to={`/surah/${s.englishName}`}
-                    className="search-dropdown-item"
-                    onClick={() => setDropdownOpen(false)}
-                  >
-                    <span className="search-dropdown-num badge badge-gold">{s.number}</span>
-                    <div style={{ flex: 1, textAlign: 'left' }}>
-                      <div style={{ fontWeight: 600 }}>{s.englishName}</div>
-                      <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{s.nameTranslation}</div>
-                    </div>
-                    <div className="search-item-right">
-                      <span className="arabic" style={{ fontSize: '1.2rem', lineHeight: '1.2' }}>{s.name}</span>
-
-                    </div>
-                  </Link>
-                ))}
+                <SearchSuggestions
+                  id="home-suggestions"
+                  items={smart.items}
+                  didYouMean={smart.didYouMean}
+                  activeIndex={activeIndex}
+                  onPick={() => setDropdownOpen(false)}
+                />
               </div>
             )}
           </div>
@@ -493,22 +477,7 @@ export default function Home() {
             </div>
             <div className="surah-grid">
               {allSurahs.slice(0, showAllSurahs ? allSurahs.length : 42).map((s, idx) => (
-                <Link key={s.number} to={`/surah/${s.englishName}`} className={`surah-card card reveal reveal-fade-up stagger-${(idx % 6) + 1} reveal-visible`}>
-                  <div className="surah-number">
-                    <span>{s.number}</span>
-                  </div>
-                  <div className="surah-info">
-                    <span className="surah-english">{s.englishName}</span>
-                    <span className="surah-translation text-muted">{s.nameTranslation}</span>
-                  </div>
-                  <div className="surah-meta">
-                    <span className="arabic surah-arabic-name">{s.name}</span>
-                    <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end', marginTop: '0.35rem' }}>
-                      <span className="badge badge-muted">{s.versesCount} verses</span>
-                      <span className={`badge ${s.revelation === 'Meccan' ? 'badge-gold' : 'badge-green'}`}>{s.revelation}</span>
-                    </div>
-                  </div>
-                </Link>
+                <SurahCard key={s.number} surah={s} className={`reveal reveal-fade-up stagger-${(idx % 6) + 1} reveal-visible`} />
               ))}
             </div>
             {!showAllSurahs && allSurahs.length > 42 && (

@@ -5,13 +5,15 @@
  *   - Theme (ThemeContext)            - Translation language (AudioContext)
  *   - Show English/Urdu (AudioContext) - Reciter (QariContext)
  *   - Arabic font size (useArabicFontSize, shared with Surah/Juz pages)
+ *   - Quran script, Uthmani | IndoPak (useQuranScript, shared with Surah/Juz pages)
  */
 
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import {
   IconX, IconAdjustmentsHorizontal, IconTextSize, IconLanguage, IconBook,
-  IconMicrophone2, IconPalette, IconRefresh, IconCheck, IconPlus, IconMinus,
+  IconMicrophone2, IconPalette, IconRefresh, IconCheck, IconPlus, IconMinus, IconAlphabetArabic,
 } from '@tabler/icons-react';
 import { useTheme, DEFAULT_THEME } from '../context/ThemeContext';
 import { useAudio } from '../context/AudioContext';
@@ -19,6 +21,13 @@ import { useQari } from '../context/QariContext';
 import useArabicFontSize, {
   ARABIC_FONT_MIN, ARABIC_FONT_MAX, ARABIC_FONT_STEP, ARABIC_FONT_DEFAULT,
 } from '../hooks/useArabicFontSize';
+import useQuranScript, { QURAN_SCRIPTS, QURAN_SCRIPT_DEFAULT } from '../hooks/useQuranScript';
+
+// Al-Fatihah 1:1 exactly as stored for the Surah page (Quran.com
+// text_indopak_nastaleeq, words + ayah-end marker). The IndoPak font may only
+// show Quran text with its reference, so the preview names the ayah.
+const INDOPAK_PREVIEW = 'بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟';
+const UTHMANI_PREVIEW = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
 
 const LANGUAGES = [
   { id: 'english', label: 'EN', name: 'English' },
@@ -60,6 +69,8 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
   const { preferredLanguage, setPreferredLanguage, showEn, setShowEn, showUr, setShowUr } = useAudio();
   const { reciter, changeReciter, reciters } = useQari();
   const [arabicSize, setArabicSize] = useArabicFontSize();
+  const [quranScript, setQuranScript] = useQuranScript();
+  const isIndopak = quranScript === 'indopak';
   const panelRef = useRef(null);
   const bodyRef = useRef(null);
   const [mounted, setMounted] = useState(false);
@@ -114,6 +125,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
     setPreferredLanguage('english', { applyAudio: false });
     changeReciter(DEFAULT_RECITER);
     setArabicSize(ARABIC_FONT_DEFAULT);
+    setQuranScript(QURAN_SCRIPT_DEFAULT);
   }
 
   // Portals can't render in the homepage's renderToString prerender, so the
@@ -153,11 +165,17 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
               <label className="sd-card-title" htmlFor="sd-arabic-size">Arabic font size</label>
               <span className="sd-value">{arabicSize.toFixed(1)}</span>
             </div>
-            {/* Same font and text as the Surah/Juz pages (.arabic → MeQuran) */}
+            {/* Same font and text as the Surah/Juz pages for the chosen script */}
             <div className="sd-preview">
-              <p className="arabic sd-arabic-preview" lang="ar" dir="rtl" style={{ fontSize: `${arabicSize}rem` }}>
-                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              <p
+                className={`arabic sd-arabic-preview${isIndopak ? ' arabic--indopak' : ''}`}
+                lang="ar"
+                dir="rtl"
+                style={{ fontSize: `${arabicSize}rem` }}
+              >
+                {isIndopak ? INDOPAK_PREVIEW : UTHMANI_PREVIEW}
               </p>
+              {isIndopak && <span className="sd-preview-ref">Al-Fatihah 1:1</span>}
             </div>
             <div className="sd-range-row">
               <button
@@ -194,6 +212,35 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
 
           <section className="sd-card" style={{ '--i': 1 }}>
             <div className="sd-card-head">
+              <IconAlphabetArabic size={18} stroke={1.5} className="sd-card-icon" />
+              <h3 className="sd-card-title" id="sd-script-label">Quran script</h3>
+            </div>
+            <div className={`sd-segmented ${isIndopak ? 'second' : ''}`} role="radiogroup" aria-labelledby="sd-script-label">
+              <span className="sd-segmented-thumb" aria-hidden="true" />
+              {QURAN_SCRIPTS.map((s) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={quranScript === s.id}
+                  className={quranScript === s.id ? 'active' : ''}
+                  onClick={() => setQuranScript(s.id)}
+                >
+                  {s.name}
+                </button>
+              ))}
+            </div>
+            <p className="sd-hint">Arabic text on Surah &amp; Juz pages.</p>
+            {isIndopak && (
+              <p className="sd-hint">
+                IndoPak font: AlQuran IndoPak by QuranWBW.{' '}
+                <Link to="/terms-and-conditions" className="sd-link" onClick={onClose}>Credits</Link>
+              </p>
+            )}
+          </section>
+
+          <section className="sd-card" style={{ '--i': 2 }}>
+            <div className="sd-card-head">
               <IconLanguage size={18} stroke={1.5} className="sd-card-icon" />
               <h3 className="sd-card-title" id="sd-lang-label">Language</h3>
             </div>
@@ -215,7 +262,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
             <p className="sd-hint">Translation shown on Surah &amp; Juz pages and used for recitation.</p>
           </section>
 
-          <section className="sd-card" style={{ '--i': 2 }}>
+          <section className="sd-card" style={{ '--i': 3 }}>
             <div className="sd-card-head">
               <IconBook size={18} stroke={1.5} className="sd-card-icon" />
               <h3 className="sd-card-title">Translations</h3>
@@ -224,7 +271,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
             <Toggle label="Urdu translation" checked={showUr} onChange={toggleUr} />
           </section>
 
-          <section className="sd-card" style={{ '--i': 3 }}>
+          <section className="sd-card" style={{ '--i': 4 }}>
             <div className="sd-card-head">
               <IconMicrophone2 size={18} stroke={1.5} className="sd-card-icon" />
               <h3 className="sd-card-title" id="sd-reciter-label">Reciter</h3>
@@ -246,7 +293,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
             </div>
           </section>
 
-          <section className="sd-card" style={{ '--i': 4 }}>
+          <section className="sd-card" style={{ '--i': 5 }}>
             <div className="sd-card-head">
               <IconPalette size={18} stroke={1.5} className="sd-card-icon" />
               <h3 className="sd-card-title" id="sd-theme-label">Theme</h3>

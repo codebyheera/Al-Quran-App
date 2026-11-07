@@ -34,6 +34,17 @@ video {
   font-display: swap;
 }
 
+/* "AlQuran IndoPak by QuranWBW" — used under QuranWBW's permission, unmodified,
+   ONLY for IndoPak ayah text (.arabic--indopak). Not for Surah names, the
+   Bismillah header, duas or UI. The browser only downloads it when used. */
+@font-face {
+  font-family: 'AlQuranIndoPak';
+  src: url('/fonts/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Theme Tokens ───────────────────────────────────────────── */
 :root {
   /* Dark mode (default) */
@@ -66,7 +77,7 @@ video {
   --transition: all 0.25s ease;
   --font-ui: 'Inter', sans-serif;
   --font-arabic: 'MeQuran', 'KFGQPC Uthmanic Script HAFS', 'Amiri', 'Traditional Arabic', 'Scheherazade New', 'Gulzar', 'Noto Nastaliq Urdu', serif;
-  --arabic-font-size: 2.2rem;
+  --arabic-font-size: 2rem;
 
   /* Dark text used on top of the gold accent color (buttons/badges/pills) —
      accent-gold stays light across every theme, so one dark value works
@@ -356,7 +367,7 @@ a:hover {
 }
 
 .verse-arabic {
-  font-size: var(--arabic-font-size, 2.2rem) !important;
+  font-size: var(--arabic-font-size, 2rem) !important;
   color: var(--text-arabic);
   line-height: 1.8 !important;
   margin-bottom: 1.5rem;
@@ -379,6 +390,31 @@ a:hover {
 .quran-word:hover {
   background: rgba(201, 168, 76, 0.15);
   color: var(--accent-gold);
+}
+
+/* IndoPak (Nastaleeq) ayah text. Nastaleeq is taller, so it needs more
+   line height; no fallback font, so the text never shows in a font it
+   wasn't made for. */
+.arabic.arabic--indopak {
+  font-family: 'AlQuranIndoPak', serif;
+}
+
+.verse-arabic.arabic--indopak {
+  line-height: 2.4 !important;
+  row-gap: 0.15rem;
+}
+
+/* Ayah number with Ruku/Sajda signs, drawn by the font */
+.quran-ayah-end {
+  cursor: default;
+  padding: 0 0.1rem;
+}
+
+/* IndoPak users: hide the build-time Uthmani snapshot of a Surah page until
+   the app renders the IndoPak text (avoids a flash of the other script).
+   index.html sets data-quran-script before first paint. */
+html[data-quran-script="indopak"] .verse-arabic[data-script="uthmani"] {
+  visibility: hidden;
 }
 
 /* Active word highlight — shown while word audio is playing */
@@ -512,6 +548,23 @@ a:hover {
 
 .input::placeholder {
   color: var(--text-muted);
+}
+
+/* Clear (×) button of search inputs — theme gold instead of the browser's blue */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  background-color: var(--accent-gold);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+input[type="search"]::-webkit-search-cancel-button:hover {
+  background-color: var(--accent-gold-light);
 }
 
 /* ── Badge ───────────────────────────────────────────────────── */

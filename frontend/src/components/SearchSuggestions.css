@@ -1,0 +1,97 @@
+/* SearchSuggestions.css — instant Surah / Ayah / Juz results */
+
+.ss-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ss-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+  border-left: 3px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ss-items li:last-child .ss-item { border-bottom: none; }
+
+.ss-item:hover,
+.ss-item.is-active {
+  background: var(--bg-card-hover);
+  border-left-color: var(--accent-gold);
+  color: var(--text-primary);
+}
+
+.ss-badge {
+  flex-shrink: 0;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--accent-gold);
+}
+
+.ss-badge--ayah,
+.ss-badge--juz {
+  background: var(--accent-gold);
+  color: var(--on-accent-gold);
+}
+
+.ss-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.ss-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.ss-meta {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ss-arabic {
+  flex-shrink: 0;
+  font-size: 1.15rem !important;
+  line-height: 1.4 !important;
+  color: var(--accent-gold);
+}
+
+.ss-dym {
+  padding: 0.6rem 1rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: rgba(201, 168, 76, 0.06);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.ss-dym-link {
+  color: var(--accent-gold);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ss-dym-link:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  .ss-arabic { display: none; }
+}

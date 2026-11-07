@@ -395,6 +395,8 @@
 .sd-preview {
   position: relative;
   display: flex;
+  flex-direction: column;
+  gap: 6px;
   align-items: center;
   justify-content: center;
   min-height: 120px;
@@ -415,6 +417,28 @@
   color: var(--text-arabic, var(--hdr-text));
   overflow-wrap: anywhere;
   transition: font-size 150ms ease-out;
+}
+
+.sd-preview .sd-arabic-preview.arabic--indopak {
+  line-height: 2.2;
+}
+
+.sd-hint + .sd-hint {
+  margin-top: 4px;
+}
+
+.sd-link {
+  color: var(--hdr-gold);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Ayah reference under the IndoPak preview */
+.sd-preview-ref {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--hdr-meta);
 }
 
 /* Slider */
