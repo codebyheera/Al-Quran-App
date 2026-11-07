@@ -503,7 +503,7 @@ export default function JuzView() {
                           </p>
                         )}
                         {(showUr || revealedVerses.has(verseUid)) && verse.urduTranslation && (
-                          <p className="translation verse-translation-ur" dir="rtl" style={{ margin: 0, fontFamily: '"Gulzar", serif', fontStyle: 'normal', textAlign: 'right', fontSize: `calc(var(--translation-font-size, 1rem) * 1.6)`, lineHeight: '2.8', color: 'var(--accent-gold)' }}>
+                          <p className="translation verse-translation-ur" dir="rtl" style={{ margin: 0, fontFamily: 'var(--font-urdu)', fontStyle: 'normal', textAlign: 'right', fontSize: `calc(var(--translation-font-size, 1rem) * var(--urdu-scale, 1.6))`, lineHeight: 'var(--urdu-line-height, 2.8)', color: 'var(--accent-gold)' }}>
                             {verse.urduTranslation}
                           </p>
                         )}

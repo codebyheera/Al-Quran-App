@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import {
   IconX, IconAdjustmentsHorizontal, IconTextSize, IconLanguage, IconBook,
   IconMicrophone2, IconPalette, IconRefresh, IconCheck, IconPlus, IconMinus, IconAlphabetArabic,
+  IconTypography,
 } from '@tabler/icons-react';
 import { useTheme, DEFAULT_THEME } from '../context/ThemeContext';
 import { useAudio } from '../context/AudioContext';
@@ -22,6 +23,7 @@ import useArabicFontSize, {
   ARABIC_FONT_MIN, ARABIC_FONT_MAX, ARABIC_FONT_STEP, getArabicFontDefault,
 } from '../hooks/useArabicFontSize';
 import useQuranScript, { QURAN_SCRIPTS, QURAN_SCRIPT_DEFAULT } from '../hooks/useQuranScript';
+import useUrduFont, { URDU_FONTS, URDU_FONT_DEFAULT } from '../hooks/useUrduFont';
 
 // Quick size presets shown under the slider (values in rem). The middle-left
 // one is this screen's default (2.0 on phones, 2.4 on desktop).
@@ -65,6 +67,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
   const SCALE_MARKS = marksFor(fontDefault);
   const [quranScript, setQuranScript] = useQuranScript();
   const isIndopak = quranScript === 'indopak';
+  const [urduFont, setUrduFont] = useUrduFont();
   const panelRef = useRef(null);
   const bodyRef = useRef(null);
   const [mounted, setMounted] = useState(false);
@@ -119,6 +122,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
     changeReciter(DEFAULT_RECITER);
     setArabicSize(fontDefault);
     setQuranScript(QURAN_SCRIPT_DEFAULT);
+    setUrduFont(URDU_FONT_DEFAULT);
   }
 
   // Portals can't render in the homepage's renderToString prerender, so the
@@ -298,6 +302,37 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
 
           <section className="sd-card" style={{ '--i': 4 }}>
             <div className="sd-card-head">
+              <IconTypography size={18} stroke={1.5} className="sd-card-icon" />
+              <h3 className="sd-card-title" id="sd-urdu-font-label">Urdu font</h3>
+            </div>
+            {/* Preview in the selected font only, so opening Settings
+                doesn't download every font */}
+            <p className="sd-urdu-preview" lang="ur" dir="rtl">
+              شروع اللہ کا نام لے کر جو بڑا مہربان نہایت رحم والا ہے
+            </p>
+            <div className="sd-options" role="radiogroup" aria-labelledby="sd-urdu-font-label">
+              {URDU_FONTS.map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={urduFont === f.id}
+                  className={`sd-option ${urduFont === f.id ? 'active' : ''}`}
+                  onClick={() => setUrduFont(f.id)}
+                >
+                  <span className="sd-radio" aria-hidden="true" />
+                  <span className="sd-option-text">
+                    {f.name}
+                    <span className="sd-option-sub">{f.style}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+            <p className="sd-hint">Used for the Urdu translation. All fonts are free (Open Font License).</p>
+          </section>
+
+          <section className="sd-card" style={{ '--i': 5 }}>
+            <div className="sd-card-head">
               <IconMicrophone2 size={18} stroke={1.5} className="sd-card-icon" />
               <h3 className="sd-card-title" id="sd-reciter-label">Reciter</h3>
             </div>
@@ -318,7 +353,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
             </div>
           </section>
 
-          <section className="sd-card" style={{ '--i': 5 }}>
+          <section className="sd-card" style={{ '--i': 6 }}>
             <div className="sd-card-head">
               <IconPalette size={18} stroke={1.5} className="sd-card-icon" />
               <h3 className="sd-card-title" id="sd-theme-label">Theme</h3>

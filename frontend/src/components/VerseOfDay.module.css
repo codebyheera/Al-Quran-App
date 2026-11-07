@@ -254,9 +254,10 @@
 }
 
 .translationBox.rtl .translationText {
-  font-family: 'Gulzar', serif;
-  font-size: clamp(1.15rem, 4.5vw, 1.6rem);
-  line-height: 2.1;
+  font-family: var(--font-urdu);
+  /* Same size for every Urdu font (Gulzar = 1.6 scale) */
+  font-size: calc(clamp(1.15rem, 4.5vw, 1.6rem) * var(--urdu-scale, 1.6) / 1.6);
+  line-height: calc(var(--urdu-line-height, 2.8) * 0.75);
 }
 
 /* ── Action row (max 3 buttons) ─────────────────────────────── */

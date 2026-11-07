@@ -27,6 +27,27 @@
       }
     } catch (e) {}
   </script>
+  <!-- Urdu translation font (Gulzar default). A chosen font's stylesheet is
+       added before first paint so Urdu text doesn't switch font later.
+       Keep in sync with src/hooks/useUrduFont.js. -->
+  <script>
+    try {
+      var uf = localStorage.getItem('urduFont');
+      var ufCss = {
+        'noto-nastaliq': 'Noto+Nastaliq+Urdu',
+        'naskh': 'Noto+Naskh+Arabic',
+        'lateef': 'Lateef'
+      }[uf];
+      if (ufCss) {
+        document.documentElement.setAttribute('data-urdu-font', uf);
+        var ul = document.createElement('link');
+        ul.id = 'urdu-font-' + uf;
+        ul.rel = 'stylesheet';
+        ul.href = 'https://fonts.googleapis.com/css2?family=' + ufCss + '&display=swap';
+        document.head.appendChild(ul);
+      }
+    } catch (e) {}
+  </script>
   <!-- Pinterest Site Verification -->
   <meta name="p:domain_verify" content="30f02ed5ef20d9e14861c89fc846e40e"/>
   <!-- Yandex Site Verification -->

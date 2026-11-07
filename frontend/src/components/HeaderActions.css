@@ -736,6 +736,33 @@
   transition: background 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out, transform 150ms ease-out;
 }
 
+/* Option with a second line (Urdu font: name + style) */
+.sd-option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 6px 0;
+}
+
+.sd-option-sub {
+  font-size: 0.72rem;
+  color: var(--hdr-meta);
+}
+
+/* Urdu font preview — always in the selected font */
+.sd-urdu-preview {
+  margin: 0 0 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--accent-gold);
+  font-family: var(--font-urdu);
+  font-size: calc(0.75rem * var(--urdu-scale, 1.6));
+  line-height: var(--urdu-line-height, 2.8);
+  text-align: right;
+}
+
 .sd-option:hover {
   background: var(--hdr-overlay);
   border-color: color-mix(in srgb, var(--hdr-gold) 45%, var(--hdr-border));
