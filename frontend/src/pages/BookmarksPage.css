@@ -46,12 +46,27 @@
 
 /* Delete */
 .bm-delete {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  padding: 0.2rem 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
   border-radius: var(--radius-sm);
+  color: var(--accent-gold);
 }
-.bm-delete:hover { color: var(--error); background: rgba(231,76,60,0.08); }
+.bm-delete:hover,
+.bm-delete:focus-visible {
+  color: var(--accent-gold-light, var(--accent-gold));
+  background: rgba(201, 168, 76, 0.12);
+}
+
+/* Filled = saved; hover/focus swaps to "bookmark off" (= remove) */
+.bm-icon-remove { display: none; }
+.bm-delete:hover .bm-icon-saved,
+.bm-delete:focus-visible .bm-icon-saved { display: none; }
+.bm-delete:hover .bm-icon-remove,
+.bm-delete:focus-visible .bm-icon-remove { display: block; }
 
 /* Go-to button */
 .bm-goto { width: 100%; justify-content: center; font-size: 0.85rem; }

@@ -27,6 +27,7 @@ import { useReadingTimer } from "../hooks/useReadingTimer";
 import { useReadingProgress } from "../hooks/useReadingProgress";
 import useArabicFontSize from "../hooks/useArabicFontSize";
 import useQuranScript, { verseHasIndopak } from "../hooks/useQuranScript";
+import GoToVerse from "../components/GoToVerse";
 import "./SurahView.css";
 
 export default function SurahView() {
@@ -540,6 +541,12 @@ export default function SurahView() {
                 </span>
               </button>
             </div>
+            {verses.length > 1 && (
+              <>
+                <div className="sv-font-divider" style={{ height: '18px', opacity: 0.3, margin: '0' }}></div>
+                <GoToVerse total={verses.length} surahName={surah.surahName} />
+              </>
+            )}
           </div>
         </div>
 

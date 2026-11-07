@@ -1,0 +1,102 @@
+/* GoToVerse.css — "Go to verse" box on Surah pages */
+
+.goto-verse {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.goto-verse-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Same pill as the Arabic / Trans size controls */
+.goto-verse-box {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.25rem 0.2rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.goto-verse-box:focus-within {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+.goto-verse-box.has-error {
+  border-color: var(--error);
+}
+
+.goto-verse-input {
+  width: 4.5rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.goto-verse-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.goto-verse-btn {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  color: var(--on-accent-gold);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.goto-verse-btn:hover { background: var(--accent-gold-light, var(--accent-gold)); }
+.goto-verse-btn:active { transform: scale(0.92); }
+
+/* The verse that was jumped to glows gold for a moment */
+.verse-card.verse-card--jump {
+  animation: verseJumpGlow 2.2s ease-out;
+}
+
+@keyframes verseJumpGlow {
+  0%, 35% {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.35), var(--shadow-gold);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verse-card.verse-card--jump {
+    animation: none;
+    border-color: var(--accent-gold);
+  }
+}
+
+/* Phones: its own row in the controls card, centered (same breakpoint as SurahView.css) */
+@media (max-width: 640px) {
+  .goto-verse {
+    justify-content: center;
+    width: 100%;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .goto-verse-input { width: 5.5rem; font-size: 16px; } /* 16px: no iOS zoom on focus */
+}

@@ -180,7 +180,7 @@ export default function App() {
       </main>
 
       {/* Global toast notification */}
-      {toast && <div className="toast">{toast}</div>}
+      {toast && <div className="toast" role="status" aria-live="polite">{toast}</div>}
 
       {/* Persistent bottom audio player */}
       <Footer />

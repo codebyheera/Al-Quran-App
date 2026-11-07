@@ -4,6 +4,7 @@
  */
 
 import { Link } from 'react-router-dom';
+import { IconBookmarkFilled, IconBookmarkOff } from '@tabler/icons-react';
 import { useBookmarks } from '../context/BookmarkContext';
 import { Helmet } from 'react-helmet-async';
 import { pageSeo } from '../data/pageSeo';
@@ -55,12 +56,17 @@ export default function BookmarksPage() {
                 <Link to={`/surah/${encodeURIComponent(b.surahName)}#verse-${b.verseNumber}`} className="bm-ref">
                   <span className="badge badge-gold">{b.surahName || `Surah ${b.surahNumber}`} — Verse {b.verseNumber}</span>
                 </Link>
+                {/* Saved bookmark; on hover/focus it shows "bookmark off" to make
+                    clear that clicking removes it. */}
                 <button
+                  type="button"
                   className="btn btn-ghost bm-delete"
                   onClick={() => removeBookmark(b._id)}
                   title="Remove bookmark"
+                  aria-label={`Remove bookmark: ${b.surahName || `Surah ${b.surahNumber}`} verse ${b.verseNumber}`}
                 >
-                  🗑
+                  <IconBookmarkFilled className="bm-icon-saved" size={18} aria-hidden="true" />
+                  <IconBookmarkOff className="bm-icon-remove" size={18} stroke={1.8} aria-hidden="true" />
                 </button>
               </div>
 
