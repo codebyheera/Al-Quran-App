@@ -53,6 +53,67 @@ function formatTime(t) {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
+/**
+ * Phones only: hide the player while the user scrolls down (more room to
+ * read), bring it back as soon as they scroll up, near the top, or at the
+ * end of the page. Scrolls the app makes by itself (Go to ayah, auto-follow)
+ * are ignored, so only the user's own touch / wheel / key scrolling counts.
+ */
+function useHideOnScroll(enabled) {
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    if (!enabled) { setHidden(false); return undefined; }
+    const mq = window.matchMedia('(max-width: 768px)');
+    let lastY = window.scrollY;
+    let down = 0;
+    let up = 0;
+    let lastInput = 0;
+    let frame = 0;
+
+    const markInput = () => { lastInput = Date.now(); };
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
+      if (!mq.matches) { setHidden(false); return; }
+
+      const nearTop = y < 80;
+      const nearEnd = window.innerHeight + y >= document.documentElement.scrollHeight - 48;
+      if (nearTop || nearEnd) { down = 0; up = 0; setHidden(false); return; }
+      // Momentum keeps scrolling a moment after the finger lifts.
+      if (Date.now() - lastInput > 1200) return;
+
+      if (dy > 0) {
+        down += dy; up = 0;
+        if (down > 24) setHidden(true);
+      } else if (dy < 0) {
+        up -= dy; down = 0;
+        if (up > 12) setHidden(false);
+      }
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+
+    const opts = { passive: true };
+    window.addEventListener('scroll', onScroll, opts);
+    window.addEventListener('touchstart', markInput, opts);
+    window.addEventListener('touchmove', markInput, opts);
+    window.addEventListener('wheel', markInput, opts);
+    window.addEventListener('keydown', markInput);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('touchstart', markInput);
+      window.removeEventListener('touchmove', markInput);
+      window.removeEventListener('wheel', markInput);
+      window.removeEventListener('keydown', markInput);
+    };
+  }, [enabled]);
+
+  return hidden;
+}
+
 /** Reciter photo with a music-note fallback while it loads or if it fails. */
 function ReciterArt({ reciter, className }) {
   const [loaded, setLoaded] = useState(false);
@@ -154,6 +215,9 @@ export default function BottomPlayer() {
 
   useEffect(() => { if (!currentVerse || isMinimized) setOptionsOpen(false); }, [currentVerse, isMinimized]);
 
+  // Never hide while the Options sheet is open or the audio has an error.
+  const scrollHidden = useHideOnScroll(Boolean(currentVerse) && !isMinimized && !optionsOpen && !audioError);
+
   if (!currentVerse) return null;
 
   const surahInfo = getSurah(currentVerse.surahNumber);
@@ -195,7 +259,11 @@ export default function BottomPlayer() {
   }
 
   return (
-    <div className={`pl-root${optionsOpen ? ' is-options-open' : ''}`} role="region" aria-label="Recitation player">
+    <div
+      className={`pl-root${optionsOpen ? ' is-options-open' : ''}${isPlaying ? ' is-playing' : ''}${scrollHidden ? ' is-scroll-hidden' : ''}`}
+      role="region"
+      aria-label="Recitation player"
+    >
       {/* Progress through the whole Surah / Juz */}
       {hasList && (
         <div
@@ -229,7 +297,7 @@ export default function BottomPlayer() {
               <IconPlayerSkipBackFilled size={18} />
             </button>
             <button type="button" className="pl-play" onClick={togglePlay} aria-label={playLabel} title={playLabel}>
-              <PlayIcon size={20} />
+              <PlayIcon size={22} />
             </button>
             <button type="button" className="pl-icon-btn" onClick={skipNext} disabled={!canNext} aria-label="Next ayah" title="Next ayah">
               <IconPlayerSkipForwardFilled size={18} />
