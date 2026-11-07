@@ -215,6 +215,9 @@
   line-height: 2.1;
   direction: rtl;
   margin: 0 0 14px 0;
+  /* MeQuran's space is very narrow; widen it to roughly match the word gap
+     on the Surah pages, so the words don't run together. */
+  word-spacing: 0.25em;
 }
 
 /* Transliteration — hidden by default, shown on toggle */

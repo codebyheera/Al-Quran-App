@@ -4,8 +4,7 @@
    the same tokens onto their own variables so nothing clashes.
    ============================================================ */
 
-.hdr-actions,
-.sd-root {
+.hdr-actions {
   --hdr-void: #081310;
   --hdr-base: #0d2117;
   --hdr-raised: #15301f;
@@ -17,11 +16,13 @@
   --hdr-gold: #e0b04e;
   --hdr-gold-hover: #f4cd77;
   --hdr-on-gold: #1a1206;
-  --hdr-font: 'Plus Jakarta Sans', var(--font-ui);
+  --hdr-font: var(--font-ui);
 }
 
-[data-theme]:not([data-theme="emerald"]) .hdr-actions,
-[data-theme]:not([data-theme="emerald"]) .sd-root {
+/* The Settings drawer always uses the site's theme colors, exactly like the
+   mobile menu sidebar (Navbar.css), so the two panels look like one system. */
+.sd-root,
+[data-theme]:not([data-theme="emerald"]) .hdr-actions {
   --hdr-void: var(--bg-primary);
   --hdr-base: var(--bg-card);
   --hdr-raised: var(--bg-secondary);
@@ -33,6 +34,7 @@
   --hdr-gold: var(--accent-gold);
   --hdr-gold-hover: var(--accent-gold-light, var(--accent-gold));
   --hdr-on-gold: var(--on-accent-gold);
+  --hdr-font: var(--font-ui);
 }
 
 /* ── Cluster ──────────────────────────────────────────────── */
@@ -252,9 +254,6 @@
   transform: translateX(0);
 }
 
-@media (max-width: 767px) {
-  .sd-panel { width: 100%; border-left: none; }
-}
 
 /* Header */
 .sd-header {
@@ -432,6 +431,10 @@
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.sd-nowrap {
+  white-space: nowrap;
 }
 
 /* Ayah reference under the IndoPak preview */
@@ -749,6 +752,98 @@
 .sd-btn-gold:hover {
   background: var(--hdr-gold-hover);
   border-color: var(--hdr-gold-hover);
+}
+
+/* Mobile/tablet (where the menu sidebar exists): the drawer IS the same
+   panel as the menu sidebar in Navbar.css — same side, width, surface,
+   shadow, backdrop, motion, header and close button. Keep them in sync. */
+@media (max-width: 1023px) {
+  .sd-root { transition: visibility 0s linear 350ms; }
+
+  .sd-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+  }
+
+  .sd-panel {
+    left: 0;
+    right: auto;
+    width: 320px;
+    max-width: 85vw;
+    border-left: none;
+    border-right: 1px solid var(--border);
+    box-shadow: 4px 0 40px rgba(0, 0, 0, 0.4);
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sd-header {
+    padding: 1.1rem 1.25rem;
+    border-bottom-color: var(--border);
+  }
+
+  .sd-header-main { gap: 0.65rem; }
+
+  .sd-header-icon {
+    width: auto;
+    height: auto;
+    border: none;
+    background: none;
+  }
+
+  .sd-title {
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+  }
+
+  .sd-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    border-color: var(--border);
+    color: var(--text-secondary);
+    transition: var(--transition);
+  }
+
+  .sd-close:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    transform: none;
+  }
+
+  .sd-body {
+    padding: 1rem 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .sd-card {
+    padding: 0.9rem;
+    border-radius: 8px;
+  }
+
+  /* The menu sidebar has no staggered entrance; only the panel slides. */
+  .sd-root.is-open .sd-card { animation: none; }
+
+  .sd-card-title {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .sd-preview,
+  .sd-segmented,
+  .sd-option,
+  .sd-btn { border-radius: 8px; }
+
+  .sd-segmented-thumb,
+  .sd-segmented button { border-radius: 6px; }
+
+  .sd-footer { padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

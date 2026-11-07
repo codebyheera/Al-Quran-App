@@ -26,7 +26,9 @@ import useQuranScript, { QURAN_SCRIPTS, QURAN_SCRIPT_DEFAULT } from '../hooks/us
 // Al-Fatihah 1:1 exactly as stored for the Surah page (Quran.com
 // text_indopak_nastaleeq, words + ayah-end marker). The IndoPak font may only
 // show Quran text with its reference, so the preview names the ayah.
-const INDOPAK_PREVIEW = 'بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟';
+// Written as \u escapes: editors may re-normalize the mark order otherwise,
+// and the text must stay exactly as Quran.com serves it.
+const INDOPAK_PREVIEW = '\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u0670\u0647\u0650 \u0627\u0644\u0631\u0651\u064E\u062D\u0652\u0645\u0670\u0646\u0650 \u0627\u0644\u0631\u0651\u064E\u062D\u0650\u06CC\u0652\u0645\u0650 \u06DF\uF61E';
 const UTHMANI_PREVIEW = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
 
 const LANGUAGES = [
@@ -35,18 +37,18 @@ const LANGUAGES = [
 ];
 
 const DEFAULT_RECITER = 'alafasy';
-const FONTS_HREF = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap';
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
 
-// Drawer fonts are only fetched the first time it opens, so the header
-// itself adds no extra font requests to every page load.
-function loadDrawerFonts() {
-  if (document.getElementById('settings-drawer-fonts')) return;
-  const link = document.createElement('link');
-  link.id = 'settings-drawer-fonts';
-  link.rel = 'stylesheet';
-  link.href = FONTS_HREF;
-  document.head.appendChild(link);
+// The last word and the ayah-end marker stay together on one line, so the
+// marker never wraps alone. Only the line breaking changes, not the text.
+function IndopakPreview() {
+  const parts = INDOPAK_PREVIEW.split(' ');
+  return (
+    <>
+      {parts.slice(0, -2).join(' ')}{' '}
+      <span className="sd-nowrap">{parts.slice(-2).join(' ')}</span>
+    </>
+  );
 }
 
 function Toggle({ label, checked, onChange }) {
@@ -81,7 +83,6 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
   // Focus the drawer on open, lock page scroll, restore focus on close.
   useEffect(() => {
     if (!open) return;
-    loadDrawerFonts();
     const returnTo = returnFocusRef?.current;
     document.body.style.overflow = 'hidden';
     // Always open at the top, with focus on the panel itself (no ring
@@ -154,7 +155,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
             <h2 id="settings-drawer-title" className="sd-title">Settings</h2>
           </div>
           <button type="button" className="sd-close" onClick={onClose} aria-label="Close settings">
-            <IconX size={20} stroke={1.5} />
+            <IconX size={24} />
           </button>
         </div>
 
@@ -173,7 +174,7 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
                 dir="rtl"
                 style={{ fontSize: `${arabicSize}rem` }}
               >
-                {isIndopak ? INDOPAK_PREVIEW : UTHMANI_PREVIEW}
+                {isIndopak ? <IndopakPreview /> : UTHMANI_PREVIEW}
               </p>
               {isIndopak && <span className="sd-preview-ref">Al-Fatihah 1:1</span>}
             </div>
