@@ -23,13 +23,13 @@ import useArabicFontSize, {
 } from '../hooks/useArabicFontSize';
 import useQuranScript, { QURAN_SCRIPTS, QURAN_SCRIPT_DEFAULT } from '../hooks/useQuranScript';
 
-// Al-Fatihah 1:1 exactly as stored for the Surah page (Quran.com
-// text_indopak_nastaleeq, words + ayah-end marker). The IndoPak font may only
-// show Quran text with its reference, so the preview names the ayah.
-// Written as \u escapes: editors may re-normalize the mark order otherwise,
-// and the text must stay exactly as Quran.com serves it.
-const INDOPAK_PREVIEW = '\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u0670\u0647\u0650 \u0627\u0644\u0631\u0651\u064E\u062D\u0652\u0645\u0670\u0646\u0650 \u0627\u0644\u0631\u0651\u064E\u062D\u0650\u06CC\u0652\u0645\u0650 \u06DF\uF61E';
-const UTHMANI_PREVIEW = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
+// Quick size presets shown under the slider (values in rem).
+const SIZE_PRESETS = [1.6, ARABIC_FONT_DEFAULT, 2.6, 3.2];
+
+// Number scale under the slider.
+const SCALE_MARKS = [ARABIC_FONT_MIN, ARABIC_FONT_DEFAULT, 3.0, ARABIC_FONT_MAX];
+
+const pct = (v) => ((v - ARABIC_FONT_MIN) / (ARABIC_FONT_MAX - ARABIC_FONT_MIN)) * 100;
 
 const LANGUAGES = [
   { id: 'english', label: 'EN', name: 'English' },
@@ -38,18 +38,6 @@ const LANGUAGES = [
 
 const DEFAULT_RECITER = 'alafasy';
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
-
-// The last word and the ayah-end marker stay together on one line, so the
-// marker never wraps alone. Only the line breaking changes, not the text.
-function IndopakPreview() {
-  const parts = INDOPAK_PREVIEW.split(' ');
-  return (
-    <>
-      {parts.slice(0, -2).join(' ')}{' '}
-      <span className="sd-nowrap">{parts.slice(-2).join(' ')}</span>
-    </>
-  );
-}
 
 function Toggle({ label, checked, onChange }) {
   return (
@@ -164,30 +152,38 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
             <div className="sd-card-head">
               <IconTextSize size={18} stroke={1.5} className="sd-card-icon" />
               <label className="sd-card-title" htmlFor="sd-arabic-size">Arabic font size</label>
-              <span className="sd-value">{arabicSize.toFixed(1)}</span>
             </div>
-            {/* Same font and text as the Surah/Juz pages for the chosen script */}
-            <div className="sd-preview">
-              <p
-                className={`arabic sd-arabic-preview${isIndopak ? ' arabic--indopak' : ''}`}
-                lang="ar"
-                dir="rtl"
-                style={{ fontSize: `${arabicSize}rem` }}
-              >
-                {isIndopak ? <IndopakPreview /> : UTHMANI_PREVIEW}
-              </p>
-              {isIndopak && <span className="sd-preview-ref">Al-Fatihah 1:1</span>}
-            </div>
-            <div className="sd-range-row">
+
+            {/* − [ big number ] + */}
+            <div className="sd-size-stepper">
               <button
                 type="button"
                 className="sd-step-btn"
                 onClick={() => setArabicSize(arabicSize - ARABIC_FONT_STEP)}
-                disabled={arabicSize <= ARABIC_FONT_MIN}
+                disabled={arabicSize <= ARABIC_FONT_MIN + 0.001}
                 aria-label="Decrease Arabic font size"
               >
                 <IconMinus size={16} stroke={2} />
               </button>
+              <div className="sd-size-display" aria-live="polite">
+                <span className="sd-size-num">{arabicSize.toFixed(1)}</span>
+                <span className="sd-size-meta">
+                  {Math.round((arabicSize / ARABIC_FONT_DEFAULT) * 100)}% of default
+                </span>
+              </div>
+              <button
+                type="button"
+                className="sd-step-btn"
+                onClick={() => setArabicSize(arabicSize + ARABIC_FONT_STEP)}
+                disabled={arabicSize >= ARABIC_FONT_MAX - 0.001}
+                aria-label="Increase Arabic font size"
+              >
+                <IconPlus size={16} stroke={2} />
+              </button>
+            </div>
+
+            {/* Slider with a number scale underneath */}
+            <div className="sd-scale">
               <input
                 id="sd-arabic-size"
                 className="sd-range"
@@ -196,18 +192,42 @@ export default function SettingsDrawer({ open, onClose, returnFocusRef }) {
                 max={ARABIC_FONT_MAX}
                 step={ARABIC_FONT_STEP}
                 value={arabicSize}
-                style={{ '--fill': `${((arabicSize - ARABIC_FONT_MIN) / (ARABIC_FONT_MAX - ARABIC_FONT_MIN)) * 100}%` }}
+                style={{ '--fill': `${pct(arabicSize)}%` }}
                 onChange={(e) => setArabicSize(parseFloat(e.target.value))}
               />
-              <button
-                type="button"
-                className="sd-step-btn"
-                onClick={() => setArabicSize(arabicSize + ARABIC_FONT_STEP)}
-                disabled={arabicSize >= ARABIC_FONT_MAX}
-                aria-label="Increase Arabic font size"
-              >
-                <IconPlus size={16} stroke={2} />
-              </button>
+              <div className="sd-scale-marks" aria-hidden="true">
+                {SCALE_MARKS.map((v) => (
+                  <span
+                    key={v}
+                    className={`sd-scale-mark${Math.abs(arabicSize - v) < 0.05 ? ' active' : ''}`}
+                    style={{ '--pos': `${pct(v)}%` }}
+                  >
+                    {v.toFixed(1)}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick presets */}
+            <div className="sd-size-presets" role="group" aria-label="Arabic font size presets">
+              {SIZE_PRESETS.map((v) => {
+                const active = Math.abs(arabicSize - v) < 0.05;
+                return (
+                  <button
+                    key={v}
+                    type="button"
+                    className={`sd-size-preset${active ? ' active' : ''}`}
+                    aria-pressed={active}
+                    aria-label={`Set Arabic font size to ${v.toFixed(1)}`}
+                    onClick={() => setArabicSize(v)}
+                  >
+                    <span className="sd-size-preset-label">{v.toFixed(1)}</span>
+                    {v === ARABIC_FONT_DEFAULT && (
+                      <span className="sd-size-preset-num">Default</span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </section>
 

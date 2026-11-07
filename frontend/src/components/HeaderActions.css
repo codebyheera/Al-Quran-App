@@ -365,17 +365,6 @@
   color: var(--hdr-text-2);
 }
 
-.sd-value {
-  min-width: 42px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--hdr-gold) 14%, transparent);
-  color: var(--hdr-gold);
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-align: center;
-}
-
 .sd-hint {
   margin: 10px 0 0;
   font-size: 0.78rem;
@@ -390,38 +379,6 @@
   box-shadow: 0 0 0 2px var(--hdr-void), 0 0 0 4px var(--hdr-gold);
 }
 
-/* Arabic preview */
-.sd-preview {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  min-height: 120px;
-  padding: 18px 14px;
-  border-radius: 12px;
-  /* Same surface as the verse cards in the selected theme */
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  transition: background 0.3s ease;
-}
-
-.sd-preview .sd-arabic-preview {
-  margin: 0;
-  width: 100%;
-  text-align: center;
-  line-height: 1.9;
-  color: var(--text-arabic, var(--hdr-text));
-  overflow-wrap: anywhere;
-  transition: font-size 150ms ease-out;
-}
-
-.sd-preview .sd-arabic-preview.arabic--indopak {
-  line-height: 2.2;
-}
-
 .sd-hint + .sd-hint {
   margin-top: 4px;
 }
@@ -433,23 +390,129 @@
   text-underline-offset: 2px;
 }
 
-.sd-nowrap {
-  white-space: nowrap;
-}
-
-/* Ayah reference under the IndoPak preview */
-.sd-preview-ref {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--hdr-meta);
-}
-
-/* Slider */
-.sd-range-row {
+/* Arabic font size: − [ number ] + */
+.sd-size-stepper {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--hdr-void);
+  border: 1px solid var(--hdr-border);
+}
+
+.sd-size-display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sd-size-num {
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--hdr-gold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.sd-size-meta {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--hdr-meta);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Slider + number scale */
+.sd-scale {
+  margin-top: 14px;
+}
+
+.sd-scale .sd-range {
+  display: block;
+  width: 100%;
+}
+
+/* Marks line up with the slider: the thumb's center travels from 10px to
+   (100% - 10px), so the scale is inset by half the thumb width. */
+.sd-scale-marks {
+  position: relative;
+  height: 18px;
+  margin: 2px 10px 0;
+}
+
+.sd-scale-mark {
+  position: absolute;
+  left: var(--pos);
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--hdr-meta);
+  font-variant-numeric: tabular-nums;
+  transition: color 150ms ease-out;
+}
+
+.sd-scale-mark::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 5px;
+  margin: 0 auto 2px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.sd-scale-mark.active {
+  color: var(--hdr-gold);
+}
+
+/* Quick presets */
+.sd-size-presets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
   margin-top: 12px;
+}
+
+.sd-size-preset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-height: 44px;
+  padding: 7px 4px;
+  border-radius: 10px;
+  border: 1px solid var(--hdr-border);
+  background: var(--hdr-base);
+  color: var(--hdr-text);
+  cursor: pointer;
+  transition: background 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out;
+}
+
+.sd-size-preset:hover {
+  border-color: var(--hdr-gold);
+}
+
+.sd-size-preset.active {
+  background: color-mix(in srgb, var(--hdr-gold) 14%, transparent);
+  border-color: var(--hdr-gold);
+  color: var(--hdr-gold);
+}
+
+.sd-size-preset-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.sd-size-preset-num {
+  font-size: 0.68rem;
+  font-weight: 600;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
 }
 
 .sd-step-btn {
@@ -835,7 +898,6 @@
     color: var(--text-muted);
   }
 
-  .sd-preview,
   .sd-segmented,
   .sd-option,
   .sd-btn { border-radius: 8px; }

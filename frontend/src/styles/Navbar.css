@@ -519,6 +519,13 @@
   z-index: 200;
 }
 
+/* The audio dropdown lives in the page (Surah/Juz controls), not the navbar.
+   Keep it below the sticky navbar (z-index 100) so it doesn't float over
+   the navbar on scroll, but above normal page content so its panel opens. */
+.navbar-dropdown.audio-custom-dropdown {
+  z-index: 50;
+}
+
 .dropdown-trigger {
   display: flex;
   align-items: center;
