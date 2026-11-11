@@ -10,6 +10,10 @@
 
 const STORAGE_KEY = 'quranStreakData';
 
+// Per-day history kept for the weekly calendar / stats. Older days are
+// trimmed so localStorage stays tiny (~60 short entries).
+const HISTORY_DAYS = 60;
+
 // ── Local date helpers ───────────────────────────────────────────────────
 // We deliberately avoid `Date#toISOString()` for "today" because it uses
 // UTC and would flip to the next day several hours early/late depending on
@@ -53,7 +57,42 @@ function defaultData() {
     currentStreak: 0,
     longestStreak: 0,
     lastCompletedDate: null,
+    // { "YYYY-MM-DD": { s: secondsRead, c: 1 if goal completed that day } }
+    history: {},
   };
+}
+
+/** Drops history entries older than HISTORY_DAYS (relative to today). */
+function trimHistory(history, today) {
+  const cutoff = addDays(today, -(HISTORY_DAYS - 1));
+  const out = {};
+  for (const [date, entry] of Object.entries(history)) {
+    if (date >= cutoff) out[date] = entry; // "YYYY-MM-DD" sorts lexically
+  }
+  return out;
+}
+
+/**
+ * One-time upgrade for data saved before `history` existed. We only know
+ * the streak length and the last completed day, so the completed run is
+ * reconstructed from those (seconds = goal, since the exact time wasn't
+ * stored). Keeps existing users' weekly dots consistent with their streak.
+ */
+function ensureHistory(data) {
+  if (data.history && typeof data.history === 'object' && !Array.isArray(data.history)) return false;
+  const history = {};
+  const goalSecs = (data.dailyGoalMinutes || 0) * 60;
+  if (data.lastCompletedDate && data.currentStreak > 0) {
+    for (let i = 0; i < data.currentStreak && i < HISTORY_DAYS; i++) {
+      history[addDays(data.lastCompletedDate, -i)] = { s: goalSecs, c: 1 };
+    }
+  }
+  if (data.todaySecondsRead > 0) {
+    const prev = history[data.todayDate];
+    history[data.todayDate] = { s: data.todaySecondsRead, c: prev ? 1 : 0 };
+  }
+  data.history = trimHistory(history, todayLocalDateStr());
+  return true;
 }
 
 function isValidShape(data) {
@@ -100,6 +139,8 @@ export function getStreakData() {
     return data;
   }
 
+  const migrated = ensureHistory(data);
+
   const today = todayLocalDateStr();
   if (data.todayDate !== today) {
     // A new day has started since the last save. Goal completion for the
@@ -120,6 +161,9 @@ export function getStreakData() {
     }
     data.todayDate = today;
     data.todaySecondsRead = 0;
+    data.history = trimHistory(data.history, today);
+    writeRaw(data);
+  } else if (migrated) {
     writeRaw(data);
   }
 
@@ -158,10 +202,15 @@ export function recordReadingSeconds(seconds) {
 
   data.todaySecondsRead += seconds;
 
+  const entry = data.history[data.todayDate] || { s: 0, c: 0 };
+  entry.s = data.todaySecondsRead;
+  data.history[data.todayDate] = entry;
+
   if (goalSeconds > 0 && !alreadyCompletedToday && data.todaySecondsRead >= goalSeconds) {
     const gap = data.lastCompletedDate ? daysBetween(data.lastCompletedDate, data.todayDate) : null;
     data.currentStreak = gap === 1 ? data.currentStreak + 1 : 1;
     data.lastCompletedDate = data.todayDate;
+    entry.c = 1;
     if (data.currentStreak > data.longestStreak) {
       data.longestStreak = data.currentStreak;
     }
@@ -169,4 +218,19 @@ export function recordReadingSeconds(seconds) {
 
   writeRaw(data);
   return data;
+}
+
+/**
+ * The last `count` days (oldest → newest, ending today) for calendars/stats:
+ * [{ date, seconds, completed, isToday }]. Read-only.
+ */
+export function getRecentDays(count = 7, data = getStreakData()) {
+  const today = data.todayDate;
+  const days = [];
+  for (let i = count - 1; i >= 0; i--) {
+    const date = addDays(today, -i);
+    const e = data.history?.[date];
+    days.push({ date, seconds: e?.s || 0, completed: !!e?.c, isToday: i === 0 });
+  }
+  return days;
 }

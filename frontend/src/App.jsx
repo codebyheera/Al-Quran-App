@@ -20,6 +20,7 @@ const ChatWidget          = lazy(() => import('./components/ChatWidget'));
 // ChatWidget.jsx/.css and backend/routes/chat.js are kept as-is.
 const SHOW_CHAT_WIDGET = false;
 const DaroodReminderToast = lazy(() => import('./components/DaroodReminderToast'));
+const DuaPill             = lazy(() => import('./components/DuaPill'));
 const LanguagePrompt      = lazy(() => import('./components/LanguagePrompt'));
 
 // ── Home is eagerly loaded (critical first paint) ────────────────────────────
@@ -219,6 +220,11 @@ export default function App() {
       {/* Daily Durood reminder toast — delayed, dismissible, site-wide */}
       <Suspense fallback={null}>
         <DaroodReminderToast />
+      </Suspense>
+
+      {/* Floating "Make dua for…" pill — comes and goes, frontend-only */}
+      <Suspense fallback={null}>
+        <DuaPill />
       </Suspense>
     </div>
   );

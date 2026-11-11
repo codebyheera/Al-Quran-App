@@ -1,0 +1,194 @@
+/* DuaPill.css — once-a-day dua popup
+   Bottom-LEFT so it never collides with the right-hand stack (Durood
+   toast, minimized player pill). Lifts above the BottomPlayer bar
+   (68px desktop / 64px mobile) when .has-player is set on .app-root. */
+
+.dua-pill {
+  position: fixed;
+  left: clamp(0.75rem, 3vw, 1.25rem);
+  bottom: calc(1.25rem + env(safe-area-inset-bottom));
+  z-index: 1050;
+  font-family: var(--font-ui);
+  animation: duaPillIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.app-root.has-player .dua-pill {
+  bottom: calc(68px + 1rem + env(safe-area-inset-bottom));
+}
+.dua-pill.is-leaving {
+  animation: duaPillOut 0.22s ease-in both;
+}
+
+@keyframes duaPillIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes duaPillOut {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(10px); }
+}
+
+/* ── Card ───────────────────────────────────────────────────────── */
+.dua-pill-card {
+  width: min(380px, calc(100vw - 1.5rem));
+  padding: 1rem 1.05rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-md, 14px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+.dua-pill-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.dua-pill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--accent-gold);
+  background: color-mix(in srgb, var(--accent-gold) 14%, transparent);
+}
+.dua-pill-title {
+  flex: 1;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+.dua-pill-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.dua-pill-x:hover {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--text-secondary) 12%, transparent);
+}
+
+/* Arabic: MeQuran's space glyph is very narrow, so widen word gaps
+   (same fix as VerseOfDay) and give the harakat room to breathe. */
+.dua-pill-arabic {
+  margin: 1rem 0 0.6rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent-gold) 6%, transparent);
+  font-family: var(--font-arabic);
+  font-size: 1.45rem;
+  line-height: 2.1;
+  word-spacing: 0.25em;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--text-arabic, var(--text-primary));
+}
+.dua-pill-meaning {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.dua-pill-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+}
+.dua-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.dua-pill-link:hover {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.dua-pill-ameen {
+  height: 32px;
+  padding: 0 1rem;
+  border: 1px solid var(--accent-gold);
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--accent-gold) 12%, transparent);
+  color: var(--accent-gold);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.dua-pill-ameen:hover {
+  background: color-mix(in srgb, var(--accent-gold) 22%, transparent);
+}
+
+.dua-pill-x:focus-visible,
+.dua-pill-link:focus-visible,
+.dua-pill-ameen:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+/* ── Urdu mode: user's chosen Urdu font (Gulzar by default), RTL ── */
+.dua-pill.is-ur .dua-pill-title,
+.dua-pill.is-ur .dua-pill-meaning,
+.dua-pill.is-ur .dua-pill-ameen,
+.dua-pill.is-ur .dua-pill-link span[dir="rtl"] {
+  font-family: var(--font-urdu);
+}
+.dua-pill.is-ur .dua-pill-title {
+  font-size: calc(1rem * var(--urdu-scale, 1.6) / 1.6);
+  font-weight: 400;
+  line-height: calc(var(--urdu-line-height, 2.8) * 0.7);
+  text-align: right;
+}
+.dua-pill.is-ur .dua-pill-meaning {
+  font-size: calc(1.05rem * var(--urdu-scale, 1.6) / 1.6);
+  line-height: calc(var(--urdu-line-height, 2.8) * 0.75);
+  color: var(--text-primary);
+}
+.dua-pill.is-ur .dua-pill-ameen {
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dua-pill,
+  .dua-pill.is-leaving { animation: none; }
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .dua-pill { left: 0.75rem; right: 0.75rem; }
+  .dua-pill-card { width: 100%; }
+  .app-root.has-player .dua-pill {
+    bottom: calc(64px + 0.75rem + env(safe-area-inset-bottom));
+  }
+  .dua-pill-arabic { font-size: 1.35rem; }
+}
+
+/* Short landscape phones: sit lower */
+@media (max-height: 480px) and (orientation: landscape) {
+  .dua-pill { bottom: 0.75rem; }
+}

@@ -6,255 +6,272 @@
 
 .streak-strip {
   width: 100%;
+  font-family: var(--font-ui);
   margin-top: 1.75rem;
   border-top: 1px solid rgba(201, 168, 76, 0.14);
 }
 
-.streak-strip-inner {
+/* ── Goal set ─────────────────────────────────────────────────────────
+   Line 1: 🔥 N day streak | ━━ x / y min today | Continue reading →
+   Line 2: ○○○○○○◉  Best N days | N min this week | Edit goal
+   One accent (gold) for progress + the link; everything else is text
+   colour. Thin rules instead of bullets.                              */
+.streak-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.1rem 1rem 1.15rem;
+}
+
+.streak-mini-line {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.9rem 1.25rem;
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 1.1rem 1rem;
-}
-
-/* Setup/edit state: stacked and fully centered, matching the hero's own
-   centered text convention — the prompt on one line, goal buttons as a
-   single group on the line below, so it never wraps into a lopsided
-   two-line split like a plain wrapping row would. */
-.streak-strip-setup {
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-/* Tight group so the flame sits right next to its count/label instead of
-   sharing the wider gap used between the row's other elements. */
-.streak-strip-fire {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  flex-shrink: 0;
-}
-
-/* Brighter, custom orange so the flame pops against any theme background
-   — emoji glyphs can't be recolored via CSS, so this uses a colorable
-   icon (@tabler/icons-react) instead of the 🔥 emoji. */
-.streak-flame-icon {
-  color: #f0a63a;
-  flex-shrink: 0;
-}
-
-.streak-strip-count {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: var(--accent-gold);
-  line-height: 1;
-}
-
-.streak-strip-label {
-  font-size: 0.85rem;
+  gap: 0.4rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
   color: var(--text-secondary);
-  white-space: nowrap;
 }
-
-.streak-strip-text {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  text-align: center;
-}
-
-/* ── Progress bar / complete message ─────────────────────────────── */
-.streak-strip-progress {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.streak-strip-progress-label {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  white-space: nowrap;
-}
-
-.streak-strip-bar {
-  width: 110px;
-  height: 6px;
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(201, 168, 76, 0.15);
-  overflow: hidden;
-}
-
-[data-theme="light"] .streak-strip-bar {
-  background: rgba(0, 0, 0, 0.07);
-}
-
-.streak-strip-bar-fill {
-  height: 100%;
-  background: linear-gradient(135deg, var(--accent-gold), #a8882a);
-  border-radius: 100px;
-  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.streak-strip-complete {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.9rem 0.45rem 0.55rem;
-  border-radius: 100px;
-  /* Theme accent, so it matches whichever theme is selected */
-  background: color-mix(in srgb, var(--accent-gold) 12%, transparent);
-  border: 1px solid var(--border-hover);
-  animation: streakCompleteIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  font-size: 0.83rem;
+.streak-mini-line b {
   font-weight: 600;
   color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
 }
 
-.streak-strip-complete-icon {
+/* Thin vertical rule between items */
+.streak-mini-div {
+  width: 1px;
+  height: 14px;
+  background: var(--border);
+}
+
+/* Streak */
+.streak-mini-count {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+.streak-mini-flame {
   flex-shrink: 0;
-  border-radius: 50%;
+  color: var(--text-muted);
+}
+.streak-mini-count.is-lit .streak-mini-flame {
+  color: #e8963a;
+}
+
+/* Today */
+.streak-mini-today {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+.streak-mini-bar {
+  display: block;
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--text-secondary) 16%, transparent);
+  overflow: hidden;
+}
+.streak-mini-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
   background: var(--accent-gold);
-  color: var(--on-accent-gold);
+  transition: width 0.4s ease;
+}
+.streak-mini-done {
+  margin-left: -0.25rem;
+  color: var(--accent-gold);
 }
 
-@keyframes streakCompleteIn {
-  from { opacity: 0; transform: scale(0.94); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .streak-strip-complete { animation: none; }
-}
-
-/* ── Buttons — compact pill, deliberately unlike the boxier hero Search
-   button so it reads as its own distinct action. ─────────────────── */
-.streak-strip-btn {
+/* Link */
+.streak-mini-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  height: 40px;
-  padding: 0 1.1rem;
-  background: rgba(201, 168, 76, 0.1);
-  border: 1.5px solid var(--accent-gold);
   color: var(--accent-gold);
-  border-radius: 100px;
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
-  transition: var(--transition);
+  border-radius: 4px;
+}
+.streak-mini-cta:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-.streak-strip-btn:hover {
-  background: rgba(201, 168, 76, 0.2);
-  color: var(--accent-gold-light);
-  border-color: var(--accent-gold-light);
-  transform: translateY(-1px);
+/* Line 2 */
+.streak-mini-line--sub {
+  gap: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.streak-mini-line--sub .streak-mini-div {
+  height: 11px;
 }
 
-.streak-goal-options {
+.streak-dots {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.streak-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-secondary) 45%, transparent);
+  cursor: default;
+}
+.streak-dot--partial {
+  box-shadow: inset 0 0 0 1px var(--accent-gold);
+  background: linear-gradient(to top, var(--accent-gold) 50%, transparent 50%);
+}
+.streak-dot--done {
+  box-shadow: none;
+  background: var(--accent-gold);
+}
+/* Today: same size, marked with a ring */
+.streak-dot.is-today {
+  outline: 1px solid color-mix(in srgb, var(--accent-gold) 70%, transparent);
+  outline-offset: 2px;
 }
 
-.streak-goal-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  padding: 0 1.1rem;
-  border-radius: 100px;
-  border: 1.5px solid var(--border);
-  background: transparent;
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.streak-goal-btn:hover {
-  border-color: rgba(201, 168, 76, 0.5);
-  color: var(--text-primary);
-}
-
-.streak-goal-btn.active {
-  border-color: var(--accent-gold);
-  background: rgba(201, 168, 76, 0.14);
-  color: var(--accent-gold);
-}
-
-.streak-edit-link {
-  background: transparent;
+.streak-mini-edit {
+  padding: 0;
   border: none;
-  color: var(--text-muted);
-  font-size: 0.78rem;
-  font-weight: 600;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--text-secondary);
   cursor: pointer;
-  padding: 0.3rem 0.2rem;
-  white-space: nowrap;
-  transition: color 0.15s ease;
+  border-radius: 4px;
+}
+.streak-mini-edit:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.streak-mini-cta:focus-visible,
+.streak-mini-edit:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
 }
 
-.streak-edit-link:hover {
-  color: var(--accent-gold);
+/* Once a day, after finishing the goal: today's dot fills in */
+.streak-dots.is-celebrating .streak-dot.is-today {
+  animation: streakDotIn 0.6s ease-out 0.3s both;
+}
+@keyframes streakDotIn {
+  from { transform: scale(0.4); opacity: 0.4; }
+  to   { transform: scale(1); opacity: 1; }
+}
+@keyframes streakFadeUp {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streak-dots.is-celebrating .streak-dot.is-today { animation: none; }
 }
 
 /* ── Mobile ───────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .streak-strip-inner {
-    flex-direction: column;
-    padding: 1rem 1rem 1.1rem;
-    gap: 0.75rem;
-  }
+  .streak-mini { gap: 0.7rem; padding: 1rem 0.5rem 1.1rem; }
+  .streak-mini-line { font-size: 0.85rem; gap: 0.5rem 0.8rem; }
+  .streak-mini-line--sub { font-size: 0.76rem; gap: 0.4rem 0.7rem; }
 
-  .streak-strip-text {
-    width: 100%;
-  }
+  /* CTA drops to its own line */
+  .streak-mini-div--cta { display: none; }
+  .streak-mini-cta { flex-basis: 100%; justify-content: center; }
+}
 
-  .streak-goal-options {
-    width: 100%;
-  }
+/* ── Setup: goal picker ──────────────────────────────────────────────
+   Line 1: 🔥 How long do you want to read daily? | 5 min · 10 min · …
+   Line 2: hint | Cancel
+   Reuses .streak-mini-line so both states share type, colours, spacing. */
+.streak-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.1rem 1rem 1.15rem;
+  animation: streakFadeUp 0.35s ease both;
+}
 
-  .streak-strip-progress {
-    width: 100%;
-    justify-content: center;
-  }
+.streak-setup-q {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.streak-setup-flame {
+  flex-shrink: 0;
+  color: #e8963a;
+}
 
-  .streak-strip-bar {
-    flex: 1;
-    max-width: 160px;
-  }
+/* Options: light outlined chips */
+.streak-seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.streak-seg-btn {
+  height: 30px;
+  padding: 0 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.streak-seg-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+/* New users: 10 min hinted */
+.streak-seg-btn.is-suggested {
+  border-color: color-mix(in srgb, var(--accent-gold) 55%, transparent);
+  color: var(--text-primary);
+}
+/* Current goal */
+.streak-seg-btn.is-active {
+  border-color: var(--accent-gold);
+  background: color-mix(in srgb, var(--accent-gold) 12%, transparent);
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+.streak-seg-btn:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
 
-  .streak-strip-complete {
-    max-width: 100%;
-    white-space: normal;
-    text-align: left;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .streak-setup { animation: none; }
+}
 
-  .streak-strip-btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .streak-edit-link {
-    padding-top: 0.15rem;
-    border-top: 1px solid rgba(201, 168, 76, 0.1);
-    margin-top: 0.1rem;
-    width: 100%;
-    text-align: center;
-  }
+@media (max-width: 640px) {
+  .streak-setup { gap: 0.75rem; padding: 1rem 0.5rem 1.1rem; }
+  .streak-setup .streak-mini-line { flex-direction: column; gap: 0.65rem; }
+  .streak-setup .streak-mini-line--sub { flex-direction: row; text-align: center; }
+  .streak-seg-btn { height: 36px; padding: 0 0.9rem; } /* comfy tap targets */
 }

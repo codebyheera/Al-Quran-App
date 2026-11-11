@@ -1,0 +1,214 @@
+/* ReadingToolbar.css — shared reading controls on Surah & Juz pages */
+
+.rt-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 0;
+  margin: 0 auto 2rem;
+  padding: 0.6rem 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.rt-bar:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-gold);
+}
+
+.rt-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 1rem;
+}
+.rt-group + .rt-group {
+  border-left: 1px solid var(--border);
+}
+
+/* ── Size steppers ── */
+.rt-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.rt-stepper-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: linear-gradient(145deg, rgba(201, 168, 76, 0.22), rgba(201, 168, 76, 0.08));
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  color: var(--accent-gold);
+  line-height: 0;
+}
+.rt-stepper-icon svg { display: block; }
+
+.rt-stepper-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  opacity: 0.85;
+}
+
+.rt-stepper-ctrl {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 4px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+}
+
+.rt-step-btn {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+.rt-step-btn:hover:not(:disabled) {
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--accent-gold);
+}
+.rt-step-btn:active:not(:disabled) { transform: scale(0.9); }
+.rt-step-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.rt-step-btn:focus-visible,
+.rt-chip:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+.rt-step-val {
+  min-width: 4.2ch;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-gold);
+}
+
+/* ── Translation chips ── */
+.rt-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.rt-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 36px;
+  padding: 0 0.85rem 0 0.55rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.rt-chip:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.rt-chip-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text-muted);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.rt-chip.is-on {
+  background: rgba(201, 168, 76, 0.14);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+.rt-chip.is-on .rt-chip-check {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: var(--on-accent-gold);
+}
+
+.rt-chip-label-short { display: none; }
+
+/* Go to verse sits in the extra slot: drop its own mobile divider/padding */
+.rt-group--extra .goto-verse {
+  border-top: none;
+  padding-top: 0;
+  width: auto;
+}
+
+/* ── Tablet: groups wrap onto rows, no dangling dividers ── */
+@media (max-width: 1024px) {
+  .rt-group + .rt-group { border-left: none; }
+  .rt-group--size { width: 100%; justify-content: center; }
+  .rt-group--lang,
+  .rt-group--extra { padding-top: 0.75rem; border-top: 1px solid var(--border); }
+  .rt-group--lang { flex: 1 1 auto; justify-content: center; }
+}
+
+/* ── Phones ── */
+@media (max-width: 640px) {
+  .rt-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    padding: 0.7rem 0.75rem;
+  }
+
+  .rt-group {
+    width: 100%;
+    padding: 0;
+    justify-content: space-between;
+  }
+  .rt-group--lang,
+  .rt-group--extra { padding-top: 0.6rem; }
+  .rt-group--extra { justify-content: center; }
+
+  .rt-group--size { gap: 0.5rem; }
+  .rt-stepper { gap: 0.35rem; }
+  .rt-stepper-label { display: none; }   /* icon (book / translate) carries meaning */
+
+  .rt-step-btn { width: 32px; height: 32px; }
+  .rt-stepper-ctrl { height: 40px; }
+  .rt-chip { height: 40px; }
+
+  .rt-chip-label { display: none; }
+  .rt-chip-label-short { display: inline; font-weight: 600; letter-spacing: 0.03em; }
+}
+
+@media (max-width: 360px) {
+  .rt-stepper-icon { display: none; }
+}

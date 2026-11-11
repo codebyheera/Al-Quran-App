@@ -9,7 +9,7 @@ import { Fragment, useEffect, useState, useRef, useMemo } from "react";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import api from "../lib/api";
 import { useBookmarks } from "../context/BookmarkContext";
-import AudioDropdown from "../components/AudioDropdown";
+import ReadingToolbar from "../components/ReadingToolbar";
 import { useAudio } from "../context/AudioContext";
 import { useQari } from "../context/QariContext";
 import { queuePrefetch } from "../lib/audioCache";
@@ -477,88 +477,21 @@ export default function SurahView() {
           </div>
         )}
 
-        {/* ── Controls (Font Sizing) ─────────────────── */}
-        <div className="sv-controls">
-          <div className="sv-font-controls">
-            <div className="sv-font-size-row" style={{ flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span className="sv-font-label text-muted">Arabic:</span>
-                <div className="sv-font-btns">
-                  <button
-                    className="btn btn-ghost"
-                    onClick={() => handleFontChange(-0.2)}
-                    disabled={fontSize <= 1.4}
-                  >
-                    -
-                  </button>
-                  <span className="sv-font-val text-primary">
-                    {fontSize.toFixed(1)}
-                  </span>
-                  <button
-                    className="btn btn-ghost"
-                    onClick={() => handleFontChange(0.2)}
-                    disabled={fontSize >= 4.0}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              <div className="sv-font-divider" style={{ height: '18px', opacity: 0.3, margin: '0' }}></div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span className="sv-font-label text-muted">Trans:</span>
-                <div className="sv-font-btns">
-                  <button
-                    className="btn btn-ghost"
-                    onClick={() => handleTranslationFontChange(-0.1)}
-                    disabled={translationFontSize <= 0.8}
-                  >
-                    -
-                  </button>
-                  <span className="sv-font-val text-primary">
-                    {translationFontSize.toFixed(1)}
-                  </span>
-                  <button
-                    className="btn btn-ghost"
-                    onClick={() => handleTranslationFontChange(0.1)}
-                    disabled={translationFontSize >= 2.0}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="sv-lang-row" style={{ flexWrap: 'wrap' }}>
-              <AudioDropdown />
-              <div className="sv-font-divider" style={{ height: '18px', opacity: 0.3, margin: '0 0.2rem' }}></div>
-              <button
-                className="btn btn-ghost sv-en-btn"
-                onClick={toggleEn}
-                title={showEn ? "Hide English" : "Show English"}
-              >
-                EN:{" "}
-                <span className={showEn ? "text-primary" : "text-muted"}>
-                  {showEn ? "On" : "Off"}
-                </span>
-              </button>
-              <button
-                className="btn btn-ghost sv-ur-btn"
-                onClick={toggleUr}
-                title={showUr ? "Hide Urdu" : "Show Urdu"}
-              >
-                UR:{" "}
-                <span className={showUr ? "text-primary" : "text-muted"}>
-                  {showUr ? "On" : "Off"}
-                </span>
-              </button>
-            </div>
-            {verses.length > 1 && (
-              <>
-                <div className="sv-font-divider" style={{ height: '18px', opacity: 0.3, margin: '0' }}></div>
-                <GoToVerse total={verses.length} surahName={surah.surahName} />
-              </>
-            )}
-          </div>
-        </div>
+        {/* ── Reading controls ───────────────────────── */}
+        <ReadingToolbar
+          arabicSize={fontSize}
+          onArabicSizeChange={handleFontChange}
+          translationSize={translationFontSize}
+          onTranslationSizeChange={handleTranslationFontChange}
+          showEn={showEn}
+          showUr={showUr}
+          onToggleEn={toggleEn}
+          onToggleUr={toggleUr}
+        >
+          {verses.length > 1 && (
+            <GoToVerse total={verses.length} surahName={surah.surahName} />
+          )}
+        </ReadingToolbar>
 
         {/* ── Intro (above) + FAQ (below) around the verse list ── */}
         <SurahIntro

@@ -8,7 +8,7 @@ import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../lib/api';
 import { useBookmarks } from '../context/BookmarkContext';
-import AudioDropdown from '../components/AudioDropdown';
+import ReadingToolbar from '../components/ReadingToolbar';
 import { useAudio } from '../context/AudioContext';
 import { useQari } from '../context/QariContext';
 import Breadcrumb from '../components/Breadcrumb';
@@ -348,48 +348,17 @@ export default function JuzView() {
           </button>
         </div>
 
-        {/* Controls (Font Sizing) */}
-        <div className="jv-controls">
-          <div className="jv-font-controls">
-            <div className="jv-font-size-row" style={{ flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span className="jv-font-label text-muted">Arabic:</span>
-                <div className="jv-font-btns">
-                  <button className="btn btn-ghost" onClick={() => handleFontChange(-0.2)} disabled={fontSize <= 1.4}>-</button>
-                  <span className="jv-font-val text-primary">{fontSize.toFixed(1)}</span>
-                  <button className="btn btn-ghost" onClick={() => handleFontChange(0.2)} disabled={fontSize >= 4.0}>+</button>
-                </div>
-              </div>
-              <div className="jv-font-divider"></div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span className="jv-font-label text-muted">Trans:</span>
-                <div className="jv-font-btns">
-                  <button className="btn btn-ghost" onClick={() => handleTranslationFontChange(-0.1)} disabled={translationFontSize <= 0.8}>-</button>
-                  <span className="jv-font-val text-primary">{translationFontSize.toFixed(1)}</span>
-                  <button className="btn btn-ghost" onClick={() => handleTranslationFontChange(0.1)} disabled={translationFontSize >= 2.0}>+</button>
-                </div>
-              </div>
-            </div>
-            <div className="jv-lang-row" style={{ flexWrap: 'wrap' }}>
-              <AudioDropdown />
-              <div className="jv-font-divider" style={{ height: '18px', opacity: 0.3, margin: '0 0.2rem' }}></div>
-              <button
-                className="btn btn-ghost jv-en-btn"
-                onClick={toggleEn}
-                title={showEn ? "Hide English" : "Show English"}
-              >
-                EN: <span className={showEn ? "text-primary" : "text-muted"}>{showEn ? 'On' : 'Off'}</span>
-              </button>
-              <button
-                className="btn btn-ghost jv-ur-btn"
-                onClick={toggleUr}
-                title={showUr ? "Hide Urdu" : "Show Urdu"}
-              >
-                UR: <span className={showUr ? "text-primary" : "text-muted"}>{showUr ? 'On' : 'Off'}</span>
-              </button>
-            </div>
-          </div>
-        </div>
+        {/* Reading controls */}
+        <ReadingToolbar
+          arabicSize={fontSize}
+          onArabicSizeChange={handleFontChange}
+          translationSize={translationFontSize}
+          onTranslationSizeChange={handleTranslationFontChange}
+          showEn={showEn}
+          showUr={showUr}
+          onToggleEn={toggleEn}
+          onToggleUr={toggleUr}
+        />
 
         {/* ── Intro (above verses, unique editorial content for SEO) ── */}
         <SurahIntro
