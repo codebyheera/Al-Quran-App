@@ -346,6 +346,226 @@ export const surahContent = {
     ],
   },
 
+  "Ad-Dukhaan": {
+    intro: [
+      "Surah Ad-Dukhan is the 44th chapter of the Quran. It has 59 verses and was revealed in Makkah. Its name means \"The Smoke,\" taken from verses 10 and 11, which warn of a day when the sky will bring a clear smoke that covers the people. It is part of the 25th Juz and is the fifth of the seven surahs that begin with the letters Ha Meem.",
+      "The surah opens by saying that the Quran was sent down on a blessed night. Many scholars, including Ibn Kathir, explain that this is Laylat al-Qadr in Ramadan. It then tells the story of Prophet Musa and Pharaoh. Pharaoh was proud and refused the truth, so he and his army were drowned, and they left behind their gardens, springs, and palaces. The Quran says that neither the heaven nor the earth wept for them.",
+      "The last part of the surah compares the two endings of the Day of Judgment. It describes the bitter tree of Zaqqum as food for the sinful, and then the peace, gardens, and safety waiting for the righteous. It closes by reminding us that Allah made the Quran easy in the Prophet's ﷺ language so that people may take heed. You can read more Surahs and explore the complete [Quran online free](/) on Al-Quran Hub.",
+    ],
+    faqs: [
+      {
+        question: "What does Surah Ad-Dukhan mean?",
+        answer:
+          "Ad-Dukhan means \"The Smoke.\" The name comes from verses 10 and 11, which describe a day when the sky will bring a visible smoke that covers the people as a painful punishment.",
+      },
+      {
+        question: "How many verses are in Surah Ad-Dukhan?",
+        answer:
+          "Surah Ad-Dukhan has 59 verses. It is the 44th surah of the Quran and is found in the 25th Juz.",
+      },
+      {
+        question: "Is Surah Ad-Dukhan a Meccan or Medinan surah?",
+        answer:
+          "Surah Ad-Dukhan is a Meccan surah. It was revealed in Makkah, when the Prophet ﷺ was calling the Quraysh to believe in one God.",
+      },
+      {
+        question: "What is the blessed night mentioned in Surah Ad-Dukhan?",
+        answer:
+          "Verse 3 says the Quran was sent down on a blessed night. Most scholars explain that this is Laylat al-Qadr, the Night of Decree in Ramadan, which is also mentioned in Surah Al-Qadr.",
+      },
+      {
+        question: "What story is told in Surah Ad-Dukhan?",
+        answer:
+          "The surah tells the story of Prophet Musa and Pharaoh. Musa asked Pharaoh to free the Children of Israel, but Pharaoh refused. Allah saved the believers and drowned Pharaoh and his army, who left behind all their wealth and gardens.",
+      },
+      {
+        question: "Is there a special time to recite Surah Ad-Dukhan?",
+        answer:
+          "Some narrations mention reciting Surah Ad-Dukhan on the night of Friday, but scholars of hadith consider these reports weak. It can be recited at any time, like any other part of the Quran.",
+      },
+    ],
+    related: [
+      { label: "Surah Az-Zukhruf", slug: "Az-Zukhruf" },
+      { label: "Surah Al-Jathiya", slug: "Al-Jaathiya" },
+      { label: "Surah Al-Qadr", slug: "Al-Qadr" },
+    ],
+  },
+
+  "Al-Qamar": {
+    intro: [
+      "Surah Al-Qamar is the 54th chapter of the Quran. It has 55 verses and was revealed in Makkah. Its name means \"The Moon.\" The surah begins with the words \"The Hour has come near, and the moon has split.\" Authentic hadith in Sahih al-Bukhari and Sahih Muslim report that the people of Makkah asked the Prophet ﷺ for a sign, and they saw the moon split into two parts. Even so, many of them turned away and called it magic.",
+      "The surah then tells, one after another, the stories of nations who rejected their prophets: the people of Nuh, the people of Ad, Thamud, the people of Lut, and the people of Pharaoh. Each story is short and powerful, and each ends with a warning about what happened to those who denied the truth.",
+      "Four times in this surah, Allah says: \"And We have certainly made the Quran easy to remember, so is there anyone who will remember?\" This line is an invitation to every reader to learn, recite, and reflect. The surah ends with good news for the righteous, who will be in gardens and rivers, in a seat of honor near the Most Powerful King. You can read more Surahs and explore the complete [Quran online free](/) on Al-Quran Hub.",
+    ],
+    faqs: [
+      {
+        question: "What does Surah Al-Qamar mean?",
+        answer:
+          "Al-Qamar means \"The Moon.\" The surah is named after its first verse, which mentions the splitting of the moon as a sign that the Hour is near.",
+      },
+      {
+        question: "How many verses are in Surah Al-Qamar?",
+        answer:
+          "Surah Al-Qamar has 55 verses. It is the 54th surah of the Quran and is part of the 27th Juz.",
+      },
+      {
+        question: "Is Surah Al-Qamar a Meccan or Medinan surah?",
+        answer:
+          "Surah Al-Qamar is a Meccan surah. It was revealed in Makkah, where the Quraysh were rejecting the message of the Prophet ﷺ.",
+      },
+      {
+        question: "What is the splitting of the moon in Surah Al-Qamar?",
+        answer:
+          "The first verse mentions that the moon split. Hadith in Sahih al-Bukhari and Sahih Muslim describe how the people of Makkah asked for a miracle and saw the moon split into two parts during the time of the Prophet ﷺ.",
+      },
+      {
+        question: "Which verse is repeated in Surah Al-Qamar?",
+        answer:
+          "The verse \"And We have certainly made the Quran easy to remember, so is there anyone who will remember?\" is repeated four times, in verses 17, 22, 32, and 40. It encourages people to read the Quran and take lessons from it.",
+      },
+      {
+        question: "Did the Prophet ﷺ recite Surah Al-Qamar in prayer?",
+        answer:
+          "Yes. A hadith in Sahih Muslim reports that the Prophet ﷺ used to recite Surah Qaf and Surah Al-Qamar in the Eid prayers.",
+      },
+    ],
+    related: [
+      { label: "Surah An-Najm", slug: "An-Najm" },
+      { label: "Surah Ar-Rahman", slug: "Ar-Rahmaan" },
+      { label: "Surah Qaf", slug: "Qaaf" },
+    ],
+  },
+
+  "Al-Hashr": {
+    intro: [
+      "Surah Al-Hashr is the 59th chapter of the Quran. It has 24 verses and was revealed in Madinah. Its name means \"The Gathering\" or \"The Exile.\" It is part of the 28th Juz. The companion Ibn Abbas used to call it Surah Bani an-Nadir, as reported in Sahih al-Bukhari, because it speaks about this tribe.",
+      "The Banu an-Nadir were a Jewish tribe living near Madinah who had a treaty with the Muslims. They broke the treaty and plotted against the Prophet ﷺ, so they were made to leave their strong forts around the fourth year after Hijrah. The surah explains that their forts could not protect them from the decree of Allah. It also sets out how the wealth left behind should be shared, and gives a key rule in verse 7: \"Whatever the Messenger gives you, take it, and whatever he forbids you, stay away from it.\"",
+      "Verse 9 praises the Ansar of Madinah, who welcomed the Muhajirun and gave them preference over themselves even when they were in need. The surah ends with three of the most beautiful verses in the Quran, verses 22 to 24, which list many of the names of Allah, such as Ar-Rahman, Al-Malik, Al-Quddus, As-Salam, and Al-Khaliq. You can read more Surahs and explore the complete [Quran online free](/) on Al-Quran Hub.",
+    ],
+    faqs: [
+      {
+        question: "What does Surah Al-Hashr mean?",
+        answer:
+          "Al-Hashr means \"The Gathering\" or \"The Exile.\" It refers to the gathering and leaving of the Banu an-Nadir tribe from their homes near Madinah.",
+      },
+      {
+        question: "How many verses are in Surah Al-Hashr?",
+        answer:
+          "Surah Al-Hashr has 24 verses. It is the 59th surah of the Quran and is part of the 28th Juz.",
+      },
+      {
+        question: "Is Surah Al-Hashr a Meccan or Medinan surah?",
+        answer:
+          "Surah Al-Hashr is a Medinan surah. It was revealed in Madinah after the Banu an-Nadir broke their treaty with the Muslims.",
+      },
+      {
+        question: "What is Surah Al-Hashr about?",
+        answer:
+          "It talks about the exile of the Banu an-Nadir, how the wealth they left should be divided, the sacrifice of the Ansar, the danger of hypocrisy, and the need to prepare for the Hereafter. It ends with many beautiful names of Allah.",
+      },
+      {
+        question: "Which names of Allah are in the last verses of Surah Al-Hashr?",
+        answer:
+          "Verses 22 to 24 mention names such as Al-Alim, Ar-Rahman, Ar-Rahim, Al-Malik, Al-Quddus, As-Salam, Al-Mu'min, Al-Muhaymin, Al-Aziz, Al-Jabbar, Al-Mutakabbir, Al-Khaliq, Al-Bari, and Al-Musawwir. Many Muslims memorize these verses.",
+      },
+      {
+        question: "What does Surah Al-Hashr say about the Ansar?",
+        answer:
+          "Verse 9 praises the Ansar, the Muslims of Madinah, for loving those who migrated to them and putting others before themselves even when they were poor. It says that those who are saved from the greed of their own souls are the successful ones.",
+      },
+    ],
+    related: [
+      { label: "Surah Al-Mujadila", slug: "Al-Mujaadila" },
+      { label: "Surah Al-Mumtahanah", slug: "Al-Mumtahana" },
+      { label: "Surah Al-Hadid", slug: "Al-Hadid" },
+    ],
+  },
+
+  "Al-Ma'aarij": {
+    intro: [
+      "Surah Al-Ma'arij is the 70th chapter of the Quran. It has 44 verses and was revealed in Makkah. Its name means \"The Ascending Stairways,\" from verses 3 and 4, which describe Allah as the Lord of the ways of ascent, by which the angels and the Spirit rise up to Him in a day whose length is fifty thousand years. It is part of the 29th Juz and is also known by its opening words, Sa'ala Sa'ilun.",
+      "The surah begins with a person who mockingly asked for the punishment to come. It answers that the punishment will surely come and no one can stop it. It then describes the Day of Judgment, when the sky will be like molten metal, the mountains like wool, and no close friend will ask about another. A sinner will even wish to give his children, his spouse, and his family to save himself.",
+      "Verses 19 to 21 describe human nature: people are anxious, they panic when harm touches them, and they hold back when good comes to them. Then the surah lists those who are different. They are steady in their prayers, they give a known share of their wealth to the poor, they believe in the Day of Judgment, they guard their chastity, they keep their trusts and promises, and they stand firm in their testimony. These people will be honored in gardens. You can read more Surahs and explore the complete [Quran online free](/) on Al-Quran Hub.",
+    ],
+    faqs: [
+      {
+        question: "What does Surah Al-Ma'arij mean?",
+        answer:
+          "Al-Ma'arij means \"The Ascending Stairways\" or \"The Ways of Ascent.\" It refers to the paths through which the angels and the Spirit rise up to Allah.",
+      },
+      {
+        question: "How many verses are in Surah Al-Ma'arij?",
+        answer:
+          "Surah Al-Ma'arij has 44 verses. It is the 70th surah of the Quran and is part of the 29th Juz.",
+      },
+      {
+        question: "Is Surah Al-Ma'arij a Meccan or Medinan surah?",
+        answer:
+          "Surah Al-Ma'arij is a Meccan surah. It was revealed in Makkah, at a time when many people mocked the idea of the Day of Judgment.",
+      },
+      {
+        question: "What is the day of fifty thousand years in Surah Al-Ma'arij?",
+        answer:
+          "Verse 4 says the angels and the Spirit ascend to Allah in a day whose length is fifty thousand years. Many scholars explain that this refers to the Day of Judgment, which will feel very long for the disbelievers, while Allah will make it easy for the believers.",
+      },
+      {
+        question: "What are the qualities of believers in Surah Al-Ma'arij?",
+        answer:
+          "Verses 22 to 35 describe them as people who are constant in prayer, give a set share of their wealth to the poor and deprived, believe in the Day of Judgment, fear Allah's punishment, guard their chastity, keep their trusts and promises, give true testimony, and protect their prayers.",
+      },
+    ],
+    related: [
+      { label: "Surah Al-Haqqah", slug: "Al-Haaqqa" },
+      { label: "Surah Nuh", slug: "Nooh" },
+      { label: "Surah Al-Muminun", slug: "Al-Muminoon" },
+    ],
+  },
+
+  "Al-Muzzammil": {
+    intro: [
+      "Surah Al-Muzzammil is the 73rd chapter of the Quran. It has 20 verses and was revealed in Makkah. Its name means \"The Wrapped One\" and refers to the Prophet Muhammad ﷺ, who was wrapped in his garment. It is one of the earliest surahs revealed, from the first years of the Prophet's ﷺ mission, and it is part of the 29th Juz.",
+      "In the opening verses, Allah tells the Prophet ﷺ to stand in prayer at night, for half the night, a little less, or a little more, and to recite the Quran slowly and clearly (tartil). Allah tells him that a heavy word is about to be given to him, meaning the weight of revelation and its message. The surah teaches that worship at night is stronger for the heart and clearer for recitation. It also tells the Prophet ﷺ to be patient with what his opponents say and to leave them in a gracious way.",
+      "The last verse, verse 20, is very long and brings a mercy. Allah knows that the believers stood in prayer for long parts of the night, and He made it easier for them: \"So recite what is easy from the Quran.\" Sayyidah Aishah (may Allah be pleased with her) explained in Sahih Muslim that night prayer became voluntary after this. The verse ends with the command to establish prayer, give zakat, and lend Allah a goodly loan. You can read more Surahs and explore the complete [Quran online free](/) on Al-Quran Hub.",
+    ],
+    faqs: [
+      {
+        question: "What does Surah Al-Muzzammil mean?",
+        answer:
+          "Al-Muzzammil means \"The Wrapped One\" or \"The One Wrapped in Garments.\" It is a gentle way of addressing the Prophet Muhammad ﷺ, who was wrapped in his cloak.",
+      },
+      {
+        question: "How many verses are in Surah Al-Muzzammil?",
+        answer:
+          "Surah Al-Muzzammil has 20 verses. It is the 73rd surah of the Quran and is part of the 29th Juz.",
+      },
+      {
+        question: "Is Surah Al-Muzzammil a Meccan or Medinan surah?",
+        answer:
+          "Surah Al-Muzzammil is a Meccan surah and one of the earliest ones revealed. Some scholars say that its last verse was revealed later in Madinah.",
+      },
+      {
+        question: "What is Surah Al-Muzzammil about?",
+        answer:
+          "The surah prepares the Prophet ﷺ for the mission of carrying the Quran. It tells him to pray at night, recite the Quran slowly, rely on Allah, and stay patient with those who reject him. It ends by making night prayer easier for the believers.",
+      },
+      {
+        question: "What does tartil mean in Surah Al-Muzzammil?",
+        answer:
+          "Verse 4 says \"and recite the Quran with tartil.\" Tartil means reciting slowly and clearly, giving each letter its right and thinking about the meaning, instead of rushing.",
+      },
+      {
+        question: "Is night prayer (Tahajjud) compulsory according to Surah Al-Muzzammil?",
+        answer:
+          "At first, the Prophet ﷺ and his companions stood for long parts of the night. Verse 20 then made it lighter. As Aishah (may Allah be pleased with her) explained in Sahih Muslim, night prayer became voluntary for the believers, though it remains a highly rewarded act.",
+      },
+    ],
+    related: [
+      { label: "Surah Al-Muddaththir", slug: "Al-Muddaththir" },
+      { label: "Surah Al-Alaq", slug: "Al-Alaq" },
+      { label: "Surah Al-Ma'arij", slug: "Al-Ma'aarij" },
+    ],
+  },
+
   // TODO: add remaining 113 Surahs here, one at a time.
   // Copy the At-Tawba shape above — key = surah.surahName slug (see
   // backend/data/surahMapping.js englishNamesToIds for the exact string),
