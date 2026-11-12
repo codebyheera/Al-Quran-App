@@ -37,7 +37,7 @@
       ]
     },
     {
-      "source": "/.well-known/ai-catalog.json",
+      "source": "/.well-known/(ard|ai-catalog).json",
       "headers": [
         {
           "key": "Content-Type",

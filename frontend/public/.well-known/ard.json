@@ -1,0 +1,44 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Al-Quran Hub",
+    "identifier": "alquranhub.org",
+    "documentationUrl": "https://alquranhub.org/llms.txt",
+    "logoUrl": "https://alquranhub.org/android-chrome-512x512.png"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:alquranhub.org:docs:llms",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
+      "displayName": "Al-Quran Hub LLM Guide",
+      "description": "Overview of Al-Quran Hub, a free, ad-free platform to read and listen to the Holy Quran, with links to all 114 Surahs, 30 Juz, blog articles and Islamic tools such as prayer times, Tasbih counter and Verse of the Day.",
+      "tags": ["quran", "islam", "surah", "juz", "translation", "recitation", "prayer-times", "tasbih"],
+      "representativeQueries": [
+        "read Quran online free",
+        "Quran with English translation and audio",
+        "read Surah Yaseen online",
+        "Ayatul Kursi 2:255 Arabic text and translation",
+        "read Quran by Juz (Para)",
+        "listen to Quran recitation online",
+        "Islamic prayer times today",
+        "online Tasbih counter"
+      ],
+      "updatedAt": "2026-11-13T00:00:00Z",
+      "url": "https://alquranhub.org/llms.txt"
+    },
+    {
+      "identifier": "urn:air:alquranhub.org:sitemap:main",
+      "type": "application/xml",
+      "displayName": "Al-Quran Hub Sitemap",
+      "description": "XML sitemap listing every Surah, Juz, blog article and tool page on Al-Quran Hub.",
+      "tags": ["sitemap", "quran", "surah", "juz"],
+      "representativeQueries": [
+        "list of all 114 Surahs of the Quran",
+        "all 30 Juz of the Quran",
+        "Al-Quran Hub pages and articles",
+        "Islamic blog articles about the Quran"
+      ],
+      "url": "https://alquranhub.org/sitemap.xml"
+    }
+  ]
+}

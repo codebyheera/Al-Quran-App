@@ -62,6 +62,7 @@ export default function SearchPage() {
 
   const smart = useMemo(() => searchQuran(input), [input]);
   const typed = input.trim();
+  const hasSuggestions = Boolean(typed) && smart.items.length > 0;
 
   // Verse search whenever the URL q param changes
   useEffect(() => {
@@ -162,14 +163,17 @@ export default function SearchPage() {
             onKeyDown={handleKeyDown}
             autoFocus
             autoComplete="off"
-            aria-controls="sp-suggestions"
-            aria-activedescendant={activeIndex >= 0 ? `sp-suggestions-${activeIndex}` : undefined}
+            role="combobox"
+            aria-autocomplete="list"
+            aria-expanded={hasSuggestions}
+            aria-controls={hasSuggestions ? 'sp-suggestions' : undefined}
+            aria-activedescendant={hasSuggestions && activeIndex >= 0 ? `sp-suggestions-${activeIndex}` : undefined}
           />
           <button type="submit" className="btn btn-primary">Search</button>
         </form>
 
         {/* Instant Surah / Ayah / Juz results */}
-        {typed && smart.items.length > 0 && (
+        {hasSuggestions && (
           <section className="sp-section" aria-label="Surahs and Ayahs">
             <h2 className="sp-section-title">Surahs &amp; Ayahs</h2>
             <div className="sp-suggestions card">

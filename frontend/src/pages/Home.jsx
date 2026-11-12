@@ -263,7 +263,10 @@ export default function Home() {
                 onKeyDown={handleQueryKeyDown}
                 onFocus={() => query.trim() && setDropdownOpen(true)}
                 autoComplete="off"
-                aria-controls="home-suggestions"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-expanded={showDropdown}
+                aria-controls={showDropdown ? 'home-suggestions' : undefined}
                 aria-activedescendant={showDropdown && activeIndex >= 0 ? `home-suggestions-${activeIndex}` : undefined}
               />
               <button type="submit" className="btn btn-primary">Search</button>
