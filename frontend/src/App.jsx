@@ -222,7 +222,7 @@ export default function App() {
         <DaroodReminderToast />
       </Suspense>
 
-      {/* Floating "Make dua for…" pill — comes and goes, frontend-only */}
+      {/* Floating, draggable dua button — tap to open the dua card, frontend-only */}
       <Suspense fallback={null}>
         <DuaPill />
       </Suspense>

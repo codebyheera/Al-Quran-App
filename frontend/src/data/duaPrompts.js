@@ -1,6 +1,6 @@
 /**
- * data/duaPrompts.js — Curated "make dua for…" prompts for the daily dua
- * popup (components/DuaPill.jsx). Frontend-only, no user input.
+ * data/duaPrompts.js — Curated "make dua for…" prompts for the floating
+ * dua button (components/DuaPill.jsx). Frontend-only, no user input.
  *
  * Every dua is from the Qur'an so it can link straight to its ayah.
  * `arabic` is a short excerpt shown in the site's default Arabic font.
@@ -10,6 +10,19 @@
  */
 
 const DUA_PROMPTS = [
+  {
+    // Special request — pinned below while active.
+    id: 'special-subhan',
+    // English only for everyone: with no `meaningUr`, DuaPill never switches
+    // this card to Urdu, so no `…Ur` fields are needed.
+    special: true,                      // centered "special request" layout
+    eyebrow: 'Special Request',
+    highlight: 'Muhammad Subhan Naeem', // shown in bold gold inside the dua
+    title: 'A Dua for Our Founder',
+    // Optional personal dua shown in the gold box.
+    note: 'May Allah grant Muhammad Subhan Naeem good health, barakah in his life, and accept this humble service to the Qur’an as Sadaqah Jariyah. Ameen.',
+    // No ayah block for this one — only the title and the personal dua.
+  },
   {
     id: 'parents-mercy',
     title: 'Make dua for your parents',
@@ -151,6 +164,6 @@ const DUA_PROMPTS = [
  * Pin one dua: when set to a prompt `id`, the popup always shows that dua
  * instead of rotating. Set to null to go back to rotating through the list.
  */
-export const PINNED_DUA_ID = 'ummah'; // Al-Baqarah 2:201
+export const PINNED_DUA_ID = 'special-subhan'; // special request (no ayah)
 
 export default DUA_PROMPTS;

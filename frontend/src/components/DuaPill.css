@@ -1,35 +1,118 @@
-/* DuaPill.css — once-a-day dua popup
-   Bottom-LEFT so it never collides with the right-hand stack (Durood
-   toast, minimized player pill). Lifts above the BottomPlayer bar
-   (68px desktop / 64px mobile) when .has-player is set on .app-root. */
+/* DuaPill.css — floating dua button + its card
+   The icon defaults to bottom-RIGHT (the chat button there is switched off
+   via SHOW_CHAT_WIDGET in App.jsx), lifting above the BottomPlayer bar /
+   minimized player pill (68px desktop / 64px mobile) when .has-player is set
+   on .app-root. Once the visitor drags it, inline left/top take over. */
 
-.dua-pill {
+/* ── Floating icon ──────────────────────────────────────────────── */
+.dua-fab {
   position: fixed;
-  left: clamp(0.75rem, 3vw, 1.25rem);
+  right: clamp(0.75rem, 3vw, 1.25rem);
   bottom: calc(1.25rem + env(safe-area-inset-bottom));
-  z-index: 1050;
-  font-family: var(--font-ui);
-  animation: duaPillIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  z-index: 1003;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;              /* keep in sync with FAB in DuaPill.jsx */
+  height: 48px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 55%, transparent);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 25%,
+    color-mix(in srgb, var(--accent-gold) 22%, var(--bg-card)),
+    var(--bg-card) 70%
+  );
+  color: var(--accent-gold);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  touch-action: none;       /* let pointer events drive the drag on touch */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  /* `backwards`, not `both` — a held end state would block the hover/drag scale */
+  animation: duaFabIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
-.app-root.has-player .dua-pill {
+.app-root.has-player .dua-fab:not(.is-placed) {
   bottom: calc(68px + 1rem + env(safe-area-inset-bottom));
 }
+.dua-fab.is-placed { right: auto; bottom: auto; }
+.dua-fab:hover { transform: scale(1.06); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3); }
+.dua-fab.is-open { background: color-mix(in srgb, var(--accent-gold) 18%, var(--bg-card)); }
+.dua-fab.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  transition: none;
+}
+/* Mirror the praying figure so it faces left (toward the page) */
+.dua-fab svg { transform: scaleX(-1); }
+.dua-fab:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 3px; }
+
+/* Always-on soft gold glow that slowly "breathes" to draw the eye.
+   On a pseudo-element so it never fights the hover/drag box-shadow. */
+.dua-fab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  /* outer shadow only — it isn't painted inside the circle, so the
+     button face stays clean */
+  box-shadow: 0 0 12px 1px color-mix(in srgb, var(--accent-gold) 35%, transparent);
+  animation: duaFabGlow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes duaFabGlow {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.8; }
+}
+
+/* Soft pulse ring until the current dua has been opened once */
+.dua-fab.is-new::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-gold);
+  animation: duaFabPulse 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes duaFabIn {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes duaFabPulse {
+  0%   { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 0;   transform: scale(1.6); }
+}
+
+/* ── Card container (left/top set from JS, next to the icon) ────── */
+.dua-pill {
+  position: fixed;
+  z-index: 1050;
+  font-family: var(--font-ui);
+  animation: duaPillIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
 .dua-pill.is-leaving {
-  animation: duaPillOut 0.22s ease-in both;
+  animation: duaPillOut 0.2s ease-in both;
 }
 
 @keyframes duaPillIn {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: scale(0.94); }
   to   { opacity: 1; transform: none; }
 }
 @keyframes duaPillOut {
   from { opacity: 1; transform: none; }
-  to   { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 0; transform: scale(0.96); }
 }
 
 /* ── Card ───────────────────────────────────────────────────────── */
 .dua-pill-card {
   width: min(380px, calc(100vw - 1.5rem));
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
   padding: 1rem 1.05rem 1rem;
   background: var(--bg-card);
   border: 1px solid var(--border-hover);
@@ -104,6 +187,42 @@
   color: var(--text-secondary);
 }
 
+/* Personal dua under the ayah — soft gold panel with a centred ۞ ornament
+   sitting on its top edge. */
+.dua-pill-note {
+  position: relative;
+  margin: 1.1rem 0 0;
+  padding: 0.85rem 0.9rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 35%, transparent);
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-gold) 10%, transparent),
+    color-mix(in srgb, var(--accent-gold) 3%, transparent)
+  );
+}
+.dua-pill-note.is-solo { margin-top: 1.25rem; }
+.dua-pill-foot.is-solo { justify-content: flex-end; }
+.dua-pill-note-orn {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  padding: 0 0.4rem;
+  background: var(--bg-card);
+  color: var(--accent-gold);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.dua-pill-note p {
+  margin: 0;
+  font-size: 0.82rem;
+  font-style: italic;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--text-primary);
+}
+
 .dua-pill-foot {
   display: flex;
   align-items: center;
@@ -150,6 +269,117 @@
   outline-offset: 2px;
 }
 
+/* ── Special request layout (prompt.special) ────────────────────── */
+.dua-special {
+  position: relative;
+  width: min(360px, calc(100vw - 1.5rem));
+  padding: 1.6rem 1.4rem 1.3rem;
+  text-align: center;
+  border-color: color-mix(in srgb, var(--accent-gold) 45%, transparent);
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--accent-gold) 11%, transparent), transparent 70%),
+    var(--bg-card);
+  overflow: hidden;
+}
+/* thin gold line across the top edge */
+.dua-special::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+.dua-special-x {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+}
+.dua-special-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 40%, transparent);
+  background: color-mix(in srgb, var(--accent-gold) 12%, transparent);
+  color: var(--accent-gold);
+}
+.dua-special-icon svg { transform: scaleX(-1); }
+.dua-special-eyebrow {
+  margin: 0.85rem 0 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+.dua-special-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+.dua-special-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1rem auto 1rem;
+  max-width: 180px;
+  color: var(--accent-gold);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+.dua-special-divider::before,
+.dua-special-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent-gold) 60%, transparent));
+}
+.dua-special-divider::after {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent-gold) 60%, transparent), transparent);
+}
+.dua-special-text {
+  margin: 0 auto;
+  max-width: 30ch;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  text-wrap: pretty;
+  color: var(--text-secondary);
+}
+.dua-special-text strong {
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+.dua-special-ameen {
+  display: block;
+  width: 100%;
+  height: 42px;
+  margin-top: 1.35rem;
+  border: none;
+  border-radius: 100px;
+  background: var(--accent-gold);
+  color: var(--on-accent-gold, #1a1a1a);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent-gold) 30%, transparent);
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.dua-special-ameen:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.dua-special-ameen:active { transform: none; }
+.dua-special-ameen:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
 /* ── Urdu mode: user's chosen Urdu font (Gulzar by default), RTL ── */
 .dua-pill.is-ur .dua-pill-title,
 .dua-pill.is-ur .dua-pill-meaning,
@@ -168,27 +398,29 @@
   line-height: calc(var(--urdu-line-height, 2.8) * 0.75);
   color: var(--text-primary);
 }
+.dua-pill.is-ur .dua-pill-note p {
+  font-family: var(--font-urdu);
+  font-style: normal;
+  font-size: calc(1rem * var(--urdu-scale, 1.6) / 1.6);
+  line-height: calc(var(--urdu-line-height, 2.8) * 0.75);
+}
 .dua-pill.is-ur .dua-pill-ameen {
   font-weight: 400;
   font-size: 0.95rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .dua-fab,
   .dua-pill,
   .dua-pill.is-leaving { animation: none; }
+  .dua-fab.is-new::after { animation: none; opacity: 0.6; }
+  .dua-fab::before { animation: none; opacity: 0.5; }
 }
 
 /* ── Mobile ─────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .dua-pill { left: 0.75rem; right: 0.75rem; }
-  .dua-pill-card { width: 100%; }
-  .app-root.has-player .dua-pill {
+  .app-root.has-player .dua-fab:not(.is-placed) {
     bottom: calc(64px + 0.75rem + env(safe-area-inset-bottom));
   }
   .dua-pill-arabic { font-size: 1.35rem; }
-}
-
-/* Short landscape phones: sit lower */
-@media (max-height: 480px) and (orientation: landscape) {
-  .dua-pill { bottom: 0.75rem; }
 }

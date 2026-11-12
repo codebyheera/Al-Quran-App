@@ -1,14 +1,15 @@
 /**
- * components/StreakWidget.jsx — "Daily Quran Reading Streak" strip
- * Lives inside the hero section (see Home.jsx) as one continuous block,
- * divided from the hero content only by a hairline (see StreakWidget.css)
- * — not a separate card/section. Pure localStorage feature (see
- * lib/streakUtils.js) — no backend, no login.
+ * components/StreakWidget.jsx — "Daily Reading Goal" section on Home
+ * First section after the hero (see Home.jsx), with the same header
+ * pattern (h2 + ghost action) and card look as "Start Reading" etc.
+ * Pure localStorage feature (see lib/streakUtils.js) — no backend, no login.
  *
- * Two quiet states, both inline text-sized rows:
- *   Setup:    🔥 How long do you want to read daily?  [5|10|15|20] min  Cancel
- *   Goal set: 🔥 N day streak | ━━ x / y min today | Continue reading →
- *             ○○○○○○◉  Best N days | N min this week | Edit goal
+ *   Daily Reading Goal                                        Edit goal
+ *   ┌───────────────────────────────────────────────────────────────┐
+ *   │ (🔥) N-day streak          ○ ◐ ● ● ○ ○ ◉   [Continue reading →] │
+ *   │      x of y min · N to go  M T W T F S S                         │
+ *   │      ━━━━━━━━━━━━━━━━      N min this week · Best N days         │
+ *   └───────────────────────────────────────────────────────────────┘
  */
 
 import { useState, useCallback, useEffect } from 'react';
@@ -22,10 +23,10 @@ const DEFAULT_GOAL = 10;
 const CELEBRATED_KEY = 'quranStreakCelebrated'; // date the "goal complete" pop last played
 
 /**
- * Inline goal picker: one row with a segmented control. Picking a value
- * saves it right away; Cancel only appears when changing an existing goal.
+ * Goal picker: question + segmented control. Picking a value saves it right
+ * away; Cancel only appears when changing an existing goal.
  */
-function GoalSetup({ current, isEdit, onSave, onCancel }) {
+function GoalSetup({ current, isEdit, onSave }) {
   const selected = current || DEFAULT_GOAL;
 
   // Arrow keys move along the segmented control (radio-group behaviour)
@@ -38,13 +39,24 @@ function GoalSetup({ current, isEdit, onSave, onCancel }) {
   };
 
   return (
-    <div className="streak-setup">
-      {/* Line 1: question | options */}
-      <div className="streak-mini-line">
-        <span className="streak-setup-q" id="streak-setup-q">
-          <IconFlameFilled className="streak-setup-flame" size={15} aria-hidden="true" />
-          {isEdit ? 'Change your daily goal' : 'How long do you want to read daily?'}
+    <div className="streak-card streak-card--setup">
+      <div className="streak-top">
+        <span className="streak-icon is-lit" aria-hidden="true">
+          <IconFlameFilled size={18} />
         </span>
+        <div className="streak-info">
+          <h3 className="streak-title" id="streak-setup-q">
+            {isEdit ? 'Change your daily goal' : 'Build a daily Quran habit'}
+          </h3>
+          <p className="streak-sub">
+            {isEdit
+              ? `Currently ${current} min a day`
+              : `How long do you want to read each day? ${DEFAULT_GOAL} min is a good start.`}
+          </p>
+        </div>
+      </div>
+
+      <div className="streak-setup-row">
         <span className="streak-seg" role="radiogroup" aria-labelledby="streak-setup-q">
           {GOAL_OPTIONS.map((m, i) => {
             const active = isEdit && m === selected;
@@ -65,54 +77,55 @@ function GoalSetup({ current, isEdit, onSave, onCancel }) {
           })}
         </span>
       </div>
-
-      {/* Line 2: hint | cancel */}
-      <div className="streak-mini-line streak-mini-line--sub">
-        <span>
-          {isEdit
-            ? `Currently ${current} min a day`
-            : `Start small — ${DEFAULT_GOAL} min a day works well. You can change it anytime.`}
-        </span>
-        {isEdit && (
-          <>
-            <span className="streak-mini-div" aria-hidden="true" />
-            <button type="button" className="streak-mini-edit" onClick={onCancel}>
-              Cancel
-            </button>
-          </>
-        )}
-      </div>
     </div>
   );
 }
+
+/** Section wrapper — same header pattern as the other Home sections. */
+function StreakSection({ action, children }) {
+  return (
+    <section className="home-section streak-section" aria-labelledby="streak-heading">
+      <div className="flex-between mb-2">
+        <h2 id="streak-heading">Daily Reading Goal</h2>
+        {action}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+const ghostBtnStyle = { fontSize: '0.85rem' };
 
 function readCelebrated() {
   try { return localStorage.getItem(CELEBRATED_KEY); } catch { return null; }
 }
 
-
-function weekdayLong(dateStr) {
+function toDate(dateStr) {
   const [y, m, d] = dateStr.split('-').map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString('en', { weekday: 'long' });
+  return new Date(y, m - 1, d);
 }
 
-/** Last 7 days as tiny dots: filled = goal met, half = read a bit, empty = none. */
+/** Last 7 days: a small circle per day with its initial underneath.
+ *  filled = goal met, half = read a bit, empty = none. */
 function WeekDots({ days, celebrate }) {
   return (
-    <ol className={`streak-dots ${celebrate ? 'is-celebrating' : ''}`} aria-label="Last 7 days">
+    <ol className={`streak-week ${celebrate ? 'is-celebrating' : ''}`} aria-label="Last 7 days">
       {days.map((d) => {
         const mins = Math.floor(d.seconds / 60);
         const state = d.completed ? 'done' : d.seconds > 0 ? 'partial' : 'empty';
-        const label = `${d.isToday ? 'Today' : weekdayLong(d.date)}: ${
+        const date = toDate(d.date);
+        const label = `${d.isToday ? 'Today' : date.toLocaleDateString('en', { weekday: 'long' })}: ${
           d.completed ? `goal complete (${mins} min)` : d.seconds > 0 ? `${mins} min read` : 'not read'
         }`;
         return (
-          <li
-            key={d.date}
-            className={`streak-dot streak-dot--${state} ${d.isToday ? 'is-today' : ''}`}
-            title={label}
-            aria-label={label}
-          />
+          <li key={d.date} className={`streak-day ${d.isToday ? 'is-today' : ''}`} title={label} aria-label={label}>
+            <span className={`streak-dot streak-dot--${state}`}>
+              {d.completed && <IconCheck size={10} stroke={3} aria-hidden="true" />}
+            </span>
+            <span className="streak-day-letter" aria-hidden="true">
+              {date.toLocaleDateString('en', { weekday: 'narrow' })}
+            </span>
+          </li>
         );
       })}
     </ol>
@@ -120,8 +133,8 @@ function WeekDots({ days, celebrate }) {
 }
 
 export default function StreakWidget() {
-  // Read synchronously on the first render (not in an effect) so the strip is
-  // part of the very first paint. Rendering null first and inserting the strip
+  // Read synchronously on the first render (not in an effect) so the card is
+  // part of the very first paint. Rendering null first and inserting it
   // after mount pushed everything below the hero down — a 0.18 CLS on mobile.
   // Safe because Home is client-rendered; the build-time snapshot (see
   // scripts/prerender.js) runs this against a stubbed, empty localStorage.
@@ -138,7 +151,7 @@ export default function StreakWidget() {
   const goalComplete = goalSeconds > 0 && (data?.todaySecondsRead || 0) >= goalSeconds;
 
   // Play the "goal complete" pop once per day: the first time the user sees
-  // the strip after finishing today's goal (usually returning from a Surah).
+  // the card after finishing today's goal (usually returning from a Surah).
   const [celebrate] = useState(() => goalComplete && readCelebrated() !== data?.todayDate);
   useEffect(() => {
     if (!celebrate) return;
@@ -152,14 +165,19 @@ export default function StreakWidget() {
   // ── State A: no goal yet, or changing it ────────────────────────────
   if (!hasGoal || editingGoal) {
     return (
-      <div className="streak-strip">
+      <StreakSection
+        action={hasGoal && (
+          <button type="button" className="btn btn-ghost" style={ghostBtnStyle} onClick={() => setEditingGoal(false)}>
+            Cancel
+          </button>
+        )}
+      >
         <GoalSetup
           current={data.dailyGoalMinutes}
           isEdit={hasGoal}
           onSave={chooseGoal}
-          onCancel={() => setEditingGoal(false)}
         />
-      </div>
+      </StreakSection>
     );
   }
 
@@ -170,67 +188,59 @@ export default function StreakWidget() {
   const goal = data.dailyGoalMinutes;
   const streak = data.currentStreak;
 
+  const title = streak > 0
+    ? <><b>{streak}</b>-day streak</>
+    : 'Start your streak today';
+  const sub = goalComplete
+    ? `Today's goal is done — MashaAllah!`
+    : `${Math.min(minutesRead, goal)} of ${goal} min read today · ${minutesLeft} min to go`;
+
   return (
-    <div className="streak-strip">
-      <div className={`streak-mini ${goalComplete ? 'is-complete' : ''}`}>
-        {/* Line 1: streak | today | CTA */}
-        <div className="streak-mini-line">
-          <span className={`streak-mini-count ${streak > 0 ? 'is-lit' : ''}`}>
-            <IconFlameFilled className="streak-mini-flame" size={15} aria-hidden="true" />
-            <span><b>{streak}</b> day streak</span>
+    <StreakSection
+      action={
+        <button type="button" className="btn btn-ghost" style={ghostBtnStyle} onClick={() => setEditingGoal(true)}>
+          Edit goal
+        </button>
+      }
+    >
+      <div className={`streak-card ${goalComplete ? 'is-complete' : ''}`}>
+        {/* Today: icon | streak + progress */}
+        <div className="streak-top">
+          <span className={`streak-icon ${streak > 0 || goalComplete ? 'is-lit' : ''}`} aria-hidden="true">
+            {goalComplete ? <IconCheck size={18} stroke={2.5} /> : <IconFlameFilled size={18} />}
           </span>
-
-          <span className="streak-mini-div" aria-hidden="true" />
-
-          <span
-            className="streak-mini-today"
-            title={goalComplete ? "Today's goal is done" : `${minutesLeft} min to go today`}
-          >
+          <div className="streak-info">
+            <h3 className="streak-title">{title}</h3>
+            <p className="streak-sub">{sub}</p>
             <span
-              className="streak-mini-bar"
+              className="streak-bar"
               role="progressbar"
               aria-valuenow={progressPct}
               aria-valuemin={0}
               aria-valuemax={100}
               aria-label="Today's reading goal"
             >
-              <span className="streak-mini-bar-fill" style={{ width: `${progressPct}%` }} />
+              <span className="streak-bar-fill" style={{ width: `${progressPct}%` }} />
             </span>
-            <span>
-              <b>{Math.min(minutesRead, goal)}</b> / {goal} min today
-            </span>
-            {goalComplete && <IconCheck className="streak-mini-done" size={14} stroke={2.5} aria-label="done" />}
-          </span>
-
-          <span className="streak-mini-div streak-mini-div--cta" aria-hidden="true" />
-
-          <Link to="/surah" className="streak-mini-cta">
-            {goalComplete ? 'Keep reading' : 'Continue reading'}
-            <IconArrowRight size={14} stroke={2} aria-hidden="true" />
-          </Link>
+          </div>
         </div>
 
-        {/* Line 2: last 7 days | best | this week | edit */}
-        <div className="streak-mini-line streak-mini-line--sub">
+        {/* This week: dots + totals */}
+        <div className="streak-week-block">
           <WeekDots days={days} celebrate={celebrate} />
-          {data.longestStreak > 0 && (
-            <>
-              <span className="streak-mini-div" aria-hidden="true" />
-              <span>Best {data.longestStreak} {data.longestStreak === 1 ? 'day' : 'days'}</span>
-            </>
-          )}
-          <span className="streak-mini-div" aria-hidden="true" />
-          <span>{weekMinutes} min this week</span>
-          <span className="streak-mini-div" aria-hidden="true" />
-          <button
-            type="button"
-            className="streak-mini-edit"
-            onClick={() => setEditingGoal(true)}
-          >
-            Edit goal
-          </button>
+          <p className="streak-meta">
+            <span><b>{weekMinutes}</b> min this week</span>
+            {data.longestStreak > 0 && (
+              <span>Best <b>{data.longestStreak}</b> {data.longestStreak === 1 ? 'day' : 'days'}</span>
+            )}
+          </p>
         </div>
+
+        <Link to="/surah" className="btn btn-primary streak-cta">
+          {goalComplete ? 'Keep reading' : 'Continue reading'}
+          <IconArrowRight size={16} stroke={2} aria-hidden="true" />
+        </Link>
       </div>
-    </div>
+    </StreakSection>
   );
 }

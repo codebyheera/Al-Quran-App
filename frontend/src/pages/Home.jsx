@@ -285,12 +285,12 @@ export default function Home() {
             )}
           </div>
         </div>
-
-        {/* ── Daily Reading Streak — lives inside the hero, divided only by a hairline ── */}
-        <StreakWidget />
       </section>
 
       <div className="container">
+        {/* ── Daily Reading Goal — its own section, first after the hero ── */}
+        <StreakWidget />
+
         {/* ── Quick Access ──────────────────────────────────── */}
         <RevealSection className="home-section">
           <div className="flex-between mb-2">

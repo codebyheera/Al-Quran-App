@@ -1,262 +1,218 @@
-/* components/StreakWidget.css — Daily Reading Streak strip
-   Lives inside the hero (Home.jsx nests it right after .hero-content) so
-   it shares the hero's own background — no separate color of its own.
-   The only separation from the hero content above it is a subtle
-   hairline (border-top), not a boxed card. */
+/* components/StreakWidget.css — "Daily Reading Goal" section on Home
+   Same card language as the Home sections below it (.mode-card in
+   pages/Home.css): bg-card, 1px var(--border), radius-md, a 2.5rem round
+   icon on var(--border), h3 at 1rem, muted 0.8rem sub text. The section
+   header (h2 + ghost button) reuses .home-section / .flex-between / .mb-2. */
 
-.streak-strip {
-  width: 100%;
+.streak-section {
   font-family: var(--font-ui);
-  margin-top: 1.75rem;
-  border-top: 1px solid rgba(201, 168, 76, 0.14);
 }
 
-/* ── Goal set ─────────────────────────────────────────────────────────
-   Line 1: 🔥 N day streak | ━━ x / y min today | Continue reading →
-   Line 2: ○○○○○○◉  Best N days | N min this week | Edit goal
-   One accent (gold) for progress + the link; everything else is text
-   colour. Thin rules instead of bullets.                              */
-.streak-mini {
-  display: flex;
-  flex-direction: column;
+.streak-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: center;
-  gap: 0.6rem;
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 1.1rem 1rem 1.15rem;
+  gap: 1.25rem 2rem;
+  padding: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+.streak-card:hover { border-color: var(--border-hover); }
+.streak-card.is-complete { border-color: var(--border-hover); }
+
+/* ── Today: icon | title, sub, bar ─────────────────────────────── */
+.streak-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  min-width: 0;
 }
 
-.streak-mini-line {
+/* Same as .mode-card-icon */
+.streak-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.4rem 1rem;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: var(--text-secondary);
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--text-muted);
+  background: var(--border);
 }
-.streak-mini-line b {
+.streak-icon.is-lit { color: var(--accent-gold); }
+
+.streak-info {
+  flex: 1;
+  min-width: 0;
+}
+.streak-title {
+  margin: 0 0 0.15rem;
+  font-size: 1rem;
   font-weight: 600;
+  line-height: 1.35;
   color: var(--text-primary);
+}
+.streak-title b {
+  color: var(--accent-gold);
+  font-variant-numeric: tabular-nums;
+}
+.streak-sub {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-muted);
   font-variant-numeric: tabular-nums;
 }
 
-/* Thin vertical rule between items */
-.streak-mini-div {
-  width: 1px;
-  height: 14px;
-  background: var(--border);
-}
-
-/* Streak */
-.streak-mini-count {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  white-space: nowrap;
-}
-.streak-mini-flame {
-  flex-shrink: 0;
-  color: var(--text-muted);
-}
-.streak-mini-count.is-lit .streak-mini-flame {
-  color: #e8963a;
-}
-
-/* Today */
-.streak-mini-today {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  white-space: nowrap;
-}
-.streak-mini-bar {
+.streak-bar {
   display: block;
-  width: 80px;
-  height: 4px;
-  border-radius: 2px;
-  background: color-mix(in srgb, var(--text-secondary) 16%, transparent);
+  max-width: 320px;
+  height: 6px;
+  margin-top: 0.65rem;
+  border-radius: 100px;
+  background: var(--border);
   overflow: hidden;
 }
-.streak-mini-bar-fill {
+.streak-bar-fill {
   display: block;
   height: 100%;
   border-radius: inherit;
   background: var(--accent-gold);
-  transition: width 0.4s ease;
-}
-.streak-mini-done {
-  margin-left: -0.25rem;
-  color: var(--accent-gold);
+  transition: width 0.5s ease;
 }
 
-/* Link */
-.streak-mini-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  color: var(--accent-gold);
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  border-radius: 4px;
-}
-.streak-mini-cta:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Line 2 */
-.streak-mini-line--sub {
-  gap: 0.4rem 0.85rem;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-.streak-mini-line--sub .streak-mini-div {
-  height: 11px;
-}
-
-.streak-dots {
+/* ── This week: dots + totals ──────────────────────────────────── */
+.streak-week-block {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 0.55rem;
+}
+.streak-week {
+  display: flex;
+  gap: 0.6rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.streak-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-secondary) 45%, transparent);
+.streak-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
   cursor: default;
 }
+.streak-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--border-hover);
+  color: var(--on-accent-gold, #0f0f1a);
+}
+.streak-dot--empty { box-shadow: inset 0 0 0 1.5px var(--border); }
 .streak-dot--partial {
-  box-shadow: inset 0 0 0 1px var(--accent-gold);
-  background: linear-gradient(to top, var(--accent-gold) 50%, transparent 50%);
+  box-shadow: inset 0 0 0 1.5px var(--accent-gold);
+  background: linear-gradient(to top, var(--border-hover) 50%, transparent 50%);
 }
 .streak-dot--done {
   box-shadow: none;
   background: var(--accent-gold);
 }
-/* Today: same size, marked with a ring */
-.streak-dot.is-today {
-  outline: 1px solid color-mix(in srgb, var(--accent-gold) 70%, transparent);
-  outline-offset: 2px;
+.streak-day-letter {
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-muted);
+}
+.streak-day.is-today .streak-day-letter {
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+.streak-day.is-today .streak-dot--empty {
+  box-shadow: inset 0 0 0 1.5px var(--accent-gold);
 }
 
-.streak-mini-edit {
-  padding: 0;
-  border: none;
-  background: transparent;
-  font-family: inherit;
-  font-size: inherit;
+.streak-meta {
+  display: flex;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.streak-meta b {
+  font-weight: 600;
   color: var(--text-secondary);
-  cursor: pointer;
-  border-radius: 4px;
+  font-variant-numeric: tabular-nums;
 }
-.streak-mini-edit:hover {
-  color: var(--text-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+
+.streak-cta {
+  white-space: nowrap;
+  text-decoration: none;
 }
-.streak-mini-cta:focus-visible,
-.streak-mini-edit:focus-visible {
+.streak-cta:focus-visible {
   outline: 2px solid var(--accent-gold);
   outline-offset: 3px;
 }
 
-/* Once a day, after finishing the goal: today's dot fills in */
-.streak-dots.is-celebrating .streak-dot.is-today {
+/* Once a day, after finishing the goal: today's dot pops in */
+.streak-week.is-celebrating .streak-day.is-today .streak-dot {
   animation: streakDotIn 0.6s ease-out 0.3s both;
 }
 @keyframes streakDotIn {
   from { transform: scale(0.4); opacity: 0.4; }
   to   { transform: scale(1); opacity: 1; }
 }
-@keyframes streakFadeUp {
-  from { opacity: 0; transform: translateY(3px); }
-  to   { opacity: 1; transform: none; }
+
+/* ── Setup: goal picker ────────────────────────────────────────── */
+.streak-card--setup {
+  grid-template-columns: minmax(0, 1fr) auto;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .streak-dots.is-celebrating .streak-dot.is-today { animation: none; }
-}
-
-/* ── Mobile ───────────────────────────────────────────────────────── */
-@media (max-width: 640px) {
-  .streak-mini { gap: 0.7rem; padding: 1rem 0.5rem 1.1rem; }
-  .streak-mini-line { font-size: 0.85rem; gap: 0.5rem 0.8rem; }
-  .streak-mini-line--sub { font-size: 0.76rem; gap: 0.4rem 0.7rem; }
-
-  /* CTA drops to its own line */
-  .streak-mini-div--cta { display: none; }
-  .streak-mini-cta { flex-basis: 100%; justify-content: center; }
-}
-
-/* ── Setup: goal picker ──────────────────────────────────────────────
-   Line 1: 🔥 How long do you want to read daily? | 5 min · 10 min · …
-   Line 2: hint | Cancel
-   Reuses .streak-mini-line so both states share type, colours, spacing. */
-.streak-setup {
+.streak-card--setup .streak-top { align-items: center; }
+.streak-setup-row {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 1.1rem 1rem 1.15rem;
-  animation: streakFadeUp 0.35s ease both;
 }
-
-.streak-setup-q {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--text-primary);
-  font-weight: 500;
-}
-.streak-setup-flame {
-  flex-shrink: 0;
-  color: #e8963a;
-}
-
-/* Options: light outlined chips */
 .streak-seg {
   display: inline-flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 .streak-seg-btn {
-  height: 30px;
-  padding: 0 0.8rem;
+  height: 38px;
+  padding: 0 1rem;
   border: 1px solid var(--border);
-  border-radius: 100px;
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--text-secondary);
   font-family: inherit;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  transition: var(--transition);
 }
 .streak-seg-btn:hover {
-  border-color: var(--border-hover);
+  border-color: var(--accent-gold);
+  background: var(--bg-card-hover);
   color: var(--text-primary);
 }
 /* New users: 10 min hinted */
 .streak-seg-btn.is-suggested {
-  border-color: color-mix(in srgb, var(--accent-gold) 55%, transparent);
+  border-color: var(--border-hover);
   color: var(--text-primary);
 }
 /* Current goal */
 .streak-seg-btn.is-active {
   border-color: var(--accent-gold);
-  background: color-mix(in srgb, var(--accent-gold) 12%, transparent);
+  background: color-mix(in srgb, var(--accent-gold) 14%, transparent);
   color: var(--accent-gold);
   font-weight: 600;
 }
@@ -266,12 +222,28 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .streak-setup { animation: none; }
+  .streak-week.is-celebrating .streak-day.is-today .streak-dot { animation: none; }
 }
 
+/* ── Tablet: CTA drops to its own row ──────────────────────────── */
+@media (max-width: 900px) {
+  .streak-card { grid-template-columns: minmax(0, 1fr) auto; }
+  .streak-cta { grid-column: 1 / -1; justify-content: center; }
+  .streak-card--setup { grid-template-columns: 1fr; }
+}
+
+/* ── Mobile: everything stacks ─────────────────────────────────── */
 @media (max-width: 640px) {
-  .streak-setup { gap: 0.75rem; padding: 1rem 0.5rem 1.1rem; }
-  .streak-setup .streak-mini-line { flex-direction: column; gap: 0.65rem; }
-  .streak-setup .streak-mini-line--sub { flex-direction: row; text-align: center; }
-  .streak-seg-btn { height: 36px; padding: 0 0.9rem; } /* comfy tap targets */
+  .streak-card { grid-template-columns: 1fr; gap: 1rem; padding: 1rem; }
+  .streak-bar { max-width: none; }
+  .streak-week-block {
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border);
+  }
+  .streak-week { width: 100%; justify-content: space-between; }
+  .streak-cta { grid-column: auto; }
+
+  .streak-seg { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; }
+  .streak-setup-row { width: 100%; }
+  .streak-seg-btn { height: 42px; padding: 0; } /* comfy tap targets */
 }

@@ -2,12 +2,12 @@
 
 /* Hero section */
 .hero {
-  min-height: 32vh;
+  min-height: 52vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem 1.5rem 0;
+  padding: 3.25rem 1.5rem 5.75rem; /* a little more space below than above → content sits slightly high (optical centre) */
   text-align: center;
   position: relative;
   z-index: 10;
@@ -246,7 +246,7 @@
 /* ── Mobile ─────────────────────────────── */
 @media (max-width: 640px) {
   .hero {
-    padding: 1.75rem 1rem 0;
+    padding: 3rem 1rem 4rem;
     min-height: unset;
   }
 
