@@ -255,7 +255,7 @@ export default function DuaPill() {
       </button>
 
       {open && (
-        <aside
+        <div
           ref={cardRef}
           id="dua-pill-card"
           className={`dua-pill ${leaving ? 'is-leaving' : ''} ${ur ? 'is-ur' : ''}`}
@@ -330,7 +330,7 @@ export default function DuaPill() {
             {timer}
           </div>
           )}
-        </aside>
+        </div>
       )}
     </>
   );
