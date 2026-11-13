@@ -166,4 +166,43 @@ const DUA_PROMPTS = [
  */
 export const PINNED_DUA_ID = 'special-subhan'; // special request (no ayah)
 
+/**
+ * Dua requests — when someone asks for dua, add an entry here.
+ *
+ * While today's date is between `from` and `until` (both inclusive, local
+ * time, 'YYYY-MM-DD'), the request replaces the pinned founder dua. After
+ * `until` passes, the founder dua comes back on its own — no need to delete
+ * the entry right away (old ones can be cleaned up whenever).
+ * If two requests overlap, the one listed first wins.
+ *
+ * Fields:
+ *   id        unique, e.g. 'req-2026-11-ahmed' (a new id = pulse on the icon again)
+ *   from      first day shown
+ *   until     last day shown
+ *   title     card heading
+ *   note      the dua itself
+ *   highlight optional — this text is shown in bold gold inside the dua (e.g. the name)
+ *   eyebrow   optional — small label above the title (default 'Dua Request')
+ *
+ * Example:
+ *   {
+ *     id: 'req-2026-11-ahmed',
+ *     from: '2026-11-15',
+ *     until: '2026-11-21',
+ *     title: 'A Dua for Ahmed Ali',
+ *     highlight: 'Ahmed Ali',
+ *     note: 'May Allah grant Ahmed Ali complete shifa, ease his pain, and reward his family for their patience. Ameen.',
+ *   },
+ */
+export const DUA_REQUESTS = [
+  {
+    id: 'req-2026-11-ammar-babbar',
+    from: '2026-11-14',
+    until: '2026-11-21',
+    title: 'A Dua for Ammar Babbar',
+    highlight: 'Ammar Babbar',
+    note: 'O Allah, grant Ammar Babbar the blessing of visiting Your House, the Holy Kaaba, with his family. Fulfil his heartfelt wish to work in Saudi Arabia and to spend the rest of his life there. Accept his dua.',
+  },
+];
+
 export default DUA_PROMPTS;

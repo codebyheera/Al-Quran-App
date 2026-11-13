@@ -6,6 +6,9 @@
  * link to the ayah); closing the card leaves the icon in place. Visitors can
  * drag the icon anywhere — its position is remembered in localStorage.
  * A soft pulse shows until the visitor has opened the current dua once.
+ * Once per day the card opens by itself 2s after arrival and closes itself
+ * after 30s if the visitor doesn't interact; manual opening always works.
+ * An active entry in DUA_REQUESTS (date range) replaces the pinned dua.
  * Visitors whose translation language is Urdu get the Urdu text.
  * Frontend-only — prompts come from data/duaPrompts.js, nothing is sent.
  */
@@ -13,14 +16,16 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IconPray, IconX, IconArrowRight } from '@tabler/icons-react';
-import DUA_PROMPTS, { PINNED_DUA_ID } from '../data/duaPrompts';
+import DUA_PROMPTS, { PINNED_DUA_ID, DUA_REQUESTS } from '../data/duaPrompts';
 import { useAudio } from '../context/AudioContext';
 import './DuaPill.css';
 
 const POS_KEY = 'duaFabPos';      // localStorage: {x, y} of the icon after a drag
 const SEEN_KEY = 'duaFabSeenId';  // localStorage: id of the dua last opened
 const DAY_KEY = 'duaFabDay';      // localStorage: date + id for the rotating dua
-const FAB = 48;                   // icon size (px) — keep in sync with CSS
+const AUTO_KEY = 'duaAutoDay';    // localStorage: date the card last opened by itself
+const AUTO_OPEN_DELAY = 2000;     // ms after arriving before the daily auto-open
+const FAB = 48;                  // icon size (px) — keep in sync with CSS
 const EDGE = 12;                  // min gap from the viewport edge
 const DRAG_THRESHOLD = 6;         // px of movement before a press becomes a drag
 
@@ -31,8 +36,11 @@ function today() {
 function lsGet(key) { try { return localStorage.getItem(key); } catch { return null; } }
 function lsSet(key, v) { try { localStorage.setItem(key, v); } catch {} }
 
-// Pinned dua if set, otherwise one rotating dua per day.
+// Active dua request first, then the pinned dua, otherwise one rotating dua per day.
 function pickPrompt() {
+  const t = today();
+  const req = DUA_REQUESTS.find((r) => r.from <= t && t <= r.until);
+  if (req) return { special: true, eyebrow: 'Dua Request', ...req };
   const pinned = PINNED_DUA_ID && DUA_PROMPTS.find((p) => p.id === PINNED_DUA_ID);
   if (pinned) return pinned;
   const [day, id] = (lsGet(DAY_KEY) || '').split('|');
@@ -85,12 +93,15 @@ export default function DuaPill() {
   const [dragging, setDragging] = useState(false);
   const [cardStyle, setCardStyle] = useState(null);
   const [seen, setSeen] = useState(() => lsGet(SEEN_KEY) === prompt?.id);
+  // true only while an auto-opened card is counting down to close itself
+  const [autoClose, setAutoClose] = useState(false);
   const { showUr } = useAudio();
   const ur = showUr && !!prompt?.meaningUr;
 
   const fabRef = useRef(null);
   const cardRef = useRef(null);
   const drag = useRef(null); // { startX, startY, originX, originY, moved }
+  const autoTimer = useRef(null); // pending daily auto-open
 
   // Keep the icon on screen when the window is resized / rotated.
   useEffect(() => {
@@ -125,13 +136,40 @@ export default function DuaPill() {
   }, [open, placeCard, pos, ur]);
 
   const close = useCallback(() => {
+    setAutoClose(false);
     setLeaving(true);
     setTimeout(() => { setOpen(false); setLeaving(false); setCardStyle(null); }, 200);
   }, []);
 
-  function openCard() {
+  const openCard = useCallback(() => {
     setOpen(true);
-    if (!seen) { setSeen(true); lsSet(SEEN_KEY, prompt.id); }
+    setSeen(true);
+    if (prompt) lsSet(SEEN_KEY, prompt.id);
+  }, [prompt]);
+
+  // Open by itself once per day, 2s after the visitor arrives. It then closes
+  // itself after 30s (timer bar in CSS) unless the visitor interacts with it.
+  useEffect(() => {
+    if (!prompt || lsGet(AUTO_KEY) === today()) return undefined;
+    autoTimer.current = setTimeout(() => {
+      autoTimer.current = null;
+      lsSet(AUTO_KEY, today());
+      openCard();
+      setAutoClose(true);
+    }, AUTO_OPEN_DELAY);
+    return () => clearTimeout(autoTimer.current);
+  }, [prompt, openCard]);
+
+  // Visitor opened/closed it themselves before the auto-open fired: skip
+  // today's auto-open, and never auto-close a card they opened.
+  function toggleByHand() {
+    if (autoTimer.current) {
+      clearTimeout(autoTimer.current);
+      autoTimer.current = null;
+      lsSet(AUTO_KEY, today());
+    }
+    if (open) close();
+    else openCard();
   }
 
   useEffect(() => {
@@ -176,19 +214,25 @@ export default function DuaPill() {
       setDragging(false);
       setPos((p) => { if (p) lsSet(POS_KEY, JSON.stringify(p)); return p; });
     } else {
-      open ? close() : openCard();
+      toggleByHand();
     }
   }
 
   function onKeyDown(e) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      open ? close() : openCard();
+      toggleByHand();
     }
   }
 
   if (!prompt) return null;
   const note = ur ? prompt.noteUr : prompt.note;
+
+  // 30s countdown bar on an auto-opened card; its CSS animation pauses on
+  // hover/focus and closes the card when it finishes.
+  const timer = autoClose && !leaving && (
+    <span className="dua-pill-timer" aria-hidden="true" onAnimationEnd={close} />
+  );
 
   return (
     <>
@@ -218,6 +262,7 @@ export default function DuaPill() {
           style={cardStyle || { visibility: 'hidden' }}
           role="dialog"
           aria-labelledby="dua-pill-title"
+          onPointerDown={() => setAutoClose(false)}
         >
           {prompt.special ? (
             <div className="dua-pill-card dua-special">
@@ -236,6 +281,7 @@ export default function DuaPill() {
               <button type="button" className="dua-special-ameen" onClick={close}>
                 Ameen
               </button>
+              {timer}
             </div>
           ) : (
           <div className="dua-pill-card">
@@ -281,6 +327,7 @@ export default function DuaPill() {
                 {ur ? 'آمین' : 'Ameen'}
               </button>
             </div>
+            {timer}
           </div>
           )}
         </aside>

@@ -110,6 +110,7 @@
 
 /* ── Card ───────────────────────────────────────────────────────── */
 .dua-pill-card {
+  position: relative;
   width: min(380px, calc(100vw - 1.5rem));
   max-height: calc(100vh - 24px);
   overflow-y: auto;
@@ -378,6 +379,32 @@
 .dua-special-ameen:focus-visible {
   outline: 2px solid var(--accent-gold);
   outline-offset: 3px;
+}
+
+/* ── Auto-close countdown (daily auto-open only) ───────────────────
+   Shrinks over 30s, then DuaPill closes the card on animationend.
+   Paused while the visitor hovers or focuses the card; tapping inside
+   removes it. Deliberately kept under reduced-motion: without it the
+   card would never close by itself. */
+.dua-pill-timer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--accent-gold);
+  opacity: 0.55;
+  transform-origin: left center;
+  animation: duaPillTimer 30s linear forwards;
+  pointer-events: none;
+}
+.dua-pill:hover .dua-pill-timer,
+.dua-pill:focus-within .dua-pill-timer {
+  animation-play-state: paused;
+}
+@keyframes duaPillTimer {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
 }
 
 /* ── Urdu mode: user's chosen Urdu font (Gulzar by default), RTL ── */
