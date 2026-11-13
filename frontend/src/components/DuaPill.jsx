@@ -6,7 +6,8 @@
  * link to the ayah); closing the card leaves the icon in place. Visitors can
  * drag the icon anywhere — its position is remembered in localStorage.
  * A soft pulse shows until the visitor has opened the current dua once.
- * Once per day the card opens by itself 2s after arrival and closes itself
+ * Once per day the card opens by itself (2s after arrival, on the first
+ * tap/scroll/key press — see the auto-open effect for why) and closes itself
  * after 30s if the visitor doesn't interact; manual opening always works.
  * An active entry in DUA_REQUESTS (date range) replaces the pinned dua.
  * Visitors whose translation language is Urdu get the Urdu text.
@@ -147,17 +148,50 @@ export default function DuaPill() {
     if (prompt) lsSet(SEEN_KEY, prompt.id);
   }, [prompt]);
 
-  // Open by itself once per day, 2s after the visitor arrives. It then closes
-  // itself after 30s (timer bar in CSS) unless the visitor interacts with it.
+  // Open by itself once per day: at least 2s after arrival AND after the
+  // visitor's first tap / scroll / key press. Waiting for an input matters
+  // for Core Web Vitals: the browser stops measuring LCP at the first input,
+  // so the card (bigger than the hero text) is never counted as the page's
+  // Largest Contentful Paint — opening on a timer alone pushed mobile LCP to
+  // ~7.6s. (mousemove is left out on purpose: it doesn't end LCP.)
+  // After opening it closes itself after 30s (timer bar in CSS) unless the
+  // visitor interacts with it.
   useEffect(() => {
     if (!prompt || lsGet(AUTO_KEY) === today()) return undefined;
+    // No 'scroll': it also fires for code-driven scrolls (e.g. jumping to
+    // #verse-N). Real scrolling starts with touchstart / wheel / keydown.
+    const EVENTS = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
+    let delayDone = false;
+    let interacted = false;
+
+    const fire = () => {
+      // short pause so the card doesn't pop up under the very tap that triggered it
+      autoTimer.current = setTimeout(() => {
+        autoTimer.current = null;
+        if (lsGet(AUTO_KEY) === today()) return;
+        lsSet(AUTO_KEY, today());
+        openCard();
+        setAutoClose(true);
+      }, 400);
+    };
+    const onInput = () => {
+      if (interacted) return;
+      interacted = true;
+      EVENTS.forEach((ev) => window.removeEventListener(ev, onInput, true));
+      if (delayDone) fire();
+    };
+
+    EVENTS.forEach((ev) => window.addEventListener(ev, onInput, { capture: true, passive: true }));
     autoTimer.current = setTimeout(() => {
       autoTimer.current = null;
-      lsSet(AUTO_KEY, today());
-      openCard();
-      setAutoClose(true);
+      delayDone = true;
+      if (interacted) fire();
     }, AUTO_OPEN_DELAY);
-    return () => clearTimeout(autoTimer.current);
+
+    return () => {
+      EVENTS.forEach((ev) => window.removeEventListener(ev, onInput, true));
+      clearTimeout(autoTimer.current);
+    };
   }, [prompt, openCard]);
 
   // Visitor opened/closed it themselves before the auto-open fired: skip
