@@ -25,6 +25,7 @@ const POS_KEY = 'duaFabPos';      // localStorage: {x, y} of the icon after a dr
 const SEEN_KEY = 'duaFabSeenId';  // localStorage: id of the dua last opened
 const DAY_KEY = 'duaFabDay';      // localStorage: date + id for the rotating dua
 const AUTO_KEY = 'duaAutoDay';    // localStorage: date the card last opened by itself
+const AMEEN_KEY = 'duaAmeenIds';  // localStorage: ids of duas this device already said Ameen to
 const AUTO_OPEN_DELAY = 2000;     // ms after arriving before the daily auto-open
 const FAB = 48;                  // icon size (px) — keep in sync with CSS
 const EDGE = 12;                  // min gap from the viewport edge
@@ -36,6 +37,17 @@ function today() {
 }
 function lsGet(key) { try { return localStorage.getItem(key); } catch { return null; } }
 function lsSet(key, v) { try { localStorage.setItem(key, v); } catch {} }
+
+// Send a GA4 `dua_ameen` event — once per dua per device, however many
+// times the visitor comes back, so the count in GA4 is people, not clicks.
+function trackAmeen(prompt, params) {
+  let ids = [];
+  try { ids = JSON.parse(lsGet(AMEEN_KEY)) || []; } catch {}
+  if (!Array.isArray(ids)) ids = [];
+  if (ids.includes(prompt.id)) return;
+  try { window.gtag?.('event', 'dua_ameen', { dua_id: prompt.id, ...params }); } catch { /* analytics is optional */ }
+  lsSet(AMEEN_KEY, JSON.stringify([...ids, prompt.id].slice(-200)));
+}
 
 // Active dua request first, then the pinned dua, otherwise one rotating dua per day.
 function pickPrompt() {
@@ -103,6 +115,7 @@ export default function DuaPill() {
   const cardRef = useRef(null);
   const drag = useRef(null); // { startX, startY, originX, originY, moved }
   const autoTimer = useRef(null); // pending daily auto-open
+  const openedBy = useRef('manual'); // 'auto' | 'manual' — how the card was opened (for analytics)
 
   // Keep the icon on screen when the window is resized / rotated.
   useEffect(() => {
@@ -170,6 +183,7 @@ export default function DuaPill() {
         autoTimer.current = null;
         if (lsGet(AUTO_KEY) === today()) return;
         lsSet(AUTO_KEY, today());
+        openedBy.current = 'auto';
         openCard();
         setAutoClose(true);
       }, 400);
@@ -203,7 +217,7 @@ export default function DuaPill() {
       lsSet(AUTO_KEY, today());
     }
     if (open) close();
-    else openCard();
+    else { openedBy.current = 'manual'; openCard(); }
   }
 
   useEffect(() => {
@@ -262,6 +276,15 @@ export default function DuaPill() {
   if (!prompt) return null;
   const note = ur ? prompt.noteUr : prompt.note;
 
+  function onAmeen() {
+    trackAmeen(prompt, {
+      dua_type: prompt.special ? 'request' : prompt.id === PINNED_DUA_ID ? 'pinned' : 'daily',
+      lang: ur ? 'ur' : 'en',
+      open_type: openedBy.current,
+    });
+    close();
+  }
+
   // 30s countdown bar on an auto-opened card; its CSS animation pauses on
   // hover/focus and closes the card when it finishes.
   const timer = autoClose && !leaving && (
@@ -312,7 +335,7 @@ export default function DuaPill() {
 
               <p className="dua-special-text">{highlight(prompt.note, prompt.highlight)}</p>
 
-              <button type="button" className="dua-special-ameen" onClick={close}>
+              <button type="button" className="dua-special-ameen" onClick={onAmeen}>
                 Ameen
               </button>
               {timer}
@@ -357,7 +380,7 @@ export default function DuaPill() {
                   <IconArrowRight size={13} stroke={2} aria-hidden="true" />
                 </Link>
               )}
-              <button type="button" className="dua-pill-ameen" onClick={close}>
+              <button type="button" className="dua-pill-ameen" onClick={onAmeen}>
                 {ur ? 'آمین' : 'Ameen'}
               </button>
             </div>

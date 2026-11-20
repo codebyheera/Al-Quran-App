@@ -196,9 +196,17 @@ export const PINNED_DUA_ID = 'special-subhan'; // special request (no ayah)
  */
 export const DUA_REQUESTS = [
   {
+    id: 'req-2026-11-haris-asif',
+    from: '2026-11-21',
+    until: '2026-11-28',
+    title: 'A Dua for Haris Asif',
+    highlight: 'Haris Asif',
+    note: 'O Allah, bless the parents of Haris Asif and grant them a life in which they feel proud of their sons, Haris and Hamza. Accept his dua.',
+  },
+  {
     id: 'req-2026-11-ammar-babbar',
     from: '2026-11-14',
-    until: '2026-11-21',
+    until: '2026-11-20',
     title: 'A Dua for Ammar Babbar',
     highlight: 'Ammar Babbar',
     note: 'O Allah, grant Ammar Babbar the blessing of visiting Your House, the Holy Kaaba, with his family. Fulfil his heartfelt wish to work in Saudi Arabia and to spend the rest of his life there. Accept his dua.',
