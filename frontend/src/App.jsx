@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { useAudio } from './context/AudioContext';
 import { useBookmarks } from './context/BookmarkContext';
+import { useAuth } from './context/AuthContext';
 import { pageSeo } from './data/pageSeo';
 import { getStreakData } from './lib/streakUtils';
 
@@ -22,6 +23,7 @@ const SHOW_CHAT_WIDGET = false;
 const DaroodReminderToast = lazy(() => import('./components/DaroodReminderToast'));
 const DuaPill             = lazy(() => import('./components/DuaPill'));
 const LanguagePrompt      = lazy(() => import('./components/LanguagePrompt'));
+const LoginModal          = lazy(() => import('./components/LoginModal'));
 
 // ── Home is eagerly loaded (critical first paint) ────────────────────────────
 import Home from './pages/Home';
@@ -63,6 +65,7 @@ const BlogPost          = lazyWithPreload(() => import('./pages/BlogPost'));
 const PrayerTimesHub    = lazyWithPreload(() => import('./pages/PrayerTimesHub'));
 const PrayerCityPage    = lazyWithPreload(() => import('./pages/PrayerCityPage'));
 const DuroodSharifPage  = lazyWithPreload(() => import('./pages/DuroodSharifPage'));
+const ProfilePage       = lazyWithPreload(() => import('./pages/ProfilePage'));
 const NotFound          = lazyWithPreload(() => import('./pages/NotFound'));
 
 // Lazy routes. `src` is the page's module, which prerender.js looks up in Vite's
@@ -84,6 +87,7 @@ export const ROUTES = [
   { path: '/prayer-times',         src: 'src/pages/PrayerTimesHub.jsx',    Page: PrayerTimesHub },
   { path: '/prayer-times/:city',   src: 'src/pages/PrayerCityPage.jsx',    Page: PrayerCityPage },
   { path: '/durood-sharif',        src: 'src/pages/DuroodSharifPage.jsx',  Page: DuroodSharifPage },
+  { path: '/profile',              src: 'src/pages/ProfilePage.jsx',       Page: ProfilePage },
 ];
 
 // Route pattern → preload for its lazy page.
@@ -117,6 +121,7 @@ const PageLoader = () => (
 export default function App() {
   const { currentVerse } = useAudio();
   const { toast } = useBookmarks();
+  const { loginOpen } = useAuth();
   const location = useLocation();
   const canonicalUrl = `https://alquranhub.org${location.pathname === '/' ? '' : location.pathname}`;
   // Static routes' og:title/og:description, from the same pageSeo entry that
@@ -192,6 +197,13 @@ export default function App() {
       <Suspense fallback={null}>
         <BottomPlayer />
       </Suspense>
+
+      {/* Optional login dialog — its code only downloads when opened */}
+      {loginOpen && (
+        <Suspense fallback={null}>
+          <LoginModal />
+        </Suspense>
+      )}
 
       {/* Global Support Popup */}
       <Suspense fallback={null}>

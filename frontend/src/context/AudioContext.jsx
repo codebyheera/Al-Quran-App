@@ -67,6 +67,19 @@ export const AudioProvider = ({ children }) => {
   // translation without touching what the player is set to — used by the
   // Surah page's own English/Urdu text toggles, where silently rewriting the
   // audio language mid-session would be surprising.
+  // Audio/translation choices changed in another tab, or pulled from the
+  // cloud (lib/cloudSync.js) — mirror them without starting playback.
+  useEffect(() => {
+    const onStorage = (e) => {
+      if (e.key === 'audioLanguage' && e.newValue) setAudioLanguage(e.newValue);
+      else if (e.key === 'showEn' && e.newValue !== null) setShowEn(e.newValue === 'true');
+      else if (e.key === 'showUr' && e.newValue !== null) setShowUr(e.newValue === 'true');
+      else if (e.key === 'preferredLanguage') setPreferredLanguageState(e.newValue);
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
   const setPreferredLanguage = (lang, { applyAudio = true } = {}) => {
     localStorage.setItem("preferredLanguage", lang);
     setPreferredLanguageState(lang);

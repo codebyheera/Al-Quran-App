@@ -12,7 +12,7 @@ import { pageSeo } from '../data/pageSeo';
 import './LegalPage.css';
 
 const PAGE_URL = `https://alquranhub.org${pageSeo.privacyPolicy.path}`;
-const LAST_UPDATED = '20th September 2026';
+const LAST_UPDATED = '21st November 2026';
 
 export default function PrivacyPolicyPage() {
   return (
@@ -48,8 +48,9 @@ export default function PrivacyPolicyPage() {
 
           <h2>What Information We Automatically Collect</h2>
           <p>
-            When you visit Al-Quran Hub, we don&apos;t ask you to create an account, log in, or give us your
-            personal details. But like most websites, we do receive some information automatically:
+            You can use all of Al-Quran Hub without an account. Logging in is optional (see
+            &ldquo;Optional Account &amp; Sync&rdquo; below). Like most websites, we do receive some
+            information automatically:
           </p>
 
           <p><strong>Google Analytics 4 (GA4) collects:</strong></p>
@@ -113,10 +114,38 @@ export default function PrivacyPolicyPage() {
             </a>.
           </p>
 
+          <h2>Optional Account &amp; Sync</h2>
+          <p>
+            If you choose to log in with Google or GitHub, you can keep your bookmarks, reading progress and
+            settings the same on all your devices. We never see or store your Google or GitHub password.
+          </p>
+          <p><strong>When you log in, we store:</strong></p>
+          <ul>
+            <li>Your name and email address (from your Google or GitHub account)</li>
+            <li>Your profile photo, if you upload one, plus the bio and social links you choose to add</li>
+            <li>Your bookmarked verses (only the Surah and verse number)</li>
+            <li>Your reading progress, reading streak and Tasbih / Durood counts</li>
+            <li>Your reader settings (theme, fonts, reciter, translation language and similar)</li>
+          </ul>
+          <p>
+            Your profile is <strong>private</strong>, so only you can see it. This data is stored securely with
+            our database provider, Supabase, and is used only to run the sync feature. It is never sold, shown
+            to other users, or used for advertising.
+          </p>
+          <p>
+            <strong>Deleting your account:</strong> log in, open <em>My Profile</em> and choose{' '}
+            <em>Delete my account</em>. Your profile, photo and all synced data are permanently removed from
+            our servers straight away.
+          </p>
+
           <h2>How We Protect Your Information</h2>
           <ul>
             <li>We use HTTPS encryption (the little lock icon in your browser) to protect data in transit</li>
-            <li>We don&apos;t store any of your personal information on our servers beyond what Google collects</li>
+            <li>
+              If you don&apos;t log in, we don&apos;t store any of your personal information on our servers
+              beyond what Google Analytics collects
+            </li>
+            <li>Account data is protected so that each user can only ever access their own data</li>
             <li>We don&apos;t sell or give access to your data</li>
           </ul>
 

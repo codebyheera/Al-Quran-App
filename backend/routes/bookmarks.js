@@ -162,15 +162,53 @@ router.post('/', async (req, res) => {
   }
 });
 
+// ── POST /api/bookmarks/clear  ────────────────────────────────────────────────
+// Removes ALL anonymous bookmarks of one device id. Called by the app right
+// after it has copied them into the user's account on login, so the heavy
+// anonymous rows (with full Arabic + translation text) don't linger.
+router.post('/clear', async (req, res) => {
+  try {
+    const { userId } = req.body || {};
+    if (!userId || typeof userId !== 'string' || !userId.trim()) {
+      return res.status(400).json({ error: 'Request body must include a non-empty "userId".' });
+    }
+
+    const { error, count } = await withTimeout(
+      supabase
+        .from('bookmarks')
+        .delete({ count: 'exact' })
+        .eq('user_id', userId.trim())
+    );
+
+    if (error) {
+      await reportError(error, { route: 'POST /api/bookmarks/clear' });
+      return res.status(500).json({ error: getErrorMessage(error) });
+    }
+
+    return res.json({ message: 'Bookmarks cleared.', count: count ?? 0 });
+  } catch (err) {
+    await reportError(err, { route: 'POST /api/bookmarks/clear' });
+    return res.status(500).json({ error: `Server error: ${err.message}` });
+  }
+});
+
 // ── DELETE /api/bookmarks/:id  ────────────────────────────────────────────────
+// Requires the owner's userId too, so nobody can delete someone else's
+// bookmark just by knowing its id.
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
+    const userId = req.body?.userId || req.query.userId;
 
     if (!id || !id.trim()) {
       return res
         .status(400)
         .json({ error: 'URL parameter "id" is required.' });
+    }
+    if (!userId || typeof userId !== 'string' || !userId.trim()) {
+      return res
+        .status(400)
+        .json({ error: '"userId" is required to delete a bookmark.' });
     }
 
     const { error, count } = await withTimeout(
@@ -178,6 +216,7 @@ router.delete('/:id', async (req, res) => {
         .from('bookmarks')
         .delete({ count: 'exact' })
         .eq('id', id.trim())
+        .eq('user_id', userId.trim())
     );
 
     if (error) {

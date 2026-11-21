@@ -6,10 +6,12 @@
 
 import { NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock, IconMoonStars, IconChevronDown, IconMailbox } from '@tabler/icons-react';
+import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock, IconMoonStars, IconChevronDown, IconMailbox, IconUserCircle } from '@tabler/icons-react';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
+import { useAuth } from '../context/AuthContext';
 import HeaderActions from './HeaderActions';
+import { Avatar } from './AccountMenu';
 import '../styles/Navbar.css';
 
 // "More" dropdown — consolidates the lower-priority links (Bookmarks,
@@ -76,6 +78,7 @@ function MoreDropdown({ bookmarkCount }) {
 export default function Navbar() {
   const { bookmarks } = useBookmarks();
   const { isPlaying } = useAudio();
+  const { user, profile, avatarSrc, status: authStatus, openLogin } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const lastScrollY = useRef(0);
@@ -224,7 +227,29 @@ export default function Navbar() {
           </button>
         </div>
 
-
+        {/* Account (phones — the header button is hidden there) */}
+        {user ? (
+          <NavLink to="/profile" className="sidebar-account" onClick={closeSidebar}>
+            <Avatar src={avatarSrc} name={profile?.name} email={user.email} size={40} />
+            <span className="sidebar-account-text">
+              <span className="sidebar-account-title">{profile?.name || 'My Profile'}</span>
+              <span className="sidebar-account-sub">View profile</span>
+            </span>
+          </NavLink>
+        ) : (
+          <button
+            type="button"
+            className="sidebar-account"
+            onClick={() => { closeSidebar(); openLogin(); }}
+            disabled={authStatus === 'loading'}
+          >
+            <span className="sidebar-account-icon"><IconUserCircle size={24} stroke={1.75} /></span>
+            <span className="sidebar-account-text">
+              <span className="sidebar-account-title">Login</span>
+              <span className="sidebar-account-sub">Sync bookmarks &amp; progress across devices</span>
+            </span>
+          </button>
+        )}
 
         {/* Stats Row */}
         <div className="sidebar-stats-boxes">

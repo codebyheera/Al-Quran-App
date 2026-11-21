@@ -80,3 +80,61 @@
   }
 }
 
+
+/* ── Sync status / login invite ───────────────────────────── */
+.bp-sync {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.5rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.bp-sync-on svg { color: var(--accent-green); flex-shrink: 0; }
+
+.bp-sync-invite {
+  flex-wrap: wrap;
+  padding: 0.85rem 1rem;
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+.bp-sync-icon { color: var(--accent-gold); flex-shrink: 0; }
+.bp-sync-text { flex: 1 1 220px; min-width: 0; line-height: 1.45; }
+.bp-sync-btn { flex-shrink: 0; }
+
+@media (max-width: 480px) {
+  .bp-sync-btn { width: 100%; }
+}
+
+/* ── Text placeholder while it loads ──────────────────────── */
+.bm-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0.5rem 0 0.75rem;
+}
+.bm-skeleton span {
+  display: block;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-card-hover) 50%, var(--bg-secondary) 75%);
+  background-size: 200% 100%;
+  animation: bmShimmer 1.4s ease-in-out infinite;
+}
+.bm-skeleton span:nth-child(1) { width: 90%; margin-left: auto; height: 18px; }
+.bm-skeleton span:nth-child(2) { width: 100%; }
+.bm-skeleton span:nth-child(3) { width: 70%; }
+
+@keyframes bmShimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-skeleton span { animation: none; }
+}
+
+/* Spinner holds roughly the empty-state's space so nothing jumps */
+.bp-loading { min-height: 260px; }

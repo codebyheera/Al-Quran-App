@@ -13,6 +13,7 @@
   "dependencies": {
     "@fontsource/noto-nastaliq-urdu": "^5.2.8",
     "@sentry/react": "^11.7.0",
+    "@supabase/supabase-js": "^2.119.2",
     "@tabler/icons-react": "^3.45.0",
     "axios": "^1.6.7",
     "react": "^18.3.1",

@@ -10,6 +10,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider }   from './context/ThemeContext';
+import { AuthProvider }    from './context/AuthContext';
 import { BookmarkProvider } from './context/BookmarkContext';
 import { AudioProvider }    from './context/AudioContext';
 import { QariProvider }     from './context/QariContext';
@@ -34,13 +35,15 @@ const app = (
     <BrowserRouter>
       <HelmetProvider>
         <ThemeProvider>
-          <QariProvider>
-            <BookmarkProvider>
-              <AudioProvider>
-                <App />
-              </AudioProvider>
-            </BookmarkProvider>
-          </QariProvider>
+          <AuthProvider>
+            <QariProvider>
+              <BookmarkProvider>
+                <AudioProvider>
+                  <App />
+                </AudioProvider>
+              </BookmarkProvider>
+            </QariProvider>
+          </AuthProvider>
         </ThemeProvider>
       </HelmetProvider>
     </BrowserRouter>

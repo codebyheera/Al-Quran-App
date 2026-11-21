@@ -1,0 +1,178 @@
+/* ============================================================
+   AccountMenu.css — Navbar avatar + account dropdown
+   ============================================================ */
+
+.acct-menu {
+  position: relative;
+}
+
+.acct-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.acct-avatar-initials {
+  background: var(--accent-gold);
+  color: var(--on-accent-gold, #1a1000);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: none;
+}
+
+.acct-btn:disabled { opacity: 0.6; cursor: default; }
+
+.acct-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 400;
+  min-width: 230px;
+  max-width: 280px;
+  padding: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  animation: acctIn 160ms ease-out;
+}
+
+.acct-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px 12px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.acct-head-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.acct-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.acct-email {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.acct-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.acct-item:hover,
+.acct-item:focus-visible {
+  outline: none;
+  background: var(--bg-card-hover);
+  color: var(--accent-gold);
+}
+.acct-item-danger:hover,
+.acct-item-danger:focus-visible { color: var(--error, #e0554f); }
+
+@keyframes acctIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Phones: account lives in the slide-in menu instead (Navbar.jsx). */
+@media (max-width: 767px) {
+  .hdr-actions .acct-btn,
+  .hdr-actions .acct-menu { display: none; }
+}
+
+/* ── Mobile sidebar account card ─────────────────────────── */
+.sidebar-account {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: calc(100% - 2rem);
+  margin: 0 1rem 1rem;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.sidebar-account:hover { border-color: var(--accent-gold); }
+
+.sidebar-account-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.sidebar-account-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sidebar-account-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sidebar-account-icon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--bg-card);
+  color: var(--accent-gold);
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acct-panel { animation: none; }
+}
+
+/* Account sits at the screen edge — anchor its tooltip to the right */
+.hdr-actions .acct-btn[data-tip]::after {
+  left: auto;
+  right: 0;
+  transform: translate(0, -4px);
+}
+.hdr-actions .acct-btn[data-tip]:hover::after,
+.hdr-actions .acct-btn[data-tip]:focus-visible::after {
+  transform: translate(0, 0);
+}

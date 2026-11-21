@@ -1,6 +1,6 @@
 /**
  * components/HeaderActions.jsx — Right-side icon cluster of the navbar:
- * [Search] [Theme toggle] [Bell, only when unread] [Settings]
+ * [Search] [Theme toggle] [Bell, only when unread] [Settings] [Account]
  *
  * Search goes to the existing /search page (Ctrl+K, or "/" when no field is
  * focused). Reciter, translation language and reader options live in the
@@ -13,6 +13,7 @@ import { IconSearch, IconSunHigh, IconMoonStars, IconSettings } from '@tabler/ic
 import { useTheme } from '../context/ThemeContext';
 import NotificationBell from './NotificationBell';
 import SettingsDrawer from './SettingsDrawer';
+import AccountMenu from './AccountMenu';
 import './HeaderActions.css';
 
 function isTypingTarget(el) {
@@ -84,6 +85,9 @@ export default function HeaderActions() {
         >
           <IconSettings size={20} stroke={1.75} className="hdr-ico-gear" />
         </button>
+
+        {/* Optional login for cross-device sync (in the mobile menu on phones) */}
+        <AccountMenu />
       </div>
 
       <SettingsDrawer

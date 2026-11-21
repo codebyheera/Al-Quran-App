@@ -3,7 +3,7 @@
  * Provides reciter state persisted in localStorage
  */
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const QariContext = createContext();
 
@@ -46,6 +46,15 @@ export const QariProvider = ({ children }) => {
   const [reciter, setReciter] = useState(() => {
     return localStorage.getItem('selectedReciter') || 'alafasy';
   });
+
+  // Reciter changed in another tab, or pulled from the cloud (lib/cloudSync.js).
+  useEffect(() => {
+    const onStorage = (e) => {
+      if (e.key === 'selectedReciter') setReciter(e.newValue || 'alafasy');
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
 
   const changeReciter = (id) => {
     setReciter(id);

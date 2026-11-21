@@ -40,6 +40,16 @@ export function ThemeProvider({ children }) {
     return THEMES.some((t) => t.id === saved) ? saved : DEFAULT_THEME;
   });
 
+  // Theme changed in another tab, or pulled from the cloud (lib/cloudSync.js).
+  useEffect(() => {
+    const onStorage = (e) => {
+      if (e.key !== THEME_KEY) return;
+      setTheme(THEMES.some((t) => t.id === e.newValue) ? e.newValue : DEFAULT_THEME);
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
   // Apply theme class to <html> whenever it changes
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
