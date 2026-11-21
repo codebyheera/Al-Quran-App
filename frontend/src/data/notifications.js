@@ -11,16 +11,17 @@
  */
 export const notifications = [
   {
+    id: '4',
+    title: 'New: Sync Across Your Devices',
+    message: 'Log in with Google or GitHub to keep your bookmarks, reading streak, tasbih counts and settings the same on all your devices. It\'s optional, and your profile stays private.',
+    date: '2026-11-21',
+    link: '/profile',
+  },
+  {
     id: '3',
     title: 'New: Continue Reading',
     message: 'You can now pick up right where you stopped. Just open the homepage and tap the Continue Reading card to jump back to your last ayah.',
     date: '2026-09-25',
     link: '/',
-  },
-  {
-    id: '1',
-    title: 'New Reciters Added',
-    message: '3 new reciters have been added to Al-Quran Hub: Abdul Samad, Abdul Rahman Al-Sudais, and Saad Al-Ghamdi.',
-    date: '2026-08-14',
   },
 ];
