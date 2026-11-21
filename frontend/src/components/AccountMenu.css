@@ -116,9 +116,10 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  width: calc(100% - 2rem);
-  margin: 0 1rem 1rem;
-  padding: 12px;
+  box-sizing: border-box;
+  width: calc(100% - 2.5rem); /* same 1.25rem side gutter as the menu below */
+  margin: 1rem 1.25rem 0;
+  padding: 12px 12px 12px 14px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: var(--bg-secondary);
@@ -176,3 +177,14 @@
 .hdr-actions .acct-btn[data-tip]:focus-visible::after {
   transform: translate(0, 0);
 }
+
+.sidebar-account-chevron {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform 150ms ease-out, color 150ms ease-out;
+}
+.sidebar-account:hover .sidebar-account-chevron {
+  color: var(--accent-gold);
+  transform: translateX(2px);
+}
+.sidebar-account:disabled { opacity: 0.6; cursor: default; }

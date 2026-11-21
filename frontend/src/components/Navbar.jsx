@@ -6,7 +6,7 @@
 
 import { NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock, IconMoonStars, IconChevronDown, IconMailbox, IconUserCircle } from '@tabler/icons-react';
+import { IconX, IconHome, IconBook, IconBook2, IconRosette, IconBookmark, IconWriting, IconHeart, IconClock, IconMoonStars, IconChevronDown, IconMailbox, IconUserCircle, IconChevronRight } from '@tabler/icons-react';
 import { useBookmarks } from '../context/BookmarkContext';
 import { useAudio } from '../context/AudioContext';
 import { useAuth } from '../context/AuthContext';
@@ -235,6 +235,7 @@ export default function Navbar() {
               <span className="sidebar-account-title">{profile?.name || 'My Profile'}</span>
               <span className="sidebar-account-sub">View profile</span>
             </span>
+            <IconChevronRight size={18} stroke={2} className="sidebar-account-chevron" aria-hidden="true" />
           </NavLink>
         ) : (
           <button
@@ -248,6 +249,7 @@ export default function Navbar() {
               <span className="sidebar-account-title">Login</span>
               <span className="sidebar-account-sub">Sync bookmarks &amp; progress across devices</span>
             </span>
+            <IconChevronRight size={18} stroke={2} className="sidebar-account-chevron" aria-hidden="true" />
           </button>
         )}
 

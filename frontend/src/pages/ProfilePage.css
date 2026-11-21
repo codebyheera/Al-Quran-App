@@ -1,11 +1,14 @@
 /* ============================================================
    ProfilePage.css — /profile (private profile editor)
+   One spacing scale throughout: cards 24px (16–18px on phones),
+   fields separated by 18px, label → input 6px.
    ============================================================ */
 
 .pf-page {
-  max-width: 720px;
+  --pf-pad: 1.5rem;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 2rem 16px 3rem;
+  padding: 2rem 16px 4rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -17,27 +20,28 @@
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: var(--pf-pad);
   box-shadow: var(--shadow);
 }
 
 .pf-title {
   margin: 0;
-  font-size: 1.45rem;
+  font-size: 1.5rem;
+  line-height: 1.25;
   font-weight: 700;
   color: var(--text-primary);
   overflow-wrap: anywhere;
 }
 
 .pf-muted { margin: 0; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; }
-.pf-hint  { margin: 0.35rem 0 0; color: var(--text-muted); font-size: 0.78rem; line-height: 1.45; }
-.pf-error { color: var(--error, #e0554f); font-size: 0.8rem; margin: 0.35rem 0 0; }
-.pf-ok    { color: var(--accent-green); font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px; }
+.pf-hint  { margin: 0; color: var(--text-muted); font-size: 0.8rem; line-height: 1.5; }
+.pf-error { margin: 0; color: var(--error, #e0554f); font-size: 0.8rem; line-height: 1.45; }
+.pf-ok    { color: var(--accent-green); font-size: 0.88rem; display: inline-flex; align-items: center; gap: 5px; }
 
-/* ── Logged-out state ── */
+/* ── Logged-out state ─────────────────────────────────────── */
 .pf-empty {
   text-align: center;
-  padding: 2.5rem 1.5rem;
+  padding: 2.75rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,17 +60,30 @@
   color: var(--accent-gold);
 }
 
-/* ── Header ── */
-.pf-head {
+/* ── Identity card ────────────────────────────────────────── */
+.pf-hero {
   display: flex;
-  gap: 1.25rem;
-  align-items: flex-start;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--border);
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
 }
+/* soft accent wash behind the photo */
+.pf-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 72px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-gold) 14%, transparent), transparent);
+  pointer-events: none;
+}
+.pf-hero > * { position: relative; }
 
 .pf-photo { position: relative; flex-shrink: 0; }
-.pf-avatar { border: 3px solid var(--border-hover); }
+.pf-avatar {
+  border: 3px solid var(--bg-card);
+  box-shadow: 0 0 0 2px var(--border-hover), var(--shadow);
+}
 .pf-photo-busy {
   position: absolute;
   inset: 0;
@@ -76,71 +93,139 @@
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.5);
 }
+.pf-photo-badge {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 3px solid var(--bg-card);
+  background: var(--accent-gold);
+  color: var(--on-accent-gold, #1a1000);
+  cursor: pointer;
+  transition: transform 150ms ease-out, filter 150ms ease-out;
+}
+.pf-photo-badge:hover:not(:disabled) { transform: scale(1.06); filter: brightness(1.05); }
+.pf-photo-badge:disabled { opacity: 0.6; cursor: wait; }
+.pf-photo-badge:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-gold);
+}
 
-.pf-head-text { min-width: 0; flex: 1; }
-.pf-private { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 0.82rem; }
-
+.pf-hero-text {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+.pf-hero-email {
+  margin: 0;
+  max-width: 100%;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pf-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.3;
+}
 .pf-photo-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 0.9rem;
+  margin-top: 0.4rem;
 }
 
-/* ── Sections ── */
-.pf-section {
-  border: none;
-  margin: 0;
-  padding: 1.25rem 0 0;
-  min-width: 0;
+/* ── Form card ────────────────────────────────────────────── */
+.pf-form { padding: 0; }
+
+.pf-section { padding: var(--pf-pad); }
+.pf-section + .pf-section { border-top: 1px solid var(--border); }
+
+.pf-section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.25rem;
 }
 .pf-section-title {
-  padding: 0;
-  margin-bottom: 0.75rem;
-  font-size: 0.78rem;
+  margin: 0;
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent-gold);
+  color: var(--text-primary);
 }
+
+.pf-fields {
+  display: grid;
+  gap: 1.1rem;
+}
+.pf-socials { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1rem; }
 
 .pf-field {
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.95rem;
+  gap: 0.4rem;
   min-width: 0;
 }
 .pf-label {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.4rem;
+  align-items: baseline;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-secondary);
 }
-.pf-count { font-weight: 400; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.pf-count { font-weight: 400; font-size: 0.78rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
 
 .pf-input {
   width: 100%;
-  min-height: 44px;
-  padding: 0.65rem 0.8rem;
+  min-height: 46px;
+  padding: 0.7rem 0.85rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--bg-secondary);
   color: var(--text-primary);
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 0.95rem; /* ≥16px on phones (below) so iOS doesn't zoom */
   box-sizing: border-box;
   transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
 }
-.pf-input::placeholder { color: var(--text-muted); opacity: 0.8; }
+.pf-input::placeholder { color: var(--text-muted); opacity: 0.75; }
 .pf-input:focus {
   outline: none;
   border-color: var(--accent-gold);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-gold) 20%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-gold) 22%, transparent);
 }
 .pf-input[aria-invalid="true"] { border-color: var(--error, #e0554f); }
-.pf-textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+.pf-textarea { resize: vertical; min-height: 96px; line-height: 1.55; }
+
+.pf-input-wrap { position: relative; display: block; }
+.pf-input-icon {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.pf-input-iconed { padding-left: 2.5rem; }
+.pf-input-wrap:focus-within .pf-input-icon { color: var(--accent-gold); }
 
 .pf-input-readonly {
   display: flex;
@@ -149,6 +234,7 @@
   gap: 10px;
   color: var(--text-secondary);
   cursor: default;
+  opacity: 0.9;
 }
 .pf-email { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .pf-provider {
@@ -159,32 +245,51 @@
   padding: 2px 8px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  font-size: 0.75rem;
+  background: var(--bg-card);
+  font-size: 0.74rem;
   color: var(--text-muted);
 }
 
-.pf-socials {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 1rem;
+/* Save bar: bottom of the form; sticks to the screen bottom while unsaved */
+.pf-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem var(--pf-pad);
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  background: var(--bg-card);
 }
+.pf-actions.is-dirty {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  box-shadow: 0 -8px 20px -12px rgba(0, 0, 0, 0.35);
+}
+.pf-unsaved { margin-right: auto; }
+.pf-actions .pf-ok,
+.pf-actions .pf-error { margin-right: auto; }
 
-/* ── Buttons ── */
+/* ── Buttons ──────────────────────────────────────────────── */
 .pf-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  min-height: 42px;
-  padding: 0 1.1rem;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 1.15rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   font: inherit;
   font-size: 0.9rem;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
   transition: background 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out, opacity 150ms;
 }
+.pf-btn-sm { min-height: 38px; padding: 0 0.9rem; font-size: 0.85rem; }
 .pf-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .pf-btn:focus-visible {
   outline: none;
@@ -196,29 +301,22 @@
   color: var(--on-accent-gold, #1a1000);
 }
 .pf-btn-primary:hover:not(:disabled) { background: var(--accent-gold-light, var(--accent-gold)); }
-.pf-btn-ghost {
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-}
+.pf-btn-ghost { background: var(--bg-secondary); color: var(--text-secondary); }
 .pf-btn-ghost:hover:not(:disabled) { border-color: var(--accent-gold); color: var(--accent-gold); }
 .pf-btn-danger:hover:not(:disabled) { border-color: var(--error, #e0554f); color: var(--error, #e0554f); }
-
-.pf-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
+.pf-btn-danger-solid {
+  background: var(--error, #e0554f);
+  border-color: var(--error, #e0554f);
+  color: #fff;
 }
+.pf-btn-danger-solid:hover:not(:disabled) { filter: brightness(1.08); }
 
-/* ── Sync + Account cards ── */
+/* ── Sync + Account cards ─────────────────────────────────── */
 .pf-card-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.4rem;
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -228,23 +326,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
 }
-.pf-row-main { min-width: 0; flex: 1; }
+.pf-row-main {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.pf-row-main .pf-card-title { margin-bottom: 0.1rem; }
 .pf-row-card > .pf-btn { flex-shrink: 0; }
 
 .pf-sync-ok  { color: var(--accent-green); }
 .pf-sync-err { color: var(--error, #e0554f); }
 .pf-sync-off { color: var(--text-muted); }
-
 .pf-spin { animation: pfSpin 900ms linear infinite; }
 
 .pf-danger {
   margin-top: 1.25rem;
-  padding: 1rem;
+  padding: 1.1rem;
   border-radius: var(--radius-md);
   border: 1px solid color-mix(in srgb, var(--error, #e0554f) 45%, transparent);
-  background: color-mix(in srgb, var(--error, #e0554f) 6%, transparent);
+  background: color-mix(in srgb, var(--error, #e0554f) 7%, transparent);
 }
 .pf-danger-title {
   margin: 0;
@@ -252,23 +356,15 @@
   font-weight: 700;
   color: var(--error, #e0554f);
 }
-.pf-danger-text { margin: 0.35rem 0 0.9rem; }
+.pf-danger-text { margin: 0.4rem 0 1rem; }
 
-.pf-btn-danger-solid {
-  background: var(--error, #e0554f);
-  border-color: var(--error, #e0554f);
-  color: #fff;
-}
-.pf-btn-danger-solid:hover:not(:disabled) { filter: brightness(1.08); }
-
-.pf-confirm { max-width: 360px; }
-.pf-confirm .pf-field { margin-bottom: 0.6rem; }
-.pf-confirm-actions {
+.pf-confirm {
+  max-width: 380px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 0.4rem;
+  flex-direction: column;
+  gap: 0.75rem;
 }
+.pf-confirm-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .pf-spinner {
   width: 26px;
@@ -280,32 +376,45 @@
 }
 @keyframes pfSpin { to { transform: rotate(360deg); } }
 
-/* ── Phones ── */
-@media (max-width: 600px) {
-  .pf-page { padding-top: 1.25rem; }
-  .pf-card { padding: 1.25rem 1rem; }
-  .pf-head { flex-direction: column; align-items: center; text-align: center; }
-  .pf-private, .pf-photo-actions { justify-content: center; }
-  .pf-socials { grid-template-columns: 1fr; }
-  .pf-actions .pf-btn-primary { width: 100%; }
-  .pf-actions { justify-content: center; }
-  .pf-row-card { flex-direction: column; align-items: stretch; }
-  .pf-row-card > .pf-btn { width: 100%; }
-  .pf-danger { padding: 0.9rem; }
-  .pf-danger > .pf-btn,
-  .pf-confirm { width: 100%; max-width: none; }
-  .pf-confirm-actions .pf-btn { flex: 1 1 140px; }
+/* ── Desktop ──────────────────────────────────────────────── */
+@media (min-width: 900px) {
+  .pf-page { --pf-pad: 1.75rem; padding-top: 2.5rem; }
 }
 
-/* Very small phones (320px) */
+/* ── Tablets & large phones ───────────────────────────────── */
+@media (max-width: 640px) {
+  .pf-page { --pf-pad: 1.1rem; padding: 1.25rem 16px 3rem; gap: 1rem; }
+  .pf-socials { grid-template-columns: 1fr; }
+
+  .pf-hero { flex-direction: column; text-align: center; gap: 1rem; padding-top: 1.5rem; }
+  .pf-hero-text { align-items: center; }
+  .pf-photo-actions { justify-content: center; }
+  .pf-title { font-size: 1.3rem; }
+
+  .pf-input { font-size: 1rem; } /* 16px: stops iOS zoom-on-focus */
+
+  .pf-actions { justify-content: stretch; }
+  .pf-actions .pf-btn-primary { width: 100%; }
+  .pf-unsaved, .pf-actions .pf-ok, .pf-actions .pf-error { margin-right: 0; width: 100%; text-align: center; justify-content: center; }
+
+  .pf-row-card { flex-direction: column; align-items: stretch; gap: 1rem; }
+  .pf-row-card > .pf-btn { width: 100%; }
+
+  .pf-danger { padding: 1rem; }
+  .pf-danger > .pf-btn,
+  .pf-confirm { width: 100%; max-width: none; }
+  .pf-confirm-actions .pf-btn { flex: 1 1 130px; }
+}
+
+/* ── Small phones (≤360px) ────────────────────────────────── */
 @media (max-width: 360px) {
-  .pf-page { padding-left: 12px; padding-right: 12px; }
-  .pf-card { padding: 1rem 0.85rem; }
-  .pf-title { font-size: 1.25rem; }
+  .pf-page { --pf-pad: 0.95rem; padding-left: 12px; padding-right: 12px; }
   .pf-photo-actions .pf-btn { flex: 1 1 auto; }
+  .pf-pill { font-size: 0.72rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .pf-spinner { animation-duration: 1.6s; }
   .pf-spin { animation: none; }
+  .pf-photo-badge { transition: none; }
 }

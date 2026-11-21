@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {
   IconCamera, IconTrash, IconLogout, IconLock, IconCloudCheck, IconCloudX, IconCloudOff, IconRefresh,
-  IconBrandGoogle, IconBrandGithub, IconCheck,
+  IconBrandGoogle, IconBrandGithub, IconCheck, IconWorld, IconBrandX, IconBrandInstagram,
+  IconBrandFacebook, IconBrandYoutube, IconBrandTiktok, IconBrandLinkedin,
 } from '@tabler/icons-react';
 import { useAuth } from '../context/AuthContext';
 import { Avatar } from '../components/AccountMenu';
@@ -33,6 +34,17 @@ function sameDraft(a, b) {
     && a.bio.trim() === b.bio.trim()
     && JSON.stringify(cleanSocials(a.socials)) === JSON.stringify(cleanSocials(b.socials));
 }
+
+const SOCIAL_ICONS = {
+  website: IconWorld,
+  x: IconBrandX,
+  instagram: IconBrandInstagram,
+  facebook: IconBrandFacebook,
+  youtube: IconBrandYoutube,
+  tiktok: IconBrandTiktok,
+  linkedin: IconBrandLinkedin,
+  github: IconBrandGithub,
+};
 
 const PROVIDER_META = {
   google: { label: 'Google', Icon: IconBrandGoogle },
@@ -191,115 +203,145 @@ export default function ProfilePage() {
     <div className="pf-page">
       {helmet}
 
-      <form className="pf-card" onSubmit={handleSave} noValidate>
-        {/* ── Header: photo + identity ─────────────────────────── */}
-        <div className="pf-head">
-          <div className="pf-photo">
-            <Avatar src={avatarSrc} name={draft.name} email={email} size={112} className="pf-avatar" />
-            {photoBusy && <span className="pf-photo-busy" aria-hidden="true"><span className="pf-spinner" /></span>}
-          </div>
-          <div className="pf-head-text">
-            <h1 className="pf-title">{profile?.name || 'My Profile'}</h1>
-            <p className="pf-muted pf-private">
-              <IconLock size={14} stroke={2} aria-hidden="true" /> Private profile, visible only to you
-            </p>
-            <div className="pf-photo-actions">
-              <button type="button" className="pf-btn pf-btn-ghost" onClick={() => fileRef.current?.click()} disabled={photoBusy}>
-                <IconCamera size={17} stroke={1.9} /> {profile?.avatar_path ? 'Change photo' : 'Upload photo'}
-              </button>
-              {profile?.avatar_path && (
-                <button type="button" className="pf-btn pf-btn-ghost pf-btn-danger" onClick={handleRemovePhoto} disabled={photoBusy}>
-                  <IconTrash size={17} stroke={1.9} /> Remove
-                </button>
-              )}
-              <input
-                ref={fileRef}
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                onChange={handlePhoto}
-                hidden
-              />
-            </div>
-            <p className="pf-hint">JPG, PNG or WebP · max 2 MB</p>
-            {photoError && <p className="pf-error" role="alert">{photoError}</p>}
-          </div>
+      {/* ── Identity: photo + name ──────────────────────────────── */}
+      <section className="pf-card pf-hero" aria-label="Profile photo">
+        <div className="pf-photo">
+          <Avatar src={avatarSrc} name={draft.name} email={email} size={104} className="pf-avatar" />
+          {photoBusy && <span className="pf-photo-busy" aria-hidden="true"><span className="pf-spinner" /></span>}
+          <button
+            type="button"
+            className="pf-photo-badge"
+            onClick={() => fileRef.current?.click()}
+            disabled={photoBusy}
+            aria-label={profile?.avatar_path ? 'Change photo' : 'Upload photo'}
+            title={profile?.avatar_path ? 'Change photo' : 'Upload photo'}
+          >
+            <IconCamera size={17} stroke={2} />
+          </button>
         </div>
 
-        {/* ── Details ─────────────────────────────────────────── */}
-        <fieldset className="pf-section">
-          <legend className="pf-section-title">Details</legend>
+        <div className="pf-hero-text">
+          <h1 className="pf-title">{profile?.name || draft.name || 'My Profile'}</h1>
+          {email && <p className="pf-hero-email">{email}</p>}
+          <span className="pf-pill">
+            <IconLock size={13} stroke={2} aria-hidden="true" /> Private profile, visible only to you
+          </span>
 
-          <label className="pf-field">
-            <span className="pf-label">Name</span>
+          <div className="pf-photo-actions">
+            <button type="button" className="pf-btn pf-btn-ghost pf-btn-sm" onClick={() => fileRef.current?.click()} disabled={photoBusy}>
+              <IconCamera size={16} stroke={1.9} /> {profile?.avatar_path ? 'Change photo' : 'Upload photo'}
+            </button>
+            {profile?.avatar_path && (
+              <button type="button" className="pf-btn pf-btn-ghost pf-btn-sm pf-btn-danger" onClick={handleRemovePhoto} disabled={photoBusy}>
+                <IconTrash size={16} stroke={1.9} /> Remove
+              </button>
+            )}
             <input
-              type="text"
-              className="pf-input"
-              value={draft.name}
-              maxLength={NAME_MAX}
-              onChange={(e) => setField('name', e.target.value)}
-              autoComplete="name"
-              required
-              aria-invalid={!draft.name.trim()}
+              ref={fileRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handlePhoto}
+              hidden
             />
-            {!draft.name.trim() && <span className="pf-error">Name can't be empty.</span>}
-          </label>
+          </div>
+          <p className="pf-hint">JPG, PNG or WebP, up to 2 MB</p>
+          {photoError && <p className="pf-error" role="alert">{photoError}</p>}
+        </div>
+      </section>
 
-          <div className="pf-field">
-            <span className="pf-label">Email</span>
-            <div className="pf-input pf-input-readonly">
-              <span className="pf-email">{email || 'Not shared by your login provider'}</span>
-              {provider && (
-                <span className="pf-provider"><provider.Icon size={14} stroke={2} /> {provider.label}</span>
-              )}
+      <form className="pf-card pf-form" onSubmit={handleSave} noValidate>
+        {/* ── Personal details ────────────────────────────────── */}
+        <section className="pf-section" aria-labelledby="pf-details-title">
+          <div className="pf-section-head">
+            <h2 id="pf-details-title" className="pf-section-title">Personal details</h2>
+            <p className="pf-hint">How your name appears in the app.</p>
+          </div>
+
+          <div className="pf-fields">
+            <label className="pf-field">
+              <span className="pf-label">Name</span>
+              <input
+                type="text"
+                className="pf-input"
+                value={draft.name}
+                maxLength={NAME_MAX}
+                onChange={(e) => setField('name', e.target.value)}
+                autoComplete="name"
+                required
+                aria-invalid={!draft.name.trim()}
+              />
+              {!draft.name.trim() && <span className="pf-error">Name can't be empty.</span>}
+            </label>
+
+            <div className="pf-field">
+              <span className="pf-label">Email</span>
+              <div className="pf-input pf-input-readonly">
+                <span className="pf-email">{email || 'Not shared by your login provider'}</span>
+                {provider && (
+                  <span className="pf-provider"><provider.Icon size={14} stroke={2} /> {provider.label}</span>
+                )}
+              </div>
+              <span className="pf-hint">Comes from your {provider?.label || 'login'} account and can't be changed here.</span>
             </div>
-            <span className="pf-hint">Comes from your {provider?.label || 'login'} account and can't be changed here.</span>
+
+            <label className="pf-field">
+              <span className="pf-label">
+                Bio <span className="pf-count">{draft.bio.length}/{BIO_MAX}</span>
+              </span>
+              <textarea
+                className="pf-input pf-textarea"
+                value={draft.bio}
+                maxLength={BIO_MAX}
+                rows={3}
+                placeholder="A few words about yourself"
+                onChange={(e) => setField('bio', e.target.value)}
+              />
+            </label>
+          </div>
+        </section>
+
+        {/* ── Social links ────────────────────────────────────── */}
+        <section className="pf-section" aria-labelledby="pf-socials-title">
+          <div className="pf-section-head">
+            <h2 id="pf-socials-title" className="pf-section-title">Social links</h2>
+            <p className="pf-hint">Optional. Only https links to each platform are accepted.</p>
           </div>
 
-          <label className="pf-field">
-            <span className="pf-label">
-              Bio <span className="pf-count">{draft.bio.length}/{BIO_MAX}</span>
-            </span>
-            <textarea
-              className="pf-input pf-textarea"
-              value={draft.bio}
-              maxLength={BIO_MAX}
-              rows={3}
-              placeholder="A few words about yourself"
-              onChange={(e) => setField('bio', e.target.value)}
-            />
-          </label>
-        </fieldset>
-
-        {/* ── Socials ─────────────────────────────────────────── */}
-        <fieldset className="pf-section">
-          <legend className="pf-section-title">Social links</legend>
-          <div className="pf-socials">
-            {SOCIAL_FIELDS.map((field) => (
-              <label key={field.key} className="pf-field">
-                <span className="pf-label">{field.label}</span>
-                <input
-                  type="url"
-                  inputMode="url"
-                  className="pf-input"
-                  value={draft.socials[field.key] || ''}
-                  placeholder={field.placeholder}
-                  maxLength={200}
-                  onChange={(e) => setSocial(field.key, e.target.value)}
-                  aria-invalid={!!socialErrors[field.key]}
-                />
-                {socialErrors[field.key] && <span className="pf-error">{socialErrors[field.key]}</span>}
-              </label>
-            ))}
+          <div className="pf-fields pf-socials">
+            {SOCIAL_FIELDS.map((field) => {
+              const Icon = SOCIAL_ICONS[field.key] || IconWorld;
+              return (
+                <label key={field.key} className="pf-field">
+                  <span className="pf-label">{field.label}</span>
+                  <span className="pf-input-wrap">
+                    <Icon size={18} stroke={1.8} className="pf-input-icon" aria-hidden="true" />
+                    <input
+                      type="url"
+                      inputMode="url"
+                      className="pf-input pf-input-iconed"
+                      value={draft.socials[field.key] || ''}
+                      placeholder={field.placeholder}
+                      maxLength={200}
+                      onChange={(e) => setSocial(field.key, e.target.value)}
+                      aria-invalid={!!socialErrors[field.key]}
+                    />
+                  </span>
+                  {socialErrors[field.key] && <span className="pf-error">{socialErrors[field.key]}</span>}
+                </label>
+              );
+            })}
           </div>
-        </fieldset>
+        </section>
 
-        {/* ── Save bar ────────────────────────────────────────── */}
-        <div className="pf-actions">
-          {saveMsg && (
+        {/* ── Save bar (sticks to the bottom while there are unsaved changes) ── */}
+        <div className={`pf-actions ${dirty ? 'is-dirty' : ''}`}>
+          {saveMsg ? (
             <span className={saveMsg.ok ? 'pf-ok' : 'pf-error'} role="status">
               {saveMsg.ok && <IconCheck size={16} stroke={2.2} />} {saveMsg.text}
             </span>
-          )}
+          ) : dirty ? (
+            <span className="pf-hint pf-unsaved">You have unsaved changes</span>
+          ) : null}
           <button type="submit" className="pf-btn pf-btn-primary" disabled={!dirty || hasErrors || saving}>
             {saving ? 'Saving…' : 'Save changes'}
           </button>
