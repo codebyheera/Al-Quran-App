@@ -9,7 +9,8 @@
  * Once per day the card opens by itself (2s after arrival, on the first
  * tap/scroll/key press — see the auto-open effect for why) and closes itself
  * after 30s if the visitor doesn't interact; manual opening always works.
- * An active entry in DUA_REQUESTS (date range) replaces the pinned dua.
+ * Active entries in DUA_REQUESTS (date range) replace the pinned dua; when
+ * several are active they rotate, one per visit.
  * Visitors whose translation language is Urdu get the Urdu text.
  * Frontend-only — prompts come from data/duaPrompts.js, nothing is sent.
  */
@@ -26,6 +27,7 @@ const SEEN_KEY = 'duaFabSeenId';  // localStorage: id of the dua last opened
 const DAY_KEY = 'duaFabDay';      // localStorage: date + id for the rotating dua
 const AUTO_KEY = 'duaAutoDay';    // localStorage: date the card last opened by itself
 const AMEEN_KEY = 'duaAmeenIds';  // localStorage: ids of duas this device already said Ameen to
+const REQ_IDX_KEY = 'duaReqIdx';  // localStorage: which active dua request to show next (rotation)
 const AUTO_OPEN_DELAY = 2000;     // ms after arriving before the daily auto-open
 const FAB = 48;                  // icon size (px) — keep in sync with CSS
 const EDGE = 12;                  // min gap from the viewport edge
@@ -49,12 +51,27 @@ function trackAmeen(prompt, params) {
   lsSet(AMEEN_KEY, JSON.stringify([...ids, prompt.id].slice(-200)));
 }
 
+let reqPick = null; // index of the dua request chosen for this page load
+
 // Active dua request first, then the pinned dua, otherwise one rotating dua per day.
 function pickPrompt() {
   const t = today();
-  const req = DUA_REQUESTS.find((r) => r.from <= t && t <= r.until);
-  if (req) return { special: true, eyebrow: 'Dua Request', ...req };
+  // Several requests can be active at once — show the next one on each visit
+  // (round-robin) so every visitor sees all of them over time.
+  // The pinned (founder) dua always stays in the rotation alongside them.
   const pinned = PINNED_DUA_ID && DUA_PROMPTS.find((p) => p.id === PINNED_DUA_ID);
+  const active = DUA_REQUESTS
+    .filter((r) => r.from <= t && t <= r.until)
+    .map((r) => ({ special: true, eyebrow: 'Dua Request', ...r }));
+  if (active.length) {
+    const pool = pinned ? [...active, pinned] : active;
+    // pick once per page load (React StrictMode calls this twice in dev)
+    if (reqPick === null) {
+      reqPick = (Number(lsGet(REQ_IDX_KEY)) || 0) % pool.length;
+      lsSet(REQ_IDX_KEY, String((reqPick + 1) % pool.length));
+    }
+    return pool[reqPick % pool.length];
+  }
   if (pinned) return pinned;
   const [day, id] = (lsGet(DAY_KEY) || '').split('|');
   if (day === today()) {
@@ -278,7 +295,7 @@ export default function DuaPill() {
 
   function onAmeen() {
     trackAmeen(prompt, {
-      dua_type: prompt.special ? 'request' : prompt.id === PINNED_DUA_ID ? 'pinned' : 'daily',
+      dua_type: prompt.id === PINNED_DUA_ID ? 'pinned' : prompt.special ? 'request' : 'daily',
       lang: ur ? 'ur' : 'en',
       open_type: openedBy.current,
     });

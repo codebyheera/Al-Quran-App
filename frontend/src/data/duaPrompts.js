@@ -170,10 +170,10 @@ export const PINNED_DUA_ID = 'special-subhan'; // special request (no ayah)
  * Dua requests — when someone asks for dua, add an entry here.
  *
  * While today's date is between `from` and `until` (both inclusive, local
- * time, 'YYYY-MM-DD'), the request replaces the pinned founder dua. After
- * `until` passes, the founder dua comes back on its own — no need to delete
- * the entry right away (old ones can be cleaned up whenever).
- * If two requests overlap, the one listed first wins.
+ * time, 'YYYY-MM-DD'), the request is shown. All active requests plus the
+ * pinned founder dua rotate — the next one on each visit. After `until`
+ * passes, the entry simply drops out of the rotation — no need to delete it
+ * right away (old ones can be cleaned up whenever).
  *
  * Fields:
  *   id        unique, e.g. 'req-2026-11-ahmed' (a new id = pulse on the icon again)
@@ -195,6 +195,22 @@ export const PINNED_DUA_ID = 'special-subhan'; // special request (no ayah)
  *   },
  */
 export const DUA_REQUESTS = [
+  {
+    id: 'req-2026-11-zaheer-abbas',
+    from: '2026-11-25',
+    until: '2026-11-30',
+    title: 'A Dua for Zaheer Abbas',
+    highlight: 'Rana Muhammad Zaheer Abbas',
+    note: 'O Allah, bless the parents of Rana Muhammad Zaheer Abbas and grant them a life in which they feel proud of their sons. Accept his dua.',
+  },
+  {
+    id: 'req-2026-11-muhammad-hassan',
+    from: '2026-11-25',
+    until: '2026-11-30',
+    title: 'A Dua for Muhammad Hassan',
+    highlight: 'Muhammad Hassan',
+    note: 'O Allah, forgive Muhammad Hassan and bless him with good health, strong faith, peace and halal rizq, with success in this life and the Hereafter. Have mercy on his parents and siblings, and grant us all the ability to understand and follow the Quran. Accept his dua.',
+  },
   {
     id: 'req-2026-11-haris-asif',
     from: '2026-11-21',
